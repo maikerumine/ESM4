@@ -66,7 +66,7 @@ bp:register_mob("esmobs:dirt2", {
 	hp_max = 50,
 	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
 	visual = "mesh",
-	mesh = "dirt.x",
+	mesh = "mobs_stone_monster.x",
 	textures = {"dirt2.png"},
 	visual_size = {x=3.5, y=2.8},
 	makes_footstep_sound = true,

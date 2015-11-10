@@ -377,7 +377,7 @@ function es.register_biomes()
 
 	-- Permanent ice
 
-	--[[minetest.register_biome({
+	minetest.register_biome({
 		name = "glacier",
 		node_dust = "default:snowblock",
 		node_top = "default:snowblock",
@@ -393,7 +393,7 @@ function es.register_biomes()
 		y_max = 31000,
 		heat_point = -5,
 		humidity_point = 50,
-	})]]
+	})
 
 	minetest.register_biome({
 		name = "glacier_ocean",
@@ -415,7 +415,7 @@ function es.register_biomes()
 
 	-- Cold
 
---[[	minetest.register_biome({
+	minetest.register_biome({
 		name = "tundra",
 		node_dust = "default:snow",
 		node_top = "default:dirt_with_snow",
@@ -431,9 +431,9 @@ function es.register_biomes()
 		y_max = 31000,
 		heat_point = 20,
 		humidity_point = 30,
-	})]]
+	})
 
-	--[[minetest.register_biome({
+	minetest.register_biome({
 		name = "tundra_ocean",
 		--node_dust = "",
 		node_top = "default:sand",
@@ -449,7 +449,7 @@ function es.register_biomes()
 		y_max = 1,
 		heat_point = 20,
 		humidity_point = 30,
-	})]]
+	})
 
 	minetest.register_biome({
 		name = "taiga",
@@ -469,7 +469,7 @@ function es.register_biomes()
 		humidity_point = 70,
 	})
 
-	--[[minetest.register_biome({
+	minetest.register_biome({
 		name = "taiga_ocean",
 		--node_dust = "",
 		node_top = "default:sand",
@@ -485,11 +485,11 @@ function es.register_biomes()
 		y_max = 1,
 		heat_point = 20,
 		humidity_point = 70,
-	})]]
+	})
 
 	-- Cool
 
---[[	minetest.register_biome({
+	minetest.register_biome({
 		name = "stone_grassland",
 		--node_dust = "",
 		node_top = "default:dirt_with_grass",
@@ -505,9 +505,9 @@ function es.register_biomes()
 		y_max = 31000,
 		heat_point = 45,
 		humidity_point = 30,
-	})]]
+	})
 
-	--[[minetest.register_biome({
+	minetest.register_biome({
 		name = "stone_grassland_ocean",
 		--node_dust = "",
 		node_top = "default:sand",
@@ -523,9 +523,9 @@ function es.register_biomes()
 		y_max = 5,
 		heat_point = 45,
 		humidity_point = 30,
-	})]]
+	})
 
---[[	minetest.register_biome({
+	minetest.register_biome({
 		name = "coniferous_forest",
 		--node_dust = "",
 		node_top = "default:dirt_with_grass",
@@ -541,9 +541,9 @@ function es.register_biomes()
 		y_max = 31000,
 		heat_point = 45,
 		humidity_point = 70,
-	})]]
+	})
 
-	--[[minetest.register_biome({
+	minetest.register_biome({
 		name = "coniferous_forest_ocean",
 		--node_dust = "",
 		node_top = "default:sand",
@@ -559,11 +559,11 @@ function es.register_biomes()
 		y_max = 5,
 		heat_point = 45,
 		humidity_point = 70,
-	})]]
+	})
 
 	-- Warm
 
-	--[[minetest.register_biome({
+	minetest.register_biome({
 		name = "sandstone_grassland",
 		--node_dust = "",
 		node_top = "default:dirt_with_grass",
@@ -579,9 +579,9 @@ function es.register_biomes()
 		y_max = 31000,
 		heat_point = 70,
 		humidity_point = 30,
-	})]]
+	})
 
-	--[[minetest.register_biome({
+	minetest.register_biome({
 		name = "sandstone_grassland_ocean",
 		--node_dust = "",
 		node_top = "default:sand",
@@ -597,9 +597,9 @@ function es.register_biomes()
 		y_max = 5,
 		heat_point = 70,
 		humidity_point = 30,
-	})]]
+	})
 
-	--[[minetest.register_biome({
+	minetest.register_biome({
 		name = "deciduous_forest",
 		--node_dust = "",
 		node_top = "default:dirt_with_grass",
@@ -615,9 +615,9 @@ function es.register_biomes()
 		y_max = 31000,
 		heat_point = 70,
 		humidity_point = 70,
-	})]]
+	})
 
-	--[[minetest.register_biome({
+	minetest.register_biome({
 		name = "deciduous_forest_ocean",
 		--node_dust = "",
 		node_top = "default:sand",
@@ -633,7 +633,7 @@ function es.register_biomes()
 		y_max = 5,
 		heat_point = 70,
 		humidity_point = 70,
-	})]]
+	})
 
 	-- Hot
 
@@ -655,7 +655,7 @@ function es.register_biomes()
 		humidity_point = 10,
 	})
 
-	--[[minetest.register_biome({
+	minetest.register_biome({
 		name = "desert_ocean",
 		--node_dust = "",
 		node_top = "default:sand",
@@ -671,9 +671,9 @@ function es.register_biomes()
 		y_max = 4,
 		heat_point = 95,
 		humidity_point = 10,
-	})]]
+	})
 
-	--[[minetest.register_biome({
+	minetest.register_biome({
 		name = "savanna",
 		--node_dust = "",
 		node_top = "default:dirt_with_dry_grass",
@@ -689,9 +689,9 @@ function es.register_biomes()
 		y_max = 31000,
 		heat_point = 95,
 		humidity_point = 50,
-	})]]
+	})
 
-	--[[minetest.register_biome({
+	minetest.register_biome({
 		name = "savanna_ocean",
 		--node_dust = "",
 		node_top = "default:sand",
@@ -707,9 +707,9 @@ function es.register_biomes()
 		y_max = 4,
 		heat_point = 95,
 		humidity_point = 50,
-	})]]
+	})
 
---[[	minetest.register_biome({
+	minetest.register_biome({
 		name = "rainforest",
 		--node_dust = "",
 		node_top = "default:dirt_with_grass",
@@ -725,9 +725,9 @@ function es.register_biomes()
 		y_max = 31000,
 		heat_point = 95,
 		humidity_point = 90,
-	})]]
+	})
 
-	--[[minetest.register_biome({
+	minetest.register_biome({
 		name = "rainforest_swamp",
 		--node_dust = "",
 		node_top = "default:dirt",
@@ -743,9 +743,9 @@ function es.register_biomes()
 		y_max = 0,
 		heat_point = 95,
 		humidity_point = 90,
-	})]]
+	})
 
-	--[[minetest.register_biome({
+	minetest.register_biome({
 		name = "rainforest_ocean",
 		--node_dust = "",
 		node_top = "default:sand",
@@ -761,7 +761,7 @@ function es.register_biomes()
 		y_max = -1,
 		heat_point = 95,
 		humidity_point = 90,
-	})]]
+	})
 
 
 	minetest.register_biome({
