@@ -1,0 +1,12 @@
+minetest.register_on_newplayer(function(player)
+	--print("on_newplayer")
+		minetest.log("action", "Giving initial stuff to player "..player:get_player_name())
+		player:get_inventory():add_item('main', 'shooter:ammo 6')
+		player:get_inventory():add_item('main', 'default:torch 25')
+		player:get_inventory():add_item('main', 'shooter:machine_gun 1')
+		player:get_inventory():add_item('main', 'default:pick_steel 1')
+		player:get_inventory():add_item('main', 'default:sapling 1')
+		player:get_inventory():add_item('main', 'shooter:pistol 1')
+		player:get_inventory():add_item('main', 'farming:bread 50')
+end)
+
