@@ -68,6 +68,8 @@ SHOOTER_ENTITIES = {
 	"esmobs:badplayer29",
 	"esmobs:badplayer30",
 	"esmobs:badplayer31",
+	"esmobs:badplayer32",
+	"esmobs:badplayer33",
 	"esmobs:tree_monster",
 	"esmobs:spider",
 	"esmobs:applmons",
