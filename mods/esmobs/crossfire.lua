@@ -25,11 +25,11 @@ bp:register_mob("esmobs:goodnpc", {
 	drops = {
 		{name = "default:apple",
 		chance = 1,
-		min = 10,
-		max = 28,},
+		min = 0,
+		max = 2,},
 		{name = "default:sword_steel",
 		chance = 2,
-		min = 1,
+		min = 0,
 		max = 1,},
 		{name = "bones:bones",
 			chance = 1,
@@ -39,38 +39,26 @@ bp:register_mob("esmobs:goodnpc", {
 	},
 	armor = 75,
 	drawtype = "front",
-	water_damage = 0,
-	lava_damage = 5,
+	water_damage = 70,
+	lava_damage = 50,
 	light_damage = 0,
-	--[[sounds = {
-		attack = "crossfiremob_bullet",
-	},]]
+	sounds = {
+		attack = "default_punch1",
+	},
 	on_rightclick = nil,
 	attack_type = "dogfight",
-	arrow = "crossfiremob:bullet",
-	shoot_interval = 1.5,
-	--[[sounds = {
-		attack = "crossfiremob_bullet",
-	},]]
 	animation = {
-		speed_normal = 17,
-		speed_run = 25,
-		stand_start = 0,
-		stand_end = 40,
-		walk_start = 168,
-		walk_end = 187,
-		run_start = 168,
-		run_end = 187,
-		punch_start = 189,
-		punch_end = 191,
+		speed_normal = 30,		speed_run = 30,
+		stand_start = 0,		stand_end = 79,
+		walk_start = 168,		walk_end = 187,
+		run_start = 168,		run_end = 187,
+		punch_start = 200,		punch_end = 219,
 	},
 	attacks_monsters = true,
 	peaceful = true,
 	group_attack = true,
 	step = 1,
 })
-
-
 
 bp:register_mob("esmobs:badnpc", {
 	type = "monster",
@@ -97,11 +85,11 @@ bp:register_mob("esmobs:badnpc", {
 	drops = {
 		{name = "default:apple",
 		chance = 1,
-		min = 10,
-		max = 28,},
+		min = 1,
+		max = 2,},
 		{name = "default:sword_steel",
 		chance = 2,
-		min = 1,
+		min = 0,
 		max = 1,},
 		{name = "bones:bones",
 			chance = 1,
@@ -111,28 +99,21 @@ bp:register_mob("esmobs:badnpc", {
 	},
 	armor = 75,
 	drawtype = "front",
-	water_damage = 0,
-	lava_damage = 5,
+	water_damage = 70,
+	lava_damage = 50,
 	light_damage = 0,
 	attack_type = "dogfight",
-	arrow = "crossfiremob:bullet",
-	shoot_interval = 0.5,
-	--[[sounds = {
-		attack = "crossfiremob_bullet",
-	},]]
+	sounds = {
+		attack = "default_punch3",
+	},
 	on_rightclick = nil,
 
 	animation = {
-		speed_normal = 17,
-		speed_run = 25,
-		stand_start = 0,
-		stand_end = 40,
-		walk_start = 168,
-		walk_end = 187,
-		run_start = 168,
-		run_end = 187,
-		punch_start = 189,
-		punch_end = 191,
+		speed_normal = 30,		speed_run = 30,
+		stand_start = 0,		stand_end = 79,
+		walk_start = 168,		walk_end = 187,
+		run_start = 168,		run_end = 187,
+		punch_start = 200,		punch_end = 219,
 	},
 	attacks_monsters = true,
 	peaceful = true,
@@ -144,42 +125,6 @@ bp:register_mob("esmobs:badnpc", {
 
 bp:register_spawn("esmobs:badnpc", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble"}, 14, -1, 2000, 3, 31000)
 bp:register_spawn("esmobs:goodnpc", {"default:dirt_with_grass", "ethereal:green_dirt","default:grass","default:stonebrick","default:cobble"}, 14, -1, 2000, 3, 31000)
-
---[[crossfiremob:register_arrow("crossfiremob:bullet", {
-	visual = "sprite",
-	visual_size = {x = 0.275, y = 0.275},
-	textures = {"bullet.png"},
-	velocity = 18,
-	hit_player = function(self, player)
-		local s = self.object:getpos()
-		local p = player:getpos()
-		local vec = {x =s.x-p.x, y =s.y-p.y, z =s.z-p.z}
-		player:punch(self.object, 1.0,  {
-			full_punch_interval= 1.0,
-			damage_groups = {fleshy = 0.55},
-		}, vec)
-		local pos = self.object:getpos()
-		for dx = -1, 1 do
-			for dy = -1, 1 do
-				for dz = -1, 1 do
-					local p = {x = pos.x + dx, y = pos.y + dy, z = pos.z + dz}
-					local n = minetest.get_node(pos).name
-				end
-			end
-		end
-	end,
-	hit_node = function(self, pos, node)
-		for dx = -1, 1 do
-			for dy = -2, 1 do
-				for dz = -1, 1 do
-					local p = {x = pos.x + dx, y = pos.y + dy, z = pos.z + dz}
-					local n = minetest.get_node(pos).name
-				end
-			end
-		end
-	end
-})
-]]
 
 
 if minetest.setting_get("log_mods") then

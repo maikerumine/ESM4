@@ -50,7 +50,7 @@ bp:register_mob("esmobs:badplayer2", {
 	armor = 100,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
+	lava_damage = 50,
 	light_damage = 110,
 	on_rightclick = nil,
 	attack_type = "dogfight",
@@ -107,7 +107,7 @@ bp:register_mob("esmobs:badplayer3", {
 	armor = 80,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
+	lava_damage = 50,
 	light_damage = 110,
 	on_rightclick = nil,
 	attack_type = "dogfight",
@@ -164,7 +164,7 @@ bp:register_mob("esmobs:badplayer4", {
 	armor = 100,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
+	lava_damage = 50,
 	light_damage = 110,
 	on_rightclick = nil,
 	attack_type = "dogfight",
@@ -182,7 +182,7 @@ bp:register_mob("esmobs:badplayer4", {
 		},
 })
 
-bp:register_spawn("esmobs:badplayer6", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 11000, 1, -1000)
+bp:register_spawn("esmobs:badplayer6", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 11000, 1, -100)
 bp:register_mob("esmobs:badplayer6", {
 	type = "monster",
 	hp_min = 130,
@@ -222,8 +222,8 @@ bp:register_mob("esmobs:badplayer6", {
 	armor = 80,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
-	light_damage = 110,
+	lava_damage = 50,
+	light_damage = 10,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -279,8 +279,8 @@ bp:register_mob("esmobs:badplayer7", {
 	armor = 85,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
-	light_damage = 110,
+	lava_damage = 50,
+	light_damage = 10,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -296,7 +296,7 @@ bp:register_mob("esmobs:badplayer7", {
 		attack = "mobs_oerkki_attack",
 		},
 })
-bp:register_spawn("esmobs:badplayer8", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 11000, 1, -2500)
+bp:register_spawn("esmobs:badplayer8", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 11000, 1, -250)
 bp:register_mob("esmobs:badplayer8", {
 	type = "monster",
 	hp_min = 157,
@@ -336,8 +336,8 @@ bp:register_mob("esmobs:badplayer8", {
 	armor = 100,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
-	light_damage = 110,
+	lava_damage = 50,
+	light_damage = 10,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -353,7 +353,7 @@ bp:register_mob("esmobs:badplayer8", {
 		attack = "default_punch2",
 		},
 })
-bp:register_spawn("esmobs:badplayer9", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 4, -1, 11000, 1, -3000)
+bp:register_spawn("esmobs:badplayer9", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 4, -1, 11000, 1, -300)
 bp:register_mob("esmobs:badplayer9", {
 	type = "monster",
 	hp_min = 177,
@@ -393,8 +393,8 @@ bp:register_mob("esmobs:badplayer9", {
 	armor = 80,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
-	light_damage = 110,
+	lava_damage = 50,
+	light_damage = 11,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -410,7 +410,7 @@ bp:register_mob("esmobs:badplayer9", {
 		attack = "default_punch3",
 		},
 })
-bp:register_spawn("esmobs:badplayer10", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 4, -1, 11000, 1, -4300)
+bp:register_spawn("esmobs:badplayer10", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 4, -1, 11000, 1, -430)
 bp:register_mob("esmobs:badplayer10", {
 	type = "monster",
 	hp_min = 157,
@@ -450,8 +450,8 @@ bp:register_mob("esmobs:badplayer10", {
 	armor = 80,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
-	light_damage = 500,
+	lava_damage = 50,
+	light_damage = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -507,8 +507,8 @@ bp:register_mob("esmobs:badplayer11", {
 	armor = 100,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
-	light_damage = 110,
+	lava_damage = 50,
+	light_damage = 10,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -564,8 +564,8 @@ bp:register_mob("esmobs:badplayer12", {
 	armor = 100,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
-	light_damage = 110,
+	lava_damage = 50,
+	light_damage = 10,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -622,8 +622,8 @@ bp:register_mob("esmobs:badplayer16", {
 	armor = 90,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
-	light_damage = 110,
+	lava_damage = 50,
+	light_damage = 10,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -680,8 +680,8 @@ bp:register_mob("esmobs:badplayer18", {
 	armor = 90,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
-	light_damage = 110,
+	lava_damage = 50,
+	light_damage = 10,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -739,7 +739,7 @@ bp:register_mob("esmobs:badplayer22", {
 	armor = 80,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
+	lava_damage = 50,
 	light_damage = 11,
 	on_rightclick = nil,
 	attack_type = "dogfight",
@@ -761,7 +761,7 @@ bp:register_mob("esmobs:badplayer22", {
 	step = 1,
 
 })
-bp:register_spawn("esmobs:badplayer23", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 1, -1500)
+bp:register_spawn("esmobs:badplayer23", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 1, -150)
 bp:register_mob("esmobs:badplayer23", {
 	type = "monster",
 	hp_min = 127,
@@ -801,8 +801,8 @@ bp:register_mob("esmobs:badplayer23", {
 	armor = 80,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
-	light_damage = 110,
+	lava_damage = 50,
+	light_damage = 11,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -818,7 +818,7 @@ bp:register_mob("esmobs:badplayer23", {
 		attack = "default_punch2",
 		},
 })
-bp:register_spawn("esmobs:badplayer24", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 1, -4000)
+bp:register_spawn("esmobs:badplayer24", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 1, -400)
 bp:register_mob("esmobs:badplayer24", {
 	type = "monster",
 	hp_min = 137,
@@ -858,8 +858,8 @@ bp:register_mob("esmobs:badplayer24", {
 	armor = 80,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
-	light_damage = 110,
+	lava_damage = 50,
+	light_damage = 10,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -915,8 +915,8 @@ bp:register_mob("esmobs:badplayer25", {
 	armor = 80,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
-	light_damage = 110,
+	lava_damage = 50,
+	light_damage = 10,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -972,8 +972,8 @@ bp:register_mob("esmobs:badplayer26", {
 	armor = 90,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
-	light_damage = 110,
+	lava_damage = 50,
+	light_damage = 10,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -1029,8 +1029,8 @@ bp:register_mob("esmobs:badplayer27", {
 	armor = 80,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
-	light_damage = 112,
+	lava_damage = 50,
+	light_damage = 11,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -1086,8 +1086,8 @@ bp:register_mob("esmobs:badplayer28", {
 	armor = 80,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
-	light_damage = 110,
+	lava_damage = 50,
+	light_damage = 11,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -1103,7 +1103,7 @@ bp:register_mob("esmobs:badplayer28", {
 		attack = "default_punch",
 		},
 })
-bp:register_spawn("esmobs:badplayer29", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 1, -500)
+bp:register_spawn("esmobs:badplayer29", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 1, -50)
 bp:register_mob("esmobs:badplayer29", {
 	type = "monster",
 	hp_min = 69,
@@ -1143,8 +1143,8 @@ bp:register_mob("esmobs:badplayer29", {
 	armor = 100,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
-	light_damage = 110,
+	lava_damage = 50,
+	light_damage = 11,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -1200,8 +1200,8 @@ bp:register_mob("esmobs:badplayer30", {
 	armor = 80,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
-	light_damage = 112,
+	lava_damage = 50,
+	light_damage = 12,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -1258,8 +1258,8 @@ bp:register_mob("esmobs:badplayer31", {
 	armor = 80,
 	drawtype = "front",
 	water_damage = 0,
-	lava_damage = 5,
-	light_damage = 112,
+	lava_damage = 50,
+	light_damage = 12,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -1318,8 +1318,8 @@ bp:register_mob("esmobs:badplayer35", {
 	armor = 80,
 	drawtype = "front",
 	water_damage = 10,
-	lava_damage = 5,
-	light_damage = 110,
+	lava_damage = 50,
+	light_damage = 11,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -1336,4 +1336,54 @@ bp:register_mob("esmobs:badplayer35", {
 		},
 })
 
-
+bp:register_spawn("esmobs:badplayer36", {"default:water_source","default:water_flowing"}, 20, -1, 1000, 3, 120)
+bp:register_mob("esmobs:badplayer36", {
+	type = "monster",
+	hp_min = 35,
+	hp_max = 75,
+	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
+	visual = "mesh",
+	mesh = "3d_armor_character.x",
+	textures = {"badplayer36.png",
+			"3d_armor_trans.png",
+				minetest.registered_items["default:water_flowing"].inventory_image,
+			},
+	visual_size = {x=1, y=1},
+	makes_footstep_sound = true,
+	view_range = 15,
+	walk_velocity = 0.9,
+	run_velocity = 1.8,
+	damage = 1,
+	drops = {
+		{name = "default:water_flowing",
+		chance = 1,
+		min = 0,
+		max = 2,},
+		{name = "bucket:bucket_empty",
+		chance = 8,
+		min = 0,
+		max = 1,},
+		{name = "bones:bones",
+			chance = 1,
+			min = 1,
+			max=1,
+		},
+	},
+	armor = 80,
+	drawtype = "front",
+	water_damage = 0,
+	lava_damage = 50,
+	light_damage = 0,
+	on_rightclick = nil,
+	attack_type = "dogfight",
+	animation = {
+		speed_normal = 30,		speed_run = 30,
+		stand_start = 0,		stand_end = 79,
+		walk_start = 168,		walk_end = 187,
+		run_start = 168,		run_end = 187,
+		punch_start = 200,		punch_end = 219,
+	},
+	sounds = {
+		random = "mobs_stonemonster",
+	},
+})

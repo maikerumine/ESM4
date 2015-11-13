@@ -46,8 +46,8 @@ bp:register_mob("esmobs:tree_monster", {
 		{name = "default:apple",
 		chance = 2, min = 1, max=3},
 	},
-	water_damage = 1,
-	lava_damage = 5,
+	water_damage = 10,
+	lava_damage = 50,
 	light_damage = 2,
 	fall_damage = 0,
 	animation = {
@@ -79,8 +79,8 @@ bp:register_mob("esmobs:sand_monster", {
 	passive = false,
 	attack_type = "dogfight",
 	damage = 2,
-	hp_min = 7,
-	hp_max = 15,
+	hp_min = 17,
+	hp_max = 35,
 	armor = 100,
 	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
 	visual = "mesh",
@@ -131,8 +131,8 @@ bp:register_mob("esmobs:stone_monster", {
 	passive = false,
 	attack_type = "dogfight",
 	damage = 8,
-	hp_min = 12,
-	hp_max = 35,
+	hp_min = 32,
+	hp_max = 55,
 	armor = 80,
 	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
 	visual = "mesh",
@@ -152,15 +152,15 @@ bp:register_mob("esmobs:stone_monster", {
 	view_range = 10,
 	drops = {
 		{name = "default:torch",
-		chance = 2, min = 3, max = 5,},
+		chance = 2, min = 0, max = 2,},
 		{name = "default:iron_lump",
-		chance=5, min=1, max=2,},
+		chance=5, min=0, max=1,},
 		{name = "default:coal_lump",
-		chance=3, min=1, max=3,},
+		chance=3, min=0, max=1,},
 	},
 	water_damage = 0,
 	lava_damage = 1,
-	light_damage = 0,
+	light_damage = 1,
 	animation = {
 		speed_normal = 15,		speed_run = 15,
 		stand_start = 0,		stand_end = 14,
@@ -170,7 +170,7 @@ bp:register_mob("esmobs:stone_monster", {
 	},
 })
 
-bp:register_spawn("esmobs:stone_monster", {"default:stone"}, 5, 0, 7000, 3, -4000)
+bp:register_spawn("esmobs:stone_monster", {"default:stone"}, 5, 0, 1000, 10, 31000)
 
 --bp:register_egg("esmobs:stone_monster", "Stone Monster", "default_stone.png", 1)
 
@@ -216,7 +216,7 @@ bp:register_mob("esmobs:spider", {
 		chance = 1, min = 0, max = 1,},
 	},
 	water_damage = 5,
-	lava_damage = 5,
+	lava_damage = 50,
 	light_damage = 0,
 	animation = {
 		speed_normal = 15,		speed_run = 15,
@@ -289,9 +289,9 @@ bp:register_mob("esmobs:applmons", {
 	},
 	armor = 100,
 	drawtype = "front",
-	water_damage = 1,
-	lava_damage = 5,
-	light_damage = 0,
+	water_damage = 10,
+	lava_damage = 50,
+	light_damage = 6,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {

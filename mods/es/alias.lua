@@ -38,6 +38,11 @@ minetest.register_alias("3d_armor:leggings_infinium", "es:leggings_infinium")
 minetest.register_alias("3d_armor:boots_emerald", "es:boots_emerald")
 minetest.register_alias("3d_armor:boots_infinium", "es:boots_infinium")
 
+--This to fix unneeded craftguide mod
+minetest.register_alias("craft_guide:sign_wall","default:torch")
+minetest.register_alias("craft_guide:lcd_pc","default:torch")
+
+
 
 
 

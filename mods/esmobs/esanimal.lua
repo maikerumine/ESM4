@@ -42,7 +42,7 @@ bp:register_mob("esmobs:sheep", {
 		chance = 1, min = 1, max = 1},
 	},
 	water_damage = 1,
-	lava_damage = 5,
+	lava_damage = 50,
 	light_damage = 0,
 	animation = {
 		speed_normal = 15,		speed_run = 15,
