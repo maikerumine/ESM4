@@ -63,7 +63,7 @@ protector.generate_formspec = function(meta)
 
 	local kill = meta:get_int("kill");
 	local warn = meta:get_int("warn");
-
+	
 	local formspec = "size[8,7]"
 		..default.gui_bg..default.gui_bg_img..default.gui_slots
 		.."label[2.5,0;-- Protector interface, mod version " .. protector.version .. "  --]"
@@ -86,7 +86,7 @@ protector.generate_formspec = function(meta)
 			end
 			i = i + 1
 	end
-
+	
 	if i < npp then
 		formspec = formspec .. "field[" .. (i % 4 * 2 + 1 / 3) .. ","
 		.. (math.floor(i / 4 + 3) + 1 / 3) .. ";1.433,.5;protector_add_member;;]"
@@ -134,35 +134,35 @@ protector.can_dig = function(r, pos, digger, onlyowner, infolevel)
 		owner = meta:get_string("owner")
 		members = meta:get_string("members")
 
-		if owner ~= digger then
+		if owner ~= digger then 
 			if onlyowner or not protector.is_member(meta, digger) then
 
 				if infolevel == 1 then
 					minetest.chat_send_player(digger,
 					"This area is owned by " .. owner .. " !")
-
+					
 					local warn = meta:get_int("warn");local kill = meta:get_int("kill");
-					local player = minetest.get_player_by_name(digger);
-					if kill==1 then
-						player:set_hp(0);
+					local player = minetest.get_player_by_name(digger); if not player then return end
+					if kill==1 then 
+						player:set_hp(0); 
 						minetest.after(1, function()
 							local inv = player:get_inventory();
 							inv:set_list("main", {});inv:set_list("craft", {})
 						end)
 						minetest.chat_send_player(digger, "PROTECTOR: You died inside protected area at " .. minetest.pos_to_string(pos) .. ". Next time try not to dig or hit players.");
 					return false end
-					if warn==1 then
+					if warn==1 then 
 						local form = "size [2,2] textarea[0,0;2.7,2;help;WARNING;This area belongs to " .. meta:get_string("owner") .."]" ..
 						"button_exit[0.5,1.5;1.5,1;close;Close]"
 						minetest.show_formspec(digger, "protector_warn", form)
 						return false
 					end
-
+					
 				elseif infolevel == 2 then
 					minetest.chat_send_player(digger,
 					"This area is owned by " .. owner .. ".")
 					minetest.chat_send_player(digger,
-					"Protection located at: " .. minetest.pos_to_string(pos) .. ", upgrade price was " .. meta:get_int("cost") .. ", protector count is " .. meta:get_int("count"))
+					"Protection located at: " .. minetest.pos_to_string(pos) .. ", upgrade price was " .. meta:get_int("cost") .. ", protector count is " .. meta:get_int("count") .. ", settings: kill ".. meta:get_int("kill") .. " warn " .. meta:get_int("warn"))
 					if members ~= "" then
 						minetest.chat_send_player(digger,
 						"Members: " .. members .. ".")
@@ -245,26 +245,26 @@ function protector.check_luxury(pos) -- return minimal block distance to luxury_
 		dist = math.max(math.abs(pos.x-p.x),math.abs(pos.y-p.y),math.abs(pos.z-p.z))
 		if dist<mindist then mindist = dist end
 	end
-
+	
 	return mindist
 
 end
 
--- count the protectors in the neighborhood and update counts.
+-- count the protectors in the neighborhood and update counts. 
 --two neigborhoods will be considered separate if their protectors are at least 15 apart
-function protector.count(pos, mode)
+function protector.count(pos, mode) 
 
 	-- mode 0: return protector count, mode 1: add new protector, mode 2: remove protector
-
+	
 	local r = 4*protector.radius+2; -- radius 14,  P = protector, PAAABBBPAAABBBP
-
+	
 	local positions = minetest.find_nodes_in_area(
 		{x = pos.x - r, y = pos.y - 0.5*r, z = pos.z - r},
 		{x = pos.x + r, y = pos.y + 0.5*r, z = pos.z + r},
 		{"protector:protect"})
 
 	local meta, p, maxcount, count -- protector count in the neighborhood
-
+	
 	if mode == 3 then -- manual reset counts to 0 by admin
 		for _, p in ipairs(positions) do
 			meta = minetest.get_meta(p)
@@ -272,33 +272,33 @@ function protector.count(pos, mode)
 		end
 		return;
 	end
-
-
+	
+	
 	if mode == 2 then -- reduce neighbor counts since protector is removed
 		for _, p in ipairs(positions) do
 			meta = minetest.get_meta(p)
-
+			
 			count = meta:get_int("count")-1;if count<0 then count = 0 end
 			meta:set_int("count", count)
 		end
-
+	
 		return;
 	end
-
-
-	maxcount = 0; count = 0; -- find maximum nearby count
+	
+	
+	maxcount = 0; count = 0; -- find maximum nearby count 
 	local maxpos = {x=pos.x,y=pos.y,z=pos.z}; -- position of protector with maxcount
 	for _, p in ipairs(positions) do
 		meta = minetest.get_meta(p)
 		count = meta:get_int("count");
 		if count>maxcount then maxcount = count; maxpos.x=p.x;maxpos.y=p.y; maxpos.z=p.z; end
 	end
-
+	
 	if mode == 0 then return maxcount,maxpos end -- just return the count and position of protector with maxcount
-
+	
 	--update counts, mode = 1
 	maxcount = maxcount + 1;
-	for _, p in ipairs(positions) do
+	for _, p in ipairs(positions) do 
 		meta = minetest.get_meta(p)
 		meta:set_int("count", maxcount)
 	end
@@ -331,30 +331,30 @@ minetest.register_node("protector:protect", {
 
 	after_place_node = function(pos, placer) -- rnd
 		local meta = minetest.get_meta(pos)
-
+		
 		local count,maxpos;
 		count = protector.count(pos, 0); -- just read the counts
 		local luxury_dist = protector.check_luxury(pos);
 
 		if luxury_dist>=protector.luxury_radius and count< protector.maxcount then -- normal placement outside luxury radius or below maxcount
-			meta:set_string("owner", placer:get_player_name() or "");
+			meta:set_string("owner", placer:get_player_name() or ""); 
 			local time = os.date("*t");
 			meta:set_string("infotext", "Protection (placed by ".. meta:get_string("owner").." at ".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..":" .. time.sec..")");
 			protector.count(pos, 1); -- update counts of nearby protectors after successful "upgrade"
 			return
 		end
-
+	
 		minetest.chat_send_player(placer:get_player_name(), " PROTECTOR: please right click me to UPGRADE or punch to DIG me.");
 		meta:set_string("owner", ""); -- initially owner is ""
 		meta:set_string("placer", placer:get_player_name() or ""); -- who placed it
 		local cost = 0;
-
+		
 		if luxury_dist<protector.luxury_radius then -- extra cost because too close to luxury center
 			cost =  math.pow(luxury_dist/protector.luxury_radius,2); -- this is 0 at center and 1 at borders of luxury,1/4 at halfway
-			cost = protector.luxury_border_cost/(cost+1/protector.luxury_center_cost);
+			cost = protector.luxury_border_cost/(cost+1/protector.luxury_center_cost); 
 			cost = cost + math.ceil(cost);
 		end
-
+		
 		if count>=protector.maxcount then -- extra costs due to exceeded protector count
 			if luxury_dist< 2*protector.luxury_radius then
 				cost = cost + math.pow(count-protector.maxcount+1,2)*protector.maxcount_price;
@@ -362,7 +362,7 @@ minetest.register_node("protector:protect", {
 				cost = cost + math.pow(count-protector.maxcount+1)*protector.maxcount_price;
 			end
 		end
-
+		
 		cost = math.ceil(cost);
 		meta:set_int("cost",cost);
 
@@ -380,13 +380,13 @@ minetest.register_node("protector:protect", {
 
 	on_rightclick = function(pos, node, clicker, itemstack) -- rnd
 		local meta = minetest.get_meta(pos)
-
+		
 		local upgrade = meta:get_int("upgrade");
 		if upgrade==1 then -- only upgrade if not already
-
+		
 			local name = clicker:get_player_name();
 			local permitgiver = meta:get_string("permitgiver");
-
+			
 			if name == permitgiver and upgrade==1 then
 				local cost = meta:get_int("cost");
 				minetest.chat_send_player(name, "PROTECTOR: you have just given permission to upgrade this protector for free. Upgrade costs were " .. cost);
@@ -395,20 +395,20 @@ minetest.register_node("protector:protect", {
 				meta:set_int("cost",0);
 				return
 			end
-
-
+			
+			
 			if name == meta:get_string("placer") then -- upgrade to full protector
-
+				
 				local count,maxpos;
 				count,maxpos = protector.count(pos, 0); -- just read the counts and position of protector with max count
 				local maxname = minetest.get_meta(maxpos):get_string("owner");
 				local permittext = "";
-
+				
 				local ip1 = minetest.get_player_ip(name);
 				local ip2 = minetest.get_player_ip(maxname);
-
-				if name~=maxname and ip1 and ip2 then
-
+				
+				if name~=maxname and ip1 and ip2 then 
+					
 					if ip1~=ip2 then -- are those really 2 different players?
 						if maxname == "" then
 							permittext = "\n\nThere is detector with count " .. count .. " without owner at "..maxpos.x .. " " .. maxpos.y .. " " .. maxpos.z;
@@ -418,15 +418,15 @@ minetest.register_node("protector:protect", {
 						end
 						meta:set_string("permitgiver", maxname);
 					end
-
+					
 				else
 					meta:set_string("permitgiver","");
 				end
-
-
+				
+				
 				--protector.check_luxury(pos)>=protector.luxury_radius
 				local cost = meta:get_int("cost");
-
+				
 				local text = "You are either trying to build close to luxury center or there are too many nearby protectors."..
 				"You will need to upgrade protector to be usable. "..
 				"\n\n Make sure you have " .. cost .. " mese in your inventory. "..
@@ -438,18 +438,18 @@ minetest.register_node("protector:protect", {
 				"textarea[0,0;5.,5;help;-- Protector upgrade --;".. text .. "]"..
 				"button[ 0,4.5;2,1;upgrade_protector;UPGRADE]"
 
-				minetest.show_formspec(clicker:get_player_name(),
+				minetest.show_formspec(clicker:get_player_name(), 
 					"protector:upgrade_" .. minetest.pos_to_string(pos), formspec)
 				return
 			end
 		end
-
+		
 		if protector.can_dig(1, pos,clicker:get_player_name(), true, 1) then
-			minetest.show_formspec(clicker:get_player_name(),
+			minetest.show_formspec(clicker:get_player_name(), 
 			"protector:node_" .. minetest.pos_to_string(pos), protector.generate_formspec(meta))
 		end
-
-
+		
+		
 	end,
 
 	on_punch = function(pos, node, puncher)
@@ -461,22 +461,22 @@ minetest.register_node("protector:protect", {
 
 	can_dig = function(pos, player)
 		local meta = minetest.get_meta(pos);
-
+	
 		local candig = (meta:get_int("upgrade") == 1); -- protector not yet upgraded?
 		local name = player:get_player_name();
-		if candig then
+		if candig then 
 			if name~=meta:get_string("placer") then -- non placer can only dig after 5 minutes passed
 				local t = minetest.get_gametime();
 				local t1 = meta:get_int("place_time");
-				if math.abs(t-t1)< 300 then candig = false
+				if math.abs(t-t1)< 300 then candig = false 
 					minetest.chat_send_player(name," Only placer can dig unupgraded protection before 5 minutes passed.");
 					return false;
 				end
 			end
 		end
-
+		
 		local owner = meta:get_string("owner");
-		if owner == name then
+		if owner == name then 
 			if not protector.discount[name] then protector.discount[name] = 0 end
 			local cost = meta:get_int("cost");
 			if cost>0 then
@@ -484,17 +484,17 @@ minetest.register_node("protector:protect", {
 				minetest.chat_send_player(name," Protector's upgrade value can be used for discount when upgrading protectors, current credits are ".. protector.discount[name] );
 			end
 		end
-
+		
 		if candig then -- dig it if its not upgraded
 			local inv = player:get_inventory();
 			inv:add_item("main", ItemStack("protector:protect"));
 			minetest.set_node(pos,{name = "air"});
-
+			
 			return false
 		end
-
+		
 		if owner~="" then protector.count(pos,2); end-- update counts after removal of protector with real owner only
-		return protector.can_dig(1, pos, player:get_player_name(), true, 1)
+		return protector.can_dig(1, pos, player:get_player_name(), true, 1)  
 	end,
 
 })
@@ -514,55 +514,55 @@ minetest.register_craft({
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 
-
+	
 	-- protector upgrade
-
+	
 	if string.sub(formname, 0, string.len("protector:upgrade_")) == "protector:upgrade_" then
-
-		if fields.upgrade_protector == "UPGRADE" then
-
+	
+		if fields.upgrade_protector == "UPGRADE" then 
+		
 			local pos_s = string.sub(formname, string.len("protector:upgrade_") + 1)
 			local pos = minetest.string_to_pos(pos_s)
 			local meta = minetest.get_meta(pos)
-
+			
 			if meta:get_int("upgrade")==1 then
 				local cost = math.floor(meta:get_int("cost"));
 				local name = player:get_player_name();
-
+				
 				if not protector.discount[name] then protector.discount[name] = 0 end
 				local cost1 = math.max(cost - protector.discount[name],0);
-
-				if cost1<cost then
+				
+				if cost1<cost then 
 					minetest.chat_send_player(player:get_player_name(), "PROTECTOR: cost with discount " .. cost1 .. ". Current discount is " .. protector.discount[name]);
 				end
-
+						
 				--check player inventory for mese
 				local inv = player:get_inventory();
-				if not inv:contains_item("main", ItemStack("default:mese_crystal "..cost1)) then
+				if not inv:contains_item("main", ItemStack("default:mese_crystal "..cost1)) then 
 					minetest.chat_send_player(player:get_player_name(),"PROTECTOR: you need at least " .. cost1 .. " mese for upgrade ");
-					return
+					return 
 				end
 
 				protector.discount[name]=protector.discount[name]-(cost-cost1);
 				inv:remove_item("main", ItemStack("default:mese_crystal "..cost1));
-
+				
 				meta:set_string("owner", player:get_player_name() or "");
 				meta:set_int("upgrade",0); -- protector is now upgraded
 				protector.count(pos, 1); -- update counts of nearby protectors after successful upgrade
-
+				
 				meta:set_string("placer","");
 				local time = os.date("*t");
 				meta:set_string("infotext", "Protection (upgraded by ".. meta:get_string("owner").." at ".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..":" .. time.sec..")");
 				minetest.chat_send_player(player:get_player_name(),"PROTECTOR: successfuly upgraded");
-
+				
 				return
 			end
 		end
 	end
-
-
-
-
+	
+	
+	
+	
 	-- protector setup
 	if string.sub(formname, 0, string.len("protector:node_")) == "protector:node_" then
 
@@ -585,7 +585,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 				protector.del_member(meta, string.sub(field,string.len("protector_del_member_") + 1))
 			end
 		end
-
+		
 		if fields.warn then
 			meta:set_int("warn", 1-meta:get_int("warn"))
 		end
@@ -593,7 +593,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		if fields.kill then
 			meta:set_int("kill", 1-meta:get_int("kill"))
 		end
-
+		
 		if not fields.close_me then
 			minetest.show_formspec(player:get_player_name(), formname, protector.generate_formspec(meta))
 		end
@@ -658,179 +658,6 @@ minetest.register_node("protector:display_node", {
 	drop = "",
 })
 
---[[
--- Register Protected Doors
-
-local function on_rightclick(pos, dir, check_name, replace, replace_dir, params)
-	pos.y = pos.y+dir
-	if not minetest.get_node(pos).name == check_name then
-		return
-	end
-	local p2 = minetest.get_node(pos).param2
-	p2 = params[p2 + 1]
-
-	minetest.swap_node(pos, {name = replace_dir, param2 = p2})
-
-	pos.y = pos.y-dir
-	minetest.swap_node(pos, {name = replace, param2 = p2})
-
-	local snd_1 = "doors_door_close"
-	local snd_2 = "doors_door_open"
-	if params[1] == 3 then
-		snd_1 = "doors_door_open"
-		snd_2 = "doors_door_close"
-	end
-
-	if minetest.get_meta(pos):get_int("right") ~= 0 then
-		minetest.sound_play(snd_1, {
-			pos = pos, gain = 0.3, max_hear_distance = 10})
-	else
-		minetest.sound_play(snd_2, {
-			pos = pos, gain = 0.3, max_hear_distance = 10})
-	end
-end
-
--- Protected Wooden Door
-
-local name = "protector:door_wood"
-
-doors.register_door(name, {
-	description = "Protected Wooden Door",
-	inventory_image = "doors_wood.png^protector_logo.png",
-	groups = {
-		snappy = 1, choppy = 2, oddly_breakable_by_hand = 2,
-		door = 1, unbreakable = 1
-	},
-	tiles_bottom = {"doors_wood_b.png^protector_logo.png", "doors_brown.png"},
-	tiles_top = {"doors_wood_a.png", "doors_brown.png"},
-	sounds = default.node_sound_wood_defaults(),
-	sunlight = false,
-})
-
-minetest.override_item(name .. "_b_1", {
-	on_rightclick = function(pos, node, clicker)
-		if not minetest.is_protected(pos, clicker:get_player_name()) then
-			on_rightclick(pos, 1,
-			name .. "_t_1", name .. "_b_2", name .. "_t_2", {1, 2, 3, 0})
-		end
-	end,
-})
-
-minetest.override_item(name.."_t_1", {
-	on_rightclick = function(pos, node, clicker)
-		if not minetest.is_protected(pos, clicker:get_player_name()) then
-			on_rightclick(pos, -1,
-			name .. "_b_1", name .. "_t_2", name .. "_b_2", {1, 2, 3, 0})
-		end
-	end,
-})
-
-minetest.override_item(name.."_b_2", {
-	on_rightclick = function(pos, node, clicker)
-		if not minetest.is_protected(pos, clicker:get_player_name()) then
-			on_rightclick(pos, 1,
-			name .. "_t_2", name .. "_b_1", name .. "_t_1", {3, 0, 1, 2})
-		end
-	end,
-})
-
-minetest.override_item(name.."_t_2", {
-	on_rightclick = function(pos, node, clicker)
-		if not minetest.is_protected(pos, clicker:get_player_name()) then
-			on_rightclick(pos, -1,
-			name .. "_b_2", name .. "_t_1", name .. "_b_1", {3, 0, 1, 2})
-		end
-	end,
-})
-
-minetest.register_craft({
-	output = name,
-	recipe = {
-		{"group:wood", "group:wood"},
-		{"group:wood", "default:copper_ingot"},
-		{"group:wood", "group:wood"}
-	}
-})
-
-minetest.register_craft({
-	output = name,
-	recipe = {
-		{"doors:door_wood", "default:copper_ingot"}
-	}
-})
-
--- Protected Steel Door
-
-local name = "protector:door_steel"
-
-doors.register_door(name, {
-	description = "Protected Steel Door",
-	inventory_image = "doors_steel.png^protector_logo.png",
-	groups = {
-		snappy = 1, bendy = 2, cracky = 1,
-		level = 2, door = 1, unbreakable = 1
-	},
-	tiles_bottom = {"doors_steel_b.png^protector_logo.png", "doors_grey.png"},
-	tiles_top = {"doors_steel_a.png", "doors_grey.png"},
-	sounds = default.node_sound_wood_defaults(),
-	sunlight = false,
-})
-
-minetest.override_item(name.."_b_1", {
-	on_rightclick = function(pos, node, clicker)
-		if not minetest.is_protected(pos, clicker:get_player_name()) then
-			on_rightclick(pos, 1,
-			name .. "_t_1", name .. "_b_2", name .. "_t_2", {1, 2, 3, 0})
-		end
-	end,
-})
-
-minetest.override_item(name.."_t_1", {
-	on_rightclick = function(pos, node, clicker)
-		if not minetest.is_protected(pos, clicker:get_player_name()) then
-			on_rightclick(pos, -1,
-			name .. "_b_1", name .. "_t_2", name .. "_b_2", {1, 2, 3, 0})
-		end
-	end,
-})
-
-minetest.override_item(name.."_b_2", {
-	on_rightclick = function(pos, node, clicker)
-		if not minetest.is_protected(pos, clicker:get_player_name()) then
-			on_rightclick(pos, 1,
-			name .. "_t_2", name .. "_b_1", name .. "_t_1", {3, 0, 1, 2})
-		end
-	end,
-})
-
-minetest.override_item(name.."_t_2", {
-	on_rightclick = function(pos, node, clicker)
-		if not minetest.is_protected(pos, clicker:get_player_name()) then
-			on_rightclick(pos, -1,
-			name .. "_b_2", name .. "_t_1", name .. "_b_1", {3, 0, 1, 2})
-		end
-	end,
-})
-
-minetest.register_craft({
-	output = name,
-	recipe = {
-		{"default:steel_ingot", "default:steel_ingot"},
-		{"default:steel_ingot", "default:copper_ingot"},
-		{"default:steel_ingot", "default:steel_ingot"}
-	}
-})
-
-minetest.register_craft({
-	output = name,
-	recipe = {
-		{"doors:door_steel", "default:copper_ingot"}
-	}
-})
-
-
-
-]]
 -- Protected Chest
 
 minetest.register_node("protector:chest", {
@@ -923,7 +750,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 					end
 				end
 			end
-
+	
 		elseif fields.todn then
 
 			-- copy contents of chest to players inventory
@@ -1000,10 +827,10 @@ if minetest.setting_getbool("enable_pvp") and protector.pvp then
 
 			local hitter_can_build =  not minetest.is_protected(pos, hitter:get_player_name());
 			local player_can_build = not minetest.is_protected(pos, player:get_player_name());
-
+			
 			--can hurt: hitter_can_build OR (NOT hitter_can_build AND NOT player_can_build)
-
-
+			
+			
 			if hitter_can_build or ((not player_can_build) and (not hitter_can_build)) then -- attacker can hurt player where he can build or if both cant build
 				return false -- can hurt
 			else
