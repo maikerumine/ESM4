@@ -78,6 +78,8 @@ SHOOTER_ENTITIES = {
 	"esmobs:applmons",
 	"esmobs:aggressormob",
 	"esmobs:sand_monster",
+	"esmobs:stone_monster",
+	"esmobs:oerkkii",
 	"esmobs:sheep",
 	"lagsmobs:griefer_ghost",
 	"lagsmobs:stone_monster",

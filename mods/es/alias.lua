@@ -41,6 +41,7 @@ minetest.register_alias("3d_armor:boots_infinium", "es:boots_infinium")
 --This to fix unneeded craftguide mod
 minetest.register_alias("craft_guide:sign_wall","default:torch")
 minetest.register_alias("craft_guide:lcd_pc","default:torch")
+minetest.register_alias("quartz:quartz_ore","default:torch")
 
 
 
