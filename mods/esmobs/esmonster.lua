@@ -1,4 +1,4 @@
---esmobs v0.0.1
+--esmobs v0.0.3
 --maikerumine
 --made for Extreme Survival game
 
@@ -7,10 +7,6 @@
 
 --REFERENCE
 --function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
-
-
-
-
 
 -- Tree Monster (or Tree Gollum) by PilzAdam
 
@@ -48,7 +44,7 @@ bp:register_mob("esmobs:tree_monster", {
 	},
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 2,
+	light_damage = 22,
 	fall_damage = 0,
 	animation = {
 		speed_normal = 15,		speed_run = 15,
@@ -59,7 +55,7 @@ bp:register_mob("esmobs:tree_monster", {
 	},
 })
 
-bp:register_spawn("esmobs:tree_monster", {"default:leaves", "default:jungleleaves","default:dirt", "default:jungletree"}, 5, 0, 13000, 2, 31000)
+bp:register_spawn("esmobs:tree_monster", {"default:leaves", "default:jungleleaves","default:dirt", "default:jungletree"}, 5, 0, 8000, 2, 31000)
 
 --bp:register_egg("esmobs:tree_monster", "Tree Monster", "default_tree_top.png", 1)
 
@@ -101,15 +97,11 @@ bp:register_mob("esmobs:sand_monster", {
 	drops = {
 		{name = "default:desert_sand",
 		chance = 1, min = 3, max = 5,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	water_damage = 3,
 	lava_damage = 4,
-	light_damage = 0,
+	light_damage = 20,
 	animation = {
 		speed_normal = 15,		speed_run = 15,
 		stand_start = 0,		stand_end = 39,
@@ -119,7 +111,7 @@ bp:register_mob("esmobs:sand_monster", {
 	},
 })
 
-bp:register_spawn("esmobs:sand_monster", {"default:sand", "meru:stone","group:sand"},20, -1, 7000, 2, 31000)
+bp:register_spawn("esmobs:sand_monster", {"default:sand", "meru:stone","group:sand"},20, -1, 8000, 2, 31000)
 
 
 
@@ -160,7 +152,7 @@ bp:register_mob("esmobs:stone_monster", {
 	},
 	water_damage = 0,
 	lava_damage = 1,
-	light_damage = 1,
+	light_damage = 21,
 	animation = {
 		speed_normal = 15,		speed_run = 15,
 		stand_start = 0,		stand_end = 14,
@@ -227,7 +219,7 @@ bp:register_mob("esmobs:spider", {
 	},
 })
 
-bp:register_spawn("esmobs:spider", {"default:stone" ,"default:cobble","group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 6, 0, 13000, 1, 71)
+bp:register_spawn("esmobs:spider", {"default:stone" ,"default:cobble","group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 6, 0, 8000, 1, 71)
 
 --bp:register_egg("esmobs:spider", "Spider", "mobs_cobweb.png", 1)
 
@@ -307,7 +299,7 @@ bp:register_mob("esmobs:applmons", {
 		punch_end = 48,
 	}
 })
-bp:register_spawn("esmobs:applmons", {"default:stone"}, 6, -1, 17000, 2, -30)
+bp:register_spawn("esmobs:applmons", {"default:stone"}, 6, -1, 8000, 2, -30)
 
 
 

@@ -1,4 +1,4 @@
---esmobs v0.0.1
+--esmobs v0.0.3
 --maikerumine
 --made for Extreme Survival game
 
@@ -7,10 +7,6 @@
 
 --REFERENCE
 --function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
-
-
-
-
 
 -- Sheep by PilzAdam
 

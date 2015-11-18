@@ -1,6 +1,15 @@
+--esmobs v0.0.3
+--maikerumine
+--made for Extreme Survival game
 
-bp:register_spawn("esmobs:man", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble"}, 11, -1, 7000, 1, 31000)
-bp:register_spawn("esmobs:woman", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble"}, 11, -1, 7000, 1, 31000)
+
+--dofile(minetest.get_modpath("esmobs").."/api.lua")
+
+--REFERENCE
+--function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
+
+bp:register_spawn("esmobs:man", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble"}, 11, -1, 9000, 1, 31000)
+bp:register_spawn("esmobs:woman", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble"}, 11, -1, 9000, 1, 31000)
 
 
 bp:register_mob("esmobs:man", {

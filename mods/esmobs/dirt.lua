@@ -1,6 +1,17 @@
+--esmobs v0.0.3
+--maikerumine
+--made for Extreme Survival game
+
+
+--dofile(minetest.get_modpath("esmobs").."/api.lua")
+
+--REFERENCE
+--function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
+
 --dofile(minetest.get_modpath("esmobs").."/api.lua")
 -- esmobs:register_spawn(name, description, nodes, max_light, min_light, chance, active_object_count, max_height)
-bp:register_spawn("esmobs:dirt", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 7, 4, 10000, 2, 31000)
+
+bp:register_spawn("esmobs:dirt", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 7, 4, 10000, 4, 31000)
 bp:register_mob("esmobs:dirt", {
 	type = "monster",
 	hp_min = 30,
@@ -21,11 +32,8 @@ bp:register_mob("esmobs:dirt", {
 		chance = 1,
 		min = 1,
 		max = 2,},
-				{name = "bones:bones",
-		chance = 1,
-		min = 1,
-		max = 1,},
-						{name = "flowers:viola",
+
+		{name = "flowers:viola",
 		chance = 10,
 		min = 0,
 		max = 1,},
@@ -59,7 +67,7 @@ bp:register_mob("esmobs:dirt", {
 
 
 
-bp:register_spawn("esmobs:dirt2", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 12, 4, 5000, 12, -102)
+bp:register_spawn("esmobs:dirt2", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 12, 4, 5000, 7, -102)
 bp:register_mob("esmobs:dirt2", {
 	type = "monster",
 	hp_min = 30,
@@ -80,11 +88,8 @@ bp:register_mob("esmobs:dirt2", {
 		chance = 1,
 		min = 1,
 		max = 2,},
-				{name = "bones:bones",
-		chance = 1,
-		min = 1,
-		max = 1,},
-						{name = "flowers:rose",
+
+		{name = "flowers:rose",
 		chance = 10,
 		min = 0,
 		max = 1,},

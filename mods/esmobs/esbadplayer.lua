@@ -1,4 +1,4 @@
---esmobs v0.0.1
+--esmobs v0.0.3
 --maikerumine
 --made for Extreme Survival game
 
@@ -8,9 +8,7 @@
 --REFERENCE
 --function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
 
-
-
-bp:register_spawn("esmobs:badplayer2", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 11000, 1, -20)
+bp:register_spawn("esmobs:badplayer2", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 8000, 1, -20)
 bp:register_mob("esmobs:badplayer2", {
 	type = "monster",
 	hp_min = 35,
@@ -41,11 +39,7 @@ bp:register_mob("esmobs:badplayer2", {
 			chance = 2,
 			min = 0,
 			max=3,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 100,
 	drawtype = "front",
@@ -67,7 +61,7 @@ bp:register_mob("esmobs:badplayer2", {
 		attack = "default_punch2",
 		},
 })
-bp:register_spawn("esmobs:badplayer3", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 11000, 1, 31000)
+bp:register_spawn("esmobs:badplayer3", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 8000, 1, 31000)
 bp:register_mob("esmobs:badplayer3", {
 	type = "monster",
 	hp_min = 49,
@@ -94,15 +88,11 @@ bp:register_mob("esmobs:badplayer3", {
 		chance = 1,
 		min = 0,
 		max = 1,},
-		{name = "default_apple",
+		{name = "default:apple",
 			chance = 1,
 			min = 1,
 			max=3,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 80,
 	drawtype = "front",
@@ -124,7 +114,7 @@ bp:register_mob("esmobs:badplayer3", {
 		attack = "default_punch3",
 		},
 })
-bp:register_spawn("esmobs:badplayer4", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 11000, 1, 31000)
+bp:register_spawn("esmobs:badplayer4", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 8000, 1, 31000)
 bp:register_mob("esmobs:badplayer4", {
 	type = "monster",
 	hp_min = 37,
@@ -155,11 +145,7 @@ bp:register_mob("esmobs:badplayer4", {
 			chance = 2,
 			min = 1,
 			max=3,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 100,
 	drawtype = "front",
@@ -182,7 +168,7 @@ bp:register_mob("esmobs:badplayer4", {
 		},
 })
 
-bp:register_spawn("esmobs:badplayer6", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 11000, 1, -100)
+bp:register_spawn("esmobs:badplayer6", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 8000, 1, -100)
 bp:register_mob("esmobs:badplayer6", {
 	type = "monster",
 	hp_min = 130,
@@ -209,15 +195,11 @@ bp:register_mob("esmobs:badplayer6", {
 		chance = 3,
 		min = 0,
 		max = 1,},
-		{name = "default_apple",
+		{name = "default:apple",
 			chance = 2,
 			min = 1,
 			max=3,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 80,
 	drawtype = "front",
@@ -239,7 +221,7 @@ bp:register_mob("esmobs:badplayer6", {
 		attack = "default_punch3",
 		},
 })
-bp:register_spawn("esmobs:badplayer7", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 11000, 1, 31000)
+bp:register_spawn("esmobs:badplayer7", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 8000, 1, 31000)
 bp:register_mob("esmobs:badplayer7", {
 	type = "monster",
 	hp_min = 37,
@@ -266,15 +248,11 @@ bp:register_mob("esmobs:badplayer7", {
 		chance = 3,
 		min = 0,
 		max = 5,},
-		{name = "default_apple",
+		{name = "default:apple",
 			chance = 1,
 			min = 1,
 			max=2,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 85,
 	drawtype = "front",
@@ -296,7 +274,7 @@ bp:register_mob("esmobs:badplayer7", {
 		attack = "mobs_oerkki_attack",
 		},
 })
-bp:register_spawn("esmobs:badplayer8", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 11000, 1, -250)
+bp:register_spawn("esmobs:badplayer8", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 8000, 1, -250)
 bp:register_mob("esmobs:badplayer8", {
 	type = "monster",
 	hp_min = 157,
@@ -327,11 +305,7 @@ bp:register_mob("esmobs:badplayer8", {
 			chance = 2,
 			min = 13,
 			max=30,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 100,
 	drawtype = "front",
@@ -353,7 +327,7 @@ bp:register_mob("esmobs:badplayer8", {
 		attack = "default_punch2",
 		},
 })
-bp:register_spawn("esmobs:badplayer9", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 4, -1, 11000, 1, -300)
+bp:register_spawn("esmobs:badplayer9", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 4, -1, 8000, 1, -300)
 bp:register_mob("esmobs:badplayer9", {
 	type = "monster",
 	hp_min = 177,
@@ -376,7 +350,7 @@ bp:register_mob("esmobs:badplayer9", {
 		chance = 2,
 		min = 0,
 		max = 1,},
-		{name = "default:default:stone_with_diamond",
+		{name = "default:stone_with_diamond",
 		chance = 6,
 		min = 0,
 		max = 3,},
@@ -384,11 +358,7 @@ bp:register_mob("esmobs:badplayer9", {
 			chance = 1,
 			min = 1,
 			max=3,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 80,
 	drawtype = "front",
@@ -410,7 +380,7 @@ bp:register_mob("esmobs:badplayer9", {
 		attack = "default_punch3",
 		},
 })
-bp:register_spawn("esmobs:badplayer10", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 4, -1, 11000, 1, -430)
+bp:register_spawn("esmobs:badplayer10", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 4, -1, 8000, 1, -430)
 bp:register_mob("esmobs:badplayer10", {
 	type = "monster",
 	hp_min = 157,
@@ -441,11 +411,7 @@ bp:register_mob("esmobs:badplayer10", {
 			chance = 2,
 			min = 0,
 			max=1,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 80,
 	drawtype = "front",
@@ -467,7 +433,7 @@ bp:register_mob("esmobs:badplayer10", {
 		attack = "mobs_slash_attack",
 		},
 })
-bp:register_spawn("esmobs:badplayer11", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 11000, 1, 100)
+bp:register_spawn("esmobs:badplayer11", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 8000, 1, 100)
 bp:register_mob("esmobs:badplayer11", {
 	type = "monster",
 	hp_min = 49,
@@ -498,11 +464,7 @@ bp:register_mob("esmobs:badplayer11", {
 			chance = 2,
 			min = 13,
 			max=30,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 100,
 	drawtype = "front",
@@ -524,7 +486,7 @@ bp:register_mob("esmobs:badplayer11", {
 		attack = "default_punch2",
 		},
 })
-bp:register_spawn("esmobs:badplayer12", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 11000, 1, 31000)
+bp:register_spawn("esmobs:badplayer12", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 8000, 1, 31000)
 bp:register_mob("esmobs:badplayer12", {
 	type = "monster",
 	hp_min = 57,
@@ -555,11 +517,7 @@ bp:register_mob("esmobs:badplayer12", {
 			chance = 2,
 			min = 13,
 			max=30,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 100,
 	drawtype = "front",
@@ -582,7 +540,7 @@ bp:register_mob("esmobs:badplayer12", {
 		},
 })
 
-bp:register_spawn("esmobs:badplayer16", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 11000, 1, 31000)
+bp:register_spawn("esmobs:badplayer16", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 8000, 1, 31000)
 bp:register_mob("esmobs:badplayer16", {
 	type = "monster",
 	hp_min = 47,
@@ -613,11 +571,7 @@ bp:register_mob("esmobs:badplayer16", {
 			chance = 2,
 			min = 1,
 			max=5,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 90,
 	drawtype = "front",
@@ -640,7 +594,7 @@ bp:register_mob("esmobs:badplayer16", {
 		},
 })
 
-bp:register_spawn("esmobs:badplayer18", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 11000, 1, 31000)
+bp:register_spawn("esmobs:badplayer18", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 8000, 1, 31000)
 bp:register_mob("esmobs:badplayer18", {
 	type = "monster",
 	hp_min = 48,
@@ -671,11 +625,7 @@ bp:register_mob("esmobs:badplayer18", {
 			chance = 2,
 			min = 4,
 			max=8,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 90,
 	drawtype = "front",
@@ -699,7 +649,7 @@ bp:register_mob("esmobs:badplayer18", {
 })
 
 
-bp:register_spawn("esmobs:badplayer22", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 11000, 1, 31000)
+bp:register_spawn("esmobs:badplayer22", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 8000, 1, 31000)
 bp:register_mob("esmobs:badplayer22", {
 	type = "npc",
 	hp_min = 77,
@@ -726,15 +676,11 @@ bp:register_mob("esmobs:badplayer22", {
 		chance = 1,
 		min = 0,
 		max = 1,},
-		{name = "default:default_brick",
+		{name = "default:book",
 			chance = 4,
 			min = 1,
 			max=30,},
-		{name = "bones:bones",
-			chance = 2,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 80,
 	drawtype = "front",
@@ -761,7 +707,7 @@ bp:register_mob("esmobs:badplayer22", {
 	step = 1,
 
 })
-bp:register_spawn("esmobs:badplayer23", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 1, -150)
+bp:register_spawn("esmobs:badplayer23", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 8000, 1, -150)
 bp:register_mob("esmobs:badplayer23", {
 	type = "monster",
 	hp_min = 127,
@@ -788,15 +734,11 @@ bp:register_mob("esmobs:badplayer23", {
 		chance = 1,
 		min = 0,
 		max = 1,},
-		{name = "shooter:ammo",
+		{name = "default:bronze_ingot",
 			chance = 2,
 			min = 1,
 			max=3,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 80,
 	drawtype = "front",
@@ -818,7 +760,7 @@ bp:register_mob("esmobs:badplayer23", {
 		attack = "default_punch2",
 		},
 })
-bp:register_spawn("esmobs:badplayer24", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 1, -400)
+bp:register_spawn("esmobs:badplayer24", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 8000, 1, -400)
 bp:register_mob("esmobs:badplayer24", {
 	type = "monster",
 	hp_min = 137,
@@ -849,11 +791,7 @@ bp:register_mob("esmobs:badplayer24", {
 			chance = 2,
 			min = 0,
 			max=3,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 80,
 	drawtype = "front",
@@ -875,7 +813,7 @@ bp:register_mob("esmobs:badplayer24", {
 		attack = "default_punch3",
 		},
 })
-bp:register_spawn("esmobs:badplayer25", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 1, -120)
+bp:register_spawn("esmobs:badplayer25", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 8000, 1, -120)
 bp:register_mob("esmobs:badplayer25", {
 	type = "monster",
 	hp_min = 100,
@@ -902,15 +840,11 @@ bp:register_mob("esmobs:badplayer25", {
 		chance = 1,
 		min = 0,
 		max = 2,},
-		{name = "default_apple",
+		{name = "default:apple",
 			chance = 2,
 			min = 1,
 			max=5,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 80,
 	drawtype = "front",
@@ -932,7 +866,7 @@ bp:register_mob("esmobs:badplayer25", {
 		attack = "default_punch",
 		},
 })
-bp:register_spawn("esmobs:badplayer26", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 1, 31000)
+bp:register_spawn("esmobs:badplayer26", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 8000, 1, 31000)
 bp:register_mob("esmobs:badplayer26", {
 	type = "monster",
 	hp_min = 73,
@@ -963,11 +897,7 @@ bp:register_mob("esmobs:badplayer26", {
 			chance = 2,
 			min = 1,
 			max=3,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 90,
 	drawtype = "front",
@@ -989,7 +919,7 @@ bp:register_mob("esmobs:badplayer26", {
 		attack = "default_punch2",
 		},
 })
-bp:register_spawn("esmobs:badplayer27", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 1, 31000)
+bp:register_spawn("esmobs:badplayer27", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 8000, 1, 31000)
 bp:register_mob("esmobs:badplayer27", {
 	type = "monster",
 	hp_min = 99,
@@ -1012,7 +942,7 @@ bp:register_mob("esmobs:badplayer27", {
 		chance = 1,
 		min = 0,
 		max = 1,},
-		{name = "default:default_apple",
+		{name = "default:apple",
 		chance = 1,
 		min = 1,
 		max = 7,},
@@ -1020,11 +950,7 @@ bp:register_mob("esmobs:badplayer27", {
 			chance = 1,
 			min = 1,
 			max=3,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 80,
 	drawtype = "front",
@@ -1046,7 +972,7 @@ bp:register_mob("esmobs:badplayer27", {
 		attack = "default_punch3",
 		},
 })
-bp:register_spawn("esmobs:badplayer28", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 1, 31000)
+bp:register_spawn("esmobs:badplayer28", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 8000, 1, 31000)
 bp:register_mob("esmobs:badplayer28", {
 	type = "monster",
 	hp_min = 77,
@@ -1073,15 +999,11 @@ bp:register_mob("esmobs:badplayer28", {
 		chance = 1,
 		min = 0,
 		max = 1,},
-		{name = "default_apple",
+		{name = "default:apple",
 			chance = 2,
 			min = 1,
 			max=3,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 80,
 	drawtype = "front",
@@ -1103,7 +1025,7 @@ bp:register_mob("esmobs:badplayer28", {
 		attack = "default_punch",
 		},
 })
-bp:register_spawn("esmobs:badplayer29", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 1, -50)
+bp:register_spawn("esmobs:badplayer29", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 8000, 1, -50)
 bp:register_mob("esmobs:badplayer29", {
 	type = "monster",
 	hp_min = 69,
@@ -1130,15 +1052,11 @@ bp:register_mob("esmobs:badplayer29", {
 		chance = 3,
 		min = 0,
 		max = 1,},
-		{name = "default:default_apple",
+		{name = "default:apple",
 			chance = 2,
 			min = 1,
 			max=9,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 100,
 	drawtype = "front",
@@ -1160,7 +1078,7 @@ bp:register_mob("esmobs:badplayer29", {
 		attack = "default_punch2",
 		},
 })
-bp:register_spawn("esmobs:badplayer30", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 1, -50)
+bp:register_spawn("esmobs:badplayer30", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 8000, 1, -50)
 bp:register_mob("esmobs:badplayer30", {
 	type = "monster",
 	hp_min = 137,
@@ -1187,15 +1105,11 @@ bp:register_mob("esmobs:badplayer30", {
 		chance = 2,
 		min = 0,
 		max = 1,},
-		{name = "default:default_apple",
+		{name = "default:apple",
 			chance = 2,
 			min = 2,
 			max=7,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 80,
 	drawtype = "front",
@@ -1218,7 +1132,7 @@ bp:register_mob("esmobs:badplayer30", {
 		},
 })
 
-bp:register_spawn("esmobs:badplayer31", {"default:dirt_with_grass","default:stone","meru:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 1, 31000)
+bp:register_spawn("esmobs:badplayer31", {"default:dirt_with_grass","default:stone","meru:stone", "default:stonebrick","default:cobble"}, 5, -1, 8000, 1, 31000)
 bp:register_mob("esmobs:badplayer31", {
 	type = "monster",
 	hp_min = 77,
@@ -1249,11 +1163,7 @@ bp:register_mob("esmobs:badplayer31", {
 			chance = 2,
 			min = 6,
 			max=23,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 80,
 	drawtype = "front",
@@ -1278,7 +1188,7 @@ bp:register_mob("esmobs:badplayer31", {
 
 
 
-bp:register_spawn("esmobs:badplayer35", {"default:sandstone","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 11000, 1, -20)
+bp:register_spawn("esmobs:badplayer35", {"default:sandstone","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 8000, 1, -20)
 bp:register_mob("esmobs:badplayer35", {
 	type = "monster",
 	hp_min = 35,
@@ -1309,11 +1219,7 @@ bp:register_mob("esmobs:badplayer35", {
 			chance = 2,
 			min = 0,
 			max=3,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 80,
 	drawtype = "front",
@@ -1336,54 +1242,4 @@ bp:register_mob("esmobs:badplayer35", {
 		},
 })
 
-bp:register_spawn("esmobs:badplayer36", {"default:water_source","default:water_flowing"}, 20, -1, 1000, 3, 120)
-bp:register_mob("esmobs:badplayer36", {
-	type = "monster",
-	hp_min = 35,
-	hp_max = 75,
-	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
-	visual = "mesh",
-	mesh = "3d_armor_character.x",
-	textures = {"badplayer36.png",
-			"3d_armor_trans.png",
-				minetest.registered_items["default:water_flowing"].inventory_image,
-			},
-	visual_size = {x=1, y=1},
-	makes_footstep_sound = true,
-	view_range = 15,
-	walk_velocity = 0.9,
-	run_velocity = 1.8,
-	damage = 1,
-	drops = {
-		{name = "default:water_flowing",
-		chance = 1,
-		min = 0,
-		max = 2,},
-		{name = "bucket:bucket_empty",
-		chance = 8,
-		min = 0,
-		max = 1,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
-	},
-	armor = 80,
-	drawtype = "front",
-	water_damage = 0,
-	lava_damage = 50,
-	light_damage = 0,
-	on_rightclick = nil,
-	attack_type = "dogfight",
-	animation = {
-		speed_normal = 30,		speed_run = 30,
-		stand_start = 0,		stand_end = 79,
-		walk_start = 168,		walk_end = 187,
-		run_start = 168,		run_end = 187,
-		punch_start = 200,		punch_end = 219,
-	},
-	sounds = {
-		random = "mobs_stonemonster",
-	},
-})
+

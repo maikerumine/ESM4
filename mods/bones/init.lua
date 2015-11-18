@@ -1,5 +1,6 @@
 -- Minetest 0.4 mod: bones
 -- See README.txt for licensing and other information. 
+--REVISED 20151117 by maikerumine for adding bones to inventory after punch
 
 bones = {}
 
@@ -79,30 +80,41 @@ minetest.register_node("bones:bones", {
 		local inv = minetest.get_meta(pos):get_inventory()
 		local player_inv = player:get_inventory()
 		local has_space = true
-		
+
 		for i=1,inv:get_size("main") do
 			local stk = inv:get_stack("main", i)
 			if player_inv:room_for_item("main", stk) then
 				inv:set_stack("main", i, nil)
 				player_inv:add_item("main", stk)
+				
 			else
 				has_space = false
 				break
 			end
 		end
 		
+--ADD GIVE BONE TO INVENTORY WHILST REMOVING NODE
 		-- remove bones if player emptied them
 		if has_space then
 			minetest.remove_node(pos)
+			player:get_inventory():add_item('main', 'bones:bones 1') 
+			--END ADDED BONE TO INV
 		end
+	
 	end,
 	
 	on_timer = function(pos, elapsed)
 		local meta = minetest.get_meta(pos)
-		local time = meta:get_int("time") + elapsed
+		local time = meta:get_int("time") + elapsed--swap this
 		if time >= share_bones_time then
-			meta:set_string("infotext", meta:get_string("owner").."'s old bones")
+--BEGIN TIME	
+	
+			local time = os.date("*t");--for this on new map
+			meta:set_string("infotext", "The old corpse of ".. meta:get_string("owner").." at ".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..":" .. time.sec..")");			
+		
+			--meta:set_string("infotext", meta:get_string("owner").."'s old bones")
 			meta:set_string("owner", "")
+			
 		else
 			meta:set_int("time", time)
 			return true
@@ -199,12 +211,19 @@ minetest.register_on_dieplayer(function(player)
 	
 	player_inv:set_list("main", {})
 	player_inv:set_list("craft", {})
+
+--BEGIN TIME STRING
+--ref			local time = os.date("*t");
+--ref			meta:set_string("infotext", self.name.."'s fresh corpse ".. meta:get_string("owner").." at ".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..":" .. time.sec..")");			
+--END TIME STRING	
 	
 	meta:set_string("formspec", bones.bones_formspec)
 	meta:set_string("owner", player_name)
 	
 	if share_bones_time ~= 0 then
-		meta:set_string("infotext", player_name.."'s fresh bones")
+		local time = os.date("*t");
+		meta:set_string("infotext", player_name.."'s fresh corpse.  :-( R.I.P. ".. meta:get_string("owner").." at ".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..":" .. time.sec..")");	
+		--meta:set_string("infotext", player_name.."'s fresh bones")--old bones code
 
 		if share_bones_time_early == 0 or not minetest.is_protected(pos, player_name) then
 			meta:set_int("time", 0)

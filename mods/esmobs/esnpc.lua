@@ -1,4 +1,4 @@
---esmobs v0.0.1
+--esmobs v0.0.3
 --maikerumine
 --made for Extreme Survival game
 
@@ -8,9 +8,7 @@
 --REFERENCE
 --function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
 
-
-
-bp:register_spawn("esmobs:badplayer1", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 11000, 1, 31000)
+bp:register_spawn("esmobs:badplayer1", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 9000, 1, 31000)
 bp:register_mob("esmobs:badplayer1", {
 	type = "npc",
 	hp_min = 25,
@@ -41,11 +39,7 @@ bp:register_mob("esmobs:badplayer1", {
 			chance = 2,
 			min = 13,
 			max=30,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 80,
 	drawtype = "front",
@@ -72,7 +66,7 @@ bp:register_mob("esmobs:badplayer1", {
 	step = 1,
 })
 
-bp:register_spawn("esmobs:badplayer5", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 11000, 1, 31000)
+bp:register_spawn("esmobs:badplayer5", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 9000, 1, 31000)
 bp:register_mob("esmobs:badplayer5", {
 	type = "npc",
 	hp_min = 27,
@@ -103,11 +97,7 @@ bp:register_mob("esmobs:badplayer5", {
 			chance = 2,
 			min = 13,
 			max=30,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 85,
 	drawtype = "front",
@@ -134,7 +124,7 @@ bp:register_mob("esmobs:badplayer5", {
 	step = 1,
 })
 
-bp:register_spawn("esmobs:badplayer13", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 11000, 1, 31000)
+bp:register_spawn("esmobs:badplayer13", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 9000, 1, 31000)
 bp:register_mob("esmobs:badplayer13", {
 	type = "npc",
 	hp_min = 13,
@@ -165,11 +155,7 @@ bp:register_mob("esmobs:badplayer13", {
 			chance = 2,
 			min = 13,
 			max=30,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 40,
 	drawtype = "front",
@@ -203,7 +189,7 @@ bp:register_mob("esmobs:badplayer13", {
 
 
 
-bp:register_spawn("esmobs:badplayer14", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 11000, 1, 31000)
+bp:register_spawn("esmobs:badplayer14", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 9000, 1, 31000)
 bp:register_mob("esmobs:badplayer14", {
 	type = "npc",
 	hp_min = 27,
@@ -234,11 +220,7 @@ bp:register_mob("esmobs:badplayer14", {
 			chance = 2,
 			min = 1,
 			max=3,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 90,
 	drawtype = "front",
@@ -265,7 +247,7 @@ bp:register_mob("esmobs:badplayer14", {
 	step = 1,
 
 })
-bp:register_spawn("esmobs:badplayer15", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 11000, 1, 31000)
+bp:register_spawn("esmobs:badplayer15", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 9000, 1, 31000)
 bp:register_mob("esmobs:badplayer15", {
 	type = "npc",
 	hp_min = 47,
@@ -296,11 +278,7 @@ bp:register_mob("esmobs:badplayer15", {
 			chance = 2,
 			min = 1,
 			max=3,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 80,
 	drawtype = "front",
@@ -327,7 +305,7 @@ bp:register_mob("esmobs:badplayer15", {
 	step = 1,
 })
 
-bp:register_spawn("esmobs:badplayer17", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 11000, 1, 31000)
+bp:register_spawn("esmobs:badplayer17", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 9000, 1, 31000)
 bp:register_mob("esmobs:badplayer17", {
 	type = "npc",
 	hp_min = 37,
@@ -358,11 +336,7 @@ bp:register_mob("esmobs:badplayer17", {
 			chance = 2,
 			min = 4,
 			max=12,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 90,
 	drawtype = "front",
@@ -394,7 +368,7 @@ bp:register_mob("esmobs:badplayer17", {
 
 })
 
-bp:register_spawn("esmobs:badplayer19", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 11000, 1, 31000)
+bp:register_spawn("esmobs:badplayer19", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 9000, 1, 31000)
 bp:register_mob("esmobs:badplayer19", {
 	type = "npc",
 	hp_min = 28,
@@ -425,11 +399,7 @@ bp:register_mob("esmobs:badplayer19", {
 			chance = 2,
 			min = 13,
 			max=30,},
-		{name = "bones:bones",
-			chance = 2,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 80,
 	drawtype = "front",
@@ -456,7 +426,7 @@ bp:register_mob("esmobs:badplayer19", {
 	step = 1,
 
 })
-bp:register_spawn("esmobs:badplayer20", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 11000, 1, -1000)
+bp:register_spawn("esmobs:badplayer20", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 9000, 1, -10)
 bp:register_mob("esmobs:badplayer20", {
 	type = "npc",
 	hp_min = 92,
@@ -487,11 +457,7 @@ bp:register_mob("esmobs:badplayer20", {
 			chance = 2,
 			min = 1,
 			max=3,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 80,
 	drawtype = "front",
@@ -520,7 +486,7 @@ bp:register_mob("esmobs:badplayer20", {
 })
 
 
-bp:register_spawn("esmobs:badplayer21", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 1, -5000)
+bp:register_spawn("esmobs:badplayer21", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1,9000, 1, -50)
 bp:register_mob("esmobs:badplayer21", {
 	type = "monster",
 	hp_min = 157,
@@ -547,15 +513,11 @@ bp:register_mob("esmobs:badplayer21", {
 		chance = 1,
 		min = 0,
 		max = 1,},
-		{name = "default_apple",
+		{name = "default:apple",
 			chance = 1,
 			min = 1,
 			max=3,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 80,
 	drawtype = "front",

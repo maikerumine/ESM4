@@ -1,3 +1,12 @@
+--esmobs v0.0.3
+--maikerumine
+--made for Extreme Survival game
+
+
+--dofile(minetest.get_modpath("esmobs").."/api.lua")
+
+--REFERENCE
+--function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
 --dofile(minetest.get_modpath("crossfiremob").."/api.lua")
 
 bp:register_mob("esmobs:goodnpc", {
@@ -31,11 +40,7 @@ bp:register_mob("esmobs:goodnpc", {
 		chance = 2,
 		min = 0,
 		max = 1,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 75,
 	drawtype = "front",
@@ -91,11 +96,7 @@ bp:register_mob("esmobs:badnpc", {
 		chance = 2,
 		min = 0,
 		max = 1,},
-		{name = "bones:bones",
-			chance = 1,
-			min = 1,
-			max=1,
-		},
+
 	},
 	armor = 75,
 	drawtype = "front",
