@@ -67,7 +67,7 @@ bp:register_mob("esmobs:dirt", {
 
 
 
-bp:register_spawn("esmobs:dirt2", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 12, 4, 5000, 7, -102)
+bp:register_spawn("esmobs:dirt2", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, 4, 5000, 7, -102)
 bp:register_mob("esmobs:dirt2", {
 	type = "monster",
 	hp_min = 30,
@@ -98,7 +98,7 @@ bp:register_mob("esmobs:dirt2", {
 	drawtype = "front",
 	water_damage = 20,
 	lava_damage = 40,
-	light_damage = 10,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {

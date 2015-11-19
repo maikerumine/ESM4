@@ -45,7 +45,7 @@ bp:register_mob("esmobs:badplayer2", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 110,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -98,7 +98,7 @@ bp:register_mob("esmobs:badplayer3", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 110,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -151,7 +151,7 @@ bp:register_mob("esmobs:badplayer4", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 110,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -205,7 +205,7 @@ bp:register_mob("esmobs:badplayer6", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 10,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -258,7 +258,7 @@ bp:register_mob("esmobs:badplayer7", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 10,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -311,7 +311,7 @@ bp:register_mob("esmobs:badplayer8", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 10,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -364,7 +364,7 @@ bp:register_mob("esmobs:badplayer9", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 11,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -417,7 +417,7 @@ bp:register_mob("esmobs:badplayer10", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 5,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -470,7 +470,7 @@ bp:register_mob("esmobs:badplayer11", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 10,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -523,7 +523,7 @@ bp:register_mob("esmobs:badplayer12", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 10,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -577,7 +577,7 @@ bp:register_mob("esmobs:badplayer16", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 10,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -631,7 +631,7 @@ bp:register_mob("esmobs:badplayer18", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 10,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -686,7 +686,7 @@ bp:register_mob("esmobs:badplayer22", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 11,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -744,7 +744,7 @@ bp:register_mob("esmobs:badplayer23", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 11,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -797,7 +797,7 @@ bp:register_mob("esmobs:badplayer24", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 10,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -850,7 +850,7 @@ bp:register_mob("esmobs:badplayer25", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 10,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -903,7 +903,7 @@ bp:register_mob("esmobs:badplayer26", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 10,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -956,7 +956,7 @@ bp:register_mob("esmobs:badplayer27", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 11,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -1009,7 +1009,7 @@ bp:register_mob("esmobs:badplayer28", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 11,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -1062,7 +1062,7 @@ bp:register_mob("esmobs:badplayer29", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 11,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -1115,7 +1115,7 @@ bp:register_mob("esmobs:badplayer30", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 12,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -1169,7 +1169,7 @@ bp:register_mob("esmobs:badplayer31", {
 	drawtype = "front",
 	water_damage = 0,
 	lava_damage = 50,
-	light_damage = 12,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -1225,7 +1225,7 @@ bp:register_mob("esmobs:badplayer35", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 11,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {

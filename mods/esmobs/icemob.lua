@@ -39,7 +39,7 @@ bp:register_mob("esmobs:icemon", {
 	drawtype = "front",
 	water_damage = 0,
 	lava_damage = 50,
-	light_damage = 20,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -85,7 +85,7 @@ bp:register_mob("esmobs:snowmon", {
 	drawtype = "front",
 	water_damage = 20,
 	lava_damage = 50,
-	light_damage = 20,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -103,7 +103,7 @@ bp:register_mob("esmobs:snowmon", {
 
 })
 
-bp:register_spawn("esmobs:watermon", {"default:water_source","default:water_flowing"}, 20, -1, 9000, 1, 120)
+bp:register_spawn("esmobs:watermon", {"default:water_source","default:water_flowing"}, 5, -1, 9000, 1, 120)
 bp:register_mob("esmobs:watermon", {
 	type = "monster",
 	hp_min = 35,
@@ -136,7 +136,7 @@ bp:register_mob("esmobs:watermon", {
 	drawtype = "front",
 	water_damage = 0,
 	lava_damage = 50,
-	light_damage = 20,
+	light_damage = 1,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {

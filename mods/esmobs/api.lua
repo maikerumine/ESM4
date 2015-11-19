@@ -941,49 +941,61 @@ function bp:register_mob(name, def)
 			end
 --------END ORIG ON PUNCH CODE	
 --------ADDING LAGS MOBS BONES HERE	
-
     --on_punch = function(self, hitter)
             --mob killed
          if self.object:get_hp() <= 0 then
             if hitter and hitter:is_player() and hitter:get_inventory() then
                for _,drop in ipairs(self.drops) do
-                  if math.random(1, drop.chance) == 1 then
-                     hitter:get_inventory():add_item("main", ItemStack(drop.name.." "..math.random(drop.min, drop.max)))
-                  end
+----------	       
+--	       	--THIS CODE GIVES YOU THE DROP INSTANT ON DEATH--removed to place drops in bones.
+--              	 if math.random(1, drop.chance) == 1 then
+--                  	hitter:get_inventory():add_item("main", ItemStack(drop.name.." "..math.random(drop.min, drop.max)))
+--               	end
+ ----------  
                end
-                    --mob bones, like player bones
-                 if math.random(1, 1) == 1 --[[and self.path_blocked_count < 1]] then --mob was free, not in cage or something
+	       
+                    --mob bones, like player bones added by Andrei modified by maikerumine
+                 if math.random(1, 1) == 1  then
                         local pos = self.object:getpos()
                         local nn = minetest.get_node(pos).name
                         local spaceforbones=nil
                         if nn=="air" or nn=="default:water_flowing" or nn=="default:water_source" or nn=="default:lava_source" or nn=="default:lava_flowing" then
                             spaceforbones=pos
-                            minetest.add_node(spaceforbones, {name="bones:bones"} )
+					minetest.add_node(spaceforbones, {name="bones:bones"} )
                             local meta = minetest.get_meta(spaceforbones)
                             local inv = meta:get_inventory()
                             inv:set_size("main", 8*4)
-
+				--DROPS FILL BONE
                             for _,drop in ipairs(self.drops) do
                                 if math.random(1, drop.chance) == 1 then
-                                    local stack = ItemStack(drop.name.." "..math.random(drop.min, drop.max))  --This seems to not work right
+                                    local stack = ItemStack(drop.name.." "..math.random(drop.min, drop.max)) 
                                     if inv:room_for_item("main", stack) then
                                         inv:add_item("main", stack)
                                     end
                                 end
                             end
------------------------------------------------------------------
--------------------------------------------------------------------
-
-			    		    
+		    		    
                             meta:set_string("formspec", "size[8,9;]"..
                                     "list[current_name;main;0,0;8,4;]"..
                                     "list[current_player;main;0,5;8,4;]")
+--[[	
+			--lags orig mob bone code for ref
+				    meta:set_string("infotext", self.full_name.."'s fresh bones")
+				    meta:set_string("owner", "Stone monster")
+				    meta:set_int("bonetime_counter", 0)
+				    local timer  = minetest.get_node_timer(spaceforbones)
+				    timer:start(10)
+				    ]]	
+
 --BEGIN TIME STRING
-			local time = os.date("*t");
-			meta:set_string("infotext", self.name.."'s fresh corpse ".. meta:get_string("owner").." at ".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..":" .. time.sec..")");			
---END TIME STRING				    
-                            --meta:set_string("infotext", self.name.."'s fresh bones")--CHANGED TO ABOVE WITH TIME
-                            meta:set_string( "R.I.P mob, you put up a good fight.")
+				local time = os.date("*t");--this keeps the bones meta to turn old				    
+				    
+--CHOOSE OPTION BELOW:
+				meta:set_string("infotext", self.name.." slain".. meta:get_string("owner").." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..")");		--SHOW TIME AT DEATH			    
+--				meta:set_string("infotext", self.name.."'s fresh bones")			--SHOW TIME AT BONE EXPIRE
+--CHOOSE OPTION BELOW:				
+				meta:set_string( "owner", "Extreme Survival Mob R.I.P.")			--SET OWNER FOR TIMER
+--				meta:set_string("owner")									--SET NO OWNER NO TIMER
                             meta:set_int("bonetime_counter", 0)
                             local timer  = minetest.get_node_timer(spaceforbones)
                             timer:start(10)
@@ -994,8 +1006,7 @@ function bp:register_mob(name, def)
             self.object:remove()
             return
          elseif self.object:get_hp() == 4 or self.object:get_hp() == 6 or self.object:get_hp() == 10 then
---                self.path_blocked_count = self.path_blocked_count - 1;  --REMOVED DUE TO CRASH WITH NIL
-            self.state="walk"
+            self.state="run"
          else
             self.v_start=true
             if hitter and hitter:is_player() and hitter:get_wielded_item() then
@@ -1004,7 +1015,7 @@ function bp:register_mob(name, def)
                hitter:set_wielded_item( tool )
             end
          end
---end,			
+--end,--use if using original punch code.			
 			
 	end,
 -------END ON PUNCH FULL CODE				
@@ -1048,7 +1059,8 @@ function bp:spawn_specific(name, nodes, neighbors, min_light, max_light, interva
 			local nod = minetest.get_node_or_nil(pos)
 			if not nod or not nod.name or not minetest.registered_nodes[nod.name]
 			or minetest.registered_nodes[nod.name].walkable == true then return end
-			pos.y = pos.y + 1
+			pos.y = pos.y + 3--test to see if prevent mineshaft spawn
+--			pos.y = pos.y + 1--original
 			nod = minetest.get_node_or_nil(pos)
 			if not nod or not nod.name or not minetest.registered_nodes[nod.name]
 			or minetest.registered_nodes[nod.name].walkable == true then return end
@@ -1165,7 +1177,8 @@ function check_for_death(self)
 		end
 		return
 	end
---MIGRATE TO BONES	
+
+--USE THIS CODE TO HAVE VISIBLE DROPS AND COMMENT OUT THE MOBS BONES	
 --[[	
 	local pos = self.object:getpos()
 	pos.y = pos.y + 1.5 -- drop items half a block higher
@@ -1181,8 +1194,46 @@ function check_for_death(self)
 	end
 	
 ]]	
-	
-	
+
+------------------------------------------------------
+------------------------------------------------------MOBS BONES ON DIE
+         if self.object:get_hp() <= 0 then
+                        local pos = self.object:getpos()
+                        local nn = minetest.get_node(pos).name
+                        local spaceforbones=nil
+                        if nn=="air" or nn=="default:water_flowing" or nn=="default:water_source" or nn=="default:lava_source" or nn=="default:lava_flowing" then
+                            spaceforbones=pos
+					minetest.add_node(spaceforbones, {name="bones:bones"} )
+                            local meta = minetest.get_meta(spaceforbones)
+                            local inv = meta:get_inventory()
+                            inv:set_size("main", 8*4)
+                            for _,drop in ipairs(self.drops) do
+                                if math.random(1, drop.chance) == 1 then
+                                    local stack = ItemStack(drop.name.." "..math.random(drop.min, drop.max)) 
+                                    if inv:room_for_item("main", stack) then
+                                        inv:add_item("main", stack)
+                                    end
+                                end
+                            end  
+                            meta:set_string("formspec", "size[8,9;]"..
+                                    "list[current_name;main;0,0;8,4;]"..
+                                    "list[current_player;main;0,5;8,4;]")
+				local time = os.date("*t");--this keeps the bones meta to turn old				    
+				meta:set_string("infotext", self.name.." slain".. meta:get_string("owner").." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..")");		--SHOW TIME AT DEATH			    				
+				meta:set_string( "owner", "Extreme Survival Mob R.I.P.")			--SET OWNER FOR TIMER
+                            meta:set_int("bonetime_counter", 0)
+                            local timer  = minetest.get_node_timer(spaceforbones)
+                            timer:start(10)
+                        end
+				self.object:remove()
+			return
+                 end
+		 
+		 --end--UNCOMMENT IF RE-ADDING VISIBLE DROPS
+------------------------------------------------------	
+------------------------------------------------------
+------------------------------------------------------
+
 	if self.sounds.death ~= nil then
 		minetest.sound_play(self.sounds.death,{object = self.object})
 	end
@@ -1191,83 +1242,7 @@ function check_for_death(self)
 		self.on_die(self, pos)
 
 	end
-end --COMMENT THIS END OUT IF ADDING BELOW CODE
-
-
---[[
---BONES FOR MOBS v0.0.1-maikerumine  please use bones modified.
-local function is_owner(pos, name)
-	local owner = minetest.get_meta(pos):get_string("owner")
-	if owner == "" or owner == name then
-		return true
-	end
-	return false
-end
-	
-local function may_replace(pos,player)
-	--local param2 = minetest.dir_to_facedir(player:get_look_dir())
-		local node_name = minetest.get_node(pos).name
-		local node_definition = minetest.registered_nodes[node_name]
-
-
-	-- if the node is unknown, we let the protection mod decide
-	-- this is consistent with when a player could dig or not dig it
-	-- unknown decoration would often be removed
-	-- while unknown building materials in use would usually be left
-	if not node_definition then
-		-- only replace nodes that are not protected
-		return not minetest.is_protected(pos, player:get_player_name())
-	end
-
-	-- allow replacing air and liquids
-	if node_name == "air" or node_definition.liquidtype ~= "none" then
-		return true
-	end
-
-	-- don't replace filled chests and other nodes that don't allow it
-	local can_dig_func = node_definition.can_dig
-
-
---THIS CAUSED CRASHES	
-	
-	if can_dig_func and not can_dig_func(pos, player) then
-		return false
-	end
-
-	
-	-- default to each nodes buildable_to; if a placed block would replace it, why shouldn't bones?
-	-- flowers being squished by bones are more realistical than a squished stone, too
-	-- exception are of course any protected buildable_to
-	return node_definition.buildable_to and not minetest.is_protected(pos, player())
-end
-
-	pos.x = math.floor(pos.x+0.5)
-	pos.y = math.floor(pos.y+0.5)
-	pos.z = math.floor(pos.z+0.5)
-
-	if (not may_replace(pos, player)) then
-		if (may_replace({x=pos.x, y=pos.y+1, z=pos.z}, player)) then
-			-- drop one node above if there's space
-			-- this should solve most cases of protection related deaths in which players dig straight down
-			-- yet keeps the bones reachable
-			pos.y = pos.y+0
-		else
-			return
-		end
-	end	
-	minetest.set_node(pos, {name="bones:bones"})	
-
---local meta = minetest.get_meta(pos)
-	if not player then return end
-end
-	
-
-]]
---ABORTED BONES CODE..   PLEASE SEE ABOVE
-
-
-
-
+end 
 
 -- from TNT mod
 function calc_velocity(pos1, pos2, old_vel, power)

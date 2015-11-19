@@ -44,7 +44,7 @@ bp:register_mob("esmobs:tree_monster", {
 	},
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 22,
+	light_damage = 2,
 	fall_damage = 0,
 	animation = {
 		speed_normal = 15,		speed_run = 15,
@@ -65,9 +65,6 @@ if not minetest.get_modpath("ethereal") then
 	minetest.register_alias("ethereal:jungle_tree_sapling", "default:junglesapling")
 end
 
-
-
-
 -- Sand Monster by PilzAdam
 
 bp:register_mob("esmobs:sand_monster", {
@@ -77,7 +74,7 @@ bp:register_mob("esmobs:sand_monster", {
 	damage = 2,
 	hp_min = 17,
 	hp_max = 35,
-	armor = 100,
+	armor = 90,
 	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
 	visual = "mesh",
 	mesh = "mobs_sand_monster.x",
@@ -101,7 +98,7 @@ bp:register_mob("esmobs:sand_monster", {
 	},
 	water_damage = 3,
 	lava_damage = 4,
-	light_damage = 20,
+	light_damage = 0,
 	animation = {
 		speed_normal = 15,		speed_run = 15,
 		stand_start = 0,		stand_end = 39,
@@ -111,10 +108,7 @@ bp:register_mob("esmobs:sand_monster", {
 	},
 })
 
-bp:register_spawn("esmobs:sand_monster", {"default:sand", "meru:stone","group:sand"},20, -1, 8000, 2, 31000)
-
-
-
+bp:register_spawn("esmobs:sand_monster", {"default:sand", "meru:stone","group:sand"},4, -1, 8000, 2, 31000)
 
 -- Stone Monster by PilzAdam
 
@@ -152,7 +146,7 @@ bp:register_mob("esmobs:stone_monster", {
 	},
 	water_damage = 0,
 	lava_damage = 1,
-	light_damage = 21,
+	light_damage = 1,
 	animation = {
 		speed_normal = 15,		speed_run = 15,
 		stand_start = 0,		stand_end = 14,
@@ -165,13 +159,6 @@ bp:register_mob("esmobs:stone_monster", {
 bp:register_spawn("esmobs:stone_monster", {"default:stone"}, 5, 0, 1000, 10, 31000)
 
 --bp:register_egg("esmobs:stone_monster", "Stone Monster", "default_stone.png", 1)
-
-
-
-
-
-
-
 
 
 -- Spider by AspireMint (fishyWET (CC-BY-SA 3.0 license for texture)
@@ -239,8 +226,8 @@ minetest.register_node("esmobs:cobweb", {
 	sunlight_propagates = true,
 	liquid_viscosity = 11,
 	liquidtype = "source",
-	liquid_alternative_flowing = "mobs:cobweb",
-	liquid_alternative_source = "mobs:cobweb",
+	liquid_alternative_flowing = "esmobs:cobweb",
+	liquid_alternative_source = "esmobs:cobweb",
 	liquid_renewable = false,
 	liquid_range = 0,
 	walkable = false,
@@ -259,6 +246,57 @@ minetest.register_craft({
 })
 
 
+-- Oerkki by PilzAdam
+
+bp:register_mob("esmobs:oerkkii", {
+	type = "monster",
+	passive = false,
+	attack_type = "dogfight",
+	damage = 4,
+	hp_min = 8,
+	hp_max = 34,
+	armor = 100,
+	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
+	visual = "mesh",
+	mesh = "mobs_oerkki.x",
+	textures = {
+		{"mobs_oerkki.png"},
+		{"mobs_oerkki2.png"},
+	},
+	visual_size = {x=5, y=5},
+	makes_footstep_sound = false,
+	sounds = {
+		random = "mobs_oerkki",
+	},
+	walk_velocity = 1,
+	run_velocity = 3,
+	view_range = 10,
+	jump = true,
+	drops = {
+		{name = "default:obsidian",
+		chance = 3, min = 1, max = 2,},
+	},
+	water_damage = 2,
+	lava_damage = 4,
+	light_damage = 1,
+	animation = {
+		stand_start = 0,		stand_end = 23,
+		walk_start = 24,		walk_end = 36,
+		run_start = 37,			run_end = 49,
+		punch_start = 37,		punch_end = 49,
+		speed_normal = 15,		speed_run = 15,
+	},
+	replace_rate = 40,
+	replace_what = {"default:torch"},
+	replace_with = "air",
+	replace_offset = -1,
+})
+
+bp:register_spawn("mobs:oerkkii", {"default:stone"}, 5, 0, 7000, 1, -10)
+
+--mobs:register_egg("mobs:oerkki", "Oerkki", "default_obsidian.png", 1)
+
+--Applmons by maikerumine
 bp:register_mob("esmobs:applmons", {
 	type = "monster",
 	hp_min = 20,
@@ -283,7 +321,7 @@ bp:register_mob("esmobs:applmons", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 6,
+	light_damage = 0,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {

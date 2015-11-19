@@ -22,9 +22,11 @@ if es then
 dofile(minetest.get_modpath("esmobs").."/esnpc2.lua")
 end
 
-
-
-
+--[[if bones then
+donotfile(minetest.get_modpath("esmobs").."/bones.lua")
+end
+dofile(minetest.get_modpath("esmobs").."/bones.lua")
+]]
 --dofile(minetest.get_modpath("esmobs").."/esconfig.lua")
 
 

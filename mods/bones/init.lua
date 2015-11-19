@@ -1,4 +1,4 @@
--- Minetest 0.4 mod: bones
+-- Minetest 0.5 mod: bones
 -- See README.txt for licensing and other information. 
 --REVISED 20151117 by maikerumine for adding bones to inventory after punch
 
@@ -22,7 +22,8 @@ bones.bones_formspec =
 	"list[current_player;main;0,6.08;8,3;8]"..
 	default.get_hotbar_bg(0,4.85)
 
-local share_bones_time = tonumber(minetest.setting_get("share_bones_time") or 1200)
+--local share_bones_time = tonumber(minetest.setting_get("share_bones_time") or 1200)--ORIGINAL TIME
+local share_bones_time = tonumber(minetest.setting_get("share_bones_time") or 600)--DEBUGGING TIME
 local share_bones_time_early = tonumber(minetest.setting_get("share_bones_time_early") or (share_bones_time/4))
 
 minetest.register_node("bones:bones", {
@@ -36,7 +37,8 @@ minetest.register_node("bones:bones", {
 		"bones_front.png"
 	},
 	paramtype2 = "facedir",
-	groups = {dig_immediate=2},
+	groups = {cracky = 2, oddly_breakable_by_hand = 2},
+--	groups = {dig_immediate=1},
 	sounds = default.node_sound_dirt_defaults({
 		footstep = {name="default_gravel_footstep", gain=0.5},
 		dug = {name="default_gravel_footstep", gain=1.0},
@@ -107,14 +109,12 @@ minetest.register_node("bones:bones", {
 		local meta = minetest.get_meta(pos)
 		local time = meta:get_int("time") + elapsed--swap this
 		if time >= share_bones_time then
---BEGIN TIME	
-	
-			local time = os.date("*t");--for this on new map
-			meta:set_string("infotext", "The old corpse of ".. meta:get_string("owner").." at ".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..":" .. time.sec..")");			
 		
-			--meta:set_string("infotext", meta:get_string("owner").."'s old bones")
-			meta:set_string("owner", "")
-			
+--BEGIN TIME AFTER BONE EXPIRE	
+			local time = os.date("*t");--for this on new map
+			meta:set_string("infotext", "R.I.P. ".. meta:get_string("owner").." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..")");--new old bones code			
+			--meta:set_string("infotext", meta:get_string("owner").."'s old bones")--org old bones code
+			meta:set_string("owner", "")	
 		else
 			meta:set_int("time", time)
 			return true
@@ -212,17 +212,16 @@ minetest.register_on_dieplayer(function(player)
 	player_inv:set_list("main", {})
 	player_inv:set_list("craft", {})
 
---BEGIN TIME STRING
+--BEGIN TIME AT TIME OF DEATH
 --ref			local time = os.date("*t");
 --ref			meta:set_string("infotext", self.name.."'s fresh corpse ".. meta:get_string("owner").." at ".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..":" .. time.sec..")");			
---END TIME STRING	
-	
 	meta:set_string("formspec", bones.bones_formspec)
 	meta:set_string("owner", player_name)
 	
 	if share_bones_time ~= 0 then
 		local time = os.date("*t");
-		meta:set_string("infotext", player_name.."'s fresh corpse.  :-( R.I.P. ".. meta:get_string("owner").." at ".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..":" .. time.sec..")");	
+		meta:set_string("infotext", player_name.." was killed".." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..")");
+		--meta:set_string("infotext", player_name.."'s fresh corpse.  :-( R.I.P. ".. meta:get_string("owner").." at ".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..")");	
 		--meta:set_string("infotext", player_name.."'s fresh bones")--old bones code
 
 		if share_bones_time_early == 0 or not minetest.is_protected(pos, player_name) then
