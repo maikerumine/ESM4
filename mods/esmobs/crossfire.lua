@@ -12,9 +12,9 @@
 
 bp.npc_drops = { "default:pick_steel", "esmobs:meat", "default:sword_steel", "default:shovel_steel", "farming:bread", "default:wood" }--Added 20151121
 
-bp:register_spawn("esmobs:badnpc", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble"}, 14, -1, 2000, 3, 31000)
-bp:register_spawn("esmobs:goodnpc", {"default:dirt_with_grass", "ethereal:green_dirt","default:grass","default:stonebrick","default:cobble"}, 14, -1, 2000, 3, 31000)
-bp:register_spawn("esmobs:normnpc", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble"}, 14, -1, 1000, 8, 31000)
+bp:register_spawn("esmobs:badnpc", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble"}, 14, -1, 3000, 3, 31000)
+bp:register_spawn("esmobs:goodnpc", {"default:dirt_with_grass", "ethereal:green_dirt","default:grass","default:stonebrick","default:cobble"}, 14, -1, 3000, 3, 31000)
+bp:register_spawn("esmobs:normnpc", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble"}, 14, -1, 3000, 3, 31000)
 
 bp:register_mob("esmobs:goodnpc", {
 	type = "npc",
@@ -70,9 +70,10 @@ bp:register_mob("esmobs:goodnpc", {
 			end
 		end
 	end,]]
-	
+
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
+		local_chat(clicker:getpos(),"Mr. White: Let's go kick some Mob butt!",3)
 		if item:get_name() == "esmobs:meat" or item:get_name() == "farming:bread" then
 			local hp = self.object:get_hp()
 			if hp + 4 > self.hp_max then return end
@@ -81,8 +82,8 @@ bp:register_mob("esmobs:goodnpc", {
 				clicker:set_wielded_item(item)
 			end
 			self.object:set_hp(hp+4)
-		
-			
+
+
 		-- right clicking with gold lump drops random item from mobs.npc_drops
 		elseif item:get_name() == "default:gold_lump" then
 			if not minetest.setting_getbool("creative_mode") then
@@ -102,8 +103,8 @@ bp:register_mob("esmobs:goodnpc", {
 				formspec = formspec .. "button_exit[5,1;2,2;gstand;stand]"
 				formspec = formspec .. "button_exit[0,2;4,4;gfandp;follow and protect]"
 				formspec = formspec .. "button_exit[4,2;4,4;gsandp;stand and protect]"
-				formspec = formspec .. "button_exit[1,2;2,2;ggohome; go home]"
-				formspec = formspec .. "button_exit[5,2;2,2;gsethome; sethome]"
+				--formspec = formspec .. "button_exit[1,2;2,2;ggohome; go home]"
+				--formspec = formspec .. "button_exit[5,2;2,2;gsethome; sethome]"
 				minetest.show_formspec(clicker:get_player_name(), "order", formspec)
 				minetest.register_on_player_receive_fields(function(clicker, formname, fields)
 					if fields.gfollow then
@@ -132,12 +133,12 @@ bp:register_mob("esmobs:goodnpc", {
 						end
 					end
 				end)
-						
+
 			end
 		end
-	end,	
-	
-	
+	end,
+
+
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -208,6 +209,7 @@ bp:register_mob("esmobs:badnpc", {
 	end,]]
 	on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
+		local_chat(clicker:getpos(),"Mr. Black: Grrrrrrrrrrrr!",3)
 		if item:get_name() == "esmobs:meat" or item:get_name() == "farming:bread" then
 			local hp = self.object:get_hp()
 			if hp + 4 > self.hp_max then return end
@@ -216,8 +218,8 @@ bp:register_mob("esmobs:badnpc", {
 				clicker:set_wielded_item(item)
 			end
 			self.object:set_hp(hp+4)
-		
-			
+
+
 		-- right clicking with gold lump drops random item from mobs.npc_drops
 		elseif item:get_name() == "default:gold_lump" then
 			if not minetest.setting_getbool("creative_mode") then
@@ -237,8 +239,8 @@ bp:register_mob("esmobs:badnpc", {
 				formspec = formspec .. "button_exit[5,1;2,2;gstand;stand]"
 				formspec = formspec .. "button_exit[0,2;4,4;gfandp;follow and protect]"
 				formspec = formspec .. "button_exit[4,2;4,4;gsandp;stand and protect]"
-				formspec = formspec .. "button_exit[1,2;2,2;ggohome; go home]"
-				formspec = formspec .. "button_exit[5,2;2,2;gsethome; sethome]"
+				--formspec = formspec .. "button_exit[1,2;2,2;ggohome; go home]"
+				--formspec = formspec .. "button_exit[5,2;2,2;gsethome; sethome]"
 				minetest.show_formspec(clicker:get_player_name(), "order", formspec)
 				minetest.register_on_player_receive_fields(function(clicker, formname, fields)
 					if fields.gfollow then
@@ -267,11 +269,11 @@ bp:register_mob("esmobs:badnpc", {
 						end
 					end
 				end)
-						
+
 			end
 		end
-	end,	
-	
+	end,
+
 	animation = {
 		speed_normal = 30,		speed_run = 30,
 		stand_start = 0,		stand_end = 79,
@@ -298,8 +300,8 @@ bp:register_mob("esmobs:badnpc", {
 				clicker:set_wielded_item(item)
 			end
 			self.object:set_hp(hp+4)
-		
-			
+
+
 		-- right clicking with gold lump drops random item from mobs.npc_drops
 		elseif item:get_name() == "default:gold_lump" then
 			if not minetest.setting_getbool("creative_mode") then
@@ -349,7 +351,7 @@ bp:register_mob("esmobs:badnpc", {
 						end
 					end
 				end)
-						
+
 			end
 		end
 	end,
@@ -411,10 +413,11 @@ bp:register_mob("esmobs:normnpc", {
 		end
 	end,]]
 
---TENPLUS1 and CProgrammerRU AWESOME CODES.	
+--TENPLUS1 and CProgrammerRU AWESOME CODES.
 	-- right clicking with cooked meat will give npc more health
 	on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
+		local_chat(clicker:getpos(),"Mr. Pink: My name is Norman, how may I assist?",3)
 		if item:get_name() == "esmobs:meat" or item:get_name() == "farming:bread" then
 			local hp = self.object:get_hp()
 			if hp + 4 > self.hp_max then return end
@@ -423,8 +426,8 @@ bp:register_mob("esmobs:normnpc", {
 				clicker:set_wielded_item(item)
 			end
 			self.object:set_hp(hp+4)
-		
-			
+
+
 		-- right clicking with gold lump drops random item from mobs.npc_drops
 		elseif item:get_name() == "default:gold_lump" then
 			if not minetest.setting_getbool("creative_mode") then
@@ -444,8 +447,8 @@ bp:register_mob("esmobs:normnpc", {
 				formspec = formspec .. "button_exit[5,1;2,2;gstand;stand]"
 				formspec = formspec .. "button_exit[0,2;4,4;gfandp;follow and protect]"
 				formspec = formspec .. "button_exit[4,2;4,4;gsandp;stand and protect]"
-				formspec = formspec .. "button_exit[1,2;2,2;ggohome; go home]"
-				formspec = formspec .. "button_exit[5,2;2,2;gsethome; sethome]"
+				--formspec = formspec .. "button_exit[1,2;2,2;ggohome; go home]"
+				--formspec = formspec .. "button_exit[5,2;2,2;gsethome; sethome]"
 				minetest.show_formspec(clicker:get_player_name(), "order", formspec)
 				minetest.register_on_player_receive_fields(function(clicker, formname, fields)
 					if fields.gfollow then
@@ -474,11 +477,11 @@ bp:register_mob("esmobs:normnpc", {
 						end
 					end
 				end)
-						
+
 			end
 		end
-	end,	
-	
+	end,
+
 
 	animation = {
 		speed_normal = 30,		speed_run = 30,
