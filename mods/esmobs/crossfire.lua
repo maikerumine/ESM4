@@ -50,7 +50,19 @@ bp:register_mob("esmobs:goodnpc", {
 	sounds = {
 		attack = "default_punch1",
 	},
-	on_rightclick = nil,
+--Maikerumine added hackish follow code
+	on_rightclick = function (self, clicker)
+		bp:face_pos(self,clicker:getpos())
+		bp:team_player(self,clicker:getpos())
+		if self.state ~= "path" and self.state ~= "following" then
+		local_chat(clicker:getpos(),"Mr. White: Let's go kick some Mob butt!",3)
+			if not self.tamed then
+				self.tamed = true
+				self.follow = true
+			end
+		end
+	end,
+	
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -107,7 +119,18 @@ bp:register_mob("esmobs:badnpc", {
 	sounds = {
 		attack = "default_punch3",
 	},
-	on_rightclick = nil,
+
+	on_rightclick = function (self, clicker)
+		bp:face_pos(self,clicker:getpos())
+		bp:team_player(self,clicker:getpos())
+		if self.state ~= "path" and self.state ~= "following" then
+			local_chat(clicker:getpos(),"Mr. Black: Grrrrrrrrrrrr!",3)
+				if not self.tamed then
+					self.tamed = true
+					self.follow = true
+			end
+		end
+	end,
 
 	animation = {
 		speed_normal = 30,		speed_run = 30,

@@ -1,9 +1,12 @@
 
-Bad Player MOD by Maikerumine
+Extreme Survival Mobs MOD by Maikerumine
 
-Adds 35 "players" to your world that all have unique attributes, strengths, and rewards.  Quite fun!
+Adds 40 "players" and creatures to your world that all have unique attributes, strengths, and rewards.  Quite fun!
 Added weapons in hand so you can see your potential reward, as well as random items that might help you fight better. 
-There are some easy going NPC that will not attack you unless they are attacked.  They help iwith fighting monsters.
+There are some easy going NPC that will not attack you unless they are attacked.  They help with fighting monsters.
+Mobs now drop bones like players, you will need to wait to grab your loot!
+
+Good Luck!
 
 Borrowed simpleskins for textures and the player model for player object.
 Used a modified version of Mobs Redo code both api and init files, the mobs now wont get stuck and actually chase you now.

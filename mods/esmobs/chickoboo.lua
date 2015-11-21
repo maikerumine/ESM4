@@ -88,7 +88,7 @@ bp:register_mob("esmobs:chickoboo", {
 	end,
 })
 
-bp:register_spawn("esmobs:chickoboo", {"default:dirt_with_grass", "ethereal:bamboo_dirt","default:cobble"}, 20, 1, 2000, 1, 31000)
+bp:register_spawn("esmobs:chickoboo", {"default:dirt_with_grass", "ethereal:bamboo_dirt","default:cobble"}, 20, 1, 22000, 1, 31000)
 
 --bp:register_egg("esmobs:chickoboo", "Chickoboo", "mobs_chicken_inv.png", 0)
 

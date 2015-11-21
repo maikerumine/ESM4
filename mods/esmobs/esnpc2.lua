@@ -46,7 +46,18 @@ bp:register_mob("esmobs:badplayer32", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	on_rightclick = nil,
+--Maikerumine added hackish follow code
+	on_rightclick = function (self, clicker)
+		bp:face_pos(self,clicker:getpos())
+		bp:team_player(self,clicker:getpos())
+		if self.state ~= "path" and self.state ~= "following" then
+		local_chat(clicker:getpos(),"INFINIUM MONS: Tame me now, come to me later, we will chat after I have cooled off.",3)
+			if not self.tamed then
+				self.tamed = true
+				self.follow = true
+			end
+		end
+	end,
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -101,7 +112,18 @@ bp:register_mob("esmobs:badplayer33", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	on_rightclick = nil,
+--Maikerumine added hackish follow code
+	on_rightclick = function (self, clicker)
+		bp:face_pos(self,clicker:getpos())
+		bp:team_player(self,clicker:getpos())
+		if self.state ~= "path" and self.state ~= "following" then
+		local_chat(clicker:getpos(),"Candy Raver: My Ruby Sword will cut through anything, let's do it!",3)
+			if not self.tamed then
+				self.tamed = true
+				self.follow = true
+			end
+		end
+	end,
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -159,7 +181,18 @@ bp:register_mob("esmobs:badplayer34", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	on_rightclick = nil,
+--Maikerumine added hackish follow code
+	on_rightclick = function (self, clicker)
+		bp:face_pos(self,clicker:getpos())
+		bp:team_player(self,clicker:getpos())
+		if self.state ~= "path" and self.state ~= "following" then
+		local_chat(clicker:getpos(),"Infinium Man: I'll give those monsters a good whack on the head with this Infinium ingot!",3)
+			if not self.tamed then
+				self.tamed = true
+				self.follow = true
+			end
+		end
+	end,
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,

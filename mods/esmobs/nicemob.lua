@@ -53,7 +53,18 @@ bp:register_mob("esmobs:man", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	on_rightclick = nil,
+--Maikerumine added hackish follow code
+	on_rightclick = function (self, clicker)
+		bp:face_pos(self,clicker:getpos())
+		bp:team_player(self,clicker:getpos())
+		if self.state ~= "path" and self.state ~= "following" then
+		local_chat(clicker:getpos(),"Old man: I am getting too old for this...  Okay, I'll help ya!",3)
+			if not self.tamed then
+				self.tamed = true
+				self.follow = true
+			end
+		end
+	end,
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 17,
@@ -71,6 +82,8 @@ bp:register_mob("esmobs:man", {
 	peaceful = true,
 	group_attack = true,
 	step = 1,
+
+
 })
 
 bp:register_mob("esmobs:woman", {
@@ -114,7 +127,18 @@ bp:register_mob("esmobs:woman", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	on_rightclick = nil,
+--Maikerumine added hackish follow code
+	on_rightclick = function (self, clicker)
+		bp:face_pos(self,clicker:getpos())
+		bp:team_player(self,clicker:getpos())
+		if self.state ~= "path" and self.state ~= "following" then
+		local_chat(clicker:getpos(),"Old woman: I may walk slow, but I can fight like a champ!",3)
+			if not self.tamed then
+				self.tamed = true
+				self.follow = true
+			end
+		end
+	end,
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 17,
@@ -127,5 +151,12 @@ bp:register_mob("esmobs:woman", {
 		run_end = 187,
 		punch_start = 189,
 		punch_end = 191,
-	}
+	},
+	
+	attacks_monsters = true,
+	peaceful = true,
+	group_attack = true,
+	step = 1,
+
+
 })

@@ -1,4 +1,4 @@
---esmobs v0.0.3
+--esmobs v0.0.4
 --maikerumine
 --made for Extreme Survival game
 
@@ -46,7 +46,18 @@ bp:register_mob("esmobs:badplayer1", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	on_rightclick = nil,
+--Maikerumine added hackish follow code
+	on_rightclick = function (self, clicker)
+		bp:face_pos(self,clicker:getpos())
+		bp:team_player(self,clicker:getpos())
+		if self.state ~= "path" and self.state ~= "following" then
+		local_chat(clicker:getpos(),"Sam: Let's go kick some Mob butt!",3)
+			if not self.tamed then
+				self.tamed = true
+				self.follow = true
+			end
+		end
+	end,
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -104,7 +115,18 @@ bp:register_mob("esmobs:badplayer5", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	on_rightclick = nil,
+--Maikerumine added hackish follow code
+	on_rightclick = function (self, clicker)
+		bp:face_pos(self,clicker:getpos())
+		bp:team_player(self,clicker:getpos())
+		if self.state ~= "path" and self.state ~= "following" then
+		local_chat(clicker:getpos(),"John: Let's go grief some monsters!",3)
+			if not self.tamed then
+				self.tamed = true
+				self.follow = true
+			end
+		end
+	end,
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -163,7 +185,18 @@ bp:register_mob("esmobs:badplayer13", {
 	lava_damage = 50,
 	light_damage = 0,
 	follow = "default:apple",
-	on_rightclick = nil,
+--Maikerumine added hackish follow code
+	on_rightclick = function (self, clicker)
+		bp:face_pos(self,clicker:getpos())
+		bp:team_player(self,clicker:getpos())
+		if self.state ~= "path" and self.state ~= "following" then
+		local_chat(clicker:getpos(),"Jannette: Stop flirting with me!",3)
+			if not self.tamed then
+				self.tamed = true
+				self.follow = true
+			end
+		end
+	end,
 
 	attack_type = "dogfight",
 	animation = {
@@ -227,7 +260,18 @@ bp:register_mob("esmobs:badplayer14", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	on_rightclick = nil,
+--Maikerumine added hackish follow code
+	on_rightclick = function (self, clicker)
+		bp:face_pos(self,clicker:getpos())
+		bp:team_player(self,clicker:getpos())
+		if self.state ~= "path" and self.state ~= "following" then
+		local_chat(clicker:getpos(),"Crybaby: I am too whimpy to fight mobs, but I can do my best!",3)
+			if not self.tamed then
+				self.tamed = true
+				self.follow = true
+			end
+		end
+	end,
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -285,7 +329,18 @@ bp:register_mob("esmobs:badplayer15", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	on_rightclick = nil,
+--Maikerumine added hackish follow code
+	on_rightclick = function (self, clicker)
+		bp:face_pos(self,clicker:getpos())
+		bp:team_player(self,clicker:getpos())
+		if self.state ~= "path" and self.state ~= "following" then
+		local_chat(clicker:getpos(),"Sepia Sam: MESE sword + Monster = My pleasure!",3)
+			if not self.tamed then
+				self.tamed = true
+				self.follow = true
+			end
+		end
+	end,
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -343,7 +398,18 @@ bp:register_mob("esmobs:badplayer17", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	on_rightclick = nil,
+--Maikerumine added hackish follow code
+	on_rightclick = function (self, clicker)
+		bp:face_pos(self,clicker:getpos())
+		bp:team_player(self,clicker:getpos())
+		if self.state ~= "path" and self.state ~= "following" then
+		local_chat(clicker:getpos(),"O.G. Sam: Mobs, let me at 'em, I'll splat 'em!!!",3)
+			if not self.tamed then
+				self.tamed = true
+				self.follow = true
+			end
+		end
+	end,
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -406,7 +472,18 @@ bp:register_mob("esmobs:badplayer19", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	on_rightclick = nil,
+--Maikerumine added hackish follow code
+	on_rightclick = function (self, clicker)
+		bp:face_pos(self,clicker:getpos())
+		bp:team_player(self,clicker:getpos())
+		if self.state ~= "path" and self.state ~= "following" then
+		local_chat(clicker:getpos(),"Vanessa: I'll code out the very instance of those mobs!",3)
+			if not self.tamed then
+				self.tamed = true
+				self.follow = true
+			end
+		end
+	end,
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -464,7 +541,18 @@ bp:register_mob("esmobs:badplayer20", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	on_rightclick = nil,
+--Maikerumine added hackish follow code
+	on_rightclick = function (self, clicker)
+		bp:face_pos(self,clicker:getpos())
+		bp:team_player(self,clicker:getpos())
+		if self.state ~= "path" and self.state ~= "following" then
+		local_chat(clicker:getpos(),"Female Sam: Minetest is the greatest voxel game ever created!",3)
+			if not self.tamed then
+				self.tamed = true
+				self.follow = true
+			end
+		end
+	end,
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -486,9 +574,9 @@ bp:register_mob("esmobs:badplayer20", {
 })
 
 
-bp:register_spawn("esmobs:badplayer21", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1,9000, 1, -50)
+bp:register_spawn("esmobs:badplayer21", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 15, -1,9000, 1, -50)
 bp:register_mob("esmobs:badplayer21", {
-	type = "monster",
+	type = "npc",
 	hp_min = 157,
 	hp_max = 180,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
@@ -500,7 +588,7 @@ bp:register_mob("esmobs:badplayer21", {
 			},
 	visual_size = {x=1, y=1},
 	makes_footstep_sound = true,
-	view_range = 4,
+	view_range = 14,
 	walk_velocity = 2.5,
 	run_velocity = 7,
 	damage = 4,
@@ -523,8 +611,19 @@ bp:register_mob("esmobs:badplayer21", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 110,
-	on_rightclick = nil,
+	light_damage = 0,
+--Maikerumine added hackish follow code
+	on_rightclick = function (self, clicker)
+		bp:face_pos(self,clicker:getpos())
+		bp:team_player(self,clicker:getpos())
+		if self.state ~= "path" and self.state ~= "following" then
+		local_chat(clicker:getpos(),"Battlefield 3 Soldier: All suited up, let's roll out and destroy those creatures!",3)
+			if not self.tamed then
+				self.tamed = true
+				self.follow = true
+			end
+		end
+	end,
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -538,6 +637,10 @@ bp:register_mob("esmobs:badplayer21", {
 		death = "mobs_barbarian_death",
 		attack = "default_punch3",
 		},
+	attacks_monsters = true,
+	peaceful = true,
+	group_attack = true,
+	step = 1,
 })
 
 

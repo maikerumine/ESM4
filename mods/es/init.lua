@@ -41,8 +41,8 @@ dofile(modpath.."/oregen.lua")
 dofile(modpath.."/tools.lua")
 
 -- Climate
-dofile(minetest.get_modpath("es").."/freeze.lua")
-dofile(minetest.get_modpath("es").."/snow.lua")
+--dofile(minetest.get_modpath("es").."/freeze.lua")
+--dofile(minetest.get_modpath("es").."/snow.lua")
 
 
 
