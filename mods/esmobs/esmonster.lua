@@ -292,9 +292,9 @@ bp:register_mob("esmobs:oerkkii", {
 	replace_offset = -1,
 })
 
-bp:register_spawn("mobs:oerkkii", {"default:stone"}, 5, 0, 7000, 1, -10)
+bp:register_spawn("esmobs:oerkkii", {"default:stone"}, 5, 0, 7000, 1, -10)
 
---mobs:register_egg("mobs:oerkki", "Oerkki", "default_obsidian.png", 1)
+--mobs:register_egg("esmobs:oerkki", "Oerkki", "default_obsidian.png", 1)
 
 --Applmons by maikerumine
 bp:register_mob("esmobs:applmons", {
