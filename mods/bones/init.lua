@@ -1,5 +1,5 @@
 -- Minetest 0.5 mod: bones
--- See README.txt for licensing and other information. 
+-- See README.txt for licensing and other information.
 --REVISED 20151117 by maikerumine for adding bones to inventory after punch
 
 bones = {}
@@ -43,42 +43,42 @@ minetest.register_node("bones:bones", {
 		footstep = {name="default_gravel_footstep", gain=0.5},
 		dug = {name="default_gravel_footstep", gain=1.0},
 	}),
-	
+
 	can_dig = function(pos, player)
 		local inv = minetest.get_meta(pos):get_inventory()
 		return is_owner(pos, player:get_player_name()) and inv:is_empty("main")
 	end,
-	
+
 	allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
 		if is_owner(pos, player:get_player_name()) then
 			return count
 		end
 		return 0
 	end,
-	
+
 	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 		return 0
 	end,
-	
+
 	allow_metadata_inventory_take = function(pos, listname, index, stack, player)
 		if is_owner(pos, player:get_player_name()) then
 			return stack:get_count()
 		end
 		return 0
 	end,
-	
+
 	on_metadata_inventory_take = function(pos, listname, index, stack, player)
 		local meta = minetest.get_meta(pos)
 		if meta:get_inventory():is_empty("main") then
 			minetest.remove_node(pos)
 		end
 	end,
-	
+
 	on_punch = function(pos, node, player)
 		if(not is_owner(pos, player:get_player_name())) then
 			return
 		end
-		
+
 		local inv = minetest.get_meta(pos):get_inventory()
 		local player_inv = player:get_inventory()
 		local has_space = true
@@ -88,33 +88,36 @@ minetest.register_node("bones:bones", {
 			if player_inv:room_for_item("main", stk) then
 				inv:set_stack("main", i, nil)
 				player_inv:add_item("main", stk)
-				
+
 			else
 				has_space = false
 				break
 			end
 		end
-		
+
 --ADD GIVE BONE TO INVENTORY WHILST REMOVING NODE
 		-- remove bones if player emptied them
 		if has_space then
 			minetest.remove_node(pos)
-			player:get_inventory():add_item('main', 'bones:bones 1') 
+			player:get_inventory():add_item('main', 'bones:bones 1')
 			--END ADDED BONE TO INV
 		end
-	
+
 	end,
-	
+
 	on_timer = function(pos, elapsed)
 		local meta = minetest.get_meta(pos)
 		local time = meta:get_int("time") + elapsed--swap this
+--		if time >= share_bones_time then
 		if time >= share_bones_time then
-		
---BEGIN TIME AFTER BONE EXPIRE	
+
+--BEGIN TIME AFTER BONE EXPIRE              if hitter and hitter:is_player() and hitter:get_inventory() then
 			local time = os.date("*t");--for this on new map
-			meta:set_string("infotext", "R.I.P. ".. meta:get_string("owner").." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..")");--new old bones code			
+			--meta:set_string("infotext", player_name.." was killed".." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min .." by: (".."...testing..."..")");---new tesint code
+			meta:set_string("infotext", "R.I.P. ".. meta:get_string("owner").." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min .."by: (".."...testing..."..")");--new old bones code
+						--meta:set_string("infotext", "R.I.P. ".. meta:get_string("owner").." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..")");--new old bones code
 			--meta:set_string("infotext", meta:get_string("owner").."'s old bones")--org old bones code
-			meta:set_string("owner", "")	
+			meta:set_string("owner", "")
 		else
 			meta:set_int("time", time)
 			return true
@@ -152,11 +155,11 @@ local function may_replace(pos, player)
 	return node_definition.buildable_to and not minetest.is_protected(pos, player:get_player_name())
 end
 
-minetest.register_on_dieplayer(function(player)
+minetest.register_on_dieplayer(function(player,hitter)
 	if minetest.setting_getbool("creative_mode") then
 		return
 	end
-	
+
 	local player_inv = player:get_inventory()
 	if player_inv:is_empty("main") and
 		player_inv:is_empty("craft") then
@@ -169,6 +172,7 @@ minetest.register_on_dieplayer(function(player)
 	pos.z = math.floor(pos.z+0.5)
 	local param2 = minetest.dir_to_facedir(player:get_look_dir())
 	local player_name = player:get_player_name()
+--	local hitter_name = hitter:get_player_name()--hitter code is global and nil
 	local player_inv = player:get_inventory()
 
 	if (not may_replace(pos, player)) then
@@ -191,14 +195,14 @@ minetest.register_on_dieplayer(function(player)
 			return
 		end
 	end
-	
+
 	minetest.set_node(pos, {name="bones:bones", param2=param2})
-	
+
 	local meta = minetest.get_meta(pos)
 	local inv = meta:get_inventory()
 	inv:set_size("main", 8*4)
 	inv:set_list("main", player_inv:get_list("main"))
-	
+
 	for i=1,player_inv:get_size("craft") do
 		local stack = player_inv:get_stack("craft", i)
 		if inv:room_for_item("main", stack) then
@@ -208,20 +212,29 @@ minetest.register_on_dieplayer(function(player)
 			minetest.add_item(pos, stack)
 		end
 	end
-	
+
 	player_inv:set_list("main", {})
 	player_inv:set_list("craft", {})
 
 --BEGIN TIME AT TIME OF DEATH
 --ref			local time = os.date("*t");
---ref			meta:set_string("infotext", self.name.."'s fresh corpse ".. meta:get_string("owner").." at ".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..":" .. time.sec..")");			
+--ref			meta:set_string("infotext", self.name.."'s fresh corpse ".. meta:get_string("owner").." at ".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..":" .. time.sec..")");
+
+--	if hitter and hitter:is_player() then
+
+
+
+
 	meta:set_string("formspec", bones.bones_formspec)
 	meta:set_string("owner", player_name)
-	
+	meta:set_string("hitter", player_name)
+
 	if share_bones_time ~= 0 then
 		local time = os.date("*t");
-		meta:set_string("infotext", player_name.." was killed".." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..")");
-		--meta:set_string("infotext", player_name.."'s fresh corpse.  :-( R.I.P. ".. meta:get_string("owner").." at ".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..")");	
+		meta:set_string("infotext", player_name.." was killed".." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min .." by: (".."...testing..."..")");
+--		meta:set_string("infotext", player_name.." was killed".." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..")");--THIS WORKS
+--		meta:set_string("infotext", player_name.." was killed".." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min .." by: ("..hitter:get_player_name()..")");--PROTOTYPE CODE BROKEN
+		--meta:set_string("infotext", player_name.."'s fresh corpse.  :-( R.I.P. ".. meta:get_string("owner").." at ".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..")");
 		--meta:set_string("infotext", player_name.."'s fresh bones")--old bones code
 
 		if share_bones_time_early == 0 or not minetest.is_protected(pos, player_name) then
@@ -234,4 +247,5 @@ minetest.register_on_dieplayer(function(player)
 	else
 		meta:set_string("infotext", player_name.."'s bones")
 	end
+
 end)

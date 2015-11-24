@@ -979,23 +979,16 @@ function bp:register_mob(name, def)
                             meta:set_string("formspec", "size[8,9;]"..
                                     "list[current_name;main;0,0;8,4;]"..
                                     "list[current_player;main;0,5;8,4;]")
---[[
-			--lags orig mob bone code for ref
-				    meta:set_string("infotext", self.full_name.."'s fresh bones")
-				    meta:set_string("owner", "Stone monster")
-				    meta:set_int("bonetime_counter", 0)
-				    local timer  = minetest.get_node_timer(spaceforbones)
-				    timer:start(10)
-				    ]]
+
 
 --BEGIN TIME STRING
 				local time = os.date("*t");--this keeps the bones meta to turn old
 
 --CHOOSE OPTION BELOW:
-				meta:set_string("infotext", self.name.." slain".. meta:get_string("owner").." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..")");		--SHOW TIME AT DEATH
---				meta:set_string("infotext", self.name.."'s fresh bones")			--SHOW TIME AT BONE EXPIRE
+				meta:set_string("infotext", self.name.." was slain".." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min .." by: ("..hitter:get_player_name()..")");	--SHOW TIME AT DEATH
+--				meta:set_string("infotext", self.name.."'s fresh bones")	--SHOW TIME AT BONE EXPIRE
 --CHOOSE OPTION BELOW:
-				meta:set_string( "owner", "Extreme Survival Mob R.I.P.")			--SET OWNER FOR TIMER
+--				meta:set_string( "owner", "Extreme Survival Mob R.I.P.")	--SET OWNER FOR TIMER
 --				meta:set_string("owner")									--SET NO OWNER NO TIMER
                             meta:set_int("bonetime_counter", 0)
                             local timer  = minetest.get_node_timer(spaceforbones)
