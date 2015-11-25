@@ -25,7 +25,7 @@ bp:register_mob("esmobs:badplayer32", {
 			},
 	visual_size = {x=1, y=1},
 	makes_footstep_sound = true,
-	view_range = 8,
+	view_range = 18,
 	walk_velocity = 5,
 	run_velocity = 3.4,
 	damage = 9,
@@ -62,7 +62,7 @@ bp:register_mob("esmobs:badplayer32", {
 			end
 		end
 	end,]]
-	
+
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"INFINIUM MONS: Tame me now, come to me later, we will chat after I have cooled off.",3)
@@ -129,8 +129,8 @@ bp:register_mob("esmobs:badplayer32", {
 			end
 		end
 	end,
-	
-	
+
+
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -198,7 +198,7 @@ bp:register_mob("esmobs:Candy", {
 			end
 		end
 	end,]]
-	
+
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Candy Raver: My Ruby Sword will cut through anything, let's do it!",3)
@@ -264,8 +264,8 @@ bp:register_mob("esmobs:Candy", {
 
 			end
 		end
-	end,	
-	
+	end,
+
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -336,7 +336,7 @@ bp:register_mob("esmobs:Infiniumman", {
 			end
 		end
 	end,]]
-	
+
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Infinium Man: I'll give those monsters a good whack on the head with this Infinium ingot!",3)
@@ -402,8 +402,8 @@ bp:register_mob("esmobs:Infiniumman", {
 
 			end
 		end
-	end,		
-	
+	end,
+
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -474,7 +474,7 @@ bp:register_mob("esmobs:Maikerumine", {
 			end
 		end
 	end,]]
-	
+
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Infinium Man: I'll give those monsters a good whack on the head with this Infinium ingot!",3)
@@ -540,8 +540,8 @@ bp:register_mob("esmobs:Maikerumine", {
 
 			end
 		end
-	end,		
-	
+	end,
+
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,

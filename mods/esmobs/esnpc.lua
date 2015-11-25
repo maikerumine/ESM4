@@ -61,7 +61,7 @@ bp:register_mob("esmobs:Sam", {
 			end
 		end
 	end,]]
-	
+
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Sam: Let's go kick some Mob butt!",3)
@@ -127,8 +127,8 @@ bp:register_mob("esmobs:Sam", {
 
 			end
 		end
-	end,	
-	
+	end,
+
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -199,7 +199,7 @@ bp:register_mob("esmobs:John", {
 			end
 		end
 	end,]]
-	
+
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"John: Let's go grief some monsters!",3)
@@ -265,8 +265,8 @@ bp:register_mob("esmobs:John", {
 
 			end
 		end
-	end,		
-	
+	end,
+
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -338,7 +338,7 @@ bp:register_mob("esmobs:Janette", {
 			end
 		end
 	end,]]
-	
+
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Jannette: Stop flirting with me!",3)
@@ -404,7 +404,7 @@ bp:register_mob("esmobs:Janette", {
 
 			end
 		end
-	end,			
+	end,
 
 	attack_type = "dogfight",
 	animation = {
@@ -481,7 +481,7 @@ bp:register_mob("esmobs:Crybaby", {
 			end
 		end
 	end,]]
-	
+
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Crybaby: I am too whimpy to fight mobs, but I can do my best!",3)
@@ -547,9 +547,9 @@ bp:register_mob("esmobs:Crybaby", {
 
 			end
 		end
-	end,			
-	
-	
+	end,
+
+
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -583,7 +583,7 @@ bp:register_mob("esmobs:SepiaSam", {
 			},
 	visual_size = {x=1, y=1},
 	makes_footstep_sound = true,
-	view_range = 7,
+	view_range = 17,
 	walk_velocity = 1.3,
 	run_velocity = 3.9,
 	damage = 3,
@@ -620,7 +620,7 @@ bp:register_mob("esmobs:SepiaSam", {
 			end
 		end
 	end,]]
-	
+
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Sepia Sam: MESE sword + Monster = My pleasure!",3)
@@ -686,8 +686,8 @@ bp:register_mob("esmobs:SepiaSam", {
 
 			end
 		end
-	end,		
-	
+	end,
+
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -758,7 +758,7 @@ bp:register_mob("esmobs:OGSam", {
 			end
 		end
 	end,]]
-	
+
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"O.G. Sam: Mobs, let me at 'em, I'll splat 'em!!!",3)
@@ -824,8 +824,8 @@ bp:register_mob("esmobs:OGSam", {
 
 			end
 		end
-	end,			
-	
+	end,
+
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -901,7 +901,7 @@ bp:register_mob("esmobs:Vanessa", {
 			end
 		end
 	end,]]
-	
+
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Vanessa: I'll code out the very instance of those mobs!",3)
@@ -967,8 +967,8 @@ bp:register_mob("esmobs:Vanessa", {
 
 			end
 		end
-	end,				
-	
+	end,
+
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -1040,7 +1040,7 @@ bp:register_mob("esmobs:FemaleSam", {
 			end
 		end
 	end,]]
-	
+
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Female Sam: Minetest is the greatest voxel game ever created!",3)
@@ -1106,8 +1106,8 @@ bp:register_mob("esmobs:FemaleSam", {
 
 			end
 		end
-	end,		
-	
+	end,
+
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
@@ -1179,7 +1179,7 @@ bp:register_mob("esmobs:Battleboy", {
 			end
 		end
 	end,]]
-	
+
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Battlefield 3 Soldier: All suited up, let's roll out and destroy those creatures!",3)
@@ -1245,8 +1245,8 @@ bp:register_mob("esmobs:Battleboy", {
 
 			end
 		end
-	end,		
-	
+	end,
+
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,

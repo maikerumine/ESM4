@@ -26,7 +26,7 @@ bp:register_mob("esmobs:Wilbert", {
 			},
 	visual_size = {x=1, y=1},
 	makes_footstep_sound = true,
-	view_range = 25,
+	view_range = 15,
 	walk_velocity = 1,
 	run_velocity = 3,
 	damage = 5,
@@ -68,7 +68,7 @@ bp:register_mob("esmobs:Wilbert", {
 			end
 		end
 	end,]]
-	
+
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Old man: I am getting too old for this...  Okay, I'll help ya!",3)
@@ -134,8 +134,8 @@ bp:register_mob("esmobs:Wilbert", {
 
 			end
 		end
-	end,		
-	
+	end,
+
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 17,
@@ -169,7 +169,7 @@ bp:register_mob("esmobs:Thelma", {
 			},
 	visual_size = {x=1, y=1},
 	makes_footstep_sound = true,
-	view_range = 35,
+	view_range = 15,
 	walk_velocity = 1,
 	run_velocity = 3,
 	damage = 5,
@@ -211,7 +211,7 @@ bp:register_mob("esmobs:Thelma", {
 			end
 		end
 	end,]]
-	
+
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Old woman: I may walk slow, but I can fight like a champ!",3)
@@ -277,8 +277,8 @@ bp:register_mob("esmobs:Thelma", {
 
 			end
 		end
-	end,		
-	
+	end,
+
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 17,
@@ -292,7 +292,7 @@ bp:register_mob("esmobs:Thelma", {
 		punch_start = 189,
 		punch_end = 191,
 	},
-	
+
 	attacks_monsters = true,
 	peaceful = true,
 	group_attack = true,
