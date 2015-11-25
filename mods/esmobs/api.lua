@@ -1,5 +1,5 @@
 -- Mobs Api (26th April 2015) By TenPlus1
---REVISED 20151117 maikerumine for esmobs
+--REVISED 20151122 maikerumine for esmobs
 bp = {}
 bp.mod = "redo"
 
@@ -104,7 +104,7 @@ function bp:register_mob(name, def)
 			local v = self.object:getvelocity()
 			return (v.x^2 + v.z^2)^(0.5)
 		end,
---[[
+--[[		--FUNNY THING, I HAVE FORGOTTEN WHAT THIS WAS FOR
 		in_fov = function(self,pos)
 			-- checks if POS is in self's FOV
 			local yaw = self.object:getyaw() + self.rotate
@@ -962,7 +962,8 @@ function bp:register_mob(name, def)
                         local spaceforbones=nil
                         if nn=="air" or nn=="default:water_flowing" or nn=="default:water_source" or nn=="default:lava_source" or nn=="default:lava_flowing" then
                             spaceforbones=pos
-					minetest.add_node(spaceforbones, {name="bones:bones"} )
+					--minetest.add_node(spaceforbones, {name="bones:bones"} )
+					minetest.add_node(spaceforbones, {name="esmobs:bones"} )
                             local meta = minetest.get_meta(spaceforbones)
                             local inv = meta:get_inventory()
                             inv:set_size("main", 8*4)
@@ -985,11 +986,12 @@ function bp:register_mob(name, def)
 				local time = os.date("*t");--this keeps the bones meta to turn old
 
 --CHOOSE OPTION BELOW:
-				meta:set_string("infotext", self.name.." was slain".." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min .." by: ("..hitter:get_player_name()..")");	--SHOW TIME AT DEATH
---				meta:set_string("infotext", self.name.."'s fresh bones")	--SHOW TIME AT BONE EXPIRE
+				meta:set_string("infotext", self.name.." was slain".." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min .." by: ("..hitter:get_player_name()..")");	--SHOW TIME AT DEATH AND WHO KILLED
+--				meta:set_string("infotext", self.name.."'s fresh bones")	--SHOW NO TIME AT BONE EXPIRE
 --CHOOSE OPTION BELOW:
 --				meta:set_string( "owner", "Extreme Survival Mob R.I.P.")	--SET OWNER FOR TIMER
---				meta:set_string("owner")									--SET NO OWNER NO TIMER
+				meta:set_string("owner")						--SET NO OWNER NO TIMER
+				
                             meta:set_int("bonetime_counter", 0)
                             local timer  = minetest.get_node_timer(spaceforbones)
                             timer:start(10)
@@ -1009,7 +1011,7 @@ function bp:register_mob(name, def)
                hitter:set_wielded_item( tool )
             end
          end
---end,--use if using original punch code.
+--end,			--use if using original punch code.
 
 	end,
 -------END ON PUNCH FULL CODE
@@ -1190,7 +1192,7 @@ function check_for_death(self)
 ]]
 
 ------------------------------------------------------
-------------------------------------------------------MOBS BONES ON DIE
+------------------------------------------------------MOBS BONES ON DIE--COMMENTED OUT DUE TO SERVER GRIEF.  MANY BONES
          if self.object:get_hp() <= 0 then
  --[[                       local pos = self.object:getpos()
                         local nn = minetest.get_node(pos).name
@@ -1324,100 +1326,59 @@ end
 
 
 --Brandon Reese code to face pos
-function bp:face_pos(self,pos)
-	local s = self.object:getpos()
-	local vec = {x=pos.x-s.x, y=pos.y-s.y, z=pos.z-s.z}
-	local yaw = math.atan(vec.z/vec.x)+math.pi/2
-	if self.drawtype == "side" then
-		yaw = yaw+(math.pi/2)
-	end
-	if pos.x > s.x then
-		yaw = yaw+math.pi
-	end
-	self.object:setyaw(yaw)
-	return yaw
-end
+			function bp:face_pos(self,pos)
+				local s = self.object:getpos()
+				local vec = {x=pos.x-s.x, y=pos.y-s.y, z=pos.z-s.z}
+				local yaw = math.atan(vec.z/vec.x)+math.pi/2
+				if self.drawtype == "side" then
+					yaw = yaw+(math.pi/2)
+				end
+				if pos.x > s.x then
+					yaw = yaw+math.pi
+				end
+				self.object:setyaw(yaw)
+				return yaw
+			end
 
 --Reese chat
-local_chat = function(pos,text,radius)
-	if radius == nil then
-		radius = 25
-	end
-	if pos ~= nil then
-		local oir = minetest.get_objects_inside_radius(pos, radius)
-		for _,p in pairs(oir) do
-			if p:is_player() then
-				minetest.chat_send_player(p:get_player_name(),text)
-			end
-		end
-	end
-end
-
-
---maikeruminefollow
-				function bp:team_player(self,pos)
-				if tamed == true or
-					self.tamed == true then
-					self.order = "follow"
-
-					--self.set_velocity(self, self.run_velocity)
-					--self:set_animation("run")
+			local_chat = function(pos,text,radius)
+				if radius == nil then
+					radius = 25
 				end
-	--TODO FIGHT MOBS AND STILL FOLLOW...
-				--[[local s = self.object:getpos()
-				local p = self.follow.player:getpos()
-				local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
-				if dist > self.view_range or self.follow.player:get_hp() <= 0 then
-					self.state = "stand"
-					self.set_velocity(self, 0)
-					self.follow = {player=nil, dist=nil}
-					self:set_animation("stand")
-					return
-				else
-					self.follow.dist = dist
-				end
-					end]]
-
-
-			--[[				-- npc, find closest monster to attack
-			local min_dist = self.view_range + 1
-			local min_player = nil
-
-			if self.type == "npc" and self.attacks_monsters and self.state ~= "attack" then
-				local s = self.object:getpos()	----?
-				local obj = nil					----?seemed to fix error
-				for _, oir in pairs(minetest.get_objects_inside_radius(s,self.view_range)) do
-					obj = oir:get_luaentity()
-					if obj and obj.type == "monster" then
-						-- attack monster
-						local p = obj.object:getpos()   ---?
-						local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5		---?
-						if dist < min_dist then
-							min_dist = dist
-							min_player = obj.object
+				if pos ~= nil then
+					local oir = minetest.get_objects_inside_radius(pos, radius)
+					for _,p in pairs(oir) do
+						if p:is_player() then
+							minetest.chat_send_player(p:get_player_name(),text)
 						end
 					end
 				end
-				if min_player then
-					self.do_attack(self, min_player, min_dist)
-				end]]
-
-end
+			end
 
 
+--maikeruminefollow
+			function bp:team_player(self,pos)
+				if tamed == true or
+					self.tamed == true then
+					self.order = "follow"
+				end
+			end
 
 
-function process_weapon(player, time_from_last_punch, tool_capabilities)
-local weapon = player:get_wielded_item()
-	if tool_capabilities ~= nil then
-		local wear = ( tool_capabilities.full_punch_interval / 75 ) * 65535
-		weapon:add_wear(wear)
-		player:set_wielded_item(weapon)
-	end
-end
+
+--TODO TWEAK CODE, AS TOOLS WEAR OUT TOO FAST
+			function process_weapon(player, time_from_last_punch, tool_capabilities)
+			local weapon = player:get_wielded_item()
+				if tool_capabilities ~= nil then
+					local wear = ( tool_capabilities.full_punch_interval / 75 ) * 65535
+					--local wear = ( tool_capabilities.full_punch_interval / 75 ) * 65535  --REF
+					weapon:add_wear(wear)
+					player:set_wielded_item(weapon)
+				end
+			end
 
 -- Spawn Egg
---[[function bp:register_egg(mob, desc, background, addegg)
+function bp:register_egg(mob, desc, background, addegg)
 local invimg = background
 if addegg == 1 then
 	invimg = invimg.."^mobs_chicken_egg.png"
@@ -1435,4 +1396,4 @@ minetest.register_craftitem(mob, {
 		return itemstack
 	end,
 })
-end]]
+end

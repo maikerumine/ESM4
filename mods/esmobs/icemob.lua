@@ -11,7 +11,7 @@
 --dofile(minetest.get_modpath("esmobs").."/api.lua")
 -- icemons:register_spawn(name, description, nodes, max_light, min_light, chance, active_object_count, max_height)
 
-bp:register_spawn("esmobs:icemon", {"default:ice"}, 12, -1, 900, 3, 31000)
+bp:register_spawn("esmobs:icemon", {"default:ice"}, 8, -1, 4000, 3, 31000)
 bp:register_mob("esmobs:icemon", {
 	type = "monster",
 	hp_min = 80,

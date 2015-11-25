@@ -1,9 +1,9 @@
---esmobs v0.0.1
+--esmobs v0.0.4
 --maikerumine
 --made for Extreme Survival game
 
 
-
+--dofile(minetest.get_modpath("esmobs").."/esconfig.lua")
 
 dofile(minetest.get_modpath("esmobs").."/api.lua")
 dofile(minetest.get_modpath("esmobs").."/chickoboo.lua")
@@ -17,18 +17,19 @@ dofile(minetest.get_modpath("esmobs").."/icemob.lua")
 dofile(minetest.get_modpath("esmobs").."/nicemob.lua")
 dofile(minetest.get_modpath("esmobs").."/crossfire.lua")
 
-
+--IF ES IS LOADED YOU WILL SEE OTHER MOBS HOLDING THE SPECIAL TOOLS
 if es then
-dofile(minetest.get_modpath("esmobs").."/esnpc2.lua")
+	dofile(minetest.get_modpath("esmobs").."/esnpc2.lua")
 end
 
---[[if bones then
-donotfile(minetest.get_modpath("esmobs").."/bones.lua")
-end
-dofile(minetest.get_modpath("esmobs").."/bones.lua")
-]]
---dofile(minetest.get_modpath("esmobs").."/esconfig.lua")
-
+--IN CASE BONES IS NOT INSTALLED, THIS OVERRIDES NODES SO YOU HAVE THEM FOR MOBS.
+if not bones then
+	dofile(minetest.get_modpath("esmobs").."/bones.lua")
+		minetest.register_alias("bones:bones", "esmobs:bones")
+	end
+	if bones then
+		minetest.register_alias("esmobs:bones", "bones:bones")
+	end
 
 if minetest.setting_get("log_mods") then
 	minetest.log("action", "esmobs mobs loaded")

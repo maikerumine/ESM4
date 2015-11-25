@@ -112,11 +112,11 @@ bp:register_mob("esmobs:sheep", {
 	end,
 })
 
-bp:register_spawn("esmobs:sheep", {"default:dirt_with_grass", "ethereal:green_dirt"}, 20, 10, 9000, 2, 31000)
+bp:register_spawn("esmobs:sheep", {"default:dirt_with_grass", "ethereal:green_dirt"}, 20, 10, 12000, 2, 31000)
 
 --bp:register_egg("esmobs:sheep", "Sheep", "wool_white.png", 1)
 
---[[ shears (right click sheep to shear wool)
+--shears (right click sheep to shear wool)
 minetest.register_tool("esmobs:shears", {
 	description = "Steel Shears (right-click sheep to shear)",
 	inventory_image = "mobs_shears.png",
@@ -128,7 +128,7 @@ minetest.register_craft({
 		{'', 'default:steel_ingot', ''},
 		{'', 'group:stick', 'default:steel_ingot'},
 	}
-})]]
+})
 
 
 

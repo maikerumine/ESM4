@@ -55,7 +55,7 @@ bp:register_mob("esmobs:tree_monster", {
 	},
 })
 
-bp:register_spawn("esmobs:tree_monster", {"default:leaves", "default:jungleleaves","default:dirt", "default:jungletree"}, 5, 0, 8000, 2, 31000)
+bp:register_spawn("esmobs:tree_monster", {"default:leaves", "default:jungleleaves","default:dirt", "default:jungletree"}, 5, 0, 7000, 2, 31000)
 
 --bp:register_egg("esmobs:tree_monster", "Tree Monster", "default_tree_top.png", 1)
 
@@ -108,7 +108,7 @@ bp:register_mob("esmobs:sand_monster", {
 	},
 })
 
-bp:register_spawn("esmobs:sand_monster", {"default:sand", "meru:stone","group:sand"},4, -1, 8000, 2, 31000)
+bp:register_spawn("esmobs:sand_monster", {"default:sand", "meru:stone","group:sand"},4, -1, 7000, 2, 31000)
 
 -- Stone Monster by PilzAdam
 
@@ -156,7 +156,7 @@ bp:register_mob("esmobs:stone_monster", {
 	},
 })
 
-bp:register_spawn("esmobs:stone_monster", {"default:stone"}, 5, 0, 1000, 10, 31000)
+bp:register_spawn("esmobs:stone_monster", {"default:stone"}, 5, 0, 3000, 10, 31000)
 
 --bp:register_egg("esmobs:stone_monster", "Stone Monster", "default_stone.png", 1)
 
@@ -206,7 +206,7 @@ bp:register_mob("esmobs:spider", {
 	},
 })
 
-bp:register_spawn("esmobs:spider", {"default:stone" ,"default:cobble","group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 6, 0, 8000, 1, 71)
+bp:register_spawn("esmobs:spider", {"default:stone" ,"default:cobble","group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 6, 0, 6000, 1, 71)
 
 --bp:register_egg("esmobs:spider", "Spider", "mobs_cobweb.png", 1)
 
@@ -292,7 +292,7 @@ bp:register_mob("esmobs:oerkkii", {
 	replace_offset = -1,
 })
 
-bp:register_spawn("esmobs:oerkkii", {"default:stone"}, 5, 0, 7000, 1, -10)
+bp:register_spawn("esmobs:oerkkii", {"default:stone"}, 5, 0, 6000, 1, -10)
 
 --mobs:register_egg("esmobs:oerkki", "Oerkki", "default_obsidian.png", 1)
 
@@ -337,8 +337,49 @@ bp:register_mob("esmobs:applmons", {
 		punch_end = 48,
 	}
 })
-bp:register_spawn("esmobs:applmons", {"default:stone"}, 6, -1, 8000, 2, -30)
+bp:register_spawn("esmobs:applmons", {"default:stone"}, 6, -1, 6000, 2, -30)
 
 
-
+--Herobrine's Bloody Ghost by Lovehart and maikerumine  http://minetest.fensta.bplaced.net/#author=lovehart 
+bp:register_mob("esmobs:herobrines_bloody_ghost", {
+	type = "monster",
+	hp_min = 320,
+	hp_max = 340,
+	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
+	visual = "mesh",
+	mesh = "badplayer.x",
+	textures = {"herobrines_blody_gost_by_lovehart.png"},
+	visual_size = {x=1, y=1.0},
+	makes_footstep_sound = true,
+	view_range = 19,
+	walk_velocity = 1.8,
+	run_velocity = 3.6,
+	damage = 4,
+	drops = {
+		{name = "default:mese",
+		chance = 1,
+		min = 1,
+		max = 3,},
+	},
+	armor = 80,
+	drawtype = "front",
+	water_damage = 10,
+	lava_damage = 50,
+	light_damage = 0,
+	on_rightclick = nil,
+	attack_type = "dogfight",
+	animation = {
+		speed_normal = 15,
+		speed_run = 15,
+		stand_start = 0,
+		stand_end = 19,
+		walk_start = 20,
+		walk_end = 35,
+		run_start = 30,
+		run_end = 40,
+		punch_start = 36,
+		punch_end = 48,
+	}
+})
+bp:register_spawn("esmobs:herobrines_bloody_ghost", {"default:stone","default:desert_sand"}, 6, -1, 12000, 1, 10)
 

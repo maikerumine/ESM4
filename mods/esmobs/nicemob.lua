@@ -7,12 +7,14 @@
 
 --REFERENCE
 --function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
-
-bp:register_spawn("esmobs:man", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble"}, 11, -1, 9000, 1, 31000)
-bp:register_spawn("esmobs:woman", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble"}, 11, -1, 9000, 1, 31000)
+bp.npc_drops = { "default:pick_steel", "esmobs:meat", "default:sword_steel", "default:shovel_steel", "farming:bread", "default:wood" }--Added 20151121
 
 
-bp:register_mob("esmobs:man", {
+bp:register_spawn("esmobs:Wilbert", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble"}, 11, -1, 9000, 1, 31000)
+bp:register_spawn("esmobs:Thelma", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble"}, 11, -1, 9000, 1, 31000)
+
+
+bp:register_mob("esmobs:Wilbert", {
 	type = "npc",
 	hp_max = 115,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
@@ -53,6 +55,7 @@ bp:register_mob("esmobs:man", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
+	--[[
 --Maikerumine added hackish follow code
 	on_rightclick = function (self, clicker)
 		bp:face_pos(self,clicker:getpos())
@@ -64,7 +67,75 @@ bp:register_mob("esmobs:man", {
 				self.follow = true
 			end
 		end
-	end,
+	end,]]
+	
+		on_rightclick = function(self, clicker)
+		local item = clicker:get_wielded_item()
+		local_chat(clicker:getpos(),"Old man: I am getting too old for this...  Okay, I'll help ya!",3)
+		if item:get_name() == "esmobs:meat" or item:get_name() == "farming:bread" then
+			local hp = self.object:get_hp()
+			if hp + 4 > self.hp_max then return end
+			if not minetest.setting_getbool("creative_mode") then
+				item:take_item()
+				clicker:set_wielded_item(item)
+			end
+			self.object:set_hp(hp+4)
+
+
+		-- right clicking with gold lump drops random item from mobs.npc_drops
+		elseif item:get_name() == "default:gold_lump" then
+			if not minetest.setting_getbool("creative_mode") then
+				item:take_item()
+				clicker:set_wielded_item(item)
+			end
+			local pos = self.object:getpos()
+			pos.y = pos.y + 0.5
+			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc_drops)]})
+		else
+			if self.owner == "" then
+				self.owner = clicker:get_player_name()
+			else
+				local formspec = "size[8,4]"
+				formspec = formspec .. "textlist[2.85,0;2.1,0.5;dialog;What can I do for you?]"
+				formspec = formspec .. "button_exit[1,1;2,2;gfollow;follow]"
+				formspec = formspec .. "button_exit[5,1;2,2;gstand;stand]"
+				formspec = formspec .. "button_exit[0,2;4,4;gfandp;follow and protect]"
+				formspec = formspec .. "button_exit[4,2;4,4;gsandp;stand and protect]"
+				--formspec = formspec .. "button_exit[1,2;2,2;ggohome; go home]"
+				--formspec = formspec .. "button_exit[5,2;2,2;gsethome; sethome]"
+				minetest.show_formspec(clicker:get_player_name(), "order", formspec)
+				minetest.register_on_player_receive_fields(function(clicker, formname, fields)
+					if fields.gfollow then
+						self.order = "follow"
+						self.attacks_monsters = false
+					end
+					if fields.gstand then
+						self.order = "stand"
+						self.attacks_monsters = false
+					end
+					if fields.gfandp then
+						self.order = "follow"
+						self.attacks_monsters = true
+					end
+					if fields.gsandp then
+						self.order = "stand"
+						self.attacks_monsters = true
+					end
+					if fields.gsethome then
+						self.floats = self.object:getpos()
+					end
+					if fields.ggohome then
+						if self.floats then
+							self.order = "stand"
+							self.object:setpos(self.floats)
+						end
+					end
+				end)
+
+			end
+		end
+	end,		
+	
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 17,
@@ -86,7 +157,7 @@ bp:register_mob("esmobs:man", {
 
 })
 
-bp:register_mob("esmobs:woman", {
+bp:register_mob("esmobs:Thelma", {
 	type = "npc",
 	hp_max = 115,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
@@ -127,6 +198,7 @@ bp:register_mob("esmobs:woman", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
+	--[[
 --Maikerumine added hackish follow code
 	on_rightclick = function (self, clicker)
 		bp:face_pos(self,clicker:getpos())
@@ -138,7 +210,75 @@ bp:register_mob("esmobs:woman", {
 				self.follow = true
 			end
 		end
-	end,
+	end,]]
+	
+		on_rightclick = function(self, clicker)
+		local item = clicker:get_wielded_item()
+		local_chat(clicker:getpos(),"Old woman: I may walk slow, but I can fight like a champ!",3)
+		if item:get_name() == "esmobs:meat" or item:get_name() == "farming:bread" then
+			local hp = self.object:get_hp()
+			if hp + 4 > self.hp_max then return end
+			if not minetest.setting_getbool("creative_mode") then
+				item:take_item()
+				clicker:set_wielded_item(item)
+			end
+			self.object:set_hp(hp+4)
+
+
+		-- right clicking with gold lump drops random item from mobs.npc_drops
+		elseif item:get_name() == "default:gold_lump" then
+			if not minetest.setting_getbool("creative_mode") then
+				item:take_item()
+				clicker:set_wielded_item(item)
+			end
+			local pos = self.object:getpos()
+			pos.y = pos.y + 0.5
+			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc_drops)]})
+		else
+			if self.owner == "" then
+				self.owner = clicker:get_player_name()
+			else
+				local formspec = "size[8,4]"
+				formspec = formspec .. "textlist[2.85,0;2.1,0.5;dialog;What can I do for you?]"
+				formspec = formspec .. "button_exit[1,1;2,2;gfollow;follow]"
+				formspec = formspec .. "button_exit[5,1;2,2;gstand;stand]"
+				formspec = formspec .. "button_exit[0,2;4,4;gfandp;follow and protect]"
+				formspec = formspec .. "button_exit[4,2;4,4;gsandp;stand and protect]"
+				--formspec = formspec .. "button_exit[1,2;2,2;ggohome; go home]"
+				--formspec = formspec .. "button_exit[5,2;2,2;gsethome; sethome]"
+				minetest.show_formspec(clicker:get_player_name(), "order", formspec)
+				minetest.register_on_player_receive_fields(function(clicker, formname, fields)
+					if fields.gfollow then
+						self.order = "follow"
+						self.attacks_monsters = false
+					end
+					if fields.gstand then
+						self.order = "stand"
+						self.attacks_monsters = false
+					end
+					if fields.gfandp then
+						self.order = "follow"
+						self.attacks_monsters = true
+					end
+					if fields.gsandp then
+						self.order = "stand"
+						self.attacks_monsters = true
+					end
+					if fields.gsethome then
+						self.floats = self.object:getpos()
+					end
+					if fields.ggohome then
+						if self.floats then
+							self.order = "stand"
+							self.object:setpos(self.floats)
+						end
+					end
+				end)
+
+			end
+		end
+	end,		
+	
 	attack_type = "dogfight",
 	animation = {
 		speed_normal = 17,

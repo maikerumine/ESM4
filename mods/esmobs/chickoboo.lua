@@ -52,7 +52,7 @@ bp:register_mob("esmobs:chickoboo", {
 	},
 	follow = "farming:seed_wheat",
 	view_range = 5,
-	replace_rate = 200000,
+	replace_rate = 20000,
 	replace_what = {"air"},
 	replace_with = "esmobs:egg",
 	on_rightclick = function(self, clicker)
@@ -88,7 +88,7 @@ bp:register_mob("esmobs:chickoboo", {
 	end,
 })
 
-bp:register_spawn("esmobs:chickoboo", {"default:dirt_with_grass", "ethereal:bamboo_dirt","default:cobble"}, 20, 1, 22000, 1, 31000)
+bp:register_spawn("esmobs:chickoboo", {"default:dirt_with_grass", "ethereal:bamboo_dirt","default:cobble"}, 15, 10, 22000, 2, 31000)
 
 --bp:register_egg("esmobs:chickoboo", "Chickoboo", "mobs_chicken_inv.png", 0)
 
