@@ -156,7 +156,7 @@ bp:register_mob("esmobs:stone_monster", {
 	},
 })
 
-bp:register_spawn("esmobs:stone_monster", {"default:stone"}, 5, 0, 3000, 10, 31000)
+bp:register_spawn("esmobs:stone_monster", {"default:stone"}, 5, 0, 3000, 10, 500)
 
 --bp:register_egg("esmobs:stone_monster", "Stone Monster", "default_stone.png", 1)
 
@@ -340,7 +340,7 @@ bp:register_mob("esmobs:applmons", {
 bp:register_spawn("esmobs:applmons", {"default:stone"}, 6, -1, 6000, 2, -30)
 
 
---Herobrine's Bloody Ghost by Lovehart and maikerumine  http://minetest.fensta.bplaced.net/#author=lovehart 
+--Herobrine's Bloody Ghost by Lovehart and maikerumine  http://minetest.fensta.bplaced.net/#author=lovehart
 bp:register_mob("esmobs:herobrines_bloody_ghost", {
 	type = "monster",
 	hp_min = 320,

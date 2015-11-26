@@ -103,7 +103,7 @@ bp:register_mob("esmobs:snowmon", {
 
 })
 
-bp:register_spawn("esmobs:watermon", {"default:water_source","default:water_flowing"}, 5, -1, 9000, 1, 120)
+bp:register_spawn("esmobs:watermon", {"default:water_source","default:water_flowing"}, 5, -1, 9000, 1, -120)
 bp:register_mob("esmobs:watermon", {
 	type = "monster",
 	hp_min = 35,
