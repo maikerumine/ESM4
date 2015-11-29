@@ -84,6 +84,43 @@ function bp:register_mob(name, def)
 		child = false,
 		gotten = false,
 
+
+		--ADDED 20151128 TENPLUS1
+		get_staticdata = function(self)
+
+		-- remove mob when out of range unless tamed
+		if bp.remove
+		and self.remove_ok
+		and not self.tamed then
+			--print ("REMOVED", self.remove_ok, self.name)
+			self.object:remove()
+			return nil
+		end
+
+		self.remove_ok = true
+		self.attack = nil
+		self.following = nil
+		self.state = "stand"
+
+		local tmp = {}
+
+		for _,stat in pairs(self) do
+			local t = type(stat)
+			if  t ~= 'function'
+			and t ~= 'nil'
+			and t ~= 'userdata' then
+				tmp[_] = self[_]
+			end
+		end
+		-- print('===== '..self.name..'\n'.. dump(tmp)..'\n=====\n')
+		return minetest.serialize(tmp)
+		end,
+
+
+
+
+
+
 		do_attack = function(self, player, dist)
 			if self.state ~= "attack" then
 					if math.random(0,100) < 90  and self.sounds.war_cry then
@@ -900,36 +937,7 @@ function bp:register_mob(name, def)
 			return minetest.serialize(tmp)
 		end,
 
---ADDED 20151128 TENPLUS1
-		get_staticdata = function(self)
 
-		-- remove mob when out of range unless tamed
-		if bp.remove
-		and self.remove_ok
-		and not self.tamed then
-			--print ("REMOVED", self.remove_ok, self.name)
-			self.object:remove()
-			return nil
-		end
-
-		self.remove_ok = true
-		self.attack = nil
-		self.following = nil
-		self.state = "stand"
-
-		local tmp = {}
-
-		for _,stat in pairs(self) do
-			local t = type(stat)
-			if  t ~= 'function'
-			and t ~= 'nil'
-			and t ~= 'userdata' then
-				tmp[_] = self[_]
-			end
-		end
-		-- print('===== '..self.name..'\n'.. dump(tmp)..'\n=====\n')
-		return minetest.serialize(tmp)
-	end,
 
 -------BEGIN ON PUNCH CODE
 
