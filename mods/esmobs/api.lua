@@ -1,5 +1,5 @@
 -- Mobs Api (26th April 2015) By TenPlus1
---REVISED 20151122 maikerumine for esmobs
+--REVISED 20151128 maikerumine for esmobs
 bp = {}
 bp.mod = "redo"
 
@@ -10,6 +10,10 @@ bp.protected = 0
 local damage_enabled = minetest.setting_getbool("enable_damage")
 local peaceful_only = minetest.setting_getbool("only_peaceful_mobs")
 local enable_blood = minetest.setting_getbool("mobs_enable_blood") or true
+bp.remove = minetest.setting_getbool("remove_far_mobs") or true  --line 903
+
+
+
 
 function bp:register_mob(name, def)
 	minetest.register_entity(name, {
@@ -847,6 +851,7 @@ function bp:register_mob(name, def)
 			if self.type == "monster" and self.tamed == true then
 				self.type = "npc"
 			end
+
 		end,
 
 		get_staticdata = function(self)
@@ -895,6 +900,36 @@ function bp:register_mob(name, def)
 			return minetest.serialize(tmp)
 		end,
 
+--ADDED 20151128 TENPLUS1
+		get_staticdata = function(self)
+
+		-- remove mob when out of range unless tamed
+		if bp.remove
+		and self.remove_ok
+		and not self.tamed then
+			--print ("REMOVED", self.remove_ok, self.name)
+			self.object:remove()
+			return nil
+		end
+
+		self.remove_ok = true
+		self.attack = nil
+		self.following = nil
+		self.state = "stand"
+
+		local tmp = {}
+
+		for _,stat in pairs(self) do
+			local t = type(stat)
+			if  t ~= 'function'
+			and t ~= 'nil'
+			and t ~= 'userdata' then
+				tmp[_] = self[_]
+			end
+		end
+		-- print('===== '..self.name..'\n'.. dump(tmp)..'\n=====\n')
+		return minetest.serialize(tmp)
+	end,
 
 -------BEGIN ON PUNCH CODE
 
@@ -991,7 +1026,7 @@ function bp:register_mob(name, def)
 --CHOOSE OPTION BELOW:
 --				meta:set_string( "owner", "Extreme Survival Mob R.I.P.")	--SET OWNER FOR TIMER
 				meta:set_string("owner")						--SET NO OWNER NO TIMER
-				
+
                             meta:set_int("bonetime_counter", 0)
                             local timer  = minetest.get_node_timer(spaceforbones)
                             timer:start(10)
