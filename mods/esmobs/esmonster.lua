@@ -2,6 +2,7 @@
 --maikerumine
 --made for Extreme Survival game
 
+minetest.register_alias("lagsmobs:cursed_stone", "esmobs:cursed_stone")
 
 --dofile(minetest.get_modpath("esmobs").."/api.lua")
 
@@ -144,7 +145,7 @@ bp:register_mob("esmobs:stone_monster", {
 		{name = "default:coal_lump",
 		chance=3, min=0, max=1,},
 	},
-	water_damage = 0,
+	water_damage = 10,
 	lava_damage = 1,
 	light_damage = 1,
 	animation = {
@@ -156,7 +157,7 @@ bp:register_mob("esmobs:stone_monster", {
 	},
 })
 
-bp:register_spawn("esmobs:stone_monster", {"default:stone"}, 5, 0, 6000, 10, 500)
+bp:register_spawn("esmobs:stone_monster", {"default:stone"}, 5, -1, 6000, 10, 500)
 
 --bp:register_egg("esmobs:stone_monster", "Stone Monster", "default_stone.png", 1)
 
@@ -292,7 +293,32 @@ bp:register_mob("esmobs:oerkkii", {
 	replace_offset = -1,
 })
 
-bp:register_spawn("esmobs:oerkkii", {"default:stone"}, 5, 0, 6000, 1, -10)
+--bp:register_spawn("esmobs:oerkkii", {"default:stone"}, 5, 0, 6000, 1, -10)
+bp:register_spawn("esmobs:oerkkii", "esmobs:cursed_stone", 4, -1, 2, 40, 500, -500)
+
+minetest.register_node("esmobs:cursed_stone", {
+	description = "Cursed stone",
+	tiles = {
+		"mobs_cursed_stone_top.png",
+		"mobs_cursed_stone_bottom.png",
+		"mobs_cursed_stone.png",
+		"mobs_cursed_stone.png",
+		"mobs_cursed_stone.png",
+		"mobs_cursed_stone.png"
+	},
+	is_ground_content = false,
+	groups = {cracky=1, level=2},
+	drop = 'default:goldblock',
+	sounds = default.node_sound_stone_defaults(),
+})
+minetest.register_craft({
+	output = 'esmobs:cursed_stone',
+	recipe = {
+		{'default:obsidian', 'default:obsidian', 'default:obsidian'},
+		{'default:obsidian', 'default:goldblock', 'default:obsidian'},
+		{'default:obsidian', 'default:obsidian', 'default:obsidian'},
+	}
+})
 
 --mobs:register_egg("esmobs:oerkki", "Oerkki", "default_obsidian.png", 1)
 

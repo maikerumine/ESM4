@@ -152,6 +152,37 @@ minetest.register_node("es:boneblock", {
 	}),
 })
 
+--FROM TECHNIC
+minetest.register_node( "es:granite", {
+	description = S("Granite"),
+	tiles = { "technic_granite.png" },
+	is_ground_content = true,
+	groups = {cracky=3},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node( "es:marble", {
+	description = S("Marble"),
+	tiles = { "technic_marble.png" },
+	is_ground_content = true,
+	groups = {cracky=3},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node( "es:marble_bricks", {
+	description = S("Marble Bricks"),
+	tiles = { "technic_marble_bricks.png" },
+	is_ground_content = true,
+	groups = {cracky=3},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+
+
+
+
+
+
 
 --Random craft [USE FOR SUPER FOOD]
 -- Jack 'O Lantern
@@ -341,7 +372,7 @@ stairs.register_stair_and_slab("Dirt", "default:dirt",
 		"Dirt Block Slab",
 		default.node_sound_stone_defaults())
 
-	
+
 if minetest.get_modpath("moreblocks") and enable_stairsplus then
 register_stair_slab_panel_micro("es", "emeraldblock", "es:emeraldblock",
 {cracky=3},

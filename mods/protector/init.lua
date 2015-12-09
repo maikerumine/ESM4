@@ -5,7 +5,7 @@ local statspawn = (minetest.setting_get_pos("static_spawnpoint") or {x = 0, y = 
 
 protector = {}
 protector.mod = "redo"
-protector.radius = (tonumber(minetest.setting_get("protector_radius")) or 5)
+protector.radius = (tonumber(minetest.setting_get("protector_radius")) or 3)
 protector.pvp = minetest.setting_getbool("protector_pvp")
 protector.spawn = (tonumber(minetest.setting_get("protector_pvp_spawn")) or 0)
 

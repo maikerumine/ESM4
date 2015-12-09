@@ -17,6 +17,8 @@ dofile(minetest.get_modpath("esmobs").."/icemob.lua")
 dofile(minetest.get_modpath("esmobs").."/nicemob.lua")
 dofile(minetest.get_modpath("esmobs").."/crossfire.lua")
 
+--dofile(minetest.get_modpath("esmobs").."/spawner.lua")
+
 --IF ES IS LOADED YOU WILL SEE OTHER MOBS HOLDING THE SPECIAL TOOLS
 if es then
 	dofile(minetest.get_modpath("esmobs").."/esnpc2.lua")

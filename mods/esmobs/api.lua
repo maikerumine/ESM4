@@ -4,15 +4,14 @@ bp = {}
 bp.mod = "redo"
 
 -- Do mobs spawn in protected areas (0=yes, 1=no)
-bp.protected = 0
+--bp.protected = 1
 
 -- Initial settings check
 local damage_enabled = minetest.setting_getbool("enable_damage")
 local peaceful_only = minetest.setting_getbool("only_peaceful_mobs")
 local enable_blood = minetest.setting_getbool("mobs_enable_blood") or true
 bp.remove = minetest.setting_getbool("remove_far_mobs") or true  --line 903
-
-
+bp.protected = tonumber(minetest.setting_get("mobs_spawn_protected")) or 1
 
 
 function bp:register_mob(name, def)
@@ -1080,8 +1079,9 @@ function bp:spawn_specific(name, nodes, neighbors, min_light, max_light, interva
 			end
 
 			-- spawn above node
-			pos.y = pos.y + 4
-
+			pos.y = pos.y + 1
+			pos.x = pos.x + 2  --ADDED TO FIX TUNNEL SPAWN
+			pos.z = pos.z + 2  --ADDED TO FIX TUNNEL SPAWN
 			-- mobs cannot spawn inside protected areas if enabled
 			if bp.protected == 1 and minetest.is_protected(pos, "") then
 				return
@@ -1098,8 +1098,8 @@ function bp:spawn_specific(name, nodes, neighbors, min_light, max_light, interva
 			local nod = minetest.get_node_or_nil(pos)
 			if not nod or not nod.name or not minetest.registered_nodes[nod.name]
 			or minetest.registered_nodes[nod.name].walkable == true then return end
-			pos.y = pos.y + 3--test to see if prevent mineshaft spawn
---			pos.y = pos.y + 1--original
+			pos.y = pos.y + 3 --test to see if prevent mineshaft spawn
+--			--pos.y = pos.y + 1--original
 			nod = minetest.get_node_or_nil(pos)
 			if not nod or not nod.name or not minetest.registered_nodes[nod.name]
 			or minetest.registered_nodes[nod.name].walkable == true then return end
@@ -1110,6 +1110,8 @@ function bp:spawn_specific(name, nodes, neighbors, min_light, max_light, interva
 
 			-- spawn mob half block higher
 			pos.y = pos.y - 0.5
+			pos.x = pos.x - 1  --ADDED TO FIX TUNNEL SPAWN
+			pos.z = pos.z - 1  --ADDED TO FIX TUNNEL SPAWN
 			minetest.add_entity(pos, name)
 			--print ("Spawned "..name.." at "..minetest.pos_to_string(pos).." on "..node.name.." near "..neighbors[1])
 

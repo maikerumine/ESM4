@@ -467,7 +467,7 @@ bp:register_mob("esmobs:Maikerumine", {
 		bp:face_pos(self,clicker:getpos())
 		bp:team_player(self,clicker:getpos())
 		if self.state ~= "path" and self.state ~= "following" then
-		local_chat(clicker:getpos(),"Infinium Man: I'll give those monsters a good whack on the head with this Infinium ingot!",3)
+		local_chat(clicker:getpos(),"Maikerumine: Maybe a new game is in the works...  Hmmm...",3)
 			if not self.tamed then
 				self.tamed = true
 				self.follow = true
@@ -477,7 +477,7 @@ bp:register_mob("esmobs:Maikerumine", {
 
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
-		local_chat(clicker:getpos(),"Infinium Man: I'll give those monsters a good whack on the head with this Infinium ingot!",3)
+		local_chat(clicker:getpos(),"Maikerumine: Maybe a new game is in the works...  Hmmm...",3)
 		if item:get_name() == "esmobs:meat" or item:get_name() == "farming:bread" then
 			local hp = self.object:get_hp()
 			if hp + 4 > self.hp_max then return end

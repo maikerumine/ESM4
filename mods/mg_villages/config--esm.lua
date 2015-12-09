@@ -6,13 +6,13 @@ mg_villages.ENABLE_VILLAGES = true;
 
 -- generate one random building for each mg_villages.INVERSE_HOUSE_DENSITY th mapchunk;
 -- set to 0 in order to disable spawning of these lone buildings outside villages
-mg_villages.INVERSE_HOUSE_DENSITY = 4;
+mg_villages.INVERSE_HOUSE_DENSITY = 0;
 
 -- cover some villages with artificial snow; probability: 1/mg_villages.artificial_snow_probability
 mg_villages.artificial_snow_probability = 10;
 
 -- if set to true, soil around villaes will get special soil-snow instead of plant + snow cover
-mg_villages.use_soil_snow = false;
+mg_villages.use_soil_snow = true;
 
 -- only place roads if there are at least that many buildings in the village
 mg_villages.MINIMAL_BUILDUNGS_FOR_ROAD_PLACEMENT = 4;
@@ -24,7 +24,7 @@ mg_villages.VILLAGE_DETECT_RANGE = 400;
 
 -- if set to true, only players which have the mg_villages priv can use the "/visit <village nr>"
 -- command which allows teleporting to the village with the given number
-mg_villages.REQUIRE_PRIV_FOR_TELEPORT = false;
+mg_villages.REQUIRE_PRIV_FOR_TELEPORT = true;
 
 -- if set to true, players cannot modify spawned villages without buying the house from the village first
 mg_villages.ENABLE_PROTECTION = true;
@@ -40,10 +40,6 @@ mg_villages.MAX_HEIGHT_TREATED = 200;
 -- choose the debug level you want
 mg_villages.DEBUG_LEVEL = mg_villages.DEBUG_LEVEL_NORMAL
 
--- if set to true (or anything else but nil or false), highlandpools by paramat (see
--- https://forum.minetest.net/viewtopic.php?t=8400) will be created
-mg_villages.CREATE_HIGHLANDPOOLS = true
-
 -- background image for the /vmap command
 -- RealTest comes with a diffrent texture
 if(     minetest.get_modpath('grounds') and minetest.get_modpath('joiner_table')) then
@@ -51,7 +47,7 @@ if(     minetest.get_modpath('grounds') and minetest.get_modpath('joiner_table')
 elseif( minetest.registered_nodes[ 'default:dirt_with_grass'] ) then
 	mg_villages.MAP_BACKGROUND_IMAGE = "default_grass.png";
 else
-	mg_villages.MAP_BACKGROUND_IMAGE = "";
+	mg_villages.MAP_BACKGROUND_IMAGE = "aw.png";
 end
 
 -- if set to true, the outer buildings in medieval villages will be fields; this is not very convincing yet
@@ -59,7 +55,7 @@ end
 mg_villages.medieval_subtype = false;
 
 -- set this to true if you want to use normal lava - but beware: charachoal villages may cause bushfires!
---mg_villages.use_normal_unsafe_lava = false;
+--mg_villages.use_normal_unsafe_lava = true;
 
 -----------------------------------------------------------------------------
 -- decrese these values slightly if you want MORE trees around your villages;
@@ -68,12 +64,12 @@ mg_villages.medieval_subtype = false;
 -- on average, every n.th node inside a village area may be one of these trees - and it will be a relatively dense packed forrest
 mg_villages.sapling_probability = {};
 
-mg_villages.sapling_probability[ minetest.get_content_id( 'default:sapling' )       ] = 25; -- suitable for a relatively dense forrest of normal trees
+mg_villages.sapling_probability[ minetest.get_content_id( 'default:sapling' )       ] = 15; -- suitable for a relatively dense forrest of normal trees
 mg_villages.sapling_probability[ minetest.get_content_id( 'default:junglesapling' ) ] = 40; -- jungletrees are a bit bigger and need more space
-mg_villages.sapling_probability[ minetest.get_content_id( 'default:pinesapling' )   ] = 30;
+mg_villages.sapling_probability[ minetest.get_content_id( 'default:pinesapling' )   ] = 15;
 if( minetest.get_modpath( 'mg' )) then
-	mg_villages.sapling_probability[ minetest.get_content_id( 'mg:savannasapling'     ) ] = 30;
-	mg_villages.sapling_probability[ minetest.get_content_id( 'mg:pinesapling'        ) ] = 35;
+	--mg_villages.sapling_probability[ minetest.get_content_id( 'mg:savannasapling'     ) ] = 30;
+	--mg_villages.sapling_probability[ minetest.get_content_id( 'mg:pinesapling'        ) ] = 35;
 end
 mg_villages.moretrees_treelist = nil;
 if( minetest.get_modpath( 'moretrees' )) then
@@ -87,7 +83,7 @@ if( minetest.get_modpath( 'moretrees' )) then
 	mg_villages.sapling_probability[ minetest.get_content_id( 'moretrees:oak_sapling_ongen'         ) ] = 380; -- ca 20x20; height: 10
 	mg_villages.sapling_probability[ minetest.get_content_id( 'moretrees:sequoia_sapling_ongen'     ) ] =  90; -- ca 10x10
 	mg_villages.sapling_probability[ minetest.get_content_id( 'moretrees:palm_sapling_ongen'        ) ] =  90;
-	mg_villages.sapling_probability[ minetest.get_content_id( 'moretrees:pine_sapling_ongen'        ) ] = 200;
+	mg_villages.sapling_probability[ minetest.get_content_id( 'moretrees:pine_sapling_ongen'        ) ] = 30;
 	mg_villages.sapling_probability[ minetest.get_content_id( 'moretrees:willow_sapling_ongen'      ) ] = 380;
 	mg_villages.sapling_probability[ minetest.get_content_id( 'moretrees:rubber_tree_sapling_ongen' ) ] = 380;
 end
@@ -110,47 +106,47 @@ end
 -----------------------------------------------------------------------------
 -- how much does the player have to pay for a plot with a building?
 mg_villages.prices = {
-	empty          = "default:copper_ingot 1", -- plot to build on
+	empty          = "default:copper_ingot 10", -- plot to build on
 
 	-- building types which usually have inhabitants (and thus allow the player
 	-- who bought the building to modifiy the entire village area minus other
 	-- buildings)
-	tent           = "default:copper_ingot 1",
-	hut            = "default:copper_ingot 1",
-	farm_full      = "default:gold_ingot 4",
-	farm_tiny      = "default:gold_ingot 2",
-	lumberjack     = "default:gold_ingot 2",
-	house          = "default:gold_ingot 2",
-	house_large    = "default:gold_ingot 4",
-	tavern         = "default:gold_ingot 12",
-	trader         = "default:gold_ingot 2",
+	tent           = "default:copper_ingot 10",
+	hut            = "default:copper_ingot 10",
+	farm_full      = "default:gold_ingot 40",
+	farm_tiny      = "default:gold_ingot 20",
+	lumberjack     = "default:gold_ingot 20",
+	house          = "default:gold_ingot 20",
+	house_large    = "default:diamondblock 3",
+	tavern         = "default:gold_ingot 112",
+	trader         = "default:gold_ingot 20",
 
 	-- more or less community buildings
-	well           = "default:gold_ingot 1",
-	village_square = "default:goldblock 1",
-	secular        = "default:goldblock 2", -- secular buildings, such as libraries ec.
-	church         = "default:goldblock 10",
+	well           = "default:gold_ingot 10",
+	village_square = "default:gold_ingot 10",
+	secular        = "default:gold_ingot 20", -- secular buildings, such as libraries ec.
+	church         = "default:diamondblock 5",
 
 	-- places for mobs to work at; usually without inhabitants
-	tower          = "default:copper_ingot 1",
-	shed           = "default:copper_ingot 2",
-	pit            = "default:copper_ingot 3", -- claytrader pit
-	mill           = "default:gold_ingot 10",
-	forge          = "default:gold_ingot 10",
-	bakery         = "default:gold_ingot 10",
-	shop           = "default:gold_ingot 20",
-	sawmill        = "default:gold_ingot 30",
+	tower          = "default:copper_ingot 10",
+	shed           = "default:copper_ingot 20",
+	pit            = "default:copper_ingot 30", -- claytrader pit
+	mill           = "default:gold_ingot 100",
+	forge          = "default:gold_ingot 100",
+	bakery         = "default:gold_ingot 100",
+	shop           = "default:gold_ingot 200",
+	sawmill        = "default:gold_ingot 300",
 
 	-- decoration
 	wagon          = "default:tree 10",
 	bench          = "default:tree 4",
 
 	-- seperate fields
-	pasture        = "default:copper_ingot 2",
-	field          = "default:copper_ingot 2",
+	pasture        = "default:copper_ingot 20",
+	field          = "default:copper_ingot 20",
 
 	-- chateaus are expensive
-	chateau        = "default:diamondblock 5",
+	chateau        = "default:diamondblock 7",
 }
 
 

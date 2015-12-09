@@ -11,7 +11,7 @@
 --dofile(minetest.get_modpath("esmobs").."/api.lua")
 -- esmobs:register_spawn(name, description, nodes, max_light, min_light, chance, active_object_count, max_height)
 
-bp:register_spawn("esmobs:dirt", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 10000, 4, 31000)
+bp:register_spawn("esmobs:dirt", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 2, 500)
 bp:register_mob("esmobs:dirt", {
 	type = "monster",
 	hp_min = 30,

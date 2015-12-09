@@ -18,6 +18,35 @@
 
 --Node Registration and location
 
+--FROM TECHNIC
+minetest.register_ore({
+	ore_type       = "sheet",
+	ore            = "technic:marble",
+	wherein        = "default:stone",
+	clust_scarcity = 1,
+	clust_num_ores = 1,
+	clust_size     = 3,
+	height_min     = -31000,
+	height_max     = -50,
+	noise_threshhold = 0.4,
+	noise_params = {offset=0, scale=15, spread={x=150, y=150, z=150}, seed=23, octaves=3, persist=0.70}
+})
+
+minetest.register_ore({
+	ore_type       = "sheet",
+	ore            = "technic:granite",
+	wherein        = "default:stone",
+	clust_scarcity = 1,
+	clust_num_ores = 1,
+	clust_size     = 4,
+	height_min     = -31000,
+	height_max     = -150,
+	noise_threshhold = 0.4,
+	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
+})
+
+
+--EXTREME SURVIVAL ORES
 minetest.register_ore({
 		    ore_type       = "scatter",
 		    ore            = "es:stone_with_emerald",
@@ -106,7 +135,7 @@ minetest.register_ore({
 			height_min     = -31000,
 			height_max     = -190,
 	})
-	
+
 minetest.register_ore({
 			ore_type       = "scatter",
 			ore            = "es:stone_with_mese",
@@ -173,8 +202,8 @@ minetest.register_ore({
 		y_max          = 1140,
 	})
 
-	
-	
+
+
 	minetest.register_ore({
 		ore_type       = "scatter",
 		ore            = "es:desert_stone_with_coal",

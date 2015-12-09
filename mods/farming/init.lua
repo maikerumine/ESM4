@@ -562,3 +562,6 @@ farming.register_plant("farming:cotton", {
 	inventory_image = "farming_cotton_seed.png",
 	steps = 8,
 })]]
+
+
+
