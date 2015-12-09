@@ -396,7 +396,7 @@ minetest.register_craft({
 -- 7*24*60*60 = 604800 real time 1 week burn time
 minetest.register_craft({
 	type = "fuel",
-	recipe = "technic:uranium_block",
+	recipe = "es:depleted_uranium_ingot",
 	burntime = 604800,
 })
 

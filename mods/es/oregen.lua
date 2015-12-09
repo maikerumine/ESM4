@@ -13,15 +13,10 @@
 --(c) Copyright (2014-2015) maikerumine; CC-BY-SA 3.0
 
 
-
-
-
---Node Registration and location
-
---FROM TECHNIC
+--TECHNIC ORES
 minetest.register_ore({
 	ore_type       = "sheet",
-	ore            = "technic:marble",
+	ore            = "es:marble",
 	wherein        = "default:stone",
 	clust_scarcity = 1,
 	clust_num_ores = 1,
@@ -34,7 +29,7 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "sheet",
-	ore            = "technic:granite",
+	ore            = "es:granite",
 	wherein        = "default:stone",
 	clust_scarcity = 1,
 	clust_num_ores = 1,
@@ -46,7 +41,8 @@ minetest.register_ore({
 })
 
 
---EXTREME SURVIVAL ORES
+
+--ES Node Registration and location
 minetest.register_ore({
 		    ore_type       = "scatter",
 		    ore            = "es:stone_with_emerald",
@@ -135,7 +131,7 @@ minetest.register_ore({
 			height_min     = -31000,
 			height_max     = -190,
 	})
-
+	
 minetest.register_ore({
 			ore_type       = "scatter",
 			ore            = "es:stone_with_mese",
@@ -202,8 +198,8 @@ minetest.register_ore({
 		y_max          = 1140,
 	})
 
-
-
+	
+	
 	minetest.register_ore({
 		ore_type       = "scatter",
 		ore            = "es:desert_stone_with_coal",

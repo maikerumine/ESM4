@@ -21,7 +21,27 @@ function stairs.register_stair_and_slab(subname, recipeitem, groups, images,
 	stairs.register_slab(subname, recipeitem, groups, images, desc_slab, sounds)
 end
 
+--TECHNIC STAIRS
+stairs.register_stair_and_slab("granite", "es:granite",
+		{cracky = 1},
+		{"technic_granite.png"},
+		"Granite Block Stair",
+		"Granite Block Slab",
+		default.node_sound_stone_defaults())
 
+stairs.register_stair_and_slab("marble", "es:marble",
+		{cracky = 1},
+		{"technic_marble.png"},
+		"Marble Block Stair",
+		"Marble Block Slab",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("marble bricks", "es:marble_bricks",
+		{cracky = 1},
+		{"technic_marble_bricks.png"},
+		"Marble Brick Block Stair",
+		"Marble Brick Block Slab",
+		default.node_sound_stone_defaults())
 
 
 --Extreme Survival Stairs

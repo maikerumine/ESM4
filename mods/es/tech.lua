@@ -17,6 +17,8 @@ es = {}
 --Random craft ATM
 -- Jack 'O Lantern
 --Borrowed from TenPlus1's Farming Plus  Might change to original
+
+--[[
 minetest.register_node("es:punkin", {
 	description = "Punk 'O Lantern",
 	tiles = {"farming_pumpkin_top.png", "farming_pumpkin_top.png", "farming_pumpkin_side.png", "farming_pumpkin_side.png", "farming_pumpkin_side.png", "farming_pumpkin_face_off.png"},
@@ -42,31 +44,32 @@ minetest.register_node("es:punkin_on", {
 		minetest.set_node(pos, node)
 	end,
 })
-
-
+]]
+--[[
 --Technic stairs
-stairs.register_stair_and_slab("granite", "technic:granite",
+stairs.register_stair_and_slab("granite", "es:granite",
 		{cracky = 1},
 		{"technic_granite.png"},
 		"Granite Block Stair",
 		"Granite Block Slab",
 		default.node_sound_stone_defaults())
 
-stairs.register_stair_and_slab("marble", "technic:marble",
+stairs.register_stair_and_slab("marble", "es:marble",
 		{cracky = 1},
 		{"technic_marble.png"},
 		"Marble Block Stair",
 		"Marble Block Slab",
 		default.node_sound_stone_defaults())
 
-stairs.register_stair_and_slab("marble bricks", "technic:marble_bricks",
+stairs.register_stair_and_slab("marble bricks", "es:marble_bricks",
 		{cracky = 1},
 		{"technic_marble_bricks.png"},
 		"Marble Brick Block Stair",
 		"Marble Brick Block Slab",
 		default.node_sound_stone_defaults())
+]]
 
-
+--[[
 stairs.register_stair_and_slab("Brass Block", "technic:brass_block",
 		{cracky = 1},
 		{"technic_brass_block.png"},
@@ -80,3 +83,4 @@ stairs.register_stair_and_slab("Chromium Block", "technic:chromium_block",
 		"Chromuim Block Stair",
 		"Chromium Block Slab",
 		default.node_sound_stone_defaults())
+		]]
