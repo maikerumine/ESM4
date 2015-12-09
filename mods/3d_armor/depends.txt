@@ -1,5 +1,6 @@
 default
 inventory_plus?
 unified_inventory?
-es?
-
+fire?
+ethereal?
+bakedclay?
