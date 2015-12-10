@@ -86,7 +86,7 @@ minetest.register_node("seawrecks:ubootchest", {
 		inv:set_size("main", 8*4)
 meta:from_table({
 	inventory = {
-	main = {[1] = "default:gold_ingot 99", [2] = "default:apple 99", [3] = "default:diamond 99", [32] = ""}
+	main = {[1] = "default:gold_ingot 99", [2] = "default:mese_crystal 99", [3] = "default:diamond 99", [32] = ""}
 	},
 	fields = {
 	formspec = "size[8,9;]list[context;main;0,0;8,4;]list[current_player;main;0,5;8,4;]",
@@ -115,36 +115,27 @@ meta:from_table({
 
 
 -- WRECK GENERATION
+
+
 minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "seawrecks:woodship",
-	wherein        = "default:mud",
-	clust_scarcity = 32*32*32,
-	clust_num_ores = 1,
-	clust_size     = 12,
-	height_max     = 6,
-	height_min     = -31000,
-})
---[[
-minetest.register_ore({
-	ore_type       = "scatter",
-	ore            = "seawrecks:woodship",
-	wherein        = "default:air",
+	wherein        = "default:sand",
 	clust_scarcity = 30*30*30,
 	clust_num_ores = 1,
 	clust_size     = 12,
-	height_max     = 2,
+	height_max     = -4,
 	height_min     = -31000,
-})]]
+})
 
 minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "seawrecks:uboot",
-	wherein        = "default:mud",
+	wherein        = "default:dirt",
 	clust_scarcity = 30*30*30,
 	clust_num_ores = 1,
 	clust_size     = 12,
-	height_max     = 2,
+	height_max     = -8,
 	height_min     = -31000,
 })
 
@@ -197,11 +188,11 @@ chance = 1,
 action = function(pos, node, active_object_count, active_object_count_wider)
 local yp = {x = pos.x, y = pos.y + 3, z = pos.z}
 	if minetest.get_node(pos).name == "seawrecks:woodship" and 
-	(minetest.get_node(yp).name == "default:mud" or
+	(minetest.get_node(yp).name == "default:water_source" or
 	minetest.get_node(yp).name == "noairblocks:water_sourcex") then
-		minetest.add_node(pos, {name = "default:dry_dirt"})
+		minetest.add_node(pos, {name = "default:sand"})
 
-		pos.y = pos.y + 3
+		pos.y = pos.y + 1
 		pos.x = pos.x - 6
 
 		for a = 1, 11 do
@@ -374,9 +365,9 @@ chance = 1,
 action = function(pos, node, active_object_count, active_object_count_wider)
 local yp = {x = pos.x, y = pos.y + 8, z = pos.z}
 	if minetest.get_node(pos).name == "seawrecks:uboot" and 
-	(minetest.get_node(yp).name == "default:mud" or
+	(minetest.get_node(yp).name == "default:water_source" or
 	minetest.get_node(yp).name == "noairblocks:water_sourcex") then
-		minetest.add_node(pos, {name = "default:dry_dirt"})
+		minetest.add_node(pos, {name = "default:dirt"})
 
 		pos.y = pos.y + 1
 		pos.x = pos.x - 15
