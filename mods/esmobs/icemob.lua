@@ -11,7 +11,7 @@
 --dofile(minetest.get_modpath("esmobs").."/api.lua")
 -- icemons:register_spawn(name, description, nodes, max_light, min_light, chance, active_object_count, max_height)
 
-bp:register_spawn("esmobs:icemon", {"default:ice"}, 8, -1, 4000, 3, 31000)
+bp:register_spawn("esmobs:icemon", {"default:ice"}, 8, -1, 14000, 1, 310010)
 bp:register_mob("esmobs:icemon", {
 	type = "monster",
 	hp_min = 80,
@@ -57,7 +57,7 @@ bp:register_mob("esmobs:icemon", {
 
 })
 
-bp:register_spawn("esmobs:snowmon", {"default:snow","default:snowblock","default:snow_block", "default:dirt_with_snow"}, 5, -1, 4000, 2, 31000)
+bp:register_spawn("esmobs:snowmon", {"default:snow","default:snowblock","default:snow_block", "default:dirt_with_snow"}, 5, -1, 14000, 1, 31000)
 bp:register_mob("esmobs:snowmon", {
 	type = "monster",
 	hp_min = 69,
@@ -103,7 +103,7 @@ bp:register_mob("esmobs:snowmon", {
 
 })
 
-bp:register_spawn("esmobs:watermon", {"default:water_source","default:water_flowing"}, 5, -1, 9000, 1, -120)
+bp:register_spawn("esmobs:watermon", {"default:water_source","default:water_flowing"}, 5, -1, 14000, 1, -120)
 bp:register_mob("esmobs:watermon", {
 	type = "monster",
 	hp_min = 35,

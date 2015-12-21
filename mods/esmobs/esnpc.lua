@@ -10,7 +10,7 @@
 
 bp.npc_drops = { "default:pick_steel", "esmobs:meat", "default:sword_steel", "default:shovel_steel", "farming:bread", "default:wood" }--Added 20151121
 
-bp:register_spawn("esmobs:Sam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 9000, 1, 31000)
+bp:register_spawn("esmobs:Sam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 14000, 1, 31000)
 bp:register_mob("esmobs:Sam", {
 	type = "npc",
 	hp_min = 25,
@@ -148,7 +148,7 @@ bp:register_mob("esmobs:Sam", {
 	step = 1,
 })
 
-bp:register_spawn("esmobs:John", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 9000, 1, 31000)
+bp:register_spawn("esmobs:John", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 14000, 1, 31000)
 bp:register_mob("esmobs:John", {
 	type = "npc",
 	hp_min = 27,
@@ -286,7 +286,7 @@ bp:register_mob("esmobs:John", {
 	step = 1,
 })
 
-bp:register_spawn("esmobs:Janette", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 9000, 1, 31000)
+bp:register_spawn("esmobs:Janette", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 14000, 1, 31000)
 bp:register_mob("esmobs:Janette", {
 	type = "npc",
 	hp_min = 13,
@@ -430,7 +430,7 @@ bp:register_mob("esmobs:Janette", {
 
 
 
-bp:register_spawn("esmobs:Crybaby", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 9000, 1, 31000)
+bp:register_spawn("esmobs:Crybaby", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 14000, 1, 31000)
 bp:register_mob("esmobs:Crybaby", {
 	type = "npc",
 	hp_min = 27,
@@ -569,7 +569,7 @@ bp:register_mob("esmobs:Crybaby", {
 	step = 1,
 
 })
-bp:register_spawn("esmobs:SepiaSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 9000, 1, 31000)
+bp:register_spawn("esmobs:SepiaSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 14000, 1, 31000)
 bp:register_mob("esmobs:SepiaSam", {
 	type = "npc",
 	hp_min = 47,
@@ -707,7 +707,7 @@ bp:register_mob("esmobs:SepiaSam", {
 	step = 1,
 })
 
-bp:register_spawn("esmobs:OGSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 9000, 1, 31000)
+bp:register_spawn("esmobs:OGSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 14000, 1, 31000)
 bp:register_mob("esmobs:OGSam", {
 	type = "npc",
 	hp_min = 37,
@@ -850,7 +850,7 @@ bp:register_mob("esmobs:OGSam", {
 
 })
 
-bp:register_spawn("esmobs:Vanessa", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 9000, 1, 31000)
+bp:register_spawn("esmobs:Vanessa", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 14000, 1, 31000)
 bp:register_mob("esmobs:Vanessa", {
 	type = "npc",
 	hp_min = 28,
@@ -989,7 +989,7 @@ bp:register_mob("esmobs:Vanessa", {
 
 })
 
-bp:register_spawn("esmobs:FemaleSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 9000, 1, -10)
+bp:register_spawn("esmobs:FemaleSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 14000, 1, -10)
 bp:register_mob("esmobs:FemaleSam", {
 	type = "npc",
 	hp_min = 92,
@@ -1128,7 +1128,7 @@ bp:register_mob("esmobs:FemaleSam", {
 
 })
 
-bp:register_spawn("esmobs:Battleboy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 15, -1,9000, 1, -50)
+bp:register_spawn("esmobs:Battleboy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 15, -1,14000, 1, -50)
 bp:register_mob("esmobs:Battleboy", {
 	type = "npc",
 	hp_min = 157,

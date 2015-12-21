@@ -1,4 +1,4 @@
-
+--[[
 moresnow.throw_snowball = function( pos, dir, player )
 	local snowball_GRAVITY=9
 	local snowball_VELOCITY=19
@@ -22,7 +22,7 @@ moresnow.throw_snowball = function( pos, dir, player )
 	obj:setvelocity({x=dir.x*snowball_VELOCITY, y=dir.y*snowball_VELOCITY, z=dir.z*snowball_VELOCITY})
 	obj:setacceleration({x=dir.x*-3, y=-snowball_GRAVITY, z=dir.z*-3})
 end
-
+]]
 
 -- let a row of snow fall
 moresnow.snow_at_one_place = function( pos )
@@ -78,7 +78,7 @@ moresnow.snow_cannon_fire = function( pos )
 	end
 	-- consume one water
 	meta:set_int( 'water', water-1 );
-	
+
 	local mode = meta:get_int( 'mode' );
 	if( not( mode )) then
 		mode = 1;

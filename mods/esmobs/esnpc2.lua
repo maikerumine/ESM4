@@ -11,7 +11,7 @@
 
 bp.npc_drops = { "default:pick_mese", "esmobs:meat", "es:sword_emerald", "es:ruby_crystal", "farming:bread", "default:wood" }--Added 20151121
 
-bp:register_spawn("esmobs:badplayer32", {"default:obsidian","es:infiniumblock","es:stone_with_infinium"}, 7, -1, 9000, 1, -450)
+bp:register_spawn("esmobs:badplayer32", {"default:obsidian","es:infiniumblock","es:stone_with_infinium"}, 7, -1, 14000, 1, -450)
 bp:register_mob("esmobs:badplayer32", {
 	type = "monster",
 	hp_min = 177,
@@ -147,7 +147,7 @@ bp:register_mob("esmobs:badplayer32", {
 })
 
 
-bp:register_spawn("esmobs:Candy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 9000, 1, 31000)
+bp:register_spawn("esmobs:Candy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 14000, 1, 31000)
 bp:register_mob("esmobs:Candy", {
 	type = "npc",
 	hp_min = 125,
@@ -285,7 +285,7 @@ bp:register_mob("esmobs:Candy", {
 	step = 1,
 })
 
-bp:register_spawn("esmobs:Infiniumman", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 9000, 1, 31000)
+bp:register_spawn("esmobs:Infiniumman", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 14000, 1, 31000)
 bp:register_mob("esmobs:Infiniumman", {
 	type = "npc",
 	hp_min = 25,
@@ -423,7 +423,7 @@ bp:register_mob("esmobs:Infiniumman", {
 	step = 1,
 })
 --TEXTURE BY: http://minetest.fensta.bplaced.net/#author=bajanhgk
-bp:register_spawn("esmobs:Maikerumine", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 1, 9000, 1, 31000)
+bp:register_spawn("esmobs:Maikerumine", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 1, 14000, 1, 31000)
 bp:register_mob("esmobs:Maikerumine", {
 	type = "npc",
 	hp_min = 95,

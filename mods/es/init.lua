@@ -68,3 +68,31 @@ end
 
 -- Map Generation (CURRENTLY YOU NEED TO REPLACE THE DEFAULT WITH the one that says stone IF YOU WANT AN ALL STONE WORLD.)
 
+
+
+
+--Fixer's code--v
+-- Time to shut down server.
+-- Default is twice a day: at 06:05 and 18:05
+local H, M = 06, 05
+local Z = 18
+
+-- Day to shut down server.
+-- Default is daily shutdown
+-- 1=Sunday, ..., 7=Saturday, nil=Shutdown daily
+local D = nil
+
+local timer = 0
+minetest.register_globalstep(function(dtime)
+   timer = timer + dtime
+   if timer < 1 then return end
+   timer = 0
+   local t = os.date("*t")
+   if ((t.hour == H or t.hour == Z) and (t.min == M) and (t.sec <= 2)
+         and ((D == nil) or (t.wday == D))) then
+      minetest.chat_send_all("Scheduled shutdown.  6 and 6 Eastern Time Zone "
+            .."Please come back in a minute.")
+      minetest.after(2, minetest.request_shutdown)
+   end
+end)
+

@@ -15,8 +15,8 @@
 
 
 --Alias                      "old"--->"new"
---minetest.register_alias("meru:destone", "default:desert_stone")
---minetest.register_alias("meru:stone", "default:sandstone")
+minetest.register_alias("meru:destone", "default:desert_stone")
+minetest.register_alias("meru:stone", "default:sandstone")
 minetest.register_alias("default:desert_stone_with_iron", "es:desert_stone_with_iron")
 minetest.register_alias("default:desert_stone_with_gold", "es:desert_stone_with_gold")
 minetest.register_alias("default:desert_stone_with_coal", "es:desert_stone_with_coal")

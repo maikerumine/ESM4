@@ -12,9 +12,9 @@
 
 bp.npc_drops = { "default:pick_steel", "esmobs:meat", "default:sword_steel", "default:shovel_steel", "farming:bread", "default:wood" }--Added 20151121
 
-bp:register_spawn("esmobs:Mr_Black", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble"}, 14, -1, 8000, 1, 30)
-bp:register_spawn("esmobs:Mr_White", {"default:dirt_with_grass", "ethereal:green_dirt","default:grass","default:stonebrick","default:cobble"}, 14, -1, 8000, 1, 30)
-bp:register_spawn("esmobs:Mr_Pink", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble"}, 14, -1, 8000, 1, 30)
+bp:register_spawn("esmobs:Mr_Black", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble"}, 14, -1, 14000, 1, 30)
+bp:register_spawn("esmobs:Mr_White", {"default:dirt_with_grass", "ethereal:green_dirt","default:grass","default:stonebrick","default:cobble"}, 14, -1, 14000, 1, 30)
+bp:register_spawn("esmobs:Mr_Pink", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble"}, 14, -1, 14000, 1, 30)
 
 bp:register_mob("esmobs:Mr_White", {
 	type = "npc",

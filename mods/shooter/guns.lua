@@ -1,4 +1,4 @@
-shooter:register_weapon("shooter:pistol", {
+--[[shooter:register_weapon("shooter:pistol", {
 	description = "Pistol",
 	inventory_image = "shooter_pistol.png",
 	rounds = 200,
@@ -10,7 +10,7 @@ shooter:register_weapon("shooter:pistol", {
 		sound = "shooter_pistol",
 		particle = "shooter_cap.png",
 	},
-})
+})]]
 
 shooter:register_weapon("shooter:rifle", {
 	description = "Rifle",
@@ -25,7 +25,7 @@ shooter:register_weapon("shooter:rifle", {
 		particle = "shooter_bullet.png",
 	},
 })
-
+--[[
 shooter:register_weapon("shooter:shotgun", {
 	description = "Shotgun",
 	inventory_image = "shooter_shotgun.png",
@@ -54,20 +54,20 @@ shooter:register_weapon("shooter:machine_gun", {
 		particle = "shooter_cap.png",
 	},
 })
-
+]]
 minetest.register_craftitem("shooter:ammo", {
 	description = "Ammo pack",
 	inventory_image = "shooter_ammo.png",
 })
 
 if SHOOTER_ENABLE_CRAFTING == true then
-	minetest.register_craft({
+--[[	minetest.register_craft({
 		output = "shooter:pistol 1 65535",
 		recipe = {
 			{"default:steel_ingot", "default:steel_ingot"},
 			{"", "default:mese_crystal"},
 		},
-	})
+	})]]
 	minetest.register_craft({
 		output = "shooter:rifle 1 65535",
 		recipe = {
@@ -76,7 +76,7 @@ if SHOOTER_ENABLE_CRAFTING == true then
 			{"", "default:mese_crystal", "default:bronze_ingot"},
 		},
 	})
-	minetest.register_craft({
+--[[	minetest.register_craft({
 		output = "shooter:shotgun 1 65535",
 		recipe = {
 			{"default:steel_ingot", "", ""},
@@ -91,7 +91,7 @@ if SHOOTER_ENABLE_CRAFTING == true then
 			{"", "default:bronze_ingot", "default:mese_crystal"},
 			{"", "default:bronze_ingot", ""},
 		},
-	})
+	})]]
 	minetest.register_craft({
 		output = "shooter:ammo",
 		recipe = {

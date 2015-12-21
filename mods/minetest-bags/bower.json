@@ -1,0 +1,24 @@
+{
+  "name": "bags",
+  "homepage": "https://cornernote.github.io/minetest-bags/",
+  "description": "Attach bags to your inventory to increase item storage capacity.",
+  "screenshots": [
+    "https://cornernote.github.io/minetest-bags/img/screenshot.png"
+  ],
+  "keywords": [
+    "bags",
+    "inventory",
+    "player",
+    "formspec"
+  ],
+  "authors": [
+    "cornernote"
+  ],
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "inventory_plus": "~1.0.0"
+  },
+  "ignore": [
+    "**/.*"
+  ]
+}

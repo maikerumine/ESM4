@@ -10,8 +10,8 @@
 bp.npc_drops = { "default:pick_steel", "esmobs:meat", "default:sword_steel", "default:shovel_steel", "farming:bread", "default:wood" }--Added 20151121
 
 
-bp:register_spawn("esmobs:Wilbert", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble"}, 11, -1, 9000, 1, 31000)
-bp:register_spawn("esmobs:Thelma", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble"}, 11, -1, 9000, 1, 31000)
+bp:register_spawn("esmobs:Wilbert", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble"}, 11, -1, 14000, 1, 31000)
+bp:register_spawn("esmobs:Thelma", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble"}, 11, -1, 14000, 1, 31000)
 
 
 bp:register_mob("esmobs:Wilbert", {

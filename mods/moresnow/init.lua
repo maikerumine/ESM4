@@ -12,10 +12,10 @@ moresnow.enable_autumnleaves = true
 moresnow.wool_dyes           =  {"white", "grey", "black", "red", "yellow", "green", "cyan", "blue",
                                 "magenta", "orange", "violet", "brown", "pink", "dark_grey", "dark_green"};
 -- the snow cannon allows to create snow
-moresnow.enable_snow_cannon  = true
+moresnow.enable_snow_cannon  = false
 -- with this set, the snow cannon can *shoot* snowballs - which will fly a long way;
 -- on servers, set this to false
-moresnow.crazy_mode          = true 
+moresnow.crazy_mode          = false
 -- end of configuration
 --------------------------------------------------------------------------------
 

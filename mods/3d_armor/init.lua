@@ -109,7 +109,7 @@ if ARMOR_MATERIALS.bronze then
 		wear = 0,
 	})
 end
---[[
+
 if ARMOR_MATERIALS.diamond then
 	minetest.register_tool("3d_armor:helmet_diamond", {
 		description = "Diamond Helmet",
@@ -136,7 +136,7 @@ if ARMOR_MATERIALS.diamond then
 		wear = 0,
 	})
 end
-]]
+
 if ARMOR_MATERIALS.gold then
 	minetest.register_tool("3d_armor:helmet_gold", {
 		description = "Gold Helmet",
@@ -163,7 +163,7 @@ if ARMOR_MATERIALS.gold then
 		wear = 0,
 	})
 end
---[[
+
 if ARMOR_MATERIALS.mithril then
 	minetest.register_tool("3d_armor:helmet_mithril", {
 		description = "Mithril Helmet",
@@ -217,7 +217,7 @@ if ARMOR_MATERIALS.crystal then
 		wear = 0,
 	})
 end
-]]
+
 for k, v in pairs(ARMOR_MATERIALS) do
 	minetest.register_craft({
 		output = "3d_armor:helmet_"..k,

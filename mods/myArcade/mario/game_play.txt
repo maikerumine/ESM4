@@ -1,0 +1,13 @@
+The idea is to get all the coins. The turtles will walk around and if they touch you you die. 
+
+The turtles would only need to walk on the x axis. It starts with 2 turtles. The come out of the pipes at the top. One from each pipe. After 45 seconds? 2 more come out. A total of 4. At the bottom I placed a portal to take them to the top again so they will always be in the game.
+
+After all the coins are collected the game advances to the next level. Coins reset and turtles start over. Turtles go a little faster as the levels advance. 
+
+When you right click on the start block the jump changes to make you jump high enough.
+
+The M block in the game is an exit button. It will reset jump to normal.
+
+Not exactly like the original Mario bros but it might be a fun game.
+
+I did the basic set up but not sure how it would work with the api. I was studying your code but I still need to learn more to understand it.
