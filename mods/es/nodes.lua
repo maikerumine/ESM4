@@ -217,7 +217,7 @@ minetest.register_node("es:hgglass", {
 	sunlight_propagates = true,
 	is_ground_content = false,
 	groups = {immortal=1,cracky=0,},
-	sounds = default.node_sound_defaults(),
+	sounds = default.node_sound_glass_defaults(),
 })
 
 --A simple way to store your cookable Mese, and it gives off light!
@@ -229,6 +229,40 @@ minetest.register_node("es:messymese", {
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
 })
+
+minetest.register_node("es:what", {
+	description = "The What Block - Dig for random gift",
+	drawtype = "glasslike_framed_optional^bubble.png",
+	tiles = {"default_glass.png^bubble.png", "default_glass_detail.png^bubble.png"},
+	inventory_image = minetest.inventorycube("default_glass.png"),
+	paramtype = "light",
+	sunlight_propagates = true,
+	is_ground_content = false,
+	groups = {crumbly=3,},
+	drop = {
+		max_items = 2,
+		items = {
+			{items = {'es:what'}, rarity = 80},
+			{items = {'es:sword_aikerum'}, rarity = 50},
+			{items = {'es:sword_ruby'}, rarity = 40},
+			{items = {'es:sword_emerald'}, rarity = 30},
+			{items = {'es:pick_aikerum'}, rarity = 50},
+			{items = {'es:pick_ruby'}, rarity = 40},
+			{items = {'es:pick_emerald'}, rarity = 30},
+			{items = {'farming:bread 20'}, rarity = 3},
+			{items = {'default:cobble 10'}, rarity = 3},
+			{items = {'default:gold_lump 10'}, rarity = 10},
+			{items = {'default:iron_lump 10'}, rarity = 5},
+			{items = {'default:apple 10'}, rarity = 5},
+			{items = {'default:coal_lump 10'}, rarity = 1},
+			{items = {'es:depleted_uranium_ingot 3'}}
+		}
+	},
+	sounds = default.node_sound_glass_defaults(),
+})
+
+
+
 
 --Default addons as they should be.  I changed ore generation to keep unique for compatibility.
 minetest.register_node("es:stone_with_mese", {

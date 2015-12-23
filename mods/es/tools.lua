@@ -59,7 +59,7 @@ minetest.register_tool("es:pick_emerald", {
 	description = "Extreme Survival Emerald Pickaxe",
 	inventory_image = "es_tool_emeraldpick.png",
 	tool_capabilities = {
-		full_punch_interval = 1.2,
+		full_punch_interval = 1.0,
 		max_drop_level=3,
 		groupcaps={
 			cracky = {times={[1]=2.10, [2]=1.30, [3]=0.70}, uses=50, maxlevel=3},
@@ -93,6 +93,91 @@ minetest.register_tool("es:pick_aikerum", {
 		damage_groups = {fleshy=27},
 	},
 })
+
+
+--AXES
+minetest.register_tool("es:axe_emerald", {
+	description = "Extreme Survival Emerald Axe",
+	inventory_image = "es_tool_emeraldaxe.png",
+	tool_capabilities = {
+		full_punch_interval = 1.0,
+		max_drop_level=2,
+		groupcaps={
+			choppy = {times={[2]=3.00, [3]=1.60}, uses=50, maxlevel=2},
+		},
+		damage_groups = {fleshy=12},
+	},
+})
+minetest.register_tool("es:axe_ruby", {
+	description = "Extreme Survival Ruby Axe",
+	inventory_image = "es_tool_rubyaxe.png",
+	tool_capabilities = {
+		full_punch_interval = 0.7,
+		max_drop_level=3,
+		groupcaps={
+			choppy={times={[1]=3.00, [2]=2.00, [3]=1.30}, uses=60, maxlevel=2},
+		},
+		damage_groups = {fleshy=18},
+	},
+})
+minetest.register_tool("es:axe_aikerum", {
+	description = "Extreme Survival Aikerum Axe",
+	inventory_image = "es_tool_aikerumaxe.png",
+	tool_capabilities = {
+		full_punch_interval = 0.25,
+		max_drop_level=4,
+		groupcaps={
+			choppy = {times={[1]=1.10, [2]=0.50, [3]=0.30}, uses=80, maxlevel=3},
+		},
+		damage_groups = {fleshy=24},
+	},
+})
+	
+	
+--SHOVELS
+minetest.register_tool("es:shovel_emerald", {
+	description = "Extreme Survival Emerald Shovel",
+	inventory_image = "es_tool_emeraldshovel.png",
+	wield_image = "es_tool_emeraldshovel.png^[transformR90",
+	tool_capabilities = {
+		full_punch_interval = 1.0,
+		max_drop_level=2,
+		groupcaps={
+			crumbly = {times={[1]=3.00, [2]=1.60, [3]=0.60}, uses=50, maxlevel=2},
+		},
+		damage_groups = {fleshy=12},
+	},
+})
+minetest.register_tool("es:shovel_ruby", {
+	description = "Extreme Survival Ruby Shovel",
+	inventory_image = "es_tool_rubyshovel.png",
+	wield_image = "es_tool_rubyshovel.png^[transformR90",
+	tool_capabilities = {
+		full_punch_interval = 0.7,
+		max_drop_level=3,
+		groupcaps={
+			crumbly = {times={[1]=1.80, [2]=1.20, [3]=0.50}, uses=60, maxlevel=2},
+		},
+		damage_groups = {fleshy=23},
+	},
+})
+minetest.register_tool("es:shovel_aikerum", {
+	description = "Extreme Survival Aikerum Shovel",
+	inventory_image = "es_tool_aikerumshovel.png",
+	wield_image = "es_tool_aikerumshovel.png^[transformR90",
+	tool_capabilities = {
+		full_punch_interval = 0.25,
+		max_drop_level=4,
+		groupcaps={
+			crumbly = {times={[1]=1.10, [2]=0.50, [3]=0.30}, uses=80, maxlevel=3},
+		},
+		damage_groups = {fleshy=24},
+	},
+})
+
+
+
+
 
 --[[
 --ARMOR_MOD_NAME = minetest.get_current_modname()

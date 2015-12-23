@@ -84,7 +84,7 @@ minetest.register_craft({
 	}
 })
 
-
+--[[
 --TECHNIC DEPENDANT
 --Comment out if not used technic
 minetest.register_craft({
@@ -138,30 +138,45 @@ minetest.register_craft({
 		{"", "es:punkin", ""},
 	}
 })
-
+]]
+minetest.register_craftitem("es:depleted_uranium_ingot", {
+	description = "Depleted uranium",
+	inventory_image = "technic_uranium_ingot.png",
+})
+minetest.register_craft({
+	output = 'es:boneblock',
+	recipe = {
+	{"bones:bones", "bones:bones", "bones:bones"},
+	{"bones:bones", "default:steelblock", "bones:bones"},
+	{"bones:bones", "bones:bones", "bones:bones"},
+	},
+})
 
 minetest.register_craft({
-output = 'es:boneblock',
-recipe = {
-{"bones:bones", "bones:bones", "bones:bones"},
-{"bones:bones", "default:steelblock", "bones:bones"},
-{"bones:bones", "bones:bones", "bones:bones"},
-},
+	output = "es:what",
+	recipe = {
+	{"es:depleted_uranium_ingot","es:depleted_uranium_ingot","es:depleted_uranium_ingot"},
+	{"es:depleted_uranium_ingot","es:depleted_uranium_ingot","es:depleted_uranium_ingot"},
+	{"es:depleted_uranium_ingot","es:depleted_uranium_ingot","es:depleted_uranium_ingot"},
+	}
 })
+
+
+
 --END TECHNIC
 
 
 
 
 --ES HELPFUL CRAFTS
---[[minetest.register_craft({
+minetest.register_craft({
 	output = 'default:ice',
 	recipe = {
 		{"default:snowblock", "default:snowblock", "default:snowblock"},
 		{"default:snowblock", "default:snowblock", "default:snowblock"},
 		{"default:snowblock", "default:snowblock", "default:snowblock"},
 	},
-})]]
+})
 
 minetest.register_craft({
 	output = 'default:dirt',
@@ -320,6 +335,7 @@ minetest.register_craft({
 
 
 --Weapon &Tool Crafting:
+--SWORDS
 minetest.register_craft({
 	output = 'es:sword_emerald',
 	recipe = {
@@ -347,6 +363,7 @@ minetest.register_craft({
 	}
 })
 
+--PICKS
 minetest.register_craft({
 	output = 'es:pick_emerald',
 	recipe = {
@@ -383,6 +400,61 @@ minetest.register_craft({
 	}
 })
 
+--AXES
+minetest.register_craft({
+	output = 'es:axe_emerald',
+	recipe = {
+		{'es:emerald_crystal', 'es:emerald_crystal', ''},
+		{'es:emerald_crystal', 'default:steel_ingot', ''},
+		{'', 'default:steel_ingot', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'es:axe_ruby',
+	recipe = {
+		{'es:ruby_crystal', 'es:ruby_crystal', ''},
+		{'es:ruby_crystal', 'default:steel_ingot', ''},
+		{'', 'default:steel_ingot', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'es:axe_aikerum',
+	recipe = {
+		{'es:aikerum_crystal', 'es:aikerum_crystal', ''},
+		{'es:aikerum_crystal', 'default:steel_ingot', ''},
+		{'', 'default:steel_ingot', ''},
+	}
+})
+
+--SHOVELS
+minetest.register_craft({
+	output = 'es:shovel_emerald',
+	recipe = {
+		{'', 'es:emerald_crystal', ''},
+		{'', 'default:steel_ingot', ''},
+		{'', 'default:steel_ingot', ''},
+	}
+})
+minetest.register_craft({
+	output = 'es:shovel_ruby',
+	recipe = {
+		{'', 'es:ruby_crystal', ''},
+		{'', 'default:steel_ingot', ''},
+		{'', 'default:steel_ingot', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'es:shovel_aikerum',
+	recipe = {
+		{'', 'es:aikerum_crystal', ''},
+		{'', 'default:steel_ingot', ''},
+		{'', 'default:steel_ingot', ''},
+	}
+})
+
 
 
 --Default override Cooking
@@ -394,10 +466,11 @@ minetest.register_craft({
 
 --rnd code
 -- 7*24*60*60 = 604800 real time 1 week burn time
+--Changed to 3 minutes 20151223
 minetest.register_craft({
 	type = "fuel",
 	recipe = "es:depleted_uranium_ingot",
-	burntime = 604800,
+	burntime = 180,
 })
 
 minetest.register_craft({

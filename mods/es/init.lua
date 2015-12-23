@@ -39,6 +39,7 @@ dofile(modpath.."/nodes.lua")
 dofile(modpath.."/oregen.lua")
 -- Tools
 dofile(modpath.."/tools.lua")
+--dofile(modpath.."/hoes.lua")
 
 -- Climate
 --dofile(minetest.get_modpath("es").."/freeze.lua")
