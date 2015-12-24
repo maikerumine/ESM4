@@ -35,7 +35,7 @@ minetest.register_node( "es:granite", {
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
-}) 
+})
 
 minetest.register_node( "es:marble", {
 	description = "Marble",
@@ -43,7 +43,7 @@ minetest.register_node( "es:marble", {
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
-}) 
+})
 
 minetest.register_node( "es:marble_bricks", {
 	description = "Marble Bricks",
@@ -207,7 +207,7 @@ minetest.register_node("es:punkin_on", {
 	end,
 })
 ]]
---INPERVIOUS GLASS  CANNOT BREAK- Great for prison walls.
+--INPERVIOUS NODES  CANNOT BREAK- Great for prison walls.
 minetest.register_node("es:hgglass", {
 	description = "High Density Glass",
 	drawtype = "glasslike_framed_optional",
@@ -216,9 +216,50 @@ minetest.register_node("es:hgglass", {
 	paramtype = "light",
 	sunlight_propagates = true,
 	is_ground_content = false,
-	groups = {immortal=1,cracky=0,},
+	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
 	sounds = default.node_sound_glass_defaults(),
 })
+
+minetest.register_node("es:steelblock", {
+	description = "High Density Steel Block",
+	tiles = {"default_steel_block.png"},
+	is_ground_content = false,
+	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("es:stoneblock", {
+	description = "High Density Stone Block",
+	tiles = {"default_stone.png"},
+	is_ground_content = false,
+	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("es:sandstonebrick", {
+	description = "High Density Sandstone Brick",
+	tiles = {"default_sandstone_brick.png"},
+	is_ground_content = false,
+	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("es:stonebrick", {
+	description = "High Density Stone Brick",
+	tiles = {"default_stone_brick.png"},
+	is_ground_content = false,
+	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("es:junglewood", {
+	description = "High Density Junglewood Planks",
+	tiles = {"default_junglewood.png"},
+	is_ground_content = false,
+	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
+	sounds = default.node_sound_wood_defaults(),
+})
+
 
 --A simple way to store your cookable Mese, and it gives off light!
 minetest.register_node("es:messymese", {
@@ -400,7 +441,7 @@ stairs.register_stair_and_slab("Dirt", "default:dirt",
 		"Dirt Block Slab",
 		default.node_sound_stone_defaults())
 
-	
+
 if minetest.get_modpath("moreblocks") and enable_stairsplus then
 register_stair_slab_panel_micro("es", "emeraldblock", "es:emeraldblock",
 {cracky=3},
