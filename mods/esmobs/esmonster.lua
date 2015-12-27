@@ -294,7 +294,7 @@ bp:register_mob("esmobs:oerkkii", {
 })
 
 bp:register_spawn("esmobs:oerkkii", {"default:stone"}, 5, 0, 14000, 1, -10)
-bp:register_spawn("esmobs:oerkkii", "esmobs:cursed_stone", 4, -1, 2, 40, 500, -500)
+bp:register_spawn("esmobs:oerkkii", "esmobs:cursed_stone", 4, -1, 2, 20, 500, -500)
 
 minetest.register_node("esmobs:cursed_stone", {
 	description = "Cursed stone",
@@ -380,18 +380,18 @@ bp:register_mob("esmobs:herobrines_bloody_ghost", {
 	view_range = 19,
 	walk_velocity = 1.8,
 	run_velocity = 3.6,
-	damage = 4,
+	damage = 10,
 	drops = {
 		{name = "default:mese",
 		chance = 1,
-		min = 1,
-		max = 3,},
+		min = 0,
+		max = 2,},
 	},
 	armor = 80,
 	drawtype = "front",
-	water_damage = 10,
+	water_damage = 210,
 	lava_damage = 50,
-	light_damage = 0,
+	light_damage = 150,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -408,4 +408,4 @@ bp:register_mob("esmobs:herobrines_bloody_ghost", {
 	}
 })
 bp:register_spawn("esmobs:herobrines_bloody_ghost", {"default:stone","default:desert_sand"}, 6, -1, 12000, 1, 10)
-bp:register_spawn("esmobs:herobrines_bloody_ghost", "esmobs:cursed_stone", 4, -1, 2, 40, 500, -500)
+bp:register_spawn("esmobs:herobrines_bloody_ghost", "esmobs:cursed_stone", 4, -1, 2, 1, 500, -500)

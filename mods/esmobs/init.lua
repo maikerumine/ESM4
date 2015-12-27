@@ -16,6 +16,7 @@ dofile(minetest.get_modpath("esmobs").."/dirt.lua")
 dofile(minetest.get_modpath("esmobs").."/icemob.lua")
 dofile(minetest.get_modpath("esmobs").."/nicemob.lua")
 dofile(minetest.get_modpath("esmobs").."/crossfire.lua")
+dofile(minetest.get_modpath("esmobs").."/bloco.lua")
 
 --dofile(minetest.get_modpath("esmobs").."/spawner.lua")
 

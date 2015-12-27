@@ -104,6 +104,9 @@ SHOOTER_ENTITIES = {
 	"esmobs:goodnpc",
 	"esmobs:badnpc",
 	"esmobs:chickoboo",
+	"esmobs:herobrines_bloody_ghost",
+	"bloco:bloco",
+	"bloco:blocod",
 }
 
 local singleplayer = minetest.is_singleplayer()
