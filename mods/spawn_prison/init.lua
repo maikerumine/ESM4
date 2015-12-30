@@ -1,6 +1,6 @@
 -- rnd : limit usage of spawn once per 15 min = 15*60 s = 900 s
 local spawn_limit = {};
-local spawn_limit_max = 900; -- how much time must elapse to be able to use spawn again
+local spawn_limit_max = 180; -- how much time must elapse to be able to use spawn again
 
 
 spawn_prison = {}

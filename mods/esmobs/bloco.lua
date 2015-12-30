@@ -1,10 +1,4 @@
---BLOCO from Not so simple mobs: https://forum.minetest.net/viewtopic.php?f=11&t=11813
---Created by:   NPX team
---License:
--- Code: GPL v3
--- Textures, models and sounds: CC BY-SA
-
-bp:spawn_specific("esmobs:bloco", {"default:stone"}, {"default:stone"}, 0, 20, 30, 12000, 3, -31000, -20)
+--bp:spawn_specific("esmobs:bloco", {"default:stone"}, {"default:stone"}, 0, 20, 30, 12000, 3, -31000, -20)
 bp:register_mob("esmobs:bloco", {
 	type = "monster",
 	hp_max = 15,
@@ -55,7 +49,7 @@ bp:register_mob("esmobs:bloco", {
 	}
 })
 
-bp:spawn_specific("esmobs:blocod", {"default:dirt"}, {"default:dirt_with_grass"}, 3, 20, 30, 15000, 3, -31000, 20)
+--bp:spawn_specific("esmobs:blocod", {"default:dirt"}, {"default:dirt_with_grass"}, 3, 20, 30, 15000, 3, -31000, 20)
 bp:register_mob("esmobs:blocod", {
 	type = "monster",
 	hp_max = 15,

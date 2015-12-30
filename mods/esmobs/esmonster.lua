@@ -294,7 +294,7 @@ bp:register_mob("esmobs:oerkkii", {
 })
 
 bp:register_spawn("esmobs:oerkkii", {"default:stone"}, 5, 0, 14000, 1, -10)
-bp:register_spawn("esmobs:oerkkii", "esmobs:cursed_stone", 4, -1, 2, 20, 500, -500)
+--bp:register_spawn("esmobs:oerkkii", "esmobs:cursed_stone", 4, -1, 2, 20, 500, -500)
 
 minetest.register_node("esmobs:cursed_stone", {
 	description = "Cursed stone",
@@ -408,4 +408,4 @@ bp:register_mob("esmobs:herobrines_bloody_ghost", {
 	}
 })
 bp:register_spawn("esmobs:herobrines_bloody_ghost", {"default:stone","default:desert_sand"}, 6, -1, 12000, 1, 10)
-bp:register_spawn("esmobs:herobrines_bloody_ghost", "esmobs:cursed_stone", 4, -1, 2, 1, 500, -500)
+--bp:register_spawn("esmobs:herobrines_bloody_ghost", "esmobs:cursed_stone", 4, -1, 2, 1, 500, -500)

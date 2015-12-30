@@ -22,8 +22,8 @@ function bp:register_mob(name, def)
 		on_die = def.on_die,
 		jump_height = def.jump_height or 6,
 		jump_chance = def.jump_chance or 0,
-		--rotate = def.rotate or 0, -- 0=front, 1.5=side, 3.0=back, 4.5=side2
-		rotate = math.rad(def.rotate or 0), --  0=front, 90=side, 180=back, 270=side2
+		rotate = def.rotate or 0, -- 0=front, 1.5=side, 3.0=back, 4.5=side2
+		--rotate = math.rad(def.rotate or 0), --  0=front, 90=side, 180=back, 270=side2
 		lifetimer = def.lifetimer or 180,
 		hp_min = def.hp_min or 9,
 		hp_max = def.hp_max or 90,
