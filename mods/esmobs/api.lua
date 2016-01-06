@@ -1,5 +1,5 @@
 -- Mobs Api (26th April 2015) By TenPlus1
---REVISED 20151128 maikerumine for esmobs
+--REVISED 20160106 maikerumine for esmobs
 bp = {}
 bp.mod = "redo"
 
@@ -692,6 +692,7 @@ function bp:register_mob(name, def)
 
 
 			-- exploding mobs
+
 			elseif self.state == "attack" and self.attack_type == "explode" then
 				if not self.attack.player or not self.attack.player:is_player() then
 					self.state = "stand"
@@ -764,7 +765,7 @@ function bp:register_mob(name, def)
 						local pos = vector.round(self.object:getpos())
 						entity_physics(pos, 3) -- hurt player/mobs caught in blast area
 						if minetest.find_node_near(pos, 1, {"group:water"})
-						or minetest.is_protected(pos, "") then
+						or minetest.find_node_near(pos, 1 , {"group:immortal"}) or minetest.is_protected(pos, "") then
 							self.object:remove()
 							if self.sounds.explode ~= "" then
 								minetest.sound_play(self.sounds.explode, {pos = pos, gain = 1.0, max_hear_distance = 16})
