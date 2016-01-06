@@ -52,6 +52,7 @@ function bp:register_mob(name, def)
 		type = def.type,
 		attack_type = def.attack_type,
 		arrow = def.arrow,
+		bombtimer = def.bombtimer or 0,
 		shoot_interval = def.shoot_interval,
 		sounds = def.sounds or {},
 		animation = def.animation,
@@ -115,11 +116,6 @@ function bp:register_mob(name, def)
 		-- print('===== '..self.name..'\n'.. dump(tmp)..'\n=====\n')
 		return minetest.serialize(tmp)
 		end,
-
-
-
-
-
 
 		do_attack = function(self, player, dist)
 			if self.state ~= "attack" then
@@ -197,6 +193,61 @@ function bp:register_mob(name, def)
 					self.object:set_animation({x=self.animation.punch_start,y=self.animation.punch_end},
 						self.animation.speed_normal, 0)
 					self.animation.current = "punch"
+				end
+			--THE HURT
+			elseif type == "hurt" and self.animation.current ~= "hurt"  then
+				self.animation.hurtdur = .5
+				if
+					self.animation.hurt_start
+					and self.animation.hurt_end
+					and self.animation.speed_normal
+				then
+					self.object:set_animation(
+						{x=self.animation.hurt_start,y=self.animation.hurt_end},
+						self.animation.speed_normal, 0
+					)
+					self.animation.current = "hurt"
+					self.animation.hurtdur = (self.animation.hurt_end - self.animation.hurt_start)/self.animation.speed_normal - 1
+				end
+			--THE DEATH
+			elseif type == "death" and self.animation.current ~= "death"  then
+				self.animation.deathdur = 1
+				if
+					self.animation.death_start
+					and self.animation.death_end
+					and self.animation.speed_normal
+				then
+					self.object:set_animation(
+						{x=self.animation.death_start,y=self.animation.death_end},
+						self.animation.speed_normal, 0
+					)
+					self.animation.current = "death"
+					self.animation.deathdur = (self.animation.death_end - self.animation.death_start)/self.animation.speed_normal - .5
+				end
+			elseif type == "shoot" and self.animation.current ~= "shoot" then
+				if
+					self.animation.shoot_start
+					and self.animation.shoot_end
+					and self.animation.speed_normal
+				then
+					self.object:set_animation(
+						{x=self.animation.shoot_start,y=self.animation.shoot_end},
+						self.animation.speed_normal, 0
+					)
+					self.animation.shootdur = (self.animation.shoot_end - self.animation.shoot_start)/self.animation.speed_normal - .5
+					self.animation.current = "shoot"
+				end
+			elseif type == "fly" and self.animation.current ~= "fly" then
+				if
+					self.animation.fly_start
+					and self.animation.fly_end
+					and self.animation.speed_normal
+				then
+					self.object:set_animation(
+						{x=self.animation.fly_start,y=self.animation.fly_end},
+						self.animation.speed_normal, 0
+					)
+					self.animation.current = "fly"
 				end
 			end
 		end,
@@ -637,14 +688,18 @@ function bp:register_mob(name, def)
 					self.state = "stand"
 					self:set_animation("stand")
 				end
+			--end
+
 
 			-- exploding mobs
 			elseif self.state == "attack" and self.attack_type == "explode" then
 				if not self.attack.player or not self.attack.player:is_player() then
 					self.state = "stand"
 					self:set_animation("stand")
-					self.timer = 0
+					self.timer = self.timer+dtime
+					--self.timer = 0
 					self.blinktimer = 0
+					self.bombtimer = self.bombtimer+dtime
 					return
 				end
 				local s = self.object:getpos()
@@ -659,7 +714,12 @@ function bp:register_mob(name, def)
 					self.attack = {player = nil, dist = nil}
 					self:set_animation("stand")
 					return
-				else
+				elseif dist < 2 and self.attack_type == "explode" and self.bombmode ~= "armed" then
+					if self.sounds and self.sounds.approach then
+						minetest.sound_play(self.sounds.approach, {object = self.object})
+					end
+					self.bombmode = "armed"
+					self.bombtimer = 0
 					self:set_animation("walk")
 					self.attack.dist = dist
 				end
@@ -714,7 +774,7 @@ function bp:register_mob(name, def)
 							return
 						end
 						self.object:remove()
-						mobs:explosion(pos, 2, 0, 1, "tnt_explode", self.sounds.explode)
+						bp:explosion(pos, 2, 0, 1, "tnt_explode", self.sounds.explode)
 					end
 				end
 				-- end of exploding mobs
@@ -781,6 +841,8 @@ function bp:register_mob(name, def)
 					end
 				end
 
+--CURRENT SUPRESSED FOR FIXES
+--[[
 			elseif self.state == "attack" and self.attack_type == "shoot" then
 
 				if not self.attack.player or not self.attack.player:is_player() then
@@ -835,6 +897,72 @@ function bp:register_mob(name, def)
 				end
 			end
 		end,
+]]
+--FROM MCMOBS API
+		elseif self.state == "attack" and self.attack_type == "shoot" then
+			if not self.attack.player or not self.attack.player:is_player() then
+				self.state = "stand"
+				self:set_animation("stand")
+				self.attack = {player=nil, dist=nil}
+				return
+			end
+			local s = self.object:getpos()
+			local p = self.attack.player:getpos()
+			local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
+			if dist > self.view_range or self.attack.player:get_hp() <= 0 then
+				self.state = "stand"
+				self.v_start = false
+				self.set_velocity(self, 0)
+				self.attack = {player=nil, dist=nil}
+				self:set_animation("stand")
+				return
+			else
+				self.attack.dist = dist
+				self.shoot_interval = (dist + self.view_range) / self.view_range
+			end
+
+			local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
+			local yaw = math.atan(vec.z/vec.x)+math.pi/2
+			if self.drawtype == "side" then
+				yaw = yaw+(math.pi/2)
+			end
+			if p.x > s.x then
+				yaw = yaw+math.pi
+			end
+			self.object:setyaw(yaw)
+			if self.attack.dist < 4 then
+				self.set_velocity(self, -self.run_velocity)
+			elseif self.attack.dist > 8 then
+				self.set_velocity(self, self.run_velocity)
+			else
+				self.set_velocity(self, 0)
+			end
+			if self.timer > self.shoot_interval and math.random(1, 100) <= 60 then
+				self.timer = 0
+
+				self:set_animation("shoot")
+				--minetest.after(self.animation.shootdur, function()
+				self:set_animation("walk")
+				--end)
+				if self.sounds and self.sounds.attack then
+					minetest.sound_play(self.sounds.attack, {object = self.object})
+				end
+
+				local p = self.object:getpos()
+				p.y = p.y + (self.collisionbox[2]+self.collisionbox[5])/2
+				local obj = minetest.add_entity(p, self.arrow)
+				local amount = (vec.x^2+vec.y^2+vec.z^2)^0.5
+				local v = 15
+				vec.y = vec.y+1
+				vec.x = vec.x*v/amount
+				vec.y = vec.y*v/amount
+				vec.z = vec.z*v/amount
+				obj:setvelocity(vec)
+			end
+		end
+
+	end,
+
 
 		on_activate = function(self, staticdata, dtime_s)
 			local pos = self.object:getpos()
@@ -983,11 +1111,134 @@ function bp:register_mob(name, def)
 					end
 				end
 			end
+
+--[[
+--deathanim	org
+
+	on_punch = function(self, hitter)
+	-- death happens at 20 hp so we can play the death animation:
+		if self.object:get_hp() <= 20 then
+			local pos = self.object:getpos()
+minetest.add_particlespawner({
+	amount = 20,
+	time = .2,
+	minpos = {x=pos.x-1, y=pos.y-.5, z=pos.z-1},
+	maxpos = {x=pos.x+1, y=pos.y+.5, z=pos.z+1},
+	minvel = {x=0, y=.3, z=0},
+	maxvel = {x=0, y=2, z=0},
+	minacc = {x=-.2, y=-.2, z=-.2},
+	maxacc = {x=.2, y=.2, z=.2},
+	minexptime = 1,
+	maxexptime = 5,
+	minsize = 1,
+	maxsize = 1,
+	collisiondetection = false,
+	vertical = false,
+	texture = "bettertnt_smoke.png",
+})
+			self:set_animation("death")
+			self.object:set_hp(1000)
+			if self.name == "esmobs:pig" and self.driver then
+				local name = self.driver:get_player_name()
+				self.driver:set_detach()
+				default.player_attached[name] = false
+				default.player_set_animation(self.driver, "stand" , 30)
+				self.driver = nil
+			end
+			minetest.after(self.animation.deathdur, function()
+				self.object:remove()
+			end)
+			if self.sounds and self.sounds.death then
+				minetest.sound_play(self.sounds.death, {object = self.object})
+			end
+			pos.y = pos.y + 0.5
+			local obj = nil
+			local ndrops = 0
+			for _,drop in ipairs(self.drops) do
+				if math.random(1, drop.chance) == 1 and ndrops < (self.maxdrops or 100) then
+					obj = minetest.add_item(pos, ItemStack(drop.name.." "..math.random(drop.min, drop.max)))
+					ndrops = ndrops + 1
+					if obj then
+						obj:setvelocity({x=math.random(-1,1), y=5, z=math.random(-1,1)})
+					end
+				end
+			end
+		else
+			if self.sounds and self.sounds.hurt then
+				minetest.sound_play(self.sounds.hurt, {object = self.object})
+			end
+			self:set_animation("hurt")
+			minetest.after(self.animation.hurtdur, function()
+				self:set_animation("walk")
+			end)
+		end
+	end
+--deathanim	org
+]]
+
+
+
+
+--deathanimation
+--	on_punch = function(self, hitter)
+	-- death happens at 20 hp so we can play the death animation:
+		if self.object:get_hp() <= 20 then
+			local pos = self.object:getpos()
+			minetest.add_particlespawner({
+				amount = 20,
+				time = .2,
+				minpos = {x=pos.x-1, y=pos.y-.5, z=pos.z-1},
+				maxpos = {x=pos.x+1, y=pos.y+.5, z=pos.z+1},
+				minvel = {x=0, y=.3, z=0},
+				maxvel = {x=0, y=2, z=0},
+				minacc = {x=-.2, y=-.2, z=-.2},
+				maxacc = {x=.2, y=.2, z=.2},
+				minexptime = 1,
+				maxexptime = 5,
+				minsize = 1,
+				maxsize = 1,
+				collisiondetection = false,
+				vertical = false,
+				texture = "bettertnt_smoke.png",
+			})
+			--self:set_animation("death")
+			--self.object:set_hp(1000)
+			if self.name == "esmobs:pig" and self.driver then
+				local name = self.driver:get_player_name()
+				self.driver:set_detach()
+				default.player_attached[name] = false
+				default.player_set_animation(self.driver, "stand" , 30)
+				self.driver = nil
+			end
+			--minetest.after(self.animation.deathdur, function()
+				--self.object:remove()
+			--end)
+			if self.sounds and self.sounds.death then
+				minetest.sound_play(self.sounds.death, {object = self.object})
+				--self:set_animation("death")
+			end
+			pos.y = pos.y + 0.5
+			local obj = nil
+		else
+			if self.sounds and self.sounds.hurt then
+				minetest.sound_play(self.sounds.hurt, {object = self.object})
+			end
+			self:set_animation("hurt")
+			minetest.after(self.animation.hurtdur, function()
+				self:set_animation("walk")
+			end)
+		end
+--	end
+--deathanimation
+
+
+
 --------END ORIG ON PUNCH CODE
 --------ADDING LAGS MOBS BONES HERE
     --on_punch = function(self, hitter)
             --mob killed
          if self.object:get_hp() <= 0 then
+
             if hitter and hitter:is_player() and hitter:get_inventory() then
                for _,drop in ipairs(self.drops) do
 ----------
@@ -1044,8 +1295,9 @@ function bp:register_mob(name, def)
             end
             self.object:remove()
             return
-         elseif self.object:get_hp() == 4 or self.object:get_hp() == 6 or self.object:get_hp() == 10 then
+         elseif self.object:get_hp() == 1 or self.object:get_hp() == 1 or self.object:get_hp() == 2 then
             self.state="run"
+	    self:set_animation("death")
          else
             self.v_start=true
             if hitter and hitter:is_player() and hitter:get_wielded_item() then
@@ -1053,12 +1305,17 @@ function bp:register_mob(name, def)
                tool:add_wear(100)
                hitter:set_wielded_item( tool )
             end
+
          end
 --end,			--use if using original punch code.
+
 
 	end,
 -------END ON PUNCH FULL CODE
 	})
+
+
+
 end
 
 
@@ -1150,7 +1407,7 @@ end
 
 -- explosion
 function bp:explosion(pos, radius, fire, smoke, sound)
-	-- node hit, bursts into flame (cannot blast through obsidian or protection redo mod items)
+	-- node hit, bursts into flame (cannot blast through obsidian or protection mod items)
 	if not fire then fire = 0 end
 	if not smoke then smoke = 0 end
 	local pos = vector.round(pos)
@@ -1165,6 +1422,7 @@ function bp:explosion(pos, radius, fire, smoke, sound)
 	local c_obsidian = minetest.get_content_id("default:obsidian")
 	local c_brick = minetest.get_content_id("default:obsidianbrick")
 	local c_chest = minetest.get_content_id("default:chest_locked")
+	local c_portal = minetest.get_content_id("nether:portal")
 	if sound and sound ~= "" then
 		minetest.sound_play(sound, {pos = pos, gain = 1.0, max_hear_distance = 16})
 	end
@@ -1175,7 +1433,7 @@ function bp:explosion(pos, radius, fire, smoke, sound)
 		p.x = pos.x + x
 		p.y = pos.y + y
 		p.z = pos.z + z
-		if data[vi] ~= c_air and data[vi] ~= c_ignore and data[vi] ~= c_obsidian and data[vi] ~= c_brick and data[vi] ~= c_chest then
+		if data[vi] ~= c_air and data[vi] ~= c_ignore and data[vi] ~= c_obsidian and data[vi] ~= c_brick and data[vi] ~= c_chest and data[vi] ~= c_portal then
 			local n = minetest.get_node(p).name
 			-- do NOT destroy protection nodes but DO destroy nodes in protected area
 			if not n:find("protector:")
@@ -1349,6 +1607,30 @@ function bp:register_arrow(name, def)
 				return
 			end
 
+					-- ridable pigs
+		if self.name == "esmobs:pig" and self.saddle == "yes" and self.driver then
+			local item = self.driver:get_wielded_item()
+			if item:get_name() == "esmobs:carrotstick" then
+				local yaw = self.driver:get_look_yaw() - math.pi / 2
+				local velo = self.object:getvelocity()
+				local v = 1.5
+				if math.abs(velo.x) + math.abs(velo.z) < .6 then velo.y = 5 end
+				self.state = "walk"
+				self:set_animation("walk")
+				self.object:setyaw(yaw)
+				self.object:setvelocity({x = -math.sin(yaw) * v, y = velo.y, z = math.cos(yaw) * v})
+
+				local inv = self.driver:get_inventory()
+				local stack = inv:get_stack("main", self.driver:get_wield_index())
+				stack:add_wear(100)
+				if stack:get_wear() > 65400 then
+					stack = {name = "fishing:pole", count = 1}
+				end
+				inv:set_stack("main", self.driver:get_wield_index(), stack)
+				return
+			end
+		end
+
 			if self.hit_player or self.hit_mob then
 				for _,player in pairs(minetest.get_objects_inside_radius(pos, 1)) do
 					-- hit player
@@ -1423,6 +1705,10 @@ end
 					player:set_wielded_item(weapon)
 				end
 			end
+
+
+
+
 
 -- Spawn Egg
 function bp:register_egg(mob, desc, background, addegg)

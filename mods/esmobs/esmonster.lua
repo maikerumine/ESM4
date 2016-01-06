@@ -1,4 +1,4 @@
---esmobs v0.0.3
+--esmobs v0.0.7
 --maikerumine
 --made for Extreme Survival game
 
@@ -8,6 +8,146 @@ minetest.register_alias("lagsmobs:cursed_stone", "esmobs:cursed_stone")
 
 --REFERENCE
 --function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
+
+
+bp:register_mob("esmobs:rat", {
+	type = "animal",
+	hp_max = 1,
+	collisionbox = {-0.2, -0.01, -0.2, 0.2, 0.2, 0.2},
+	visual = "mesh",
+	mesh = "mobs_rat.x",
+	textures = {"mobs_rat.png"},
+	makes_footstep_sound = false,
+	walk_velocity = 1,
+	armor = 200,
+	drops = {},
+	drawtype = "front",
+	water_damage = 0,
+	lava_damage = 1,
+	light_damage = 0,
+
+	on_rightclick = function(self, clicker)
+		if clicker:is_player() and clicker:get_inventory() then
+			clicker:get_inventory():add_item("main", "mobs:rat")
+			self.object:remove()
+		end
+	end,
+})
+bp:register_spawn("esmobs:rat", {"default:dirt_with_grass", "default:stone"}, 20, -1, 7000, 1, 31000)
+
+--LETS GET THIS TO WORK!
+bp:register_mob("esmobs:dungeon_master", {
+	type = "monster",
+	hp_max = 150,
+	collisionbox = {-0.7, -0.01, -0.7, 0.7, 2.6, 0.7},
+	visual = "mesh",
+	mesh = "mobs_dungeon_master.x",
+	textures = {"mobs_dungeon_master.png"},
+	visual_size = {x=8, y=8},
+	makes_footstep_sound = true,
+	view_range = 15,
+	walk_velocity = 1,
+	run_velocity = 3,
+	damage = 4,
+	drops = {
+		{name = "default:mese",
+		chance = 10,
+		min = 1,
+		max = 2,},
+	},
+	armor = 60,
+	drawtype = "front",
+	water_damage = 1,
+	lava_damage = 1,
+	light_damage = 0,
+	on_rightclick = nil,
+	attack_type = "shoot",
+	arrow = "esmobs:fireball",
+	shoot_interval = 2.5,
+	sounds = {
+		attack = "mobs_fireball",
+	},
+	animation = {
+		stand_start = 0,
+		stand_end = 19,
+		walk_start = 20,
+		walk_end = 35,
+		punch_start = 36,
+		punch_end = 48,
+		speed_normal = 15,
+		speed_run = 15,
+	},
+})
+bp:register_spawn("esmobs:dungeon_master", {"default:stone"}, 2, -1, 7000, 1, -200)
+
+bp:register_arrow("esmobs:fireball", {
+	visual = "sprite",
+	visual_size = {x=1, y=1},
+	--textures = {{name="mobs_fireball.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=0.5}}}, FIXME
+	textures = {"mobs_fireball.png"},
+	velocity = 5,
+	hit_player = function(self, player)
+		local s = self.object:getpos()
+		local p = player:getpos()
+		local vec = {x=s.x-p.x, y=s.y-p.y, z=s.z-p.z}
+		player:punch(self.object, 1.0,  {
+			full_punch_interval=1.0,
+			damage_groups = {fleshy=4},
+		}, vec)
+		local pos = self.object:getpos()
+		for dx=-1,1 do
+			for dy=-1,1 do
+				for dz=-1,1 do
+					local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+					local n = minetest.get_node(pos).name
+					if minetest.registered_nodes[n].groups.flammable or math.random(1, 100) <= 30 then
+						minetest.set_node(p, {name="fire:basic_flame"})
+					else
+						minetest.remove_node(p)
+					end
+				end
+			end
+		end
+	end,
+	hit_node = function(self, pos, node)
+		for dx=-1,1 do
+			for dy=-2,1 do
+				for dz=-1,1 do
+					local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
+					local n = minetest.get_node(pos).name
+					if minetest.registered_nodes[n].groups.flammable or math.random(1, 100) <= 30 then
+						minetest.set_node(p, {name="fire:basic_flame"})
+					else
+						minetest.remove_node(p)
+					end
+				end
+			end
+		end
+	end
+})
+
+bp:register_arrow("esmobs:arrow", {
+--[[	visual = "wielditem",
+	visual_size = {x=.1, y=.1},
+	textures = {"mobs:arrow_box"},  ]]
+	visual = "sprite",
+	visual_size = {x=1, y=1},
+	textures = {"mobs_fireball.png"},
+
+	velocity = 15,
+	hit_player = function(self, player)
+		local s = self.object:getpos()
+		local p = player:getpos()
+		local vec = {x=s.x-p.x, y=s.y-p.y, z=s.z-p.z}
+
+		player:punch(self.object, 1.0,  {
+			full_punch_interval=1.0,
+			damage_groups = {fleshy=2},
+		}, vec)
+	end,
+	hit_node = function(self, pos, node) end
+})
+
 
 -- Tree Monster (or Tree Gollum) by PilzAdam
 
@@ -57,6 +197,7 @@ bp:register_mob("esmobs:tree_monster", {
 })
 
 bp:register_spawn("esmobs:tree_monster", {"default:leaves", "default:jungleleaves","default:dirt", "default:jungletree"}, 5, 0, 14000, 1, 31000)
+
 
 --bp:register_egg("esmobs:tree_monster", "Tree Monster", "default_tree_top.png", 1)
 
@@ -157,7 +298,10 @@ bp:register_mob("esmobs:stone_monster", {
 	},
 })
 
-bp:register_spawn("esmobs:stone_monster", {"default:stone"}, 5, -1, 14000, 4, 500)
+
+
+bp:register_spawn("esmobs:stone_monster", {"default:stone"}, 5, 0, 6000, 10, 500)
+
 
 --bp:register_egg("esmobs:stone_monster", "Stone Monster", "default_stone.png", 1)
 
@@ -247,6 +391,7 @@ minetest.register_craft({
 })
 
 
+
 -- Oerkki by PilzAdam
 
 bp:register_mob("esmobs:oerkkii", {
@@ -293,8 +438,10 @@ bp:register_mob("esmobs:oerkkii", {
 	replace_offset = -1,
 })
 
-bp:register_spawn("esmobs:oerkkii", {"default:stone"}, 5, 0, 14000, 1, -10)
---bp:register_spawn("esmobs:oerkkii", "esmobs:cursed_stone", 4, -1, 2, 20, 500, -500)
+
+
+bp:register_spawn("esmobs:oerkkii", "esmobs:cursed_stone", 4, -1, 2, 40, 500, -500)
+
 
 minetest.register_node("esmobs:cursed_stone", {
 	description = "Cursed stone",
@@ -321,6 +468,7 @@ minetest.register_craft({
 })
 
 --mobs:register_egg("esmobs:oerkki", "Oerkki", "default_obsidian.png", 1)
+
 
 --Applmons by maikerumine
 bp:register_mob("esmobs:applmons", {
@@ -363,7 +511,8 @@ bp:register_mob("esmobs:applmons", {
 		punch_end = 48,
 	}
 })
-bp:register_spawn("esmobs:applmons", {"default:stone"}, 6, -1, 14000, 1, -30)
+
+bp:register_spawn("esmobs:applmons", {"default:stone","nether:rack"}, 6, -1, 14000, 1, -30)
 
 
 --Herobrine's Bloody Ghost by Lovehart and maikerumine  http://minetest.fensta.bplaced.net/#author=lovehart
@@ -407,5 +556,9 @@ bp:register_mob("esmobs:herobrines_bloody_ghost", {
 		punch_end = 48,
 	}
 })
-bp:register_spawn("esmobs:herobrines_bloody_ghost", {"default:stone","default:desert_sand"}, 6, -1, 12000, 1, 10)
---bp:register_spawn("esmobs:herobrines_bloody_ghost", "esmobs:cursed_stone", 4, -1, 2, 1, 500, -500)
+
+bp:register_spawn("esmobs:herobrines_bloody_ghost", {"default:stone","default:desert_sand","nether:brick"}, 6, -1, 12000, 1, 10)
+
+
+bp:register_spawn("esmobs:herobrines_bloody_ghost", "esmobs:cursed_stone", 4, -1, 2, 1, 500, -500)
+
