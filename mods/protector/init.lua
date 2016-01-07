@@ -64,7 +64,7 @@ protector.generate_formspec = function(meta)
 		..default.gui_bg..default.gui_bg_img..default.gui_slots
 		.."label[2.5,0;-- Protector interface --]"
 		.."label[0,1;PUNCH node to show protected area or USE for area check]"
-		.."label[0,2;Members: (type player name then press Enter to add)]"
+		.."label[0,2;Members: (type player name then press Enter to add--BROKEN!!)]"
 		.. "button_exit[2.5,6.2;3,0.5;close_me;Close]"
 
 	local members = protector.get_member_list(meta)
@@ -88,7 +88,7 @@ protector.generate_formspec = function(meta)
 
 		i = i + 1
 	end
-	
+
 	if i < npp then
 
 		-- user name entry field
@@ -142,7 +142,7 @@ protector.can_dig = function(r, pos, digger, onlyowner, infolevel)
 		owner = meta:get_string("owner")
 		members = meta:get_string("members")
 
-		if owner ~= digger then 
+		if owner ~= digger then
 
 			if onlyowner
 			or not protector.is_member(meta, digger) then
@@ -317,7 +317,7 @@ minetest.register_node("protector:protect", {
 		local meta = minetest.get_meta(pos)
 
 		if protector.can_dig(1, pos,clicker:get_player_name(), true, 1) then
-			minetest.show_formspec(clicker:get_player_name(), 
+			minetest.show_formspec(clicker:get_player_name(),
 			"protector:node_" .. minetest.pos_to_string(pos), protector.generate_formspec(meta))
 		end
 	end,
@@ -396,7 +396,7 @@ minetest.register_node("protector:protect2", {
 
 		if protector.can_dig(1, pos, clicker:get_player_name(), true, 1) then
 
-			minetest.show_formspec(clicker:get_player_name(), 
+			minetest.show_formspec(clicker:get_player_name(),
 			"protector:node_" .. minetest.pos_to_string(pos), protector.generate_formspec(meta))
 		end
 	end,
@@ -424,7 +424,7 @@ minetest.register_craft({
 		{"default:stone", "default:stone", "default:stone"},
 	}
 })
-
+]]
 -- If name entered or button press
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
@@ -452,7 +452,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 				protector.del_member(meta, string.sub(field,string.len("protector_del_member_") + 1))
 			end
 		end
-		
+
 		if not fields.close_me then
 			minetest.show_formspec(player:get_player_name(), formname, protector.generate_formspec(meta))
 		end
@@ -460,7 +460,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	end
 
 end)
-]]
+
 
 
 -- Display entity shown when protector node is punched

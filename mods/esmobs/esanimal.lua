@@ -233,7 +233,7 @@ print(item:get_name(), minetest.get_item_group(item:get_name(), "dye"))
 		end
 	end,
 })
-bp:register_spawn("esmobs:sheep2", {"default:dirt_with_grass"}, 20, 12, 5000, 2, 31000)
+bp:register_spawn("esmobs:sheep2", {"default:dirt_with_grass"}, 20, 12, 15000, 2, 31000)
 
 
 bp:register_mob("esmobs:pig", {
@@ -325,7 +325,7 @@ bp:register_mob("esmobs:pig", {
 	end
 	end,
 })
-bp:register_spawn("esmobs:pig", {"default:dirt_with_grass"}, 20, 12, 5000, 1, 31000)
+bp:register_spawn("esmobs:pig", {"default:dirt_with_grass"}, 20, 12, 15000, 1, 31000)
 
 
 bp:register_mob("esmobs:cow", {
@@ -390,7 +390,7 @@ bp:register_mob("esmobs:cow", {
 		end
 	end,
 })
-bp:register_spawn("esmobs:cow", {"default:dirt_with_grass"}, 20, 8, 7000, 1, 31000)
+bp:register_spawn("esmobs:cow", {"default:dirt_with_grass"}, 20, 8, 17000, 1, 31000)
 
 
 bp:register_mob("esmobs:chicken", {
@@ -449,7 +449,7 @@ bp:register_mob("esmobs:chicken", {
 		end
 	end,
 })
-bp:register_spawn("esmobs:chicken", {"default:dirt_with_grass"}, 20, 8, 7000, 2, 31000)
+bp:register_spawn("esmobs:chicken", {"default:dirt_with_grass"}, 20, 8, 17000, 2, 31000)
 
 --KPGMOBS HORSE
 --By: KrupnovPavel
@@ -512,7 +512,7 @@ local horse = {
 			self.object:setyaw(clicker:get_look_yaw())
 		end
 	end,
-	
+
 	on_activate = function(self, staticdata, dtime_s)
 		self.object:set_armor_groups({immortal=1})
 		print (self.texture, self.jmp)
@@ -524,7 +524,7 @@ local horse = {
 			self.object:remove()
 		end
 	end,
-	
+
 	on_step = function(self, dtime)
 
 		self.v = get_v(self.object:getvelocity())*get_sign(self.v)
@@ -554,7 +554,7 @@ local horse = {
 				end
 			end
 		end
-		
+
 		local s = get_sign(self.v)
 		self.v = self.v - 0.02*s
 		if s ~= get_sign(self.v) then
@@ -566,7 +566,7 @@ local horse = {
 		if math.abs(self.v) > 4.5 then
 			self.v = 4.5*get_sign(self.v)
 		end
-	
+
 		local p = self.object:getpos()
 		p.y = p.y-0.5
 
@@ -669,11 +669,11 @@ bp:register_mob("esmobs:horse", {
 			clicker:get_inventory():remove_item("main", "esmobs:saddle")
 			local pos = self.object:getpos()
 			self.object:remove()
-			minetest.add_entity(pos, "esmobs:horseh1")			
+			minetest.add_entity(pos, "esmobs:horseh1")
 		end
 	end,
 })
-bp:register_spawn("esmobs:horse", {"default:dirt_with_dry_grass"}, 20, 8, 11000, 1, 31000)
+bp:register_spawn("esmobs:horse", {"default:dirt_with_dry_grass"}, 20, 8, 17000, 1, 31000)
 
 bp:register_mob("esmobs:horse2", {
 	type = "animal",
@@ -712,11 +712,11 @@ bp:register_mob("esmobs:horse2", {
 			clicker:get_inventory():remove_item("main", "esmobs:saddle")
 			local pos = self.object:getpos()
 			self.object:remove()
-			minetest.add_entity(pos, "esmobs:horsepegh1")			
+			minetest.add_entity(pos, "esmobs:horsepegh1")
 		end
 	end,
 })
-bp:register_spawn("esmobs:horse2", {"default:dirt_with_dry_grass"}, 20, 8, 11000, 1, 31000)
+bp:register_spawn("esmobs:horse2", {"default:dirt_with_dry_grass"}, 20, 8, 17000, 1, 31000)
 
 bp:register_mob("esmobs:horse3", {
 	type = "animal",
@@ -755,10 +755,10 @@ bp:register_mob("esmobs:horse3", {
 			clicker:get_inventory():remove_item("main", "esmobs:saddle")
 			local pos = self.object:getpos()
 			self.object:remove()
-			minetest.add_entity(pos, "esmobs:horsearah1")			
+			minetest.add_entity(pos, "esmobs:horsearah1")
 		end
 	end,
 })
-bp:register_spawn("esmobs:horse3", {"default:desert_sand"}, 20, 8, 11000, 1, 31000)
+bp:register_spawn("esmobs:horse3", {"default:desert_sand"}, 20, 8, 17000, 1, 31000)
 
 

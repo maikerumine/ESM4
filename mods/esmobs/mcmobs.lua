@@ -245,7 +245,7 @@ bp:register_mob("esmobs:creeper", {
 	view_range = 16,
 	attack_type = "explode",
 })
-bp:register_spawn("esmobs:creeper", {"group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 7, -1, 5000, 6, 31000)
+bp:register_spawn("esmobs:creeper", {"group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 7, -1, 25000, 1, 31000)
 
 bp:register_mob("esmobs:skeleton", {
 	type = "monster",
@@ -303,7 +303,7 @@ bp:register_mob("esmobs:skeleton", {
 	arrow = "throwing:arrow_entity",
 	shoot_interval = 2.5,
 })
-bp:register_spawn("esmobs:skeleton", {"group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 7, -1, 15000, 4, 31000)
+bp:register_spawn("esmobs:skeleton", {"group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 7, -1, 15000, 2, 31000)
 -- from throwing mod by PilzAdam:
 minetest.register_node("esmobs:arrow_box", {
 	drawtype = "nodebox",
@@ -397,7 +397,7 @@ bp:register_mob("esmobs:zombie", {
 	view_range = 16,
 	attack_type = "dogfight",
 })
-bp:register_spawn("esmobs:zombie", {"group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 7, -1, 17000, 4, 31000)
+bp:register_spawn("esmobs:zombie", {"group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 7, -1, 17000, 1, 31000)
 
 bp:register_mob("esmobs:pigman", {
 	type = "monster",
