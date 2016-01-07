@@ -165,8 +165,9 @@ minetest.register_tool("esmobs:carrotstick", {
 minetest.register_craft({
 	type = "shapeless",
 	output = "esmobs:carrotstick",
-	--recipe = {"fishing:pole", "farming_plus:carrot_item"},
-	recipe = {"fishing:pole", "default:apple"},
+	--recipe = {"fishing:pole_", "farming_plus:carrot_item"},
+	--recipe = {"fishing:pole_", "default:apple"},
+	recipe = {"fishing:pole_wood", "farming:carrot"},
 })
 
 -- cobweb

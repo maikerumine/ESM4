@@ -2,7 +2,7 @@ minetest.register_privilege("delprotect","Ignore player protection")
 
 protector = {}
 protector.mod = "redo"
-protector.radius = (tonumber(minetest.setting_get("protector_radius")) or 3)  --was 5
+protector.radius = (tonumber(minetest.setting_get("protector_radius")) or 3)
 protector.drop = minetest.setting_getbool("protector_drop") or false
 protector.hurt = (tonumber(minetest.setting_get("protector_hurt")) or 0)
 
@@ -214,14 +214,16 @@ function minetest.is_protected(pos, digger)
 
 		local player = minetest.get_player_by_name(digger)
 
-		if protector.hurt > 0 then
+		if protector.hurt > 0
+		and player then
 			player:set_hp(player:get_hp() - protector.hurt)
 		end
 
-		if protector.drop == true then
+		if protector.drop == true
+		and player then
 			-- drop tool/item if protection violated
 			local tool = player:get_wielded_item()
-			local wear = tool:get_wear()
+			--local wear = tool:get_wear()
 			local num = player:get_wield_index()
 			local player_inv = player:get_inventory()
 			local inv = player_inv:get_stack("main", num)
@@ -231,7 +233,7 @@ function minetest.is_protected(pos, digger)
 			if obj then
 				obj:setvelocity({x = 0, y = 5, z = 0})
 				player:set_wielded_item(nil)
-				minetest.after(0.1, function()
+				minetest.after(0.2, function()
 					player_inv:set_stack("main", num, nil)
 				end)
 			end
@@ -270,7 +272,7 @@ end
 --= Protection Block
 
 minetest.register_node("protector:protect", {
-	description = "Mese Protection System Block",
+	description = "Protection Block",
 	drawtype = "nodebox",
 	tiles = {
 		"moreblocks_circle_stone_bricks.png",
@@ -336,16 +338,16 @@ minetest.register_node("protector:protect", {
 })
 
 minetest.register_craft({
-	output = "protector:protect 2",
+	output = "protector:protect",
 	recipe = {
 		{"default:stone", "default:stone", "default:stone"},
 		{"default:stone", "default:mese", "default:stone"},
 		{"default:stone", "default:stone", "default:stone"},
 	}
 })
---[[
---= Protection Logo
 
+--= Protection Logo
+--[[
 minetest.register_node("protector:protect2", {
 	description = "Protection Logo",
 	tiles = {"protector_logo.png"},
@@ -422,7 +424,7 @@ minetest.register_craft({
 		{"default:stone", "default:stone", "default:stone"},
 	}
 })
-]]
+
 -- If name entered or button press
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
@@ -458,6 +460,8 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	end
 
 end)
+]]
+
 
 -- Display entity shown when protector node is punched
 

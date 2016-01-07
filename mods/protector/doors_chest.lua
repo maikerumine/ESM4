@@ -37,7 +37,7 @@ local function on_rightclick(pos, dir, check_name, replace, replace_dir, params)
 			pos = pos, gain = 0.3, max_hear_distance = 10})
 	end
 end
---[[
+
 -- Protected Wooden Door
 
 local name = "protector:door_wood"
@@ -191,7 +191,7 @@ minetest.register_craft({
 		{"doors:door_steel", "default:copper_ingot"}
 	}
 })
-]]
+
 -- Protected Chest
 
 minetest.register_node("protector:chest", {
@@ -358,7 +358,7 @@ minetest.register_craft({
 		{'default:chest', 'default:copper_ingot', ''},
 	}
 })
---[[
+
 -- Protected Trapdoor
 
 function register_trapdoor(name, def)
@@ -449,4 +449,3 @@ minetest.register_craft({
 		{"doors:trapdoor", "default:copper_ingot"}
 	}
 })
-]]

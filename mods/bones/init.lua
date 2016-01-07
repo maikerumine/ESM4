@@ -2,6 +2,7 @@
 -- See README.txt for licensing and other information.
 --REVISED 20151117 by maikerumine for adding bones to inventory after punch
 
+
 bones = {}
 
 local function is_owner(pos, name)

@@ -36,37 +36,51 @@ bp:register_mob("esmobs:rat", {
 bp:register_spawn("esmobs:rat", {"default:dirt_with_grass", "default:stone"}, 20, -1, 7000, 1, 31000)
 
 --LETS GET THIS TO WORK!
+-- Dungeon Master by PilzAdam
 bp:register_mob("esmobs:dungeon_master", {
 	type = "monster",
-	hp_max = 150,
-	collisionbox = {-0.7, -0.01, -0.7, 0.7, 2.6, 0.7},
+	passive = false,
+	damage = 4,
+	--attack_type = "dogshoot",
+	attack_type = "shoot",
+	reach = 3,
+	shoot_interval = 2.5,
+	arrow = "esmobs:fireball",
+	shoot_offset = 1,
+	hp_min = 12,
+	hp_max = 35,
+	armor = 60,
+	collisionbox = {-0.7, -1, -0.7, 0.7, 1.6, 0.7},
 	visual = "mesh",
-	mesh = "mobs_dungeon_master.x",
-	textures = {"mobs_dungeon_master.png"},
-	visual_size = {x=8, y=8},
+	mesh = "mobs_dungeon_master.b3d",
+	textures = {
+		{"mobs_dungeon_master.png"},
+		{"mobs_dungeon_master2.png"},
+		{"mobs_dungeon_master3.png"},
+	},
 	makes_footstep_sound = true,
-	view_range = 15,
+	sounds = {
+		random = "mobs_dungeonmaster",
+		attack = "mobs_fireball",
+	},
 	walk_velocity = 1,
 	run_velocity = 3,
-	damage = 4,
+	jump = true,
+	view_range = 15,
 	drops = {
-		{name = "default:mese",
-		chance = 10,
-		min = 1,
-		max = 2,},
+		{name = "default:mese_crystal_fragment",
+		chance = 1, min = 1, max = 3},
+		{name = "default:diamond",
+		chance = 4, min = 1, max = 1},
+		{name = "default:mese_crystal",
+		chance = 2, min = 1, max = 2},
+		{name = "default:diamondblock",
+		chance = 30, min = 1, max = 1},
 	},
-	armor = 60,
-	drawtype = "front",
 	water_damage = 1,
 	lava_damage = 1,
 	light_damage = 0,
-	on_rightclick = nil,
-	attack_type = "shoot",
-	arrow = "esmobs:fireball",
-	shoot_interval = 2.5,
-	sounds = {
-		attack = "mobs_fireball",
-	},
+	fear_height = 3,
 	animation = {
 		stand_start = 0,
 		stand_end = 19,
@@ -78,79 +92,38 @@ bp:register_mob("esmobs:dungeon_master", {
 		speed_run = 15,
 	},
 })
-bp:register_spawn("esmobs:dungeon_master", {"default:stone"}, 2, -1, 7000, 1, -200)
+bp:register_spawn("esmobs:dungeon_master", {"default:stone"}, 2, 0, 7000, 2, -70)
 
+-- fireball (weapon)
 bp:register_arrow("esmobs:fireball", {
 	visual = "sprite",
-	visual_size = {x=1, y=1},
-	--textures = {{name="mobs_fireball.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=0.5}}}, FIXME
+	visual_size = {x = 1, y = 1},
 	textures = {"mobs_fireball.png"},
-	velocity = 5,
+	velocity = 6,
+
+	-- direct hit, no fire... just plenty of pain
 	hit_player = function(self, player)
-		local s = self.object:getpos()
-		local p = player:getpos()
-		local vec = {x=s.x-p.x, y=s.y-p.y, z=s.z-p.z}
-		player:punch(self.object, 1.0,  {
-			full_punch_interval=1.0,
-			damage_groups = {fleshy=4},
-		}, vec)
-		local pos = self.object:getpos()
-		for dx=-1,1 do
-			for dy=-1,1 do
-				for dz=-1,1 do
-					local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-					local n = minetest.get_node(pos).name
-					if minetest.registered_nodes[n].groups.flammable or math.random(1, 100) <= 30 then
-						minetest.set_node(p, {name="fire:basic_flame"})
-					else
-						minetest.remove_node(p)
-					end
-				end
-			end
-		end
+		player:punch(self.object, 1.0, {
+			full_punch_interval = 1.0,
+			damage_groups = {fleshy = 8},
+		}, nil)
 	end,
+
+	hit_mob = function(self, player)
+		player:punch(self.object, 1.0, {
+			full_punch_interval = 1.0,
+			damage_groups = {fleshy = 8},
+		}, nil)
+	end,
+
+	-- node hit, bursts into flame
 	hit_node = function(self, pos, node)
-		for dx=-1,1 do
-			for dy=-2,1 do
-				for dz=-1,1 do
-					local p = {x=pos.x+dx, y=pos.y+dy, z=pos.z+dz}
-					local n = minetest.get_node(pos).name
-					if minetest.registered_nodes[n].groups.flammable or math.random(1, 100) <= 30 then
-						minetest.set_node(p, {name="fire:basic_flame"})
-					else
-						minetest.remove_node(p)
-					end
-				end
-			end
-		end
+		--bp:explosion(pos, 1, 1, 0)  --this deletes nodes
 	end
-})
-
-bp:register_arrow("esmobs:arrow", {
---[[	visual = "wielditem",
-	visual_size = {x=.1, y=.1},
-	textures = {"mobs:arrow_box"},  ]]
-	visual = "sprite",
-	visual_size = {x=1, y=1},
-	textures = {"mobs_fireball.png"},
-
-	velocity = 15,
-	hit_player = function(self, player)
-		local s = self.object:getpos()
-		local p = player:getpos()
-		local vec = {x=s.x-p.x, y=s.y-p.y, z=s.z-p.z}
-
-		player:punch(self.object, 1.0,  {
-			full_punch_interval=1.0,
-			damage_groups = {fleshy=2},
-		}, vec)
-	end,
-	hit_node = function(self, pos, node) end
 })
 
 
 -- Tree Monster (or Tree Gollum) by PilzAdam
-
 bp:register_mob("esmobs:tree_monster", {
 	type = "monster",
 	passive = false,
@@ -195,11 +168,7 @@ bp:register_mob("esmobs:tree_monster", {
 		punch_start = 48,		punch_end = 62,
 	},
 })
-
 bp:register_spawn("esmobs:tree_monster", {"default:leaves", "default:jungleleaves","default:dirt", "default:jungletree"}, 5, 0, 14000, 1, 31000)
-
-
---bp:register_egg("esmobs:tree_monster", "Tree Monster", "default_tree_top.png", 1)
 
 -- ethereal sapling compatibility
 if not minetest.get_modpath("ethereal") then
@@ -208,7 +177,6 @@ if not minetest.get_modpath("ethereal") then
 end
 
 -- Sand Monster by PilzAdam
-
 bp:register_mob("esmobs:sand_monster", {
 	type = "monster",
 	passive = false,
@@ -249,11 +217,9 @@ bp:register_mob("esmobs:sand_monster", {
 		punch_start = 74,		punch_end = 105,
 	},
 })
-
 bp:register_spawn("esmobs:sand_monster", {"default:sand", "meru:stone","group:sand"},4, -1, 14000, 1, 31000)
 
 -- Stone Monster by PilzAdam
-
 bp:register_mob("esmobs:stone_monster", {
 	type = "monster",
 	passive = false,
@@ -297,17 +263,9 @@ bp:register_mob("esmobs:stone_monster", {
 		punch_start = 40,		punch_end = 63,
 	},
 })
-
-
-
 bp:register_spawn("esmobs:stone_monster", {"default:stone"}, 5, 0, 6000, 10, 500)
 
-
---bp:register_egg("esmobs:stone_monster", "Stone Monster", "default_stone.png", 1)
-
-
 -- Spider by AspireMint (fishyWET (CC-BY-SA 3.0 license for texture)
-
 bp:register_mob("esmobs:spider", {
 	type = "monster",
 	passive = false,
@@ -350,50 +308,15 @@ bp:register_mob("esmobs:spider", {
 		punch_start = 50,		punch_end = 90,
 	},
 })
-
 bp:register_spawn("esmobs:spider", {"default:stone" ,"default:cobble","group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 6, 0, 14000, 1, 71)
-
---bp:register_egg("esmobs:spider", "Spider", "mobs_cobweb.png", 1)
 
 -- ethereal crystal spike compatibility
 if not minetest.get_modpath("ethereal") then
 	minetest.register_alias("ethereal:crystal_spike", "default:sandstone")
 end
 
--- cobweb
-minetest.register_node("esmobs:cobweb", {
-	description = "Cobweb",
-	drawtype = "plantlike",
-	visual_scale = 1.1,
-	tiles = {"mobs_cobweb.png"},
-	inventory_image = "mobs_cobweb.png",
-	paramtype = "light",
-	sunlight_propagates = true,
-	liquid_viscosity = 11,
-	liquidtype = "source",
-	liquid_alternative_flowing = "esmobs:cobweb",
-	liquid_alternative_source = "esmobs:cobweb",
-	liquid_renewable = false,
-	liquid_range = 0,
-	walkable = false,
-	groups = {snappy=1,liquid=3},
-	drop = "farming:cotton",
-	sounds = default.node_sound_leaves_defaults(),
-})
-
-minetest.register_craft({
-	output = "esmobs:cobweb",
-	recipe = {
-		{"farming:string", "", "farming:string"},
-		{"", "farming:string", ""},
-		{"farming:string", "", "farming:string"},
-	}
-})
-
-
 
 -- Oerkki by PilzAdam
-
 bp:register_mob("esmobs:oerkkii", {
 	type = "monster",
 	passive = false,
@@ -437,38 +360,7 @@ bp:register_mob("esmobs:oerkkii", {
 	replace_with = "air",
 	replace_offset = -1,
 })
-
-
-
 bp:register_spawn("esmobs:oerkkii", "esmobs:cursed_stone", 4, -1, 2, 40, 500, -500)
-
-
-minetest.register_node("esmobs:cursed_stone", {
-	description = "Cursed stone",
-	tiles = {
-		"mobs_cursed_stone_top.png",
-		"mobs_cursed_stone_bottom.png",
-		"mobs_cursed_stone.png",
-		"mobs_cursed_stone.png",
-		"mobs_cursed_stone.png",
-		"mobs_cursed_stone.png"
-	},
-	is_ground_content = false,
-	groups = {cracky=1, level=2},
-	drop = 'default:goldblock',
-	sounds = default.node_sound_stone_defaults(),
-})
-minetest.register_craft({
-	output = 'esmobs:cursed_stone',
-	recipe = {
-		{'default:obsidian', 'default:obsidian', 'default:obsidian'},
-		{'default:obsidian', 'default:goldblock', 'default:obsidian'},
-		{'default:obsidian', 'default:obsidian', 'default:obsidian'},
-	}
-})
-
---mobs:register_egg("esmobs:oerkki", "Oerkki", "default_obsidian.png", 1)
-
 
 --Applmons by maikerumine
 bp:register_mob("esmobs:applmons", {
@@ -477,7 +369,7 @@ bp:register_mob("esmobs:applmons", {
 	hp_max = 40,
 	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.0, 0.4},
 	visual = "mesh",
-	mesh = "applmons.x",
+	mesh = "mobs_dungeon_master.x",
 	textures = {"applmons.png"},
 	visual_size = {x=3.6, y=2.6},
 	makes_footstep_sound = true,
@@ -511,9 +403,7 @@ bp:register_mob("esmobs:applmons", {
 		punch_end = 48,
 	}
 })
-
 bp:register_spawn("esmobs:applmons", {"default:stone","nether:rack"}, 6, -1, 14000, 1, -30)
-
 
 --Herobrine's Bloody Ghost by Lovehart and maikerumine  http://minetest.fensta.bplaced.net/#author=lovehart
 bp:register_mob("esmobs:herobrines_bloody_ghost", {
@@ -522,7 +412,7 @@ bp:register_mob("esmobs:herobrines_bloody_ghost", {
 	hp_max = 340,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
-	mesh = "badplayer.x",
+	mesh = "badplayer.b3d",
 	textures = {"herobrines_blody_gost_by_lovehart.png"},
 	visual_size = {x=1, y=1.0},
 	makes_footstep_sound = true,
@@ -532,9 +422,9 @@ bp:register_mob("esmobs:herobrines_bloody_ghost", {
 	damage = 10,
 	drops = {
 		{name = "default:mese",
-		chance = 1,
-		min = 0,
-		max = 2,},
+		chance = 7,
+		min = 1,
+		max = 4,},
 	},
 	armor = 80,
 	drawtype = "front",
@@ -556,9 +446,77 @@ bp:register_mob("esmobs:herobrines_bloody_ghost", {
 		punch_end = 48,
 	}
 })
-
 bp:register_spawn("esmobs:herobrines_bloody_ghost", {"default:stone","default:desert_sand","nether:brick"}, 6, -1, 12000, 1, 10)
 
-
-bp:register_spawn("esmobs:herobrines_bloody_ghost", "esmobs:cursed_stone", 4, -1, 2, 1, 500, -500)
+--Phoenix from NSSM
+bp:register_spawn("esmobs:phoenix", {"air","air"}, 6, -1, 17000, 1, 100)
+--bp:spawn_specific("esmobs:phoenix", {"air"}, {"air"}, 10, 20, 120, 12000, 1, 10, 40)
+bp:register_mob("esmobs:phoenix", {
+	type = "monster",
+	hp_max = 60,
+	hp_min = 60,
+	collisionbox = {-0.65, -0.4, -0.65, 0.65, 0.4, 0.65},
+	visual = "mesh",
+	mesh = "phoenix.x",
+	textures = {{"phoenix.png"}},
+	visual_size = {x=10, y=10},
+	view_range = 40,
+	lifetimer = 500,
+	floats=1,
+	rotate = 270,
+	walk_velocity = 2,
+	run_velocity = 2.5,
+  fall_speed = 0,
+  stepheight = 3,
+  sounds = {
+		random = "phoenix",
+		distance = 45,
+	},
+	damage = 2,
+	jump = false,
+	drops = {
+		{name = "default:sand",
+		chance = 1,
+		min = 7,
+		max = 8,},
+		{name = "esmobs:feather",
+		chance = 1,
+		min = 1,
+		max = 1,},
+		{name = "esmobs:chicken",
+		chance = 1,
+		min = 5,
+		max = 6,},
+		{name = "default:gold_ore",
+		chance = 6,
+		min = 10,
+		max = 20,},
+	},
+	armor = 60,
+	drawtype = "front",
+	water_damage = 5,
+	lava_damage = 0,
+	light_damage = 0,
+	on_rightclick = nil,
+  fly = true,
+	attack_type = "shoot",
+		--arrow = "throwing:arrow_entity",
+		arrow = "esmobs:fireball",
+		reach = 1,
+		shoot_interval = 0.5,
+	animation = {
+		speed_normal = 25,
+		speed_run = 25,
+		stand_start = 220,
+		stand_end = 280,
+		walk_start = 140,
+		walk_end = 180,
+		run_start = 190,
+		run_end = 210,
+		punch_start = 80,
+		punch_end = 110,
+		dattack_start = 80,
+		dattack_end = 110,
+	}
+})
 

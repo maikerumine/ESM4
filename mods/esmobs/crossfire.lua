@@ -1,4 +1,4 @@
---esmobs v0.0.3
+--esmobs v0.0.7
 --maikerumine
 --made for Extreme Survival game
 
@@ -150,7 +150,7 @@ bp:register_mob("esmobs:Mr_White", {
 	attacks_monsters = true,
 	peaceful = true,
 	group_attack = true,
-	step = 1,
+	--step = 1,
 })
 
 bp:register_mob("esmobs:Mr_Black", {
@@ -284,7 +284,7 @@ bp:register_mob("esmobs:Mr_Black", {
 	attacks_monsters = true,
 	peaceful = true,
 	group_attack = true,
-	step = 1,
+	--step = 1,
 })
 
 bp:register_mob("esmobs:Mr_Pink", {
@@ -423,7 +423,7 @@ bp:register_mob("esmobs:Mr_Pink", {
 	attacks_monsters = true,
 	peaceful = true,
 	group_attack = true,
-	step = 1,
+	--step = 1,
 })
 
 

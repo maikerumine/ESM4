@@ -44,12 +44,12 @@ function bp:register_mob(name, def)
 		fall_damage = def.fall_damage or 1,
 		fall_speed = def.fall_speed or -10, -- must be lower than -2
 		drops = def.drops or {},
-		--drop_min = def.drop_min or 1,  --This is not correct
-		--drop_max = def.drop_max or 3,  --This is not correct
 		armor = def.armor,
-		--drawtype = def.drawtype,
+		drawtype = def.drawtype,
 		on_rightclick = def.on_rightclick,
 		type = def.type,
+		fly = def.fly,
+		fly_in = def.fly_in or "air",
 		attack_type = def.attack_type,
 		arrow = def.arrow,
 		bombtimer = def.bombtimer or 0,
@@ -84,7 +84,13 @@ function bp:register_mob(name, def)
 		hornytimer = 0,
 		child = false,
 		gotten = false,
-
+		health = 0,
+		reach = def.reach or 3,
+		htimer = 0,
+		child_texture = def.child_texture,
+		docile_by_day = def.docile_by_day or false,
+		time_of_day = 0.5,
+		fear_height = def.fear_height or 0,
 
 		--ADDED 20151128 TENPLUS1
 		get_staticdata = function(self)
@@ -141,28 +147,7 @@ function bp:register_mob(name, def)
 			local v = self.object:getvelocity()
 			return (v.x^2 + v.z^2)^(0.5)
 		end,
---[[		--FUNNY THING, I HAVE FORGOTTEN WHAT THIS WAS FOR
-		in_fov = function(self,pos)
-			-- checks if POS is in self's FOV
-			local yaw = self.object:getyaw() + self.rotate
-			local vx = math.sin(yaw)
-			local vz = math.cos(yaw)
-			local ds = math.sqrt(vx^2 + vz^2)
-			local ps = math.sqrt(pos.x^2 + pos.z^2)
-			local d = { x = vx / ds, z = vz / ds }
-			local p = { x = pos.x / ps, z = pos.z / ps }
 
-			local an = ( d.x * p.x ) + ( d.z * p.z )
-
-			a = math.deg( math.acos( an ) )
-
-			if a > ( self.fov / 2 ) then
-				return false
-			else
-				return true
-			end
-		end,
-]]
 		set_animation = function(self, type)
 			if not self.animation then
 				return
@@ -659,7 +644,6 @@ function bp:register_mob(name, def)
 				end
 
 			elseif self.state == "walk" then
-
 				local s = self.object:getpos()
 				-- if there is water nearby, try to avoid it
 				local lp = minetest.find_node_near(s, 2, {"group:water"})
@@ -692,7 +676,6 @@ function bp:register_mob(name, def)
 
 
 			-- exploding mobs
-
 			elseif self.state == "attack" and self.attack_type == "explode" then
 				if not self.attack.player or not self.attack.player:is_player() then
 					self.state = "stand"
@@ -781,7 +764,6 @@ function bp:register_mob(name, def)
 				-- end of exploding mobs
 
 			elseif self.state == "attack" and self.attack_type == "dogfight" then
-
 				if not self.attack.player or not self.attack.player:getpos() then
 					print("stop attacking")
 					self.state = "stand"
@@ -842,7 +824,7 @@ function bp:register_mob(name, def)
 					end
 				end
 
---CURRENT SUPRESSED FOR FIXES
+--CURRENT SUPRESSED FOR FIXES  currently crashes when skeleton used.
 --[[
 			elseif self.state == "attack" and self.attack_type == "shoot" then
 
@@ -899,7 +881,7 @@ function bp:register_mob(name, def)
 			end
 		end,
 ]]
---FROM MCMOBS API
+--FROM MCMOBS API  HACK WORKS
 		elseif self.state == "attack" and self.attack_type == "shoot" then
 			if not self.attack.player or not self.attack.player:is_player() then
 				self.state = "stand"
@@ -1066,520 +1048,500 @@ function bp:register_mob(name, def)
 			return minetest.serialize(tmp)
 		end,
 
-
-
 -------BEGIN ON PUNCH CODE
+					on_punch = function(self, hitter, tflp, tool_capabilities, dir)
 
-		on_punch = function(self, hitter, tflp, tool_capabilities, dir)
+						process_weapon(hitter,tflp,tool_capabilities)
+						check_for_death(self)
 
-			process_weapon(hitter,tflp,tool_capabilities)
-			check_for_death(self)
-
-			--blood_particles
-			local pos = self.object:getpos()
-			pos.y = pos.y + (-self.collisionbox[2] + self.collisionbox[5]) / 2
-			if self.blood_amount > 0 and pos and enable_blood == true then
-				effect(pos, self.blood_amount, self.blood_texture)
-			end
-
-			-- knock back effect, adapted from blockmen's pyramids mod
-			-- https://github.com/BlockMen/pyramids
-			local kb = self.knock_back
-			local r = self.recovery_time
-			local ykb = 2
-			local v = self.object:getvelocity()
-			if tflp < tool_capabilities.full_punch_interval then
-				kb = kb * ( tflp / tool_capabilities.full_punch_interval )
-				r = r * ( tflp / tool_capabilities.full_punch_interval )
-			end
-			if v.y ~= 0 then ykb = 0 end
-			self.object:setvelocity({x=dir.x*kb,y=ykb,z=dir.z*kb})
-			self.pause_timer = r
-
-			-- attack puncher and call other mobs for help
-			if self.passive == false and not self.tamed then
-				if self.state ~= "attack" then
-					self.do_attack(self,hitter,1)
-				end
-				-- alert others to the attack
-				local obj = nil
-				for _, oir in pairs(minetest.get_objects_inside_radius(hitter:getpos(),5)) do
-					obj = oir:get_luaentity()
-					if obj then
-						if obj.group_attack == true and obj.state ~= "attack" then
-							obj.do_attack(obj,hitter,1)
+						--blood_particles
+						local pos = self.object:getpos()
+						pos.y = pos.y + (-self.collisionbox[2] + self.collisionbox[5]) / 2
+						if self.blood_amount > 0 and pos and enable_blood == true then
+							effect(pos, self.blood_amount, self.blood_texture)
 						end
+
+						-- knock back effect, adapted from blockmen's pyramids mod
+						-- https://github.com/BlockMen/pyramids
+						local kb = self.knock_back
+						local r = self.recovery_time
+						local ykb = 2
+						local v = self.object:getvelocity()
+						if tflp < tool_capabilities.full_punch_interval then
+							kb = kb * ( tflp / tool_capabilities.full_punch_interval )
+							r = r * ( tflp / tool_capabilities.full_punch_interval )
+						end
+						if v.y ~= 0 then ykb = 0 end
+						self.object:setvelocity({x=dir.x*kb,y=ykb,z=dir.z*kb})
+						self.pause_timer = r
+
+						-- attack puncher and call other mobs for help
+						if self.passive == false and not self.tamed then
+							if self.state ~= "attack" then
+								self.do_attack(self,hitter,1)
+							end
+							-- alert others to the attack
+							local obj = nil
+							for _, oir in pairs(minetest.get_objects_inside_radius(hitter:getpos(),5)) do
+								obj = oir:get_luaentity()
+								if obj then
+									if obj.group_attack == true and obj.state ~= "attack" then
+										obj.do_attack(obj,hitter,1)
+									end
+								end
+							end
+						end
+
+			--deathanimation WIP
+			--	on_punch = function(self, hitter)
+				-- death happens at 20 hp so we can play the death animation:
+					if self.object:get_hp() <= 20 then
+						local pos = self.object:getpos()
+						minetest.add_particlespawner({
+							amount = 20,
+							time = .2,
+							minpos = {x=pos.x-1, y=pos.y-.5, z=pos.z-1},
+							maxpos = {x=pos.x+1, y=pos.y+.5, z=pos.z+1},
+							minvel = {x=0, y=.3, z=0},
+							maxvel = {x=0, y=2, z=0},
+							minacc = {x=-.2, y=-.2, z=-.2},
+							maxacc = {x=.2, y=.2, z=.2},
+							minexptime = 1,
+							maxexptime = 5,
+							minsize = 1,
+							maxsize = 1,
+							collisiondetection = false,
+							vertical = false,
+							texture = "bettertnt_smoke.png",
+						})
+						--self:set_animation("death")
+						--self.object:set_hp(1000)
+						if self.name == "esmobs:pig" and self.driver then
+							local name = self.driver:get_player_name()
+							self.driver:set_detach()
+							default.player_attached[name] = false
+							default.player_set_animation(self.driver, "stand" , 30)
+							self.driver = nil
+						end
+						--minetest.after(self.animation.deathdur, function()
+							--self.object:remove()
+						--end)
+						if self.sounds and self.sounds.death then
+							minetest.sound_play(self.sounds.death, {object = self.object})
+							--self:set_animation("death")
+						end
+						pos.y = pos.y + 0.5
+						local obj = nil
+					else
+						if self.sounds and self.sounds.hurt then
+							minetest.sound_play(self.sounds.hurt, {object = self.object})
+						end
+						self:set_animation("hurt")
+						minetest.after(self.animation.hurtdur, function()
+							self:set_animation("walk")
+						end)
 					end
-				end
+			--	end
+			--deathanimation WIP
+
+
+
+			--------END ORIG ON PUNCH CODE
+			--------ADDING LAGS MOBS BONES HERE
+			    --on_punch = function(self, hitter)
+				    --mob killed
+				 if self.object:get_hp() <= 0 then
+
+				    if hitter and hitter:is_player() and hitter:get_inventory() then
+				       for _,drop in ipairs(self.drops) do
+			----------
+			--	       	--THIS CODE GIVES YOU THE DROP INSTANT ON DEATH--removed to place drops in bones.
+			--              	 if math.random(1, drop.chance) == 1 then
+			--                  	hitter:get_inventory():add_item("main", ItemStack(drop.name.." "..math.random(drop.min, drop.max)))
+			--               	end
+			 ----------
+				       end
+
+					    --mob bones, like player bones added by Andrei modified by maikerumine
+					 if math.random(1, 1) == 1  then
+						local pos = self.object:getpos()
+						local nn = minetest.get_node(pos).name
+						local spaceforbones=nil
+						if nn=="air" or nn=="default:water_flowing" or nn=="default:water_source" or nn=="default:lava_source" or nn=="default:lava_flowing" then
+						    spaceforbones=pos
+								--minetest.add_node(spaceforbones, {name="bones:bones"} )
+								minetest.add_node(spaceforbones, {name="esmobs:bones"} )
+						    local meta = minetest.get_meta(spaceforbones)
+						    local inv = meta:get_inventory()
+						    inv:set_size("main", 8*4)
+							--DROPS FILL BONE
+						    for _,drop in ipairs(self.drops) do
+							if math.random(1, drop.chance) == 1 then
+							    local stack = ItemStack(drop.name.." "..math.random(drop.min, drop.max))
+							    if inv:room_for_item("main", stack) then
+								inv:add_item("main", stack)
+							    end
+							end
+						    end
+
+						    meta:set_string("formspec", "size[8,9;]"..
+							    "list[current_name;main;0,0;8,4;]"..
+							    "list[current_player;main;0,5;8,4;]")
+
+
+			--BEGIN TIME STRING
+							local time = os.date("*t");--this keeps the bones meta to turn old
+
+			--CHOOSE OPTION BELOW:
+							meta:set_string("infotext", self.name.." was slain".." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min .." by: ("..hitter:get_player_name()..")");	--SHOW TIME AT DEATH AND WHO KILLED
+			--				meta:set_string("infotext", self.name.."'s fresh bones")	--SHOW NO TIME AT BONE EXPIRE
+			--CHOOSE OPTION BELOW:
+			--				meta:set_string( "owner", "Extreme Survival Mob R.I.P.")	--SET OWNER FOR TIMER
+							meta:set_string("owner")						--SET NO OWNER NO TIMER
+
+						    meta:set_int("bonetime_counter", 0)
+						    local timer  = minetest.get_node_timer(spaceforbones)
+						    timer:start(10)
+						end
+					 end
+				       minetest.log("action", "Killed mob "..name.." by "..hitter:get_player_name())
+				    end
+				    self.object:remove()
+				    return
+				 elseif self.object:get_hp() == 1 or self.object:get_hp() == 1 or self.object:get_hp() == 2 then
+				    self.state="run"
+				    self:set_animation("death")
+				 else
+				    self.v_start=true
+				    if hitter and hitter:is_player() and hitter:get_wielded_item() then
+				       local tool=hitter:get_wielded_item()
+				       tool:add_wear(100)
+				       hitter:set_wielded_item( tool )
+				    end
+
+				 end
+			--end,			--use if using original punch code.
+				end,
+			-------END ON PUNCH FULL CODE
+				})
 			end
 
---[[
---deathanim	org
+--SPAWNING
+			bp.spawning_mobs = {}
+			function bp:spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
+				bp.spawning_mobs[name] = true
+				minetest.register_abm({
+					nodenames = nodes,
+					neighbors = neighbors,
+					interval = interval,
+					chance = chance,
+					action = function(pos, node, _, active_object_count_wider)
+						-- do not spawn if too many active in area
+						if active_object_count_wider > active_object_count
+						or not bp.spawning_mobs[name]
+						or not pos then
+							return
+						end
 
-	on_punch = function(self, hitter)
-	-- death happens at 20 hp so we can play the death animation:
-		if self.object:get_hp() <= 20 then
-			local pos = self.object:getpos()
-minetest.add_particlespawner({
-	amount = 20,
-	time = .2,
-	minpos = {x=pos.x-1, y=pos.y-.5, z=pos.z-1},
-	maxpos = {x=pos.x+1, y=pos.y+.5, z=pos.z+1},
-	minvel = {x=0, y=.3, z=0},
-	maxvel = {x=0, y=2, z=0},
-	minacc = {x=-.2, y=-.2, z=-.2},
-	maxacc = {x=.2, y=.2, z=.2},
-	minexptime = 1,
-	maxexptime = 5,
-	minsize = 1,
-	maxsize = 1,
-	collisiondetection = false,
-	vertical = false,
-	texture = "bettertnt_smoke.png",
-})
-			self:set_animation("death")
-			self.object:set_hp(1000)
-			if self.name == "esmobs:pig" and self.driver then
-				local name = self.driver:get_player_name()
-				self.driver:set_detach()
-				default.player_attached[name] = false
-				default.player_set_animation(self.driver, "stand" , 30)
-				self.driver = nil
-			end
-			minetest.after(self.animation.deathdur, function()
-				self.object:remove()
-			end)
-			if self.sounds and self.sounds.death then
-				minetest.sound_play(self.sounds.death, {object = self.object})
-			end
-			pos.y = pos.y + 0.5
-			local obj = nil
-			local ndrops = 0
-			for _,drop in ipairs(self.drops) do
-				if math.random(1, drop.chance) == 1 and ndrops < (self.maxdrops or 100) then
-					obj = minetest.add_item(pos, ItemStack(drop.name.." "..math.random(drop.min, drop.max)))
-					ndrops = ndrops + 1
-					if obj then
-						obj:setvelocity({x=math.random(-1,1), y=5, z=math.random(-1,1)})
+						-- spawn above node
+						pos.y = pos.y + 1
+						--pos.x = pos.x + 2  --ADDED TO FIX TUNNEL SPAWN
+						--pos.z = pos.z + 2  --ADDED TO FIX TUNNEL SPAWN
+						-- mobs cannot spawn inside protected areas if enabled  --20151224 removed because broken
+
+						if bp.protected == 1 and minetest.is_protected(pos, "") then
+							return
+						end
+
+						-- check if light and height levels are ok to spawn
+						local light = minetest.get_node_light(pos)
+						if not light or light > max_light or light < min_light
+						or pos.y > max_height or pos.y < min_height then
+							return
+						end
+
+						-- are we spawning inside a solid node?
+						local nod = minetest.get_node_or_nil(pos)
+						if not nod or not nod.name or not minetest.registered_nodes[nod.name]
+						or minetest.registered_nodes[nod.name].walkable == true then return end
+						pos.y = pos.y + 3 --test to see if prevent mineshaft spawn
+			--			--pos.y = pos.y + 1--original
+						nod = minetest.get_node_or_nil(pos)
+						if not nod or not nod.name or not minetest.registered_nodes[nod.name]
+						or minetest.registered_nodes[nod.name].walkable == true then return end
+
+						if minetest.setting_getbool("display_mob_spawn") then
+							minetest.chat_send_all("[bp] Add "..name.." at "..minetest.pos_to_string(pos))
+						end
+
+						-- spawn mob half block higher
+						pos.y = pos.y - 0.5
+						--pos.x = pos.x - 1  --ADDED TO FIX TUNNEL SPAWN
+						--pos.z = pos.z - 1  --ADDED TO FIX TUNNEL SPAWN
+						minetest.add_entity(pos, name)
+						--print ("Spawned "..name.." at "..minetest.pos_to_string(pos).." on "..node.name.." near "..neighbors[1])
+
+			--TODO --ADD CODE SO MOB CANNOT SPAWN IN MINESHAFT, ALSO REMOVE
 					end
-				end
+				})
 			end
-		else
-			if self.sounds and self.sounds.hurt then
-				minetest.sound_play(self.sounds.hurt, {object = self.object})
-			end
-			self:set_animation("hurt")
-			minetest.after(self.animation.hurtdur, function()
-				self:set_animation("walk")
-			end)
-		end
-	end
---deathanim	org
-]]
-
-
-
-
---deathanimation
---	on_punch = function(self, hitter)
-	-- death happens at 20 hp so we can play the death animation:
-		if self.object:get_hp() <= 20 then
-			local pos = self.object:getpos()
-			minetest.add_particlespawner({
-				amount = 20,
-				time = .2,
-				minpos = {x=pos.x-1, y=pos.y-.5, z=pos.z-1},
-				maxpos = {x=pos.x+1, y=pos.y+.5, z=pos.z+1},
-				minvel = {x=0, y=.3, z=0},
-				maxvel = {x=0, y=2, z=0},
-				minacc = {x=-.2, y=-.2, z=-.2},
-				maxacc = {x=.2, y=.2, z=.2},
-				minexptime = 1,
-				maxexptime = 5,
-				minsize = 1,
-				maxsize = 1,
-				collisiondetection = false,
-				vertical = false,
-				texture = "bettertnt_smoke.png",
-			})
-			--self:set_animation("death")
-			--self.object:set_hp(1000)
-			if self.name == "esmobs:pig" and self.driver then
-				local name = self.driver:get_player_name()
-				self.driver:set_detach()
-				default.player_attached[name] = false
-				default.player_set_animation(self.driver, "stand" , 30)
-				self.driver = nil
-			end
-			--minetest.after(self.animation.deathdur, function()
-				--self.object:remove()
-			--end)
-			if self.sounds and self.sounds.death then
-				minetest.sound_play(self.sounds.death, {object = self.object})
-				--self:set_animation("death")
-			end
-			pos.y = pos.y + 0.5
-			local obj = nil
-		else
-			if self.sounds and self.sounds.hurt then
-				minetest.sound_play(self.sounds.hurt, {object = self.object})
-			end
-			self:set_animation("hurt")
-			minetest.after(self.animation.hurtdur, function()
-				self:set_animation("walk")
-			end)
-		end
---	end
---deathanimation
-
-
-
---------END ORIG ON PUNCH CODE
---------ADDING LAGS MOBS BONES HERE
-    --on_punch = function(self, hitter)
-            --mob killed
-         if self.object:get_hp() <= 0 then
-
-            if hitter and hitter:is_player() and hitter:get_inventory() then
-               for _,drop in ipairs(self.drops) do
-----------
---	       	--THIS CODE GIVES YOU THE DROP INSTANT ON DEATH--removed to place drops in bones.
---              	 if math.random(1, drop.chance) == 1 then
---                  	hitter:get_inventory():add_item("main", ItemStack(drop.name.." "..math.random(drop.min, drop.max)))
---               	end
- ----------
-               end
-
-                    --mob bones, like player bones added by Andrei modified by maikerumine
-                 if math.random(1, 1) == 1  then
-                        local pos = self.object:getpos()
-                        local nn = minetest.get_node(pos).name
-                        local spaceforbones=nil
-                        if nn=="air" or nn=="default:water_flowing" or nn=="default:water_source" or nn=="default:lava_source" or nn=="default:lava_flowing" then
-                            spaceforbones=pos
-					--minetest.add_node(spaceforbones, {name="bones:bones"} )
-					minetest.add_node(spaceforbones, {name="esmobs:bones"} )
-                            local meta = minetest.get_meta(spaceforbones)
-                            local inv = meta:get_inventory()
-                            inv:set_size("main", 8*4)
-				--DROPS FILL BONE
-                            for _,drop in ipairs(self.drops) do
-                                if math.random(1, drop.chance) == 1 then
-                                    local stack = ItemStack(drop.name.." "..math.random(drop.min, drop.max))
-                                    if inv:room_for_item("main", stack) then
-                                        inv:add_item("main", stack)
-                                    end
-                                end
-                            end
-
-                            meta:set_string("formspec", "size[8,9;]"..
-                                    "list[current_name;main;0,0;8,4;]"..
-                                    "list[current_player;main;0,5;8,4;]")
-
-
---BEGIN TIME STRING
-				local time = os.date("*t");--this keeps the bones meta to turn old
-
---CHOOSE OPTION BELOW:
-				meta:set_string("infotext", self.name.." was slain".." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min .." by: ("..hitter:get_player_name()..")");	--SHOW TIME AT DEATH AND WHO KILLED
---				meta:set_string("infotext", self.name.."'s fresh bones")	--SHOW NO TIME AT BONE EXPIRE
---CHOOSE OPTION BELOW:
---				meta:set_string( "owner", "Extreme Survival Mob R.I.P.")	--SET OWNER FOR TIMER
-				meta:set_string("owner")						--SET NO OWNER NO TIMER
-
-                            meta:set_int("bonetime_counter", 0)
-                            local timer  = minetest.get_node_timer(spaceforbones)
-                            timer:start(10)
-                        end
-                 end
-               minetest.log("action", "Killed mob "..name.." by "..hitter:get_player_name())
-            end
-            self.object:remove()
-            return
-         elseif self.object:get_hp() == 1 or self.object:get_hp() == 1 or self.object:get_hp() == 2 then
-            self.state="run"
-	    self:set_animation("death")
-         else
-            self.v_start=true
-            if hitter and hitter:is_player() and hitter:get_wielded_item() then
-               local tool=hitter:get_wielded_item()
-               tool:add_wear(100)
-               hitter:set_wielded_item( tool )
-            end
-
-         end
---end,			--use if using original punch code.
-
-
-	end,
--------END ON PUNCH FULL CODE
-	})
-
-
-
-end
-
-
-bp.spawning_mobs = {}
-
-function bp:spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
-	bp.spawning_mobs[name] = true
-	minetest.register_abm({
-		nodenames = nodes,
-		neighbors = neighbors,
-		interval = interval,
-		chance = chance,
-		action = function(pos, node, _, active_object_count_wider)
-			-- do not spawn if too many active in area
-			if active_object_count_wider > active_object_count
-			or not bp.spawning_mobs[name]
-			or not pos then
-				return
-			end
-
-			-- spawn above node
-			pos.y = pos.y + 1
-			--pos.x = pos.x + 2  --ADDED TO FIX TUNNEL SPAWN
-			--pos.z = pos.z + 2  --ADDED TO FIX TUNNEL SPAWN
-			-- mobs cannot spawn inside protected areas if enabled  --20151224 removed because broken
-
-			if bp.protected == 1 and minetest.is_protected(pos, "") then
-				return
-			end
-
-			-- check if light and height levels are ok to spawn
-			local light = minetest.get_node_light(pos)
-			if not light or light > max_light or light < min_light
-			or pos.y > max_height or pos.y < min_height then
-				return
-			end
-
-			-- are we spawning inside a solid node?
-			local nod = minetest.get_node_or_nil(pos)
-			if not nod or not nod.name or not minetest.registered_nodes[nod.name]
-			or minetest.registered_nodes[nod.name].walkable == true then return end
-			pos.y = pos.y + 3 --test to see if prevent mineshaft spawn
---			--pos.y = pos.y + 1--original
-			nod = minetest.get_node_or_nil(pos)
-			if not nod or not nod.name or not minetest.registered_nodes[nod.name]
-			or minetest.registered_nodes[nod.name].walkable == true then return end
-
-			if minetest.setting_getbool("display_mob_spawn") then
-				minetest.chat_send_all("[bp] Add "..name.." at "..minetest.pos_to_string(pos))
-			end
-
-			-- spawn mob half block higher
-			pos.y = pos.y - 0.5
-			--pos.x = pos.x - 1  --ADDED TO FIX TUNNEL SPAWN
-			--pos.z = pos.z - 1  --ADDED TO FIX TUNNEL SPAWN
-			minetest.add_entity(pos, name)
-			--print ("Spawned "..name.." at "..minetest.pos_to_string(pos).." on "..node.name.." near "..neighbors[1])
-
---TODO --ADD CODE SO MOB CANNOT SPAWN IN MINESHAFT, ALSO REMOVE
-
-
-		end
-	})
-end
 
 -- compatibility with older mob registration
-function bp:register_spawn(name, nodes, max_light, min_light, chance, active_object_count, max_height)
-	bp:spawn_specific(name, nodes, {"air"}, min_light, max_light, 30, chance, active_object_count, -31000, max_height)
-end
+			function bp:register_spawn(name, nodes, max_light, min_light, chance, active_object_count, max_height)
+				bp:spawn_specific(name, nodes, {"air"}, min_light, max_light, 30, chance, active_object_count, -31000, max_height)
+			end
 
 -- particle effects
-function effect(pos, amount, texture, max_size)
-	minetest.add_particlespawner({
-		amount = amount,
-		time = 0.25,
-		minpos = pos,
-		maxpos = pos,
-		minvel = {x=-0, y=-2, z=-0},
-		maxvel = {x=2,  y=2,  z=2},
-		minacc = {x=-4, y=-4, z=-4},
-		maxacc = {x=4, y=4, z=4},
-		minexptime = 0.1,
-		maxexptime = 1,
-		minsize = 0.5,
-		maxsize = (max_size or 1),
-		texture = texture,
-	})
-end
+			function effect(pos, amount, texture, max_size)
+				minetest.add_particlespawner({
+					amount = amount,
+					time = 0.25,
+					minpos = pos,
+					maxpos = pos,
+					minvel = {x=-0, y=-2, z=-0},
+					maxvel = {x=2,  y=2,  z=2},
+					minacc = {x=-4, y=-4, z=-4},
+					maxacc = {x=4, y=4, z=4},
+					minexptime = 0.1,
+					maxexptime = 1,
+					minsize = 0.5,
+					maxsize = (max_size or 1),
+					texture = texture,
+				})
+			end
+-- check if within map limits (-30911 to 30927)
+			function within_limits(pos, radius)
 
--- explosion
-function bp:explosion(pos, radius, fire, smoke, sound)
-	-- node hit, bursts into flame (cannot blast through obsidian or protection mod items)
-	if not fire then fire = 0 end
-	if not smoke then smoke = 0 end
-	local pos = vector.round(pos)
-	local radius = 1
-	local vm = VoxelManip()
-	local minp, maxp = vm:read_from_map(vector.subtract(pos, radius), vector.add(pos, radius))
-	local a = VoxelArea:new({MinEdge = minp, MaxEdge = maxp})
-	local data = vm:get_data()
-	local p = {}
-	local c_air = minetest.get_content_id("air")
-	local c_ignore = minetest.get_content_id("ignore")
-	local c_obsidian = minetest.get_content_id("default:obsidian")
-	local c_brick = minetest.get_content_id("default:obsidianbrick")
-	local c_chest = minetest.get_content_id("default:chest_locked")
-	local c_portal = minetest.get_content_id("nether:portal")
-	if sound and sound ~= "" then
-		minetest.sound_play(sound, {pos = pos, gain = 1.0, max_hear_distance = 16})
-	end
-	for z = -radius, radius do
-	for y = -radius, radius do
-	local vi = a:index(pos.x + (-radius), pos.y + y, pos.z + z)
-	for x = -radius, radius do
-		p.x = pos.x + x
-		p.y = pos.y + y
-		p.z = pos.z + z
-		if data[vi] ~= c_air and data[vi] ~= c_ignore and data[vi] ~= c_obsidian and data[vi] ~= c_brick and data[vi] ~= c_chest and data[vi] ~= c_portal then
-			local n = minetest.get_node(p).name
-			-- do NOT destroy protection nodes but DO destroy nodes in protected area
-			if not n:find("protector:")
-			--and not minetest.is_protected(p, "")
-			and minetest.get_item_group(n.name, "unbreakable") ~= 1 then
-				-- if chest then drop items inside
-				if n == "default:chest" then
-					local meta = minetest.get_meta(p)
-					local inv  = meta:get_inventory()
-					for i = 1,32 do
-						local m_stack = inv:get_stack("main",i)
-						local obj = minetest.add_item(pos,m_stack)
-						if obj then
-							obj:setvelocity({x=math.random(-2,2), y=7, z=math.random(-2,2)})
+				if  (pos.x - radius) > -30913
+				and (pos.x + radius) <  30928
+				and (pos.y - radius) > -6001  --hack for esm world
+				and (pos.y + radius) <  30928
+				and (pos.z - radius) > -30913
+				and (pos.z + radius) <  30928 then
+					return true -- within limits
+				end
+
+				return false -- beyond limits
+			end
+
+-- explosion (cannot break protected or unbreakable nodes)
+			function bp:explosion(pos, radius, fire, smoke, sound)
+
+				radius = radius or 0
+				fire = fire or 0
+				smoke = smoke or 0
+
+				-- if area protected or near map limits then no blast damage
+				if minetest.is_protected(pos, "")
+				or not within_limits(pos, radius) then
+					return
+				end
+				
+				--ADD IMMORTAL HERE
+
+				-- explosion sound
+				if sound
+				and sound ~= "" then
+
+					minetest.sound_play(sound, {
+						pos = pos,
+						gain = 1.0,
+						max_hear_distance = 16
+					})
+				end
+
+				pos = vector.round(pos) -- voxelmanip doesn't work properly unless pos is rounded ?!?!
+
+				local vm = VoxelManip()
+				local minp, maxp = vm:read_from_map(vector.subtract(pos, radius), vector.add(pos, radius))
+				local a = VoxelArea:new({MinEdge = minp, MaxEdge = maxp})
+				local data = vm:get_data()
+				local p = {}
+
+				for z = -radius, radius do
+				for y = -radius, radius do
+				local vi = a:index(pos.x + (-radius), pos.y + y, pos.z + z)
+				for x = -radius, radius do
+
+					p.x = pos.x + x
+					p.y = pos.y + y
+					p.z = pos.z + z
+
+					if data[vi] ~= c_air
+					and data[vi] ~= c_ignore
+					and data[vi] ~= c_obsidian
+					and data[vi] ~= c_brick
+					and data[vi] ~= c_chest then
+
+						local n = node_ok(p).name
+
+						if minetest.get_item_group(n, "unbreakable") ~= 1  then
+
+							-- if chest then drop items inside
+							if n == "default:chest"
+							or n == "3dchest:chest"
+							or n == "bones:bones" then
+
+								local meta = minetest.get_meta(p)
+								local inv  = meta:get_inventory()
+
+								for i = 1, inv:get_size("main") do
+
+									local m_stack = inv:get_stack("main", i)
+									local obj = minetest.add_item(p, m_stack)
+
+									if obj then
+
+										obj:setvelocity({
+											x = math.random(-2, 2),
+											y = 7,
+											z = math.random(-2, 2)
+										})
+									end
+								end
+							end
+
+							-- after effects
+							if fire > 0
+							and (minetest.registered_nodes[n].groups.flammable
+							or math.random(1, 100) <= 30) then
+
+								minetest.set_node(p, {name = "fire:basic_flame"})
+							else
+								minetest.set_node(p, {name = "air"})
+
+								if smoke > 0 then
+									effect(p, 2, "tnt_smoke.png", 5)
+								end
+							end
 						end
 					end
+
+					vi = vi + 1
+
 				end
-				if fire > 0 and (minetest.registered_nodes[n].groups.flammable or math.random(1, 100) <= 30) then
-					minetest.set_node(p, {name="fire:basic_flame"})
-				else
-					minetest.remove_node(p)
 				end
-				if smoke > 0 then
-					effect(p, 2, "tnt_smoke.png", 5)
 				end
 			end
-		end
-		vi = vi + 1
-	end
-	end
-	end
-end
+
 
 --BEGIN DROPS GO TO BONES
 -- on mob death drop items
-function check_for_death(self)
-	local hp = self.object:get_hp()
-	if hp > 0 then
-		if self.sounds.damage ~= nil and hp < self.oldhp then
-			minetest.sound_play(self.sounds.damage,{object = self.object})
-			self.oldhp = hp
-		end
-		return
-	end
+			function check_for_death(self)
+				local hp = self.object:get_hp()
+				if hp > 0 then
+					if self.sounds.damage ~= nil and hp < self.oldhp then
+						minetest.sound_play(self.sounds.damage,{object = self.object})
+						self.oldhp = hp
+					end
+					return
+				end
 
---USE THIS CODE TO HAVE VISIBLE DROPS AND COMMENT OUT THE MOBS BONES
---[[
-	local pos = self.object:getpos()
-	pos.y = pos.y + 1.5 -- drop items half a block higher
-	self.object:remove()
-	local obj = nil
-	for _,drop in ipairs(self.drops) do
-		if math.random(1, drop.chance) == 1 then
-			obj = minetest.add_item(pos, ItemStack(drop.name.." "..math.random(drop.min, drop.max)))
-			if obj then
-				obj:setvelocity({x=math.random(-1,1), y=5, z=math.random(-1,1)})
-			end
-		end
-	end
-
-]]
-
-------------------------------------------------------
-------------------------------------------------------MOBS BONES ON DIE--COMMENTED OUT DUE TO SERVER GRIEF.  MANY BONES
-         if self.object:get_hp() <= 0 then
- --[[                       local pos = self.object:getpos()
-                        local nn = minetest.get_node(pos).name
-                        local spaceforbones=nil
-                        if nn=="air" or nn=="default:water_flowing" or nn=="default:water_source" or nn=="default:lava_source" or nn=="default:lava_flowing" then
-                            spaceforbones=pos
-					minetest.add_node(spaceforbones, {name="bones:bones"} )
-                            local meta = minetest.get_meta(spaceforbones)
-                            local inv = meta:get_inventory()
-                            inv:set_size("main", 8*4)
-                            for _,drop in ipairs(self.drops) do
-                                if math.random(1, drop.chance) == 1 then
-                                    local stack = ItemStack(drop.name.." "..math.random(drop.min, drop.max))
-                                    if inv:room_for_item("main", stack) then
-                                        inv:add_item("main", stack)
-                                    end
-                                end
-                            end
-                            meta:set_string("formspec", "size[8,9;]"..
-                                    "list[current_name;main;0,0;8,4;]"..
-                                    "list[current_player;main;0,5;8,4;]")
-				local time = os.date("*t");--this keeps the bones meta to turn old
-				meta:set_string("infotext", self.name.." slain".. meta:get_string("owner").." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..")");		--SHOW TIME AT DEATH
-				meta:set_string( "owner", "Extreme Survival Mob R.I.P.")			--SET OWNER FOR TIMER
-                            meta:set_int("bonetime_counter", 0)
-                            local timer  = minetest.get_node_timer(spaceforbones)
-                            timer:start(10)
-                        end]]
+			--USE THIS CODE TO HAVE VISIBLE DROPS AND COMMENT OUT THE MOBS BONES
+			--[[
+				local pos = self.object:getpos()
+				pos.y = pos.y + 1.5 -- drop items half a block higher
 				self.object:remove()
-			return
-                 end
+				local obj = nil
+				for _,drop in ipairs(self.drops) do
+					if math.random(1, drop.chance) == 1 then
+						obj = minetest.add_item(pos, ItemStack(drop.name.." "..math.random(drop.min, drop.max)))
+						if obj then
+							obj:setvelocity({x=math.random(-1,1), y=5, z=math.random(-1,1)})
+						end
+					end
+				end
 
-		 --end--UNCOMMENT IF RE-ADDING VISIBLE DROPS
-------------------------------------------------------
-------------------------------------------------------
-------------------------------------------------------
+			]]
 
-	if self.sounds.death ~= nil then
-		minetest.sound_play(self.sounds.death,{object = self.object})
-	end
-	if self.on_die then
-		pos.y = pos.y - 0.5
-		self.on_die(self, pos)
+			------------------------------------------------------
+			------------------------------------------------------MOBS BONES ON DIE--COMMENTED OUT DUE TO SERVER GRIEF.  MANY BONES
+				 if self.object:get_hp() <= 0 then
+			 --[[                       local pos = self.object:getpos()
+						local nn = minetest.get_node(pos).name
+						local spaceforbones=nil
+						if nn=="air" or nn=="default:water_flowing" or nn=="default:water_source" or nn=="default:lava_source" or nn=="default:lava_flowing" then
+						    spaceforbones=pos
+								minetest.add_node(spaceforbones, {name="bones:bones"} )
+						    local meta = minetest.get_meta(spaceforbones)
+						    local inv = meta:get_inventory()
+						    inv:set_size("main", 8*4)
+						    for _,drop in ipairs(self.drops) do
+							if math.random(1, drop.chance) == 1 then
+							    local stack = ItemStack(drop.name.." "..math.random(drop.min, drop.max))
+							    if inv:room_for_item("main", stack) then
+								inv:add_item("main", stack)
+							    end
+							end
+						    end
+						    meta:set_string("formspec", "size[8,9;]"..
+							    "list[current_name;main;0,0;8,4;]"..
+							    "list[current_player;main;0,5;8,4;]")
+							local time = os.date("*t");--this keeps the bones meta to turn old
+							meta:set_string("infotext", self.name.." slain".. meta:get_string("owner").." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..")");		--SHOW TIME AT DEATH
+							meta:set_string( "owner", "Extreme Survival Mob R.I.P.")			--SET OWNER FOR TIMER
+						    meta:set_int("bonetime_counter", 0)
+						    local timer  = minetest.get_node_timer(spaceforbones)
+						    timer:start(10)
+						end]]
+							self.object:remove()
+						return
+					 end
 
-	end
-end
+					 --end--UNCOMMENT IF RE-ADDING VISIBLE DROPS
+			------------------------------------------------------
+			------------------------------------------------------
+			------------------------------------------------------
+
+				if self.sounds.death ~= nil then
+					minetest.sound_play(self.sounds.death,{object = self.object})
+				end
+				if self.on_die then
+					pos.y = pos.y - 0.5
+					self.on_die(self, pos)
+
+				end
+			end
 
 -- from TNT mod
-function calc_velocity(pos1, pos2, old_vel, power)
-	local vel = vector.direction(pos1, pos2)
-	vel = vector.normalize(vel)
-	vel = vector.multiply(vel, power)
-	local dist = vector.distance(pos1, pos2)
-	dist = math.max(dist, 1)
-	vel = vector.divide(vel, dist)
-	vel = vector.add(vel, old_vel)
-	return vel
-end
+			function calc_velocity(pos1, pos2, old_vel, power)
+				local vel = vector.direction(pos1, pos2)
+				vel = vector.normalize(vel)
+				vel = vector.multiply(vel, power)
+				local dist = vector.distance(pos1, pos2)
+				dist = math.max(dist, 1)
+				vel = vector.divide(vel, dist)
+				vel = vector.add(vel, old_vel)
+				return vel
+			end
 
 -- modified from TNT mod
-function entity_physics(pos, radius)
-	radius = radius * 2
-	local objs = minetest.get_objects_inside_radius(pos, radius)
-	local obj_pos, obj_vel, dist
-	for _, obj in pairs(objs) do
-		obj_pos = obj:getpos()
-		obj_vel = obj:getvelocity()
-		dist = math.max(1, vector.distance(pos, obj_pos))
-		if obj_vel ~= nil then
-			obj:setvelocity(calc_velocity(pos, obj_pos,
-					obj_vel, radius * 10))
-		end
-		local damage = (4 / dist) * radius
-		obj:set_hp(obj:get_hp() - damage)
-	end
-end
+			function entity_physics(pos, radius)
+				radius = radius * 2
+				local objs = minetest.get_objects_inside_radius(pos, radius)
+				local obj_pos, obj_vel, dist
+				for _, obj in pairs(objs) do
+					obj_pos = obj:getpos()
+					obj_vel = obj:getvelocity()
+					dist = math.max(1, vector.distance(pos, obj_pos))
+					if obj_vel ~= nil then
+						obj:setvelocity(calc_velocity(pos, obj_pos,
+								obj_vel, radius * 10))
+					end
+					local damage = (4 / dist) * radius
+					obj:set_hp(obj:get_hp() - damage)
+				end
+			end
 
+--[[
+--NEWARROW  DM DOESN'T SHOOT
 -- register arrow for shoot attack
 function bp:register_arrow(name, def)
+
 	if not name or not def then return end -- errorcheck
+
 	minetest.register_entity(name, {
+
 		physical = false,
 		visual = def.visual,
 		visual_size = def.visual_size,
@@ -1589,71 +1551,224 @@ function bp:register_arrow(name, def)
 		hit_node = def.hit_node,
 		hit_mob = def.hit_mob,
 		drop = def.drop or false,
-		collisionbox = {0,0,0,0,0,0}, -- remove box around arrows
+		collisionbox = {0, 0, 0, 0, 0, 0}, -- remove box around arrows
+		timer = 0,
+		switch = 0,
 
 		on_step = function(self, dtime)
-			self.timer = (self.timer or 0) + 1
-			if self.timer > 150 then self.object:remove() return end
-			local engage = 10 - (self.velocity / 2) -- clear entity before arrow becomes active
+
+			self.timer = self.timer + 1
+
 			local pos = self.object:getpos()
-			local node = minetest.get_node(self.object:getpos()).name
-			-- hit node you can walk on
-			if self.hit_node and node and minetest.registered_nodes[node] and minetest.registered_nodes[node].walkable then
-				self.hit_node(self, pos, node)
-				if self.drop == true then
-					pos.y = pos.y + 1 ; self.lastpos = (self.lastpos or pos)
-					minetest.add_item(self.lastpos, self.object:get_luaentity().name)
-				end
-				self.object:remove()
+
+			if self.switch == 0
+			or self.timer > 150
+			or not within_limits(pos, 0) then
+
+				self.object:remove() ; -- print ("removed arrow")
+
 				return
 			end
 
-					-- ridable pigs
-		if self.name == "esmobs:pig" and self.saddle == "yes" and self.driver then
-			local item = self.driver:get_wielded_item()
-			if item:get_name() == "esmobs:carrotstick" then
-				local yaw = self.driver:get_look_yaw() - math.pi / 2
-				local velo = self.object:getvelocity()
-				local v = 1.5
-				if math.abs(velo.x) + math.abs(velo.z) < .6 then velo.y = 5 end
-				self.state = "walk"
-				self:set_animation("walk")
-				self.object:setyaw(yaw)
-				self.object:setvelocity({x = -math.sin(yaw) * v, y = velo.y, z = math.cos(yaw) * v})
+			if self.hit_node then
 
-				local inv = self.driver:get_inventory()
-				local stack = inv:get_stack("main", self.driver:get_wield_index())
-				stack:add_wear(100)
-				if stack:get_wear() > 65400 then
-					stack = {name = "fishing:pole", count = 1}
+				local node = node_ok(pos).name
+
+				if minetest.registered_nodes[node].walkable then
+
+					self.hit_node(self, pos, node)
+
+					if self.drop == true then
+
+						pos.y = pos.y + 1
+
+						self.lastpos = (self.lastpos or pos)
+
+						minetest.add_item(self.lastpos, self.object:get_luaentity().name)
+					end
+
+					self.object:remove() ; -- print ("hit node")
+
+					return
 				end
-				inv:set_stack("main", self.driver:get_wield_index(), stack)
-				return
 			end
-		end
 
-			if self.hit_player or self.hit_mob then
-				for _,player in pairs(minetest.get_objects_inside_radius(pos, 1)) do
-					-- hit player
-					if self.hit_player and self.timer > engage and player:is_player() then
+								-- ridable pigs
+			if self.name == "esmobs:pig" and self.saddle == "yes" and self.driver then
+				local item = self.driver:get_wielded_item()
+				if item:get_name() == "esmobs:carrotstick" then
+					local yaw = self.driver:get_look_yaw() - math.pi / 2
+					local velo = self.object:getvelocity()
+					local v = 1.5
+					if math.abs(velo.x) + math.abs(velo.z) < .6 then velo.y = 5 end
+					self.state = "walk"
+					self:set_animation("walk")
+					self.object:setyaw(yaw)
+					self.object:setvelocity({x = -math.sin(yaw) * v, y = velo.y, z = math.cos(yaw) * v})
+
+					local inv = self.driver:get_inventory()
+					local stack = inv:get_stack("main", self.driver:get_wield_index())
+					stack:add_wear(100)
+					if stack:get_wear() > 65400 then
+						stack = {name = "fishing:pole", count = 1}
+					end
+					inv:set_stack("main", self.driver:get_wield_index(), stack)
+					return
+				end
+			end
+
+			if (self.hit_player or self.hit_mob)
+			-- clear mob entity before arrow becomes active
+			and self.timer > (10 - (self.velocity / 2)) then
+
+				for _,player in pairs(minetest.get_objects_inside_radius(pos, 1.0)) do
+
+					if self.hit_player
+					and player:is_player() then
+
 						self.hit_player(self, player)
-						self.object:remove()
+						self.object:remove() ; -- print ("hit player")
 						return
 					end
-					-- hit mob
-					if self.hit_mob and self.timer > engage and player:get_luaentity().name ~= self.object:get_luaentity().name
-					and player:get_luaentity().name ~= "__builtin:item" then
+
+					if self.hit_mob
+					and player:get_luaentity()
+					and player:get_luaentity().name ~= self.object:get_luaentity().name
+					and player:get_luaentity().name ~= "__builtin:item"
+					and player:get_luaentity().name ~= "gauges:hp_bar"
+					and player:get_luaentity().name ~= "signs:text" then
+
 						self.hit_mob(self, player)
-						self.object:remove()
+
+						self.object:remove() ;  print ("hit mob")
+
 						return
 					end
 				end
-				self.lastpos = pos
 			end
+
+			self.lastpos = pos
 		end
 	})
 end
+--ENDNEWARROW
+]]
 
+
+--OLDARROW  DM SHOOTS 
+-- register arrow for shoot attack
+			function bp:register_arrow(name, def)
+				if not name or not def then return end -- errorcheck
+				minetest.register_entity(name, {
+					physical = false,
+					visual = def.visual,
+					textures = def.textures,
+					visual_size = def.visual_size,
+					velocity = def.velocity,
+					hit_player = def.hit_player,
+					hit_node = def.hit_node,
+					hit_mob = def.hit_mob,
+					drop = def.drop or false,
+					collisionbox = {0,0,0,0,0,0}, -- remove box around arrows
+
+					on_step = function(self, dtime)
+						self.timer = (self.timer or 0) + 1
+						if self.timer > 150 then self.object:remove() return end
+						local engage = 10 - (self.velocity / 2) -- clear entity before arrow becomes active
+						local pos = self.object:getpos()
+						local node = minetest.get_node(self.object:getpos()).name
+						-- hit node you can walk on
+									if self.hit_node then
+
+							local node = node_ok(pos).name
+
+							if minetest.registered_nodes[node].walkable then
+
+								self.hit_node(self, pos, node)
+
+								if self.drop == true then
+
+									pos.y = pos.y + 1
+
+									self.lastpos = (self.lastpos or pos)
+
+									minetest.add_item(self.lastpos, self.object:get_luaentity().name)
+								end
+
+								self.object:remove() ; -- print ("hit node")
+
+								return
+							end
+						end
+						
+					-- ridable pigs
+					if self.name == "esmobs:pig" and self.saddle == "yes" and self.driver then
+						local item = self.driver:get_wielded_item()
+						if item:get_name() == "esmobs:carrotstick" then
+							local yaw = self.driver:get_look_yaw() - math.pi / 2
+							local velo = self.object:getvelocity()
+							local v = 1.5
+							if math.abs(velo.x) + math.abs(velo.z) < .6 then velo.y = 5 end
+							self.state = "walk"
+							self:set_animation("walk")
+							self.object:setyaw(yaw)
+							self.object:setvelocity({x = -math.sin(yaw) * v, y = velo.y, z = math.cos(yaw) * v})
+
+							local inv = self.driver:get_inventory()
+							local stack = inv:get_stack("main", self.driver:get_wield_index())
+							stack:add_wear(100)
+							if stack:get_wear() > 65400 then
+								stack = {name = "fishing:pole", count = 1}
+							end
+							inv:set_stack("main", self.driver:get_wield_index(), stack)
+							return
+						end
+					end
+
+						if self.hit_player or self.hit_mob then
+							for _,player in pairs(minetest.get_objects_inside_radius(pos, 1)) do
+								-- hit player
+								if self.hit_player and self.timer > engage and player:is_player() then
+									self.hit_player(self, player)
+									self.object:remove()
+									return
+								end
+								-- hit mob
+								if self.hit_mob and self.timer > engage and player:get_luaentity().name ~= self.object:get_luaentity().name
+								and player:get_luaentity().name ~= "__builtin:item" then
+									self.hit_mob(self, player)
+									self.object:remove()
+									return
+								end
+							end
+							self.lastpos = pos
+						end
+					end
+				})
+			end
+--ENDOLDARROW
+
+
+
+--NODE OK
+			function node_ok(pos, fallback)
+
+				fallback = fallback or "default:dirt"
+
+				local node = minetest.get_node_or_nil(pos)
+
+				if not node then
+					return minetest.registered_nodes[fallback]
+				end
+
+				local nodef = minetest.registered_nodes[node.name]
+
+				if nodef then
+					return node
+				end
+
+				return minetest.registered_nodes[fallback]
+			end
 
 --Brandon Reese code to face pos
 			function bp:face_pos(self,pos)
@@ -1685,7 +1800,6 @@ end
 				end
 			end
 
-
 --maikeruminefollow
 			function bp:team_player(self,pos)
 				if tamed == true or
@@ -1693,8 +1807,6 @@ end
 					self.order = "follow"
 				end
 			end
-
-
 
 --TODO TWEAK CODE, AS TOOLS WEAR OUT TOO FAST
 			function process_weapon(player, time_from_last_punch, tool_capabilities)
@@ -1706,10 +1818,6 @@ end
 					player:set_wielded_item(weapon)
 				end
 			end
-
-
-
-
 
 -- Spawn Egg
 function bp:register_egg(mob, desc, background, addegg)
