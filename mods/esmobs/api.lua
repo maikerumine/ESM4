@@ -945,7 +945,16 @@ function bp:register_mob(name, def)
 		end
 
 	end,
+	
+	--END ORG STATES
+	
+	
+	
+--ADDING DOGSHOOT HERE--V
 
+
+
+----ENDNG DOGSHOOT HERE--^
 
 		on_activate = function(self, staticdata, dtime_s)
 			local pos = self.object:getpos()

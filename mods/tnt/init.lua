@@ -172,6 +172,7 @@ function tnt:explode(pos, radius)
 
 	local c_air = minetest.get_content_id("air")
 	local c_tnt = minetest.get_content_id("tnt:tnt")
+	local c_bomb = minetest.get_content_id("tnt:bomb")
 	local c_tnt_burning = minetest.get_content_id("tnt:tnt_burning")
 	local c_gunpowder = minetest.get_content_id("tnt:gunpowder")
 	local c_gunpowder_burning = minetest.get_content_id("tnt:gunpowder_burning")
@@ -194,7 +195,7 @@ function tnt:explode(pos, radius)
 			p.x = pos.x + x
 			p.y = pos.y + y
 			p.z = pos.z + z
-			if cid == c_tnt then
+			if cid == c_tnt or cid == c_bomb then
 				minetest.after(ntnt+math.random(1,9)/10, function()
 					tnt:boom(p)
 				end)
@@ -295,6 +296,13 @@ function tnt:lit( p, n )
 	minetest.add_entity( p, 'tnt:tnt_ent' )
 end
 
+function tnt:lit2( p, n )
+	minetest.remove_node( p )
+	minetest.add_entity( p, 'tnt:tnt2_ent' )
+end
+
+
+
 function tnt:boom(pos)
 	minetest.sound_play("tnt_explode", {pos=pos, gain=1.5, max_hear_distance=2*64})
 
@@ -323,6 +331,20 @@ minetest.register_node("tnt:tnt", {
 		if puncher:get_wielded_item():get_name() == "default:torch" then
 			minetest.sound_play("tnt_ignite", {pos=pos})
 			tnt:lit(pos, node)
+		end
+	end,
+	mesecons = {effector = {action_on = meseboom}},
+})
+
+minetest.register_node("tnt:bomb", {
+	description = "TNT Air Drop Bomb",
+	tiles = {"tnt2_top.png", "tnt2_top.png", "tnt2_side.png"},
+	groups = {dig_immediate=2, mesecon=2},
+	sounds = default.node_sound_wood_defaults(),
+	on_punch = function(pos, node, puncher)
+		if puncher:get_wielded_item():get_name() == "default:mese" then
+			minetest.sound_play("tnt_ignite", {pos=pos})
+			tnt:lit2(pos, node)
 		end
 	end,
 	mesecons = {effector = {action_on = meseboom}},
@@ -392,7 +414,7 @@ minetest.register_node("tnt:gunpowder_burning", {
 })
 
 minetest.register_abm({
-	nodenames = {"tnt:tnt", "tnt:gunpowder"},
+	nodenames = {"tnt:tnt", "tnt:bomb","tnt:gunpowder"},
 	neighbors = {"fire:basic_flame", "default:lava_source", "default:lava_flowing"},
 	interval = 1,
 	chance = 1,
@@ -480,6 +502,62 @@ tnt.ent_proto = {
 }
 
 minetest.register_entity( 'tnt:tnt_ent', tnt.ent_proto )
+
+tnt.ent_proto2 = {
+	hp_max		= 1000,
+	physical	= true,
+	collisionbox	= { -1/2, -1/2, -1/2, 1/2, 1/2, 1/2 },
+	visual		= 'cube',
+	textures = {	'tnt2_top.png', 'tnt2_top.png', 'tnt2_side.png',
+			'tnt2_side.png', 'tnt2_side.png', 'tnt2_side.png' },
+
+	timer		= 0,
+	btimer		= 0,
+	bstatus		= true,
+	physical_state	= true,
+
+	on_activate = function( sf, sd )
+		sf.object:set_armor_groups( { immortal=1 } )
+		sf.object:setvelocity({x=math.random(-40,40)/40, y=4, z=math.random(-40,40)/40})
+		sf.object:setacceleration({x=0, y=-10, z=0})
+		sf.object:settexturemod('^[brighten')
+	end,
+
+	on_step = function( sf, dt )
+		sf.timer = sf.timer + dt
+		sf.btimer = sf.btimer + dt
+		if sf.btimer > 0.5 then
+			sf.btimer = sf.btimer - 0.5
+			if sf.bstatus then
+				sf.object:settexturemod('')
+			else
+				sf.object:settexturemod('^[brighten')
+			end
+			sf.bstatus = not sf.bstatus
+		end
+		if sf.timer > 0.5 then
+			local p = sf.object:getpos()
+			p.y = p.y - 0.501
+			local nn = minetest.get_node(p).name
+			if not minetest.registered_nodes[nn] or
+				minetest.registered_nodes[nn].walkable then
+				sf.object:setvelocity({x=0,y=0,z=0})
+				sf.object:setacceleration({x=0, y=0, z=0})
+			end
+		end
+		if sf.timer > 4 then
+			local pos = sf.object:getpos()
+			local pos2 = {x=math.floor(pos.x+0.5), y=math.floor(pos.y+0.5),
+				z=math.floor(pos.z+0.5)}
+			tnt:boom(pos2)
+			sf.object:remove()
+		end
+	end,
+}
+
+minetest.register_entity( 'tnt:tnt2_ent', tnt.ent_proto2 )
+
+
 
 
 if minetest.setting_get("log_mods") then
