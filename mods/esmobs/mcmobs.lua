@@ -245,7 +245,7 @@ bp:register_mob("esmobs:creeper", {
 	view_range = 16,
 	attack_type = "explode",
 })
-bp:register_spawn("esmobs:creeper", {"group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 7, -1, 25000, 1, 31000)
+bp:register_spawn("esmobs:creeper", {"group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 7, -1, 18000, 1, 31000)
 
 bp:register_mob("esmobs:skeleton", {
 	type = "monster",
@@ -300,10 +300,13 @@ bp:register_mob("esmobs:skeleton", {
 	light_damage = 1,
 	view_range = 16,
 	attack_type = "shoot",
-	arrow = "throwing:arrow_entity",
+	arrow = "esmobs:arrow_entity",
+	--arrow = "throwing:arrow_entity",
+	--arrow = "esmobs:bonebullet",
 	shoot_interval = 2.5,
 })
 bp:register_spawn("esmobs:skeleton", {"group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 7, -1, 15000, 2, 31000)
+
 -- from throwing mod by PilzAdam:
 minetest.register_node("esmobs:arrow_box", {
 	drawtype = "nodebox",
@@ -449,57 +452,6 @@ bp:register_mob("esmobs:pigman", {
 bp:register_spawn("esmobs:pigman", {"nether:rack"}, 15, -1, 5000, 4, -1000)
 bp:register_spawn("esmobs:pigman", {"nether:portal"}, 15, -1, 15000, 4, 31000)
 
--- Spider by AspireMint (fishyWET (CC-BY-SA 3.0 license for texture)
-
-bp:register_mob("esmobs:spider", {
-	type = "monster",
-	passive = false,
-	attack_type = "dogfight",
-	damage = 3,
-	hp_min = 40,
-	hp_max = 80,
-	armor = 100,
-	collisionbox = {-0.9, -0.01, -0.7, 0.7, 0.6, 0.7},
-	visual = "mesh",
-	mesh = "mobs_spider.x",
-	textures = {
-		{"mobs_spider.png"},
-	},
-	visual_size = {x=3,y=3},
-	makes_footstep_sound = false,
-	sounds = {
-		random = "mobs_spider",
-		attack = "mobs_spider",
-	},
-	walk_velocity = 1.7,
-	run_velocity = 3.3,
-	jump = true,
-	view_range = 15,
-	floats = 0,
-    drops = {
-		{name = "farming:string",
-		chance = 1, min = 1, max = 5,},
-		{name = "esmobs:meat_raw",
-		chance = 1, min = 0, max = 1,},
-	},
-	water_damage = 5,
-	lava_damage = 50,
-	light_damage = 0,
-	animation = {
-		speed_normal = 15,		speed_run = 15,
-		stand_start = 1,		stand_end = 1,
-		walk_start = 20,		walk_end = 40,
-		run_start = 20,			run_end = 40,
-		punch_start = 50,		punch_end = 90,
-	},
-})
-
-bp:register_spawn("esmobs:spider", {"default:stone" ,"default:cobble","group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 6, 0, 14000, 1, 71)
-
--- ethereal crystal spike compatibility
-if not minetest.get_modpath("ethereal") then
-	minetest.register_alias("ethereal:crystal_spike", "default:sandstone")
-end
 
 -- nether compatibility
 if not minetest.get_modpath("nether") then

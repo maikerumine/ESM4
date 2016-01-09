@@ -7,6 +7,31 @@
 
 --REFERENCE
 --function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
+bp:register_mob("esmobs:rat", {
+	type = "animal",
+	hp_max = 1,
+	collisionbox = {-0.2, -0.01, -0.2, 0.2, 0.2, 0.2},
+	visual = "mesh",
+	mesh = "mobs_rat.x",
+	textures = {"mobs_rat.png"},
+	makes_footstep_sound = false,
+	walk_velocity = 1,
+	armor = 200,
+	drops = {},
+	drawtype = "front",
+	water_damage = 0,
+	lava_damage = 1,
+	light_damage = 0,
+
+	on_rightclick = function(self, clicker)
+		if clicker:is_player() and clicker:get_inventory() then
+			clicker:get_inventory():add_item("main", "mobs:rat")
+			self.object:remove()
+		end
+	end,
+})
+bp:register_spawn("esmobs:rat", {"default:dirt_with_grass", "default:stone"}, 20, -1, 7000, 1, 31000)
+
 
 -- Sheep by PilzAdam
 
@@ -508,7 +533,7 @@ local horse = {
 			clicker:set_detach()
 		elseif not self.driver then
 			self.driver = clicker
-			clicker:set_attach(self.object, "", {x=0,y=5,z=0}, {x=0,y=0,z=0})
+			clicker:set_attach(self.object, "", {x=0,y=11,z=0}, {x=0,y=0,z=0})
 			self.object:setyaw(clicker:get_look_yaw())
 		end
 	end,

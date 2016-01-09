@@ -10,31 +10,6 @@ minetest.register_alias("lagsmobs:cursed_stone", "esmobs:cursed_stone")
 --function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
 
 
-bp:register_mob("esmobs:rat", {
-	type = "animal",
-	hp_max = 1,
-	collisionbox = {-0.2, -0.01, -0.2, 0.2, 0.2, 0.2},
-	visual = "mesh",
-	mesh = "mobs_rat.x",
-	textures = {"mobs_rat.png"},
-	makes_footstep_sound = false,
-	walk_velocity = 1,
-	armor = 200,
-	drops = {},
-	drawtype = "front",
-	water_damage = 0,
-	lava_damage = 1,
-	light_damage = 0,
-
-	on_rightclick = function(self, clicker)
-		if clicker:is_player() and clicker:get_inventory() then
-			clicker:get_inventory():add_item("main", "mobs:rat")
-			self.object:remove()
-		end
-	end,
-})
-bp:register_spawn("esmobs:rat", {"default:dirt_with_grass", "default:stone"}, 20, -1, 7000, 1, 31000)
-
 --LETS GET THIS TO WORK!
 -- Dungeon Master by PilzAdam
 bp:register_mob("esmobs:dungeon_master", {
@@ -118,7 +93,7 @@ bp:register_arrow("esmobs:fireball", {
 
 	-- node hit, bursts into flame
 	hit_node = function(self, pos, node)
-		--bp:explosion(pos, 1, 1, 0)  --this deletes nodes
+		--bp:explode(pos, 1, 1, 0)  --this deletes nodes
 	end
 })
 
@@ -563,9 +538,9 @@ bp:register_mob("esmobs:bomber", {
 		chance = 1,
 		min = 5,
 		max = 6,},
-		{name = "tnt:bomb",
+		{name = "esmobs:bomb",
 		chance = 6,
-		min = 10,
+		min = 0,
 		max = 20,},
 	},
 	armor = 60,
@@ -577,9 +552,10 @@ bp:register_mob("esmobs:bomber", {
 	fly = true,
 	attack_type = "shoot",
 	--attack_type = "dogfight",
-		--arrow = "throwing:arrow_entity",
-		--arrow = "esmobs:fireball",
-		arrow = "tnt:tnt2_ent",
+		--arrow = "default:lava_flowing",
+		--arrow = "esmobs:bonebullet",
+		--arrow = "esmobs:tnt2_ent",
+		arrow = "esmobs:bone_monster",
 		--reach = 1,
 		shoot_interval = 4.5,
 
@@ -598,4 +574,64 @@ bp:register_mob("esmobs:bomber", {
 		--dattack_end = 89,
 	}
 })
+
+-- Bone Monster by maikerumine
+bp:register_mob("esmobs:bone_monster", {
+	type = "monster",
+	passive = false,
+	attack_type = "shoot",
+	arrow = "esmobs:bonebullet",
+	--reach = 1,
+	shoot_interval = 4.5,
+	damage = 2,
+	hp_min = 17,
+	hp_max = 35,
+	armor = 90,
+	collisionbox = {-0.5, -1.5, -0.5, 0.5, 0.5, 0.5},
+	--visual = "node",
+	visual = "mesh",
+	mesh = "bone_monster.x",
+	textures = {
+	{"bone_monster.png"},
+	},
+	visual_size = {x=0.9,y=0.9},
+	makes_footstep_sound = true,
+	sounds = {
+		random = "default_gravel_footstep",
+	},
+	walk_velocity = 1.5,
+	run_velocity = 4,
+	view_range = 15,
+	jump = true,
+	jump_height = 8,
+	fall_damage = 0,
+	fall_speed = -1,
+	stepheight = 3,
+	floats = 1,
+	drops = {
+		{name = "bones:bones",
+		chance = 1, min = 3, max = 5,},
+		{name = "default:steelblock",
+		chance = 1, min = 0, max = 2,},
+
+	},
+	water_damage = 4,
+	lava_damage = 4,
+	light_damage = 4,
+		animation = {
+		speed_normal = 15,
+		speed_run = 15,
+		stand_start = 0,
+		stand_end = 14,
+		walk_start = 15,
+		walk_end = 38,
+		run_start = 40,
+		run_end = 63,
+		punch_start = 40,
+		punch_end = 63,
+	},
+
+})
+bp:register_spawn("esmobs:bone_monster", {"default:stone_with_iron","bones:bones","esmobs:bones"},4, -1, 10400, 1, -30)
+
 

@@ -1,7 +1,7 @@
 -- Mobs Api (26th April 2015) By TenPlus1
---REVISED 20160106 maikerumine for esmobs
+--REVISED 20160110 maikerumine for esmobs
 bp = {}
-bp.mod = "redo"
+bp.mod = "esmobs"
 
 -- Do mobs spawn in protected areas (0=yes, 1=no)
 bp.protected = 0
@@ -10,7 +10,7 @@ bp.protected = 0
 local damage_enabled = minetest.setting_getbool("enable_damage")
 local peaceful_only = minetest.setting_getbool("only_peaceful_mobs")
 local enable_blood = minetest.setting_getbool("mobs_enable_blood") or true
-bp.remove = minetest.setting_getbool("remove_far_mobs") or true  --line 903
+bp.remove = minetest.setting_getbool("remove_far_mobs") or true
 bp.protected = tonumber(minetest.setting_get("mobs_spawn_protected")) or 0
 
 
@@ -23,7 +23,6 @@ function bp:register_mob(name, def)
 		jump_height = def.jump_height or 6,
 		jump_chance = def.jump_chance or 0,
 		rotate = def.rotate or 0, -- 0=front, 1.5=side, 3.0=back, 4.5=side2
-		--rotate = math.rad(def.rotate or 0), --  0=front, 90=side, 180=back, 270=side2
 		lifetimer = def.lifetimer or 180,
 		hp_min = def.hp_min or 9,
 		hp_max = def.hp_max or 90,
@@ -51,7 +50,8 @@ function bp:register_mob(name, def)
 		fly = def.fly,
 		fly_in = def.fly_in or "air",
 		attack_type = def.attack_type,
-		arrow = def.arrow,
+		arrow = def.arrow,-- or "esmobs:bonebullet",
+		velocity = def.velocity or  3,
 		bombtimer = def.bombtimer or 0,
 		shoot_interval = def.shoot_interval,
 		sounds = def.sounds or {},
@@ -92,7 +92,6 @@ function bp:register_mob(name, def)
 		time_of_day = 0.5,
 		fear_height = def.fear_height or 0,
 
-		--ADDED 20151128 TENPLUS1
 		get_staticdata = function(self)
 
 		-- remove mob when out of range unless tamed
@@ -148,6 +147,7 @@ function bp:register_mob(name, def)
 			return (v.x^2 + v.z^2)^(0.5)
 		end,
 
+		--ANIMATIONS
 		set_animation = function(self, type)
 			if not self.animation then
 				return
@@ -237,10 +237,35 @@ function bp:register_mob(name, def)
 			end
 		end,
 
+		--STEP
 		on_step = function(self, dtime)
 
 			local yaw = 0
 
+			-- RIDEABLE PIGGIES
+			if self.name == "esmobs:pig" and self.saddle == "yes" and self.driver then
+				local item = self.driver:get_wielded_item()
+				if item:get_name() == "esmobs:carrotstick" then
+					local yaw = self.driver:get_look_yaw() - math.pi / 2
+					local velo = self.object:getvelocity()
+					local v = 1.5
+					if math.abs(velo.x) + math.abs(velo.z) < .6 then velo.y = 5 end
+					self.state = "walk"
+					self:set_animation("walk")
+					self.object:setyaw(yaw)
+					self.object:setvelocity({x = -math.sin(yaw) * v, y = velo.y, z = math.cos(yaw) * v})
+
+					local inv = self.driver:get_inventory()
+					local stack = inv:get_stack("main", self.driver:get_wield_index())
+					stack:add_wear(100)
+					if stack:get_wear() > 65400 then
+						stack = {name = "fishing:pole", count = 1}
+					end
+					inv:set_stack("main", self.driver:get_wield_index(), stack)
+					return
+				end
+			end	
+		
 			if self.type == "monster" and peaceful_only then
 				self.object:remove()
 				return
@@ -672,8 +697,6 @@ function bp:register_mob(name, def)
 					self.state = "stand"
 					self:set_animation("stand")
 				end
-			--end
-
 
 			-- exploding mobs
 			elseif self.state == "attack" and self.attack_type == "explode" then
@@ -758,11 +781,13 @@ function bp:register_mob(name, def)
 							return
 						end
 						self.object:remove()
-						bp:explosion(pos, 2, 0, 1, "tnt_explode", self.sounds.explode)
+						--bp:explosion(pos, 2, 0, 1, "tnt_explode", self.sounds.explode)  --removed fugly
+						esmobs:explode(pos, 2, 0, 1, "tnt_explode", self.sounds.explode)
+						minetest.sound_play("tnt_explode", {pos=pos, gain=1.5, max_hear_distance=2*64})
 					end
 				end
-				-- end of exploding mobs
-
+				
+			--dogfight attack
 			elseif self.state == "attack" and self.attack_type == "dogfight" then
 				if not self.attack.player or not self.attack.player:getpos() then
 					print("stop attacking")
@@ -823,65 +848,8 @@ function bp:register_mob(name, def)
 						end
 					end
 				end
-
---CURRENT SUPRESSED FOR FIXES  currently crashes when skeleton used.
---[[
-			elseif self.state == "attack" and self.attack_type == "shoot" then
-
-				if not self.attack.player or not self.attack.player:is_player() then
-					self.state = "stand"
-					self:set_animation("stand")
-					return
-				end
-				local s = self.object:getpos()
-				local p = self.attack.player:getpos()
-				p.y = p.y - .5
-				s.y = s.y + .5
-				local dist = ((p.x-s.x)^2 + (p.y-s.y)^2 + (p.z-s.z)^2)^0.5
-				if dist > self.view_range or self.attack.player:get_hp() <= 0 then
-					self.state = "stand"
-					self.set_velocity(self, 0)
-					if self.type ~= "npc" then
-						self.attack = {player=nil, dist=nil}
-					end
-					self:set_animation("stand")
-					return
-				else
-					self.attack.dist = dist
-				end
-
-				local vec = {x=p.x-s.x, y=p.y-s.y, z=p.z-s.z}
-				local yaw = (math.atan(vec.z/vec.x)+math.pi/2) + self.rotate
-				if p.x > s.x then
-					yaw = yaw+math.pi
-				end
-				self.object:setyaw(yaw)
-				self.set_velocity(self, 0)
-
-				if self.shoot_interval and self.timer > self.shoot_interval and math.random(1, 100) <= 60 then
-					self.timer = 0
-
-					self:set_animation("punch")
-
-					if self.sounds.attack then
-						minetest.sound_play(self.sounds.attack, {object = self.object})
-					end
-
-					local p = self.object:getpos()
-					p.y = p.y + (self.collisionbox[2]+self.collisionbox[5])/2
-					local obj = minetest.add_entity(p, self.arrow)
-					local amount = (vec.x^2+vec.y^2+vec.z^2)^0.5
-					local v = obj:get_luaentity().velocity
-					vec.y = vec.y + self.shoot_offset -- this makes shoot aim accurate
-					vec.x = vec.x*v/amount
-					vec.y = vec.y*v/amount
-					vec.z = vec.z*v/amount
-					obj:setvelocity(vec)
-				end
-			end
-		end,
-]]
---FROM MCMOBS API  HACK WORKS
+				
+		--FROM MCMOBS API  HACK WORKS
 		elseif self.state == "attack" and self.attack_type == "shoot" then
 			if not self.attack.player or not self.attack.player:is_player() then
 				self.state = "stand"
@@ -946,16 +914,7 @@ function bp:register_mob(name, def)
 
 	end,
 	
-	--END ORG STATES
-	
-	
-	
---ADDING DOGSHOOT HERE--V
-
-
-
-----ENDNG DOGSHOOT HERE--^
-
+		--BEGIN ON_ACTIVATE
 		on_activate = function(self, staticdata, dtime_s)
 			local pos = self.object:getpos()
 			self.object:set_hp( math.random(self.hp_min, self.hp_max) ) -- set HP
@@ -1057,7 +1016,7 @@ function bp:register_mob(name, def)
 			return minetest.serialize(tmp)
 		end,
 
--------BEGIN ON PUNCH CODE
+		--BEGIN ON PUNCH CODE
 					on_punch = function(self, hitter, tflp, tool_capabilities, dir)
 
 						process_weapon(hitter,tflp,tool_capabilities)
@@ -1153,22 +1112,22 @@ function bp:register_mob(name, def)
 			--	end
 			--deathanimation WIP
 
-
-
-			--------END ORIG ON PUNCH CODE
-			--------ADDING LAGS MOBS BONES HERE
+			--END ORIG ON PUNCH CODE
+			
+			--ADDING LAGS MOBS BONES HERE
 			    --on_punch = function(self, hitter)
 				    --mob killed
 				 if self.object:get_hp() <= 0 then
 
 				    if hitter and hitter:is_player() and hitter:get_inventory() then
 				       for _,drop in ipairs(self.drops) do
-			----------
-			--	       	--THIS CODE GIVES YOU THE DROP INSTANT ON DEATH--removed to place drops in bones.
+			
+			--THIS CODE GIVES YOU THE DROP INSTANT ON DEATH
+			--removed to place drops in bones.
 			--              	 if math.random(1, drop.chance) == 1 then
 			--                  	hitter:get_inventory():add_item("main", ItemStack(drop.name.." "..math.random(drop.min, drop.max)))
 			--               	end
-			 ----------
+			 
 				       end
 
 					    --mob bones, like player bones added by Andrei modified by maikerumine
@@ -1196,8 +1155,6 @@ function bp:register_mob(name, def)
 						    meta:set_string("formspec", "size[8,9;]"..
 							    "list[current_name;main;0,0;8,4;]"..
 							    "list[current_player;main;0,5;8,4;]")
-
-
 			--BEGIN TIME STRING
 							local time = os.date("*t");--this keeps the bones meta to turn old
 
@@ -1227,15 +1184,15 @@ function bp:register_mob(name, def)
 				       tool:add_wear(100)
 				       hitter:set_wielded_item( tool )
 				    end
-
 				 end
 			--end,			--use if using original punch code.
 				end,
-			-------END ON PUNCH FULL CODE
+				
+			--END ON PUNCH FULL CODE
 				})
 			end
 
---SPAWNING
+			--SPAWNING
 			bp.spawning_mobs = {}
 			function bp:spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
 				bp.spawning_mobs[name] = true
@@ -1256,7 +1213,7 @@ function bp:register_mob(name, def)
 						pos.y = pos.y + 1
 						--pos.x = pos.x + 2  --ADDED TO FIX TUNNEL SPAWN
 						--pos.z = pos.z + 2  --ADDED TO FIX TUNNEL SPAWN
-						-- mobs cannot spawn inside protected areas if enabled  --20151224 removed because broken
+						-- mobs cannot spawn inside protected areas if enabled
 
 						if bp.protected == 1 and minetest.is_protected(pos, "") then
 							return
@@ -1289,18 +1246,16 @@ function bp:register_mob(name, def)
 						--pos.z = pos.z - 1  --ADDED TO FIX TUNNEL SPAWN
 						minetest.add_entity(pos, name)
 						--print ("Spawned "..name.." at "..minetest.pos_to_string(pos).." on "..node.name.." near "..neighbors[1])
-
-			--TODO --ADD CODE SO MOB CANNOT SPAWN IN MINESHAFT, ALSO REMOVE
 					end
 				})
 			end
 
--- compatibility with older mob registration
+			-- compatibility with older mob registration
 			function bp:register_spawn(name, nodes, max_light, min_light, chance, active_object_count, max_height)
 				bp:spawn_specific(name, nodes, {"air"}, min_light, max_light, 30, chance, active_object_count, -31000, max_height)
 			end
 
--- particle effects
+			-- particle effects
 			function effect(pos, amount, texture, max_size)
 				minetest.add_particlespawner({
 					amount = amount,
@@ -1318,7 +1273,7 @@ function bp:register_mob(name, def)
 					texture = texture,
 				})
 			end
--- check if within map limits (-30911 to 30927)
+			-- check if within map limits (-30911 to 30927)
 			function within_limits(pos, radius)
 
 				if  (pos.x - radius) > -30913
@@ -1332,110 +1287,9 @@ function bp:register_mob(name, def)
 
 				return false -- beyond limits
 			end
-
--- explosion (cannot break protected or unbreakable nodes)
-			function bp:explosion(pos, radius, fire, smoke, sound)
-
-				radius = radius or 0
-				fire = fire or 0
-				smoke = smoke or 0
-
-				-- if area protected or near map limits then no blast damage
-				if minetest.is_protected(pos, "")
-				or not within_limits(pos, radius) then
-					return
-				end
-				
-				--ADD IMMORTAL HERE
-
-				-- explosion sound
-				if sound
-				and sound ~= "" then
-
-					minetest.sound_play(sound, {
-						pos = pos,
-						gain = 1.0,
-						max_hear_distance = 16
-					})
-				end
-
-				pos = vector.round(pos) -- voxelmanip doesn't work properly unless pos is rounded ?!?!
-
-				local vm = VoxelManip()
-				local minp, maxp = vm:read_from_map(vector.subtract(pos, radius), vector.add(pos, radius))
-				local a = VoxelArea:new({MinEdge = minp, MaxEdge = maxp})
-				local data = vm:get_data()
-				local p = {}
-
-				for z = -radius, radius do
-				for y = -radius, radius do
-				local vi = a:index(pos.x + (-radius), pos.y + y, pos.z + z)
-				for x = -radius, radius do
-
-					p.x = pos.x + x
-					p.y = pos.y + y
-					p.z = pos.z + z
-
-					if data[vi] ~= c_air
-					and data[vi] ~= c_ignore
-					and data[vi] ~= c_obsidian
-					and data[vi] ~= c_brick
-					and data[vi] ~= c_chest then
-
-						local n = node_ok(p).name
-
-						if minetest.get_item_group(n, "unbreakable") ~= 1  then
-
-							-- if chest then drop items inside
-							if n == "default:chest"
-							or n == "3dchest:chest"
-							or n == "bones:bones" then
-
-								local meta = minetest.get_meta(p)
-								local inv  = meta:get_inventory()
-
-								for i = 1, inv:get_size("main") do
-
-									local m_stack = inv:get_stack("main", i)
-									local obj = minetest.add_item(p, m_stack)
-
-									if obj then
-
-										obj:setvelocity({
-											x = math.random(-2, 2),
-											y = 7,
-											z = math.random(-2, 2)
-										})
-									end
-								end
-							end
-
-							-- after effects
-							if fire > 0
-							and (minetest.registered_nodes[n].groups.flammable
-							or math.random(1, 100) <= 30) then
-
-								minetest.set_node(p, {name = "fire:basic_flame"})
-							else
-								minetest.set_node(p, {name = "air"})
-
-								if smoke > 0 then
-									effect(p, 2, "tnt_smoke.png", 5)
-								end
-							end
-						end
-					end
-
-					vi = vi + 1
-
-				end
-				end
-				end
-			end
-
-
---BEGIN DROPS GO TO BONES
--- on mob death drop items
+			
+			--BEGIN DROPS GO TO BONES
+			-- on mob death drop items
 			function check_for_death(self)
 				local hp = self.object:get_hp()
 				if hp > 0 then
@@ -1463,8 +1317,7 @@ function bp:register_mob(name, def)
 
 			]]
 
-			------------------------------------------------------
-			------------------------------------------------------MOBS BONES ON DIE--COMMENTED OUT DUE TO SERVER GRIEF.  MANY BONES
+			--MOBS BONES ON DIE--COMMENTED OUT DUE TO SERVER GRIEF.  MANY BONES
 				 if self.object:get_hp() <= 0 then
 			 --[[                       local pos = self.object:getpos()
 						local nn = minetest.get_node(pos).name
@@ -1497,10 +1350,7 @@ function bp:register_mob(name, def)
 						return
 					 end
 
-					 --end--UNCOMMENT IF RE-ADDING VISIBLE DROPS
-			------------------------------------------------------
-			------------------------------------------------------
-			------------------------------------------------------
+					 --end	--UNCOMMENT IF RE-ADDING VISIBLE DROPS
 
 				if self.sounds.death ~= nil then
 					minetest.sound_play(self.sounds.death,{object = self.object})
@@ -1512,7 +1362,7 @@ function bp:register_mob(name, def)
 				end
 			end
 
--- from TNT mod
+			-- from TNT mod
 			function calc_velocity(pos1, pos2, old_vel, power)
 				local vel = vector.direction(pos1, pos2)
 				vel = vector.normalize(vel)
@@ -1524,7 +1374,7 @@ function bp:register_mob(name, def)
 				return vel
 			end
 
--- modified from TNT mod
+			-- modified from TNT mod
 			function entity_physics(pos, radius)
 				radius = radius * 2
 				local objs = minetest.get_objects_inside_radius(pos, radius)
@@ -1542,130 +1392,8 @@ function bp:register_mob(name, def)
 				end
 			end
 
---[[
---NEWARROW  DM DOESN'T SHOOT
--- register arrow for shoot attack
-function bp:register_arrow(name, def)
-
-	if not name or not def then return end -- errorcheck
-
-	minetest.register_entity(name, {
-
-		physical = false,
-		visual = def.visual,
-		visual_size = def.visual_size,
-		textures = def.textures,
-		velocity = def.velocity,
-		hit_player = def.hit_player,
-		hit_node = def.hit_node,
-		hit_mob = def.hit_mob,
-		drop = def.drop or false,
-		collisionbox = {0, 0, 0, 0, 0, 0}, -- remove box around arrows
-		timer = 0,
-		switch = 0,
-
-		on_step = function(self, dtime)
-
-			self.timer = self.timer + 1
-
-			local pos = self.object:getpos()
-
-			if self.switch == 0
-			or self.timer > 150
-			or not within_limits(pos, 0) then
-
-				self.object:remove() ; -- print ("removed arrow")
-
-				return
-			end
-
-			if self.hit_node then
-
-				local node = node_ok(pos).name
-
-				if minetest.registered_nodes[node].walkable then
-
-					self.hit_node(self, pos, node)
-
-					if self.drop == true then
-
-						pos.y = pos.y + 1
-
-						self.lastpos = (self.lastpos or pos)
-
-						minetest.add_item(self.lastpos, self.object:get_luaentity().name)
-					end
-
-					self.object:remove() ; -- print ("hit node")
-
-					return
-				end
-			end
-
-								-- ridable pigs
-			if self.name == "esmobs:pig" and self.saddle == "yes" and self.driver then
-				local item = self.driver:get_wielded_item()
-				if item:get_name() == "esmobs:carrotstick" then
-					local yaw = self.driver:get_look_yaw() - math.pi / 2
-					local velo = self.object:getvelocity()
-					local v = 1.5
-					if math.abs(velo.x) + math.abs(velo.z) < .6 then velo.y = 5 end
-					self.state = "walk"
-					self:set_animation("walk")
-					self.object:setyaw(yaw)
-					self.object:setvelocity({x = -math.sin(yaw) * v, y = velo.y, z = math.cos(yaw) * v})
-
-					local inv = self.driver:get_inventory()
-					local stack = inv:get_stack("main", self.driver:get_wield_index())
-					stack:add_wear(100)
-					if stack:get_wear() > 65400 then
-						stack = {name = "fishing:pole", count = 1}
-					end
-					inv:set_stack("main", self.driver:get_wield_index(), stack)
-					return
-				end
-			end
-
-			if (self.hit_player or self.hit_mob)
-			-- clear mob entity before arrow becomes active
-			and self.timer > (10 - (self.velocity / 2)) then
-
-				for _,player in pairs(minetest.get_objects_inside_radius(pos, 1.0)) do
-
-					if self.hit_player
-					and player:is_player() then
-
-						self.hit_player(self, player)
-						self.object:remove() ; -- print ("hit player")
-						return
-					end
-
-					if self.hit_mob
-					and player:get_luaentity()
-					and player:get_luaentity().name ~= self.object:get_luaentity().name
-					and player:get_luaentity().name ~= "__builtin:item"
-					and player:get_luaentity().name ~= "gauges:hp_bar"
-					and player:get_luaentity().name ~= "signs:text" then
-
-						self.hit_mob(self, player)
-
-						self.object:remove() ;  print ("hit mob")
-
-						return
-					end
-				end
-			end
-
-			self.lastpos = pos
-		end
-	})
-end
---ENDNEWARROW
-]]
-
-
---OLDARROW  DM SHOOTS 
--- register arrow for shoot attack
+			--OLDARROW  DM SHOOTS 
+			-- register arrow for shoot attack
 			function bp:register_arrow(name, def)
 				if not name or not def then return end -- errorcheck
 				minetest.register_entity(name, {
@@ -1709,33 +1437,8 @@ end
 								return
 							end
 						end
-						
-					-- ridable pigs
-					if self.name == "esmobs:pig" and self.saddle == "yes" and self.driver then
-						local item = self.driver:get_wielded_item()
-						if item:get_name() == "esmobs:carrotstick" then
-							local yaw = self.driver:get_look_yaw() - math.pi / 2
-							local velo = self.object:getvelocity()
-							local v = 1.5
-							if math.abs(velo.x) + math.abs(velo.z) < .6 then velo.y = 5 end
-							self.state = "walk"
-							self:set_animation("walk")
-							self.object:setyaw(yaw)
-							self.object:setvelocity({x = -math.sin(yaw) * v, y = velo.y, z = math.cos(yaw) * v})
-
-							local inv = self.driver:get_inventory()
-							local stack = inv:get_stack("main", self.driver:get_wield_index())
-							stack:add_wear(100)
-							if stack:get_wear() > 65400 then
-								stack = {name = "fishing:pole", count = 1}
-							end
-							inv:set_stack("main", self.driver:get_wield_index(), stack)
-							return
-						end
-					end
-
 						if self.hit_player or self.hit_mob then
-							for _,player in pairs(minetest.get_objects_inside_radius(pos, 1)) do
+							for _,player in pairs(minetest.get_objects_inside_radius(pos, 1.5)) do
 								-- hit player
 								if self.hit_player and self.timer > engage and player:is_player() then
 									self.hit_player(self, player)
@@ -1755,11 +1458,9 @@ end
 					end
 				})
 			end
---ENDOLDARROW
+			--ENDOLDARROW
 
-
-
---NODE OK
+			--NODE OK
 			function node_ok(pos, fallback)
 
 				fallback = fallback or "default:dirt"
@@ -1779,7 +1480,7 @@ end
 				return minetest.registered_nodes[fallback]
 			end
 
---Brandon Reese code to face pos
+			--Brandon Reese code to face pos
 			function bp:face_pos(self,pos)
 				local s = self.object:getpos()
 				local vec = {x=pos.x-s.x, y=pos.y-s.y, z=pos.z-s.z}
@@ -1794,7 +1495,7 @@ end
 				return yaw
 			end
 
---Reese chat
+			--Reese chat
 			local_chat = function(pos,text,radius)
 				if radius == nil then
 					radius = 25
@@ -1809,42 +1510,42 @@ end
 				end
 			end
 
---maikeruminefollow
+			--maikeruminefollow
 			function bp:team_player(self,pos)
 				if tamed == true or
 					self.tamed == true then
 					self.order = "follow"
 				end
 			end
-
---TODO TWEAK CODE, AS TOOLS WEAR OUT TOO FAST
+			
+			--TODO TWEAK CODE, AS TOOLS WEAR OUT TOO FAST
 			function process_weapon(player, time_from_last_punch, tool_capabilities)
 			local weapon = player:get_wielded_item()
 				if tool_capabilities ~= nil then
-					local wear = ( tool_capabilities.full_punch_interval / 75 ) * 65535
+					local wear = ( tool_capabilities.full_punch_interval / 85 ) * 65535
 					--local wear = ( tool_capabilities.full_punch_interval / 75 ) * 65535  --REF
 					weapon:add_wear(wear)
 					player:set_wielded_item(weapon)
 				end
 			end
 
--- Spawn Egg
-function bp:register_egg(mob, desc, background, addegg)
-local invimg = background
-if addegg == 1 then
-	invimg = invimg.."^mobs_chicken_egg.png"
-end
-minetest.register_craftitem(mob, {
-	description = desc,
-	inventory_image = invimg,
-	on_place = function(itemstack, placer, pointed_thing)
-		local pos = pointed_thing.above
-		if pointed_thing.above and not minetest.is_protected(pos, placer:get_player_name()) then
-			pos.y = pos.y + 0.5
-			minetest.add_entity(pos, mob)
-			itemstack:take_item()
-		end
-		return itemstack
-	end,
-})
+			-- Spawn Egg
+			function bp:register_egg(mob, desc, background, addegg)
+			local invimg = background
+			if addegg == 1 then
+				invimg = invimg.."^mobs_chicken_egg.png"
+			end
+			minetest.register_craftitem(mob, {
+				description = desc,
+				inventory_image = invimg,
+				on_place = function(itemstack, placer, pointed_thing)
+					local pos = pointed_thing.above
+					if pointed_thing.above and not minetest.is_protected(pos, placer:get_player_name()) then
+						pos.y = pos.y + 0.5
+						minetest.add_entity(pos, mob)
+						itemstack:take_item()
+					end
+					return itemstack
+				end,
+			})
 end
