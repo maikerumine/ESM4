@@ -265,11 +265,11 @@ bp:register_mob("esmobs:skeleton", {
 	damage = 1,
 	armor = 200,
 	drops = {
-		{name = "throwing:arrow",
+		{name = "esmobs:arrow",
 		chance = 1,
 		min = 0,
 		max = 2,},
-		{name = "throwing:bow_wood",
+		{name = "esmobs:bow_wood",
 		chance = 11,
 		min = 1,
 		max = 1,},
