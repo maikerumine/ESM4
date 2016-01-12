@@ -1,13 +1,10 @@
---esmobs v0.0.4
+--esmobs v01.0
 --maikerumine
 --made for Extreme Survival game
-
-
---dofile(minetest.get_modpath("esmobs").."/api.lua")
+--License for code WTFPL
 
 --REFERENCE
 --function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
-
 
 bp.npc_drops = { "default:pick_mese", "esmobs:meat", "es:sword_emerald", "es:ruby_crystal", "farming:bread", "default:wood" }--Added 20151121
 
@@ -49,21 +46,7 @@ bp:register_mob("esmobs:Jasmine", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	--[[
---Maikerumine added hackish follow code
-	on_rightclick = function (self, clicker)
-		bp:face_pos(self,clicker:getpos())
-		bp:team_player(self,clicker:getpos())
-		if self.state ~= "path" and self.state ~= "following" then
-		local_chat(clicker:getpos(),"INFINIUM MONS: Tame me now, come to me later, we will chat after I have cooled off.",3)
-			if not self.tamed then
-				self.tamed = true
-				self.follow = true
-			end
-		end
-	end,]]
-
-		on_rightclick = function(self, clicker)
+	on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Jasmine: Tame me now, come to me later, we will chat after I have cooled off.",3)
 		if item:get_name() == "esmobs:meat" or item:get_name() == "farming:bread" then
@@ -185,20 +168,6 @@ bp:register_mob("esmobs:Candy", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	--[[
---Maikerumine added hackish follow code
-	on_rightclick = function (self, clicker)
-		bp:face_pos(self,clicker:getpos())
-		bp:team_player(self,clicker:getpos())
-		if self.state ~= "path" and self.state ~= "following" then
-		local_chat(clicker:getpos(),"Candy Raver: My Ruby Sword will cut through anything, let's do it!",3)
-			if not self.tamed then
-				self.tamed = true
-				self.follow = true
-			end
-		end
-	end,]]
-
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Candy Raver: My Ruby Sword will cut through anything, let's do it!",3)
@@ -323,20 +292,6 @@ bp:register_mob("esmobs:Infiniumman", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	--[[
---Maikerumine added hackish follow code
-	on_rightclick = function (self, clicker)
-		bp:face_pos(self,clicker:getpos())
-		bp:team_player(self,clicker:getpos())
-		if self.state ~= "path" and self.state ~= "following" then
-		local_chat(clicker:getpos(),"Infinium Man: I'll give those monsters a good whack on the head with this Infinium ingot!",3)
-			if not self.tamed then
-				self.tamed = true
-				self.follow = true
-			end
-		end
-	end,]]
-
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Infinium Man: I'll give those monsters a good whack on the head with this Infinium ingot!",3)
@@ -461,20 +416,6 @@ bp:register_mob("esmobs:Maikerumine", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	--[[
---Maikerumine added hackish follow code
-	on_rightclick = function (self, clicker)
-		bp:face_pos(self,clicker:getpos())
-		bp:team_player(self,clicker:getpos())
-		if self.state ~= "path" and self.state ~= "following" then
-		local_chat(clicker:getpos(),"Maikerumine: Maybe a new game is in the works...  Hmmm...",3)
-			if not self.tamed then
-				self.tamed = true
-				self.follow = true
-			end
-		end
-	end,]]
-
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Maikerumine: Maybe a new game is in the works...  Hmmm...",3)

@@ -1,16 +1,11 @@
 --esmobs v01.0
 --maikerumine
 --made for Extreme Survival game
-
-minetest.register_alias("lagsmobs:cursed_stone", "esmobs:cursed_stone")
-
---dofile(minetest.get_modpath("esmobs").."/api.lua")
+--License for code WTFPL
 
 --REFERENCE
 --function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
 
-
---LETS GET THIS TO WORK!
 -- Dungeon Master by PilzAdam
 bp:register_mob("esmobs:dungeon_master", {
 	type = "monster",
@@ -980,7 +975,3 @@ bp:register_mob("esmobs:dirt2", {
 		attack = "mobs_stone_attack",
 		},
 })
-
-
-
-

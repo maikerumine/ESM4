@@ -1,9 +1,7 @@
---esmobs v0.1.0
+--esmobs v01.0
 --maikerumine
 --made for Extreme Survival game
-
-
---dofile(minetest.get_modpath("esmobs").."/api.lua")
+--License for code WTFPL
 
 --REFERENCE
 --function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
@@ -48,20 +46,6 @@ bp:register_mob("esmobs:Sam", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	--[[
---Maikerumine added hackish follow code
-	on_rightclick = function (self, clicker)
-		bp:face_pos(self,clicker:getpos())
-		bp:team_player(self,clicker:getpos())
-		if self.state ~= "path" and self.state ~= "following" then
-		local_chat(clicker:getpos(),"Sam: Let's go kick some Mob butt!",3)
-			if not self.tamed then
-				self.tamed = true
-				self.follow = true
-			end
-		end
-	end,]]
-
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Sam: Let's go kick some Mob butt!",3)
@@ -186,20 +170,6 @@ bp:register_mob("esmobs:John", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	--[[
---Maikerumine added hackish follow code
-	on_rightclick = function (self, clicker)
-		bp:face_pos(self,clicker:getpos())
-		bp:team_player(self,clicker:getpos())
-		if self.state ~= "path" and self.state ~= "following" then
-		local_chat(clicker:getpos(),"John: Let's go grief some monsters!",3)
-			if not self.tamed then
-				self.tamed = true
-				self.follow = true
-			end
-		end
-	end,]]
-
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"John: Let's go grief some monsters!",3)
@@ -325,20 +295,6 @@ bp:register_mob("esmobs:Janette", {
 	lava_damage = 50,
 	light_damage = 0,
 	follow = "default:apple",
-	--[[
---Maikerumine added hackish follow code
-	on_rightclick = function (self, clicker)
-		bp:face_pos(self,clicker:getpos())
-		bp:team_player(self,clicker:getpos())
-		if self.state ~= "path" and self.state ~= "following" then
-		local_chat(clicker:getpos(),"Jannette: Stop flirting with me!",3)
-			if not self.tamed then
-				self.tamed = true
-				self.follow = true
-			end
-		end
-	end,]]
-
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Jannette: Stop flirting with me!",3)
@@ -426,10 +382,6 @@ bp:register_mob("esmobs:Janette", {
 	step = 1,
 })
 
---bp:register_egg("esmobs:badplayer13", "Girl In Red", "character_13_preview.png", 1)
-
-
-
 bp:register_spawn("esmobs:Crybaby", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 14000, 1, 31000)
 bp:register_mob("esmobs:Crybaby", {
 	type = "npc",
@@ -468,20 +420,6 @@ bp:register_mob("esmobs:Crybaby", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	--[[
---Maikerumine added hackish follow code
-	on_rightclick = function (self, clicker)
-		bp:face_pos(self,clicker:getpos())
-		bp:team_player(self,clicker:getpos())
-		if self.state ~= "path" and self.state ~= "following" then
-		local_chat(clicker:getpos(),"Crybaby: I am too whimpy to fight mobs, but I can do my best!",3)
-			if not self.tamed then
-				self.tamed = true
-				self.follow = true
-			end
-		end
-	end,]]
-
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Crybaby: I am too whimpy to fight mobs, but I can do my best!",3)
@@ -607,20 +545,6 @@ bp:register_mob("esmobs:SepiaSam", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	--[[
---Maikerumine added hackish follow code
-	on_rightclick = function (self, clicker)
-		bp:face_pos(self,clicker:getpos())
-		bp:team_player(self,clicker:getpos())
-		if self.state ~= "path" and self.state ~= "following" then
-		local_chat(clicker:getpos(),"Sepia Sam: MESE sword + Monster = My pleasure!",3)
-			if not self.tamed then
-				self.tamed = true
-				self.follow = true
-			end
-		end
-	end,]]
-
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Sepia Sam: MESE sword + Monster = My pleasure!",3)
@@ -745,20 +669,6 @@ bp:register_mob("esmobs:OGSam", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	--[[
---Maikerumine added hackish follow code
-	on_rightclick = function (self, clicker)
-		bp:face_pos(self,clicker:getpos())
-		bp:team_player(self,clicker:getpos())
-		if self.state ~= "path" and self.state ~= "following" then
-		local_chat(clicker:getpos(),"O.G. Sam: Mobs, let me at 'em, I'll splat 'em!!!",3)
-			if not self.tamed then
-				self.tamed = true
-				self.follow = true
-			end
-		end
-	end,]]
-
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"O.G. Sam: Mobs, let me at 'em, I'll splat 'em!!!",3)
@@ -847,7 +757,6 @@ bp:register_mob("esmobs:OGSam", {
 	peaceful = true,
 	group_attack = true,
 	step = 1,
-
 })
 
 bp:register_spawn("esmobs:Vanessa", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 14000, 1, 31000)
@@ -888,20 +797,6 @@ bp:register_mob("esmobs:Vanessa", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	--[[
---Maikerumine added hackish follow code
-	on_rightclick = function (self, clicker)
-		bp:face_pos(self,clicker:getpos())
-		bp:team_player(self,clicker:getpos())
-		if self.state ~= "path" and self.state ~= "following" then
-		local_chat(clicker:getpos(),"Vanessa: I'll code out the very instance of those mobs!",3)
-			if not self.tamed then
-				self.tamed = true
-				self.follow = true
-			end
-		end
-	end,]]
-
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Vanessa: I'll code out the very instance of those mobs!",3)
@@ -986,7 +881,6 @@ bp:register_mob("esmobs:Vanessa", {
 	peaceful = true,
 	group_attack = true,
 	step = 1,
-
 })
 
 bp:register_spawn("esmobs:FemaleSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 10, 14000, 1, -10)
@@ -1027,20 +921,6 @@ bp:register_mob("esmobs:FemaleSam", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	--[[
---Maikerumine added hackish follow code
-	on_rightclick = function (self, clicker)
-		bp:face_pos(self,clicker:getpos())
-		bp:team_player(self,clicker:getpos())
-		if self.state ~= "path" and self.state ~= "following" then
-		local_chat(clicker:getpos(),"Female Sam: Minetest is the greatest voxel game ever created!",3)
-			if not self.tamed then
-				self.tamed = true
-				self.follow = true
-			end
-		end
-	end,]]
-
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Female Sam: Minetest is the greatest voxel game ever created!",3)
@@ -1125,7 +1005,6 @@ bp:register_mob("esmobs:FemaleSam", {
 	peaceful = true,
 	group_attack = true,
 	step = 1,
-
 })
 
 bp:register_spawn("esmobs:Battleboy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 15, -1,14000, 1, -50)
@@ -1166,20 +1045,6 @@ bp:register_mob("esmobs:Battleboy", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	--[[
---Maikerumine added hackish follow code
-	on_rightclick = function (self, clicker)
-		bp:face_pos(self,clicker:getpos())
-		bp:team_player(self,clicker:getpos())
-		if self.state ~= "path" and self.state ~= "following" then
-		local_chat(clicker:getpos(),"Battlefield 3 Soldier: All suited up, let's roll out and destroy those creatures!",3)
-			if not self.tamed then
-				self.tamed = true
-				self.follow = true
-			end
-		end
-	end,]]
-
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Battlefield 3 Soldier: All suited up, let's roll out and destroy those creatures!",3)
@@ -1308,20 +1173,6 @@ bp:register_mob("esmobs:Wilbert", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	--[[
---Maikerumine added hackish follow code
-	on_rightclick = function (self, clicker)
-		bp:face_pos(self,clicker:getpos())
-		bp:team_player(self,clicker:getpos())
-		if self.state ~= "path" and self.state ~= "following" then
-		local_chat(clicker:getpos(),"Old man: I am getting too old for this...  Okay, I'll help ya!",3)
-			if not self.tamed then
-				self.tamed = true
-				self.follow = true
-			end
-		end
-	end,]]
-
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Old man: I am getting too old for this...  Okay, I'll help ya!",3)
@@ -1406,8 +1257,6 @@ bp:register_mob("esmobs:Wilbert", {
 	peaceful = true,
 	group_attack = true,
 	step = 1,
-
-
 })
 
 bp:register_spawn("esmobs:Thelma", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble"}, 11, -1, 14000, 1, 31000)
@@ -1452,20 +1301,6 @@ bp:register_mob("esmobs:Thelma", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	--[[
---Maikerumine added hackish follow code
-	on_rightclick = function (self, clicker)
-		bp:face_pos(self,clicker:getpos())
-		bp:team_player(self,clicker:getpos())
-		if self.state ~= "path" and self.state ~= "following" then
-		local_chat(clicker:getpos(),"Old woman: I may walk slow, but I can fight like a champ!",3)
-			if not self.tamed then
-				self.tamed = true
-				self.follow = true
-			end
-		end
-	end,]]
-
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Old woman: I may walk slow, but I can fight like a champ!",3)
@@ -1551,8 +1386,6 @@ bp:register_mob("esmobs:Thelma", {
 	peaceful = true,
 	group_attack = true,
 	step = 1,
-
-
 })
 
 bp:register_spawn("esmobs:DrifterDan", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 15, -1,14000, 1, -50)
@@ -1593,20 +1426,6 @@ bp:register_mob("esmobs:DrifterDan", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
-	--[[
---Maikerumine added hackish follow code
-	on_rightclick = function (self, clicker)
-		bp:face_pos(self,clicker:getpos())
-		bp:team_player(self,clicker:getpos())
-		if self.state ~= "path" and self.state ~= "following" then
-		local_chat(clicker:getpos(),"Battlefield 3 Soldier: All suited up, let's roll out and destroy those creatures!",3)
-			if not self.tamed then
-				self.tamed = true
-				self.follow = true
-			end
-		end
-	end,]]
-
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Battlefield 3 Soldier: All suited up, let's roll out and destroy those creatures!",3)
@@ -1692,10 +1511,6 @@ bp:register_mob("esmobs:DrifterDan", {
 	group_attack = true,
 	step = 1,
 })
-
-
-
-
 bp:register_spawn("esmobs:Mr_White", {"default:dirt_with_grass", "ethereal:green_dirt","default:grass","default:stonebrick","default:cobble"}, 14, -1, 14000, 1, 30)
 bp:register_mob("esmobs:Mr_White", {
 	type = "npc",
@@ -1738,20 +1553,6 @@ bp:register_mob("esmobs:Mr_White", {
 	sounds = {
 		attack = "default_punch1",
 	},
-	--[[
---Maikerumine added hackish follow code
-	on_rightclick = function (self, clicker)
-		bp:face_pos(self,clicker:getpos())
-		bp:team_player(self,clicker:getpos())
-		if self.state ~= "path" and self.state ~= "following" then
-		local_chat(clicker:getpos(),"Mr. White: Let's go kick some Mob butt!",3)
-			if not self.tamed then
-				self.tamed = true
-				self.follow = true
-			end
-		end
-	end,]]
-
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Mr. White: Let's go kick some Mob butt!",3)
@@ -1877,20 +1678,6 @@ bp:register_mob("esmobs:Mr_Pink", {
 	sounds = {
 		attack = "default_punch3",
 	},
---[[
---MAIKERUMINE CRAP CODE
-	on_rightclick = function (self, clicker)
-		bp:face_pos(self,clicker:getpos())
-		bp:team_player(self,clicker:getpos())
-		if self.state ~= "path" and self.state ~= "following" then
-			local_chat(clicker:getpos(),"Mr. Black: Grrrrrrrrrrrr!",3)
-				if not self.tamed then
-					self.tamed = true
-					self.follow = true
-			end
-		end
-	end,]]
-
 --TENPLUS1 and CProgrammerRU AWESOME CODES.
 	-- right clicking with cooked meat will give npc more health
 	on_rightclick = function(self, clicker)
@@ -1960,7 +1747,6 @@ bp:register_mob("esmobs:Mr_Pink", {
 		end
 	end,
 
-
 	animation = {
 		speed_normal = 30,		speed_run = 30,
 		stand_start = 0,		stand_end = 79,
@@ -1973,4 +1759,3 @@ bp:register_mob("esmobs:Mr_Pink", {
 	group_attack = true,
 	--step = 1,
 })
-

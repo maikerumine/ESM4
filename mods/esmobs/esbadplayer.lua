@@ -1,9 +1,7 @@
---esmobs v0.1.0
+--esmobs v01.0
 --maikerumine
 --made for Extreme Survival game
-
-
---dofile(minetest.get_modpath("esmobs").."/api.lua")
+--License for code WTFPL
 
 --REFERENCE
 --function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
@@ -1285,18 +1283,6 @@ bp:register_mob("esmobs:Mr_Black", {
 	sounds = {
 		attack = "default_punch3",
 	},
---[[
-	on_rightclick = function (self, clicker)
-		bp:face_pos(self,clicker:getpos())
-		bp:team_player(self,clicker:getpos())
-		if self.state ~= "path" and self.state ~= "following" then
-			local_chat(clicker:getpos(),"Mr. Black: Grrrrrrrrrrrr!",3)
-				if not self.tamed then
-					self.tamed = true
-					self.follow = true
-			end
-		end
-	end,]]
 	on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Mr. Black: Grrrrrrrrrrrr!",3)
@@ -1376,4 +1362,3 @@ bp:register_mob("esmobs:Mr_Black", {
 	group_attack = true,
 	--step = 1,
 })
-

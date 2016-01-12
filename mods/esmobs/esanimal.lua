@@ -1,9 +1,7 @@
---esmobs v0.0.7
+--esmobs v01.0
 --maikerumine
 --made for Extreme Survival game
-
-
---dofile(minetest.get_modpath("esmobs").."/api.lua")
+--License for code WTFPL
 
 --REFERENCE
 --function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
@@ -138,18 +136,16 @@ bp:register_mob("esmobs:sheep", {
 		end
 	end,
 })
-
---bp:register_spawn("esmobs:sheep", {"default:dirt_with_grass", "ethereal:green_dirt"}, 20, 10, 5000, 8, 31000)
-
---bp:register_egg("esmobs:sheep", "Sheep", "wool_white.png", 1)
-
-
+bp:register_spawn("esmobs:sheep", {"default:dirt_with_grass", "ethereal:green_dirt"}, 20, 10, 5000, 8, 31000)
 
 --BEGIN MC ANIMALS
 bp:register_mob("esmobs:sheep2", {
 	type = "animal",
+	passive = false,
 	hp_max = 25,
-	collisionbox = {-0.5, -0.01, -0.5, 0.5, 1.5, 0.5},
+	--collisionbox = {-0.5, -0.01, -0.5, 0.5, 1.5, 0.5},
+	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1, 0.4},
+	visual_size = {x=1,y=1},
 	textures = {"mobs_24.png"},
 	visual = "mesh",
 	mesh = "sheep.x",
@@ -192,31 +188,47 @@ bp:register_mob("esmobs:sheep2", {
 	},
 	follow = "farming:wheat",
 	view_range = 5,
-
+	replace_rate = 50,
+	replace_what = {"default:grass_3", "default:grass_4", "default:grass_5", "farming:wheat_8"},
+	replace_with = "air",
 	on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
-		if item:get_name() == "farming:wheat" then
-			if not self.tamed then
-				if not minetest.setting_getbool("creative_mode") then
-					item:take_item()
-					clicker:set_wielded_item(item)
+				if item:get_name() == "farming:wheat" then
+			if not minetest.setting_getbool("creative_mode") then
+				item:take_item()
+				clicker:set_wielded_item(item)
+			end
+			if self.child == true then
+				self.hornytimer = self.hornytimer + 10
+				return
+			end
+			self.food = (self.food or 0) + 1
+			if self.food >= 8 then
+				self.food = 0
+				if self.hornytimer == 0 then
+					self.horny = true
 				end
+				self.gotten = false -- can be shaved again
 				self.tamed = true
-			elseif self.naked then
-				if not minetest.setting_getbool("creative_mode") then
-					item:take_item()
-					clicker:set_wielded_item(item)
-				end
-				self.food = (self.food or 0) + 1
-				if self.food >= 4 then
-					self.food = 0
-					self.naked = false
-					self.object:set_properties({
-						textures = {"mobs_24.png"},
-					})
-				end
+				self.object:set_properties({
+					textures = {"mobs_24.png"},
+					mesh = "sheep.x",
+				})
+				minetest.sound_play("mobs_sheep", {object = self.object,gain = 1.0,max_hear_distance = 32,loop = false,})
 			end
 			return
+		end
+
+		if item:get_name() == "esmobs:magic_lasso"
+		and clicker:is_player()
+		and clicker:get_inventory()
+		and self.child == false
+		and clicker:get_inventory():room_for_item("main", "esmobs:sheep") then
+			clicker:get_inventory():add_item("main", "esmobs:sheep")
+			self.object:remove()
+			item:add_wear(3000) -- 22 uses
+			print ("wear", item:get_wear())
+			clicker:set_wielded_item(item)
 		end
 		if item:get_name() == "esmobs:shears" and not self.naked then
 			self.naked = true
@@ -237,7 +249,7 @@ bp:register_mob("esmobs:sheep2", {
 			end
 		end
 		if minetest.get_item_group(item:get_name(), "dye") == 1 and not self.naked then
-print(item:get_name(), minetest.get_item_group(item:get_name(), "dye"))
+			print(item:get_name(), minetest.get_item_group(item:get_name(), "dye"))
 			local name = item:get_name()
 			local pname = name:split(":")[2]
 
@@ -259,7 +271,6 @@ print(item:get_name(), minetest.get_item_group(item:get_name(), "dye"))
 	end,
 })
 bp:register_spawn("esmobs:sheep2", {"default:dirt_with_grass"}, 20, 12, 15000, 2, 31000)
-
 
 bp:register_mob("esmobs:pig", {
 	type = "animal",
@@ -352,7 +363,6 @@ bp:register_mob("esmobs:pig", {
 })
 bp:register_spawn("esmobs:pig", {"default:dirt_with_grass"}, 20, 12, 15000, 1, 31000)
 
-
 bp:register_mob("esmobs:cow", {
 	type = "animal",
 	hp_max = 28,
@@ -416,7 +426,6 @@ bp:register_mob("esmobs:cow", {
 	end,
 })
 bp:register_spawn("esmobs:cow", {"default:dirt_with_grass"}, 20, 8, 17000, 1, 31000)
-
 
 bp:register_mob("esmobs:chicken", {
 	type = "animal",
@@ -787,7 +796,6 @@ bp:register_mob("esmobs:horse3", {
 bp:register_spawn("esmobs:horse3", {"default:desert_sand"}, 20, 8, 17000, 1, 31000)
 
 -- Chicken by JK Murray
-
 bp:register_mob("esmobs:chickoboo", {
 	type = "animal",
 	passive = false,
@@ -875,64 +883,6 @@ bp:register_mob("esmobs:chickoboo", {
 		end]]
 	end,
 })
-
 bp:register_spawn("esmobs:chickoboo", {"default:dirt_with_grass", "ethereal:bamboo_dirt"}, 15, 10, 32000, 1, 31000)
 
---bp:register_egg("esmobs:chickoboo", "Chickoboo", "mobs_chicken_inv.png", 0)
-
--- egg
-minetest.register_node("esmobs:egg", {
-	description = "Chicken Egg",
-	tiles = {"mobs_chicken_egg.png"},
-	inventory_image  = "mobs_chicken_egg.png",
-	visual_scale = 0.7,
-	drawtype = "plantlike",
-	wield_image = "mobs_chicken_egg.png",
-	paramtype = "light",
-	walkable = false,
-	is_ground_content = true,
-	sunlight_propagates = true,
-	selection_box = {
-		type = "fixed",
-		fixed = {-0.2, -0.5, -0.2, 0.2, 0, 0.2}
-	},
-	groups = {snappy=2, dig_immediate=3},
-	after_place_node = function(pos, placer, itemstack)
-		if placer:is_player() then
-			minetest.set_node(pos, {name="esmobs:egg", param2=1})
-		end
-	end
-})
-
--- fried egg
-minetest.register_craftitem("esmobs:chicken_egg_fried", {
-description = "Fried Egg",
-	inventory_image = "mobs_chicken_egg_fried.png",
-	on_use = minetest.item_eat(2),
-})
-
-minetest.register_craft({
-	type  =  "cooking",
-	recipe  = "esmobs:egg",
-	output = "esmobs:chicken_egg_fried",
-})
-
--- chicken (raw and cooked)
-minetest.register_craftitem("esmobs:chicken_raw", {
-description = "Raw Chicken",
-	inventory_image = "mobs_chicken_raw.png",
-	on_use = minetest.item_eat(2),
-})
-
-minetest.register_craftitem("esmobs:chicken_cooked", {
-description = "Cooked Chicken",
-	inventory_image = "mobs_chicken_cooked.png",
-	on_use = minetest.item_eat(6),
-})
-
-minetest.register_craft({
-	type  =  "cooking",
-	recipe  = "esmobs:chicken_raw",
-	output = "esmobs:chicken_cooked",
-})
 

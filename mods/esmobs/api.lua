@@ -1,5 +1,10 @@
+--esmobs v01.0
+--maikerumine
+--made for Extreme Survival game
+--License for code WTFPL
+
 -- Mobs Api (26th April 2015) By TenPlus1
---REVISED 20160110 maikerumine for esmobs
+--REVISED 20160111 maikerumine for esmobs
 bp = {}
 bp.mod = "esmobs"
 
@@ -1135,7 +1140,7 @@ function bp:register_mob(name, def)
 						local pos = self.object:getpos()
 						local nn = minetest.get_node(pos).name
 						local spaceforbones=nil
-						if nn=="air" or nn=="default:water_flowing" or nn=="default:water_source" or nn=="default:lava_source" or nn=="default:lava_flowing" then
+						if nn=="air" or nn=="default:water_flowing" or nn=="default:water_source" or nn=="default:lava_source" or nn=="default:lava_flowing" or nn=="default:snow" then
 						    spaceforbones=pos
 								--minetest.add_node(spaceforbones, {name="bones:bones"} )
 								minetest.add_node(spaceforbones, {name="esmobs:bones"} )

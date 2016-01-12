@@ -1,40 +1,21 @@
---esmobs v0.0.7
+--esmobs v01.0
 --maikerumine
 --made for Extreme Survival game
+--License for code WTFPL
 
---dofile(minetest.get_modpath("esmobs").."/api.lua")
-
-
---crafts-tenplus1
---[[
--- raw meat
-minetest.register_craftitem("esmobs:meat_raw", {
-	description = "Raw Meat",
-	inventory_image = "mobs_meat_raw.png",
-	on_use = minetest.item_eat(3),
-})
-
--- cooked meat
-minetest.register_craftitem("esmobs:meat", {
-	description = "Meat",
-	inventory_image = "mobs_meat.png",
-	on_use = minetest.item_eat(8),
+-- generic meat
+minetest.register_craftitem("esmobs:rat", {
+	description = "Raw Rat Meat",
+	inventory_image = "mobs_rat_inventory.png",
 })
 
 minetest.register_craft({
 	type = "cooking",
 	output = "esmobs:meat",
-	recipe = "esmobs:meat_raw",
-	cooktime = 5,
+	recipe = "esmobs:rat",
+	cooktime = 1,
 })
-]]
 
---TODO
---MC-Mobs and MT-Mobs crafts-need to organise
-
-
-
--- generic meat
 minetest.register_craftitem("esmobs:meat_raw", {
 	description = "Raw Meat",
 	inventory_image = "mobs_meat_raw.png",
@@ -139,8 +120,44 @@ minetest.register_craft({
 	cooktime = 5,
 })
 
--- leather, feathers, etc.
+-- egg
+minetest.register_node("esmobs:egg", {
+	description = "Chicken Egg",
+	tiles = {"mobs_chicken_egg.png"},
+	inventory_image  = "mobs_chicken_egg.png",
+	visual_scale = 0.7,
+	drawtype = "plantlike",
+	wield_image = "mobs_chicken_egg.png",
+	paramtype = "light",
+	walkable = false,
+	is_ground_content = true,
+	sunlight_propagates = true,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.2, -0.5, -0.2, 0.2, 0, 0.2}
+	},
+	groups = {snappy=2, dig_immediate=3},
+	after_place_node = function(pos, placer, itemstack)
+		if placer:is_player() then
+			minetest.set_node(pos, {name="esmobs:egg", param2=1})
+		end
+	end
+})
 
+-- fried egg
+minetest.register_craftitem("esmobs:chicken_egg_fried", {
+description = "Fried Egg",
+	inventory_image = "mobs_chicken_egg_fried.png",
+	on_use = minetest.item_eat(2),
+})
+
+minetest.register_craft({
+	type  =  "cooking",
+	recipe  = "esmobs:egg",
+	output = "esmobs:chicken_egg_fried",
+})
+
+-- leather, feathers, saddle, etc.
 minetest.register_craftitem("esmobs:leather", {
 	description = "Leather",
 	inventory_image = "mobs_leather.png",
@@ -163,12 +180,33 @@ minetest.register_tool("esmobs:carrotstick", {
 })
 
 minetest.register_craft({
+	output = "esmobs:saddle",
+	recipe = {
+		{"esmobs:leather", "esmobs:leather", "esmobs:leather"},
+		{"farming:string", "", "farming:string"},
+	{"default:steel_ingot", "", "default:steel_ingot"}
+	},
+})
+
+minetest.register_craft({
+	--type = "shapeless",
+	output = "esmobs:carrotstick",
+	recipe = {
+		{"default:stick", "default:stick" , "default:apple"},
+		{"default:stick", "farming:string" , "farming:seed_wheat"},
+		{"farming:string", "", "farming:string"}
+		},
+		
+})
+
+minetest.register_craft({
 	type = "shapeless",
 	output = "esmobs:carrotstick",
-	--recipe = {"fishing:pole_", "farming_plus:carrot_item"},
-	--recipe = {"fishing:pole_", "default:apple"},
 	recipe = {"fishing:pole_wood", "farming:carrot"},
 })
+
+
+
 
 -- cobweb
 minetest.register_node("esmobs:cobweb", {

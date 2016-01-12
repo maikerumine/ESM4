@@ -1,7 +1,9 @@
---esmobs v0.0.3
+--esmobs v01.0
 --maikerumine
 --made for Extreme Survival game
---MCMOBS borrowed form stampy game
+--License for code WTFPL
+
+--MCMOBS borrowed from stampy game
 --[[
 Notes
 -----
@@ -162,7 +164,6 @@ http://minetest.net/
   0. You just DO WHAT THE FUCK YOU WANT TO.
 ]]
 
---dofile(minetest.get_modpath("esmobs").."/api.lua")
 
 --REFERENCE
 --function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
