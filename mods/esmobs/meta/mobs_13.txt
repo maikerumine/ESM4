@@ -1,0 +1,5 @@
+name = "The Bomber",
+type = "Monster",
+hp = "50-60",
+drops = "sand, feather, chicken, bomb",
+info = "He shoots Bone Monsters at you, they shoot too!",

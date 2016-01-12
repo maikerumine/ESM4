@@ -13,7 +13,7 @@ bp:register_mob("esmobs:rat", {
 	collisionbox = {-0.2, -0.01, -0.2, 0.2, 0.2, 0.2},
 	visual = "mesh",
 	mesh = "mobs_rat.x",
-	textures = {"mobs_rat.png"},
+	textures = {"mobs_22.png"},
 	makes_footstep_sound = false,
 	walk_velocity = 1,
 	armor = 200,
@@ -25,7 +25,7 @@ bp:register_mob("esmobs:rat", {
 
 	on_rightclick = function(self, clicker)
 		if clicker:is_player() and clicker:get_inventory() then
-			clicker:get_inventory():add_item("main", "mobs:rat")
+			clicker:get_inventory():add_item("main", "esmobs:rat")
 			self.object:remove()
 		end
 	end,
@@ -45,7 +45,7 @@ bp:register_mob("esmobs:sheep", {
 	visual = "mesh",
 	mesh = "mobs_sheep.x",
 	textures = {
-		{"mobs_sheep.png"},
+		{"mobs_23.png"},
 	},
 	visual_size = {x=1,y=1},
 	gotten_texture = {"mobs_sheep_shaved.png"},
@@ -97,7 +97,7 @@ bp:register_mob("esmobs:sheep", {
 				self.gotten = false -- can be shaved again
 				self.tamed = true
 				self.object:set_properties({
-					textures = {"mobs_sheep.png"},
+					textures = {"mobs_23.png"},
 					mesh = "mobs_sheep.x",
 				})
 				minetest.sound_play("mobs_sheep", {object = self.object,gain = 1.0,max_hear_distance = 32,loop = false,})
@@ -150,7 +150,7 @@ bp:register_mob("esmobs:sheep2", {
 	type = "animal",
 	hp_max = 25,
 	collisionbox = {-0.5, -0.01, -0.5, 0.5, 1.5, 0.5},
-	textures = {"sheep.png"},
+	textures = {"mobs_24.png"},
 	visual = "mesh",
 	mesh = "sheep.x",
 	makes_footstep_sound = true,
@@ -212,7 +212,7 @@ bp:register_mob("esmobs:sheep2", {
 					self.food = 0
 					self.naked = false
 					self.object:set_properties({
-						textures = {"sheep.png"},
+						textures = {"mobs_24.png"},
 					})
 				end
 			end
@@ -265,7 +265,7 @@ bp:register_mob("esmobs:pig", {
 	type = "animal",
 	hp_max = 25,
 	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1, 0.4},
-	textures = {"pig.png"},
+	textures = {"mobs_25.png"},
 	visual = "mesh",
 	mesh = "pig.x",
 	makes_footstep_sound = true,
@@ -357,7 +357,7 @@ bp:register_mob("esmobs:cow", {
 	type = "animal",
 	hp_max = 28,
 	collisionbox = {-0.6, -0.01, -0.6, 0.6, 1.8, 0.6},
-	textures = {"cow.png"},
+	textures = {"mobs_26.png"},
 	visual = "mesh",
 	mesh = "cow.x",
 	makes_footstep_sound = true,
@@ -422,7 +422,7 @@ bp:register_mob("esmobs:chicken", {
 	type = "animal",
 	hp_max = 24,
 	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1, 0.4},
-	textures = {"chicken.png"},
+	textures = {"mobs_27.png"},
 	visual = "mesh",
 	mesh = "chicken.x",
 	makes_footstep_sound = true,
@@ -663,7 +663,7 @@ bp:register_mob("esmobs:horse", {
 	hp_max = 10,
 	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1, 0.4},
 	textures = {
-		{"mobs_horse.png"},
+		{"mobs_28.png"},
 	},
 	visual = "mesh",
 	mesh = "mobs_horse.x",
@@ -706,7 +706,7 @@ bp:register_mob("esmobs:horse2", {
 	hp_max = 10,
 	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1, 0.4},
 	textures = {
-		{"mobs_horsepeg.png"},
+		{"mobs_29.png"},
 	},
 	visual = "mesh",
 	mesh = "mobs_horse.x",
@@ -749,7 +749,7 @@ bp:register_mob("esmobs:horse3", {
 	hp_max = 10,
 	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1, 0.4},
 	textures = {
-		{"mobs_horseara.png"},
+		{"mobs_30.png"},
 	},
 	visual = "mesh",
 	mesh = "mobs_horse.x",
@@ -786,4 +786,153 @@ bp:register_mob("esmobs:horse3", {
 })
 bp:register_spawn("esmobs:horse3", {"default:desert_sand"}, 20, 8, 17000, 1, 31000)
 
+-- Chicken by JK Murray
+
+bp:register_mob("esmobs:chickoboo", {
+	type = "animal",
+	passive = false,
+	attack_type = "dogfight",
+	damage = 3,
+	hp_min = 50,
+	hp_max = 80,
+	armor = 90,
+	--collisionbox = {-0.4, -3.1, -0.4, 0.4, -1.7, 0.4},
+		collisionbox = {-0.3, -0.75, -0.3, 0.3, 0.1, 0.3},
+	visual = "mesh",
+	mesh = "mobs_chicken.x",
+	textures = {
+		{"mobs_31.png", "mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png",
+		"mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png"},
+		{"mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png",
+		"mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png"},
+	},
+	child_texture = {
+		{"mobs_chick.png", "mobs_chick.png", "mobs_chick.png", "mobs_chick.png",
+		"mobs_chick.png", "mobs_chick.png", "mobs_chick.png", "mobs_chick.png", "mobs_chick.png"},
+	},
+	--visual_size = {x=4.5,y=4.5},
+	visual_size = {x=1,y=1},
+	makes_footstep_sound = true,
+	sounds = {
+		random = "mobs_chicken",
+	},
+	walk_velocity = 2.8,
+	run_velocity = 7,
+	jump = true,
+	view_range = 45,
+	drops = {
+		{name = "esmobs:chicken_raw",
+		chance = 1, min = 6, max = 12},
+		{name = "esmobs:egg",
+		chance = 1, min = 1, max = 3},
+	},
+	water_damage = 10,
+	lava_damage = 50,
+	light_damage = 0,
+	fall_damage = 0,
+	fall_speed = -4,
+	animation = {
+		speed_normal = 15,
+		stand_start = 0,
+		stand_end = 1, -- 20
+		walk_start = 20,
+		walk_end = 40,
+	},
+	follow = "farming:seed_wheat",
+	view_range = 5,
+	replace_rate = 20000,
+	replace_what = {"air"},
+	replace_with = "esmobs:egg",
+	on_rightclick = function(self, clicker)
+		local tool = clicker:get_wielded_item()
+		if tool:get_name() == "farming:seed_wheat" then
+			if not minetest.setting_getbool("creative_mode") then
+				tool:take_item(1)
+				clicker:set_wielded_item(tool)
+			end
+			if self.child == true then
+				self.hornytimer = self.hornytimer + 10
+				return
+			end
+			self.food = (self.food or 0) + 1
+			if self.food >= 8 then
+				self.food = 0
+				if self.hornytimer == 0 then
+					self.horny = true
+				end
+				self.tamed = true
+				minetest.sound_play("mobs_chicken", {object = self.object,gain = 1.0,max_hear_distance = 15,loop = false,})
+			end
+			return
+		end
+
+		--[[if clicker:is_player()
+		and clicker:get_inventory()
+		and self.child == false
+		and clicker:get_inventory():room_for_item("main", "esmobs:chickoboo") then
+			clicker:get_inventory():add_item("main", "esmobs:chickoboo")
+			self.object:remove()
+		end]]
+	end,
+})
+
+bp:register_spawn("esmobs:chickoboo", {"default:dirt_with_grass", "ethereal:bamboo_dirt"}, 15, 10, 32000, 1, 31000)
+
+--bp:register_egg("esmobs:chickoboo", "Chickoboo", "mobs_chicken_inv.png", 0)
+
+-- egg
+minetest.register_node("esmobs:egg", {
+	description = "Chicken Egg",
+	tiles = {"mobs_chicken_egg.png"},
+	inventory_image  = "mobs_chicken_egg.png",
+	visual_scale = 0.7,
+	drawtype = "plantlike",
+	wield_image = "mobs_chicken_egg.png",
+	paramtype = "light",
+	walkable = false,
+	is_ground_content = true,
+	sunlight_propagates = true,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.2, -0.5, -0.2, 0.2, 0, 0.2}
+	},
+	groups = {snappy=2, dig_immediate=3},
+	after_place_node = function(pos, placer, itemstack)
+		if placer:is_player() then
+			minetest.set_node(pos, {name="esmobs:egg", param2=1})
+		end
+	end
+})
+
+-- fried egg
+minetest.register_craftitem("esmobs:chicken_egg_fried", {
+description = "Fried Egg",
+	inventory_image = "mobs_chicken_egg_fried.png",
+	on_use = minetest.item_eat(2),
+})
+
+minetest.register_craft({
+	type  =  "cooking",
+	recipe  = "esmobs:egg",
+	output = "esmobs:chicken_egg_fried",
+})
+
+-- chicken (raw and cooked)
+minetest.register_craftitem("esmobs:chicken_raw", {
+description = "Raw Chicken",
+	inventory_image = "mobs_chicken_raw.png",
+	on_use = minetest.item_eat(2),
+})
+
+minetest.register_craftitem("esmobs:chicken_cooked", {
+description = "Cooked Chicken",
+	inventory_image = "mobs_chicken_cooked.png",
+	on_use = minetest.item_eat(6),
+})
+
+minetest.register_craft({
+	type  =  "cooking",
+	recipe  = "esmobs:chicken_raw",
+	output = "esmobs:chicken_cooked",
+})
 

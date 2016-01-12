@@ -1,4 +1,4 @@
---esmobs v0.0.7
+--esmobs v01.0
 --maikerumine
 --made for Extreme Survival game
 
@@ -22,16 +22,16 @@ bp:register_mob("esmobs:dungeon_master", {
 	shoot_interval = 2.5,
 	arrow = "esmobs:fireball",
 	shoot_offset = 1,
-	hp_min = 12,
-	hp_max = 35,
+	hp_min = 120,
+	hp_max = 350,
 	armor = 60,
 	collisionbox = {-0.7, -1, -0.7, 0.7, 1.6, 0.7},
 	visual = "mesh",
 	mesh = "mobs_dungeon_master.b3d",
 	textures = {
-		{"mobs_dungeon_master.png"},
-		{"mobs_dungeon_master2.png"},
-		{"mobs_dungeon_master3.png"},
+		{"mobs_1.png"},
+		{"mobs_2.png"},
+		{"mobs_3.png"},
 	},
 	makes_footstep_sound = true,
 	sounds = {
@@ -111,7 +111,7 @@ bp:register_mob("esmobs:tree_monster", {
 	visual = "mesh",
 	mesh = "mobs_tree_monster.x",
 	textures = {
-		{"mobs_tree_monster.png"},
+		{"mobs_4.png"},
 	},
 	visual_size = {x=4.5,y=4.5},
 	blood_texture = "default_wood.png",
@@ -164,7 +164,7 @@ bp:register_mob("esmobs:sand_monster", {
 	visual = "mesh",
 	mesh = "mobs_sand_monster.x",
 	textures = {
-		{"mobs_sand_monster.png"},
+		{"mobs_5.png"},
 	},
 	visual_size = {x=8,y=8},
 	makes_footstep_sound = true,
@@ -207,7 +207,7 @@ bp:register_mob("esmobs:stone_monster", {
 	visual = "mesh",
 	mesh = "mobs_stone_monster.x",
 	textures = {
-		{"mobs_stone_monster.png"},
+		{"mobs_6.png"},
 	},
 	visual_size = {x=3, y=2.6},
 	makes_footstep_sound = true,
@@ -253,7 +253,7 @@ bp:register_mob("esmobs:spider", {
 	visual = "mesh",
 	mesh = "mobs_spider.x",
 	textures = {
-		{"mobs_spider.png"},
+		{"mobs_7.png"},
 	},
 	visual_size = {x=3,y=3},
 	makes_footstep_sound = false,
@@ -304,8 +304,8 @@ bp:register_mob("esmobs:oerkkii", {
 	visual = "mesh",
 	mesh = "mobs_oerkki.x",
 	textures = {
-		{"mobs_oerkki.png"},
-		{"mobs_oerkki2.png"},
+		{"mobs_8.png"},
+		{"mobs_9.png"},
 	},
 	visual_size = {x=5, y=5},
 	makes_footstep_sound = false,
@@ -345,7 +345,7 @@ bp:register_mob("esmobs:applmons", {
 	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.0, 0.4},
 	visual = "mesh",
 	mesh = "mobs_dungeon_master.x",
-	textures = {"applmons.png"},
+	textures = {"mobs_10.png"},
 	visual_size = {x=3.6, y=2.6},
 	makes_footstep_sound = true,
 	view_range = 15,
@@ -388,7 +388,7 @@ bp:register_mob("esmobs:herobrines_bloody_ghost", {
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "badplayer.x",
-	textures = {"herobrines_blody_gost_by_lovehart.png"},
+	textures = {"mobs_11.png"},
 	visual_size = {x=1, y=1.0},
 	makes_footstep_sound = true,
 	view_range = 19,
@@ -433,7 +433,7 @@ bp:register_mob("esmobs:phoenix", {
 	collisionbox = {-0.65, -0.4, -0.65, 0.65, 0.4, 0.65},
 	visual = "mesh",
 	mesh = "phoenix.b3d",  --paniki from minetest defense
-	textures = {{"phoenix.png"}},  --paniki from minetest defense
+	textures = {{"mobs_12.png"}},  --paniki from minetest defense
 	visual_size = {x=7, y=7},
 	view_range = 90,
 	lifetimer = 500,
@@ -499,7 +499,6 @@ bp:register_mob("esmobs:phoenix", {
 	}
 })
 
-
 bp:spawn_specific("esmobs:bomber", {"air"}, {"air"}, 10, -1, 120, 29000, 1, 15, 40)
 bp:register_mob("esmobs:bomber", {
 	type = "monster",
@@ -508,7 +507,7 @@ bp:register_mob("esmobs:bomber", {
 	collisionbox = {-0.65, -0.4, -0.65, 0.65, 0.4, 0.65},
 	visual = "mesh",
 	mesh = "phoenix.b3d",  --paniki from minetest defense
-	textures = {{"bomber.png"}},  --paniki from minetest defense made into a plane
+	textures = {{"mobs_13.png"}},  --paniki from minetest defense made into a plane
 	visual_size = {x=17, y=7},
 	view_range = 90,
 	lifetimer = 500,
@@ -592,7 +591,7 @@ bp:register_mob("esmobs:bone_monster", {
 	visual = "mesh",
 	mesh = "bone_monster.x",
 	textures = {
-	{"bone_monster.png"},
+	{"mobs_14.png"},
 	},
 	visual_size = {x=0.9,y=0.9},
 	makes_footstep_sound = true,
@@ -633,5 +632,355 @@ bp:register_mob("esmobs:bone_monster", {
 
 })
 bp:register_spawn("esmobs:bone_monster", {"default:stone_with_iron","bones:bones","esmobs:bones"},4, -1, 10400, 1, -30)
+
+bp:register_spawn("esmobs:icemon", {"default:ice"}, 8, -1, 14000, 1, 310010)
+bp:register_mob("esmobs:icemon", {
+	type = "monster",
+	hp_min = 80,
+	hp_max = 110,
+	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
+	visual = "mesh",
+	mesh = "mobs_stone_monster.x",
+	textures = {"mobs_15.png"},
+	visual_size = {x=3.5, y=2.8},
+	makes_footstep_sound = true,
+	view_range = 14,
+	walk_velocity = 2.0,
+	run_velocity = 2.9,
+	damage = 4,
+	sounds = {
+		random = "mobs_stonemonster",
+	},
+	drops = {
+		{name = "default:ice",
+		chance = 1,
+		min = 3,
+		max = 6,},
+	},
+	armor = 75,
+	drawtype = "front",
+	water_damage = 0,
+	lava_damage = 50,
+	light_damage = 1,
+	on_rightclick = nil,
+	attack_type = "dogfight",
+	animation = {
+		speed_normal = 15,
+		speed_run = 15,
+		stand_start = 0,
+		stand_end = 14,
+		walk_start = 15,
+		walk_end = 38,
+		run_start = 40,
+		run_end = 63,
+		punch_start = 37,
+		punch_end = 49,
+	}
+
+})
+
+bp:register_spawn("esmobs:snowmon", {"default:snow","default:snowblock","default:snow_block", "default:dirt_with_snow"}, 5, -1, 14000, 1, 31000)
+bp:register_mob("esmobs:snowmon", {
+	type = "monster",
+	hp_min = 69,
+	hp_max = 112,
+	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
+	visual = "mesh",
+	mesh = "mobs_stone_monster.x",
+	textures = {"mobs_16.png"},
+	visual_size = {x=5.5, y=2.8},
+	makes_footstep_sound = true,
+	view_range = 14,
+	walk_velocity = 1.0,
+	run_velocity = 2.0,
+	damage = 5,
+	sounds = {
+		random = "mobs_stonemonster",
+	},
+	drops = {
+		{name = "default:snow",
+		chance = 1,
+		min = 3,
+		max = 6,},
+	},
+	armor = 80,
+	drawtype = "front",
+	water_damage = 20,
+	lava_damage = 50,
+	light_damage = 1,
+	on_rightclick = nil,
+	attack_type = "dogfight",
+	animation = {
+		speed_normal = 15,
+		speed_run = 15,
+		stand_start = 0,
+		stand_end = 14,
+		walk_start = 15,
+		walk_end = 38,
+		run_start = 40,
+		run_end = 63,
+		punch_start = 37,
+		punch_end = 49,
+	}
+
+})
+
+bp:register_spawn("esmobs:watermon", {"default:water_source","default:water_flowing"}, 5, -1, 14000, 5, -120)
+bp:register_mob("esmobs:watermon", {
+	type = "monster",
+	hp_min = 35,
+	hp_max = 75,
+	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
+	visual = "mesh",
+	mesh = "3d_armor_character.x",
+	textures = {"mobs_17.png",
+			"3d_armor_trans.png",
+				minetest.registered_items["default:pick_wood"].inventory_image,
+			},
+	visual_size = {x=1, y=1},
+	makes_footstep_sound = true,
+	view_range = 15,
+	walk_velocity = 0.9,
+	run_velocity = 1.8,
+	damage = 1,
+	drops = {
+		{name = "default:water_flowing",
+		chance = 1,
+		min = 0,
+		max = 2,},
+		{name = "bucket:bucket_empty",
+		chance = 8,
+		min = 0,
+		max = 1,},
+
+	},
+	armor = 80,
+	drawtype = "front",
+	water_damage = 0,
+	lava_damage = 50,
+	light_damage = 1,
+	on_rightclick = nil,
+	attack_type = "dogfight",
+	animation = {
+		speed_normal = 30,		speed_run = 30,
+		stand_start = 0,		stand_end = 79,
+		walk_start = 168,		walk_end = 187,
+		run_start = 168,		run_end = 187,
+		punch_start = 200,		punch_end = 219,
+	},
+	sounds = {
+		random = "mobs_stonemonster",
+	},
+})
+
+bp:spawn_specific("esmobs:bloco", {"default:stone"}, {"default:stone"}, 0, 20, 30, 12000, 3, -31000, -20)
+bp:register_mob("esmobs:bloco", {
+	type = "monster",
+	hp_max = 15,
+	hp_min = 14,
+	collisionbox = {-0.56, -0.2, -0.56, 0.56, 1.2, 0.56},
+	visual = "mesh",
+	mesh = "bloco.x",
+	textures = {{"mobs_18.png"}},
+	visual_size = {x=4, y=4},
+	makes_footstep_sound = true,
+	view_range = 8,
+	walk_velocity = -1,
+	run_velocity = -2.5,
+    rotate = 1.5,
+    sounds = {
+		random = "bloco",
+	},
+	damage = 2,
+	jump = true,
+	drops = {
+		{name = "default:apple",
+		chance = 1,
+		min = 1,
+		max = 1,},
+		{name = "default:stone",
+		chance = 1,
+		min = 2,
+		max = 3,},
+	},
+	armor = 60,
+	drawtype = "side",
+	water_damage = 3,
+	lava_damage = 1,
+	light_damage = 1,
+	on_rightclick = nil,
+	attack_type = "dogfight",
+	animation = {
+		speed_normal = 20,
+		speed_run = 20,
+		stand_start = 90,
+		stand_end = 110,
+		walk_start = 1,
+		walk_end = 80,
+		run_start = 120,
+		run_end = 160,
+		punch_start = 170,
+		punch_end = 190,
+	}
+})
+
+bp:spawn_specific("esmobs:blocod", {"default:dirt"}, {"default:dirt_with_grass"}, 3, 20, 30, 15000, 3, -31000, 20)
+bp:register_mob("esmobs:blocod", {
+	type = "monster",
+	hp_max = 15,
+	hp_min = 14,
+	collisionbox = {-0.56, -0.2, -0.56, 0.56, 1.2, 0.56},
+	visual = "mesh",
+	mesh = "bloco.x",
+	textures = {{"mobs_19.png"}},
+	visual_size = {x=4, y=4},
+	makes_footstep_sound = true,
+	view_range = 8,
+	walk_velocity = -1,
+	run_velocity = -2.5,
+    rotate = 1.5,
+    sounds = {
+		random = "bloco",
+	},
+	damage = 2,
+	jump = true,
+	drops = {
+		{name = "default:apple",
+		chance = 1,
+		min = 1,
+		max = 1,},
+		{name = "default:dirt_with_grass",
+		chance = 1,
+		min = 2,
+		max = 3,},
+	},
+	armor = 60,
+	drawtype = "side",
+	water_damage = 3,
+	lava_damage = 1,
+	light_damage = 1,
+	on_rightclick = nil,
+	attack_type = "dogfight",
+	animation = {
+		speed_normal = 20,
+		speed_run = 20,
+		stand_start = 90,
+		stand_end = 110,
+		walk_start = 1,
+		walk_end = 80,
+		run_start = 120,
+		run_end = 160,
+		punch_start = 170,
+		punch_end = 190,
+	}
+})
+
+bp:register_spawn("esmobs:dirt", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 2, 500)
+bp:register_mob("esmobs:dirt", {
+	type = "monster",
+	hp_min = 30,
+	hp_max = 50,
+	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
+	visual = "mesh",
+	mesh = "mobs_stone_monster.x",
+	textures = {"mobs_20.png"},
+	visual_size = {x=3.5, y=2.8},
+	makes_footstep_sound = true,
+	view_range = 24,
+	follow = "flowers:viola",--swap out type randomly for server players"flowers:tulip","flowers:rose","flowers:geranium","flowers:dandelion_yellow","flowers:dandelion_white",
+	walk_velocity = 2.5,
+	run_velocity = 3.8,
+	damage = 2.7,
+	drops = {
+		{name = "default:dirt",
+		chance = 1,
+		min = 1,
+		max = 2,},
+
+		{name = "flowers:viola",
+		chance = 10,
+		min = 0,
+		max = 1,},
+	},
+	armor = 75,
+	drawtype = "front",
+	water_damage = 10,
+	lava_damage = 50,
+	light_damage = 1,
+	on_rightclick = nil,
+	attack_type = "dogfight",
+	animation = {
+		speed_normal = 15,
+		speed_run = 15,
+		stand_start = 0,
+		stand_end = 14,
+		walk_start = 15,
+		walk_end = 38,
+		run_start = 40,
+		run_end = 63,
+		punch_start = 40,
+		punch_end = 63,
+	},
+	sounds = {
+		war_cry = "mobs_stone",
+		death = "mobs_death2",
+		attack = "mobs_stone_attack",
+		},
+})
+
+bp:register_spawn("esmobs:dirt2", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 4, -1, 5000, 7, -102)
+bp:register_mob("esmobs:dirt2", {
+	type = "monster",
+	hp_min = 30,
+	hp_max = 50,
+	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
+	visual = "mesh",
+	mesh = "mobs_stone_monster.x",
+	textures = {"mobs_21.png"},
+	visual_size = {x=3.5, y=2.8},
+	makes_footstep_sound = true,
+	view_range = 24,
+	follow = "flowers:rose",--swap out type randomly for server players"flowers:tulip","flowers:rose","flowers:geranium","flowers:dandelion_yellow","flowers:dandelion_white",
+	walk_velocity = 1.5,
+	run_velocity = 2.8,
+	damage = 2.7,
+	drops = {
+		{name = "default:dirt",
+		chance = 1,
+		min = 1,
+		max = 2,},
+
+		{name = "flowers:rose",
+		chance = 10,
+		min = 0,
+		max = 1,},
+	},
+	armor = 75,
+	drawtype = "front",
+	water_damage = 20,
+	lava_damage = 40,
+	light_damage = 1,
+	on_rightclick = nil,
+	attack_type = "dogfight",
+	animation = {
+		speed_normal = 15,
+		speed_run = 15,
+		stand_start = 0,
+		stand_end = 14,
+		walk_start = 15,
+		walk_end = 38,
+		run_start = 40,
+		run_end = 63,
+		punch_start = 40,
+		punch_end = 63,
+	},
+	sounds = {
+		war_cry = "mobs_stone",
+		death = "mobs_death2",
+		attack = "mobs_stone_attack",
+		},
+})
+
+
 
 

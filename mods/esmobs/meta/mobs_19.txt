@@ -1,0 +1,5 @@
+name = "Bloco",
+type = "Cute Monster",
+hp = "14-15",
+drops = "Dirt with grass",
+info = "Easy way to get dirt with grass.",

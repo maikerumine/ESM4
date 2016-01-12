@@ -11,15 +11,15 @@
 
 bp.npc_drops = { "default:pick_mese", "esmobs:meat", "es:sword_emerald", "es:ruby_crystal", "farming:bread", "default:wood" }--Added 20151121
 
-bp:register_spawn("esmobs:badplayer32", {"default:obsidian","es:infiniumblock","es:stone_with_infinium"}, 7, -1, 14000, 1, -450)
-bp:register_mob("esmobs:badplayer32", {
+bp:register_spawn("esmobs:Jasmine", {"default:obsidian","es:infiniumblock","es:stone_with_infinium","default:cobble"}, 9, -1, 14000, 1, 31000)
+bp:register_mob("esmobs:Jasmine", {
 	type = "monster",
-	hp_min = 177,
-	hp_max = 190,
+	hp_min = 277,
+	hp_max = 290,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer32.png",
+	textures = {"badplayer_42.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_diamond"].inventory_image,
 			},
@@ -28,7 +28,7 @@ bp:register_mob("esmobs:badplayer32", {
 	view_range = 18,
 	walk_velocity = 5,
 	run_velocity = 3.4,
-	damage = 9,
+	damage = 4,
 	drops = {
 		{name = "es:infinium_goo",
 		chance = 5,
@@ -65,7 +65,7 @@ bp:register_mob("esmobs:badplayer32", {
 
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
-		local_chat(clicker:getpos(),"INFINIUM MONS: Tame me now, come to me later, we will chat after I have cooled off.",3)
+		local_chat(clicker:getpos(),"Jasmine: Tame me now, come to me later, we will chat after I have cooled off.",3)
 		if item:get_name() == "esmobs:meat" or item:get_name() == "farming:bread" then
 			local hp = self.object:get_hp()
 			if hp + 4 > self.hp_max then return end
@@ -155,7 +155,7 @@ bp:register_mob("esmobs:Candy", {
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"character_17.png",
+	textures = {"badplayer_41.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["es:sword_ruby"].inventory_image,
 			},
@@ -293,7 +293,7 @@ bp:register_mob("esmobs:Infiniumman", {
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"character_2.png",
+	textures = {"badplayer_40.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["es:infinium_ingot"].inventory_image,
 			},
@@ -427,11 +427,11 @@ bp:register_spawn("esmobs:Maikerumine", {"default:dirt_with_grass","default:ston
 bp:register_mob("esmobs:Maikerumine", {
 	type = "npc",
 	hp_min = 95,
-	hp_max = 75,
+	hp_max = 175,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"Cryotic_by_bajanhgk.png",
+	textures = {"badplayer_39.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["es:sword_aikerum"].inventory_image,
 			},
@@ -446,7 +446,7 @@ bp:register_mob("esmobs:Maikerumine", {
 		chance = 1,
 		min = 1,
 		max = 2,},
-		{name = "default:sword_diamond",
+		{name = "es:sword_aikerum",
 		chance = 3,
 		min = 0,
 		max = 1,},
@@ -559,4 +559,58 @@ bp:register_mob("esmobs:Maikerumine", {
 	peaceful = true,
 	group_attack = true,
 	step = 1,
+})
+
+bp:register_spawn("esmobs:Infinium_Monster", {"default:dirt_with_grass","default:stone","meru:stone", "default:stonebrick","default:cobble"}, 5, -1, 14000, 1, -1000)
+bp:register_mob("esmobs:Infinium_Monster", {
+	type = "monster",
+	hp_min = 377,
+	hp_max = 390,
+	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
+	visual = "mesh",
+	mesh = "3d_armor_character.x",
+	textures = {"badplayer_32.png",
+			"3d_armor_trans.png",
+				minetest.registered_items["es:sword_aikerum"].inventory_image,
+			},
+	visual_size = {x=1, y=1},
+	makes_footstep_sound = true,
+	view_range = 5,
+	walk_velocity = 1,
+	run_velocity = 5,
+	damage = 4,
+	drops = {
+		{name = "es:infinium_goo",
+		chance = 5,
+		min = 3,
+		max = 10,},
+		{name = "es:sword_aikerum",
+		chance = 2,
+		min = 1,
+		max = 1,},
+		{name = "default:lava_source",
+			chance = 2,
+			min = 1,
+			max=2,},
+
+	},
+	armor = 80,
+	drawtype = "front",
+	water_damage = 0,
+	lava_damage = 50,
+	light_damage = 1,
+	on_rightclick = nil,
+	attack_type = "dogfight",
+	animation = {
+		speed_normal = 30,		speed_run = 30,
+		stand_start = 0,		stand_end = 79,
+		walk_start = 168,		walk_end = 187,
+		run_start = 168,		run_end = 187,
+		punch_start = 200,		punch_end = 219,
+	},
+	sounds = {
+		war_cry = "mobs_barbarian_yell2",
+		death = "mobs_howl",
+		attack = "default_punch3",
+		},
 })

@@ -1,4 +1,4 @@
---esmobs v0.0.4
+--esmobs v0.1.0
 --maikerumine
 --made for Extreme Survival game
 
@@ -7,6 +7,7 @@
 
 --REFERENCE
 --function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
+bp.npc_drops = { "default:pick_steel", "esmobs:meat", "default:sword_steel", "default:shovel_steel", "farming:bread", "default:wood" }--Added 20151121
 
 bp:register_spawn("esmobs:badplayer2", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 14000, 1, -20)
 bp:register_mob("esmobs:badplayer2", {
@@ -16,7 +17,7 @@ bp:register_mob("esmobs:badplayer2", {
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer2.png",
+	textures = {"badplayer_2.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_steel"].inventory_image,
 			},
@@ -69,7 +70,7 @@ bp:register_mob("esmobs:badplayer3", {
 	collisionbox = {-0.3, -0.6, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer3.png",
+	textures = {"badplayer_3.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_steel"].inventory_image,
 			},
@@ -122,7 +123,7 @@ bp:register_mob("esmobs:badplayer4", {
 	collisionbox = {-0.3, -1.3, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer4.png",
+	textures = {"badplayer_4.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:pick_steel"].inventory_image,
 			},
@@ -176,7 +177,7 @@ bp:register_mob("esmobs:badplayer6", {
 	collisionbox = {-0.3, -0.8, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer6.png",
+	textures = {"badplayer_6.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_mese"].inventory_image,
 			},
@@ -229,7 +230,7 @@ bp:register_mob("esmobs:badplayer7", {
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer7.png",
+	textures = {"badplayer_7.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_bronze"].inventory_image,
 			},
@@ -282,7 +283,7 @@ bp:register_mob("esmobs:badplayer8", {
 	collisionbox = {-0.3, -0.8, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer8.png",
+	textures = {"badplayer_8.png",
 				"3d_armor_trans.png",
 				minetest.registered_items["default:sword_steel"].inventory_image,
 			},
@@ -335,7 +336,7 @@ bp:register_mob("esmobs:badplayer9", {
 	collisionbox = {-0.3, -0.8, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer9.png",
+	textures = {"badplayer_9.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_bronze"].inventory_image,
 			},
@@ -388,7 +389,7 @@ bp:register_mob("esmobs:badplayer10", {
 	collisionbox = {-0.3, -1.5, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer10.png",
+	textures = {"badplayer_10.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_mese"].inventory_image,
 			},
@@ -441,7 +442,7 @@ bp:register_mob("esmobs:badplayer11", {
 	collisionbox = {-0.3, -1.3, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer11.png",
+	textures = {"badplayer_11.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_steel"].inventory_image,
 			},
@@ -494,7 +495,7 @@ bp:register_mob("esmobs:badplayer12", {
 	collisionbox = {-0.3, -0.5, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer12.png",
+	textures = {"badplayer_12.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_wood"].inventory_image,
 			},
@@ -548,7 +549,7 @@ bp:register_mob("esmobs:badplayer16", {
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer16.png",
+	textures = {"badplayer_16.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:pick_wood"].inventory_image,
 			},
@@ -602,7 +603,7 @@ bp:register_mob("esmobs:badplayer18", {
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer18.png",
+	textures = {"badplayer_18.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:pick_stone"].inventory_image,
 			},
@@ -657,7 +658,7 @@ bp:register_mob("esmobs:badplayer22", {
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer22.png",
+	textures = {"badplayer_22.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_steel"].inventory_image,
 			},
@@ -715,7 +716,7 @@ bp:register_mob("esmobs:badplayer23", {
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer23.png",
+	textures = {"badplayer_23.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_steel"].inventory_image,
 			},
@@ -768,7 +769,7 @@ bp:register_mob("esmobs:badplayer24", {
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer24.png",
+	textures = {"badplayer_24.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:goldblock"].inventory_image,
 			},
@@ -821,7 +822,7 @@ bp:register_mob("esmobs:badplayer25", {
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer25.png",
+	textures = {"badplayer_25.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:pick_diamond"].inventory_image,
 			},
@@ -874,7 +875,7 @@ bp:register_mob("esmobs:badplayer26", {
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer26.png",
+	textures = {"badplayer_26.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:axe_steel"].inventory_image,
 			},
@@ -927,7 +928,7 @@ bp:register_mob("esmobs:badplayer27", {
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer27.png",
+	textures = {"badplayer_27.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_diamond"].inventory_image,
 			},
@@ -980,7 +981,7 @@ bp:register_mob("esmobs:badplayer28", {
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer28.png",
+	textures = {"badplayer_28.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_steel"].inventory_image,
 			},
@@ -1033,7 +1034,7 @@ bp:register_mob("esmobs:badplayer29", {
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer29.png",
+	textures = {"badplayer_29.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_stone"].inventory_image,
 			},
@@ -1086,7 +1087,7 @@ bp:register_mob("esmobs:badplayer30", {
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer30.png",
+	textures = {"badplayer_30.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_mese"].inventory_image,
 			},
@@ -1140,7 +1141,7 @@ bp:register_mob("esmobs:badplayer31", {
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"badplayer31.png",
+	textures = {"badplayer_31.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_mese"].inventory_image,
 			},
@@ -1185,8 +1186,6 @@ bp:register_mob("esmobs:badplayer31", {
 		attack = "default_punch3",
 		},
 })
-
-
 
 bp:register_spawn("esmobs:badplayer35", {"default:sandstone","default:stone", "default:stonebrick","default:cobble"}, 9, -1, 14000, 1, -20)
 bp:register_mob("esmobs:badplayer35", {
@@ -1242,4 +1241,139 @@ bp:register_mob("esmobs:badplayer35", {
 		},
 })
 
+
+bp:register_spawn("esmobs:Mr_Black", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble"}, 14, -1, 14000, 1, 30)
+bp:register_mob("esmobs:Mr_Black", {
+	type = "monster",
+	hp_min = 35,
+	hp_max = 65,
+	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
+	visual = "mesh",
+	mesh = "3d_armor_character.x",
+	textures = {"badplayer_33.png",
+			"3d_armor_trans.png",
+				minetest.registered_items["default:sword_stone"].inventory_image,
+			},
+	visual_size = {x=1, y=1},
+	makes_footstep_sound = true,
+	view_range = 15,
+	walk_velocity = 1,
+	run_velocity = 3,
+	damage = 2,
+		sounds = {
+		war_cry = "mobs_barbarian_yell1",
+		death = "mobs_barbarian_death",
+		attack = "default_punch1",
+		},
+	drops = {
+		{name = "default:apple",
+		chance = 1,
+		min = 1,
+		max = 2,},
+		{name = "default:sword_steel",
+		chance = 2,
+		min = 0,
+		max = 1,},
+
+	},
+	armor = 75,
+	drawtype = "front",
+	water_damage = 70,
+	lava_damage = 50,
+	light_damage = 0,
+	attack_type = "dogfight",
+	sounds = {
+		attack = "default_punch3",
+	},
+--[[
+	on_rightclick = function (self, clicker)
+		bp:face_pos(self,clicker:getpos())
+		bp:team_player(self,clicker:getpos())
+		if self.state ~= "path" and self.state ~= "following" then
+			local_chat(clicker:getpos(),"Mr. Black: Grrrrrrrrrrrr!",3)
+				if not self.tamed then
+					self.tamed = true
+					self.follow = true
+			end
+		end
+	end,]]
+	on_rightclick = function(self, clicker)
+		local item = clicker:get_wielded_item()
+		local_chat(clicker:getpos(),"Mr. Black: Grrrrrrrrrrrr!",3)
+		if item:get_name() == "esmobs:meat" or item:get_name() == "farming:bread" then
+			local hp = self.object:get_hp()
+			if hp + 4 > self.hp_max then return end
+			if not minetest.setting_getbool("creative_mode") then
+				item:take_item()
+				clicker:set_wielded_item(item)
+			end
+			self.object:set_hp(hp+4)
+
+
+		-- right clicking with gold lump drops random item from mobs.npc_drops
+		elseif item:get_name() == "default:gold_lump" then
+			if not minetest.setting_getbool("creative_mode") then
+				item:take_item()
+				clicker:set_wielded_item(item)
+			end
+			local pos = self.object:getpos()
+			pos.y = pos.y + 0.5
+			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc_drops)]})
+		else
+			if self.owner == "" then
+				self.owner = clicker:get_player_name()
+			else
+				local formspec = "size[8,4]"
+				formspec = formspec .. "textlist[2.85,0;2.1,0.5;dialog;What can I do for you?]"
+				formspec = formspec .. "button_exit[1,1;2,2;gfollow;follow]"
+				formspec = formspec .. "button_exit[5,1;2,2;gstand;stand]"
+				formspec = formspec .. "button_exit[0,2;4,4;gfandp;follow and protect]"
+				formspec = formspec .. "button_exit[4,2;4,4;gsandp;stand and protect]"
+				--formspec = formspec .. "button_exit[1,2;2,2;ggohome; go home]"
+				--formspec = formspec .. "button_exit[5,2;2,2;gsethome; sethome]"
+				minetest.show_formspec(clicker:get_player_name(), "order", formspec)
+				minetest.register_on_player_receive_fields(function(clicker, formname, fields)
+					if fields.gfollow then
+						self.order = "follow"
+						self.attacks_monsters = false
+					end
+					if fields.gstand then
+						self.order = "stand"
+						self.attacks_monsters = false
+					end
+					if fields.gfandp then
+						self.order = "follow"
+						self.attacks_monsters = true
+					end
+					if fields.gsandp then
+						self.order = "stand"
+						self.attacks_monsters = true
+					end
+					if fields.gsethome then
+						self.floats = self.object:getpos()
+					end
+					if fields.ggohome then
+						if self.floats then
+							self.order = "stand"
+							self.object:setpos(self.floats)
+						end
+					end
+				end)
+
+			end
+		end
+	end,
+
+	animation = {
+		speed_normal = 30,		speed_run = 30,
+		stand_start = 0,		stand_end = 79,
+		walk_start = 168,		walk_end = 187,
+		run_start = 168,		run_end = 187,
+		punch_start = 200,		punch_end = 219,
+	},
+	attacks_monsters = true,
+	peaceful = true,
+	group_attack = true,
+	--step = 1,
+})
 

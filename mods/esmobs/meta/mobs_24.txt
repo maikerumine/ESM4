@@ -1,0 +1,5 @@
+name = "MC Sheep",
+type = "Animal",
+hp = "25",
+drops = "wool, meat",
+info = "Follows wheat, can be dyed, can shear for wool, and tamed.",

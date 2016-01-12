@@ -1,0 +1,5 @@
+name = "Sam",
+type = "Friendly npc",
+hp = "24-35",
+drops = "sword, ore, apple",
+info = "Right click to have as team player, right click with gold_lump for random trade",

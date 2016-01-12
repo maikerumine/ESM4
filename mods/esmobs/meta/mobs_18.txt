@@ -1,0 +1,5 @@
+name = "Bloco",
+type = "Cute Monster",
+hp = "14-15",
+drops = "stone",
+info = "Easy way to get stone.",

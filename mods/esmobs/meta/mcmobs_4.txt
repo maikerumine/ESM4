@@ -1,0 +1,5 @@
+name = "Zombie Piggie",
+type = "Monster",
+hp = "35",
+drops = "mese sword, gold, rotten flesh",
+info = "Decent drops, easy to kill.",
