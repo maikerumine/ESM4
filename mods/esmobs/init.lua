@@ -25,9 +25,7 @@ dofile(minetest.get_modpath("esmobs").."/mcmobs.lua")
 dofile(minetest.get_modpath("esmobs").."/spawner.lua")
 
 --MOB SEPCS
---dofile(minetest.get_modpath("esmobs").."/mobspec.lua")
---dofile(minetest.get_modpath("esmobs").."/meta.lua")
---dofile(minetest.get_modpath("esmobs").."/skinlist.lua")
+
 
 
 --IF ES IS LOADED YOU WILL SEE OTHER MOBS HOLDING THE SPECIAL TOOLS
@@ -56,11 +54,11 @@ dofile(minetest.get_modpath("esmobs").."/spawner.lua")
 		minetest.register_alias("esmobs:bow", "throwing:bow")
 		minetest.register_alias("esmobs:arrow", "throwing:arrow")
 	end
-	
+
 --TNT HACK
-	dofile(minetest.get_modpath("esmobs").."/tnt.lua")
-	
-	
+	--dofile(minetest.get_modpath("esmobs").."/tnt.lua")
+
+
 --MOB SPECS
 esmobs = {}
 esmobs.type = { SPRITE=0, MODEL=1 }
@@ -106,7 +104,7 @@ esmobs.formspec.main = function(name)
 			.. "image[1,.75;1,2;"..esmobs.esmobs[name].."_preview_back.png]"
 			.. "label[6,.5;Raw texture:]"
 			.. "image[6,1;2,1;"..esmobs.esmobs[name]..".png]"
-		
+
 	else
 		formspec = formspec
 --			.. "image[0,.75;1,2;"..esmobs.esmobs[name]..".png]"
@@ -186,9 +184,9 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 			inventory_plus.set_inventory_formspec(player,esmobs.formspec.main(player:get_player_name()))
 		end
 	end
-end)	
-	
-print("[ES-Mobs] Extreme Survival Mobs Loaded!")	
+end)
+
+print("[ES-Mobs] Extreme Survival Mobs Loaded!")
 if minetest.setting_get("log_mods") then
 	minetest.log("action", "esmobs mobs loaded")
 end

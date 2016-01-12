@@ -264,8 +264,8 @@ function bp:register_mob(name, def)
 					inv:set_stack("main", self.driver:get_wield_index(), stack)
 					return
 				end
-			end	
-		
+			end
+
 			if self.type == "monster" and peaceful_only then
 				self.object:remove()
 				return
@@ -782,11 +782,11 @@ function bp:register_mob(name, def)
 						end
 						self.object:remove()
 						--bp:explosion(pos, 2, 0, 1, "tnt_explode", self.sounds.explode)  --removed fugly
-						esmobs:explode(pos, 2, 0, 1, "tnt_explode", self.sounds.explode)
+						--bp:explode(pos, 2, 0, 1, "tnt_explode", self.sounds.explode)
 						minetest.sound_play("tnt_explode", {pos=pos, gain=1.5, max_hear_distance=2*64})
 					end
 				end
-				
+
 			--dogfight attack
 			elseif self.state == "attack" and self.attack_type == "dogfight" then
 				if not self.attack.player or not self.attack.player:getpos() then
@@ -848,7 +848,7 @@ function bp:register_mob(name, def)
 						end
 					end
 				end
-				
+
 		--FROM MCMOBS API  HACK WORKS
 		elseif self.state == "attack" and self.attack_type == "shoot" then
 			if not self.attack.player or not self.attack.player:is_player() then
@@ -913,7 +913,7 @@ function bp:register_mob(name, def)
 		end
 
 	end,
-	
+
 		--BEGIN ON_ACTIVATE
 		on_activate = function(self, staticdata, dtime_s)
 			local pos = self.object:getpos()
@@ -1113,7 +1113,7 @@ function bp:register_mob(name, def)
 			--deathanimation WIP
 
 			--END ORIG ON PUNCH CODE
-			
+
 			--ADDING LAGS MOBS BONES HERE
 			    --on_punch = function(self, hitter)
 				    --mob killed
@@ -1121,13 +1121,13 @@ function bp:register_mob(name, def)
 
 				    if hitter and hitter:is_player() and hitter:get_inventory() then
 				       for _,drop in ipairs(self.drops) do
-			
+
 			--THIS CODE GIVES YOU THE DROP INSTANT ON DEATH
 			--removed to place drops in bones.
 			--              	 if math.random(1, drop.chance) == 1 then
 			--                  	hitter:get_inventory():add_item("main", ItemStack(drop.name.." "..math.random(drop.min, drop.max)))
 			--               	end
-			 
+
 				       end
 
 					    --mob bones, like player bones added by Andrei modified by maikerumine
@@ -1187,7 +1187,7 @@ function bp:register_mob(name, def)
 				 end
 			--end,			--use if using original punch code.
 				end,
-				
+
 			--END ON PUNCH FULL CODE
 				})
 			end
@@ -1287,7 +1287,7 @@ function bp:register_mob(name, def)
 
 				return false -- beyond limits
 			end
-			
+
 			--BEGIN DROPS GO TO BONES
 			-- on mob death drop items
 			function check_for_death(self)
@@ -1392,7 +1392,7 @@ function bp:register_mob(name, def)
 				end
 			end
 
-			--OLDARROW  DM SHOOTS 
+			--OLDARROW  DM SHOOTS
 			-- register arrow for shoot attack
 			function bp:register_arrow(name, def)
 				if not name or not def then return end -- errorcheck
@@ -1517,7 +1517,7 @@ function bp:register_mob(name, def)
 					self.order = "follow"
 				end
 			end
-			
+
 			--TODO TWEAK CODE, AS TOOLS WEAR OUT TOO FAST
 			function process_weapon(player, time_from_last_punch, tool_capabilities)
 			local weapon = player:get_wielded_item()
