@@ -3,8 +3,7 @@
 --made for Extreme Survival game
 --License for code WTFPL
 
-
-
+--[[
 -----------------------------------------------------------------------------
 -- You decide which mobs and how many will spawn
 -----------------------------------------------------------------------------
@@ -22,25 +21,27 @@ esmobs.good_npc = true;
 
 -- if set to true, the baddies will spawn and they look like good npc!
 esmobs.bad_npc = true;
-
+]]
 -- if set to given number, You will get all the mobs in the set mob package.  (see below for configuration)
-esmobs.overall = 5;
+
+esmobs.MOB_SETTING = 10;
+
 
 -----------------------------------------------------------------------------
 --MOB PACKAGES
 -----------------------------------------------------------------------------
---esmobs.overall = 12;		Animals, and MT Monsters
---esmobs.overall = 11;		MT monsters, MC like mobs, and Bad npc's.
---esmobs.overall = 10;		Good npc, and Bad npc's.
---esmobs.overall = 9;		MT monsters and Animals.
---esmobs.overall = 8;		MC like mobs and Animals.
---esmobs.overall = 7;		Good npc, Bad npc's.
---esmobs.overall = 6;		MT Monsters, Bad npc's.
---esmobs.overall = 5;		Animals, Good npc, MT monsters, MC like mobs, and Bad npc's. All 76 of them.
---esmobs.overall = 4;		Animals, Good npc, MT monsters, and MC like mobs.
---esmobs.overall = 3;		Animals, Good npc, and MT monsters.
---esmobs.overall = 2;		Animals and good npc's.
---esmobs.overall = 1;		Just Animals.
+--esmobs.MOB_SETTING = 12;		MT Monsters
+--esmobs.MOB_SETTING = 11;		MT monsters, ES Monsters, MC like mobs, and Bad npc's.
+--esmobs.MOB_SETTING = 10;		Good npc's
+--esmobs.MOB_SETTING = 9;		MT monsters and Animals.
+--esmobs.MOB_SETTING = 8;		MC like mobs and Animals.
+--esmobs.MOB_SETTING = 7;		Good npc, Bad npc's.
+--esmobs.MOB_SETTING = 6;		MT Monsters, Bad npc's.
+--esmobs.MOB_SETTING = 5;		Animals, Good npc, MT monsters, ES monsters,  MC like mobs, and Bad npc's. All 76 of them.
+--esmobs.MOB_SETTING = 4;		Animals, Good npc, MT monsters, and MC like mobs.
+--esmobs.MOB_SETTING = 3;		Animals, Good npc, and MT monsters.
+--esmobs.MOB_SETTING = 2;		Animals and good npc's.
+--esmobs.MOB_SETTING = 1;		Just Animals.
 
 
 
