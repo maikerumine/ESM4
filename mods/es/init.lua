@@ -16,12 +16,9 @@ es = {}
 --NOTE:  THIS--v  v--MUST BE FIRST IN THE INIT FOR EVERYTHING TO WORK
 enable_stairsplus = true
 
-
-
 local load_start = os.clock()
 local modpath = minetest.get_modpath("es")
 es.modpath = modpath
-
 
 -- Alias
 dofile(modpath.."/alias.lua")
@@ -30,8 +27,8 @@ dofile(modpath.."/armor.lua")
 -- Craft recipes for items
 dofile(modpath.."/crafting.lua")
 
--- Mapgen?
---dofile(modpath.."/mapgen.lua")
+-- Shutdown
+dofile(modpath.."/shutdown.lua")
 
 -- Nodes
 dofile(modpath.."/nodes.lua")
@@ -41,7 +38,7 @@ dofile(modpath.."/oregen.lua")
 dofile(modpath.."/tools.lua")
 --dofile(modpath.."/hoes.lua")
 
--- Climate
+-- Climate  very laggy
 --dofile(minetest.get_modpath("es").."/freeze.lua")
 --dofile(minetest.get_modpath("es").."/snow.lua")
 
@@ -52,7 +49,6 @@ dofile(modpath.."/tools.lua")
 --MOREBLOCKS / STAIRSPLUS SUPPORT
 if moreblocks then
 dofile(modpath.."/mostair.lua")
---enable_stairsplus = true
 end
 
 --STAIR SUPPORT
@@ -61,39 +57,28 @@ dofile(modpath.."/stair.lua")
 end
 
 
---TECHNIC SUPPORT
-if technic then
-dofile(modpath.."/tech.lua")
-end
+-- Map Generation 
+--(CURRENTLY YOU NEED TO REPLACE THE DEFAULT WITH
+--the one that says stone IF YOU WANT AN ALL STONE WORLD.)
 
 
--- Map Generation (CURRENTLY YOU NEED TO REPLACE THE DEFAULT WITH the one that says stone IF YOU WANT AN ALL STONE WORLD.)
-
-
-
-
---Fixer's code--v
--- Time to shut down server.
--- Default is twice a day: at 06:05 and 18:05
-local H, M = 06, 05
-local Z = 18
-
--- Day to shut down server.
--- Default is daily shutdown
--- 1=Sunday, ..., 7=Saturday, nil=Shutdown daily
-local D = nil
-
-local timer = 0
-minetest.register_globalstep(function(dtime)
-   timer = timer + dtime
-   if timer < 1 then return end
-   timer = 0
-   local t = os.date("*t")
-   if ((t.hour == H or t.hour == Z) and (t.min == M) and (t.sec <= 2)
-         and ((D == nil) or (t.wday == D))) then
-      minetest.chat_send_all("Scheduled shutdown.  6 and 6 Eastern Time Zone "
-            .."Please come back in a minute.")
-      minetest.after(2, minetest.request_shutdown)
-   end
-end)
-
+--MAPFIX CODE
+minetest.register_chatcommand("mapfix", {
+	params = "<size>",
+	description = "Recalculate the flowing liquids of a chunk",
+	func = function(name, param)
+		local pos = minetest.get_player_by_name(name):getpos()
+		local size = tonumber(param) or 40
+		if size > 50 and not minetest.check_player_privs(name, {server=true}) then
+			return false, "You need the server privilege to exceed the radius of 50 blocks"
+		end
+		local minp, maxp = {x = math.floor(pos.x - size), y = math.floor(pos.y - size), z = math.floor(pos.z - size)}, {x = math.ceil(pos.x + size), y = math.ceil(pos.y + size), z = math.ceil(pos.z + size)}
+		local vm = minetest.get_voxel_manip()
+		vm:read_from_map(minp, maxp)
+		vm:calc_lighting()
+		vm:update_liquids()
+		vm:write_to_map()
+		vm:update_map()
+		return true, "Done."
+	end,
+})

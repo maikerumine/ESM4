@@ -14,6 +14,7 @@
 
 --Default override crafting
 
+--groups = {not_in_craft_guide=1},
 
 
 
@@ -84,61 +85,6 @@ minetest.register_craft({
 	}
 })
 
---[[
---TECHNIC DEPENDANT
---Comment out if not used technic
-minetest.register_craft({
-	type = 'cooking',
-	recipe = "es:depleted_uranium_ingot",
-	cooktime = 60,
-	output = "technic:uranium",
-})
-
-minetest.register_craft({
-	output = "es:depleted_uranium_ingot",
-	recipe = {
-	{"technic:chernobylite_block","technic:chernobylite_block","technic:chernobylite_block"},
-	{"technic:chernobylite_block","technic:chernobylite_block","technic:chernobylite_block"},
-	{"technic:chernobylite_block","technic:chernobylite_block","technic:chernobylite_block"},
-	}
-})
-
-minetest.register_craftitem("es:depleted_uranium_ingot", {
-	description = "Depleted uranium",
-	inventory_image = "technic_uranium_ingot.png",
-})
-
-minetest.register_craft({
-	output = "es:punkin",
-	recipe = {
-	{"es:depleted_uranium_ingot","es:depleted_uranium_ingot","es:depleted_uranium_ingot"},
-	{"es:depleted_uranium_ingot","es:depleted_uranium_ingot","es:depleted_uranium_ingot"},
-	{"es:depleted_uranium_ingot","es:depleted_uranium_ingot","es:depleted_uranium_ingot"},
-	}
-})
-
-minetest.register_craftitem("es:punkin_slice", {
-	description = "Punkin Slice",
-	inventory_image = "farming_pumpkin_slice.png",
-	on_use = minetest.item_eat(50),
-})
-
-minetest.register_craft({
-	output = "es:punkin",
-	recipe = {
-		{"es:punkin_slice", "es:punkin_slice", "es:punkin_slice"},
-		{"es:punkin_slice", "es:punkin_slice", "es:punkin_slice"},
-		{"es:punkin_slice", "es:punkin_slice", "es:punkin_slice"},
-	}
-})
-
-minetest.register_craft({
-	output = "es:punkin_slice 9",
-	recipe = {
-		{"", "es:punkin", ""},
-	}
-})
-]]
 minetest.register_craftitem("es:depleted_uranium_ingot", {
 	description = "Depleted uranium",
 	inventory_image = "technic_uranium_ingot.png",
@@ -162,8 +108,6 @@ minetest.register_craft({
 })
 
 
-
---END TECHNIC
 
 
 
@@ -193,6 +137,18 @@ minetest.register_craft({
 		{'stairs:stair_dirt', 'stairs:stair_dirt', 'stairs:stair_dirt'},
 	}
 })
+
+minetest.register_craft({
+	description = "Dirt with Dry Grass",
+	--type = "shapeless",
+	output = 'default:dirt_with_dry_grass 2',
+	recipe = {
+	{'group:flora' , },
+	{'es:dry_dirt', },
+}	
+})
+
+
 --[[For ref
 minetest.register_node("default:dirt_with_grass", {
 	description = "Dirt with Grass",
@@ -464,6 +420,13 @@ minetest.register_craft({
 	recipe = "default:ice",
 })
 
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 10,
+	output = "es:dry_dirt",
+	recipe = "default:dirt",
+})
+
 --rnd code
 -- 7*24*60*60 = 604800 real time 1 week burn time
 --Changed to 3 minutes 20151223
@@ -494,7 +457,7 @@ minetest.register_craft({
 	recipe = "es:mesecook_crystal",
 })
 
---MUST HAVE DEFAULT ORE GENERATION SET 
+--MUST HAVE DEFAULT ORE GENERATION SET
 minetest.register_craftitem("es:mesecook_crystal", {
 	description = "Cookable Raw MESE",
 	inventory_image = "mese_cook_mese_crystal.png",
