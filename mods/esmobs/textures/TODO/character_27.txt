@@ -1,2 +1,0 @@
-name = "Special Ops",
-author = "",

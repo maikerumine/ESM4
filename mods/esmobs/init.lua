@@ -24,11 +24,11 @@ esmobs={}
 		dofile(minetest.get_modpath("esmobs").."/esanimal.lua")
 		dofile(minetest.get_modpath("esmobs").."/esnpc.lua")
 		dofile(minetest.get_modpath("esmobs").."/mtmonster.lua")
-		dofile(minetest.get_modpath("esmobs").."/mcmonster.lua")
+		--dofile(minetest.get_modpath("esmobs").."/mcmonster.lua")
 		dofile(minetest.get_modpath("esmobs").."/esbadplayer.lua")
 		dofile(minetest.get_modpath("esmobs").."/esmonster.lua")
-		dofile(minetest.get_modpath("esmobs").."/esnpc2.lua")
-		dofile(minetest.get_modpath("esmobs").."/esbadplayer2.lua")
+		--dofile(minetest.get_modpath("esmobs").."/esnpc2.lua")
+		--dofile(minetest.get_modpath("esmobs").."/esbadplayer2.lua")
 
 --[[
 --MOB SETTINGS leave this alone, use config file to change.

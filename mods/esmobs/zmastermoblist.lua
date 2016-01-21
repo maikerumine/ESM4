@@ -235,7 +235,7 @@ bp:register_mob("esmobs:stone_monster", {
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",
-	damage = 2,
+	damage = 6,
 	hp_min = 32,
 	hp_max = 55,
 	armor = 80,
@@ -265,7 +265,7 @@ bp:register_mob("esmobs:stone_monster", {
 	},
 	water_damage = 10,
 	lava_damage = 1,
-	light_damage = 1,
+	light_damage = 2,
 	animation = {
 		speed_normal = 15,		speed_run = 15,
 		stand_start = 0,		stand_end = 14,
@@ -600,8 +600,8 @@ bp:register_mob("esmobs:bomber", {
 	lifetimer = 500,
 	floats=1,
 	rotate = 4.5,
-	walk_velocity = -2.5,
-	run_velocity = -3.5,
+	walk_velocity = -1.5,
+	run_velocity = -2.5,
   fall_speed = 0,
   stepheight = 12,
   sounds = {
@@ -642,8 +642,8 @@ bp:register_mob("esmobs:bomber", {
 		--arrow = "esmobs:bonebullet",
 		--arrow = "esmobs:tnt2_ent",
 		arrow = "esmobs:bone_monster",
-		--reach = 1,
-		shoot_interval = 4.5,
+		reach = 1,
+		shoot_interval = 5,
 
 	animation = {
 		speed_normal = 22,
@@ -1907,7 +1907,7 @@ bp:register_mob("esmobs:chickoboo", {
 	visual = "mesh",
 	mesh = "mobs_chicken.x",
 	textures = {
-		{"mobs_31.png", "mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png",
+		{"mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png",
 		"mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png"},
 		{"mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png",
 		"mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png"},

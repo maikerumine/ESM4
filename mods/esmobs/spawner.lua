@@ -4,18 +4,18 @@
 --License for code WTFPL
 --Andrey created mob spawner for his world needs
 
-minetest.register_alias("lagsmobs:cursed_stone", "esmmobs:cursed_stone")
+--minetest.register_alias("lagsmobs:cursed_stone", "esmmobs:cursed_stone")
 --minetest.register_alias("mobs:cursed_stone", "esmmobs:cursed_stone")
 
 minetest.register_node("esmobs:cursed_stone", {
 	description = "Cursed stone",
 	tiles = {
-		"mobs_cursed_stone_top.png",
-		"mobs_cursed_stone_bottom.png",
-		"mobs_cursed_stone.png",
-		"mobs_cursed_stone.png",
-		"mobs_cursed_stone.png",
-		"mobs_cursed_stone.png"
+		"bones_front.png",
+		"default_obsidian.png^mobs_cobweb.png",
+		"default_obsidian.png^mobs_cobweb.png",
+		"default_obsidian.png^mobs_cobweb.png",
+		"default_obsidian.png^mobs_cobweb.png",
+		"default_obsidian.png^mobs_cobweb.png"
 	},
 	is_ground_content = false,
 	groups = {cracky=1, level=2},

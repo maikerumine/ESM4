@@ -1,2 +1,0 @@
-name = "Perry the Platypus",
-author = "",

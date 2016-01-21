@@ -168,11 +168,11 @@ http://minetest.net/
 --REFERENCE
 --function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
 
-bp:register_spawn("esmobs:spider", {"default:stone" ,"default:cobble","group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 6, 0, 14000, 1, 71)
-bp:register_spawn("esmobs:creeper", {"group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 7, -1, 18000, 1, 31000)
-bp:register_spawn("esmobs:skeleton", {"group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 7, -1, 15000, 2, 31000)
-bp:register_spawn("esmobs:zombie", {"group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 7, -1, 17000, 1, 31000)
-bp:register_spawn("esmobs:pigman", {"nether:rack"}, 15, -1, 5000, 4, -1000)
+--bp:register_spawn("esmobs:spider", {"default:stone" ,"default:cobble","group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 6, 0, 14000, 1, 71)
+bp:register_spawn("esmobs:creeper", {"group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 7, -1, 22000, 1, 31000)
+bp:register_spawn("esmobs:skeleton", {"group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 7, -1, 22000, 2, 31000)
+bp:register_spawn("esmobs:zombie", {"group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 7, -1, 22000, 1, 31000)
+--bp:register_spawn("esmobs:pigman", {"nether:rack"}, 15, -1, 5000, 4, -1000)
 bp:register_spawn("esmobs:pigman", {"nether:portal"}, 15, -1, 15000, 4, 31000)
 
 
