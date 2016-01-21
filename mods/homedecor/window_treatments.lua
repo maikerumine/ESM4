@@ -1,102 +1,5 @@
 local S = homedecor.gettext
 
-homedecor.register("window_quartered", {
-	description = "Window (quartered)",
-	tiles = {
-		"homedecor_window_sides.png",
-		"homedecor_window_sides.png",
-		"homedecor_window_sides.png",
-		"homedecor_window_sides.png",
-		"homedecor_window_quartered.png",
-		"homedecor_window_quartered.png"
-	},
-	use_texture_alpha = true,
-	groups = {snappy=3},
-	sounds = default.node_sound_glass_defaults(),
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.5, -0.5, 0.025, 0.5, 0.5, 0}, -- NodeBox1
-			{-0.5, 0.4375, -0.0625, 0.5, 0.5, 0.0625}, -- NodeBox2
-			{-0.5, -0.5, -0.0625, 0.5, -0.4375, 0.0625}, -- NodeBox3
-			{-0.5, -0.0625, -0.025, 0.5, 0.0625, 0.025}, -- NodeBox4
-			{0.4375, -0.5, -0.0625, 0.5, 0.5, 0.0625}, -- NodeBox5
-			{-0.5, -0.5, -0.0625, -0.4375, 0.5, 0.0625}, -- NodeBox6
-			{-0.0625, -0.5, -0.025, 0.0625, 0.5, 0.025}, -- NodeBox7
-		}
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = {-0.5, -0.5, -0.0625, 0.5, 0.5, 0.0625}
-	}
-})
-
-homedecor.register("window_plain", {
-	description = "Window (plain)",
-	tiles = {
-		"homedecor_window_sides.png",
-		"homedecor_window_sides.png",
-		"homedecor_window_sides.png",
-		"homedecor_window_sides.png",
-		"homedecor_window_frame.png",
-		"homedecor_window_frame.png"
-	},
-	use_texture_alpha = true,
-	groups = {snappy=3},
-	sounds = default.node_sound_glass_defaults(),
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.5, -0.5, 0.025, 0.5, 0.5, 0}, -- NodeBox1
-			{-0.5, 0.4375, -0.0625, 0.5, 0.5, 0.0625}, -- NodeBox2
-			{-0.5, -0.5, -0.0625, 0.5, -0.4375, 0.0625}, -- NodeBox3
-			{0.4375, -0.5, -0.0625, 0.5, 0.5, 0.0625}, -- NodeBox4
-			{-0.5, -0.5, -0.0625, -0.4375, 0.5, 0.0625}, -- NodeBox5
-		}
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = {-0.5, -0.5, -0.0625, 0.5, 0.5, 0.0625}
-	}
-})
-
-local wb1_cbox = {
-	type = "fixed",
-	fixed = { -8/16, -8/16, 5/16, 8/16, 8/16, 8/16 },
-}
-
-homedecor.register("blinds_thick", {
-	description = "Window Blinds (thick)",
-	mesh = "homedecor_windowblind_thick.obj",
-	inventory_image = "homedecor_windowblind_thick_inv.png",
-	tiles = {
-		"homedecor_windowblind_strings.png",
-		"homedecor_windowblinds.png"
-	},
-	walkable = false,
-	groups = {snappy=3},
-	sounds = default.node_sound_wood_defaults(),
-	selection_box = wb1_cbox
-})
-
-local wb2_cbox = {
-	type = "fixed",
-	fixed = { -8/16, -8/16, 6/16, 8/16, 8/16, 8/16 },
-}
-
-homedecor.register("blinds_thin", {
-	description = "Window Blinds (thin)",
-	mesh = "homedecor_windowblind_thin.obj",
-	inventory_image = "homedecor_windowblind_thick_inv.png",
-	tiles = {
-		"homedecor_windowblind_strings.png",
-		"homedecor_windowblinds.png"
-	},
-	walkable = false,
-	groups = {snappy=3},
-	sounds = default.node_sound_wood_defaults(),
-	selection_box = wb2_cbox
-})
 
 local curtaincolors = {
 	{ "red",    "#ad2323e0:175" },
@@ -159,8 +62,8 @@ for c in ipairs(curtaincolors) do
 end
 
 local mats = {
-	{ "brass", "Brass", "homedecor_generic_metal_brass.png" },
-	{ "wrought_iron", "Wrought iron", "homedecor_generic_metal_wrought_iron.png" },
+	--{ "brass", "Brass", "homedecor_generic_metal_brass.png" },
+	--{ "wrought_iron", "Wrought iron", "homedecor_generic_metal_wrought_iron.png" },
 	{ "wood", "Wooden", "default_wood.png" }
 }
 
@@ -184,22 +87,3 @@ for i in ipairs(mats) do
 	})
 end
 
-homedecor.register("window_flowerbox", {
-	description = "Window flowerbow",
-	tiles = {
-		"homedecor_flowerbox_top.png",
-		"homedecor_flowerbox_bottom.png",
-		"homedecor_flowerbox_sides.png"
-	},
-	inventory_image = "homedecor_flowerbox_inv.png",
-	sounds = default.node_sound_stone_defaults(),
-	groups = { snappy = 3 },
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, 0.25, -0.125, 0.375, 0.5, 0.375}, -- NodeBox1
-			{-0.3125, 0.4375, 0.375, -0.25, 0.4875, 0.5}, -- NodeBox2
-			{0.25, 0.4375, 0.375, 0.3125, 0.4875, 0.5}, -- NodeBox3
-		}
-	}
-})

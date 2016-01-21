@@ -71,21 +71,6 @@ homedecor.register("kitchen_cabinet_with_sink", {
 	},
 })
 
-local cp_cbox = {
-	type = "fixed",
-	fixed = { -0.375, -0.5, -0.5, 0.375, -0.3125, 0.3125 }
-}
-
-homedecor.register("copper_pans", {
-	description = "Copper pans",
-	mesh = "homedecor_copper_pans.obj",
-	tiles = { "homedecor_polished_copper.png" },
-	inventory_image = "homedecor_copper_pans_inv.png",
-	groups = { snappy=3 },
-	selection_box = cp_cbox,
-	walkable = false,
-	on_place = minetest.rotate_node
-})
 
 local kf_cbox = {
 	type = "fixed",
@@ -94,7 +79,7 @@ local kf_cbox = {
 
 homedecor.register("kitchen_faucet", {
 	mesh = "homedecor_kitchen_faucet.obj",
-	tiles = { "homedecor_generic_metal_bright.png" },
+	tiles = { "default_steel_block.png" },
 	inventory_image = "homedecor_kitchen_faucet_inv.png",
 	description = "Kitchen Faucet",
 	groups = {snappy=3},
@@ -102,18 +87,3 @@ homedecor.register("kitchen_faucet", {
 	walkable = false
 })
 
-homedecor.register("paper_towel", {
-	mesh = "homedecor_paper_towel.obj",
-	tiles = {
-		"homedecor_generic_quilted_paper.png",
-		"default_wood.png"
-	},
-	inventory_image = "homedecor_paper_towel_inv.png",
-	description = "Paper towels",
-	groups = { snappy=3 },
-	walkable = false,
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.4375, 0.125, 0.0625, 0.4375, 0.4375, 0.5 }
-	},
-})

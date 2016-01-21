@@ -35,6 +35,9 @@ for i in ipairs(table_colors) do
 	})
 end
 
+
+
+
 local chaircolors = {
 	{ "", "plain" },
 	{ "black", "Black" },
@@ -52,7 +55,7 @@ local kc_cbox = {
 
 local ac_cbox = {
 	type = "fixed",
-	fixed = { 
+	fixed = {
 		{-0.5, -0.5, -0.5, 0.5, 0, 0.5 },
 		{-0.5, -0.5, 0.4, 0.5, 0.5, 0.5 }
 	}
@@ -64,15 +67,15 @@ for i in ipairs(chaircolors) do
 	local color2 = chaircolors[i][1]
 	local name = S(chaircolors[i][2])
 	local chairtiles = {
-		homedecor.plain_wood,
+		defaultwood,
 		"wool"..color..".png",
 	}
 
 	if chaircolors[i][1] == "" then
 		color = ""
 		chairtiles = {
-			homedecor.plain_wood,
-			homedecor.plain_wood
+			"default_wood.png",
+			"default_wood.png"
 		}
 	end
 
@@ -117,42 +120,7 @@ for i in ipairs(chaircolors) do
 	end
 end
 
-local ob_cbox = {
-	type = "fixed",
-	fixed = { -0.5, -0.5, 0, 0.5, 0.5, 0.5 }
-}
 
-minetest.register_node(":homedecor:openframe_bookshelf", {
-	description = "Bookshelf (open-frame)",
-	drawtype = "mesh",
-	mesh = "homedecor_openframe_bookshelf.obj",
-	tiles = {
-		"homedecor_openframe_bookshelf_books.png",
-		"default_wood.png"
-	},
-	groups = {choppy=3,oddly_breakable_by_hand=2,flammable=3},
-	sounds = default.node_sound_wood_defaults(),
-	paramtype = "light",
-	paramtype2 = "facedir",
-	selection_box = ob_cbox,
-	collision_box = ob_cbox,
-})
-
-homedecor.register("wall_shelf", {
-	description = "Wall Shelf",
-	tiles = {
-		"homedecor_wood_table_large_edges.png",
-	},
-	groups = { snappy = 3 },
-	sounds = default.node_sound_wood_defaults(),
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.5, 0.4, 0.47, 0.5, 0.47, 0.5},
-			{-0.5, 0.47, -0.1875, 0.5, 0.5, 0.5}
-		}
-	}
-})
 
 local ofchairs_sbox = {
 		type = "fixed",
@@ -169,7 +137,7 @@ local ofchairs_cbox = {
 		}
 	}
 
-local ofchairs = {"basic", "upscale"}
+local ofchairs = {"basic"}
 
 for _, c in ipairs(ofchairs) do
 
@@ -189,47 +157,36 @@ end
 
 -- Sitting functions disabled for now because of buggyness.
 
---[[
-function homedecor.sit(pos, node, clicker)
-	local name = clicker:get_player_name()
-	local meta = minetest:get_meta(pos)
-	local param2 = node.param2
-	if clicker:get_player_name() == meta:get_string("player") then
-		meta:set_string("player", "")
-		pos.y = pos.y-0.5
-		clicker:setpos(pos)
-		clicker:set_eye_offset({x=0,y=0,z=0}, {x=0,y=0,z=0})
-		clicker:set_physics_override(1, 1, 1)
-		default.player_attached[name] = false
-		default.player_set_animation(clicker, "stand", 30)
-	else
-		meta:set_string("player", clicker:get_player_name())
-		clicker:set_eye_offset({x=0,y=-7,z=2}, {x=0,y=0,z=0})
-		clicker:set_physics_override(0, 0, 0)
-		default.player_attached[name] = true
-		if param2 == 1 then
-			clicker:set_look_yaw(7.9)
-		elseif param2 == 3 then
-			clicker:set_look_yaw(4.75)
-		elseif param2 == 0 then
-			clicker:set_look_yaw(3.15)
-		else
-			clicker:set_look_yaw(6.28)
-		end
-	end
-end
 
-function homedecor.sit_exec(pos, node, clicker) -- don't move these functions inside sit()
-	if not clicker or not clicker:is_player()
-		or clicker:get_player_control().up == true or clicker:get_player_control().down == true
-		or clicker:get_player_control().left == true or clicker:get_player_control().right == true
-		or clicker:get_player_control().jump == true then  -- make sure that the player is immobile.
-	return end
-	homedecor.sit(pos, node, clicker)
-	clicker:setpos(pos)
-	default.player_set_animation(clicker, "sit", 30)
-end
---]]
+
+
+local desk_cbox = {
+	type = "fixed",
+	fixed = { -0.5, -0.5, -0.5, 1.5, 0.5, 0.5 }
+}
+
+homedecor.register("desk", {
+	description = "Desk",
+	mesh = "homedecor_desk.obj",
+	tiles = {
+		homedecor.plain_wood,
+		"homedecor_desk_drawers.png",
+		"homedecor_generic_metal_black.png",
+	},
+	inventory_image = "homedecor_desk_inv.png",
+	selection_box = desk_cbox,
+	collision_box = desk_cbox,
+	sounds = default.node_sound_wood_defaults(),
+	groups = { snappy = 3 },
+	expand = { right="air" },
+	inventory = {
+		size=24,
+	},
+})
+
+minetest.register_alias("homedecor:desk_r", "air")
+
+
 
 -- Aliases for 3dforniture mod.
 
