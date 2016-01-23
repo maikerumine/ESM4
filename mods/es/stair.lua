@@ -24,21 +24,21 @@ end
 --TECHNIC STAIRS
 stairs.register_stair_and_slab("granite", "es:granite",
 		{cracky = 1},
-		{"default_coal_block.png^[colorize:#696969:142^(default_acacia_leaves.png^[colorize:#5E2612:152)"},
+		{"technic_granite.png"},
 		"Granite Block Stair",
 		"Granite Block Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("marble", "es:marble",
 		{cracky = 1},
-		{"default_sand.png^[colorize:#CDB79E:142^(default_acacia_leaves.png^[colorize:#CDB79E:152)"},
+		{"technic_marble.png"},
 		"Marble Block Stair",
 		"Marble Block Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("marble bricks", "es:marble_bricks",
 		{cracky = 1},
-		{"default_sandstone_brick.png^[colorize:#CDB79E:182^(default_acacia_leaves.png^[colorize:#CDB79E:152)" },
+		{"technic_marble_bricks.png" },
 		"Marble Brick Block Stair",
 		"Marble Brick Block Slab",
 		default.node_sound_stone_defaults())

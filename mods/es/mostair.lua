@@ -16,11 +16,11 @@
 es = {}
 
 --Compatibility with Moreblocks / stairsplus
-	
+
 	if minetest.get_modpath("moreblocks") and enable_stairsplus then
 	register_stair_slab_panel_micro("es", "emeraldblock", "es:emeraldblock",
 	{cracky=3},
-	{"default_diamond_block.png^[colorize:#7CFC00:195"},
+	{"default_diamond_block.png^[colorize:#7CFC00:134"},
 	"Emerald Block",
 	"emeraldblock",
 	0)
@@ -29,7 +29,7 @@ end
 if minetest.get_modpath("moreblocks") and enable_stairsplus then
 	register_stair_slab_panel_micro("es", "rubyblock", "es:rubyblock",
 	{cracky=3},
-	{"default_diamond_block.png^[colorize:#FF0000:200"},
+	{"default_diamond_block.png^[colorize:#FF0000:144"},
 	"Ruby Block",
 	"rubyblock",
 	0)
@@ -38,7 +38,7 @@ end
 if minetest.get_modpath("moreblocks") and enable_stairsplus then
 	register_stair_slab_panel_micro("es", "aikerumblock", "es:aikerumblock",
 	{cracky=3},
-	{"default_diamond_block.png^[colorize:#0000CD:195"},
+	{"default_diamond_block.png^[colorize:#0000CD:134"},
 	"Aikerum Block",
 	"aikerumblock",
 	0)
@@ -97,4 +97,4 @@ end
 	table.insert(circular_saw.known_stairs, "es:messymese")
 	table.insert(circular_saw.known_stairs, "default:dirt_with_grass")
 
-	
+

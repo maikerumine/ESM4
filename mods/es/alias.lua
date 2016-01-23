@@ -35,12 +35,17 @@ minetest.register_alias("carts:rail_power","carts:powerrail")
 
 
 --This is to fix the old interaction with my modified 3d_armor mod.
+--NEED TO USE THIS FOR 3-D ARMOUR TO WORK!!!!!
+minetest.register_alias("3d_armor:helmet_aikerum", "es:helmet_aikerum")
 minetest.register_alias("3d_armor:helmet_emerald", "es:helmet_emerald")
 minetest.register_alias("3d_armor:helmet_infinium", "es:helmet_infinium")
+minetest.register_alias("3d_armor:chestplate_aikerum", "es:chestplate_aikerum")
 minetest.register_alias("3d_armor:chestplate_emerald", "es:chestplate_emerald")
 minetest.register_alias("3d_armor:chestplate_infinium", "es:chestplate_infinium")
+minetest.register_alias("3d_armor:leggings_aikerum", "es:leggings_aikerum")
 minetest.register_alias("3d_armor:leggings_emerald", "es:leggings_emerald")
 minetest.register_alias("3d_armor:leggings_infinium", "es:leggings_infinium")
+minetest.register_alias("3d_armor:boots_aikerum", "es:boots_aikerum")
 minetest.register_alias("3d_armor:boots_emerald", "es:boots_emerald")
 minetest.register_alias("3d_armor:boots_infinium", "es:boots_infinium")
 

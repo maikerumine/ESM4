@@ -31,8 +31,8 @@ hurt_cactus();
 --TECHNIC NODES
 minetest.register_node( "es:granite", {
 	description = "Granite",
-	--tiles = { "technic_granite.png" },
-	tiles = { "default_coal_block.png^[colorize:#696969:142^(default_acacia_leaves.png^[colorize:#5E2612:152)" },
+	tiles = { "technic_granite.png" },
+	--tiles = { "default_coal_block.png^[colorize:#696969:142^(default_acacia_leaves.png^[colorize:#5E2612:152)" },
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
@@ -40,8 +40,8 @@ minetest.register_node( "es:granite", {
 
 minetest.register_node( "es:marble", {
 	description = "Marble",
-	--tiles = { "technic_marble.png" },
-	tiles = {"default_sand.png^[colorize:#CDB79E:142^(default_acacia_leaves.png^[colorize:#CDB79E:152)"},
+	tiles = { "technic_marble.png" },
+	--tiles = {"default_sand.png^[colorize:#CDB79E:142^(default_acacia_leaves.png^[colorize:#CDB79E:152)"},
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
@@ -49,8 +49,8 @@ minetest.register_node( "es:marble", {
 
 minetest.register_node( "es:marble_bricks", {
 	description = "Marble Bricks",
-	--tiles = { "technic_marble_bricks.png" },
-	tiles = {"default_sandstone_brick.png^[colorize:#CDB79E:182^(default_acacia_leaves.png^[colorize:#CDB79E:152)" },
+	tiles = { "technic_marble_bricks.png" },
+	--tiles = {"default_sandstone_brick.png^[colorize:#CDB79E:182^(default_acacia_leaves.png^[colorize:#CDB79E:152)" },
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
@@ -341,7 +341,7 @@ minetest.register_abm({
 --ES Node Definition
 minetest.register_node("es:stone_with_emerald", {
 	description = "Emerald Ore",
-	tiles = {"default_stone.png^(default_mineral_mese.png^[colorize:#7CFC00:195)"},
+	tiles = {"default_stone.png^(default_mineral_mese.png^[colorize:#7CFC00:134)"},
 	is_ground_content = true,
 	groups = {cracky=1},
 	drop = "es:emerald_crystal",
@@ -350,7 +350,7 @@ minetest.register_node("es:stone_with_emerald", {
 
 minetest.register_node("es:stone_with_ruby", {
 	description = "Ruby Ore",
-	tiles = {"default_stone.png^(default_mineral_mese.png^[colorize:#FF0000:200)"},
+	tiles = {"default_stone.png^(default_mineral_mese.png^[colorize:#FF0000:144)"},
 	is_ground_content = true,
 	groups = {cracky=1},
 	drop = "es:ruby_crystal",
@@ -358,8 +358,8 @@ minetest.register_node("es:stone_with_ruby", {
 })
 
 minetest.register_node("es:stone_with_aikerum", {
-	description = "Ruby Ore",
-	tiles = {"default_stone.png^(default_mineral_mese.png^[colorize:#0000CD:195)"},
+	description = "Aikerum Ore",
+	tiles = {"default_stone.png^(default_mineral_mese.png^[colorize:#0000CD:134)"},
 	is_ground_content = true,
 	groups = {cracky=1,level = 2},
 	drop = "es:aikerum_crystal",
@@ -378,7 +378,7 @@ minetest.register_node("es:stone_with_infinium", {
 --Emerald located at -1000
 minetest.register_node("es:emeraldblock", {
 	description = "Emerald Block",
-	tiles = {"default_diamond_block.png^[colorize:#7CFC00:177"},
+	tiles = {"default_diamond_block.png^[colorize:#7CFC00:134"},
 	is_ground_content = true,
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
@@ -386,13 +386,13 @@ minetest.register_node("es:emeraldblock", {
 
 minetest.register_craftitem("es:emerald_crystal", {
 	description = "Emerald Crystal",
-	inventory_image = "default_diamond.png^[colorize:#7CFC00:195",
+	inventory_image = "default_diamond.png^[colorize:#7CFC00:134",
 })
 
 --Ruby located at -3000
 minetest.register_node("es:rubyblock", {
 	description = "Ruby Block",
-	tiles = {"default_diamond_block.png^[colorize:#FF0000:177"},
+	tiles = {"default_diamond_block.png^[colorize:#FF0000:144"},
 	is_ground_content = true,
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
@@ -400,13 +400,13 @@ minetest.register_node("es:rubyblock", {
 
 minetest.register_craftitem("es:ruby_crystal", {
 	description = "Ruby Crystal",
-	inventory_image = "default_diamond.png^[colorize:#FF0000:200",
+	inventory_image = "default_diamond.png^[colorize:#FF0000:144",
 })
 
 --Aikerum located at -4000
 minetest.register_node("es:aikerumblock", {
 	description = "Aikerum Block",
-	tiles = {"default_diamond_block.png^[colorize:#0000CD:177"},
+	tiles = {"default_diamond_block.png^[colorize:#0000CD:134"},
 	is_ground_content = true,
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
@@ -414,7 +414,7 @@ minetest.register_node("es:aikerumblock", {
 
 minetest.register_craftitem("es:aikerum_crystal", {
 	description = "Aikerum Crystal",
-	inventory_image = "default_diamond.png^[colorize:#0000CD:195",
+	inventory_image = "default_diamond.png^[colorize:#0000CD:134",
 })
 
 
@@ -564,7 +564,7 @@ minetest.register_node("es:what", {
 
 --Default addons as they should be.  I changed ore generation to keep unique for compatibility.
 
---Dry dirt added 
+--Dry dirt added
 minetest.register_node("es:dry_dirt", {
 	description = "Some dry dirt",
 	--tiles = {"default_dry_dirt.png"},

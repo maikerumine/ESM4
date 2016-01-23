@@ -20,7 +20,11 @@ local load_start = os.clock()
 local modpath = minetest.get_modpath("es")
 es.modpath = modpath
 
-
+-- REMOVE NODES DO NOT USE IN YOUR WORLD
+-- Alias
+--dofile(modpath.."/technodrem.lua")
+--dofile(modpath.."/moreorerem.lua")
+dofile(modpath.."/alias.lua")
 
 -- Armor [abort migration]
 dofile(modpath.."/armor.lua")
@@ -63,11 +67,7 @@ end
 --(CURRENTLY YOU NEED TO REPLACE THE DEFAULT WITH
 --the one that says stone IF YOU WANT AN ALL STONE WORLD.)
 
--- REMOVE NODES DO NOT USE IN YOUR WORLD
--- Alias
---dofile(modpath.."/technodrem.lua")
---dofile(modpath.."/moreorerem.lua")
---dofile(modpath.."/alias.lua")
+
 
 
 --MAPFIX CODE

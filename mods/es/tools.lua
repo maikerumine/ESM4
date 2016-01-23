@@ -13,10 +13,25 @@
 --(c) Copyright (2014-2015) maikerumine; CC-BY-SA 3.0
 
 
+--es_tool_emeraldsword
+--es_tool_rubysword
+--es_tool_aikerumsword
+
+--es_tool_emeraldpick
+--es_tool_rubypick
+--es_tool_aikerumpick
+
+
+
+
+
+
+
 --SWORDS
 minetest.register_tool("es:sword_emerald", {
 	description = "Extreme Survival Emerald Sword",
-	inventory_image = "default_tool_diamondsword.png^[colorize:#7CFC00:177",
+	--inventory_image = "default_tool_diamondsword.png^[colorize:#7CFC00:177",
+	inventory_image = "es_tool_emeraldsword.png",
 	tool_capabilities = {
 		full_punch_interval = 0.5,
 		max_drop_level=1,
@@ -29,7 +44,8 @@ minetest.register_tool("es:sword_emerald", {
 
 minetest.register_tool("es:sword_ruby", {
 	description = "Extreme Survival Ruby Sword",
-	inventory_image = "default_tool_diamondsword.png^[colorize:#FF0000:177",
+	--inventory_image = "default_tool_diamondsword.png^[colorize:#FF0000:177",
+	inventory_image = "es_tool_rubysword.png",
 	tool_capabilities = {
 		full_punch_interval = 0.4,
 		max_drop_level=3,
@@ -42,7 +58,8 @@ minetest.register_tool("es:sword_ruby", {
 
 minetest.register_tool("es:sword_aikerum", {
 	description = "Extreme Survival Aikerum Sword",
-	inventory_image = "default_tool_diamondsword.png^[colorize:#0000CD:177",
+	--inventory_image = "default_tool_diamondsword.png^[colorize:#0000CD:177",
+	inventory_image = "es_tool_aikerumsword.png",
 	tool_capabilities = {
 		full_punch_interval = 0.3,
 		max_drop_level=4,
@@ -132,8 +149,8 @@ minetest.register_tool("es:axe_aikerum", {
 		damage_groups = {fleshy=24},
 	},
 })
-	
-	
+
+
 --SHOVELS
 minetest.register_tool("es:shovel_emerald", {
 	description = "Extreme Survival Emerald Shovel",
