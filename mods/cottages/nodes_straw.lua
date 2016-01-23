@@ -24,9 +24,9 @@ end
 minetest.register_node("cottages:straw_mat", {
         description = S("layer of straw"),
         drawtype = 'nodebox',
-        tiles = { 'cottages_darkage_straw.png' }, -- done by VanessaE
-        wield_image = 'cottages_darkage_straw.png',
-        inventory_image = 'cottages_darkage_straw.png',
+        tiles = { 'farming_straw.png' }, -- done by VanessaE
+        wield_image = 'farming_straw.png',
+        inventory_image = 'farming_straw.png',
         sunlight_propagates = true,
         paramtype = 'light',
         paramtype2 = "facedir",
@@ -79,7 +79,7 @@ minetest.register_node("cottages:straw_bale", {
 minetest.register_node("cottages:straw", {
 	drawtype = "normal",
 	description = S("straw"),
-	tiles = {"cottages_darkage_straw.png"},
+	tiles = {"farming_straw.png"},
 	groups = {snappy=3,choppy=3,oddly_breakable_by_hand=3,flammable=3},
 	sounds = default.node_sound_wood_defaults(),
         -- the bale is slightly smaller than a full node
@@ -106,7 +106,7 @@ minetest.register_node("cottages:threshing_floor", {
 	drawtype = "nodebox",
 	description = S("threshing floor"),
 -- TODO: stone also looks pretty well for this
-	tiles = {"cottages_junglewood.png^farming_wheat.png","cottages_junglewood.png","cottages_junglewood.png^"..cottages.texture_stick},
+	tiles = {"default_junglewood.png^farming_wheat.png","default_junglewood.png","default_junglewood.png^"..cottages.texture_stick},
 	paramtype  = "light",
         paramtype2 = "facedir",
 	groups = {cracky=2},
@@ -243,7 +243,7 @@ minetest.register_node("cottages:threshing_floor", {
 		end
 
 		local overlay1 = "^farming_wheat.png";
-		local overlay2 = "^cottages_darkage_straw.png";
+		local overlay2 = "^farming_straw.png";
 		local overlay3 = "^"..cottages.texture_wheat_seed;
 
 		-- this can be enlarged by a multiplicator if desired
@@ -271,7 +271,7 @@ minetest.register_node("cottages:threshing_floor", {
 		local hud0 = puncher:hud_add({
 			hud_elem_type = "image",
 			scale = {x = 38, y = 38},
-			text = "cottages_junglewood.png^[colorize:#888888:128",
+			text = "default_junglewood.png^[colorize:#888888:128",
 			position = {x = 0.5, y = 0.5},
 			alignment = {x = 0, y = 0}
 		});
@@ -279,21 +279,21 @@ minetest.register_node("cottages:threshing_floor", {
 		local hud1 = puncher:hud_add({
 			hud_elem_type = "image",
 			scale = {x = 15, y = 15},
-			text = "cottages_junglewood.png"..overlay1,
+			text = "default_junglewood.png"..overlay1,
 			position = {x = 0.4, y = 0.5},
 			alignment = {x = 0, y = 0}
 		});
 		local hud2 = puncher:hud_add({
 			hud_elem_type = "image",
 			scale = {x = 15, y = 15},
-			text = "cottages_junglewood.png"..overlay2,
+			text = "default_junglewood.png"..overlay2,
 			position = {x = 0.6, y = 0.35},
 			alignment = {x = 0, y = 0}
 		});
 		local hud3 = puncher:hud_add({
 			hud_elem_type = "image",
 			scale = {x = 15, y = 15},
-			text = "cottages_junglewood.png"..overlay3,
+			text = "default_junglewood.png"..overlay3,
 			position = {x = 0.6, y = 0.65},
 			alignment = {x = 0, y = 0}
 		});
@@ -361,7 +361,7 @@ minetest.register_node("cottages:handmill", {
 	description = S("mill, powered by punching"),
 	drawtype = "mesh",
 	mesh = "cottages_handmill.obj",
-	tiles = {"cottages_stone.png"},
+	tiles = {"default_stone.png"},
 	paramtype  = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=2},

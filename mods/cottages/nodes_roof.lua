@@ -86,7 +86,7 @@ cottages.register_roof = function( name, tiles, basic_material, homedecor_altern
 		is_ground_content = false,
 	})
 
-
+--[[
    if( not( homedecor_alternative )
        or ( minetest.get_modpath("homedecor") ~= nil )) then
 
@@ -99,7 +99,9 @@ cottages.register_roof = function( name, tiles, basic_material, homedecor_altern
 	}
       })
    end
+]]
 
+--[[
    -- make those roof parts that use homedecor craftable without that mod
    if( homedecor_alternative ) then
       basic_material = 'cottages:roof_wood';
@@ -113,7 +115,7 @@ cottages.register_roof = function( name, tiles, basic_material, homedecor_altern
 	}
       })
    end
-
+]]
 
    minetest.register_craft({
 	output = "cottages:roof_connector_"..name,
@@ -147,14 +149,14 @@ end -- of cottages.register_roof( name, tiles, basic_material )
 -- add the diffrent roof types
 ---------------------------------------------------------------------------------------
 cottages.register_roof( 'straw',
-		{"cottages_darkage_straw.png","cottages_darkage_straw.png",
-		"cottages_darkage_straw.png","cottages_darkage_straw.png",
-		"cottages_darkage_straw.png","cottages_darkage_straw.png"},
+		{"farming_straw.png","farming_straw.png",
+		"farming_straw.png","farming_straw.png",
+		"farming_straw.png","farming_straw.png"},
 		'cottages:straw_mat', nil );
 cottages.register_roof( 'reet',
-		{"cottages_reet.png","cottages_reet.png",
-		"cottages_reet.png","cottages_reet.png",
-		"cottages_reet.png","cottages_reet.png"},
+		{"farming_straw.png","farming_straw.png",
+		"farming_straw.png","farming_straw.png",
+		"farming_straw.png","farming_straw.png"},
 		cottages.craftitem_papyrus, nil );
 cottages.register_roof( 'wood',
 		{cottages.textures_roof_wood, cottages.texture_roof_sides,
@@ -162,24 +164,24 @@ cottages.register_roof( 'wood',
 		cottages.texture_roof_sides,  cottages.textures_roof_wood},
 		cottages.craftitem_wood, nil);
 cottages.register_roof( 'black',
-		{"cottages_homedecor_shingles_asphalt.png", cottages.texture_roof_sides,
+		{"default_furnace_bottom.png", cottages.texture_roof_sides,
 		cottages.texture_roof_sides, cottages.texture_roof_sides,
-		cottages.texture_roof_sides, "cottages_homedecor_shingles_asphalt.png"},
+		cottages.texture_roof_sides, "default_furnace_bottom.png"},
 		'homedecor:shingles_asphalt', cottages.craftitem_coal_lump);
 cottages.register_roof( 'red',
-		{"cottages_homedecor_shingles_terracotta.png", cottages.texture_roof_sides,
+		{"default_bronze_block.png", cottages.texture_roof_sides,
 		cottages.texture_roof_sides, cottages.texture_roof_sides,
-		cottages.texture_roof_sides, "cottages_homedecor_shingles_terracotta.png"},
+		cottages.texture_roof_sides, "default_bronze_block.png"},
 		'homedecor:shingles_terracotta', cottages.craftitem_clay_brick);
 cottages.register_roof( 'brown',
-		{"cottages_homedecor_shingles_wood.png", cottages.texture_roof_sides,
+		{"default_wood.png", cottages.texture_roof_sides,
 		cottages.texture_roof_sides, cottages.texture_roof_sides,
-		cottages.texture_roof_sides, "cottages_homedecor_shingles_wood.png"},
+		cottages.texture_roof_sides, "default_wood.png"},
 		'homedecor:shingles_wood', cottages.craftitem_dirt);
 cottages.register_roof( 'slate',
-		{"cottages_slate.png", cottages.texture_roof_sides,
-		"cottages_slate.png", "cottages_slate.png",
-		cottages.texture_roof_sides,"cottages_slate.png"},
+		{"default_acacia_tree.png", cottages.texture_roof_sides,
+		"default_acacia_tree.png", "default_acacia_tree.png",
+		cottages.texture_roof_sides,"default_acacia_tree.png"},
 		cottages.craftitem_stone, nil);
 
 
@@ -188,7 +190,7 @@ cottages.register_roof( 'slate',
 ---------------------------------------------------------------------------------------
 minetest.register_node("cottages:slate_vertical", {
         description = S("Vertical Slate"),
-        tiles = {"cottages_slate.png",cottages.texture_roof_sides,"cottages_slate.png","cottages_slate.png",cottages.texture_roof_sides,"cottages_slate.png"},
+        tiles = {"default_acacia_tree.png",cottages.texture_roof_sides,"default_acacia_tree.png","default_acacia_tree.png",cottages.texture_roof_sides,"default_acacia_tree.png"},
         paramtype2 = "facedir",
         groups = {cracky=2, stone=1},
         sounds = default.node_sound_stone_defaults(),
@@ -207,7 +209,7 @@ minetest.register_craft({
 ---------------------------------------------------------------------------------------
 minetest.register_node("cottages:reet", {
         description = S("Reet for thatching"),
-        tiles = {"cottages_reet.png"},
+        tiles = {"farming_straw.png"},
 	groups = {snappy=3,choppy=3,oddly_breakable_by_hand=3,flammable=3},
 	sounds = default.node_sound_wood_defaults(),
 	is_ground_content = false,

@@ -47,7 +47,7 @@ minetest.register_node("cottages:window_shutter_open", {
 		description = S("opened window shutters"),
 		drawtype = "nodebox",
                 -- top, bottom, side1, side2, inner, outer
-		tiles = {"cottages_minimal_wood.png"},
+		tiles = {"default_wood.png"},
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
@@ -76,7 +76,7 @@ minetest.register_node("cottages:window_shutter_closed", {
 		description = S("closed window shutters"),
 		drawtype = "nodebox",
                 -- top, bottom, side1, side2, inner, outer
-		tiles = {"cottages_minimal_wood.png"},
+		tiles = {"default_wood.png"},
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2,not_in_creative_inventory=1},
@@ -143,7 +143,7 @@ minetest.register_node("cottages:half_door", {
 		description = S("half door"),
 		drawtype = "nodebox",
                 -- top, bottom, side1, side2, inner, outer
-		tiles = {"cottages_minimal_wood.png"},
+		tiles = {"default_wood.png"},
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
@@ -184,7 +184,7 @@ minetest.register_node("cottages:half_door_inverted", {
 		description = S("half door inverted"),
 		drawtype = "nodebox",
                 -- top, bottom, side1, side2, inner, outer
-		tiles = {"cottages_minimal_wood.png"},
+		tiles = {"default_wood.png"},
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
@@ -357,8 +357,8 @@ end
 
 
 -- further alternate hatch materials: wood, tree, copper_block
-cottages.register_hatch( 'cottages:hatch_wood',  'wooden hatch', 'cottages_minimal_wood.png',  cottages.craftitem_slab_wood );
-cottages.register_hatch( 'cottages:hatch_steel', 'metal hatch',  'cottages_steel_block.png',   cottages.craftitem_steel );
+cottages.register_hatch( 'cottages:hatch_wood',  'wooden hatch', 'default_wood.png',  cottages.craftitem_slab_wood );
+cottages.register_hatch( 'cottages:hatch_steel', 'metal hatch',  'default_steel_block.png',   cottages.craftitem_steel );
 
 
 

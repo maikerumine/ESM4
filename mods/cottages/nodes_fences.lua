@@ -6,7 +6,7 @@ minetest.register_node("cottages:fence_small", {
 		description = S("small fence"),
 		drawtype = "nodebox",
                 -- top, bottom, side1, side2, inner, outer
-		tiles = {"cottages_minimal_wood.png"},
+		tiles = {"default_wood.png"},
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
@@ -35,7 +35,7 @@ minetest.register_node("cottages:fence_corner", {
 		description = S("small fence corner"),
 		drawtype = "nodebox",
                 -- top, bottom, side1, side2, inner, outer
-		tiles = {"cottages_minimal_wood.png"},
+		tiles = {"default_wood.png"},
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
@@ -71,7 +71,7 @@ minetest.register_node("cottages:fence_end", {
 		description = S("small fence end"),
 		drawtype = "nodebox",
                 -- top, bottom, side1, side2, inner, outer
-		tiles = {"cottages_minimal_wood.png"},
+		tiles = {"default_wood.png"},
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},

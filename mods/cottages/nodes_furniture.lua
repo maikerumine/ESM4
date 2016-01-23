@@ -15,11 +15,20 @@
 
 local S = cottages.S
 
+--Alias                      "old"--->"new"
+minetest.register_alias("cottages:bed_foot", "beds:bed_bottom")
+minetest.register_alias("cottages:bed_head", "beds:bed_top")
+
+
+
+
+
+--[[
 -- a bed without functionality - just decoration
 minetest.register_node("cottages:bed_foot", {
 	description = S("Bed (foot region)"),
 	drawtype = "nodebox",
-	tiles = {"cottages_beds_bed_top_bottom.png", cottages.texture_furniture,  "cottages_beds_bed_side.png",  "cottages_beds_bed_side.png",  "cottages_beds_bed_side.png",  "cottages_beds_bed_side.png"},
+	tiles = {"beds_bed_top_bottom.png", cottages.texture_furniture,  "beds_bed_side1.png",  "beds_bed_side1.png",  "beds_bed_side1.png",  "beds_bed_side1.png"},
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
@@ -54,7 +63,7 @@ minetest.register_node("cottages:bed_foot", {
 minetest.register_node("cottages:bed_head", {
 	description = S("Bed (head region)"),
 	drawtype = "nodebox",
-	tiles = {"cottages_beds_bed_top_top.png", cottages.texture_furniture,  "cottages_beds_bed_side_top_r.png",  "cottages_beds_bed_side_top_l.png",  cottages.texture_furniture,  "cottages_beds_bed_side.png"},
+	tiles = {"beds_bed_top_top.png", cottages.texture_furniture,  "beds_bed_side_top_r.png",  "beds_bed_side_top_r.png",  cottages.texture_furniture,  "beds_bed_side_top_r.png"},
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
@@ -85,15 +94,15 @@ minetest.register_node("cottages:bed_head", {
 			end
 })
 
-
+]]
 -- the basic version of a bed - a sleeping mat
 -- to facilitate upgrade path straw mat -> sleeping mat -> bed, this uses a nodebox
 minetest.register_node("cottages:sleeping_mat", {
         description = S("sleeping mat"),
         drawtype = 'nodebox',
-        tiles = { 'cottages_sleepingmat.png' }, -- done by VanessaE
-        wield_image = 'cottages_sleepingmat.png',
-        inventory_image = 'cottages_sleepingmat.png',
+        tiles = { 'farming_straw.png' }, -- done by VanessaE
+        wield_image = 'farming_straw.png',
+        inventory_image = 'farming_straw.png',
         sunlight_propagates = true,
         paramtype = 'light',
         paramtype2 = "facedir",
@@ -127,7 +136,7 @@ minetest.register_node("cottages:sleeping_mat", {
 minetest.register_node("cottages:bench", {
 	drawtype = "nodebox",
 	description = S("simple wooden bench"),
-	tiles = {"cottages_minimal_wood.png", "cottages_minimal_wood.png",  "cottages_minimal_wood.png",  "cottages_minimal_wood.png",  "cottages_minimal_wood.png",  "cottages_minimal_wood.png"},
+	tiles = {"default_wood.png", "default_wood.png",  "default_wood.png",  "default_wood.png",  "default_wood.png",  "default_wood.png"},
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=3},
@@ -161,7 +170,7 @@ local cottages_table_def = {
 		description = S("table"),
 		drawtype = "nodebox",
                 -- top, bottom, side1, side2, inner, outer
-		tiles = {"cottages_minimal_wood.png"},
+		tiles = {"default_wood.png"},
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
@@ -207,7 +216,7 @@ minetest.register_node("cottages:shelf", {
 		description = S("open storage shelf"),
 		drawtype = "nodebox",
                 -- top, bottom, side1, side2, inner, outer
-		tiles = {"cottages_minimal_wood.png"},
+		tiles = {"default_wood.png"},
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
@@ -268,7 +277,7 @@ minetest.register_node("cottages:shelf", {
 minetest.register_node("cottages:stovepipe", {
 		description = S("stovepipe"),
 		drawtype = "nodebox",
-		tiles = {"cottages_steel_block.png"},
+		tiles = {"default_steel_block.png"},
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
@@ -293,7 +302,7 @@ minetest.register_node("cottages:washing", {
 		description = S("washing place"),
 		drawtype = "nodebox",
                 -- top, bottom, side1, side2, inner, outer
-		tiles = {"cottages_clay.png"},
+		tiles = {"default_clay.png"},
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
@@ -531,6 +540,8 @@ end
 ---------------------------------------------------------------------------------------
 -- crafting receipes
 ---------------------------------------------------------------------------------------
+--[[
+
 minetest.register_craft({
 	output = "cottages:bed_foot",
 	recipe = {
@@ -548,7 +559,7 @@ minetest.register_craft({
 		{"", "",              cottages.craftitem_stick, }
 	}
 })
-
+]]
 minetest.register_craft({
 	output = "cottages:sleeping_mat 3",
 	recipe = {

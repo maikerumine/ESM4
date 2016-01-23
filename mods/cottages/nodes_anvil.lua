@@ -51,7 +51,7 @@ local cottages_anvil_formspec =
 minetest.register_node("cottages:anvil", {
 	drawtype = "nodebox",
 	description = S("anvil"),
-	tiles = {"cottages_stone.png"}, -- TODO default_steel_block.png,  default_obsidian.png are also nice
+	tiles = {"default_stone.png"}, -- TODO default_steel_block.png,  default_obsidian.png are also nice
 	paramtype  = "light",
         paramtype2 = "facedir",
 	groups = {cracky=2},

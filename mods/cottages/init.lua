@@ -40,14 +40,14 @@ dofile(minetest.get_modpath("cottages").."/adaptions.lua");
 -- add a stack size if you want a higher yield
 cottages.handmill_product = {};
 cottages.handmill_product[ cottages.craftitem_seed_wheat ] = 'farming:flour 1';
---[[ some examples:
+--some examples:
 cottages.handmill_product[ 'default:cobble' ] = 'default:gravel';
 cottages.handmill_product[ 'default:gravel' ] = 'default:sand';
 cottages.handmill_product[ 'default:sand'   ] = 'default:dirt 2';
 cottages.handmill_product[ 'flowers:rose'   ] = 'dye:red 6';
 cottages.handmill_product[ 'default:cactus' ] = 'dye:green 6';
 cottages.handmill_product[ 'default:coal_lump'] = 'dye:black 6';
---]]
+
 -- process that many inputs per turn
 cottages.handmill_max_per_turn = 20;
 cottages.handmill_min_per_turn = 0;

@@ -35,7 +35,7 @@ minetest.register_node("cottages:wagon_wheel", {
 -- a nice dirt road for small villages or paths to fields
 minetest.register_node("cottages:feldweg", {
         description = S("dirt road"),
-        tiles = {"cottages_feldweg.png","default_dirt.png", "default_dirt.png^default_grass_side.png"},
+        tiles = {"default_stone_brick.png","default_dirt.png", "default_dirt.png^default_grass_side.png"},
 	paramtype2 = "facedir",
 	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
 	legacy_facedir_simple = true,
@@ -48,7 +48,7 @@ minetest.register_node("cottages:feldweg", {
 -- people didn't use clay for houses; they did build with loam
 minetest.register_node("cottages:loam", {
         description = S("loam"),
-        tiles = {"cottages_loam.png"},
+        tiles = {"default_sandstone.png"},
 	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
         groups = {crumbly=3},
         sounds = default.node_sound_dirt_defaults,
@@ -59,14 +59,14 @@ minetest.register_node("cottages:loam", {
 if( minetest.get_modpath("stairs") and stairs and stairs.register_stair_and_slab) then
    stairs.register_stair_and_slab("feldweg", "cottages:feldweg",
 		{snappy=2,choppy=2,oddly_breakable_by_hand=2},
-		{"cottages_feldweg.png","default_dirt.png", "default_grass.png","default_grass.png","cottages_feldweg.png","cottages_feldweg.png"},
+		{"default_stone_brick.png","default_dirt.png", "default_grass.png","default_grass.png","default_stone_brick.png","default_stone_brick.png"},
 		S("Dirt Road Stairs"),
 		S("Dirt Road, half height"),
 		default.node_sound_dirt_defaults())
 
    stairs.register_stair_and_slab("loam", "cottages:loam",
 		{snappy=2,choppy=2,oddly_breakable_by_hand=2},
-		{"cottages_loam.png"},
+		{"default_sandstone.png"},
 		S("Loam Stairs"),
 		S("Loam Slab"),
 		default.node_sound_dirt_defaults())
@@ -74,7 +74,7 @@ if( minetest.get_modpath("stairs") and stairs and stairs.register_stair_and_slab
    if( minetest.registered_nodes["default:clay"]) then
       stairs.register_stair_and_slab("clay", "default:clay",
 	        {crumbly=3},
-		{"cottages_clay.png"},
+		{"default_clay.png"},
 		S("Clay Stairs"),
 		S("Clay Slab"),
 		default.node_sound_dirt_defaults())
@@ -86,7 +86,7 @@ end
 -- right now, this block mostly serves as a placeholder
 minetest.register_node("cottages:straw_ground", {
         description = S("straw ground for animals"),
-        tiles = {"cottages_darkage_straw.png","cottages_loam.png","cottages_loam.png","cottages_loam.png","cottages_loam.png","cottages_loam.png"},
+        tiles = {"farming_straw.png","default_sandstone.png","default_sandstone.png","default_sandstone.png","default_sandstone.png","default_sandstone.png"},
 	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
         groups = {crumbly=3},
         sounds = default.node_sound_dirt_defaults,
@@ -99,7 +99,7 @@ minetest.register_node("cottages:glass_pane", {
 		description = S("simple glass pane (centered)"),
 		drawtype = "nodebox",
                 -- top, bottom, side1, side2, inner, outer
-		tiles = {"cottages_glass_pane.png"},
+		tiles = {"default_glass.png"},
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
@@ -123,7 +123,7 @@ minetest.register_node("cottages:glass_pane_side", {
 		description = S("simple glass pane"),
 		drawtype = "nodebox",
                 -- top, bottom, side1, side2, inner, outer
-		tiles = {"cottages_glass_pane.png"},
+		tiles = {"default_glass.png"},
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
@@ -150,7 +150,7 @@ minetest.register_node("cottages:wood_flat", {
 		description = S("flat wooden planks"),
 		drawtype = "nodebox",
                 -- top, bottom, side1, side2, inner, outer
-		tiles = {"cottages_minimal_wood.png"},
+		tiles = {"default_wood.png"},
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
@@ -177,7 +177,7 @@ minetest.register_node("cottages:wool_tent", {
 		description = S("wool for tents"),
 		drawtype = "nodebox",
                 -- top, bottom, side1, side2, inner, outer
-		tiles = {"cottages_wool.png"},
+		tiles = {"wool_grey.png"},
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
@@ -200,7 +200,7 @@ minetest.register_node("cottages:wool_tent", {
 -- a fallback for cases in which there is no wool
 minetest.register_node("cottages:wool", {
 		description = "Wool",
-		tiles = {"cottages_wool.png"},
+		tiles = {"wool_grey.png"},
 		is_ground_content = false,
 		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,wool=1},
 })
@@ -217,7 +217,7 @@ minetest.register_craft({
 		{cottages.craftitem_iron, cottages.craftitem_stick,       cottages.craftitem_iron }
 	}
 })
-
+--[[
 -- run a wagon wheel over dirt :-)
 minetest.register_craft({
 	output = "cottages:feldweg 4",
@@ -274,7 +274,7 @@ minetest.register_craft({
 		{cottages.craftitem_stick, "",              cottages.craftitem_stick },
 	}
 })
-
+]]
 minetest.register_craft({
 	output = "cottages:wool_tent 2",
 	recipe = {

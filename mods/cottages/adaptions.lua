@@ -47,8 +47,8 @@ cottages.texture_roof_sides = "default_wood.png";
 -- if the default wood node does not exist, use an alternate wood texture
 -- (which is also used for furnitures and doors in this mod)
 if( not( minetest.registered_nodes['default:wood'])) then
-	cottages.texture_roof_sides = "cottages_minimal_wood.png";
-	cottages.texture_furniture  = "cottages_minimal_wood.png";
+	cottages.texture_roof_sides = "default:wood.png";
+	cottages.texture_furniture  = "default:wood.png";
 end
 
 cottages.texture_chest = {"default_chest_top.png", "default_chest_top.png", "default_chest_side.png",
