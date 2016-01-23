@@ -33,7 +33,7 @@ minetest.register_node("bedrock2:bedrock", {
 	description = "Bedrock",
 	tiles = {"bedrock2_bedrock.png"},
 	groups = {immortal=1, not_in_creative_inventory=1},
-	sounds = { footstep = { name = "bedrock2_step", gain = 1 } },
+	sounds = { footstep = { name = "default_gravel_footstep", gain = 1 } },
 	is_ground_content = false,
 	on_blast = function() end,
 	on_destruct = function () end,
