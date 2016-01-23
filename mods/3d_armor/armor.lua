@@ -8,13 +8,13 @@ ARMOR_LEVEL_MULTIPLIER = 1
 ARMOR_HEAL_MULTIPLIER = 1
 ARMOR_MATERIALS = {
 	wood = "group:wood",
-	cactus = "default:cactus",
+	--cactus = "default:cactus",
 	steel = "default:steel_ingot",
 	bronze = "default:bronze_ingot",
 	diamond = "default:diamond",
 	gold = "default:gold_ingot",
-	mithril = "moreores:mithril_ingot",
-	crystal = "ethereal:crystal_ingot",
+	--mithril = "moreores:mithril_ingot",
+	--crystal = "ethereal:crystal_ingot",
 }
 ARMOR_FIRE_PROTECT = minetest.get_modpath("ethereal") ~= nil
 ARMOR_FIRE_NODES = {
