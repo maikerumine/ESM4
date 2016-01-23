@@ -31,7 +31,8 @@ hurt_cactus();
 --TECHNIC NODES
 minetest.register_node( "es:granite", {
 	description = "Granite",
-	tiles = { "technic_granite.png" },
+	--tiles = { "technic_granite.png" },
+	tiles = { "default_coal_block.png^[colorize:#696969:142^(default_acacia_leaves.png^[colorize:#5E2612:152)" },
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
@@ -39,7 +40,8 @@ minetest.register_node( "es:granite", {
 
 minetest.register_node( "es:marble", {
 	description = "Marble",
-	tiles = { "technic_marble.png" },
+	--tiles = { "technic_marble.png" },
+	tiles = {"default_sand.png^[colorize:#CDB79E:142^(default_acacia_leaves.png^[colorize:#CDB79E:152)"},
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
@@ -47,7 +49,8 @@ minetest.register_node( "es:marble", {
 
 minetest.register_node( "es:marble_bricks", {
 	description = "Marble Bricks",
-	tiles = { "technic_marble_bricks.png" },
+	--tiles = { "technic_marble_bricks.png" },
+	tiles = {"default_sandstone_brick.png^[colorize:#CDB79E:182^(default_acacia_leaves.png^[colorize:#CDB79E:152)" },
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
@@ -338,7 +341,7 @@ minetest.register_abm({
 --ES Node Definition
 minetest.register_node("es:stone_with_emerald", {
 	description = "Emerald Ore",
-	tiles = {"default_stone.png^emerald_ore.png"},
+	tiles = {"default_stone.png^(default_mineral_mese.png^[colorize:#7CFC00:195)"},
 	is_ground_content = true,
 	groups = {cracky=1},
 	drop = "es:emerald_crystal",
@@ -347,7 +350,7 @@ minetest.register_node("es:stone_with_emerald", {
 
 minetest.register_node("es:stone_with_ruby", {
 	description = "Ruby Ore",
-	tiles = {"default_stone.png^ruby_ore.png"},
+	tiles = {"default_stone.png^(default_mineral_mese.png^[colorize:#FF0000:200)"},
 	is_ground_content = true,
 	groups = {cracky=1},
 	drop = "es:ruby_crystal",
@@ -356,7 +359,7 @@ minetest.register_node("es:stone_with_ruby", {
 
 minetest.register_node("es:stone_with_aikerum", {
 	description = "Ruby Ore",
-	tiles = {"default_stone.png^aikerum_ore.png"},
+	tiles = {"default_stone.png^(default_mineral_mese.png^[colorize:#0000CD:195)"},
 	is_ground_content = true,
 	groups = {cracky=1,level = 2},
 	drop = "es:aikerum_crystal",
@@ -375,7 +378,7 @@ minetest.register_node("es:stone_with_infinium", {
 --Emerald located at -1000
 minetest.register_node("es:emeraldblock", {
 	description = "Emerald Block",
-	tiles = {"emerald_block.png"},
+	tiles = {"default_diamond_block.png^[colorize:#7CFC00:177"},
 	is_ground_content = true,
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
@@ -383,13 +386,13 @@ minetest.register_node("es:emeraldblock", {
 
 minetest.register_craftitem("es:emerald_crystal", {
 	description = "Emerald Crystal",
-	inventory_image = "emerald.png",
+	inventory_image = "default_diamond.png^[colorize:#7CFC00:195",
 })
 
 --Ruby located at -3000
 minetest.register_node("es:rubyblock", {
 	description = "Ruby Block",
-	tiles = {"ruby_block.png"},
+	tiles = {"default_diamond_block.png^[colorize:#FF0000:177"},
 	is_ground_content = true,
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
@@ -397,13 +400,13 @@ minetest.register_node("es:rubyblock", {
 
 minetest.register_craftitem("es:ruby_crystal", {
 	description = "Ruby Crystal",
-	inventory_image = "ruby.png",
+	inventory_image = "default_diamond.png^[colorize:#FF0000:200",
 })
 
 --Aikerum located at -4000
 minetest.register_node("es:aikerumblock", {
 	description = "Aikerum Block",
-	tiles = {"aikerum_block.png"},
+	tiles = {"default_diamond_block.png^[colorize:#0000CD:177"},
 	is_ground_content = true,
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
@@ -411,7 +414,7 @@ minetest.register_node("es:aikerumblock", {
 
 minetest.register_craftitem("es:aikerum_crystal", {
 	description = "Aikerum Crystal",
-	inventory_image = "aikerum.png",
+	inventory_image = "default_diamond.png^[colorize:#0000CD:195",
 })
 
 
@@ -431,7 +434,8 @@ minetest.register_craftitem("es:infinium_goo", {
 
 minetest.register_craftitem("es:infinium_ingot", {
 	description = "Infinium Ingot--TBD CRAFTING Special Armour and Lab Equipment",
-	inventory_image = "infinium_ingot.png",
+	--inventory_image = "infinium_ingot.png",
+	inventory_image = "default_steel_ingot.png^[colorize:#B0171F:215",
 })
 
 minetest.register_craftitem("es:infinium_container", {
@@ -560,10 +564,11 @@ minetest.register_node("es:what", {
 
 --Default addons as they should be.  I changed ore generation to keep unique for compatibility.
 
---Dry dirt added from Blockmens wasteland game
+--Dry dirt added 
 minetest.register_node("es:dry_dirt", {
 	description = "Some dry dirt",
-	tiles = {"default_dry_dirt.png"},
+	--tiles = {"default_dry_dirt.png"},
+	tiles = {"default_dirt.png^[colorize:#B8860B:95"},
 	groups = {crumbly = 3},
 	drop = 'es:dry_dirt',
 	sounds = default.node_sound_dirt_defaults({
@@ -573,7 +578,7 @@ minetest.register_node("es:dry_dirt", {
 
 minetest.register_node("es:stone_with_mese", {
 	description = "Cookable Mese Ore",
-	tiles = {"default_stone.png^mese_cook_mese_crystal.png^default_mineral_mese.png"},
+	tiles = {"default_stone.png^(default_mineral_mese.png^[colorize:#F0E68C:195)"},
 	paramtype = "light",
 	groups = {cracky = 1},
 	drop = "es:mesecook_crystal",
@@ -607,7 +612,7 @@ minetest.register_node("es:desert_stone_with_coal", {
 
 minetest.register_node("es:depleted_uranium", {
 	description = "Depleted Uranium Ore RADIOACTIVE",
-	tiles = {"default_stone.png^es_depleted_uranium_ore.png"},
+	tiles = {"default_stone.png^(default_mineral_gold.png^[colorize:#00FF00:195)"},
 	groups = {cracky = 3, radioactive = (state == "source" and 3 or 2)},
 	drop = 'es:depleted_uranium_lump',
 	sounds = default.node_sound_stone_defaults(),
@@ -616,132 +621,5 @@ minetest.register_node("es:depleted_uranium", {
 
 minetest.register_craftitem("es:depleted_uranium_lump", {
 	description = "Depleted Uranium use for long term fuel, first cook the lump into an ingot, then use ingot for fuel.",
-	inventory_image = "es_depleted_uranium_lump.png",
+	inventory_image = "default_mineral_mese.png^[colorize:#7CFC00:195",
 })
-
-
-
---Stairs and moreblocks code that gave me so much trouble...
---[[comment out the stair code if not installed in main game directory-look for global
-
-
-function stairs.register_stair_and_slab(subname, recipeitem, groups, images,
-		desc_stair, desc_slab, sounds)
-	stairs.register_stair(subname, recipeitem, groups, images, desc_stair, sounds)
-	stairs.register_slab(subname, recipeitem, groups, images, desc_slab, sounds)
-end
-
---Technic stairs
---comment out if not use technic
-stairs.register_stair_and_slab("granite", "technic:granite",
-		{cracky = 1},
-		{"technic_granite.png"},
-		"Granite Block Stair",
-		"Granite Block Slab",
-		default.node_sound_stone_defaults())
-
-stairs.register_stair_and_slab("marble", "technic:marble",
-		{cracky = 1},
-		{"technic_marble.png"},
-		"Marble Block Stair",
-		"Marble Block Slab",
-		default.node_sound_stone_defaults())
-
-stairs.register_stair_and_slab("marble bricks", "technic:marble_bricks",
-		{cracky = 1},
-		{"technic_marble_bricks.png"},
-		"Marble Brick Block Stair",
-		"Marble Brick Block Slab",
-		default.node_sound_stone_defaults())
-
-
-stairs.register_stair_and_slab("Brass Block", "technic:brass_block",
-		{cracky = 1},
-		{"technic_brass_block.png"},
-		"Brass Block Stair",
-		"Brass Block Slab",
-		default.node_sound_stone_defaults())
-
-stairs.register_stair_and_slab("Chromium Block", "technic:chromium_block",
-		{cracky = 1},
-		{"technic_chromium_block.png"},
-		"Chromuim Block Stair",
-		"Chromium Block Slab",
-		default.node_sound_stone_defaults())
-
-
-
---Extreme Survival Stairs
-stairs.register_stair_and_slab("Ruby", "es:rubyblock",
-		{cracky = 1},
-		{"ruby_block.png"},
-		"Ruby Block Stair",
-		"Ruby Block Slab",
-		default.node_sound_stone_defaults())
-
-stairs.register_stair_and_slab("Emerald", "es:emeraldblock",
-		{cracky = 1},
-		{"emerald_block.png"},
-		"Emerald Block Stair",
-		"Emerald Block Slab",
-		default.node_sound_stone_defaults())
-
-stairs.register_stair_and_slab("Aikerum", "es:aikerumblock",
-		{cracky = 1},
-		{"aikerum_block.png"},
-		"Aikerum Block Stair",
-		"Aikerum Block Slab",
-		default.node_sound_stone_defaults())
-
-stairs.register_stair_and_slab("Infinium", "es:infiniumblock",
-		{cracky = 1},
-		{"infinium_block.png"},
-		"Infinium Block Stair",
-		"Infinium Block Slab",
-		default.node_sound_stone_defaults())
-stairs.register_stair_and_slab("Dirt", "default:dirt",
-		{cracky = 1},
-		{"default_dirt.png"},
-		"Dirt Block Stair",
-		"Dirt Block Slab",
-		default.node_sound_stone_defaults())
-
-
-if minetest.get_modpath("moreblocks") and enable_stairsplus then
-register_stair_slab_panel_micro("es", "emeraldblock", "es:emeraldblock",
-{cracky=3},
-{"emerald_block.png"},
-"Emerald Block",
-"emeraldblock",
-0)
-end
-if minetest.get_modpath("moreblocks") and enable_stairsplus then
-register_stair_slab_panel_micro("es", "rubyblock", "es:rubyblock",
-{cracky=3},
-{"ruby_block.png"},
-"Ruby Block",
-"rubyblock",
-0)
-end
-if minetest.get_modpath("moreblocks") and enable_stairsplus then
-register_stair_slab_panel_micro("es", "aikerumblock", "es:aikerumblock",
-{cracky=3},
-{"aikerum_block.png"},
-"Aikerum Block",
-"aikerumblock",
-0)
-end
-if minetest.get_modpath("moreblocks") and enable_stairsplus then
-register_stair_slab_panel_micro("es", "infiniumblock", "es:infiniumblock",
-{cracky=3},
-{"infinium_block.png"},
-"Infinium Block",
-"infiniumblock",
-0)
-end
---COMMENT OUT STAIRSPLUS IF NOT USE MOREBLOCKS
-table.insert(circular_saw.known_stairs, "es:emeraldblock")
-table.insert(circular_saw.known_stairs, "es:rubyblock")
-table.insert(circular_saw.known_stairs, "es:aikerumblock")
-table.insert(circular_saw.known_stairs, "es:infiniumblock")
-]]

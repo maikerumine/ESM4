@@ -87,7 +87,8 @@ minetest.register_craft({
 
 minetest.register_craftitem("es:depleted_uranium_ingot", {
 	description = "Depleted uranium",
-	inventory_image = "technic_uranium_ingot.png",
+	--inventory_image = "technic_uranium_ingot.png",
+	inventory_image = "default_steel_ingot.png^[colorize:#00FF00:185",
 })
 minetest.register_craft({
 	output = 'es:boneblock',
@@ -460,7 +461,7 @@ minetest.register_craft({
 --MUST HAVE DEFAULT ORE GENERATION SET
 minetest.register_craftitem("es:mesecook_crystal", {
 	description = "Cookable Raw MESE",
-	inventory_image = "mese_cook_mese_crystal.png",
+	inventory_image = "default_mineral_mese.png^[colorize:#F0E68C:195",
 })
 
 

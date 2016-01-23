@@ -20,8 +20,8 @@ local load_start = os.clock()
 local modpath = minetest.get_modpath("es")
 es.modpath = modpath
 
--- Alias
-dofile(modpath.."/alias.lua")
+
+
 -- Armor [abort migration]
 dofile(modpath.."/armor.lua")
 -- Craft recipes for items
@@ -30,8 +30,14 @@ dofile(modpath.."/crafting.lua")
 -- Shutdown
 dofile(modpath.."/shutdown.lua")
 
+--Spawn
+dofile(modpath.."/spawn.lua")
+
 -- Nodes
 dofile(modpath.."/nodes.lua")
+
+
+
 -- Ore Generation
 dofile(modpath.."/oregen.lua")
 -- Tools
@@ -42,10 +48,6 @@ dofile(modpath.."/tools.lua")
 --dofile(minetest.get_modpath("es").."/freeze.lua")
 --dofile(minetest.get_modpath("es").."/snow.lua")
 
-
-
---THESE ARE BROKEN AND STORED IN THE nodes.lua
---Something about global is nil...
 --MOREBLOCKS / STAIRSPLUS SUPPORT
 if moreblocks then
 dofile(modpath.."/mostair.lua")
@@ -57,9 +59,15 @@ dofile(modpath.."/stair.lua")
 end
 
 
--- Map Generation 
+-- Map Generation
 --(CURRENTLY YOU NEED TO REPLACE THE DEFAULT WITH
 --the one that says stone IF YOU WANT AN ALL STONE WORLD.)
+
+-- REMOVE NODES DO NOT USE IN YOUR WORLD
+-- Alias
+--dofile(modpath.."/technodrem.lua")
+--dofile(modpath.."/moreorerem.lua")
+--dofile(modpath.."/alias.lua")
 
 
 --MAPFIX CODE
@@ -82,3 +90,8 @@ minetest.register_chatcommand("mapfix", {
 		return true, "Done."
 	end,
 })
+
+
+
+
+

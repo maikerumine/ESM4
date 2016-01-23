@@ -28,14 +28,21 @@
 
 minetest.register_tool("es:helmet_emerald", {
 	description = "Emerald Helmet",
-	inventory_image = "es_inv_helmet_emerald.png",
+	inventory_image = "3d_armor_inv_helmet_diamond.png^[colorize:#7CFC00:195",
 	groups = {armor_head = 15, armor_heal = 12, armor_use = 100},
+	wear = 0,
+})
+
+minetest.register_tool("es:helmet_aikerum", {
+	description = "Emerald Helmet",
+	inventory_image = "3d_armor_inv_helmet_mithril.png",
+	groups = {armor_head = 17, armor_heal = 17, armor_use = 120},
 	wear = 0,
 })
 
 minetest.register_tool("es:helmet_infinium", {
 	description = "Infinium Helmet",
-	inventory_image = "es_inv_helmet_infinium.png",
+	inventory_image = "3d_armor_inv_helmet_diamond.png^[colorize:#B0171F:195",
 	groups = {armor_head = 20, armor_heal = 15, armor_use = 150},
 	wear = 0,
 })
@@ -43,28 +50,42 @@ minetest.register_tool("es:helmet_infinium", {
 
 minetest.register_tool("es:chestplate_emerald", {
 	description = "Emerald Chestplate",
-	inventory_image = "es_inv_chestplate_emerald.png",
+	inventory_image = "3d_armor_inv_chestplate_diamond.png^[colorize:#7CFC00:195",
 	groups = {armor_torso = 20, armor_heal = 12, armor_use = 100},
+	wear = 0,
+})
+
+minetest.register_tool("es:chestplate_aikerum", {
+	description = "Aikerum Chestplate",
+	inventory_image = "3d_armor_inv_chestplate_mithril.png",
+	groups = {armor_torso = 35, armor_heal = 13, armor_use = 125},
 	wear = 0,
 })
 
 minetest.register_tool("es:chestplate_infinium", {
 	description = "Infinium Chestplate",
-	inventory_image = "es_inv_chestplate_infinium.png",
+	inventory_image = "3d_armor_inv_chestplate_diamond.png^[colorize:#B0171F:195",
 	groups = {armor_torso = 50, armor_heal = 15, armor_use = 150},
 	wear = 0,
 })
 
 minetest.register_tool("es:leggings_emerald", {
 	description = "Emerald Leggings",
-	inventory_image = "es_inv_leggings_emerald.png",
+	inventory_image = "3d_armor_inv_leggings_diamond.png^[colorize:#7CFC00:195",
 	groups = {armor_legs = 20, armor_heal = 12, armor_use = 100},
+	wear = 0,
+})
+
+minetest.register_tool("es:leggings_aikerum", {
+	description = "Aikerum Leggings",
+	inventory_image = "3d_armor_inv_leggings_mithril.png",
+	groups = {armor_legs = 34, armor_heal = 13, armor_use = 125},
 	wear = 0,
 })
 
 minetest.register_tool("es:leggings_infinium", {
 	description = "Infinium Leggings",
-	inventory_image = "es_inv_leggings_infinium.png",
+	inventory_image = "3d_armor_inv_leggings_diamond.png^[colorize:#B0171F:195",
 	groups = {armor_legs = 50, armor_heal = 15, armor_use = 150},
 	wear = 0,
 })
@@ -72,14 +93,21 @@ minetest.register_tool("es:leggings_infinium", {
 
 minetest.register_tool("es:boots_emerald", {
 	description = "Emerald Boots",
-	inventory_image = "es_inv_boots_emerald.png",
+	inventory_image = "3d_armor_inv_boots_diamond.png^[colorize:#7CFC00:195",
 	groups = {armor_feet = 15, armor_heal = 12, armor_use = 100},
+	wear = 0,
+})
+
+minetest.register_tool("es:boots_aikerum", {
+	description = "Aikerum Boots",
+	inventory_image = "3d_armor_inv_boots_mithril.png",
+	groups = {armor_feet = 20, armor_heal = 13, armor_use = 130},
 	wear = 0,
 })
 
 minetest.register_tool("es:boots_infinium", {
 	description = "Infinium Boots",
-	inventory_image = "es_inv_boots_infinium.png",
+	inventory_image = "3d_armor_inv_boots_diamond.png^[colorize:#B0171F:195",
 	groups = {armor_feet = 30, armor_heal = 15, armor_use = 150},
 	wear = 0,
 })
@@ -90,11 +118,12 @@ local craft_ingreds = {
 
 	infinium = "es:infinium_ingot",
 	emerald = "es:emerald_crystal",
+	aikerum = "es:aikerum_crystal",
 }
 
 for k, v in pairs(craft_ingreds) do
 	minetest.register_craft({
-		output = "3d_armor:helmet_"..k,
+		output = "3d_armor :helmet_"..k,
 		recipe = {
 			{v, v, v},
 			{v, "", v},

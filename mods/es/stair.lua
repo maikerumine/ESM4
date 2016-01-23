@@ -24,21 +24,21 @@ end
 --TECHNIC STAIRS
 stairs.register_stair_and_slab("granite", "es:granite",
 		{cracky = 1},
-		{"technic_granite.png"},
+		{"default_coal_block.png^[colorize:#696969:142^(default_acacia_leaves.png^[colorize:#5E2612:152)"},
 		"Granite Block Stair",
 		"Granite Block Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("marble", "es:marble",
 		{cracky = 1},
-		{"technic_marble.png"},
+		{"default_sand.png^[colorize:#CDB79E:142^(default_acacia_leaves.png^[colorize:#CDB79E:152)"},
 		"Marble Block Stair",
 		"Marble Block Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("marble bricks", "es:marble_bricks",
 		{cracky = 1},
-		{"technic_marble_bricks.png"},
+		{"default_sandstone_brick.png^[colorize:#CDB79E:182^(default_acacia_leaves.png^[colorize:#CDB79E:152)" },
 		"Marble Brick Block Stair",
 		"Marble Brick Block Slab",
 		default.node_sound_stone_defaults())
@@ -47,21 +47,21 @@ stairs.register_stair_and_slab("marble bricks", "es:marble_bricks",
 --Extreme Survival Stairs
 stairs.register_stair_and_slab("Ruby", "es:rubyblock",
 		{cracky = 1},
-		{"ruby_block.png"},
+		{"default_diamond_block.png^[colorize:#FF0000:200"},
 		"Ruby Block Stair",
 		"Ruby Block Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("Emerald", "es:emeraldblock",
 		{cracky = 1},
-		{"emerald_block.png"},
+		{"default_diamond_block.png^[colorize:#7CFC00:195"},
 		"Emerald Block Stair",
 		"Emerald Block Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("Aikerum", "es:aikerumblock",
 		{cracky = 1},
-		{"aikerum_block.png"},
+		{"default_diamond_block.png^[colorize:#0000CD:195"},
 		"Aikerum Block Stair",
 		"Aikerum Block Slab",
 		default.node_sound_stone_defaults())
