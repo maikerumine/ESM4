@@ -22,10 +22,12 @@ es.modpath = modpath
 
 -- REMOVE NODES DO NOT USE IN YOUR WORLD
 -- Alias
---dofile(modpath.."/technodrem.lua")
---dofile(modpath.."/moreorerem.lua")
+dofile(modpath.."/technodrem.lua")
+dofile(modpath.."/moreorerem.lua")
 dofile(modpath.."/alias.lua")
 
+-- Anticheat by RND
+dofile(modpath.."/anticheat.lua")
 -- Armor [abort migration]
 dofile(modpath.."/armor.lua")
 -- Craft recipes for items

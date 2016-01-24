@@ -1,3 +1,18 @@
+--Extreme Survival created by maikerumine
+-- Minetest 0.4.13 mod: "Extreme Survival"
+-- namespace: es
+--https://github.com/maikerumine
+
+--License:
+--~~~~~~~~
+--Code:
+--(c) Copyright 2015 maikerumine; modified zlib-License
+--see "LICENSE.txt" for details.
+
+
+es = {}
+
+
 
 -- rnd: anti noclip cheat
 local clip_nodes = {["default:stone"]=1,["default:cobble"]=1,["default:stonebrick"]=1,["default:dirt"]=1,["default:glass"]=1,["default:dirt"]=1,["default:steelblock"]=1}
@@ -37,7 +52,7 @@ minetest.register_globalstep(function(dtime)
 
 	end
 	if check then
-	player:set_hp(1); -- kill player
+	player:set_hp(0.5); -- kill player
 	minetest.chat_send_all(name.. " was caught walking inside walls at " .. p.x .. " " .. p.y .. " " .. p.z)
 	minetest.log("action", name.. " was caught walking inside walls at " .. p.x .. " " .. p.y .. " " .. p.z)
 	end

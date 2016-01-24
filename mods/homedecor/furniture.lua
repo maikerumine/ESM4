@@ -171,7 +171,7 @@ homedecor.register("desk", {
 	tiles = {
 		homedecor.plain_wood,
 		"homedecor_desk_drawers.png",
-		"homedecor_generic_metal_black.png",
+		"default_obsidian.png",
 	},
 	inventory_image = "homedecor_desk_inv.png",
 	selection_box = desk_cbox,
