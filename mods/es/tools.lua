@@ -115,7 +115,7 @@ minetest.register_tool("es:pick_aikerum", {
 --AXES
 minetest.register_tool("es:axe_emerald", {
 	description = "Extreme Survival Emerald Axe",
-	inventory_image = "default_tool_diamondaxe.png^[colorize:008000:177",
+	inventory_image = "default_tool_diamondaxe.png^[colorize:#008000:177",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=2,
