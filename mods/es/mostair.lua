@@ -20,7 +20,7 @@ es = {}
 	if minetest.get_modpath("moreblocks") and enable_stairsplus then
 	register_stair_slab_panel_micro("es", "emeraldblock", "es:emeraldblock",
 	{cracky=3},
-	{"default_diamond_block.png^[colorize:#7CFC00:134"},
+	{"default_diamond_block.png^[colorize:#008000:134"},
 	"Emerald Block",
 	"emeraldblock",
 	0)
@@ -38,7 +38,7 @@ end
 if minetest.get_modpath("moreblocks") and enable_stairsplus then
 	register_stair_slab_panel_micro("es", "aikerumblock", "es:aikerumblock",
 	{cracky=3},
-	{"default_diamond_block.png^[colorize:#0000CD:134"},
+	{"default_diamond_block.png^[colorize:#0000FF:134"},
 	"Aikerum Block",
 	"aikerumblock",
 	0)

@@ -30,7 +30,7 @@
 --SWORDS
 minetest.register_tool("es:sword_emerald", {
 	description = "Extreme Survival Emerald Sword",
-	--inventory_image = "default_tool_diamondsword.png^[colorize:#7CFC00:177",
+	--inventory_image = "default_tool_diamondsword.png^[colorize:#008000:177",
 	inventory_image = "es_tool_emeraldsword.png",
 	tool_capabilities = {
 		full_punch_interval = 0.5,
@@ -74,7 +74,7 @@ minetest.register_tool("es:sword_aikerum", {
 --PICKS
 minetest.register_tool("es:pick_emerald", {
 	description = "Extreme Survival Emerald Pickaxe",
-	inventory_image = "default_tool_diamondpick.png^[colorize:#7CFC00:177",
+	inventory_image = "default_tool_diamondpick.png^[colorize:#008000:177",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=3,
@@ -100,7 +100,7 @@ minetest.register_tool("es:pick_ruby", {
 
 minetest.register_tool("es:pick_aikerum", {
 	description = "Extreme Survival Aikerum Pickaxe",
-	inventory_image = "default_tool_diamondpick.png^[colorize:#0000CD:177",
+	inventory_image = "default_tool_diamondpick.png^[colorize:#0000FF:177",
 	tool_capabilities = {
 		full_punch_interval = 0.25,
 		max_drop_level=4,
@@ -115,7 +115,7 @@ minetest.register_tool("es:pick_aikerum", {
 --AXES
 minetest.register_tool("es:axe_emerald", {
 	description = "Extreme Survival Emerald Axe",
-	inventory_image = "default_tool_diamondaxe.png^[colorize:#7CFC00:177",
+	inventory_image = "default_tool_diamondaxe.png^[colorize:008000:177",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=2,
@@ -139,7 +139,7 @@ minetest.register_tool("es:axe_ruby", {
 })
 minetest.register_tool("es:axe_aikerum", {
 	description = "Extreme Survival Aikerum Axe",
-	inventory_image = "default_tool_diamondaxe.png^[colorize:#0000CD:177",
+	inventory_image = "default_tool_diamondaxe.png^[colorize:#0000FF:177",
 	tool_capabilities = {
 		full_punch_interval = 0.25,
 		max_drop_level=4,
@@ -154,7 +154,7 @@ minetest.register_tool("es:axe_aikerum", {
 --SHOVELS
 minetest.register_tool("es:shovel_emerald", {
 	description = "Extreme Survival Emerald Shovel",
-	inventory_image = "default_tool_diamondaxe.png^[colorize:#7CFC00:177",
+	inventory_image = "default_tool_diamondaxe.png^[colorize:#008000:177",
 	--wield_image = "es_tool_emeraldshovel.png^[transformR90",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
@@ -180,7 +180,7 @@ minetest.register_tool("es:shovel_ruby", {
 })
 minetest.register_tool("es:shovel_aikerum", {
 	description = "Extreme Survival Aikerum Shovel",
-	inventory_image = "default_tool_diamondshovel.png^[colorize:#0000CD:177",
+	inventory_image = "default_tool_diamondshovel.png^[colorize:#0000FF:177",
 	--wield_image = "es_tool_aikerumshovel.png^[transformR90",
 	tool_capabilities = {
 		full_punch_interval = 0.25,

@@ -341,7 +341,7 @@ minetest.register_abm({
 --ES Node Definition
 minetest.register_node("es:stone_with_emerald", {
 	description = "Emerald Ore",
-	tiles = {"default_stone.png^(default_mineral_mese.png^[colorize:#7CFC00:134)"},
+	tiles = {"default_stone.png^(default_mineral_mese.png^[colorize:#008000:134)"},
 	is_ground_content = true,
 	groups = {cracky=1},
 	drop = "es:emerald_crystal",
@@ -359,7 +359,7 @@ minetest.register_node("es:stone_with_ruby", {
 
 minetest.register_node("es:stone_with_aikerum", {
 	description = "Aikerum Ore",
-	tiles = {"default_stone.png^(default_mineral_mese.png^[colorize:#0000CD:134)"},
+	tiles = {"default_stone.png^(default_mineral_mese.png^[colorize:#0000FF:134)"},
 	is_ground_content = true,
 	groups = {cracky=1,level = 2},
 	drop = "es:aikerum_crystal",
@@ -378,7 +378,7 @@ minetest.register_node("es:stone_with_infinium", {
 --Emerald located at -1000
 minetest.register_node("es:emeraldblock", {
 	description = "Emerald Block",
-	tiles = {"default_diamond_block.png^[colorize:#7CFC00:134"},
+	tiles = {"default_diamond_block.png^[colorize:#008000:134"},
 	is_ground_content = true,
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
@@ -386,13 +386,13 @@ minetest.register_node("es:emeraldblock", {
 
 minetest.register_craftitem("es:emerald_crystal", {
 	description = "Emerald Crystal",
-	inventory_image = "default_diamond.png^[colorize:#7CFC00:134",
+	inventory_image = "default_diamond.png^[colorize:#7008000:134",
 })
 
 --Ruby located at -3000
 minetest.register_node("es:rubyblock", {
 	description = "Ruby Block",
-	tiles = {"default_diamond_block.png^[colorize:#FF0000:144"},
+	tiles = {"default_diamond_block.png^[colorize:#FF0000:194"},
 	is_ground_content = true,
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
@@ -406,7 +406,7 @@ minetest.register_craftitem("es:ruby_crystal", {
 --Aikerum located at -4000
 minetest.register_node("es:aikerumblock", {
 	description = "Aikerum Block",
-	tiles = {"default_diamond_block.png^[colorize:#0000CD:134"},
+	tiles = {"default_diamond_block.png^[colorize:#0000FF:134"},
 	is_ground_content = true,
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
@@ -414,7 +414,7 @@ minetest.register_node("es:aikerumblock", {
 
 minetest.register_craftitem("es:aikerum_crystal", {
 	description = "Aikerum Crystal",
-	inventory_image = "default_diamond.png^[colorize:#0000CD:134",
+	inventory_image = "default_diamond.png^[colorize:#0000FF:134",
 })
 
 
