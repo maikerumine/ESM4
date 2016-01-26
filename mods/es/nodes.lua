@@ -386,7 +386,7 @@ minetest.register_node("es:emeraldblock", {
 
 minetest.register_craftitem("es:emerald_crystal", {
 	description = "Emerald Crystal",
-	inventory_image = "default_diamond.png^[colorize:#7008000:134",
+	inventory_image = "default_diamond.png^[colorize:#008000:134",
 })
 
 --Ruby located at -3000
