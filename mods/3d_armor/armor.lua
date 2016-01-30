@@ -4,8 +4,8 @@ ARMOR_BONES_DELAY = 1
 ARMOR_UPDATE_TIME = 1
 ARMOR_DROP = minetest.get_modpath("bones") ~= nil
 ARMOR_DESTROY = false
-ARMOR_LEVEL_MULTIPLIER = 1
-ARMOR_HEAL_MULTIPLIER = 1
+ARMOR_LEVEL_MULTIPLIER = 0.5
+ARMOR_HEAL_MULTIPLIER = 0
 ARMOR_MATERIALS = {
 	wood = "group:wood",
 	--cactus = "default:cactus",
@@ -254,7 +254,7 @@ armor.update_armor = function(self, player)
 				end
 			end
 		end
-	end	
+	end
 	if hp <= 0 or hp == self.player_hp[name] then
 		return
 	end
@@ -464,7 +464,7 @@ minetest.register_on_joinplayer(function(player)
 	for i=1, 6 do
 		local stack = player_inv:get_stack("armor", i)
 		armor_inv:set_stack("armor", i, stack)
-	end	
+	end
 
 	armor.player_hp[name] = 0
 	armor.def[name] = {
