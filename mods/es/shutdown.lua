@@ -20,13 +20,13 @@ es = {}
 --Modified by maikerumine
 -- Time to shut down server.
 -- Default is twice a day: at 06:05 and 18:05
-local H = 23
-local X = 05
-local Y = 11
-local Z = 17
+local H = 00
+local X = 06
+local Y = 12
+local Z = 18
 
-local M = 58
-local N = 59
+local M = 01
+local N = 02
 
 -- Day to shut down server.
 -- Default is daily shutdown

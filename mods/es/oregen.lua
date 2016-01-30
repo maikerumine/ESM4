@@ -40,6 +40,31 @@ minetest.register_ore({
 	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 })
 
+--ES LIQUIDS
+minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "es:toxic_water_source",
+		wherein        =  {"default:dry_dirt", "default:dirt_with_dry_grass","default:dirt", "default:stone"},
+		clust_scarcity = 24*24*24,
+		clust_num_ores = 4,
+		clust_size     = 4,
+		y_min          = -9000,
+		y_max          = 50,
+
+	})
+
+
+minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "es:mud",
+		wherein        =  {"default:dry_dirt", "default:dirt_with_dry_grass", "default:dirt"},
+		clust_scarcity = 11*5*10,
+		clust_num_ores = 4,
+		clust_size     = 12,
+		y_min          = -31,
+		y_max          = 75,
+
+	})
 
 
 --ES Node Registration and location
@@ -131,7 +156,19 @@ minetest.register_ore({
 			height_min     = -31000,
 			height_max     = -190,
 	})
-	
+
+
+minetest.register_ore({
+			ore_type       = "scatter",
+			ore            = "es:stone_with_purpellium",
+			wherein        = "default:stone",
+			clust_scarcity = 16*18*16,
+			clust_num_ores = 5,
+			clust_size     = 5,
+			height_min     = -31000,
+			height_max     = -4090,
+	})
+
 minetest.register_ore({
 			ore_type       = "scatter",
 			ore            = "es:stone_with_mese",
@@ -150,8 +187,8 @@ minetest.register_ore({
 			clust_scarcity = 54 * 14 * 54,
 			clust_num_ores = 3,
 			clust_size     = 8,
-			y_min          = -310,
-			y_max          = -256,
+			y_min          = -14210,
+			y_max          = -156,
 	})
 
 minetest.register_ore({
@@ -161,8 +198,8 @@ minetest.register_ore({
 			clust_scarcity = 14 * 14 * 14,
 			clust_num_ores = 6,
 			clust_size     = 8,
-			y_min          = -500,
-			y_max          = -1256,
+			y_min          = -15000,
+			y_max          = -256,
 	})
 
 	minetest.register_ore({
@@ -172,8 +209,8 @@ minetest.register_ore({
 		clust_scarcity = 15*15*10,
 		clust_num_ores = 2,
 		clust_size     = 2,
-		y_min          = 31,
-		y_max          = -1140,
+		y_min          = -31000,
+		y_max          = 1140,
 	})
 
 	minetest.register_ore({
@@ -183,7 +220,7 @@ minetest.register_ore({
 		clust_scarcity = 15*15*10,
 		clust_num_ores = 2,
 		clust_size     = 2,
-		y_min          = 21,
+		y_min          = -31000,
 		y_max          = 1140,
 	})
 
@@ -194,12 +231,12 @@ minetest.register_ore({
 		clust_scarcity = 15*15*10,
 		clust_num_ores = 2,
 		clust_size     = 2,
-		y_min          = 2,
+		y_min          = -20000,
 		y_max          = 1140,
 	})
 
-	
-	
+
+
 	minetest.register_ore({
 		ore_type       = "scatter",
 		ore            = "es:desert_stone_with_coal",

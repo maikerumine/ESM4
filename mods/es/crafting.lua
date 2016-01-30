@@ -88,7 +88,7 @@ minetest.register_craft({
 minetest.register_craftitem("es:depleted_uranium_ingot", {
 	description = "Depleted uranium",
 	--inventory_image = "technic_uranium_ingot.png",
-	inventory_image = "default_steel_ingot.png^[colorize:#00FF00:185",
+	inventory_image = "technic_uranium_ingot.png",
 })
 minetest.register_craft({
 	output = 'es:boneblock',
@@ -146,7 +146,7 @@ minetest.register_craft({
 	recipe = {
 	{'group:flora' , },
 	{'es:dry_dirt', },
-}	
+}
 })
 
 
@@ -249,6 +249,21 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = 'es:purpelliumblock',
+	recipe = {
+		{'es:purpellium_ingot', 'es:purpellium_ingot', 'es:purpellium_ingot'},
+		{'es:purpellium_ingot', 'es:purpellium_ingot', 'es:purpellium_ingot'},
+		{'es:purpellium_ingot', 'es:purpellium_ingot', 'es:purpellium_ingot'},
+
+	}
+})
+minetest.register_craft({
+	output = 'es:purpelliumblock 2',
+	recipe = {
+		{'stairs:stair_Purpellium', 'stairs:stair_Purpellium', 'stairs:stair_Purpellium'},
+	}
+})
 
 minetest.register_craft({
 	output = 'es:emerald_crystal 9',
@@ -278,6 +293,12 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = 'es:purpellium_ingot 9',
+	recipe = {
+		{'es:purpelliumblock'},
+	}
+})
 
 --crafting
 minetest.register_craft({
@@ -286,9 +307,23 @@ minetest.register_craft({
 	recipe = {"vessels:glass_bottle", "es:infinium_goo","default:water_flowing"},
 })
 
+minetest.register_craft({
+	type = "shapeless",
+	output = "es:purpellium_container",
+	recipe = {"vessels:glass_bottle", "es:purpellium_dust","default:water_flowing"},
+})
 
+minetest.register_craftitem("es:purpellium_container", {
+	description = "Potion to do wonders!",
+	inventory_image = "purpellium_container.png",
+	on_use = minetest.item_eat(50),
+	--TODO HEAL HP TOO
+})
 
-
+minetest.register_craftitem("es:purpellium_dust", {
+	description = "Purpellium Dust",
+	inventory_image = "dye_violet.png",
+})
 
 
 --Weapon &Tool Crafting:
@@ -446,6 +481,13 @@ minetest.register_craft({
 minetest.register_craft({
 	type = "cooking",
 	cooktime = 30,
+	output = "es:purpellium_ingot",
+	recipe = "es:purpellium_lump",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 30,
 	output = "es:depleted_uranium_ingot",
 	recipe = "es:depleted_uranium_lump",
 })
@@ -461,7 +503,7 @@ minetest.register_craft({
 --MUST HAVE DEFAULT ORE GENERATION SET
 minetest.register_craftitem("es:mesecook_crystal", {
 	description = "Cookable Raw MESE",
-	inventory_image = "default_mineral_mese.png^[colorize:#F0E68C:195",
+	inventory_image = "default_mineral_mese.png",
 })
 
 

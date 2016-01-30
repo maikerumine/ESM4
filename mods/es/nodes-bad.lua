@@ -751,17 +751,18 @@ minetest.register_node("es:toxic_water_flowing", {
 	groups = {water = 3, liquid = 3, puts_out_fire = 1,
 		not_in_creative_inventory = 1, radioactive = (state == "source" and 2 or 2),},
 })
---FOR REF
+
+--[[--FOR REF
 -- Quicksand (old style, sinking inside shows black instead of yellow effect,
 -- works ok with noclip enabled though)
-minetest.register_node("es:mud", {
-	description = "Mud",
-	tiles = {"es_mud.png"},
-	--drop = "es:mud",
-	liquid_viscosity = 19,
+minetest.register_node("ethereal:quicksand", {
+	description = "Quicksand",
+	tiles = {"default_sand.png"},
+	drop = "default:sand",
+	liquid_viscosity = 15,
 	liquidtype = "source",
-	liquid_alternative_flowing = "es:mud",
-	liquid_alternative_source = "es:mud",
+	liquid_alternative_flowing = "ethereal:quicksand",
+	liquid_alternative_source = "ethereal:quicksand",
 	liquid_renewable = false,
 	liquid_range = 0,
 	drowning = 1,
@@ -772,16 +773,14 @@ minetest.register_node("es:mud", {
 	sounds = default.node_sound_sand_defaults(),
 })
 
+]]
 
-
---this code is broken and makes the server not allow kindle players
---[[
 minetest.register_node("es:mud_source", {
 	description = "Mud Source",
 	inventory_image = minetest.inventorycube("es_mud.png"),
 	drawtype = "liquid",
 		tiles = {"es_mud.png"},
-	tiles = {
+--[[	tiles = {
 		{
 			name = "default_mud_source_animated.png",
 			animation = {
@@ -804,7 +803,7 @@ minetest.register_node("es:mud_source", {
 			},
 			backface_culling = false,
 		},
-	},
+	},]]
 	alpha = 255,
 	paramtype = "light",
 	walkable = false,
@@ -869,4 +868,3 @@ minetest.register_node("es:mud_flowing", {
 	groups = {water = 3, liquid = 3, puts_out_fire = 1,
 		not_in_creative_inventory = 1, },
 })
-]]

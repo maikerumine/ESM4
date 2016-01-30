@@ -32,6 +32,7 @@ hurt_cactus();
 minetest.register_node( "es:granite", {
 	description = "Granite",
 	tiles = { "technic_granite.png" },
+	--tiles = { "default_coal_block.png^[colorize:#696969:142^(default_acacia_leaves.png^[colorize:#5E2612:152)" },
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
@@ -40,6 +41,7 @@ minetest.register_node( "es:granite", {
 minetest.register_node( "es:marble", {
 	description = "Marble",
 	tiles = { "technic_marble.png" },
+	--tiles = {"default_sand.png^[colorize:#CDB79E:142^(default_acacia_leaves.png^[colorize:#CDB79E:152)"},
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
@@ -48,6 +50,7 @@ minetest.register_node( "es:marble", {
 minetest.register_node( "es:marble_bricks", {
 	description = "Marble Bricks",
 	tiles = { "technic_marble_bricks.png" },
+	--tiles = {"default_sandstone_brick.png^[colorize:#CDB79E:182^(default_acacia_leaves.png^[colorize:#CDB79E:152)" },
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
@@ -338,7 +341,7 @@ minetest.register_abm({
 --ES Node Definition
 minetest.register_node("es:stone_with_emerald", {
 	description = "Emerald Ore",
-	tiles = {"default_stone.png^emerald_ore.png"},
+	tiles = {"default_stone.png^(default_mineral_mese.png^[colorize:#008000:134)"},
 	is_ground_content = true,
 	groups = {cracky=1},
 	drop = "es:emerald_crystal",
@@ -347,7 +350,7 @@ minetest.register_node("es:stone_with_emerald", {
 
 minetest.register_node("es:stone_with_ruby", {
 	description = "Ruby Ore",
-	tiles = {"default_stone.png^ruby_ore.png"},
+	tiles = {"default_stone.png^(default_mineral_mese.png^[colorize:#FF0000:144)"},
 	is_ground_content = true,
 	groups = {cracky=1},
 	drop = "es:ruby_crystal",
@@ -356,7 +359,7 @@ minetest.register_node("es:stone_with_ruby", {
 
 minetest.register_node("es:stone_with_aikerum", {
 	description = "Aikerum Ore",
-	tiles = {"default_stone.png^aikerum_ore.png"},
+	tiles = {"default_stone.png^(default_mineral_mese.png^[colorize:#0000FF:134)"},
 	is_ground_content = true,
 	groups = {cracky=1,level = 2},
 	drop = "es:aikerum_crystal",
@@ -372,19 +375,10 @@ minetest.register_node("es:stone_with_infinium", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
-minetest.register_node("es:stone_with_purpellium", {
-	description = "Purlellium Ore - Oddly interesting",
-	tiles = {"default_stone.png^purpellium_ore.png"},
-	is_ground_content = true,
-	groups = {cracky=2,level = 2, radioactive = (state == "source" and 2 or 2)},
-	drop = "es:purpellium_lump",
-	sounds = default.node_sound_stone_defaults(),
-})
-
 --Emerald located at -1000
 minetest.register_node("es:emeraldblock", {
 	description = "Emerald Block",
-	tiles = {"emerald_block.png"},
+	tiles = {"default_diamond_block.png^[colorize:#008000:134"},
 	is_ground_content = true,
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
@@ -392,13 +386,13 @@ minetest.register_node("es:emeraldblock", {
 
 minetest.register_craftitem("es:emerald_crystal", {
 	description = "Emerald Crystal",
-	inventory_image = "emerald.png",
+	inventory_image = "default_diamond.png^[colorize:#008000:134",
 })
 
 --Ruby located at -3000
 minetest.register_node("es:rubyblock", {
 	description = "Ruby Block",
-	tiles = {"ruby_block.png"},
+	tiles = {"default_diamond_block.png^[colorize:#FF0000:194"},
 	is_ground_content = true,
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
@@ -406,13 +400,13 @@ minetest.register_node("es:rubyblock", {
 
 minetest.register_craftitem("es:ruby_crystal", {
 	description = "Ruby Crystal",
-	inventory_image = "ruby.png",
+	inventory_image = "default_diamond.png^[colorize:#FF0000:144",
 })
 
 --Aikerum located at -4000
 minetest.register_node("es:aikerumblock", {
 	description = "Aikerum Block",
-	tiles = {"aikerum_block.png"},
+	tiles = {"default_diamond_block.png^[colorize:#0000FF:134"},
 	is_ground_content = true,
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
@@ -420,7 +414,7 @@ minetest.register_node("es:aikerumblock", {
 
 minetest.register_craftitem("es:aikerum_crystal", {
 	description = "Aikerum Crystal",
-	inventory_image = "aikerum.png",
+	inventory_image = "default_diamond.png^[colorize:#0000FF:134",
 })
 
 
@@ -441,33 +435,13 @@ minetest.register_craftitem("es:infinium_goo", {
 minetest.register_craftitem("es:infinium_ingot", {
 	description = "Infinium Ingot--TBD CRAFTING Special Armour and Lab Equipment",
 	--inventory_image = "infinium_ingot.png",
-	inventory_image = "infinium_ingot.png",
+	inventory_image = "default_steel_ingot.png^[colorize:#B0171F:215",
 })
 
 minetest.register_craftitem("es:infinium_container", {
 	description = "Infinium Container--Cook to get Infinium Ingot",
 	inventory_image = "infinium_container.png",
 })
-
---Purpellium located at -4000
-minetest.register_node("es:purpelliumblock", {
-	description = "Purpellium Block",
-	tiles = {"purpellium_block.png"},
-	is_ground_content = true,
-	groups = {cracky=1,level=2},
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_craftitem("es:purpellium_lump", {
-	description = "Purpellium Lump",
-	inventory_image = "purpellium_lump.png",
-})
-
-minetest.register_craftitem("es:purpellium_ingot", {
-	description = "Purpellium Ingot",
-	inventory_image = "purpellium_ingot.png",
-})
-
 
 
 --BONEBLOCK
@@ -521,7 +495,7 @@ minetest.register_node("es:stoneblock", {
 
 minetest.register_node("es:sandstonebrick", {
 	description = "High Density Sandstone Brick",
-	tiles = {"default_stone_brick.png^[colorize:#CCCC99:150"},
+	tiles = {"default_sandstone_brick.png"},
 	is_ground_content = false,
 	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
 	sounds = default.node_sound_stone_defaults(),
@@ -593,8 +567,8 @@ minetest.register_node("es:what", {
 --Dry dirt added
 minetest.register_node("es:dry_dirt", {
 	description = "Some dry dirt",
-	tiles = {"default_dry_dirt.png"},
-	--tiles = {"dry_dirt.png"},
+	--tiles = {"default_dry_dirt.png"},
+	tiles = {"default_dirt.png^[colorize:#B8860B:95"},
 	groups = {crumbly = 3},
 	drop = 'es:dry_dirt',
 	sounds = default.node_sound_dirt_defaults({
@@ -604,7 +578,7 @@ minetest.register_node("es:dry_dirt", {
 
 minetest.register_node("es:stone_with_mese", {
 	description = "Cookable Mese Ore",
-	tiles = {"default_stone.png^default_mineral_mese.png"},
+	tiles = {"default_stone.png^(default_mineral_mese.png^[colorize:#F0E68C:195)"},
 	paramtype = "light",
 	groups = {cracky = 1},
 	drop = "es:mesecook_crystal",
@@ -638,235 +612,14 @@ minetest.register_node("es:desert_stone_with_coal", {
 
 minetest.register_node("es:depleted_uranium", {
 	description = "Depleted Uranium Ore RADIOACTIVE",
-	tiles = {"default_stone.png^uranium_ore.png"},
+	tiles = {"default_stone.png^(default_mineral_gold.png^[colorize:#00FF00:195)"},
 	groups = {cracky = 3, radioactive = (state == "source" and 3 or 2)},
 	drop = 'es:depleted_uranium_lump',
 	sounds = default.node_sound_stone_defaults(),
-	light_source = 12,
+	light_source = 1,
 })
 
 minetest.register_craftitem("es:depleted_uranium_lump", {
 	description = "Depleted Uranium use for long term fuel, first cook the lump into an ingot, then use ingot for fuel.",
-	inventory_image = "uranium_lump.png",
+	inventory_image = "default_mineral_mese.png^[colorize:#7CFC00:195",
 })
-
-
-
---ES CUSTOM LIQUIDS:
-minetest.register_node("es:toxic_water_source", {
-	description = "Toxic_Water Source",
-	inventory_image = minetest.inventorycube("es_toxic_water.png"),
-	drawtype = "liquid",
-	tiles = {
-		{
-			name = "es_toxic_water_source_animated.png",
-			animation = {
-				type = "vertical_frames",
-				aspect_w = 16,
-				aspect_h = 16,
-				length = 2.0,
-			},
-		},
-	},
-	special_tiles = {
-		-- New-style water source material (mostly unused)
-		{
-			name = "es_toxic_water_source_animated.png",
-			animation = {
-				type = "vertical_frames",
-				aspect_w = 16,
-				aspect_h = 16,
-				length = 2.0,
-			},
-			backface_culling = false,
-		},
-	},
-	alpha = 240,
-	paramtype = "light",
-	walkable = false,
-	pointable = false,
-	diggable = false,
-	buildable_to = true,
-	is_ground_content = false,
-	drop = "",
-	drowning = 1,
-	liquidtype = "source",
-	liquid_alternative_flowing = "es:toxic_water_flowing",
-	liquid_alternative_source = "es:toxic_water_source",
-	liquid_viscosity =3,
-	damage_per_second = 3*2,
-	post_effect_color = {a = 255, r = 30, g = 60, b = 90},
-	groups = {water = 3, liquid = 3, puts_out_fire = 1, radioactive = (state == "source" and 2 or 2),},
-})
-
---NOTES:
---		radioactive = (state == "source" and 32 or 16),
---THIS IS DEFAULT SETTING FROM TECHNIC
-
-
-
-minetest.register_node("es:toxic_water_flowing", {
-	description = "Toxic_Flowing Water",
-	inventory_image = minetest.inventorycube("es_toxic_water.png"),
-	drawtype = "flowingliquid",
-	tiles = {"es_toxic_water.png"},
-	special_tiles = {
-		{
-			name = "es_toxic_water_flowing_animated.png",
-			backface_culling = false,
-			animation = {
-				type = "vertical_frames",
-				aspect_w = 16,
-				aspect_h = 16,
-				length = 0.8,
-			},
-		},
-		{
-			name = "es_toxic_water_flowing_animated.png",
-			backface_culling = true,
-			animation = {
-				type = "vertical_frames",
-				aspect_w = 16,
-				aspect_h = 16,
-				length = 0.8,
-			},
-		},
-	},
-	alpha = 240,
-	paramtype = "light",
-	paramtype2 = "flowingliquid",
-	walkable = false,
-	pointable = false,
-	diggable = false,
-	buildable_to = true,
-	is_ground_content = false,
-	drop = "",
-	drowning = 1,
-	liquidtype = "flowing",
-	liquid_alternative_flowing = "es:toxic_water_flowing",
-	liquid_alternative_source = "es:toxic_water_source",
-	liquid_viscosity = 2,
-	damage_per_second = 2*2,
-	post_effect_color = {a = 255, r = 30, g = 60, b = 90},
-	groups = {water = 3, liquid = 3, puts_out_fire = 1,
-		not_in_creative_inventory = 1, radioactive = (state == "source" and 2 or 2),},
-})
---FOR REF
--- Quicksand (old style, sinking inside shows black instead of yellow effect,
--- works ok with noclip enabled though)
-minetest.register_node("es:mud", {
-	description = "Mud",
-	tiles = {"es_mud.png"},
-	--drop = "es:mud",
-	liquid_viscosity = 19,
-	liquidtype = "source",
-	liquid_alternative_flowing = "es:mud",
-	liquid_alternative_source = "es:mud",
-	liquid_renewable = false,
-	liquid_range = 0,
-	drowning = 1,
-	walkable = false,
-	climbable = false,
-	post_effect_color = { r=230, g=210, b=160, a=245 },
-	groups = {crumbly=3, falling_node=1, sand=1, liquid=3, disable_jump=1},
-	sounds = default.node_sound_sand_defaults(),
-})
-
-
-
---this code is broken and makes the server not allow kindle players
---[[
-minetest.register_node("es:mud_source", {
-	description = "Mud Source",
-	inventory_image = minetest.inventorycube("es_mud.png"),
-	drawtype = "liquid",
-		tiles = {"es_mud.png"},
-	tiles = {
-		{
-			name = "default_mud_source_animated.png",
-			animation = {
-				type = "vertical_frames",
-				aspect_w = 16,
-				aspect_h = 16,
-				length = 2.0,
-			},
-		},
-	},
-	special_tiles = {
-		-- New-style water source material (mostly unused)
-		{
-			name = "default_mud_source_animated.png",
-			animation = {
-				type = "vertical_frames",
-				aspect_w = 16,
-				aspect_h = 16,
-				length = 2.0,
-			},
-			backface_culling = false,
-		},
-	},
-	alpha = 255,
-	paramtype = "light",
-	walkable = false,
-	pointable = false,
-	diggable = false,
-	buildable_to = true,
-	is_ground_content = false,
-	drop = "",
-	drowning = 1,
-	--damage_per_second = 3*2,
-	liquidtype = "source",
-	liquid_alternative_flowing = "es:mud_flowing",
-	liquid_alternative_source = "es:mud_source",
-	liquid_viscosity = 18,
-	post_effect_color = {a = 255, r = 43, g = 23, b = 9},
-	groups = {water = 3, liquid = 3, puts_out_fire = 1, },
-})
-
-minetest.register_node("es:mud_flowing", {
-	description = "Flowing  mud",
-	inventory_image = minetest.inventorycube("es_mud.png"),
-	drawtype = "liquid",--change to liquid for a solid look
-	tiles = {"es_mud.png"},
-	special_tiles = {
-		{
-			name = "es_mud_flowing_animated.png",
-			backface_culling = false,
-			animation = {
-				type = "vertical_frames",
-				aspect_w = 16,
-				aspect_h = 16,
-				length = 0.8,
-			},
-		},
-		{
-			name = "es_mud_flowing_animated.png",
-			backface_culling = true,
-			animation = {
-				type = "vertical_frames",
-				aspect_w = 16,
-				aspect_h = 16,
-				length = 0.8,
-			},
-		},
-	},
-	alpha = 250,
-	paramtype = "light",
-	paramtype2 = "flowingliquid",
-	walkable = false,
-	pointable = false,
-	diggable = false,
-	buildable_to = true,
-	is_ground_content = false,
-	drop = "",
-	drowning = 1,
-	--damage_per_second = 3*2,
-	liquidtype = "flowing",
-	liquid_alternative_flowing = "es:mud_flowing",
-	liquid_alternative_source = "es:mud_source",
-	liquid_viscosity = 19,
-	post_effect_color = {a = 255, r = 43, g = 23, b = 9},
-	groups = {water = 3, liquid = 3, puts_out_fire = 1,
-		not_in_creative_inventory = 1, },
-})
-]]

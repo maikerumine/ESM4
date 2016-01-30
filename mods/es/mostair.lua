@@ -20,7 +20,7 @@ es = {}
 	if minetest.get_modpath("moreblocks") and enable_stairsplus then
 	register_stair_slab_panel_micro("es", "emeraldblock", "es:emeraldblock",
 	{cracky=3},
-	{"default_diamond_block.png^[colorize:#008000:134"},
+	{"emerald_block.png"},
 	"Emerald Block",
 	"emeraldblock",
 	0)
@@ -29,7 +29,7 @@ end
 if minetest.get_modpath("moreblocks") and enable_stairsplus then
 	register_stair_slab_panel_micro("es", "rubyblock", "es:rubyblock",
 	{cracky=3},
-	{"default_diamond_block.png^[colorize:#FF0000:144"},
+	{"ruby_block.png"},
 	"Ruby Block",
 	"rubyblock",
 	0)
@@ -38,7 +38,7 @@ end
 if minetest.get_modpath("moreblocks") and enable_stairsplus then
 	register_stair_slab_panel_micro("es", "aikerumblock", "es:aikerumblock",
 	{cracky=3},
-	{"default_diamond_block.png^[colorize:#0000FF:134"},
+	{"aikerum_block.png"},
 	"Aikerum Block",
 	"aikerumblock",
 	0)
@@ -50,6 +50,15 @@ if minetest.get_modpath("moreblocks") and enable_stairsplus then
 	{"infinium_block.png"},
 	"Infinium Block",
 	"infiniumblock",
+	0)
+end
+
+if minetest.get_modpath("moreblocks") and enable_stairsplus then
+	register_stair_slab_panel_micro("es", "purpelliumblock", "es:purpelliumblock",
+	{cracky=3},
+	{"purpellium_block.png"},
+	"Purpellium Block",
+	"purpelliumblock",
 	0)
 end
 
@@ -93,6 +102,7 @@ end
 	table.insert(circular_saw.known_stairs, "es:rubyblock")
 	table.insert(circular_saw.known_stairs, "es:aikerumblock")
 	table.insert(circular_saw.known_stairs, "es:infiniumblock")
+	table.insert(circular_saw.known_stairs, "es:purpelliumblock")
 	table.insert(circular_saw.known_stairs, "es:boneblock")
 	table.insert(circular_saw.known_stairs, "es:messymese")
 	table.insert(circular_saw.known_stairs, "default:dirt_with_grass")

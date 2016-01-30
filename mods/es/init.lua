@@ -22,8 +22,8 @@ es.modpath = modpath
 
 -- REMOVE NODES DO NOT USE IN YOUR WORLD
 -- Alias
---dofile(modpath.."/technodrem.lua")
---dofile(modpath.."/moreorerem.lua")
+dofile(modpath.."/technodrem.lua")
+dofile(modpath.."/moreorerem.lua")
 dofile(modpath.."/alias.lua")
 
 -- Anticheat by RND
@@ -53,6 +53,7 @@ dofile(modpath.."/tools.lua")
 -- Climate  very laggy
 --dofile(minetest.get_modpath("es").."/freeze.lua")
 --dofile(minetest.get_modpath("es").."/snow.lua")
+--dofile(minetest.get_modpath("es").."/thaw.lua")
 
 --MOREBLOCKS / STAIRSPLUS SUPPORT
 if moreblocks then

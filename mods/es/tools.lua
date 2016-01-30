@@ -13,24 +13,9 @@
 --(c) Copyright (2014-2015) maikerumine; CC-BY-SA 3.0
 
 
---es_tool_emeraldsword
---es_tool_rubysword
---es_tool_aikerumsword
-
---es_tool_emeraldpick
---es_tool_rubypick
---es_tool_aikerumpick
-
-
-
-
-
-
-
 --SWORDS
 minetest.register_tool("es:sword_emerald", {
 	description = "Extreme Survival Emerald Sword",
-	--inventory_image = "default_tool_diamondsword.png^[colorize:#008000:177",
 	inventory_image = "es_tool_emeraldsword.png",
 	tool_capabilities = {
 		full_punch_interval = 0.5,
@@ -44,7 +29,6 @@ minetest.register_tool("es:sword_emerald", {
 
 minetest.register_tool("es:sword_ruby", {
 	description = "Extreme Survival Ruby Sword",
-	--inventory_image = "default_tool_diamondsword.png^[colorize:#FF0000:177",
 	inventory_image = "es_tool_rubysword.png",
 	tool_capabilities = {
 		full_punch_interval = 0.4,
@@ -58,7 +42,6 @@ minetest.register_tool("es:sword_ruby", {
 
 minetest.register_tool("es:sword_aikerum", {
 	description = "Extreme Survival Aikerum Sword",
-	--inventory_image = "default_tool_diamondsword.png^[colorize:#0000CD:177",
 	inventory_image = "es_tool_aikerumsword.png",
 	tool_capabilities = {
 		full_punch_interval = 0.3,
@@ -74,7 +57,7 @@ minetest.register_tool("es:sword_aikerum", {
 --PICKS
 minetest.register_tool("es:pick_emerald", {
 	description = "Extreme Survival Emerald Pickaxe",
-	inventory_image = "default_tool_diamondpick.png^[colorize:#008000:177",
+	inventory_image = "es_tool_emeraldpick.png",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=3,
@@ -87,7 +70,7 @@ minetest.register_tool("es:pick_emerald", {
 
 minetest.register_tool("es:pick_ruby", {
 	description = "Extreme Survival Ruby Pickaxe",
-	inventory_image = "default_tool_diamondpick.png^[colorize:#FF0000:177",
+	inventory_image = "es_tool_rubypick.png",
 	tool_capabilities = {
 		full_punch_interval = 0.7,
 		max_drop_level=3,
@@ -100,7 +83,7 @@ minetest.register_tool("es:pick_ruby", {
 
 minetest.register_tool("es:pick_aikerum", {
 	description = "Extreme Survival Aikerum Pickaxe",
-	inventory_image = "default_tool_diamondpick.png^[colorize:#0000FF:177",
+	inventory_image = "es_tool_aikerumpick.png",
 	tool_capabilities = {
 		full_punch_interval = 0.25,
 		max_drop_level=4,
@@ -115,7 +98,7 @@ minetest.register_tool("es:pick_aikerum", {
 --AXES
 minetest.register_tool("es:axe_emerald", {
 	description = "Extreme Survival Emerald Axe",
-	inventory_image = "default_tool_diamondaxe.png^[colorize:#008000:177",
+	inventory_image = "es_tool_emeraldaxe.png",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=2,
@@ -127,7 +110,7 @@ minetest.register_tool("es:axe_emerald", {
 })
 minetest.register_tool("es:axe_ruby", {
 	description = "Extreme Survival Ruby Axe",
-	inventory_image = "default_tool_diamondaxe.png^[colorize:#FF0000:177",
+	inventory_image = "es_tool_rubyaxe.png",
 	tool_capabilities = {
 		full_punch_interval = 0.7,
 		max_drop_level=3,
@@ -139,7 +122,7 @@ minetest.register_tool("es:axe_ruby", {
 })
 minetest.register_tool("es:axe_aikerum", {
 	description = "Extreme Survival Aikerum Axe",
-	inventory_image = "default_tool_diamondaxe.png^[colorize:#0000FF:177",
+	inventory_image = "es_tool_aikerumaxe.png",
 	tool_capabilities = {
 		full_punch_interval = 0.25,
 		max_drop_level=4,
@@ -149,13 +132,13 @@ minetest.register_tool("es:axe_aikerum", {
 		damage_groups = {fleshy=24},
 	},
 })
-
-
+	
+	
 --SHOVELS
 minetest.register_tool("es:shovel_emerald", {
 	description = "Extreme Survival Emerald Shovel",
-	inventory_image = "default_tool_diamondaxe.png^[colorize:#008000:177",
-	--wield_image = "es_tool_emeraldshovel.png^[transformR90",
+	inventory_image = "es_tool_emeraldshovel.png",
+	wield_image = "es_tool_emeraldshovel.png^[transformR90",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=2,
@@ -167,8 +150,8 @@ minetest.register_tool("es:shovel_emerald", {
 })
 minetest.register_tool("es:shovel_ruby", {
 	description = "Extreme Survival Ruby Shovel",
-	inventory_image = "default_tool_diamondshovel.png^[colorize:#FF0000:177",
-	--wield_image = "es_tool_rubyshovel.png^[transformR90",
+	inventory_image = "es_tool_rubyshovel.png",
+	wield_image = "es_tool_rubyshovel.png^[transformR90",
 	tool_capabilities = {
 		full_punch_interval = 0.7,
 		max_drop_level=3,
@@ -180,8 +163,8 @@ minetest.register_tool("es:shovel_ruby", {
 })
 minetest.register_tool("es:shovel_aikerum", {
 	description = "Extreme Survival Aikerum Shovel",
-	inventory_image = "default_tool_diamondshovel.png^[colorize:#0000FF:177",
-	--wield_image = "es_tool_aikerumshovel.png^[transformR90",
+	inventory_image = "es_tool_aikerumshovel.png",
+	wield_image = "es_tool_aikerumshovel.png^[transformR90",
 	tool_capabilities = {
 		full_punch_interval = 0.25,
 		max_drop_level=4,
@@ -191,3 +174,114 @@ minetest.register_tool("es:shovel_aikerum", {
 		damage_groups = {fleshy=24},
 	},
 })
+
+
+
+
+
+--[[
+--ARMOR_MOD_NAME = minetest.get_current_modname()
+--dofile(minetest.get_modpath(ARMOR_MOD_NAME).."/armor.lua")
+local use_3d_armor = minetest.get_modpath("3d_armor")
+
+--if use_3d_armor then
+--ARMOR
+minetest.register_tool("es:helmet_emerald", {
+	description = "Emerald Helmet",
+	inventory_image = "3d_armor_inv_helmet_emerald.png",
+	groups = {armor_head = 15, armor_heal = 12, armor_use = 100},
+	wear = 0,
+})
+
+minetest.register_tool("es:helmet_infinium", {
+	description = "Infinium Helmet",
+	inventory_image = "3d_armor_inv_helmet_infinium.png",
+	groups = {armor_head = 20, armor_heal = 15, armor_use = 150},
+	wear = 0,
+})
+
+minetest.register_tool("es:chestplate_emerald", {
+	description = "Emerald Chestplate",
+	inventory_image = "3d_armor_inv_chestplate_emerald.png",
+	groups = {armor_torso = 20, armor_heal = 12, armor_use = 100},
+	wear = 0,
+})
+
+minetest.register_tool("es:chestplate_infinium", {
+	description = "Infinium Chestplate",
+	inventory_image = "3d_armor_inv_chestplate_infinium.png",
+	groups = {armor_torso = 50, armor_heal = 15, armor_use = 150},
+	wear = 0,
+})
+
+minetest.register_tool("es:leggings_emerald", {
+	description = "Emerald Leggings",
+	inventory_image = "3d_armor_inv_leggings_emerald.png",
+	groups = {armor_legs = 20, armor_heal = 12, armor_use = 100},
+	wear = 0,
+})
+
+minetest.register_tool("es:leggings_infinium", {
+	description = "Infinium Leggings",
+	inventory_image = "3d_armor_inv_leggings_infinium.png",
+	groups = {armor_legs = 50, armor_heal = 15, armor_use = 150},
+	wear = 0,
+})
+
+minetest.register_tool("es:boots_emerald", {
+	description = "Emerald Boots",
+	inventory_image = "3d_armor_inv_boots_emerald.png",
+	groups = {armor_feet = 15, armor_heal = 12, armor_use = 100},
+	wear = 0,
+})
+
+minetest.register_tool("es:boots_infinium", {
+	description = "Infinium Boots",
+	inventory_image = "3d_armor_inv_boots_infinium.png",
+	groups = {armor_feet = 30, armor_heal = 15, armor_use = 150},
+	wear = 0,
+})
+
+-- Register crafting recipes:
+
+local craft_ingreds = {
+
+	infinium = "es:infinium_ingot",
+	emerald = "es:emerald_crystal",
+}
+
+--end
+for k, v in pairs(craft_ingreds) do
+	minetest.register_craft({
+		output = "es:helmet_"..k,
+		recipe = {
+			{v, v, v},
+			{v, "", v},
+			{"", "", ""},
+		},
+	})
+	minetest.register_craft({
+		output = "es:chestplate_"..k,
+		recipe = {
+			{v, "", v},
+			{v, v, v},
+			{v, v, v},
+		},
+	})
+	minetest.register_craft({
+		output = "es:leggings_"..k,
+		recipe = {
+			{v, v, v},
+			{v, "", v},
+			{v, "", v},
+		},
+	})
+	minetest.register_craft({
+		output = "es:boots_"..k,
+		recipe = {
+			{v, "", v},
+			{v, "", v},
+		},
+	})
+--end
+end]]

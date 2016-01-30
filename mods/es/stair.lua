@@ -47,21 +47,21 @@ stairs.register_stair_and_slab("marble bricks", "es:marble_bricks",
 --Extreme Survival Stairs
 stairs.register_stair_and_slab("Ruby", "es:rubyblock",
 		{cracky = 1},
-		{"default_diamond_block.png^[colorize:#FF0000:200"},
+		{"ruby_block.png"},
 		"Ruby Block Stair",
 		"Ruby Block Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("Emerald", "es:emeraldblock",
 		{cracky = 1},
-		{"default_diamond_block.png^[colorize:#7CFC00:195"},
+		{"emerald_block.png"},
 		"Emerald Block Stair",
 		"Emerald Block Slab",
 		default.node_sound_stone_defaults())
 
 stairs.register_stair_and_slab("Aikerum", "es:aikerumblock",
 		{cracky = 1},
-		{"default_diamond_block.png^[colorize:#0000CD:195"},
+		{"aikerum_block.png"},
 		"Aikerum Block Stair",
 		"Aikerum Block Slab",
 		default.node_sound_stone_defaults())
@@ -72,8 +72,16 @@ stairs.register_stair_and_slab("Infinium", "es:infiniumblock",
 		"Infinium Block Stair",
 		"Infinium Block Slab",
 		default.node_sound_stone_defaults())
-stairs.register_stair_and_slab("Dirt", "default:dirt",
+
+stairs.register_stair_and_slab("Purpellium", "es:purpelliumblock",
 		{cracky = 1},
+		{"purpellium_block.png"},
+		"Purpellium Block Stair",
+		"Purpellium Block Slab",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("Dirt", "default:dirt",
+		{cracky = 3, crumbly = 3,},
 		{"default_dirt.png"},
 		"Dirt Block Stair",
 		"Dirt Block Slab",
