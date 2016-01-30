@@ -106,10 +106,10 @@ esmobs.formspec.main = function(name)
 	if page == nil then page = 0 end
 	local formspec = "size[8,7.5]"
 		.. "button[0,0;2,.5;main;Back]"
-	if esmobs.get_type(esmobs.esmobs[name]) == esmobs.type.MODEL then
+	if esmobs.get_type(esmobs.esmobs[name]) == esmobs.type.SPRITE then
 		formspec = formspec
-			.. "image[0,.75;1,2;"..esmobs.esmobs[name].."_preview.png]"
-			.. "image[1,.75;1,2;"..esmobs.esmobs[name].."_preview_back.png]"
+--			.. "image[0,.75;1,2;"..esmobs.esmobs[name].."_preview.png]"
+--			.. "image[1,.75;1,2;"..esmobs.esmobs[name].."_preview_back.png]"
 			.. "label[6,.5;Raw texture:]"
 			.. "image[6,1;2,1;"..esmobs.esmobs[name]..".png]"
 
@@ -117,25 +117,25 @@ esmobs.formspec.main = function(name)
 		formspec = formspec
 --			.. "image[0,.75;1,2;"..esmobs.esmobs[name]..".png]"
 --			.. "image[1,.75;1,2;"..esmobs.esmobs[name].."_back.png]"
-			.. "image[0,.75;1,2;"..esmobs.esmobs[name].."_preview.png]"
-			.. "image[1,.75;1,2;"..esmobs.esmobs[name].."_preview_back.png]" 
+--			.. "image[0,.75;1,2;"..esmobs.esmobs[name].."_preview.png]"
+--			.. "image[1,.75;1,2;"..esmobs.esmobs[name].."_preview_back.png]" 
 	end
 	local meta = esmobs.meta[esmobs.esmobs[name]]
 	if meta then
 		if meta.name then
-			formspec = formspec .. "label[2,.5;name: "..meta.name.."]"
+			formspec = formspec .. "label[0,.5;name: "..meta.name.."]"
 		end
 		if meta.type then
-			formspec = formspec .. "label[2,1;type: "..meta.type.."]"
+			formspec = formspec .. "label[0,1;type: "..meta.type.."]"
 		end
 		if meta.hp then
-			formspec = formspec .. "label[2,1.5;hp:"..meta.hp.."]"
+			formspec = formspec .. "label[0,1.5;hp:"..meta.hp.."]"
 		end
 		if meta.drops then
-			formspec = formspec .. "label[2,2;drops:"..meta.drops.."]"
+			formspec = formspec .. "label[0,2;drops:"..meta.drops.."]"
 		end
 		if meta.info then
-			formspec = formspec .. "label[2,2.5;info:"..meta.info.."]"
+			formspec = formspec .. "label[0,2.5;info:"..meta.info.."]"
 		end
 	end
 	local index = 0

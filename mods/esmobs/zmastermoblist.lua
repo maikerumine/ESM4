@@ -235,7 +235,7 @@ bp:register_mob("esmobs:stone_monster", {
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",
-	damage = 6,
+	damage = 8,
 	hp_min = 32,
 	hp_max = 55,
 	armor = 80,
@@ -284,7 +284,7 @@ bp:register_mob("esmobs:oerkkii", {
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",
-	damage = 4,
+	damage = 3,
 	hp_min = 8,
 	hp_max = 34,
 	armor = 100,
@@ -340,7 +340,7 @@ bp:register_mob("esmobs:dirt", {
 	follow = "flowers:viola",--swap out type randomly for server players"flowers:tulip","flowers:rose","flowers:geranium","flowers:dandelion_yellow","flowers:dandelion_white",
 	walk_velocity = 2.5,
 	run_velocity = 3.8,
-	damage = 2.7,
+	damage = 3.7,
 	drops = {
 		{name = "default:dirt",
 		chance = 1,
@@ -440,7 +440,7 @@ bp:register_mob("esmobs:applmons", {
 	view_range = 15,
 	walk_velocity = 1,
 	run_velocity = 3,
-	damage = 2,
+	damage = 3,
 	drops = {
 		{name = "default:apple",
 		chance = 4,
@@ -1022,7 +1022,7 @@ bp:register_mob("esmobs:dirt2", {
 	follow = "flowers:rose",--swap out type randomly for server players"flowers:tulip","flowers:rose","flowers:geranium","flowers:dandelion_yellow","flowers:dandelion_white",
 	walk_velocity = 1.5,
 	run_velocity = 2.8,
-	damage = 2.7,
+	damage = 3.7,
 	drops = {
 		{name = "default:dirt",
 		chance = 1,
@@ -1065,7 +1065,7 @@ bp:register_mob("esmobs:stone_monster", {
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",
-	damage = 8,
+	damage = 3,
 	hp_min = 32,
 	hp_max = 55,
 	armor = 80,
@@ -1105,6 +1105,51 @@ bp:register_mob("esmobs:stone_monster", {
 	},
 })
 
+
+-- Stone Monster by PilzAdam
+bp:register_mob("esmobs:stone_monster2", {
+	type = "monster",
+	passive = false,
+	attack_type = "dogfight",
+	damage = 6,
+	hp_min = 82,
+	hp_max = 105,
+	armor = 80,
+	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
+	visual = "mesh",
+	mesh = "mobs_stone_monster.x",
+	textures = {
+		{"mobs_6.png"},
+	},
+	visual_size = {x=3, y=2.6},
+	makes_footstep_sound = true,
+	sounds = {
+		random = "mobs_stonemonster",
+	},
+	walk_velocity = 1.5,
+	run_velocity = 2.6,
+	jump = true,
+	floats = 1,
+	view_range = 10,
+	drops = {
+		{name = "default:torch",
+		chance = 2, min = 0, max = 2,},
+		{name = "default:iron_lump",
+		chance=5, min=0, max=1,},
+		{name = "default:coal_lump",
+		chance=3, min=0, max=1,},
+	},
+	water_damage = 10,
+	lava_damage = 1,
+	light_damage = 1,
+	animation = {
+		speed_normal = 15,		speed_run = 15,
+		stand_start = 0,		stand_end = 14,
+		walk_start = 15,		walk_end = 38,
+		run_start = 40,			run_end = 63,
+		punch_start = 40,		punch_end = 63,
+	},
+})
 ------------------------------
 --MINETEST ANIMALS
 ------------------------------
@@ -2374,7 +2419,7 @@ bp:register_mob("esmobs:badplayer10", {
 	run_velocity =15,
 	damage = 4,
 	drops = {
-		{name = "default:cotton",
+		{name = "farming:cotton",
 		chance = 1,
 		min = 3,
 		max = 5,},

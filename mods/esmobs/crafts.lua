@@ -3,6 +3,18 @@
 --made for Extreme Survival game
 --License for code WTFPL
 
+
+--ref
+--[[
+minetest.register_craftitem("farming:bread", {
+	description = "Bread",
+	inventory_image = "farming_bread.png",
+	on_use = minetest.item_eat(5),
+})
+]]
+
+
+
 -- generic meat
 minetest.register_craftitem("esmobs:rat", {
 	description = "Raw Rat Meat",
@@ -22,9 +34,9 @@ minetest.register_craftitem("esmobs:meat_raw", {
 })
 
 minetest.register_craftitem("esmobs:meat", {
-	description = "Meat",
+	description = "Cooked Meat",
 	inventory_image = "mobs_meat.png",
-	on_use = minetest.item_eat(8),
+	on_use = minetest.item_eat(5),
 })
 
 minetest.register_craft({
@@ -37,7 +49,7 @@ minetest.register_craft({
 minetest.register_craftitem("esmobs:rotten_flesh", {
 	description = "Rotten Flesh",
 	inventory_image = "mobs_rotten_flesh.png",
-	on_use = minetest.item_eat(4),
+	on_use = minetest.item_eat(-4),
 })
 
 -- beef
