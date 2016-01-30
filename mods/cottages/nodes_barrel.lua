@@ -34,7 +34,7 @@ barrel.on_construct = function( pos )
    meta:set_string( 'formspec', 
                                "size[8,9]"..
                                 "image[2.6,2;2,3;default_sandstone.png^[lowpart:"..
-                                                (100-percent)..":default_desert_stone.png]".. -- TODO: better images
+                                                (100-percent)..":default_steel_block.png^[colorize:#996600:152]".. -- TODO: better images
                                 "label[2.2,0;"..S("Pour:").."]"..
                                 "list[current_name;input;3,0.5;1,1;]"..
                                 "label[5,3.3;"..S("Fill:").."]"..

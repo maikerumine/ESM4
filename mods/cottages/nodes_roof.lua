@@ -73,7 +73,7 @@ cottages.register_roof = function( name, tiles, basic_material, homedecor_altern
 		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
 		node_box = {
 			type = "fixed",
-			fixed = {	
+			fixed = {
 				{-0.5, -0.5, -0.5, 0.5, 0, 0.5},
 			},
 		},
@@ -169,9 +169,9 @@ cottages.register_roof( 'black',
 		cottages.texture_roof_sides, "default_furnace_bottom.png"},
 		'homedecor:shingles_asphalt', cottages.craftitem_coal_lump);
 cottages.register_roof( 'red',
-		{"default_bronze_block.png", cottages.texture_roof_sides,
+		{"default_copper_block.png", cottages.texture_roof_sides,
 		cottages.texture_roof_sides, cottages.texture_roof_sides,
-		cottages.texture_roof_sides, "default_bronze_block.png"},
+		cottages.texture_roof_sides, "default_copper_block.png"},
 		'homedecor:shingles_terracotta', cottages.craftitem_clay_brick);
 cottages.register_roof( 'brown',
 		{"default_wood.png", cottages.texture_roof_sides,
