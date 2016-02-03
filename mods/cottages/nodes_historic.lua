@@ -59,7 +59,7 @@ minetest.register_node("cottages:loam", {
 if( minetest.get_modpath("stairs") and stairs and stairs.register_stair_and_slab) then
    stairs.register_stair_and_slab("feldweg", "cottages:feldweg",
 		{snappy=2,choppy=2,oddly_breakable_by_hand=2},
-		{"default_stone_brick.png","default_dirt.png", "default_grass.png","default_grass.png","default_stone_brick.png","default_stone_brick.png"},
+		{"cottages_feldweg.png","default_dirt.png", "default_grass.png","default_grass.png","default_stone_brick.png","default_stone_brick.png"},
 		S("Dirt Road Stairs"),
 		S("Dirt Road, half height"),
 		default.node_sound_dirt_defaults())
