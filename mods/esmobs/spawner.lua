@@ -31,7 +31,43 @@ minetest.register_craft({
 	}
 })
 
-bp:register_spawn("esmobs:oerkkii", "esmobs:cursed_stone", 4, -1, 2, 2, 22, -500)  --comment out to disable
+--NPC SPAWNER
+minetest.register_node("esmobs:blessed_stone", {
+	description = "Blessed Stone",
+	tiles = {
+		"default_diamond_block.png^tnt_smoke.png",
+		"default_diamond_block.png^tnt_smoke.png",
+		"default_diamond_block.png^tnt_smoke.png",
+		"default_diamond_block.png^tnt_smoke.png",
+		"default_diamond_block.png^tnt_smoke.png",
+		"default_diamond_block.png^tnt_smoke.png"
+	},
+	is_ground_content = false,
+	groups = {cracky=1, level=2},
+	drop = 'default:diamondblock',
+	sounds = default.node_sound_stone_defaults(),
+})
+minetest.register_craft({
+	output = 'esmobs:blessed_stone',
+	recipe = {
+		{'default:obsidian', 'default:obsidian', 'default:obsidian'},
+		{'default:obsidian', 'default:diamondblock', 'default:obsidian'},
+		{'default:obsidian', 'default:obsidian', 'default:obsidian'},
+	}
+})
+
+--bp:register_spawn("esmobs:dirt2", "esmobs:cursed_stone", 4, -1, 2, 40, 500, -500)  --comment out to disable
+--bp:register_spawn("esmobs:stone_monster2", "esmobs:cursed_stone", 4, -1, 2, 40, 500, -500)  --comment out to disable
+bp:register_spawn("esmobs:Jasmine", "esmobs:cursed_stone", 4, -1, 2, 10, 500, -500)  --comment out to disable
+
+--bp:register_spawn("esmobs:SepiaSam", "esmobs:blessed_stone", 4, -1, 2, 40, 500, -500)  --comment out to disable
+--bp:register_spawn("esmobs:Maikerumine", "esmobs:blessed_stone", 4, -1, 2, 40, 500, -500)  --comment out to disable
+bp:register_spawn("esmobs:Candy", "esmobs:blessed_stone", 4, -1, 2, 10, 500, -500)  --comment out to disable
+
+
+
+
+--bp:register_spawn("esmobs:oerkkii", "esmobs:cursed_stone", 4, -1, 2, 2, 22, -500)  --comment out to disable
 --bp:register_spawn("esmobs:herobrines_bloody_ghost", "esmobs:cursed_stone", 4, -1, 2, 1, 500, -500)
 
 -- SPAWN EGGS

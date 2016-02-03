@@ -836,7 +836,7 @@ minetest.register_node("default:cactus", {
 	tiles = {"default_cactus_top.png", "default_cactus_top.png",
 		"default_cactus_side.png"},
 	paramtype2 = "facedir",
-	groups = {snappy = 1, choppy = 3, flammable = 2},
+	groups = {snappy = 1, choppy = 3, flammable = 2, fall_damage_add_percent = 1000},
 	sounds = default.node_sound_wood_defaults(),
 	on_place = minetest.rotate_node,
 

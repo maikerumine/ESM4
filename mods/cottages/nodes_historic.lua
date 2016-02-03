@@ -35,7 +35,7 @@ minetest.register_node("cottages:wagon_wheel", {
 -- a nice dirt road for small villages or paths to fields
 minetest.register_node("cottages:feldweg", {
         description = S("dirt road"),
-        tiles = {"default_stone_brick.png","default_dirt.png", "default_dirt.png^default_grass_side.png"},
+        tiles = {"cottages_feldweg.png","default_dirt.png", "default_dirt.png^default_grass_side.png"},
 	paramtype2 = "facedir",
 	groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2},
 	legacy_facedir_simple = true,

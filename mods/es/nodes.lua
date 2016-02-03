@@ -376,7 +376,7 @@ minetest.register_node("es:stone_with_purpellium", {
 	description = "Purlellium Ore - Oddly interesting",
 	tiles = {"default_stone.png^purpellium_ore.png"},
 	is_ground_content = true,
-	groups = {cracky=2,level = 2, radioactive = (state == "source" and 2 or 2)},
+	groups = {cracky=2,level = 2,fall_damage_add_percent = -1000, radioactive = (state == "source" and 2 or 2)},
 	drop = "es:purpellium_lump",
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -764,10 +764,10 @@ minetest.register_node("es:mud", {
 	liquid_alternative_source = "es:mud",
 	liquid_renewable = false,
 	liquid_range = 0,
-	drowning = 1,
+	drowning = 3,
 	walkable = false,
 	climbable = false,
-	post_effect_color = { r=230, g=210, b=160, a=245 },
+	post_effect_color = { a = 255, r = 43, g = 23, b = 9 },
 	groups = {crumbly=3, falling_node=1, sand=1, liquid=3, disable_jump=1},
 	sounds = default.node_sound_sand_defaults(),
 })

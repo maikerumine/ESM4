@@ -229,7 +229,7 @@ bp:register_mob("esmobs:sand_monster", {
 	},
 })
 
-
+--[[
 -- Stone Monster by PilzAdam
 bp:register_mob("esmobs:stone_monster", {
 	type = "monster",
@@ -276,7 +276,7 @@ bp:register_mob("esmobs:stone_monster", {
 })
 
 
-
+]]
 
 
 -- Oerkki by PilzAdam
@@ -324,7 +324,7 @@ bp:register_mob("esmobs:oerkkii", {
 	replace_offset = -1,
 })
 
-
+--[[
 
 bp:register_mob("esmobs:dirt", {
 	type = "monster",
@@ -377,7 +377,7 @@ bp:register_mob("esmobs:dirt", {
 		attack = "mobs_stone_attack",
 		},
 })
-
+]]
 ---------------------------------------
 --EXTREME SURVUVAL MOBS
 ---------------------------------------
@@ -698,7 +698,9 @@ bp:register_mob("esmobs:bone_monster", {
 		{name = "bones:bones",
 		chance = 1, min = 3, max = 5,},
 		{name = "default:steelblock",
-		chance = 1, min = 0, max = 2,},
+		chance = 3, min = 0, max = 2,},
+		{name = "esmobs:feather",
+		chance = 1, min = 3, max = 9,},
 
 	},
 	water_damage = 4,
@@ -3397,7 +3399,7 @@ bp:register_mob("esmobs:Jasmine", {
 	view_range = 18,
 	walk_velocity = 5,
 	run_velocity = 3.4,
-	damage = 4,
+	damage = 7,
 	drops = {
 		{name = "default:diamond_block",
 		chance = 5,
@@ -3417,7 +3419,7 @@ bp:register_mob("esmobs:Jasmine", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 0,
+	light_damage = 70,
 	on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Jasmine: Tame me now, come to me later, we will chat after I have cooled off.",3)
@@ -4415,7 +4417,7 @@ bp:register_mob("esmobs:Vanessa", {
 		punch_start = 200,		punch_end = 219,
 	},
 	sounds = {
-		war_cry = "mobs_fireball",
+		war_cry = "default_punch",
 		death = "mobs_slash_attack",
 		attack = "default_punch",
 		},
@@ -5316,7 +5318,7 @@ bp:register_mob("esmobs:Candy", {
 	view_range = 25,
 	walk_velocity = 1.9,
 	run_velocity = 3.9,
-	damage = 5,
+	damage = 9,
 	drops = {
 		{name = "default:apple",
 		chance = 1,
@@ -5336,7 +5338,7 @@ bp:register_mob("esmobs:Candy", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 0,
+	light_damage = 25,
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Candy Raver: My Ruby Sword will cut through anything, let's do it!",3)

@@ -325,6 +325,12 @@ minetest.register_craftitem("es:purpellium_dust", {
 	inventory_image = "dye_violet.png",
 })
 
+minetest.register_craft({
+	type = "shapeless",
+	output = "es:mud",
+	recipe = {"es:dry_dirt","default:water_flowing"},
+})
+
 
 --Weapon &Tool Crafting:
 --SWORDS
