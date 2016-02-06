@@ -79,6 +79,7 @@ SHOOTER_ENTITIES = {
 	"esmobs:aggressormob",
 	"esmobs:sand_monster",
 	"esmobs:stone_monster",
+	"esmobs:stone_monster2",
 	"esmobs:oerkkii",
 	"esmobs:sheep",
 	"lagsmobs:griefer_ghost",
@@ -104,13 +105,14 @@ SHOOTER_ENTITIES = {
 	"esmobs:bone_monster",
 	"esmobs:Mr_Black",
 	"esmobs:chickoboo",
-	"esmobs:herobrines_bloody_ghost",
 	"esmobs:bloco",
 	"esmobs:creeper",
 	"esmobs:skeleton",
 	"esmobs:zombie",
 	"esmobs:pigman",
 	"esmobs:blocod",
+	"esmobs:phoenix",
+	"esmobs:Jasmine",
 }
 
 local singleplayer = minetest.is_singleplayer()
