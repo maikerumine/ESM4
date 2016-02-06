@@ -28,5 +28,5 @@ bp:register_spawn("esmobs:badplayer29", {"default:dirt_with_grass","default:ston
 bp:register_spawn("esmobs:badplayer30", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 4, -1, 14000, 1, 31000)
 bp:register_spawn("esmobs:badplayer31", {"default:dirt_with_grass","default:stone","meru:stone", "default:stonebrick","default:cobble"}, 4, -1, 14000, 1, 31000)
 bp:register_spawn("esmobs:badplayer35", {"default:sandstone","default:stone", "default:stonebrick","default:cobble"}, 4, -1, 14000, 1, -20)
-bp:register_spawn("esmobs:Mr_Black", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble"}, 4, -1, 14000, 1, 31000)
+--bp:register_spawn("esmobs:Mr_Black", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble"}, 4, -1, 14000, 1, 31000)
 

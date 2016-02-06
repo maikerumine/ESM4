@@ -5,6 +5,6 @@
 
 --REFERENCE
 --function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
-bp:register_spawn("esmobs:Candy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 7, -1, 24000, 1, 31000)
+bp:register_spawn("esmobs:Candy", {"es:blessed_stone"}, 7, -1, 24000, 1, 31000)
 bp:register_spawn("esmobs:Infiniumman", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 1, 34000, 1, 31000)
 bp:register_spawn("esmobs:Maikerumine", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 20, 1, 34000, 1, 31000)
