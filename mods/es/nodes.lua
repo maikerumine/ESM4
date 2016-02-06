@@ -451,7 +451,7 @@ minetest.register_craftitem("es:infinium_container", {
 
 --Purpellium located at -4000
 minetest.register_node("es:purpelliumblock", {
-	description = "Purpellium Block",
+	description = "Purpellium Block - Fall from great height without any damage if landing on this block",
 	tiles = {"purpellium_block.png"},
 	is_ground_content = true,
 	groups = {cracky=1,level=2},

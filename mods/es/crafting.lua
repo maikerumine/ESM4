@@ -314,7 +314,7 @@ minetest.register_craft({
 })
 
 minetest.register_craftitem("es:purpellium_container", {
-	description = "Potion to do wonders!",
+	description = "Potion to do wonders!  (gives 50+ hunger for extra endurance mining.)",
 	inventory_image = "purpellium_container.png",
 	on_use = minetest.item_eat(50),
 	--TODO HEAL HP TOO
@@ -361,6 +361,15 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = 'es:sword_purpellium',
+	recipe = {
+		{'es:purpellium_ingot'},
+		{'es:purpellium_ingot'},
+		{'default:steel_ingot'},
+	}
+})
+
 --PICKS
 minetest.register_craft({
 	output = 'es:pick_emerald',
@@ -393,6 +402,15 @@ minetest.register_craft({
 	output = 'es:pick_aikerum',
 	recipe = {
 		{'es:aikerum_crystal', 'es:aikerum_crystal', 'es:aikerum_crystal'},
+		{'', 'default:steel_ingot', ''},
+		{'', 'default:steel_ingot', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'es:pick_purpellium',
+	recipe = {
+		{'es:purpellium_ingot', 'es:purpellium_ingot', 'es:purpellium_ingot'},
 		{'', 'default:steel_ingot', ''},
 		{'', 'default:steel_ingot', ''},
 	}

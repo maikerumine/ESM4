@@ -53,6 +53,22 @@ minetest.register_tool("es:sword_aikerum", {
 	}
 })
 
+minetest.register_tool("es:sword_purpellium", {
+	description = "Extreme Survival Purpellium Sword",
+	inventory_image = "es_tool_purpelliumsword.png",
+	tool_capabilities = {
+		full_punch_interval = 0.5,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=1.10, [2]=0.30, [3]=0.10}, uses=500, maxlevel=3},
+		},
+		damage_groups = {fleshy=10},
+	}
+})
+
+
+
+
 
 --PICKS
 minetest.register_tool("es:pick_emerald", {
@@ -94,6 +110,19 @@ minetest.register_tool("es:pick_aikerum", {
 	},
 })
 
+minetest.register_tool("es:pick_purpellium", {
+	description = "Extreme Survival Purpellium Pickaxe",
+	inventory_image = "es_tool_purpelliumpick.png",
+	tool_capabilities = {
+		full_punch_interval = 1.0,
+		max_drop_level=3,
+		groupcaps={
+			cracky = {times={[1]=2.10, [2]=1.30, [3]=0.70}, uses=500, maxlevel=3},
+		},
+		damage_groups = {fleshy=8},
+	},
+})
+
 
 --AXES
 minetest.register_tool("es:axe_emerald", {
@@ -132,8 +161,8 @@ minetest.register_tool("es:axe_aikerum", {
 		damage_groups = {fleshy=24},
 	},
 })
-	
-	
+
+
 --SHOVELS
 minetest.register_tool("es:shovel_emerald", {
 	description = "Extreme Survival Emerald Shovel",

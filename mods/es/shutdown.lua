@@ -25,8 +25,8 @@ local X = 06
 local Y = 12
 local Z = 18
 
-local M = 01
-local N = 02
+local M = 00
+local N = 01
 
 -- Day to shut down server.
 -- Default is daily shutdown
