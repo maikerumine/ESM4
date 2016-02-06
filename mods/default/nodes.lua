@@ -832,7 +832,7 @@ minetest.register_node("default:diamondblock", {
 --
 
 minetest.register_node("default:cactus", {
-	description = "Cactus",
+	description = "Cactus - Death on impact",
 	tiles = {"default_cactus_top.png", "default_cactus_top.png",
 		"default_cactus_side.png"},
 	paramtype2 = "facedir",
