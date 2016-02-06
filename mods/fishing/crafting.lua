@@ -45,13 +45,25 @@ if minetest.get_modpath("ropes") ~= nil then
 end
 
 -- Mithril Fishing Pole
-if minetest.get_modpath("moreores") ~= nil and minetest.get_modpath("mobs") ~= nil then
+if minetest.get_modpath("moreores") ~= nil and minetest.get_modpath("esmobs") ~= nil then
 minetest.register_craft({
 	output = "fishing:pole_perfect",
 	recipe = {
 		{"",                            "",                       "moreores:mithril_ingot" },
-		{"", 							"moreores:mithril_ingot", "mobs:spider_cobweb"     },
-		{"moreores:mithril_ingot",      "",                       "mobs:spider_cobweb"     },
+		{"", 							"moreores:mithril_ingot", "esmobs:spider_cobweb"     },
+		{"moreores:mithril_ingot",      "",                       "esmobs:spider_cobweb"     },
+	}
+})
+end
+
+-- Aikerum Fishing Pole
+if minetest.get_modpath("es") ~= nil and minetest.get_modpath("esmobs") ~= nil then
+minetest.register_craft({
+	output = "fishing:pole_perfect",
+	recipe = {
+		{"",                            "",                       "es:aikerum_crystal" },
+		{"", 							"es:aikerum_crystal", "esmobs:spider_cobweb"     },
+		{"es:aikerum_crystal",      "",                       "esmobs:spider_cobweb"     },
 	}
 })
 end
