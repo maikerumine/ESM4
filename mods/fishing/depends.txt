@@ -1,5 +1,6 @@
 default
-unified_inventory?
+es?
+esmobs?
 farming
 moreblocks?
 ropes?
@@ -7,3 +8,4 @@ moreores?
 mobs?
 flowers_plus?
 seaplants?
+unified_inventory?

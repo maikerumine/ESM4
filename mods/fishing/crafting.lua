@@ -22,13 +22,13 @@ minetest.register_craft({
 	}
 })
 
-if minetest.get_modpath("moreblocks") ~= nil then
+if minetest.get_modpath("esmobs") ~= nil then
 minetest.register_craft({
 	output = "fishing:pole_wood",
 	recipe = {
 		{"",            "",            "group:stick"     },
-		{"",            "group:stick", "moreblocks:rope" },
-		{"group:stick", "",            "moreblocks:rope" },
+		{"",            "group:stick", "esmobs:cobweb" },
+		{"group:stick", "",            "esmobs:cobweb" },
 	}
 })
 end
@@ -45,13 +45,13 @@ if minetest.get_modpath("ropes") ~= nil then
 end
 
 -- Mithril Fishing Pole
-if minetest.get_modpath("moreores") ~= nil and minetest.get_modpath("esmobs") ~= nil then
+if minetest.get_modpath("es") ~= nil and minetest.get_modpath("esmobs") ~= nil then
 minetest.register_craft({
 	output = "fishing:pole_perfect",
 	recipe = {
-		{"",                            "",                       "moreores:mithril_ingot" },
-		{"", 							"moreores:mithril_ingot", "esmobs:spider_cobweb"     },
-		{"moreores:mithril_ingot",      "",                       "esmobs:spider_cobweb"     },
+		{"",                            "",                       "es:aikerum_crystal" },
+		{"", 							"es:aikerum_crystal", "esmobs:cobweb"     },
+		{"es:aikerum_crystal",      "",                       "esmobs:cobweb"     },
 	}
 })
 end
@@ -62,8 +62,8 @@ minetest.register_craft({
 	output = "fishing:pole_perfect",
 	recipe = {
 		{"",                            "",                       "es:aikerum_crystal" },
-		{"", 							"es:aikerum_crystal", "esmobs:spider_cobweb"     },
-		{"es:aikerum_crystal",      "",                       "esmobs:spider_cobweb"     },
+		{"", 							"es:aikerum_crystal", "farming:string"     },
+		{"es:aikerum_crystal",      "",                       "farming:string"     },
 	}
 })
 end
