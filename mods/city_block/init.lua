@@ -1,6 +1,8 @@
 -- Minetest mod "City block"
 -- City block disables use of water/lava buckets and also sends aggressive players to jail
 
+-- modified by rnd: only send player in jail if he kills by punching, no more innocent players in jail
+
 --This library is free software; you can redistribute it and/or
 --modify it under the terms of the GNU Lesser General Public
 --License as published by the Free Software Foundation; either
@@ -127,12 +129,31 @@ minetest.registered_craftitems["tnt:tnt"].on_place=function(itemstack, placer, p
 	end
 end]]
 
+-- rnd: now only players who kill others by punching go to jail, no more fail jailings
+minetest.register_on_punchplayer(
+		function(player, hitter, time_from_last_punch, tool_capabilities, dir, damage)
+			local hp = player:get_hp();
+			if hp-damage<0 then -- player will die
+				local pos = player:getpos()
+				if city_block:in_city(pos) and not(pos.x>-25 and pos.x<25 and pos.y>-5 and pos.y<25 and pos.z>-25 and pos.z<25) then
+					local name = hitter:get_player_name();
+					local pname = player:get_player_name();
+					if not name or not pname then return end
+					hitter:setpos( {x=-213, y=2, z=920} )
+					minetest.chat_send_all("Player "..name.." sent to PRISON as suspect for killing " .. pname .."  in town")
+					minetest.log("action", "Player "..name.." warned for killing in town")
+				end
 
 
 
+			end
+		end
+)
+
+--[[
 minetest.register_on_dieplayer(
 	function(player)
-		pos=player:getpos()
+		local pos=player:getpos()
 		if city_block:in_city(pos) and not(pos.x>-25 and pos.x<25 and pos.y>-5 and pos.y<25 and pos.z>-25 and pos.z<25) then
 			for _,suspect in pairs(minetest.get_objects_inside_radius(pos, 13.8)) do
 				if suspect:is_player() and suspect:get_player_name()~=player:get_player_name() then
@@ -155,7 +176,7 @@ minetest.register_on_dieplayer(
 		end
 	end
 )
-
+]]
 --do not let lava flow across boundary of city block
 minetest.register_abm({
 	nodenames = {"default:lava_flowing"},
