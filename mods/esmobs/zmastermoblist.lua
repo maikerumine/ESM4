@@ -1041,7 +1041,7 @@ for _, col in pairs(all_colours) do
 		visual = "mesh",
 		mesh = "mobs_sheep.b3d",
 		textures = {
-			{"esmobs_sheep_"..col..".png"},
+			{"mobs_sheep_"..col..".png"},
 		},
 		gotten_texture = {"mobs_sheep_shaved.png"},
 		gotten_mesh = "mobs_sheep_shaved.b3d",
