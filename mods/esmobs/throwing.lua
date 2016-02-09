@@ -30,7 +30,7 @@ minetest.register_node("esmobs:arrow_box", {
 			{7.5/17, -2.5/17, 2.5/17, 6.5/17, -1.5/17, 1.5/17},
 			{7.5/17, 2.5/17, -2.5/17, 6.5/17, 1.5/17, -1.5/17},
 			{6.5/17, -1.5/17, -1.5/17, 7.5/17, -2.5/17, -2.5/17},
-			
+
 			{7.5/17, 2.5/17, 2.5/17, 8.5/17, 3.5/17, 3.5/17},
 			{8.5/17, -3.5/17, 3.5/17, 7.5/17, -2.5/17, 2.5/17},
 			{8.5/17, 3.5/17, -3.5/17, 7.5/17, 2.5/17, -2.5/17},
@@ -56,7 +56,7 @@ minetest.register_node("esmobs:arrow_diamond_box", {
 			{7.5/17, -2.5/17, 2.5/17, 6.5/17, -1.5/17, 1.5/17},
 			{7.5/17, 2.5/17, -2.5/17, 6.5/17, 1.5/17, -1.5/17},
 			{6.5/17, -1.5/17, -1.5/17, 7.5/17, -2.5/17, -2.5/17},
-			
+
 			{7.5/17, 2.5/17, 2.5/17, 8.5/17, 3.5/17, 3.5/17},
 			{8.5/17, -3.5/17, 3.5/17, 7.5/17, -2.5/17, 2.5/17},
 			{8.5/17, 3.5/17, -3.5/17, 7.5/17, 2.5/17, -2.5/17},
@@ -95,7 +95,7 @@ THROWING_ARROW_ENTITY.on_step = function(self, dtime)
 	self.timer=self.timer+dtime
 	local pos = self.object:getpos()
 	local node = minetest.get_node(pos)
-	
+
 minetest.add_particle({
     pos = pos,
     vel = {x=0, y=0, z=0},
@@ -148,7 +148,7 @@ THROWING_ARROW_DIAMOND_ENTITY.on_step = function(self, dtime)
 	self.timer=self.timer+dtime
 	local pos = self.object:getpos()
 	local node = minetest.get_node(pos)
-	
+
 minetest.add_particle({
     pos = pos,
     vel = {x=0, y=0, z=0},
@@ -234,7 +234,7 @@ local throwing_shoot_arrow = function(itemstack, player)
 			end
 			local playerpos = player:getpos()
 			--local obj = minetest.env:add_entity({x=playerpos.x,y=playerpos.y+1.5,z=playerpos.z}, arrow[2]) --current
-			local obj = minetest.add_entity({x=playerpos.x,y=playerpos.y+1.5,z=playerpos.z}, arrow[2])  --mc 
+			local obj = minetest.add_entity({x=playerpos.x,y=playerpos.y+1.5,z=playerpos.z}, arrow[2])  --mc
 			local dir = player:get_look_dir()
 			obj:setvelocity({x=dir.x*22, y=dir.y*22, z=dir.z*22})
 			obj:setacceleration({x=dir.x*-3, y=-10, z=dir.z*-3})
@@ -272,8 +272,8 @@ minetest.register_craft({
 		{'farming:cotton', 'default:stick', ''},
 	}
 })
-	
-	
+
+
 -- bone (weapon)
 mobs:register_arrow("esmobs:bonebullet", {
 	visual = "sprite",
@@ -293,6 +293,62 @@ mobs:register_arrow("esmobs:bonebullet", {
 		player:punch(self.object, 1.0, {
 			full_punch_interval = 1.0,
 			damage_groups = {fleshy = 1},
+		}, nil)
+	end,
+
+	-- node hit, bursts into flame
+	hit_node = function(self, pos, node)
+		--mobs:explosion(pos, 1, 1, 0)  --this deletes nodes
+	end
+})
+
+-- book (weapon)
+mobs:register_arrow("esmobs:bookbullet", {
+	visual = "sprite",
+	visual_size = {x = 0.3, y = 0.3},
+	textures = {"default_book.png"},
+	velocity = 7,
+
+	-- direct hit, no fire... just plenty of pain
+	hit_player = function(self, player)
+		player:punch(self.object, 1.0, {
+			full_punch_interval = 1.0,
+			damage_groups = {fleshy = 4},
+		}, nil)
+	end,
+
+	hit_mob = function(self, player)
+		player:punch(self.object, 1.0, {
+			full_punch_interval = 1.0,
+			damage_groups = {fleshy = 7},
+		}, nil)
+	end,
+
+	-- node hit, bursts into flame
+	hit_node = function(self, pos, node)
+		--mobs:explosion(pos, 1, 1, 0)  --this deletes nodes
+	end
+})
+
+-- axe (weapon)
+mobs:register_arrow("esmobs:axebullet", {
+	visual = "sprite",
+	visual_size = {x = 0.3, y = 0.3},
+	textures = {"default_tool_meseaxe.png"},
+	velocity = 7,
+
+	-- direct hit, no fire... just plenty of pain
+	hit_player = function(self, player)
+		player:punch(self.object, 1.0, {
+			full_punch_interval = 1.0,
+			damage_groups = {fleshy = 4},
+		}, nil)
+	end,
+
+	hit_mob = function(self, player)
+		player:punch(self.object, 1.0, {
+			full_punch_interval = 1.0,
+			damage_groups = {fleshy = 7},
 		}, nil)
 	end,
 

@@ -343,7 +343,7 @@ mobs:register_mob("esmobs:dirt", {
 	type = "monster",
 	hp_min = 30,
 	hp_max = 50,
-	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
+	collisionbox = {-0.4, -1, -0.4, 0.4, 0.9, 0.4},
 	visual = "mesh",
 	mesh = "mobs_stone_monster.b3d",
 	textures = {"mobs_20.png"},
@@ -1041,9 +1041,9 @@ for _, col in pairs(all_colours) do
 		visual = "mesh",
 		mesh = "mobs_sheep.b3d",
 		textures = {
-			{"mobs_sheep_"..col..".png"},
+			{"esmobs_sheep_"..col..".png"},
 		},
-		gotten_texture = {"mobs_sheep_shaved.png"},
+		gotten_texture = {"esmobs_sheep_shaved.png"},
 		gotten_mesh = "mobs_sheep_shaved.b3d",
 		makes_footstep_sound = true,
 		sounds = {
@@ -1117,7 +1117,7 @@ for _, col in pairs(all_colours) do
 						clicker:set_wielded_item(item)
 					end
 					self.object:set_properties({
-						textures = {"mobs_sheep_shaved.png"},
+						textures = {"esmobs_sheep_shaved.png"},
 						mesh = "mobs_sheep_shaved.b3d",
 					})
 				end
@@ -1174,7 +1174,7 @@ minetest.register_entity("esmobs:sheep", {
 	visual = "mesh",
 	mesh = "mobs_sheep.b3d",
 	visual_size = {x = 1, y = 1},
-	textures = {"mobs_sheep.png"},
+	textures = {"esmobs_sheep.png"},
 	velocity = {x = 0, y = 0, z = 0},
 	collisionbox = {-0.4, -1, -0.4, 0.4, 0.3, 0.4},
 	is_visible = true,
@@ -1867,6 +1867,7 @@ mobs:register_mob("esmobs:badplayer2", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -1920,6 +1921,7 @@ mobs:register_mob("esmobs:badplayer3", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -1973,6 +1975,7 @@ mobs:register_mob("esmobs:badplayer4", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -2026,6 +2029,7 @@ mobs:register_mob("esmobs:badplayer6", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -2079,6 +2083,7 @@ mobs:register_mob("esmobs:badplayer7", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -2132,6 +2137,7 @@ mobs:register_mob("esmobs:badplayer8", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -2185,6 +2191,7 @@ mobs:register_mob("esmobs:badplayer9", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -2238,6 +2245,7 @@ mobs:register_mob("esmobs:badplayer10", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -2291,6 +2299,7 @@ mobs:register_mob("esmobs:badplayer11", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -2344,6 +2353,7 @@ mobs:register_mob("esmobs:badplayer12", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -2398,6 +2408,7 @@ mobs:register_mob("esmobs:badplayer16", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -2451,6 +2462,7 @@ mobs:register_mob("esmobs:badplayer18", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -2504,6 +2516,7 @@ mobs:register_mob("esmobs:badplayer22", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -2562,6 +2575,7 @@ mobs:register_mob("esmobs:badplayer23", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -2615,6 +2629,7 @@ mobs:register_mob("esmobs:badplayer24", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -2668,6 +2683,7 @@ mobs:register_mob("esmobs:badplayer25", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -2721,6 +2737,7 @@ mobs:register_mob("esmobs:badplayer26", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -2774,6 +2791,7 @@ mobs:register_mob("esmobs:badplayer27", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -2827,6 +2845,7 @@ mobs:register_mob("esmobs:badplayer28", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -2880,6 +2899,7 @@ mobs:register_mob("esmobs:badplayer29", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -2933,6 +2953,7 @@ mobs:register_mob("esmobs:badplayer30", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -2986,6 +3007,7 @@ mobs:register_mob("esmobs:badplayer31", {
 	water_damage = 0,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -3039,6 +3061,7 @@ mobs:register_mob("esmobs:badplayer35", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -3093,6 +3116,7 @@ mobs:register_mob("esmobs:Mr_Black", {
 	water_damage = 70,
 	lava_damage = 50,
 	light_damage = 0,
+	fear_height = 5,
 	attack_type = "dogfight",
 	sounds = {
 		attack = "default_punch3",
@@ -3190,7 +3214,7 @@ mobs:register_mob("esmobs:Jasmine", {
 	mesh = "3d_armor_character.x",
 	textures = {"badplayer_42.png",
 			"3d_armor_trans.png",
-				minetest.registered_items["default:sword_diamond"].inventory_image,
+				minetest.registered_items["es:sword_purpellium"].inventory_image,
 			},
 	visual_size = {x=1, y=1},
 	makes_footstep_sound = true,
@@ -3202,10 +3226,10 @@ mobs:register_mob("esmobs:Jasmine", {
 		{name = "default:diamond_block",
 		chance = 5,
 		min = 0,
-		max = 1,},
-		{name = "default:sword_diamond",
-		chance = 2,
-		min = 1,
+		max = 2,},
+		{name = "es:sword_purpellium",
+		chance = 7,
+		min = 0,
 		max = 1,},
 		{name = "default:water_flowing",
 			chance = 2,
@@ -3218,6 +3242,7 @@ mobs:register_mob("esmobs:Jasmine", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 70,
+	fear_height = 2,
 	on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Jasmine: Tame me now, come to me later, we will chat after I have cooled off.",3)
@@ -3336,6 +3361,7 @@ mobs:register_mob("esmobs:Infinium_Monster", {
 	water_damage = 0,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -3393,6 +3419,7 @@ mobs:register_mob("esmobs:Sam", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
+	fear_height = 5,
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Sam: Let's go kick some Mob butt!",3)
@@ -3516,6 +3543,7 @@ mobs:register_mob("esmobs:John", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
+	fear_height = 5,
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"John: Let's go grief some monsters!",3)
@@ -3639,6 +3667,7 @@ mobs:register_mob("esmobs:Janette", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
+	fear_height = 5,
 	follow = "default:apple",
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
@@ -3764,6 +3793,7 @@ mobs:register_mob("esmobs:Crybaby", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
+	fear_height = 5,
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Crybaby: I am too whimpy to fight mobs, but I can do my best!",3)
@@ -3889,6 +3919,7 @@ mobs:register_mob("esmobs:SepiaSam", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
+	fear_height = 5,
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Sepia Sam: MESE sword + Monster = My pleasure!",3)
@@ -4012,6 +4043,7 @@ mobs:register_mob("esmobs:OGSam", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
+	fear_height = 5,
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"O.G. Sam: Mobs, let me at 'em, I'll splat 'em!!!",3)
@@ -4111,7 +4143,7 @@ mobs:register_mob("esmobs:Vanessa", {
 	mesh = "3d_armor_character.x",
 	textures = {"badplayer_19.png",
 			"3d_armor_trans.png",
-				minetest.registered_items["default:sword_steel"].inventory_image,
+				minetest.registered_items["default:axe_mese"].inventory_image,
 			},
 	visual_size = {x=1, y=1},
 	makes_footstep_sound = true,
@@ -4139,6 +4171,7 @@ mobs:register_mob("esmobs:Vanessa", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
+	fear_height = 5,
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Vanessa: I'll code out the very instance of those mobs!",3)
@@ -4206,7 +4239,11 @@ mobs:register_mob("esmobs:Vanessa", {
 		end
 	end,
 
-	attack_type = "dogfight",
+	--attack_type = "dogfight",
+	attack_type = "dogshoot",
+	shoot_interval = 0.7,
+	arrow = "esmobs:axebullet",
+	shoot_offset = 2,
 	animation = {
 		speed_normal = 30,		speed_run = 30,
 		stand_start = 0,		stand_end = 79,
@@ -4262,6 +4299,7 @@ mobs:register_mob("esmobs:FemaleSam", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
+	fear_height = 5,
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Female Sam: Minetest is the greatest voxel game ever created!",3)
@@ -4385,6 +4423,7 @@ mobs:register_mob("esmobs:Battleboy", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
+	fear_height = 5,
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Battlefield 3 Soldier: All suited up, let's roll out and destroy those creatures!",3)
@@ -4512,6 +4551,7 @@ mobs:register_mob("esmobs:Wilbert", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
+	fear_height = 5,
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Old man: I am getting too old for this...  Okay, I'll help ya!",3)
@@ -4639,6 +4679,7 @@ mobs:register_mob("esmobs:Thelma", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
+	fear_height = 5,
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Old woman: I may walk slow, but I can fight like a champ!",3)
@@ -4763,6 +4804,7 @@ mobs:register_mob("esmobs:DrifterDan", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
+	fear_height = 5,
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Drifter Dan: Let's roll out and destroy those creatures!",3)
@@ -4887,6 +4929,7 @@ mobs:register_mob("esmobs:Mr_White", {
 	water_damage = 70,
 	lava_damage = 50,
 	light_damage = 0,
+	fear_height = 5,
 	sounds = {
 		attack = "default_punch1",
 	},
@@ -5010,6 +5053,7 @@ mobs:register_mob("esmobs:Mr_Pink", {
 	water_damage = 70,
 	lava_damage = 50,
 	light_damage = 0,
+	fear_height = 5,
 	attack_type = "dogfight",
 	sounds = {
 		attack = "default_punch3",
@@ -5109,7 +5153,8 @@ mobs:register_mob("esmobs:Candy", {
 	mesh = "3d_armor_character.x",
 	textures = {"badplayer_41.png",
 			"3d_armor_trans.png",
-				minetest.registered_items["default:diamond"].inventory_image,
+				--minetest.registered_items["default:diamond"].inventory_image,
+				minetest.registered_items["es:sword_ruby"].inventory_image,
 			},
 	visual_size = {x=1, y=1.0},
 	makes_footstep_sound = true,
@@ -5137,6 +5182,7 @@ mobs:register_mob("esmobs:Candy", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 5,
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Candy Raver: My Ruby Sword will cut through anything, let's do it!",3)
@@ -5260,6 +5306,7 @@ mobs:register_mob("esmobs:Infiniumman", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
+	fear_height = 5,
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Infinium Man: I'll give those monsters a good whack on the head with this Infinium ingot!",3)
@@ -5357,6 +5404,8 @@ mobs:register_mob("esmobs:Maikerumine", {
 	textures = {"badplayer_39.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:book"].inventory_image,
+				--minetest.registered_items["throwing:bow_steel"].inventory_image,
+				--minetest.registered_items["esmobs:bow_wood"].inventory_image,
 			},
 	visual_size = {x=1, y=1.0},
 	makes_footstep_sound = true,
@@ -5364,6 +5413,11 @@ mobs:register_mob("esmobs:Maikerumine", {
 	walk_velocity = 3,
 	run_velocity = 5,
 	damage = 9,
+	--attack_type = "dogfight",
+	attack_type = "shoot",
+	shoot_interval = 0.5,
+	arrow = "esmobs:bookbullet",
+	shoot_offset = 2,
 	drops = {
 		{name = "default:apple",
 		chance = 1,
@@ -5384,6 +5438,7 @@ mobs:register_mob("esmobs:Maikerumine", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
+	fear_height = 5,
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Maikerumine: Maybe a new game is in the works...  Hmmm...",3)
@@ -5451,7 +5506,6 @@ mobs:register_mob("esmobs:Maikerumine", {
 		end
 	end,
 
-	attack_type = "dogfight",
 	animation = {
 		speed_normal = 30,		speed_run = 30,
 		stand_start = 0,		stand_end = 79,
