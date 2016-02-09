@@ -31,14 +31,14 @@ esmobs.MOB_SETTING = 5;
 --MOB PACKAGES
 -----------------------------------------------------------------------------
 --esmobs.MOB_SETTING = 12;		MT Monsters
---esmobs.MOB_SETTING = 11;		MT monsters, ES Monsters, MC like mobs, and Bad npc's.
+--esmobs.MOB_SETTING = 11;		MT monsters, ES Monsters, and Bad npc's.
 --esmobs.MOB_SETTING = 10;		Good npc's
 --esmobs.MOB_SETTING = 9;		MT monsters and Animals.
---esmobs.MOB_SETTING = 8;		MC like mobs and Animals.
+--esmobs.MOB_SETTING = 8;		Animals.
 --esmobs.MOB_SETTING = 7;		Good npc, Bad npc's.
 --esmobs.MOB_SETTING = 6;		MT Monsters, Bad npc's.
---esmobs.MOB_SETTING = 5;		Animals, Good npc, MT monsters, ES monsters,  MC like mobs, and Bad npc's. All 76 of them.
---esmobs.MOB_SETTING = 4;		Animals, Good npc, MT monsters, and MC like mobs.
+--esmobs.MOB_SETTING = 5;		Animals, Good npc, MT monsters, ES monsters,  and Bad npc's. All of them.
+--esmobs.MOB_SETTING = 4;		Animals, Good npc, MT monsters.
 --esmobs.MOB_SETTING = 3;		Animals, Good npc, and MT monsters.
 --esmobs.MOB_SETTING = 2;		Animals and good npc's.
 --esmobs.MOB_SETTING = 1;		Just Animals.

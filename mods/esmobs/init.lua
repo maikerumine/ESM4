@@ -23,12 +23,11 @@ esmobs={}
 	--BECAUSE I SUCK AT PROGRAMMING THIS IS THE OVER RIDE TO THE BELOW CODE
 		dofile(minetest.get_modpath("esmobs").."/esanimal.lua")
 		dofile(minetest.get_modpath("esmobs").."/esnpc.lua")
-		--dofile(minetest.get_modpath("esmobs").."/mtmonster.lua")
-		--dofile(minetest.get_modpath("esmobs").."/mcmonster.lua")
+		dofile(minetest.get_modpath("esmobs").."/mtmonster.lua")
 		dofile(minetest.get_modpath("esmobs").."/esbadplayer.lua")
 		dofile(minetest.get_modpath("esmobs").."/esmonster.lua")
-		--dofile(minetest.get_modpath("esmobs").."/esnpc2.lua")
-		--dofile(minetest.get_modpath("esmobs").."/esbadplayer2.lua")
+		dofile(minetest.get_modpath("esmobs").."/esnpc2.lua")
+		dofile(minetest.get_modpath("esmobs").."/esbadplayer2.lua")
 
 --[[
 --MOB SETTINGS leave this alone, use config file to change.
@@ -53,21 +52,19 @@ esmobs={}
 		end
 	end
 
-	if (esmobs.MOB_SETTING == 4) then	--Animals, Good npc, MT monsters, and MC like mobs.
+	if (esmobs.MOB_SETTING == 4) then	--Animals, Good npc, and, MT monsters.
 		dofile(minetest.get_modpath("esmobs").."/esanimal.lua")
 		dofile(minetest.get_modpath("esmobs").."/esnpc.lua")
 		dofile(minetest.get_modpath("esmobs").."/mtmonster.lua")
-		dofile(minetest.get_modpath("esmobs").."/mcmonster.lua")
 		if es then
 			dofile(minetest.get_modpath("esmobs").."/esnpc2.lua")
 		end
 	end
 
-	if (esmobs.MOB_SETTING == 5) then	--Animals, Good npc, MT monsters, ES monsters, MC like mobs, and Bad npc's.   All 76 of them.
+	if (esmobs.MOB_SETTING == 5) then	--Animals, Good npc, MT monsters, ES monsters,  and Bad npc's.   All 76 of them.
 		dofile(minetest.get_modpath("esmobs").."/esanimal.lua")
 		dofile(minetest.get_modpath("esmobs").."/esnpc.lua")
 		dofile(minetest.get_modpath("esmobs").."/mtmonster.lua")
-		dofile(minetest.get_modpath("esmobs").."/mcmonster.lua")
 		dofile(minetest.get_modpath("esmobs").."/esbadplayer.lua")
 		dofile(minetest.get_modpath("esmobs").."/esmonster.lua")
 		if es then
@@ -93,9 +90,8 @@ esmobs={}
 		end
 	end
 
-	if (esmobs.MOB_SETTING == 8) then	--MC like mobs and Animals.
+	if (esmobs.MOB_SETTING == 8) then	 Animals.
 		dofile(minetest.get_modpath("esmobs").."/esanimal.lua")
-		dofile(minetest.get_modpath("esmobs").."/mcmonster.lua")
 	end
 
 	if (esmobs.MOB_SETTING == 9) then	--MT monsters and Animals.
@@ -110,9 +106,8 @@ esmobs={}
 		end
 	end
 
-	if (esmobs.MOB_SETTING == 11) then	--MT monsters, ES monsters, MC like mobs, and Bad npc's.
+	if (esmobs.MOB_SETTING == 11) then	--MT monsters, ES monsters, and Bad npc's.
 		dofile(minetest.get_modpath("esmobs").."/mtmonster.lua")
-		dofile(minetest.get_modpath("esmobs").."/mcmonster.lua")
 		dofile(minetest.get_modpath("esmobs").."/esbadplayer.lua")
 		dofile(minetest.get_modpath("esmobs").."/esmonster.lua")
 		if es then
@@ -131,7 +126,6 @@ esmobs={}
 	--dofile(minetest.get_modpath("esmobs").."/esbadplayer.lua")
 	--dofile(minetest.get_modpath("esmobs").."/esbadplayer2.lua")
 	--dofile(minetest.get_modpath("esmobs").."/esanimal.lua")
-	--dofile(minetest.get_modpath("esmobs").."/mcmobs.lua")
 
 --CRAFTS AND MISC
 	dofile(minetest.get_modpath("esmobs").."/crafts.lua")

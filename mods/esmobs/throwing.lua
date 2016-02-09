@@ -275,7 +275,7 @@ minetest.register_craft({
 	
 	
 -- bone (weapon)
-bp:register_arrow("esmobs:bonebullet", {
+mobs:register_arrow("esmobs:bonebullet", {
 	visual = "sprite",
 	visual_size = {x = 0.3, y = 0.3},
 	textures = {"bones_front.png"},
@@ -298,6 +298,6 @@ bp:register_arrow("esmobs:bonebullet", {
 
 	-- node hit, bursts into flame
 	hit_node = function(self, pos, node)
-		--bp:explosion(pos, 1, 1, 0)  --this deletes nodes
+		--mobs:explosion(pos, 1, 1, 0)  --this deletes nodes
 	end
 })

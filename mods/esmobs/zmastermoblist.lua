@@ -9,14 +9,10 @@ esmobs = {}
 if not minetest.get_modpath("ethereal") then
 	minetest.register_alias("ethereal:crystal_spike", "default:sandstone")
 end
--- nether compatibility
-if not minetest.get_modpath("nether") then
-	minetest.register_alias("nether:netherrack", "default:sandstone")
-	minetest.register_alias("nether:portal", "default:sandstone")
-end
+
 --friendly npc drops when right click with gold lump.
-bp.npc_drops = { "default:pick_steel", "esmobs:meat", "default:sword_steel", "default:shovel_steel", "farming:bread", "default:wood" }--Added 20151121
-bp.npc2_drops = { "default:pick_mese", "esmobs:meat", "default:sword_diamond", "default:pick_diamond", "farming:bread", "default:wood" }--Added 20151121
+mobs.npc_drops = { "default:pick_steel", "esmobs:meat", "default:sword_steel", "default:shovel_steel", "farming:bread", "default:wood" }--Added 20151121
+mobs.npc2_drops = { "default:pick_mese", "esmobs:meat", "default:sword_diamond", "default:pick_diamond", "farming:bread", "default:wood" }--Added 20151121
 
 
 -- from throwing mod by PilzAdam:
@@ -47,7 +43,7 @@ minetest.register_node("esmobs:arrow_box", {
 })
 
 -- fireball (weapon)
-bp:register_arrow("esmobs:fireball", {
+mobs:register_arrow("esmobs:fireball", {
 	visual = "sprite",
 	visual_size = {x = 1, y = 1},
 	textures = {"mobs_fireball.png"},
@@ -70,19 +66,18 @@ bp:register_arrow("esmobs:fireball", {
 
 	-- node hit, bursts into flame
 	hit_node = function(self, pos, node)
-		--bp:explode(pos, 1, 1, 0)  --this deletes nodes
+		--mobs:explode(pos, 1, 1, 0)  --this deletes nodes
 	end
 })
 -------------------------
 --MINETEST MOBS
 -------------------------
 -- Dungeon Master by PilzAdam
-bp:register_mob("esmobs:dungeon_master", {
+mobs:register_mob("esmobs:dungeon_master", {
 	type = "monster",
 	passive = false,
 	damage = 4,
-	--attack_type = "dogshoot",
-	attack_type = "shoot",
+	attack_type = "dogshoot",
 	reach = 3,
 	shoot_interval = 2.5,
 	arrow = "esmobs:fireball",
@@ -135,21 +130,21 @@ bp:register_mob("esmobs:dungeon_master", {
 
 
 -- Tree Monster (or Tree Gollum) by PilzAdam
-bp:register_mob("esmobs:tree_monster", {
+mobs:register_mob("esmobs:tree_monster", {
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",
-	damage = 1,
-	hp_min = 27,
-	hp_max = 53,
+	reach = 2,
+	damage = 2,
+	hp_min = 7,
+	hp_max = 33,
 	armor = 100,
-	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
+	collisionbox = {-0.4, -1, -0.4, 0.4, 0.8, 0.4},
 	visual = "mesh",
-	mesh = "mobs_tree_monster.x",
+	mesh = "mobs_tree_monster.b3d",
 	textures = {
-		{"mobs_4.png"},
+		{"mobs_tree_monster.png"},
 	},
-	visual_size = {x=4.5,y=4.5},
 	blood_texture = "default_wood.png",
 	makes_footstep_sound = true,
 	sounds = {
@@ -167,18 +162,24 @@ bp:register_mob("esmobs:tree_monster", {
 		{name = "default:apple",
 		chance = 2, min = 1, max=3},
 	},
-	water_damage = 10,
-	lava_damage = 50,
+	water_damage = 1,
+	lava_damage = 5,
 	light_damage = 2,
 	fall_damage = 0,
 	animation = {
-		speed_normal = 15,		speed_run = 15,
-		stand_start = 0,		stand_end = 24,
-		walk_start = 25,		walk_end = 47,
-		run_start = 48,			run_end = 62,
-		punch_start = 48,		punch_end = 62,
+		speed_normal = 15,
+		speed_run = 15,
+		stand_start = 0,
+		stand_end = 24,
+		walk_start = 25,
+		walk_end = 47,
+		run_start = 48,
+		run_end = 62,
+		punch_start = 48,
+		punch_end = 62,
 	},
 })
+
 
 
 -- ethereal sapling compatibility
@@ -188,21 +189,21 @@ if not minetest.get_modpath("ethereal") then
 end
 
 -- Sand Monster by PilzAdam
-bp:register_mob("esmobs:sand_monster", {
+mobs:register_mob("esmobs:sand_monster", {
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",
-	damage = 2,
-	hp_min = 17,
-	hp_max = 35,
-	armor = 90,
-	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
+	reach = 2,
+	damage = 3,
+	hp_min = 34,
+	hp_max = 60,
+	armor = 100,
+	collisionbox = {-0.4, -1, -0.4, 0.4, 0.8, 0.4},
 	visual = "mesh",
-	mesh = "mobs_sand_monster.x",
+	mesh = "mobs_sand_monster.b3d",
 	textures = {
-		{"mobs_5.png"},
+		{"mobs_sand_monster.png"},
 	},
-	visual_size = {x=8,y=8},
 	makes_footstep_sound = true,
 	sounds = {
 		random = "mobs_sandmonster",
@@ -214,41 +215,94 @@ bp:register_mob("esmobs:sand_monster", {
 	floats = 0,
 	drops = {
 		{name = "default:desert_sand",
-		chance = 1, min = 3, max = 5,},
-
+		chance = 1, min = 3, max = 5},
 	},
 	water_damage = 3,
 	lava_damage = 4,
 	light_damage = 0,
+	fear_height = 3,
+	animation = {
+		speed_normal = 15,
+		speed_run = 15,
+		stand_start = 0,
+		stand_end = 39,
+		walk_start = 41,
+		walk_end = 72,
+		run_start = 74,
+		run_end = 105,
+		punch_start = 74,
+		punch_end = 105,
+	},
+})
+
+
+-- Stone Monster by PilzAdam
+mobs:register_mob("esmobs:stone_monster", {
+	type = "monster",
+	passive = false,
+	attack_type = "dogfight",
+	reach = 2,
+	damage = 8,
+	hp_min = 32,
+	hp_max = 55,
+	armor = 80,
+	collisionbox = {-0.4, -1, -0.4, 0.4, 0.9, 0.4},
+	visual = "mesh",
+	mesh = "mobs_stone_monster.b3d",
+	textures = {
+		{"mobs_6.png"},
+	},
+	makes_footstep_sound = true,
+	sounds = {
+		random = "mobs_stonemonster",
+	},
+	walk_velocity = 0.5,
+	run_velocity = 2,
+	jump = true,
+	floats = 0,
+	view_range = 10,
+	drops = {
+		{name = "default:torch",
+		chance = 2, min = 0, max = 2,},
+		{name = "default:iron_lump",
+		chance=5, min=0, max=1,},
+		{name = "default:coal_lump",
+		chance=3, min=0, max=1,},
+	},
+	water_damage = 10,
+	lava_damage = 1,
+	light_damage = 2,
 	animation = {
 		speed_normal = 15,		speed_run = 15,
-		stand_start = 0,		stand_end = 39,
-		walk_start = 41,		walk_end = 72,
-		run_start = 74,			run_end = 105,
-		punch_start = 74,		punch_end = 105,
+		stand_start = 0,		stand_end = 14,
+		walk_start = 15,		walk_end = 38,
+		run_start = 40,			run_end = 63,
+		punch_start = 40,		punch_end = 63,
 	},
 })
 
 
 
 
+
 -- Oerkki by PilzAdam
-bp:register_mob("esmobs:oerkkii", {
+
+mobs:register_mob("esmobs:oerkki", {
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",
-	damage = 3,
+	reach = 2,
+	damage = 4,
 	hp_min = 8,
 	hp_max = 34,
 	armor = 100,
-	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
+	collisionbox = {-0.4, -1, -0.4, 0.4, 0.9, 0.4},
 	visual = "mesh",
-	mesh = "mobs_oerkki.x",
+	mesh = "mobs_oerkki.b3d",
 	textures = {
-		{"mobs_8.png"},
-		{"mobs_9.png"},
+		{"mobs_oerkki.png"},
+		{"mobs_oerkki2.png"},
 	},
-	visual_size = {x=5, y=5},
 	makes_footstep_sound = false,
 	sounds = {
 		random = "mobs_oerkki",
@@ -259,41 +313,48 @@ bp:register_mob("esmobs:oerkkii", {
 	jump = true,
 	drops = {
 		{name = "default:obsidian",
-		chance = 3, min = 1, max = 2,},
+		chance = 3, min = 1, max = 2},
 	},
 	water_damage = 2,
 	lava_damage = 4,
 	light_damage = 1,
+	fear_height = 3,
 	animation = {
-		stand_start = 0,		stand_end = 23,
-		walk_start = 24,		walk_end = 36,
-		run_start = 37,			run_end = 49,
-		punch_start = 37,		punch_end = 49,
-		speed_normal = 15,		speed_run = 15,
+		stand_start = 0,
+		stand_end = 23,
+		walk_start = 24,
+		walk_end = 36,
+		run_start = 37,
+		run_end = 49,
+		punch_start = 37,
+		punch_end = 49,
+		speed_normal = 15,
+		speed_run = 15,
 	},
-	replace_rate = 40,
+	replace_rate = 5,
 	replace_what = {"default:torch"},
 	replace_with = "air",
 	replace_offset = -1,
 })
 
---[[
 
-bp:register_mob("esmobs:dirt", {
+
+mobs:register_mob("esmobs:dirt", {
 	type = "monster",
 	hp_min = 30,
 	hp_max = 50,
 	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
 	visual = "mesh",
-	mesh = "mobs_stone_monster.x",
+	mesh = "mobs_stone_monster.b3d",
 	textures = {"mobs_20.png"},
-	visual_size = {x=3.5, y=2.8},
+	--visual_size = {x=3.5, y=2.8},
 	makes_footstep_sound = true,
 	view_range = 24,
 	follow = "flowers:viola",--swap out type randomly for server players"flowers:tulip","flowers:rose","flowers:geranium","flowers:dandelion_yellow","flowers:dandelion_white",
 	walk_velocity = 2.5,
 	run_velocity = 3.8,
 	damage = 3.7,
+	reach = 2,
 	drops = {
 		{name = "default:dirt",
 		chance = 1,
@@ -310,6 +371,7 @@ bp:register_mob("esmobs:dirt", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 3,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -330,12 +392,12 @@ bp:register_mob("esmobs:dirt", {
 		attack = "mobs_stone_attack",
 		},
 })
-]]
+
 ---------------------------------------
 --EXTREME SURVUVAL MOBS
 ---------------------------------------
 -- Spider by AspireMint (fishyWET (CC-BY-SA 3.0 license for texture)
-bp:register_mob("esmobs:spider", {
+mobs:register_mob("esmobs:spider", {
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",
@@ -369,6 +431,7 @@ bp:register_mob("esmobs:spider", {
 	water_damage = 5,
 	lava_damage = 50,
 	light_damage = 0,
+	fear_height = 14,
 	animation = {
 		speed_normal = 15,		speed_run = 15,
 		stand_start = 1,		stand_end = 1,
@@ -380,15 +443,15 @@ bp:register_mob("esmobs:spider", {
 
 
 --Applmons by maikerumine
-bp:register_mob("esmobs:applmons", {
+mobs:register_mob("esmobs:applmons", {
 	type = "monster",
 	hp_min = 20,
 	hp_max = 40,
 	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.0, 0.4},
 	visual = "mesh",
-	mesh = "mobs_dungeon_master.x",
+	mesh = "mobs_dungeon_master.b3d",
 	textures = {"mobs_10.png"},
-	visual_size = {x=3.6, y=2.6},
+	visual_size = {x=0.6, y=0.6},
 	makes_footstep_sound = true,
 	view_range = 15,
 	walk_velocity = 1,
@@ -405,6 +468,7 @@ bp:register_mob("esmobs:applmons", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 0,
+	fear_height = 6,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -422,8 +486,8 @@ bp:register_mob("esmobs:applmons", {
 })
 
 
---Herobrine's Bloody Ghost by Lovehart and maikerumine  http://minetest.fensta.bplaced.net/#author=lovehart
-bp:register_mob("esmobs:herobrines_bloody_ghost", {
+--Herobrine's Bloody Ghost by Lovehart and maikerumine  http://minetest.fensta.mobslaced.net/#author=lovehart
+mobs:register_mob("esmobs:herobrines_bloody_ghost", {
 	type = "monster",
 	hp_min = 320,
 	hp_max = 340,
@@ -448,6 +512,7 @@ bp:register_mob("esmobs:herobrines_bloody_ghost", {
 	water_damage = 210,
 	lava_damage = 50,
 	light_damage = 150,
+	fear_height = 30,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -466,8 +531,8 @@ bp:register_mob("esmobs:herobrines_bloody_ghost", {
 
 
 --Phoenix from NSSM and bat from minetest defense merged into this
---bp:register_spawn("esmobs:phoenix", {"air","air"}, 6, -1, 170000, 1, 100)
-bp:register_mob("esmobs:phoenix", {
+--mobs:register_spawn("esmobs:phoenix", {"air","air"}, 6, -1, 170000, 1, 100)
+mobs:register_mob("esmobs:phoenix", {
 	type = "monster",
 	hp_max = 60,
 	hp_min = 50,
@@ -514,9 +579,10 @@ bp:register_mob("esmobs:phoenix", {
 	water_damage = 5,
 	lava_damage = 0,
 	light_damage = 10,
+	--fear_height = 70,
 	on_rightclick = nil,
 	fly = true,
-	attack_type = "shoot",
+	attack_type = "dogshoot",
 	--attack_type = "dogfight",
 		--arrow = "throwing:arrow_entity",
 		arrow = "esmobs:fireball",
@@ -540,7 +606,7 @@ bp:register_mob("esmobs:phoenix", {
 	}
 })
 
-bp:register_mob("esmobs:bomber", {
+mobs:register_mob("esmobs:bomber", {
 	type = "monster",
 	hp_max = 60,
 	hp_min = 50,
@@ -615,13 +681,13 @@ bp:register_mob("esmobs:bomber", {
 })
 
 -- Bone Monster by maikerumine
-bp:register_mob("esmobs:bone_monster", {
+mobs:register_mob("esmobs:bone_monster", {
 	type = "monster",
 	passive = false,
-	attack_type = "shoot",
+	attack_type = "dogshoot",
 	arrow = "esmobs:bonebullet",
 	--reach = 1,
-	shoot_interval = 4.5,
+	shoot_interval = 1.5,
 	damage = 2,
 	hp_min = 17,
 	hp_max = 35,
@@ -646,6 +712,7 @@ bp:register_mob("esmobs:bone_monster", {
 	fall_damage = 0,
 	fall_speed = -1,
 	stepheight = 3,
+	fear_height = 30,
 	floats = 1,
 	drops = {
 		{name = "bones:bones",
@@ -674,15 +741,15 @@ bp:register_mob("esmobs:bone_monster", {
 
 })
 
-bp:register_mob("esmobs:icemon", {
+mobs:register_mob("esmobs:icemon", {
 	type = "monster",
 	hp_min = 80,
 	hp_max = 110,
-	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
+	collisionbox = {-0.4, -1, -0.4, 0.4, 0.9, 0.4},
 	visual = "mesh",
-	mesh = "mobs_stone_monster.x",
+	mesh = "mobs_stone_monster.b3d",
 	textures = {"mobs_15.png"},
-	visual_size = {x=3.5, y=2.8},
+	--visual_size = {x=3.5, y=2.8},
 	makes_footstep_sound = true,
 	view_range = 14,
 	walk_velocity = 2.0,
@@ -702,6 +769,7 @@ bp:register_mob("esmobs:icemon", {
 	water_damage = 0,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 30,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -719,15 +787,15 @@ bp:register_mob("esmobs:icemon", {
 
 })
 
-bp:register_mob("esmobs:snowmon", {
+mobs:register_mob("esmobs:snowmon", {
 	type = "monster",
 	hp_min = 69,
 	hp_max = 112,
-	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
+	collisionbox = {-0.4, -1, -0.4, 0.4, 0.9, 0.4},
 	visual = "mesh",
-	mesh = "mobs_stone_monster.x",
+	mesh = "mobs_stone_monster.b3d",
 	textures = {"mobs_16.png"},
-	visual_size = {x=5.5, y=2.8},
+	--visual_size = {x=5.5, y=2.8},
 	makes_footstep_sound = true,
 	view_range = 14,
 	walk_velocity = 1.0,
@@ -747,6 +815,7 @@ bp:register_mob("esmobs:snowmon", {
 	water_damage = 20,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 3,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -764,7 +833,7 @@ bp:register_mob("esmobs:snowmon", {
 
 })
 
-bp:register_mob("esmobs:watermon", {
+mobs:register_mob("esmobs:watermon", {
 	type = "monster",
 	hp_min = 35,
 	hp_max = 75,
@@ -797,6 +866,7 @@ bp:register_mob("esmobs:watermon", {
 	water_damage = 0,
 	lava_damage = 50,
 	light_damage = 1,
+	fear_height = 3,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -811,167 +881,16 @@ bp:register_mob("esmobs:watermon", {
 	},
 })
 
-bp:register_mob("esmobs:bloco", {
-	type = "monster",
-	hp_max = 15,
-	hp_min = 14,
-	collisionbox = {-0.56, -0.2, -0.56, 0.56, 1.2, 0.56},
-	visual = "mesh",
-	mesh = "bloco.x",
-	textures = {{"mobs_18.png"}},
-	visual_size = {x=4, y=4},
-	makes_footstep_sound = true,
-	view_range = 8,
-	walk_velocity = -1,
-	run_velocity = -2.5,
-    rotate = 1.5,
-    sounds = {
-		random = "bloco",
-	},
-	damage = 2,
-	jump = true,
-	drops = {
-		{name = "default:apple",
-		chance = 1,
-		min = 1,
-		max = 1,},
-		{name = "default:stone",
-		chance = 1,
-		min = 2,
-		max = 3,},
-	},
-	armor = 60,
-	drawtype = "side",
-	water_damage = 3,
-	lava_damage = 1,
-	light_damage = 1,
-	on_rightclick = nil,
-	attack_type = "dogfight",
-	animation = {
-		speed_normal = 20,
-		speed_run = 20,
-		stand_start = 90,
-		stand_end = 110,
-		walk_start = 1,
-		walk_end = 80,
-		run_start = 120,
-		run_end = 160,
-		punch_start = 170,
-		punch_end = 190,
-	}
-})
 
-bp:register_mob("esmobs:blocod", {
-	type = "monster",
-	hp_max = 15,
-	hp_min = 14,
-	collisionbox = {-0.56, -0.2, -0.56, 0.56, 1.2, 0.56},
-	visual = "mesh",
-	mesh = "bloco.x",
-	textures = {{"mobs_19.png"}},
-	visual_size = {x=4, y=4},
-	makes_footstep_sound = true,
-	view_range = 8,
-	walk_velocity = -1,
-	run_velocity = -2.5,
-    rotate = 1.5,
-    sounds = {
-		random = "bloco",
-	},
-	damage = 2,
-	jump = true,
-	drops = {
-		{name = "default:apple",
-		chance = 1,
-		min = 1,
-		max = 1,},
-		{name = "default:dirt_with_grass",
-		chance = 1,
-		min = 2,
-		max = 3,},
-	},
-	armor = 60,
-	drawtype = "side",
-	water_damage = 3,
-	lava_damage = 1,
-	light_damage = 1,
-	on_rightclick = nil,
-	attack_type = "dogfight",
-	animation = {
-		speed_normal = 20,
-		speed_run = 20,
-		stand_start = 90,
-		stand_end = 110,
-		walk_start = 1,
-		walk_end = 80,
-		run_start = 120,
-		run_end = 160,
-		punch_start = 170,
-		punch_end = 190,
-	}
-})
-
-bp:register_mob("esmobs:dirt", {
+mobs:register_mob("esmobs:dirt2", {
 	type = "monster",
 	hp_min = 30,
 	hp_max = 50,
-	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
+	collisionbox = {-0.4, -1, -0.4, 0.4, 0.9, 0.4},
 	visual = "mesh",
-	mesh = "mobs_stone_monster.x",
-	textures = {"mobs_20.png"},
-	visual_size = {x=3.5, y=2.8},
-	makes_footstep_sound = true,
-	view_range = 24,
-	follow = "flowers:viola",--swap out type randomly for server players"flowers:tulip","flowers:rose","flowers:geranium","flowers:dandelion_yellow","flowers:dandelion_white",
-	walk_velocity = 2.5,
-	run_velocity = 3.8,
-	damage = 2.7,
-	drops = {
-		{name = "default:dirt",
-		chance = 1,
-		min = 1,
-		max = 2,},
-
-		{name = "flowers:viola",
-		chance = 10,
-		min = 0,
-		max = 1,},
-	},
-	armor = 75,
-	drawtype = "front",
-	water_damage = 10,
-	lava_damage = 50,
-	light_damage = 1,
-	on_rightclick = nil,
-	attack_type = "dogfight",
-	animation = {
-		speed_normal = 15,
-		speed_run = 15,
-		stand_start = 0,
-		stand_end = 14,
-		walk_start = 15,
-		walk_end = 38,
-		run_start = 40,
-		run_end = 63,
-		punch_start = 40,
-		punch_end = 63,
-	},
-	sounds = {
-		war_cry = "mobs_stone",
-		death = "mobs_death2",
-		attack = "mobs_stone_attack",
-		},
-})
-
-bp:register_mob("esmobs:dirt2", {
-	type = "monster",
-	hp_min = 30,
-	hp_max = 50,
-	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
-	visual = "mesh",
-	mesh = "mobs_stone_monster.x",
+	mesh = "mobs_stone_monster.b3d",
 	textures = {"mobs_21.png"},
-	visual_size = {x=3.5, y=2.8},
+	--visual_size = {x=3.5, y=2.8},
 	makes_footstep_sound = true,
 	view_range = 24,
 	follow = "flowers:rose",--swap out type randomly for server players"flowers:tulip","flowers:rose","flowers:geranium","flowers:dandelion_yellow","flowers:dandelion_white",
@@ -994,6 +913,7 @@ bp:register_mob("esmobs:dirt2", {
 	water_damage = 20,
 	lava_damage = 40,
 	light_damage = 1,
+	fear_height = 6,
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	animation = {
@@ -1016,53 +936,7 @@ bp:register_mob("esmobs:dirt2", {
 })
 
 -- Stone Monster by PilzAdam
-bp:register_mob("esmobs:stone_monster", {
-	type = "monster",
-	passive = false,
-	attack_type = "dogfight",
-	damage = 3,
-	hp_min = 32,
-	hp_max = 55,
-	armor = 80,
-	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
-	visual = "mesh",
-	mesh = "mobs_stone_monster.x",
-	textures = {
-		{"mobs_6.png"},
-	},
-	visual_size = {x=3, y=2.6},
-	makes_footstep_sound = true,
-	sounds = {
-		random = "mobs_stonemonster",
-	},
-	walk_velocity = 0.5,
-	run_velocity = 2,
-	jump = true,
-	floats = 0,
-	view_range = 10,
-	drops = {
-		{name = "default:torch",
-		chance = 2, min = 0, max = 2,},
-		{name = "default:iron_lump",
-		chance=5, min=0, max=1,},
-		{name = "default:coal_lump",
-		chance=3, min=0, max=1,},
-	},
-	water_damage = 10,
-	lava_damage = 1,
-	light_damage = 1,
-	animation = {
-		speed_normal = 15,		speed_run = 15,
-		stand_start = 0,		stand_end = 14,
-		walk_start = 15,		walk_end = 38,
-		run_start = 40,			run_end = 63,
-		punch_start = 40,		punch_end = 63,
-	},
-})
-
-
--- Stone Monster by PilzAdam
-bp:register_mob("esmobs:stone_monster2", {
+mobs:register_mob("esmobs:stone_monster2", {
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",
@@ -1070,13 +944,13 @@ bp:register_mob("esmobs:stone_monster2", {
 	hp_min = 82,
 	hp_max = 105,
 	armor = 80,
-	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
+	collisionbox = {-0.4, -1, -0.4, 0.4, 0.9, 0.4},
 	visual = "mesh",
-	mesh = "mobs_stone_monster.x",
+	mesh = "mobs_stone_monster.b3d",
 	textures = {
 		{"mobs_6.png"},
 	},
-	visual_size = {x=3, y=2.6},
+	--visual_size = {x=3, y=2.6},
 	makes_footstep_sound = true,
 	sounds = {
 		random = "mobs_stonemonster",
@@ -1097,6 +971,7 @@ bp:register_mob("esmobs:stone_monster2", {
 	water_damage = 10,
 	lava_damage = 1,
 	light_damage = 1,
+	fear_height = 3,
 	animation = {
 		speed_normal = 15,		speed_run = 15,
 		stand_start = 0,		stand_end = 14,
@@ -1108,478 +983,447 @@ bp:register_mob("esmobs:stone_monster2", {
 ------------------------------
 --MINETEST ANIMALS
 ------------------------------
-bp:register_mob("esmobs:rat", {
+-- Rat by PilzAdam
+
+mobs:register_mob("esmobs:rat", {
 	type = "animal",
-	hp_max = 1,
-	collisionbox = {-0.2, -0.01, -0.2, 0.2, 0.2, 0.2},
-	visual = "mesh",
-	mesh = "mobs_rat.x",
-	textures = {"mobs_22.png"},
-	makes_footstep_sound = false,
-	walk_velocity = 1,
+	passive = true,
+	hp_min = 1,
+	hp_max = 4,
 	armor = 200,
-	drops = {},
-	drawtype = "front",
+	collisionbox = {-0.2, -1, -0.2, 0.2, -0.8, 0.2},
+	visual = "mesh",
+	mesh = "mobs_rat.b3d",
+	textures = {
+		{"mobs_rat.png"},
+		{"mobs_rat2.png"},
+	},
+	makes_footstep_sound = false,
+	sounds = {
+		random = "mobs_rat",
+	},
+	walk_velocity = 1,
+	run_velocity = 2,
+	runaway = true,
+	jump = true,
 	water_damage = 0,
-	lava_damage = 1,
+	lava_damage = 4,
 	light_damage = 0,
+	fear_height = 2,
+	on_rightclick = function(self, clicker)
+		mobs:capture_mob(self, clicker, 25, 80, 0, true, nil)
+	end,
+--[[
+	do_custom = function(self)
+		local pos = self.object:getpos()
+		print("rat pos", pos.x, pos.y, pos.z)
+	end,
+--]]
+})
+
+local all_colours = {
+	"grey", "black", "red", "yellow", "green", "cyan", "blue", "magenta",
+	"white", "orange", "violet", "brown", "pink", "dark_grey", "dark_green"
+}
+
+-- Sheep by PilzAdam
+
+for _, col in pairs(all_colours) do
+
+	mobs:register_mob("esmobs:sheep_"..col, {
+		type = "animal",
+		passive = true,
+		hp_min = 8,
+		hp_max = 10,
+		armor = 200,
+		--collisionbox = {-0.4, -1, -0.4, 0.4, 0.3, 0.4},
+		collisionbox = {-0.5, -1, -0.5, 0.5, 0.3, 0.5},
+		visual = "mesh",
+		mesh = "mobs_sheep.b3d",
+		textures = {
+			{"esmobs_sheep_"..col..".png"},
+		},
+		gotten_texture = {"mobs_sheep_shaved.png"},
+		gotten_mesh = "mobs_sheep_shaved.b3d",
+		makes_footstep_sound = true,
+		sounds = {
+			random = "mobs_sheep",
+		},
+		walk_velocity = 1,
+		run_velocity = 2,
+		runaway = true,
+		jump = true,
+		drops = {
+			{name = "esmobs:meat_raw",
+			chance = 1, min = 1, max = 2},
+			{name = "wool:"..col,
+			chance = 1, min = 1, max = 1},
+		},
+		water_damage = 1,
+		lava_damage = 5,
+		light_damage = 0,
+		animation = {
+			speed_normal = 15,
+			speed_run = 15,
+			stand_start = 0,
+			stand_end = 80,
+			walk_start = 81,
+			walk_end = 100,
+		},
+		follow = {"farming:wheat", "default:grass_5"},
+		view_range = 8,
+		replace_rate = 10,
+		replace_what = {"default:grass_3", "default:grass_4", "default:grass_5", "farming:wheat_8"},
+		replace_with = "air",
+		replace_offset = -1,
+		fear_height = 3,
+		on_rightclick = function(self, clicker)
+			local shpcolor = string.split(self.name,"_")[2]
+			if shpcolor =="dark" then
+				shpcolor = shpcolor.."_"..string.split(self.name,"_")[3]
+			end
+
+			--are we feeding?
+			if mobs:feed_tame(self, clicker, 8, true, true) then
+				--if full grow fuzz
+				if self.gotten == false then
+					self.object:set_properties({
+						textures = {"esmobs_sheep_"..shpcolor..".png"},
+						mesh = "mobs_sheep.b3d",
+					})
+				end
+				return
+			end
+
+			local item = clicker:get_wielded_item()
+			local itemname = item:get_name()
+
+			--are we giving a haircut>
+			if itemname == "esmobs:shears" then
+				if self.gotten == false and self.child == false then
+					self.gotten = true -- shaved
+					if minetest.get_modpath("wool") then
+						local pos = self.object:getpos()
+						pos.y = pos.y + 0.5
+						local obj = minetest.add_item(pos, ItemStack("wool:"..shpcolor.." "..math.random(1,3)))
+						if obj then
+							obj:setvelocity({
+								x = math.random(-1,1),
+								y = 5,
+								z = math.random(-1,1)
+							})
+						end
+						item:add_wear(650) -- 100 uses
+						clicker:set_wielded_item(item)
+					end
+					self.object:set_properties({
+						textures = {"mobs_sheep_shaved.png"},
+						mesh = "mobs_sheep_shaved.b3d",
+					})
+				end
+				return
+			end
+
+			local name = clicker:get_player_name()
+
+			--are we coloring?
+			if itemname:find("dye:") then
+				if self.gotten == false
+				and self.child == false
+				and self.tamed == true
+				and name == self.owner then
+					local col = string.split(itemname,":")[2]
+					for _,c in pairs(all_colours) do
+						if c == col then
+							local pos = self.object:getpos()
+							self.object:remove()
+							local mob = minetest.add_entity(pos, "esmobs:sheep_"..col)
+							local ent = mob:get_luaentity()
+							ent.owner = name
+							ent.tamed = true
+							-- take item
+							if not minetest.setting_getbool("creative_mode") then
+								item:take_item()
+								clicker:set_wielded_item(item)
+							end
+							break
+						end
+					end
+				end
+				return
+			end
+
+			--are we capturing?
+			mobs:capture_mob(self, clicker, 0, 5, 60, false, nil)
+		end
+	})
+
+	mobs:register_egg("esmobs:sheep_"..col, "Sheep ("..col..")", "wool_"..col..".png", 1)
+
+end
+
+--mobs:register_spawn("mobs:sheep_white", {"default:dirt_with_grass", "ethereal:green_dirt"}, 20, 10, 15000, 2, 31000)
+
+-- compatibility (item and entity)
+minetest.register_alias("esmobs:sheep", "esmobs:sheep_white")
+
+minetest.register_entity("esmobs:sheep", {
+	hp_max = 1,
+	physical = true,
+	collide_with_objects = true,
+	visual = "mesh",
+	mesh = "mobs_sheep.b3d",
+	visual_size = {x = 1, y = 1},
+	textures = {"mobs_sheep.png"},
+	velocity = {x = 0, y = 0, z = 0},
+	collisionbox = {-0.4, -1, -0.4, 0.4, 0.3, 0.4},
+	is_visible = true,
+	speed = 0,
+	timer = 0,
 
 	on_rightclick = function(self, clicker)
-		if clicker:is_player() and clicker:get_inventory() then
-			clicker:get_inventory():add_item("main", "esmobs:rat")
-			self.object:remove()
+		clicker:get_inventory():add_item("main", "esmobs:sheep_white")
+		self.object:remove()
+	end,
+
+	on_step = function(self, dtime)
+
+		self.timer = self.timer + dtime
+		if self.timer >= 1 then
+			self.timer = 0
+			self.object:setacceleration({
+				x = 0,
+				y = -10,
+				z = 0
+			})
+		end
+	end,
+
+})
+
+-- Chicken by JK Murray
+
+mobs:register_mob("esmobs:chicken", {
+	type = "animal",
+	passive = true,
+	hp_min = 5,
+	hp_max = 10,
+	armor = 200,
+	collisionbox = {-0.3, -0.75, -0.3, 0.3, 0.1, 0.3},
+	visual = "mesh",
+	mesh = "mobs_chicken.x",
+	-- seems a lot of textures but this fixes the problem with the model
+	textures = {
+		{"mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png",
+		"mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png"},
+		{"mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png",
+		"mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png"},
+	},
+	child_texture = {
+		{"mobs_chick.png", "mobs_chick.png", "mobs_chick.png", "mobs_chick.png",
+		"mobs_chick.png", "mobs_chick.png", "mobs_chick.png", "mobs_chick.png", "mobs_chick.png"},
+	},
+	makes_footstep_sound = true,
+	sounds = {
+		random = "mobs_chicken",
+	},
+	walk_velocity = 1,
+	run_velocity = 3,
+	runaway = true,
+	jump = true,
+	drops = {
+		{name = "esmobs:chicken_raw",
+		chance = 1, min = 2, max = 2},
+	},
+	water_damage = 1,
+	lava_damage = 5,
+	light_damage = 0,
+	fall_damage = 0,
+	fall_speed = -8,
+	fear_height = 5,
+	animation = {
+		speed_normal = 15,
+		stand_start = 0,
+		stand_end = 1, -- 20
+		walk_start = 20,
+		walk_end = 40,
+	},
+	follow = {"farming:seed_wheat", "farming:seed_cotton"},
+	view_range = 5,
+
+	on_rightclick = function(self, clicker)
+		if mobs:feed_tame(self, clicker, 8, true, true) then
+			return
+		end
+		esmobs:capture_mob(self, clicker, 30, 50, 80, false, nil)
+	end,
+
+	do_custom = function(self)
+		if not self.child
+		and math.random(1, 500) == 1 then
+			local pos = self.object:getpos()
+			minetest.add_item(pos, "esmobs:egg")
+			minetest.sound_play("default_place_node_hard", {
+				pos = pos,
+				gain = 1.0,
+				max_hear_distance = 5,
+			})
 		end
 	end,
 })
 
--- Sheep by PilzAdam
-bp:register_mob("esmobs:sheep", {
+-- Cow by Krupnovpavel
+
+mobs:register_mob("esmobs:cow", {
 	type = "animal",
 	passive = false,
-	hp_min = 12,
+	attack_type = "dogfight",
+	reach = 2,
+	damage = 4,
+	hp_min = 5,
 	hp_max = 20,
-	armor = 100,
+	armor = 200,
 	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1, 0.4},
 	visual = "mesh",
-	mesh = "mobs_sheep.x",
+	mesh = "mobs_cow.x",
 	textures = {
-		{"mobs_23.png"},
+		{"mobs_cow.png"},
 	},
-	visual_size = {x=1,y=1},
-	gotten_texture = {"mobs_sheep_shaved.png"},
-	gotten_mesh = "mobs_sheep_shaved.x",
 	makes_footstep_sound = true,
 	sounds = {
-		random = "Sheep3",
-		death = "mobs_sheep",
-		hurt = "mobs_sheep",
+		random = "mobs_cow",
 	},
-	walk_velocity = 1.7,
+	walk_velocity = 1,
+	run_velocity = 2,
 	jump = true,
 	drops = {
 		{name = "esmobs:meat_raw",
-		chance = 1, min = 2, max = 3},
-		{name = "wool:white",
-		chance = 1, min = 1, max = 1},
+		chance = 1, min = 1, max = 3},
+		{name = "esmobs:leather",
+		chance = 1, min = 1, max = 2},
 	},
 	water_damage = 1,
-	lava_damage = 50,
+	lava_damage = 5,
 	light_damage = 0,
 	animation = {
-		speed_normal = 15,		speed_run = 15,
-		stand_start = 0,		stand_end = 80,
-		walk_start = 81,		walk_end = 100,
+		speed_normal = 15,
+		speed_run = 15,
+		stand_start = 0,
+		stand_end = 30,
+		walk_start = 35,
+		walk_end = 65,
+		run_start = 105,
+		run_end = 135,
+		punch_start = 70,
+		punch_end = 100,
 	},
 	follow = "farming:wheat",
-	view_range = 5,
-	replace_rate = 50,
+	view_range = 7,
+	replace_rate = 10,
 	replace_what = {"default:grass_3", "default:grass_4", "default:grass_5", "farming:wheat_8"},
 	replace_with = "air",
+	fear_height = 2,
 	on_rightclick = function(self, clicker)
-		local item = clicker:get_wielded_item()
-		if item:get_name() == "farming:wheat" then
-			if not minetest.setting_getbool("creative_mode") then
-				item:take_item()
-				clicker:set_wielded_item(item)
-			end
-			if self.child == true then
-				self.hornytimer = self.hornytimer + 10
-				return
-			end
-			self.food = (self.food or 0) + 1
-			if self.food >= 8 then
-				self.food = 0
-				if self.hornytimer == 0 then
-					self.horny = true
-				end
-				self.gotten = false -- can be shaved again
-				self.tamed = true
-				self.object:set_properties({
-					textures = {"mobs_23.png"},
-					mesh = "mobs_sheep.x",
-				})
-				minetest.sound_play("mobs_sheep", {object = self.object,gain = 1.0,max_hear_distance = 32,loop = false,})
-			end
+
+		-- feed or tame
+		if mobs:feed_tame(self, clicker, 8, true, true) then
 			return
 		end
 
-		if item:get_name() == "esmobs:shears"
-		and self.gotten == false
-		and self.child == false then
-			self.gotten = true -- shaved
-			if minetest.registered_items["wool:white"] then
+		local tool = clicker:get_wielded_item()
+
+		-- milk cow with empty bucket
+		if tool:get_name() == "bucket:bucket_empty" then
+
+			--if self.gotten == true
+			if self.child == true then
+				return
+			end
+
+			if self.gotten == true then
+				minetest.chat_send_player(clicker:get_player_name(),
+						"Cow already milked!")
+				return
+			end
+
+			local inv = clicker:get_inventory()
+
+			inv:remove_item("main", "bucket:bucket_empty")
+
+			if inv:room_for_item("main", {name = "esmobs:bucket_milk"}) then
+				clicker:get_inventory():add_item("main", "esmobs:bucket_milk")
+			else
 				local pos = self.object:getpos()
 				pos.y = pos.y + 0.5
-				local obj = minetest.add_item(pos, ItemStack("wool:white "..math.random(2,3)))
-				if obj then
-					obj:setvelocity({x=math.random(-1,1), y=5, z=math.random(-1,1)})
-				end
-				item:add_wear(650) -- 100 uses
-				clicker:set_wielded_item(item)
+				minetest.add_item(pos, {name = "esmobs:bucket_milk"})
 			end
-			self.object:set_properties({
-				textures = {"mobs_sheep_shaved.png"},
-				mesh = "mobs_sheep_shaved.x",
-			})
+
+			self.gotten = true -- milked
+
+			return
 		end
 
-		if item:get_name() == "esmobs:magic_lasso"
-		and clicker:is_player()
-		and clicker:get_inventory()
-		and self.child == false
-		and clicker:get_inventory():room_for_item("main", "esmobs:sheep") then
-			clicker:get_inventory():add_item("main", "esmobs:sheep")
-			self.object:remove()
-			item:add_wear(3000) -- 22 uses
-			print ("wear", item:get_wear())
-			clicker:set_wielded_item(item)
-		end
+		mobs:capture_mob(self, clicker, 0, 5, 60, false, nil)
 	end,
 })
 
+-- Warthog by KrupnoPavel
 
---BEGIN MC ANIMALS
-bp:register_mob("esmobs:sheep2", {
+mobs:register_mob("esmobs:pumba", {
 	type = "animal",
 	passive = false,
-	hp_max = 25,
-	--collisionbox = {-0.5, -0.01, -0.5, 0.5, 1.5, 0.5},
-	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1, 0.4},
-	visual_size = {x=1,y=1},
-	textures = {"mobs_24.png"},
-	visual = "mesh",
-	mesh = "sheep.x",
-	makes_footstep_sound = true,
-	walk_velocity = 1,
+	attack_type = "dogfight",
+	group_attack = true,
+	reach = 2,
+	damage = 2,
+	hp_min = 5,
+	hp_max = 15,
 	armor = 200,
-	drops = {
-		{name = "esmobs:mutton_raw",
-		chance = 1,
-		min = 1,
-		max = 2,},
-		{name = "wool:white",
-		chance = 1,
-		min = 1,
-		max = 1,},
+	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1, 0.4},
+	visual = "mesh",
+	mesh = "mobs_pumba.x",
+	textures = {
+		{"mobs_pumba.png"},
 	},
-	drawtype = "front",
+	makes_footstep_sound = true,
+	sounds = {
+		random = "mobs_pig",
+		attack = "mobs_pig_angry",
+	},
+	walk_velocity = 2,
+	run_velocity = 3,
+	jump = true,
+	follow = {"default:apple", "farming:potato"},
+	view_range = 10,
+	drops = {
+		{name = "esmobs:pork_raw",
+		chance = 1, min = 1, max = 3},
+	},
 	water_damage = 1,
 	lava_damage = 5,
 	light_damage = 0,
-	sounds = {
-		random = "Sheep3",
-		death = "mobs_sheep",
-		hurt = "mobs_sheep",
-	},
+	fear_height = 2,
 	animation = {
-		speed_normal = 24,
-		stand_start = 0,
-		stand_end = 23,
-		walk_start = 24,
-		walk_end = 49,
-		hurt_start = 118,
-		hurt_end = 154,
-		death_start = 154,
-		death_end = 179,
-		eat_start = 49,
-		eat_end = 78,
-		look_start = 78,
-		look_end = 108,
+		speed_normal = 15,
+		stand_start = 25,
+		stand_end = 55,
+		walk_start = 70,
+		walk_end = 100,
+		punch_start = 70,
+		punch_end = 100,
 	},
-	follow = "farming:wheat",
-	view_range = 5,
-	replace_rate = 50,
-	replace_what = {"default:grass_3", "default:grass_4", "default:grass_5", "farming:wheat_8"},
-	replace_with = "air",
 	on_rightclick = function(self, clicker)
-		local item = clicker:get_wielded_item()
-				if item:get_name() == "farming:wheat" then
-			if not minetest.setting_getbool("creative_mode") then
-				item:take_item()
-				clicker:set_wielded_item(item)
-			end
-			if self.child == true then
-				self.hornytimer = self.hornytimer + 10
-				return
-			end
-			self.food = (self.food or 0) + 1
-			if self.food >= 8 then
-				self.food = 0
-				if self.hornytimer == 0 then
-					self.horny = true
-				end
-				self.gotten = false -- can be shaved again
-				self.tamed = true
-				self.object:set_properties({
-					textures = {"mobs_24.png"},
-					mesh = "sheep.x",
-				})
-				minetest.sound_play("mobs_sheep", {object = self.object,gain = 1.0,max_hear_distance = 32,loop = false,})
-			end
+		if mobs:feed_tame(self, clicker, 8, true, true) then
 			return
 		end
-
-		if item:get_name() == "esmobs:magic_lasso"
-		and clicker:is_player()
-		and clicker:get_inventory()
-		and self.child == false
-		and clicker:get_inventory():room_for_item("main", "esmobs:sheep") then
-			clicker:get_inventory():add_item("main", "esmobs:sheep")
-			self.object:remove()
-			item:add_wear(3000) -- 22 uses
-			print ("wear", item:get_wear())
-			clicker:set_wielded_item(item)
-		end
-		if item:get_name() == "esmobs:shears" and not self.naked then
-			self.naked = true
-			local pos = self.object:getpos()
-			minetest.sound_play("shears", {pos = pos})
-			pos.y = pos.y + 0.5
-			if not self.color then
-				minetest.add_item(pos, ItemStack("wool:white "..math.random(1,3)))
-			else
-				minetest.add_item(pos, ItemStack("wool:"..self.color.." "..math.random(1,3)))
-			end
-			self.object:set_properties({
-				textures = {"sheep_sheared.png"},
-			})
-			if not minetest.setting_getbool("creative_mode") then
-				item:add_wear(300)
-				clicker:get_inventory():set_stack("main", clicker:get_wield_index(), item)
-			end
-		end
-		if minetest.get_item_group(item:get_name(), "dye") == 1 and not self.naked then
-			print(item:get_name(), minetest.get_item_group(item:get_name(), "dye"))
-			local name = item:get_name()
-			local pname = name:split(":")[2]
-
-			self.object:set_properties({
-				textures = {"sheep_"..pname..".png"},
-			})
-			self.color = pname
-			self.drops = {
-				{name = "esmobs:mutton_raw",
-				chance = 1,
-				min = 1,
-				max = 2,},
-				{name = "wool:"..self.color,
-				chance = 1,
-				min = 1,
-				max = 1,},
-			}
-		end
+		mobs:capture_mob(self, clicker, 0, 5, 50, false, nil)
 	end,
 })
 
-bp:register_mob("esmobs:pig", {
-	type = "animal",
-	hp_max = 25,
-	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1, 0.4},
-	textures = {"mobs_25.png"},
-	visual = "mesh",
-	mesh = "pig.x",
-	makes_footstep_sound = true,
-	walk_velocity = 1,
-	armor = 200,
-	drops = {
-		{name = "esmobs:porkchop_raw",
-		chance = 1,
-		min = 1,
-		max = 3,},
-	},
-	drawtype = "front",
-	water_damage = 1,
-	lava_damage = 5,
-	light_damage = 0,
-	sounds = {
-		random = "Pig2",
-		death = "Pigdeath",
-		hurt = "Pig2",
-	},
-	animation = {
-		speed_normal = 24,
-		stand_start = 0,
-		stand_end = 23,
-		walk_start = 24,
-		walk_end = 49,
-		hurt_start = 118,
-		hurt_end = 154,
-		death_start = 154,
-		death_end = 179,
-		eat_start = 49,
-		eat_end = 78,
-		look_start = 78,
-		look_end = 108,
-	},
-	follow = "farming:carrot", --was farming_plus:carrot_item
-	view_range = 5,
-	on_rightclick = function(self, clicker)
-		if not clicker or not clicker:is_player() then
-			return
-		end
-		local item = clicker:get_wielded_item()
-		if item:get_name() == "esmobs:saddle" and self.saddle ~= "yes" then
-			self.object:set_properties({
-				textures = {"pig_with_saddle.png"},
-			})
-			self.saddle = "yes"
-			self.tamed = true
-			self.drops = {
-				{name = "esmobs:porkchop_raw",
-				chance = 1,
-				min = 1,
-				max = 3,},
-				{name = "esmobs:saddle",
-				chance = 1,
-				min = 1,
-				max = 1,},
-			}
-			if not minetest.setting_getbool("creative_mode") then
-				local inv = clicker:get_inventory()
-				local stack = inv:get_stack("main", clicker:get_wield_index())
-				stack:take_item()
-				inv:set_stack("main", clicker:get_wield_index(), stack)
-			end
-			return
-		end
-	-- from boats mod
-	local name = clicker:get_player_name()
-	if self.driver and clicker == self.driver then
-		self.driver = nil
-		clicker:set_detach()
-		default.player_attached[name] = false
-		default.player_set_animation(clicker, "stand" , 30)
-	elseif not self.driver and self.saddle == "yes" then
-		self.driver = clicker
-		clicker:set_attach(self.object, "", {x = 0, y = 19, z = 0}, {x = 0, y = 0, z = 0})
-		default.player_attached[name] = true
-		minetest.after(0.2, function()
-			default.player_set_animation(clicker, "sit" , 30)
-		end)
-		--self.object:setyaw(clicker:get_look_yaw() - math.pi / 2)
-	end
-	end,
-})
 
-bp:register_mob("esmobs:cow", {
-	type = "animal",
-	hp_max = 28,
-	collisionbox = {-0.6, -0.01, -0.6, 0.6, 1.8, 0.6},
-	textures = {"mobs_26.png"},
-	visual = "mesh",
-	mesh = "cow.x",
-	makes_footstep_sound = true,
-	walk_velocity = 1,
-	armor = 200,
-	drops = {
-		{name = "esmobs:beef_raw",
-		chance = 1,
-		min = 1,
-		max = 3,},
-		{name = "esmobs:leather",
-		chance = 1,
-		min = 0,
-		max = 2,},
-	},
-	drawtype = "front",
-	water_damage = 1,
-	lava_damage = 5,
-	light_damage = 0,
-	sounds = {
-		random = "Cow1",
-		death = "Cowhurt1",
-		hurt = "Cowhurt1",
-	},
-	animation = {
-		speed_normal = 24,
-		stand_start = 0,
-		stand_end = 23,
-		walk_start = 24,
-		walk_end = 49,
-		hurt_start = 118,
-		hurt_end = 154,
-		death_start = 154,
-		death_end = 179,
-		eat_start = 49,
-		eat_end = 78,
-		look_start = 78,
-		look_end = 108,
-	},
-	follow = "farming:wheat",
-	view_range = 5,
-	on_rightclick = function(self, clicker)
-		local item = clicker:get_wielded_item()
-		if item:get_name() == "bucket:bucket_empty" and clicker:get_inventory() then
-			local inv = clicker:get_inventory()
-			inv:remove_item("main", "bucket:bucket_empty")
-			-- if room add bucket of milk to inventory, otherwise drop as item
-			if inv:room_for_item("main", {name="bucket:bucket_milk"}) then
-				clicker:get_inventory():add_item("main", "bucket:bucket_milk")
-			else
-				local pos = self.object:getpos()
-				pos.y = pos.y + 0.5
-				minetest.add_item(pos, {name = "bucket:bucket_milk"})
-			end
-		end
-	end,
-})
 
-bp:register_mob("esmobs:chicken", {
-	type = "animal",
-	hp_max = 24,
-	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1, 0.4},
-	textures = {"mobs_27.png"},
-	visual = "mesh",
-	mesh = "chicken.x",
-	makes_footstep_sound = true,
-	walk_velocity = 1,
-	armor = 200,
-	drops = {
-		{name = "esmobs:chicken_raw",
-		chance = 1,
-		min = 1,
-		max = 1,},
-		{name = "esmobs:feather",
-		chance = 1,
-		min = 0,
-		max = 2,},
-	},
-	drawtype = "front",
-	water_damage = 1,
-	lava_damage = 5,
-	light_damage = 0,
-	sounds = {
-		random = "Chicken1",
-		death = "Chickenhurt1",
-		hurt = "Chickenhurt1",
-	},
-	animation = {
-		speed_normal = 24,
-		stand_start = 0,
-		stand_end = 23,
-		walk_start = 24,
-		walk_end = 49,
-		hurt_start = 118,
-		hurt_end = 154,
-		death_start = 154,
-		death_end = 179,
-		eat_start = 49,
-		eat_end = 78,
-		look_start = 78,
-		look_end = 108,
-		fly_start = 181,
-		fly_end = 187,
-	},
-	follow = "farming:seed_wheat",
-	view_range = 5,
-	on_rightclick = function(self, clicker)   --WAS FOOD:EGG
-		if clicker:get_inventory() then
-			if minetest.registered_items["esmobs:egg"] then
-				clicker:get_inventory():add_item("main", ItemStack("esmobs:egg 1"))
-			end
-		end
-	end,
-})
+
+
 
 -------------------------
 --KPGMOBS HORSE
@@ -1764,7 +1608,7 @@ local ara = {
 minetest.register_entity("esmobs:horsearah1", merge(ara, horse))
 
 
-bp:register_mob("esmobs:horse", {
+mobs:register_mob("esmobs:horse", {
 	type = "animal",
 	hp_min = 5,
 	hp_max = 10,
@@ -1806,7 +1650,7 @@ bp:register_mob("esmobs:horse", {
 	end,
 })
 
-bp:register_mob("esmobs:horse2", {
+mobs:register_mob("esmobs:horse2", {
 	type = "animal",
 	hp_min = 5,
 	hp_max = 10,
@@ -1848,7 +1692,7 @@ bp:register_mob("esmobs:horse2", {
 	end,
 })
 
-bp:register_mob("esmobs:horse3", {
+mobs:register_mob("esmobs:horse3", {
 	type = "animal",
 	hp_min = 5,
 	hp_max = 10,
@@ -1894,7 +1738,7 @@ bp:register_mob("esmobs:horse3", {
 --ES CHOKOBU
 -----------------------------
 -- Chicken by JK Murray
-bp:register_mob("esmobs:chickoboo", {
+mobs:register_mob("esmobs:chickoboo", {
 	type = "animal",
 	passive = false,
 	attack_type = "dogfight",
@@ -1936,6 +1780,7 @@ bp:register_mob("esmobs:chickoboo", {
 	lava_damage = 50,
 	light_damage = 0,
 	fall_damage = 0,
+	fear_height = 3,
 	fall_speed = -4,
 	animation = {
 		speed_normal = 15,
@@ -1985,7 +1830,7 @@ bp:register_mob("esmobs:chickoboo", {
 -------------------------
 --BAD NPC'S
 -------------------------
-bp:register_mob("esmobs:badplayer2", {
+mobs:register_mob("esmobs:badplayer2", {
 	type = "monster",
 	hp_min = 35,
 	hp_max = 75,
@@ -2038,7 +1883,7 @@ bp:register_mob("esmobs:badplayer2", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer3", {
+mobs:register_mob("esmobs:badplayer3", {
 	type = "monster",
 	hp_min = 49,
 	hp_max = 83,
@@ -2091,7 +1936,7 @@ bp:register_mob("esmobs:badplayer3", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer4", {
+mobs:register_mob("esmobs:badplayer4", {
 	type = "monster",
 	hp_min = 37,
 	hp_max = 82,
@@ -2144,7 +1989,7 @@ bp:register_mob("esmobs:badplayer4", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer6", {
+mobs:register_mob("esmobs:badplayer6", {
 	type = "monster",
 	hp_min = 130,
 	hp_max = 140,
@@ -2197,7 +2042,7 @@ bp:register_mob("esmobs:badplayer6", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer7", {
+mobs:register_mob("esmobs:badplayer7", {
 	type = "monster",
 	hp_min = 37,
 	hp_max = 70,
@@ -2250,7 +2095,7 @@ bp:register_mob("esmobs:badplayer7", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer8", {
+mobs:register_mob("esmobs:badplayer8", {
 	type = "monster",
 	hp_min = 157,
 	hp_max = 195,
@@ -2303,7 +2148,7 @@ bp:register_mob("esmobs:badplayer8", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer9", {
+mobs:register_mob("esmobs:badplayer9", {
 	type = "monster",
 	hp_min = 177,
 	hp_max = 190,
@@ -2356,7 +2201,7 @@ bp:register_mob("esmobs:badplayer9", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer10", {
+mobs:register_mob("esmobs:badplayer10", {
 	type = "monster",
 	hp_min = 157,
 	hp_max = 200,
@@ -2409,7 +2254,7 @@ bp:register_mob("esmobs:badplayer10", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer11", {
+mobs:register_mob("esmobs:badplayer11", {
 	type = "monster",
 	hp_min = 49,
 	hp_max = 85,
@@ -2462,7 +2307,7 @@ bp:register_mob("esmobs:badplayer11", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer12", {
+mobs:register_mob("esmobs:badplayer12", {
 	type = "monster",
 	hp_min = 57,
 	hp_max = 85,
@@ -2516,7 +2361,7 @@ bp:register_mob("esmobs:badplayer12", {
 })
 
 
-bp:register_mob("esmobs:badplayer16", {
+mobs:register_mob("esmobs:badplayer16", {
 	type = "monster",
 	hp_min = 47,
 	hp_max = 85,
@@ -2569,7 +2414,7 @@ bp:register_mob("esmobs:badplayer16", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer18", {
+mobs:register_mob("esmobs:badplayer18", {
 	type = "monster",
 	hp_min = 48,
 	hp_max = 77,
@@ -2622,7 +2467,7 @@ bp:register_mob("esmobs:badplayer18", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer22", {
+mobs:register_mob("esmobs:badplayer22", {
 	type = "monster",
 	hp_min = 77,
 	hp_max = 90,
@@ -2680,7 +2525,7 @@ bp:register_mob("esmobs:badplayer22", {
 
 })
 
-bp:register_mob("esmobs:badplayer23", {
+mobs:register_mob("esmobs:badplayer23", {
 	type = "monster",
 	hp_min = 127,
 	hp_max = 152,
@@ -2733,7 +2578,7 @@ bp:register_mob("esmobs:badplayer23", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer24", {
+mobs:register_mob("esmobs:badplayer24", {
 	type = "monster",
 	hp_min = 137,
 	hp_max = 159,
@@ -2786,7 +2631,7 @@ bp:register_mob("esmobs:badplayer24", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer25", {
+mobs:register_mob("esmobs:badplayer25", {
 	type = "monster",
 	hp_min = 100,
 	hp_max = 120,
@@ -2839,7 +2684,7 @@ bp:register_mob("esmobs:badplayer25", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer26", {
+mobs:register_mob("esmobs:badplayer26", {
 	type = "monster",
 	hp_min = 73,
 	hp_max = 80,
@@ -2892,7 +2737,7 @@ bp:register_mob("esmobs:badplayer26", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer27", {
+mobs:register_mob("esmobs:badplayer27", {
 	type = "monster",
 	hp_min = 99,
 	hp_max = 140,
@@ -2945,7 +2790,7 @@ bp:register_mob("esmobs:badplayer27", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer28", {
+mobs:register_mob("esmobs:badplayer28", {
 	type = "monster",
 	hp_min = 77,
 	hp_max = 90,
@@ -2998,7 +2843,7 @@ bp:register_mob("esmobs:badplayer28", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer29", {
+mobs:register_mob("esmobs:badplayer29", {
 	type = "monster",
 	hp_min = 69,
 	hp_max = 89,
@@ -3051,7 +2896,7 @@ bp:register_mob("esmobs:badplayer29", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer30", {
+mobs:register_mob("esmobs:badplayer30", {
 	type = "monster",
 	hp_min = 137,
 	hp_max = 150,
@@ -3104,7 +2949,7 @@ bp:register_mob("esmobs:badplayer30", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer31", {
+mobs:register_mob("esmobs:badplayer31", {
 	type = "monster",
 	hp_min = 77,
 	hp_max = 130,
@@ -3157,7 +3002,7 @@ bp:register_mob("esmobs:badplayer31", {
 		},
 })
 
-bp:register_mob("esmobs:badplayer35", {
+mobs:register_mob("esmobs:badplayer35", {
 	type = "monster",
 	hp_min = 35,
 	hp_max = 75,
@@ -3210,7 +3055,7 @@ bp:register_mob("esmobs:badplayer35", {
 		},
 })
 
-bp:register_mob("esmobs:Mr_Black", {
+mobs:register_mob("esmobs:Mr_Black", {
 	type = "monster",
 	hp_min = 35,
 	hp_max = 65,
@@ -3273,7 +3118,7 @@ bp:register_mob("esmobs:Mr_Black", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc_drops)]})
+			minetest.add_item(pos, {name = mobs.npc_drops[math.random(1,#mobs.npc_drops)]})
 		else
 			if self.owner == "" then
 				self.owner = clicker:get_player_name()
@@ -3336,7 +3181,7 @@ bp:register_mob("esmobs:Mr_Black", {
 -------------------------
 --BAD NPC'S
 -------------------------
-bp:register_mob("esmobs:Jasmine", {
+mobs:register_mob("esmobs:Jasmine", {
 	type = "monster",
 	hp_min = 277,
 	hp_max = 290,
@@ -3394,7 +3239,7 @@ bp:register_mob("esmobs:Jasmine", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc2_drops)]})
+			minetest.add_item(pos, {name = mobs.npc_drops[math.random(1,#mobs.npc2_drops)]})
 		else
 			if self.owner == "" then
 				self.owner = clicker:get_player_name()
@@ -3454,7 +3299,7 @@ bp:register_mob("esmobs:Jasmine", {
 		},
 })
 
-bp:register_mob("esmobs:Infinium_Monster", {
+mobs:register_mob("esmobs:Infinium_Monster", {
 	type = "monster",
 	hp_min = 377,
 	hp_max = 390,
@@ -3511,7 +3356,7 @@ bp:register_mob("esmobs:Infinium_Monster", {
 -------------------------
 --GOOD NPC'S
 -------------------------
-bp:register_mob("esmobs:Sam", {
+mobs:register_mob("esmobs:Sam", {
 	type = "npc",
 	hp_min = 25,
 	hp_max = 35,
@@ -3569,7 +3414,7 @@ bp:register_mob("esmobs:Sam", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc_drops)]})
+			minetest.add_item(pos, {name = mobs.npc_drops[math.random(1,#mobs.npc_drops)]})
 		else
 			if self.owner == "" then
 				self.owner = clicker:get_player_name()
@@ -3634,7 +3479,7 @@ bp:register_mob("esmobs:Sam", {
 	step = 1,
 })
 
-bp:register_mob("esmobs:John", {
+mobs:register_mob("esmobs:John", {
 	type = "npc",
 	hp_min = 27,
 	hp_max = 34,
@@ -3692,7 +3537,7 @@ bp:register_mob("esmobs:John", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc_drops)]})
+			minetest.add_item(pos, {name = mobs.npc_drops[math.random(1,#mobs.npc_drops)]})
 		else
 			if self.owner == "" then
 				self.owner = clicker:get_player_name()
@@ -3757,7 +3602,7 @@ bp:register_mob("esmobs:John", {
 	step = 1,
 })
 
-bp:register_mob("esmobs:Janette", {
+mobs:register_mob("esmobs:Janette", {
 	type = "npc",
 	hp_min = 13,
 	hp_max = 15,
@@ -3816,7 +3661,7 @@ bp:register_mob("esmobs:Janette", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc_drops)]})
+			minetest.add_item(pos, {name = mobs.npc_drops[math.random(1,#mobs.npc_drops)]})
 		else
 			if self.owner == "" then
 				self.owner = clicker:get_player_name()
@@ -3882,7 +3727,7 @@ bp:register_mob("esmobs:Janette", {
 	step = 1,
 })
 
-bp:register_mob("esmobs:Crybaby", {
+mobs:register_mob("esmobs:Crybaby", {
 	type = "npc",
 	hp_min = 27,
 	hp_max = 45,
@@ -3940,7 +3785,7 @@ bp:register_mob("esmobs:Crybaby", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc_drops)]})
+			minetest.add_item(pos, {name = mobs.npc_drops[math.random(1,#mobs.npc_drops)]})
 		else
 			if self.owner == "" then
 				self.owner = clicker:get_player_name()
@@ -4007,7 +3852,7 @@ bp:register_mob("esmobs:Crybaby", {
 
 })
 
-bp:register_mob("esmobs:SepiaSam", {
+mobs:register_mob("esmobs:SepiaSam", {
 	type = "npc",
 	hp_min = 47,
 	hp_max = 55,
@@ -4065,7 +3910,7 @@ bp:register_mob("esmobs:SepiaSam", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc_drops)]})
+			minetest.add_item(pos, {name = mobs.npc_drops[math.random(1,#mobs.npc_drops)]})
 		else
 			if self.owner == "" then
 				self.owner = clicker:get_player_name()
@@ -4130,7 +3975,7 @@ bp:register_mob("esmobs:SepiaSam", {
 	step = 1,
 })
 
-bp:register_mob("esmobs:OGSam", {
+mobs:register_mob("esmobs:OGSam", {
 	type = "npc",
 	hp_min = 37,
 	hp_max = 45,
@@ -4188,7 +4033,7 @@ bp:register_mob("esmobs:OGSam", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc_drops)]})
+			minetest.add_item(pos, {name = mobs.npc_drops[math.random(1,#mobs.npc_drops)]})
 		else
 			if self.owner == "" then
 				self.owner = clicker:get_player_name()
@@ -4257,7 +4102,7 @@ bp:register_mob("esmobs:OGSam", {
 	step = 1,
 })
 
-bp:register_mob("esmobs:Vanessa", {
+mobs:register_mob("esmobs:Vanessa", {
 	type = "npc",
 	hp_min = 28,
 	hp_max = 35,
@@ -4315,7 +4160,7 @@ bp:register_mob("esmobs:Vanessa", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc_drops)]})
+			minetest.add_item(pos, {name = mobs.npc_drops[math.random(1,#mobs.npc_drops)]})
 		else
 			if self.owner == "" then
 				self.owner = clicker:get_player_name()
@@ -4380,7 +4225,7 @@ bp:register_mob("esmobs:Vanessa", {
 	step = 1,
 })
 
-bp:register_mob("esmobs:FemaleSam", {
+mobs:register_mob("esmobs:FemaleSam", {
 	type = "npc",
 	hp_min = 92,
 	hp_max = 125,
@@ -4438,7 +4283,7 @@ bp:register_mob("esmobs:FemaleSam", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc_drops)]})
+			minetest.add_item(pos, {name = mobs.npc_drops[math.random(1,#mobs.npc_drops)]})
 		else
 			if self.owner == "" then
 				self.owner = clicker:get_player_name()
@@ -4503,7 +4348,7 @@ bp:register_mob("esmobs:FemaleSam", {
 	step = 1,
 })
 
-bp:register_mob("esmobs:Battleboy", {
+mobs:register_mob("esmobs:Battleboy", {
 	type = "npc",
 	hp_min = 157,
 	hp_max = 180,
@@ -4561,7 +4406,7 @@ bp:register_mob("esmobs:Battleboy", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc_drops)]})
+			minetest.add_item(pos, {name = mobs.npc_drops[math.random(1,#mobs.npc_drops)]})
 		else
 			if self.owner == "" then
 				self.owner = clicker:get_player_name()
@@ -4626,7 +4471,7 @@ bp:register_mob("esmobs:Battleboy", {
 	step = 1,
 })
 
-bp:register_mob("esmobs:Wilbert", {
+mobs:register_mob("esmobs:Wilbert", {
 	type = "npc",
 	hp_max = 115,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
@@ -4688,7 +4533,7 @@ bp:register_mob("esmobs:Wilbert", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc_drops)]})
+			minetest.add_item(pos, {name = mobs.npc_drops[math.random(1,#mobs.npc_drops)]})
 		else
 			if self.owner == "" then
 				self.owner = clicker:get_player_name()
@@ -4753,7 +4598,7 @@ bp:register_mob("esmobs:Wilbert", {
 	step = 1,
 })
 
-bp:register_mob("esmobs:Thelma", {
+mobs:register_mob("esmobs:Thelma", {
 	type = "npc",
 	hp_max = 115,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
@@ -4815,7 +4660,7 @@ bp:register_mob("esmobs:Thelma", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc_drops)]})
+			minetest.add_item(pos, {name = mobs.npc_drops[math.random(1,#mobs.npc_drops)]})
 		else
 			if self.owner == "" then
 				self.owner = clicker:get_player_name()
@@ -4881,7 +4726,7 @@ bp:register_mob("esmobs:Thelma", {
 	step = 1,
 })
 
-bp:register_mob("esmobs:DrifterDan", {
+mobs:register_mob("esmobs:DrifterDan", {
 	type = "npc",
 	hp_min = 117,
 	hp_max = 129,
@@ -4920,7 +4765,7 @@ bp:register_mob("esmobs:DrifterDan", {
 	light_damage = 0,
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
-		local_chat(clicker:getpos(),"Battlefield 3 Soldier: All suited up, let's roll out and destroy those creatures!",3)
+		local_chat(clicker:getpos(),"Drifter Dan: Let's roll out and destroy those creatures!",3)
 		if item:get_name() == "esmobs:meat" or item:get_name() == "farming:bread" then
 			local hp = self.object:get_hp()
 			if hp + 4 > self.hp_max then return end
@@ -4939,7 +4784,7 @@ bp:register_mob("esmobs:DrifterDan", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc_drops)]})
+			minetest.add_item(pos, {name = mobs.npc_drops[math.random(1,#mobs.npc_drops)]})
 		else
 			if self.owner == "" then
 				self.owner = clicker:get_player_name()
@@ -5004,7 +4849,7 @@ bp:register_mob("esmobs:DrifterDan", {
 	step = 1,
 })
 
-bp:register_mob("esmobs:Mr_White", {
+mobs:register_mob("esmobs:Mr_White", {
 	type = "npc",
 	hp_min = 35,
 	hp_max = 65,
@@ -5066,7 +4911,7 @@ bp:register_mob("esmobs:Mr_White", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc_drops)]})
+			minetest.add_item(pos, {name = mobs.npc_drops[math.random(1,#mobs.npc_drops)]})
 		else
 			if self.owner == "" then
 				self.owner = clicker:get_player_name()
@@ -5127,7 +4972,7 @@ bp:register_mob("esmobs:Mr_White", {
 	--step = 1,
 })
 
-bp:register_mob("esmobs:Mr_Pink", {
+mobs:register_mob("esmobs:Mr_Pink", {
 	type = "npc",
 	hp_min = 35,
 	hp_max = 65,
@@ -5192,7 +5037,7 @@ bp:register_mob("esmobs:Mr_Pink", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc_drops)]})
+			minetest.add_item(pos, {name = mobs.npc_drops[math.random(1,#mobs.npc_drops)]})
 		else
 			if self.owner == "" then
 				self.owner = clicker:get_player_name()
@@ -5255,7 +5100,7 @@ bp:register_mob("esmobs:Mr_Pink", {
 -------------------------
 --GOOD NPC'S
 -------------------------
-bp:register_mob("esmobs:Candy", {
+mobs:register_mob("esmobs:Candy", {
 	type = "npc",
 	hp_min = 125,
 	hp_max = 135,
@@ -5291,7 +5136,7 @@ bp:register_mob("esmobs:Candy", {
 	drawtype = "front",
 	water_damage = 10,
 	lava_damage = 50,
-	light_damage = 55,
+	light_damage = 1,
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Candy Raver: My Ruby Sword will cut through anything, let's do it!",3)
@@ -5313,7 +5158,7 @@ bp:register_mob("esmobs:Candy", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc2_drops)]})
+			minetest.add_item(pos, {name = mobs.npc_drops[math.random(1,#mobs.npc2_drops)]})
 		else
 			if self.owner == "" then
 				self.owner = clicker:get_player_name()
@@ -5378,7 +5223,7 @@ bp:register_mob("esmobs:Candy", {
 	step = 1,
 })
 
-bp:register_mob("esmobs:Infiniumman", {
+mobs:register_mob("esmobs:Infiniumman", {
 	type = "npc",
 	hp_min = 25,
 	hp_max = 35,
@@ -5436,7 +5281,7 @@ bp:register_mob("esmobs:Infiniumman", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc2_drops)]})
+			minetest.add_item(pos, {name = mobs.npc_drops[math.random(1,#mobs.npc2_drops)]})
 		else
 			if self.owner == "" then
 				self.owner = clicker:get_player_name()
@@ -5500,9 +5345,9 @@ bp:register_mob("esmobs:Infiniumman", {
 	group_attack = true,
 	step = 1,
 })
---TEXTURE BY: http://minetest.fensta.bplaced.net/#author=bajanhgk
+--TEXTURE BY: http://minetest.fensta.mobslaced.net/#author=bajanhgk
 
-bp:register_mob("esmobs:Maikerumine", {
+mobs:register_mob("esmobs:Maikerumine", {
 	type = "npc",
 	hp_min = 95,
 	hp_max = 175,
@@ -5560,7 +5405,7 @@ bp:register_mob("esmobs:Maikerumine", {
 			end
 			local pos = self.object:getpos()
 			pos.y = pos.y + 0.5
-			minetest.add_item(pos, {name = bp.npc_drops[math.random(1,#bp.npc2_drops)]})
+			minetest.add_item(pos, {name = mobs.npc_drops[math.random(1,#mobs.npc2_drops)]})
 		else
 			if self.owner == "" then
 				self.owner = clicker:get_player_name()
@@ -5623,283 +5468,6 @@ bp:register_mob("esmobs:Maikerumine", {
 	peaceful = true,
 	group_attack = true,
 	step = 1,
-})
-
-
--------------------------
---MC-LIKE MOBS
--------------------------
---Shrank down by maikerumine for es world
--- Spider by AspireMint (fishyWET (CC-BY-SA 3.0 license for texture)
-bp:register_mob("esmobs:spider", {
-	type = "monster",
-	passive = false,
-	attack_type = "dogfight",
-	damage = 3,
-	hp_min = 40,
-	hp_max = 80,
-	armor = 100,
-	collisionbox = {-0.9, -0.01, -0.7, 0.7, 0.6, 0.7},
-	visual = "mesh",
-	mesh = "mobs_spider.x",
-	textures = {
-		{"mobs_7.png"},
-	},
-	visual_size = {x=3,y=3},
-	makes_footstep_sound = false,
-	sounds = {
-		random = "mobs_spider",
-		attack = "mobs_spider",
-	},
-	walk_velocity = 1.7,
-	run_velocity = 3.3,  --made faster mm
-	jump = true,
-	view_range = 15,
-	floats = 0,
-    drops = {
-		{name = "farming:string",
-		chance = 1, min = 1, max = 5,},
-		{name = "esmobs:meat_raw",
-		chance = 1, min = 0, max = 1,},
-	},
-	water_damage = 5,
-	lava_damage = 50,
-	light_damage = 0,
-	animation = {
-		speed_normal = 15,		speed_run = 15,
-		stand_start = 1,		stand_end = 1,
-		walk_start = 20,		walk_end = 40,
-		run_start = 20,			run_end = 40,
-		punch_start = 50,		punch_end = 90,
-	},
-})
-
-bp:register_mob("esmobs:creeper", {
-	type = "monster",
-	hp_max = 30,
-	damage = 2,
-	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.6, 0.4},
-	textures = {"mcmobs_1.png"},
-	visual = "mesh",
-	visual_size = {x=.75, y=.75, z=.75},
-	mesh = "creeper.x",
-	makes_footstep_sound = false,
-	sounds = {
-		approach = "Fuse",
-		death = "Creeperdeath",
-		hurt = "Creeper4",
-		attack = "damage",
-	},
-	walk_velocity = 1.5,
-	run_velocity = 3,
-	damage = 1,
-	armor = 200,
-	maxdrops = 3,
-	drops = {
-		{name = "tnt:gunpowder",
-		chance = 1,
-		min = 0,
-		max = 2,},
-		{name = "default:copper_ingot",
-		chance = 1,
-		min = 0,
-		max = 1,},
-	},
-	animation = {
-		speed_normal = 24,
-		speed_run = 48,
-		stand_start = 0,
-		stand_end = 23,
-		walk_start = 24,
-		walk_end = 49,
-		run_start = 24,
-		run_end = 49,
-		hurt_start = 110,
-		hurt_end = 139,
-		death_start = 140,
-		death_end = 189,
-		look_start = 50,
-		look_end = 108,
-	},
-	drawtype = "front",
-	water_damage = 1,
-	lava_damage = 5,
-	light_damage = 0,
-	view_range = 16,
-	attack_type = "explode",
-})
-
-bp:register_mob("esmobs:skeleton", {
-	type = "monster",
-	hp_max = 30,
-	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
-	textures = {"mcmobs_2.png"},
-	visual = "mesh",
-	mesh = "skeleton.x",
-	makes_footstep_sound = true,
-	sounds = {
-		random = "skeleton1",
-		death = "skeletondeath",
-		hurt = "skeletonhurt1",
-	},
-	walk_velocity = 1.2,
-	run_velocity = 2.4,
-	damage = 1,
-	armor = 200,
-	drops = {
-		{name = "esmobs:arrow",
-		chance = 1,
-		min = 0,
-		max = 2,},
-		{name = "esmobs:bow_wood",
-		chance = 11,
-		min = 1,
-		max = 1,},
-		{name = "bones:bones",
-		chance = 1,
-		min = 0,
-		max = 2,},
-	},
-	animation = {
-		speed_normal = 30,
-		speed_run = 60,
-		stand_start = 0,
-		stand_end = 23,
-		walk_start = 24,
-		walk_end = 49,
-		run_start = 24,
-		run_end = 49,
-		hurt_start = 85,
-		hurt_end = 115,
-		death_start = 117,
-		death_end = 145,
-		shoot_start = 50,
-		shoot_end = 82,
-	},
-	drawtype = "front",
-	water_damage = 1,
-	lava_damage = 5,
-	light_damage = 1,
-	view_range = 16,
-	attack_type = "shoot",
-	arrow = "esmobs:arrow_entity",
-	--arrow = "throwing:arrow_entity",
-	--arrow = "esmobs:bonebullet",
-	shoot_interval = 2.5,
-})
-
-bp:register_mob("esmobs:zombie", {
-	type = "monster",
-	hp_max = 35,
-	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
-	textures = {"mcmobs_3.png"},
-	visual = "mesh",
-	mesh = "zombie.x",
-	makes_footstep_sound = true,
-	sounds = {
-		random = "zombie1",
-		death = "zombiedeath",
-		hurt = "zombiehurt1",
-		attack = "damage",
-	},
-	walk_velocity = .8,
-	run_velocity = 1.6,
-	damage = 1,
-	armor = 200,
-	drops = {
-		{name = "esmobs:rotten_flesh",
-		chance = 1,
-		min = 1,
-		max = 1,},
-		{name = "default:steel_ingot",
-		chance = 3,
-		min = 0,
-		max = 2,},
-		{name = "default:shovel_steel",
-		chance = 4,
-		min = 1,
-		max = 1,},
-		{name = "default:sword_steel",
-		chance = 8,
-		min = 1,
-		max = 1,},
-		{name = "farming_plus:carrot_item",
-		chance = 10,
-		min = 1,
-		max = 1,},
-		{name = "farming_plus:potato_item",
-		chance = 10,
-		min = 1,
-		max = 1,},
-	},
-	animation = {
-		speed_normal = 24,
-		speed_run = 48,
-		stand_start = 0,
-		stand_end = 23,
-		walk_start = 24,
-		walk_end = 47,
-		run_start = 48,
-		run_end = 62,
-		hurt_start = 64,
-		hurt_end = 86,
-		death_start = 88,
-		death_end = 118,
-	},
-	drawtype = "front",
-	water_damage = 1,
-	lava_damage = 5,
-	light_damage = 1,
-	view_range = 16,
-	attack_type = "dogfight",
-})
-
-bp:register_mob("esmobs:pigman", {
-	type = "monster",
-	hp_max = 35,
-	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.9, 0.4},
-	textures = {"mcmobs_4.png"},
-	visual = "mesh",
-	mesh = "zombie.x",
-	makes_footstep_sound = true,
-	walk_velocity = .8,
-	run_velocity = 1.6,
-	damage = 2,
-	armor = 400,
-	drops = {
-		{name = "esmobs:rotten_flesh",
-		chance = 1,
-		min = 1,
-		max = 1,},
-		{name = "default:gold_ingot",
-		chance = 13,
-		min = 0,
-		max = 2,},
-		{name = "default:sword_mese",
-		chance = 8,
-		min = 1,
-		max = 1,},
-	},
-	animation = {
-		speed_normal = 24,
-		speed_run = 48,
-		stand_start = 0,
-		stand_end = 23,
-		walk_start = 24,
-		walk_end = 47,
-		run_start = 48,
-		run_end = 62,
-		hurt_start = 64,
-		hurt_end = 86,
-		death_start = 88,
-		death_end = 118,
-	},
-	drawtype = "front",
-	water_damage = 1,
-	lava_damage = 5,
-	light_damage = 1,
-	view_range = 16,
-	attack_type = "dogfight",
 })
 
 if minetest.setting_get("log_mods") then
