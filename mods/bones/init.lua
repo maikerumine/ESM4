@@ -115,7 +115,7 @@ minetest.register_node("bones:bones", {
 --BEGIN TIME AFTER BONE EXPIRE              if hitter and hitter:is_player() and hitter:get_inventory() then
 			local time = os.date("*t");--for this on new map
 			--meta:set_string("infotext", player_name.." was killed".." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min .." by: (".."...testing..."..")");---new tesint code
-			meta:set_string("infotext", "R.I.P. ".. meta:get_string("owner").." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min .."by: (".."...testing..."..")");--new old bones code
+			meta:set_string("infotext", "R.I.P. ".. meta:get_string("owner").." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min .."by: ("..meta:get_string("hitter_name")..")");--new old bones code
 						--meta:set_string("infotext", "R.I.P. ".. meta:get_string("owner").." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..")");--new old bones code
 			--meta:set_string("infotext", meta:get_string("owner").."'s old bones")--org old bones code
 			meta:set_string("owner", "")
@@ -156,7 +156,7 @@ local function may_replace(pos, player)
 	return node_definition.buildable_to and not minetest.is_protected(pos, player:get_player_name())
 end
 
-minetest.register_on_dieplayer(function(player,hitter)
+minetest.register_on_dieplayer(function(player,hitter,self)
 	if minetest.setting_getbool("creative_mode") then
 		return
 	end
@@ -173,7 +173,6 @@ minetest.register_on_dieplayer(function(player,hitter)
 	pos.z = math.floor(pos.z+0.5)
 	local param2 = minetest.dir_to_facedir(player:get_look_dir())
 	local player_name = player:get_player_name()
---	local hitter_name = hitter:get_player_name()--hitter code is global and nil
 	local player_inv = player:get_inventory()
 
 	if (not may_replace(pos, player)) then
@@ -221,18 +220,18 @@ minetest.register_on_dieplayer(function(player,hitter)
 --ref			local time = os.date("*t");
 --ref			meta:set_string("infotext", self.name.."'s fresh corpse ".. meta:get_string("owner").." at ".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..":" .. time.sec..")");
 
---	if hitter and hitter:is_player() then
+	
 
 
 
 
 	meta:set_string("formspec", bones.bones_formspec)
 	meta:set_string("owner", player_name)
-	meta:set_string("hitter", player_name)
+	meta:set_string("hitter", hitter_name)
 
 	if share_bones_time ~= 0 then
 		local time = os.date("*t");
-		meta:set_string("infotext", player_name.." was killed".." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min .." by: (".."...testing..."..")");
+		meta:set_string("infotext", player_name.." was killed".." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min .." by:("..meta:get_string("hitter_name")..")");
 --		meta:set_string("infotext", player_name.." was killed".." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..")");--THIS WORKS
 --		meta:set_string("infotext", player_name.." was killed".." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min .." by: ("..hitter:get_player_name()..")");--PROTOTYPE CODE BROKEN
 		--meta:set_string("infotext", player_name.."'s fresh corpse.  :-( R.I.P. ".. meta:get_string("owner").." at ".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min ..")");
