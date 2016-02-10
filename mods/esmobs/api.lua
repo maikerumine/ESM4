@@ -706,6 +706,7 @@ minetest.register_entity(name, {
 	visual = def.visual,
 	visual_size = def.visual_size or {x = 1, y = 1},
 	mesh = def.mesh,
+	textures = def.textures,
 	makes_footstep_sound = def.makes_footstep_sound or false,
 	view_range = def.view_range or 5,
 	walk_velocity = def.walk_velocity or 1,
