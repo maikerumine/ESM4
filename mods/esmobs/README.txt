@@ -1,8 +1,8 @@
 
-Extreme Survival Mobs MOD by Maikerumine
+Extreme Survival Mobs MOD by Maikerumine, TenPlus1, And RND
 
 Adds 40 "players" and creatures to your world that all have unique attributes, strengths, and rewards.  Quite fun!
-Added weapons in hand so you can see your potential reward, as well as random items that might help you fight better. 
+Added weapons in hand so you can see your potential reward, as well as random items that might help you fight better.
 There are some easy going NPC that will not attack you unless they are attacked.  They help with fighting monsters.
 Mobs now drop bones like players, you will need to wait to grab your loot!
 
@@ -25,11 +25,15 @@ Used a modified version of Mobs Redo code both api and init files, the mobs now 
             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
    TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
-  0. You just DO WHAT THE FUCK YOU WANT TO. 
+  0. You just DO WHAT THE FUCK YOU WANT TO.
 
 ======================================
 
-
+====MINETEST PATHFINDING====
+RND created some clever pathfinding code and forked it in TenPlus1's mobs redo 1.26, which I have merged into ESMOBS.
+https://forum.minetest.net/viewtopic.php?f=9&t=14030
+and GIT:
+https://github.com/ac-minetest/smart_mobs
 
 
 
@@ -232,7 +236,7 @@ http://minetest.net/
             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
    TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
-  0. You just DO WHAT THE FUCK YOU WANT TO. 
+  0. You just DO WHAT THE FUCK YOU WANT TO.
 
 
 
@@ -277,4 +281,4 @@ http://minetest.net/
             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
    TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
-  0. You just DO WHAT THE FUCK YOU WANT TO. 
+  0. You just DO WHAT THE FUCK YOU WANT TO.
