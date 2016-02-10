@@ -47,7 +47,7 @@ mobs:register_arrow("esmobs:fireball", {
 	visual = "sprite",
 	visual_size = {x = 1, y = 1},
 	textures = {"mobs_fireball.png"},
-	velocity = 6,
+	velocity = 10,
 
 	-- direct hit, no fire... just plenty of pain
 	hit_player = function(self, player)
@@ -166,6 +166,7 @@ mobs:register_mob("esmobs:tree_monster", {
 	lava_damage = 5,
 	light_damage = 2,
 	fall_damage = 0,
+	group_attack = true,
 	animation = {
 		speed_normal = 15,
 		speed_run = 15,
@@ -221,6 +222,7 @@ mobs:register_mob("esmobs:sand_monster", {
 	lava_damage = 4,
 	light_damage = 0,
 	fear_height = 3,
+	group_attack = true,
 	animation = {
 		speed_normal = 15,
 		speed_run = 15,
@@ -261,6 +263,7 @@ mobs:register_mob("esmobs:stone_monster", {
 	jump = true,
 	floats = 0,
 	view_range = 10,
+	group_attack = true,
 	drops = {
 		{name = "default:torch",
 		chance = 2, min = 0, max = 2,},
@@ -335,6 +338,7 @@ mobs:register_mob("esmobs:oerkki", {
 	replace_what = {"default:torch"},
 	replace_with = "air",
 	replace_offset = -1,
+	group_attack = true,
 })
 
 
@@ -374,6 +378,7 @@ mobs:register_mob("esmobs:dirt", {
 	fear_height = 3,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	group_attack = true,
 	animation = {
 		speed_normal = 15,
 		speed_run = 15,
@@ -422,6 +427,7 @@ mobs:register_mob("esmobs:spider", {
 	jump = true,
 	view_range = 15,
 	floats = 0,
+	group_attack = true,
     drops = {
 		{name = "farming:string",
 		chance = 1, min = 1, max = 5,},
@@ -446,16 +452,16 @@ mobs:register_mob("esmobs:spider", {
 mobs:register_mob("esmobs:applmons", {
 	type = "monster",
 	hp_min = 20,
-	hp_max = 40,
-	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1.0, 0.4},
+	hp_max = 28,
+	collisionbox = {-0.4, -0.3, -0.4, 0.4, 0.6, 0.4},
 	visual = "mesh",
 	mesh = "mobs_dungeon_master.b3d",
 	textures = {"mobs_10.png"},
-	visual_size = {x=0.6, y=0.6},
+	visual_size = {x=0.6, y=0.3},
 	makes_footstep_sound = true,
 	view_range = 15,
-	walk_velocity = 1,
-	run_velocity = 3,
+	walk_velocity = 3,
+	run_velocity = 3.6,
 	damage = 3,
 	drops = {
 		{name = "default:apple",
@@ -463,14 +469,23 @@ mobs:register_mob("esmobs:applmons", {
 		min = 1,
 		max = 3,},
 	},
+		sounds = {
+		random = "mobs_rat",
+	},
 	armor = 100,
 	drawtype = "front",
-	water_damage = 10,
-	lava_damage = 50,
+	water_damage = 0,
+	lava_damage = 3,
 	light_damage = 0,
+	jump = true,
+	jump_height = 8,
+	fall_damage = 0,
+	fall_speed = -5,
+	stepheight = 2.1,
 	fear_height = 6,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	group_attack = true,
 	animation = {
 		speed_normal = 15,
 		speed_run = 15,
@@ -529,10 +544,9 @@ mobs:register_mob("esmobs:herobrines_bloody_ghost", {
 	}
 })
 
-
 --Phoenix from NSSM and bat from minetest defense merged into this
 --mobs:register_spawn("esmobs:phoenix", {"air","air"}, 6, -1, 170000, 1, 100)
-mobs:register_mob("esmobs:phoenix", {
+mobs:register_mob("esmobs:paniki", {
 	type = "monster",
 	hp_max = 60,
 	hp_min = 50,
@@ -540,22 +554,22 @@ mobs:register_mob("esmobs:phoenix", {
 	visual = "mesh",
 	mesh = "phoenix.b3d",  --paniki from minetest defense
 	textures = {{"mobs_12.png"}},  --paniki from minetest defense
-	visual_size = {x=7, y=7},
+	visual_size = {x=1, y=1},
 	view_range = 90,
 	lifetimer = 500,
 	floats=1,
-	rotate = 4.5,
-	walk_velocity = -2.5,
-	run_velocity = -8.5,
-  fall_speed = 0,
+	rotate = 270,
+	walk_velocity = 2.5,
+	run_velocity = 3.5,
+  fall_speed = 1,
   stepheight = 3,
   sounds = {
 		random = "phoenix",
 		attack = "mobs_fireball",
-		distance = 45,
+		distance = 15,
 	},
 	damage = 2,
-	jump = true,
+	--jump = true,
 	drops = {
 		{name = "default:sand",
 		chance = 1,
@@ -575,20 +589,96 @@ mobs:register_mob("esmobs:phoenix", {
 		max = 20,},
 	},
 	armor = 60,
-	drawtype = "side",
+	--drawtype = "side",
 	water_damage = 5,
 	lava_damage = 0,
 	light_damage = 10,
 	--fear_height = 70,
 	on_rightclick = nil,
 	fly = true,
-	attack_type = "dogshoot",
+	--attack_type = "shoot",
+	attack_type = "dogfight",
+		--arrow = "throwing:arrow_entity",
+		arrow = "esmobs:fireball",
+		--arrow = "tnt:tnt_ent",
+		reach = 1,
+		shoot_interval = 1.25,
+
+	animation = {
+		speed_normal = 22,
+		speed_run = 25,
+		stand_start = 220,
+		stand_end = 280,
+		walk_start = 30,
+		walk_end = 59,
+		run_start = 60,
+		run_end = 89,
+		punch_start = 60,
+		punch_end = 89,
+		--dattack_start = 60,
+		--dattack_end = 89,
+	}
+})
+
+--Phoenix from NSSM and bat from minetest defense merged into this
+--mobs:register_spawn("esmobs:phoenix", {"air","air"}, 6, -1, 170000, 1, 100)
+mobs:register_mob("esmobs:phoenix", {
+	type = "monster",
+	hp_max = 60,
+	hp_min = 50,
+	collisionbox = {-0.65, -0.4, -0.65, 0.65, 0.4, 0.65},
+	visual = "mesh",
+	mesh = "phoenix.b3d",  --paniki from minetest defense
+	textures = {{"mobs_12.png"}},  --paniki from minetest defense
+	visual_size = {x=4, y=4},
+	view_range = 90,
+	lifetimer = 500,
+	floats=1,
+	rotate = 270,
+	walk_velocity = 2.5,
+	run_velocity = 6.5,
+  fall_speed = 1,
+  stepheight = 3,
+  sounds = {
+		random = "phoenix",
+		attack = "mobs_fireball",
+		distance = 15,
+	},
+	damage = 2,
+	--jump = true,
+	drops = {
+		{name = "default:sand",
+		chance = 1,
+		min = 7,
+		max = 8,},
+		{name = "esmobs:feather",
+		chance = 1,
+		min = 1,
+		max = 1,},
+		{name = "esmobs:chicken",
+		chance = 1,
+		min = 5,
+		max = 6,},
+		{name = "default:gold_lump",
+		chance = 6,
+		min = 10,
+		max = 20,},
+	},
+	armor = 60,
+	--drawtype = "side",
+	water_damage = 5,
+	lava_damage = 0,
+	light_damage = 10,
+	--fear_height = 70,
+	on_rightclick = nil,
+	fly = true,
+	attack_type = "shoot",
 	--attack_type = "dogfight",
 		--arrow = "throwing:arrow_entity",
 		arrow = "esmobs:fireball",
 		--arrow = "tnt:tnt_ent",
 		reach = 1,
-		shoot_interval = 2.25,
+		shoot_interval = 1.25,
 
 	animation = {
 		speed_normal = 22,
@@ -688,6 +778,7 @@ mobs:register_mob("esmobs:bone_monster", {
 	arrow = "esmobs:bonebullet",
 	--reach = 1,
 	shoot_interval = 1.5,
+	shoot_offset = 2,
 	damage = 2,
 	hp_min = 17,
 	hp_max = 35,
@@ -710,7 +801,7 @@ mobs:register_mob("esmobs:bone_monster", {
 	jump = true,
 	jump_height = 8,
 	fall_damage = 0,
-	fall_speed = -1,
+	fall_speed = -0.5,
 	stepheight = 3,
 	fear_height = 30,
 	floats = 1,

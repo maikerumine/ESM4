@@ -17,4 +17,5 @@ mobs:register_spawn("esmobs:snowmon", {"default:snow","default:snowblock","defau
 mobs:register_spawn("esmobs:watermon", {"default:water_source","default:water_flowing"}, 5, -1, 14000, 5, -120)
 mobs:register_spawn("esmobs:dirt2", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 16000, 2, -100)
 mobs:register_spawn("esmobs:stone_monster2", {"default:stone","bedrock2:bedrock"}, 5, -1, 14000, 3, -500)
-mobs:spawn_specific("esmobs:phoenix", {"air"},{"air"}, 2, -1, 30, 35000, 1, 15, 40)
+mobs:spawn_specific("esmobs:phoenix", {"air"},{"air"}, 2, -1, 30, 15000, 1, 15, 40)
+mobs:spawn_specific("esmobs:paniki", {"air"},{"air"}, 3, -1, 30, 15000, 1, 15, 40)
