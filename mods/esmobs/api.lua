@@ -15,7 +15,7 @@ local damage_enabled = minetest.setting_getbool("enable_damage")
 local peaceful_only = minetest.setting_getbool("only_peaceful_mobs")
 local disable_blood = minetest.setting_getbool("mobs_disable_blood")
 local creative = minetest.setting_getbool("creative_mode")
-local spawn_protected = tonumber(minetest.setting_get("mobs_spawn_protected")) or 1
+local spawn_protected = tonumber(minetest.setting_get("mobs_spawn_protected")) or 0
 local remove_far = minetest.setting_getbool("remove_far_mobs")
 -- PATHFINDING settings
 local enable_pathfinding = true
@@ -262,7 +262,7 @@ end
 			end
 		end
 	end
-	
+
 	-- play death sound
 	if self.sounds.death then
 
@@ -2420,7 +2420,7 @@ function mobs:capture_mob(self, clicker, chance_hand, chance_net, chance_lasso, 
 			if tool:is_empty() then
 				chance = chance_hand
 
-			elseif tool:get_name() == "mobs:net" then
+			elseif tool:get_name() == "esmobs:net" then
 
 				chance = chance_net
 
@@ -2428,7 +2428,7 @@ function mobs:capture_mob(self, clicker, chance_hand, chance_net, chance_lasso, 
 
 				clicker:set_wielded_item(tool)
 
-			elseif tool:get_name() == "mobs:magic_lasso" then
+			elseif tool:get_name() == "esmobs:magic_lasso" then
 
 				chance = chance_lasso
 
@@ -2548,7 +2548,7 @@ function mobs:feed_tame(self, clicker, feed_count, breed, tame)
 	local item = clicker:get_wielded_item()
 
 	-- if mob has been tamed you can name it with a nametag
-	if item:get_name() == "mobs:nametag"
+	if item:get_name() == "esmobs:nametag"
 	and clicker:get_player_name() == self.owner then
 
 		local name = clicker:get_player_name()
