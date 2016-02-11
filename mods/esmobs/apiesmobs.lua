@@ -209,6 +209,7 @@ function check_for_death(self)
 
 		return false
 	end
+	
 --BREAK
 --remove for bones
 if enable_mob_bones == false then

@@ -75,6 +75,21 @@ minetest.register_craft({
 	cooktime = 5,
 })
 
+-- cooked rat, yummy!
+minetest.register_craftitem("esmobs:rat_cooked", {
+	description = "Cooked Rat",
+	inventory_image = "mobs_cooked_rat.png",
+	on_use = minetest.item_eat(3),
+})
+
+minetest.register_craft({
+	type = "cooking",
+	output = "esmobs:rat_cooked",
+	recipe = "esmobs:rat",
+	cooktime = 5,
+})
+
+
 -- egg entity
 
 mobs:register_arrow("esmobs:egg_entity", {

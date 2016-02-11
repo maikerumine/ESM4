@@ -143,7 +143,7 @@ mobs:register_mob("esmobs:tree_monster", {
 	visual = "mesh",
 	mesh = "mobs_tree_monster.b3d",
 	textures = {
-		{"mobs_tree_monster.png"},
+		{"mobs_4.png"},
 	},
 	blood_texture = "default_wood.png",
 	makes_footstep_sound = true,
@@ -203,7 +203,7 @@ mobs:register_mob("esmobs:sand_monster", {
 	visual = "mesh",
 	mesh = "mobs_sand_monster.b3d",
 	textures = {
-		{"mobs_sand_monster.png"},
+		{"mobs_5.png"},
 	},
 	makes_footstep_sound = true,
 	sounds = {
@@ -303,8 +303,8 @@ mobs:register_mob("esmobs:oerkki", {
 	visual = "mesh",
 	mesh = "mobs_oerkki.b3d",
 	textures = {
-		{"mobs_oerkki.png"},
-		{"mobs_oerkki2.png"},
+		{"mobs_8.png"},
+		{"mobs_9.png"},
 	},
 	makes_footstep_sound = false,
 	sounds = {
@@ -1039,12 +1039,12 @@ mobs:register_mob("esmobs:stone_monster2", {
 	visual = "mesh",
 	mesh = "mobs_stone_monster.b3d",
 	textures = {
-		{"mobs_6.png"},
+		{"mobs_6.png^[colorize:#FF0000:100"},
 	},
 	--visual_size = {x=3, y=2.6},
 	makes_footstep_sound = true,
 	sounds = {
-		random = "mobs_stonemonster",
+		random = "mobs_stone_attack",
 	},
 	walk_velocity = 1.5,
 	run_velocity = 2.6,
@@ -1052,15 +1052,15 @@ mobs:register_mob("esmobs:stone_monster2", {
 	floats = 1,
 	view_range = 10,
 	drops = {
-		{name = "default:torch",
+		{name = "default:stone",
 		chance = 2, min = 0, max = 2,},
 		{name = "default:iron_lump",
-		chance=5, min=0, max=1,},
+		chance=5, min=0, max=5,},
 		{name = "default:coal_lump",
-		chance=3, min=0, max=1,},
+		chance=3, min=0, max=5,},
 	},
-	water_damage = 10,
-	lava_damage = 1,
+	water_damage = 5,
+	lava_damage = 0,
 	light_damage = 1,
 	fear_height = 3,
 	animation = {
@@ -3296,6 +3296,7 @@ mobs:register_mob("esmobs:Mr_Black", {
 -------------------------
 --BAD NPC'S
 -------------------------
+if es then
 mobs:register_mob("esmobs:Jasmine", {
 	type = "monster",
 	hp_min = 277,
@@ -3414,6 +3415,7 @@ mobs:register_mob("esmobs:Jasmine", {
 		attack = "default_punch3",
 		},
 })
+end
 
 mobs:register_mob("esmobs:Infinium_Monster", {
 	type = "monster",
@@ -5235,6 +5237,7 @@ mobs:register_mob("esmobs:Mr_Pink", {
 -------------------------
 --GOOD NPC'S
 -------------------------
+if es then
 mobs:register_mob("esmobs:Candy", {
 	type = "npc",
 	hp_min = 125,
@@ -5359,6 +5362,7 @@ mobs:register_mob("esmobs:Candy", {
 	group_attack = true,
 	step = 1,
 })
+end
 
 mobs:register_mob("esmobs:Infiniumman", {
 	type = "npc",
