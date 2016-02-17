@@ -27,7 +27,7 @@ local MOVER_FUEL_STORAGE_CAPACITY =  5; -- how many operations from one coal lum
 basic_machines.fuels = {["default:coal_lump"]=30,["default:cactus"]=5,["default:tree"]=10,["default:jungletree"]=12,["default:pinetree"]=12,["default:acacia_tree"]=10,["default:coalblock"]=500,["default:lava_source"]=5000,["basic_machines:charcoal"]=20}
 
 -- how hard it is to move blocks, default factor 1
-basic_machines.hardness = {["default:stone"]=4,["default:tree"]=2,["default:jungletree"]=2,["default:pinetree"]=2,["default:acacia_tree"]=2,["default:lava_source"]=20,["default:obsidian"]=20};
+basic_machines.hardness = {["default:stone"]=4,["default:tree"]=2,["default:jungletree"]=2,["default:pinetree"]=2,["default:acacia_tree"]=2,["default:lava_source"]=20,["default:obsidian"]=20,["es:toxic_water_source"]=9999,["default:water_source"]=9999,["default:lava_source"]=9999};
 -- farming operations are much cheaper
 basic_machines.hardness["farming:wheat_8"]=0.1;basic_machines.hardness["farming:cotton_8"]=0.1;
 basic_machines.hardness["farming:seed_wheat"]=0.05;basic_machines.hardness["farming:seed_cotton"]=0.05;
