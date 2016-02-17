@@ -65,14 +65,29 @@ if minetest.get_modpath("farming") ~= nil then
 overwrite("farming:bread", 4)
 end
 
+
 if minetest.get_modpath("es") ~= nil then
-overwrite("es:punkin_slice", 20)
+overwrite("es:purpellium_container", 50,"vessels:glass_bottle",nil,50)
 end
 
-
-if minetest.get_modpath("badplayer") ~= nil then
-overwrite("badplayer:meat", 6)
-overwrite("badplayer:meat_raw", 3)
+if minetest.get_modpath("esmobs") ~= nil then
+overwrite("esmobs:meat", 8)
+overwrite("esmobs:meat_raw", 2)
+overwrite("esmobs:chicken", 6)
+overwrite("esmobs:chicken_raw", 2)
+overwrite("esmobs:chicken_egg_fried", 2)
+overwrite("esmobs:rotten_flesh", -6)
+overwrite("esmobs:chicken_egg_fried", 3)
+overwrite("esmobs:mutton_cooked", 6)
+overwrite("esmobs:mutton_raw", 3)
+overwrite("esmobs:pork_raw", 6)
+overwrite("esmobs:pork_cooked", 3)
+overwrite("esmobs:beef_raw", 6)
+overwrite("esmobs:beef_cooked", 3)
+overwrite("esmobs:cheese", 4)
+overwrite("esmobs:rat_cooked", 3)
+overwrite("esmobs:rat", 1)
+overwrite("esmobs:bucket_milk", 8,"bucket:bucket_empty")
 end
 
 if minetest.get_modpath("moretrees") ~= nil then
