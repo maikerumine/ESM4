@@ -736,7 +736,7 @@ minetest.register_entity(name, {
 	water_damage = def.water_damage or 0,
 	lava_damage = def.lava_damage or 0,
 	fall_damage = def.fall_damage or 1,
-	fall_speed = def.fall_speed or -10, -- must be lower than -2 (default: -10)
+	fall_speed = def.fall_speed or -12, -- must be lower than -2 (default: -10)
 	drops = def.drops or {},
 	armor = def.armor,
 	on_rightclick = def.on_rightclick,
@@ -778,7 +778,7 @@ minetest.register_entity(name, {
 	fear_height = def.fear_height or 0,
 	runaway = def.runaway,
 	runaway_timer = 0,
-
+	pathfinding = def.pathfinding,
 	on_step = function(self, dtime)
 
 		local pos = self.object:getpos()
@@ -1479,11 +1479,10 @@ minetest.register_entity(name, {
 
 			end
 
-			-- rnd: new movement direction
-
-			if self.path.stuck and self.path.way then
-				if #self.path.way>50 or dist<self.reach then self.path.stuck = false return end -- no paths longer than 50
-				local p1 = self.path.way[1]; if not p1 then self.path.stuck = false return end
+			-- rnd: following path
+			if self.path.following and self.path.way then
+				if #self.path.way>50 or dist<self.reach then self.path.following = false return end -- no paths longer than 50
+				local p1 = self.path.way[1]; if not p1 then self.path.following = false return end
 				if math.abs(p1.x-s.x)+math.abs(p1.z-s.z)<0.6 then -- reached waypoint, remove it from queue
 					table.remove(self.path.way,1);
 				end
@@ -1519,30 +1518,38 @@ minetest.register_entity(name, {
 					else self.path.stuck_timer = 0;
 					end
 					self.path.lastpos = {x=s.x,y=s.y,z=s.z};
-					if (self.path.stuck_timer>stuck_timeout and not self.path.stuck) or (self.path.stuck_timer>stuck_path_timeout and self.path.stuck) then -- im stuck, search for path
-						self.path.stuck = true;
+
+					if (self.path.stuck_timer>stuck_timeout) or (self.path.stuck_timer>stuck_path_timeout and self.path.following) then -- im stuck, search for path
+
+						self.path.stuck_timer = 0;
+
+						-- lets try find a path, first take care of positions since pathfinder is very sensitive
 						local sheight=self.collisionbox[5]-self.collisionbox[2];
 						s.x=math.floor(s.x+0.5);s.y=math.floor(s.y+0.5)-sheight;s.z=math.floor(s.z+0.5); -- round position to center of node to avoid stuck in walls, also adjust height for player models!
 						local ssight,sground;ssight,sground=minetest.line_of_sight(s, {x=s.x,y=s.y-4,z=s.z}, 1); if not ssight then s.y=sground.y+1	end-- determine node above ground
-
-						--minetest.chat_send_all("stuck at " .. s.x .." " .. s.y .. " " .. s.z .. ", calculating path")
 						local p1 = self.attack:getpos();p1.x=math.floor(p1.x+0.5);p1.y=math.floor(p1.y+0.5);p1.z=math.floor(p1.z+0.5);
 						--minetest.find_path(pos1, pos2, searchdistance, max_jump, max_drop, algorithm)
 						self.path.way = minetest.find_path(s, p1, 16, 2, 6,"Dijkstra"); --"A*_noprefetch");
+
 						if not self.path.way then -- no path found, try something else
-							self.path.stuck=false
-							if enable_pathfind_digging and self.path.stuck_timer>1 then -- lets make way by digging/building if not accessible
+							self.path.following=false;
+							self.path.stuck = true;
+
+							if enable_pathfind_digging then -- lets make way by digging/building if not accessible
+
 								if s.y<p.y then -- add block and remove one block above so there is room to jump if needed
 									if not minetest.is_protected(s,"") then	minetest.set_node(s,{name="esmobs:stone"}); end
-										local sheight=math.ceil(self.collisionbox[5])+1;
-										s.y=s.y+sheight; -- assume mob is 2 blocks high so it digs above its head
-										if not minetest.is_protected(s,"") then
-											local node1=minetest.get_node(s).name;
-											if node1~="air" then minetest.set_node(s,{name="air"});minetest.add_item(s,ItemStack(node1)) end
-										end
-										s.y=s.y-sheight;self.object:setpos({x=s.x,y=s.y+2,z=s.z});
-									else
-										local yaw1= self.object:getyaw()+pi/2; -- dig 2 blocks to make door toward player direction
+									local sheight=math.ceil(self.collisionbox[5])+1;
+									s.y=s.y+sheight; -- assume mob is 2 blocks high so it digs above its head
+									if not minetest.is_protected(s,"") then
+										local node1=minetest.get_node(s).name;
+										if node1~="air" then minetest.set_node(s,{name="air"});minetest.add_item(s,ItemStack(node1)) end
+									end
+									s.y=s.y-sheight;self.object:setpos({x=s.x,y=s.y+2,z=s.z});
+
+								else-- dig 2 blocks to make door toward player direction
+
+								local yaw1= self.object:getyaw()+pi/2;
 										local p1 = {x=s.x+math.cos(yaw1),y=s.y,z=s.z+math.sin(yaw1)};
 										if not minetest.is_protected(p1,"") then
 											local node1=minetest.get_node(p1).name;
@@ -1553,22 +1560,24 @@ minetest.register_entity(name, {
 										end
 								end
 							end
+
+							self.path.stuck_timer=stuck_timeout-1; -- will try again in 1 second
 							minetest.sound_play(self.sounds.random, { -- frustration! cant find the damn path:(
 								object = self.object,
 								max_hear_distance = self.sounds.distance
 							})
-							else
-								if self.sounds.random then -- yay i found path
-									set_velocity(self, self.walk_velocity)
-									minetest.sound_play(self.sounds.attack, {
-										object = self.object,
-										max_hear_distance = self.sounds.distance
-									})
-								end
-							--minetest.chat_send_all("found path with length " .. #self.path.way);
-						self.state = "stand"
+
+						else
+
+							if self.sounds.random then -- yay i found path
+								set_velocity(self, self.walk_velocity)
+								minetest.sound_play(self.sounds.attack, {
+									object = self.object,
+									max_hear_distance = self.sounds.distance
+								})
+							end
+							self.path.following=true;-- follow path now that it has it
 						end
-						self.path.stuck_timer=0
 
 					end
 				end
@@ -1597,9 +1606,9 @@ minetest.register_entity(name, {
 					set_animation(self, "run")
 				end
 
-			else
+			else -- rnd: if inside reach range
 
-				self.path.stuck = false; self.path.stuck_timer=0 -- rnd: no more stuck
+				self.path.stuck = false; self.path.stuck_timer=0;self.path.following=false; -- rnd: no more stuck
 				set_velocity(self, 0)
 				set_animation(self, "punch")
 
@@ -1699,6 +1708,7 @@ minetest.register_entity(name, {
 
 		end -- END if self.state == "attack"
 	end,
+
 
 	on_punch = function(self, hitter, tflp, tool_capabilities, dir)
 		--bones for mobs
@@ -1962,6 +1972,7 @@ minetest.register_entity(name, {
 		self.path.way = {};-- path to follow, table of positions
 		self.path.lastpos = {x=0,y=0,z=0};
 		self.path.stuck = false;
+		self.path.following = false; -- currently following path?
 		self.path.stuck_timer = 0; -- if stuck for too long search for path, stuck if v.x, v.z has magnitude smaller than 0.25 for too long
 
 
@@ -2574,30 +2585,29 @@ end
 -- inspired by blockmen's nametag mod
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 
-	-- right-clicked with nametag, name entered and button pressed?
+	-- right-clicked with nametag and name entered?
 	if formname == "mobs_nametag"
-	and fields.mob_rename
+	and fields.name
 	and fields.name ~= "" then
 
 		local name = player:get_player_name()
-		local ent = mob_obj[name]
 
-		if not ent
-		or not ent.object then
+		if not mob_obj[name]
+		or not mob_obj[name].object then
 			return
 		end
 
 		-- update nametag
-		ent.nametag = fields.name
-		update_tag(ent)
+		mob_obj[name].nametag = fields.name
+
+		update_tag(mob_obj[name])
 
 		-- if not in creative then take item
 		if not creative then
 
-			local itemstack = mob_sta[name]
+			mob_sta[name]:take_item()
 
-			itemstack:take_item()
-			player:set_wielded_item(itemstack)
+			player:set_wielded_item(mob_sta[name])
 		end
 
 		-- reset external variables
@@ -2621,7 +2631,7 @@ minetest.register_node("esmobs:stone", {
 		end)
 	end
 })
---[[
+
 		--Brandon Reese code to face pos
 			function mobs:face_pos(self,pos)
 				local s = self.object:getpos()
@@ -2636,7 +2646,7 @@ minetest.register_node("esmobs:stone", {
 				self.object:setyaw(yaw)
 				return yaw
 			end
-]]
+
 			--Reese chat
 			local_chat = function(pos,text,radius)
 				if radius == nil then

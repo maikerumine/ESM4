@@ -275,6 +275,8 @@ minetest.register_craft({
 	}
 })
 
+
+
 -- shears (right click to shear animal)
 minetest.register_tool("esmobs:shears", {
 	description = "Steel Shears (right-click to shear)",

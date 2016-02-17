@@ -1346,7 +1346,7 @@ mobs:register_mob("esmobs:chicken", {
 		if mobs:feed_tame(self, clicker, 8, true, true) then
 			return
 		end
-		esmobs:capture_mob(self, clicker, 30, 50, 80, false, nil)
+		mobs:capture_mob(self, clicker, 30, 50, 80, false, nil)
 	end,
 
 	do_custom = function(self)
@@ -3334,7 +3334,7 @@ mobs:register_mob("esmobs:Jasmine", {
 	water_damage = 10,
 	lava_damage = 50,
 	light_damage = 70,
-	fear_height = 2,
+	fear_height = 4,
 	on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Jasmine: Tame me now, come to me later, we will chat after I have cooled off.",3)
@@ -3402,6 +3402,7 @@ mobs:register_mob("esmobs:Jasmine", {
 		end
 	end,
 	attack_type = "dogfight",
+	group_attack = true,
 	animation = {
 		speed_normal = 30,		speed_run = 30,
 		stand_start = 0,		stand_end = 79,
@@ -3443,7 +3444,7 @@ mobs:register_mob("esmobs:Infinium_Monster", {
 		chance = 2,
 		min = 1,
 		max = 1,},
-		{name = "default:lava_source",
+		{name = "default:lava_flowing",
 			chance = 2,
 			min = 1,
 			max=2,},
@@ -3457,6 +3458,7 @@ mobs:register_mob("esmobs:Infinium_Monster", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	group_attack = true,
 	animation = {
 		speed_normal = 30,		speed_run = 30,
 		stand_start = 0,		stand_end = 79,
@@ -5373,7 +5375,7 @@ mobs:register_mob("esmobs:Infiniumman", {
 	mesh = "3d_armor_character.x",
 	textures = {"badplayer_40.png",
 			"3d_armor_trans.png",
-				minetest.registered_items["default:sword_steel"].inventory_image,
+				minetest.registered_items["default:sword_diamond"].inventory_image,
 			},
 	visual_size = {x=1, y=1.0},
 	makes_footstep_sound = true,
@@ -5620,5 +5622,5 @@ mobs:register_mob("esmobs:Maikerumine", {
 })
 
 if minetest.setting_get("log_mods") then
-	minetest.log("action", "eXTREME sURVIVAL mobs loaded")
+	minetest.log("action", "EXTREME SURVIVAL mobs loaded")
 end
