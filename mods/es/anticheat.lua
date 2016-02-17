@@ -52,7 +52,7 @@ minetest.register_globalstep(function(dtime)
 
 	end
 	if check then
-	player:set_hp(0.5); -- kill player
+	player:set_hp(3); -- kill player
 	minetest.chat_send_all(name.. " was caught walking inside walls at " .. p.x .. " " .. p.y .. " " .. p.z)
 	minetest.log("action", name.. " was caught walking inside walls at " .. p.x .. " " .. p.y .. " " .. p.z)
 	end

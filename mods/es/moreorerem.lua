@@ -14,9 +14,9 @@
 
 es = {}
 
-minetest.register_alias("moreores:mineral_mithril", "es:stone_with_infinium")
-minetest.register_alias("moreores:mineral_silver", "es:stone_with_aikerum")
-minetest.register_alias("moreores:mineral_tin", "es:stone_with_ruby")
+minetest.register_alias("moreores:mineral_mithril", "default:stone_with_iron")
+minetest.register_alias("moreores:mineral_silver", "default:stone_with_iron")
+minetest.register_alias("moreores:mineral_tin", "default:stone_with_iron")
 minetest.register_alias("moreores:mithril_block", "es:aikerumblock")
 minetest.register_alias("moreores:silver_block", "es:rubyblock")
 minetest.register_alias("moreores:tin_block", "default:steelblock")

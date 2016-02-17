@@ -317,8 +317,13 @@ minetest.register_craftitem("es:purpellium_container", {
 	description = "Potion to do wonders!  (gives 50+ hunger for extra endurance mining.)",
 	inventory_image = "purpellium_container.png",
 	on_use = minetest.item_eat(50),
-	--TODO HEAL HP TOO
 })
+	-- HEAL HP in hunger hud  
+--	if minetest.get_modpath("es") ~= nil then
+--overwrite("es:purpellium_container", 50,"vessels:glass_bottle",nil,50)
+--end
+
+
 
 minetest.register_craftitem("es:purpellium_dust", {
 	description = "Purpellium Dust",
@@ -332,6 +337,164 @@ minetest.register_craft({
 })
 
 
+
+
+--Weapon &Tool Crafting:
+minetest.register_craft({
+	output = 'es:handle',
+	recipe = {
+		{'default:bronze_ingot', 'default:mese_crystal', 'default:bronze_ingot'},
+		{'farming:string', 'default:steel_ingot', 'farming:string'},
+		{'farming:string', 'default:diamond', 'farming:string'},
+	}
+})
+minetest.register_craftitem("es:handle", {
+	description = "Extreme Survival Uni-handle",
+	inventory_image = "es_handle.png",
+	--inventory_image = "default_steel_ingot.png^default_diamond.png^default_mese_crystal.png^farming_cotton.png",
+})
+
+
+
+--SWORDS
+minetest.register_craft({
+	output = 'es:sword_emerald',
+	recipe = {
+		{'es:emerald_crystal'},
+		{'es:emerald_crystal'},
+		{'es:handle'},
+	}
+})
+
+minetest.register_craft({
+	output = 'es:sword_ruby',
+	recipe = {
+		{'es:ruby_crystal'},
+		{'es:ruby_crystal'},
+		{'es:handle'},
+	}
+})
+
+minetest.register_craft({
+	output = 'es:sword_aikerum',
+	recipe = {
+		{'es:aikerum_crystal'},
+		{'es:aikerum_crystal'},
+		{'es:handle'},
+	}
+})
+
+minetest.register_craft({
+	output = 'es:sword_purpellium',
+	recipe = {
+		{'es:purpellium_ingot'},
+		{'es:purpellium_ingot'},
+		{'es:handle'},
+	}
+})
+
+--PICKS
+minetest.register_craft({
+	output = 'es:pick_emerald',
+	recipe = {
+		{'es:emerald_crystal', 'es:emerald_crystal', 'es:emerald_crystal'},
+		{'', 'default:steel_ingot', ''},
+		{'', 'es:handle', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'es:pick_ruby',
+	recipe = {
+		{'es:ruby_crystal', 'es:ruby_crystal', 'es:ruby_crystal'},
+		{'', 'default:steel_ingot', ''},
+		{'', 'es:handle', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'es:pick_aikerum',
+	recipe = {
+		{'es:aikerum_crystal', 'es:aikerum_crystal', 'es:aikerum_crystal'},
+		{'', 'default:steel_ingot', ''},
+		{'', 'es:handle', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'es:pick_aikerum',
+	recipe = {
+		{'es:aikerum_crystal', 'es:aikerum_crystal', 'es:aikerum_crystal'},
+		{'', 'default:steel_ingot', ''},
+		{'', 'es:handle', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'es:pick_purpellium',
+	recipe = {
+		{'es:purpellium_ingot', 'es:purpellium_ingot', 'es:purpellium_ingot'},
+		{'', 'default:steel_ingot', ''},
+		{'', 'es:handle', ''},
+	}
+})
+
+--AXES
+minetest.register_craft({
+	output = 'es:axe_emerald',
+	recipe = {
+		{'es:emerald_crystal', 'es:emerald_crystal', ''},
+		{'es:emerald_crystal', 'default:steel_ingot', ''},
+		{'', 'es:handle', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'es:axe_ruby',
+	recipe = {
+		{'es:ruby_crystal', 'es:ruby_crystal', ''},
+		{'es:ruby_crystal', 'default:steel_ingot', ''},
+		{'', 'es:handle', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'es:axe_aikerum',
+	recipe = {
+		{'es:aikerum_crystal', 'es:aikerum_crystal', ''},
+		{'es:aikerum_crystal', 'default:steel_ingot', ''},
+		{'', 'es:handle', ''},
+	}
+})
+
+--SHOVELS
+minetest.register_craft({
+	output = 'es:shovel_emerald',
+	recipe = {
+		{'', 'es:emerald_crystal', ''},
+		{'', 'default:steel_ingot', ''},
+		{'', 'es:handle', ''},
+	}
+})
+minetest.register_craft({
+	output = 'es:shovel_ruby',
+	recipe = {
+		{'', 'es:ruby_crystal', ''},
+		{'', 'default:steel_ingot', ''},
+		{'', 'es:handle', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'es:shovel_aikerum',
+	recipe = {
+		{'', 'es:aikerum_crystal', ''},
+		{'', 'default:steel_ingot', ''},
+		{'', 'es:handle', ''},
+	}
+})
+
+--[[
 --Weapon &Tool Crafting:
 --SWORDS
 minetest.register_craft({
@@ -471,7 +634,7 @@ minetest.register_craft({
 	}
 })
 
-
+]]
 
 --Default override Cooking
 minetest.register_craft({
@@ -523,6 +686,9 @@ minetest.register_craft({
 	output = "default:mese_crystal",
 	recipe = "es:mesecook_crystal",
 })
+
+
+
 
 --MUST HAVE DEFAULT ORE GENERATION SET
 minetest.register_craftitem("es:mesecook_crystal", {
