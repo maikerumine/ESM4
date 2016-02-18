@@ -29,28 +29,28 @@ minetest.register_tool("cottages:hammer", {
 
 local cottages_anvil_formspec =
                                "size[8,8]"..
-				"image[7,3;1,1;glooptest_tool_steelhammer.png]"..
+--				"image[7,3;1,1;glooptest_tool_steelhammer.png]"..
 --                                "list[current_name;sample;0,0.5;1,1;]"..
                                 "list[current_name;input;2.5,1.5;1,1;]"..
 --                                "list[current_name;material;5,0;3,3;]"..
-                                "list[current_name;hammer;5,3;1,1;]"..
+    --                            "list[current_name;hammer;5,3;1,1;]"..
 --					"label[0.0,0.0;Sample:]"..
 --					"label[0.0,1.0;(Receipe)]"..
-					"label[2.5,1.0;"..S("Workpiece:").."]"..
+					"label[0,1.0;"..S("Survival is to be MUCH harder now").."]"..
 --					"label[6.0,-0.5;Materials:]"..
-					"label[6.0,2.7;"..S("Optional").."]"..
-					"label[6.0,3.0;"..S("storage for").."]"..
-					"label[6.0,3.3;"..S("your hammer").."]"..
+	--				"label[6.0,2.7;"..S("Optional").."]"..
+--					"label[6.0,3.0;"..S("storage for").."]"..
+--					"label[6.0,3.3;"..S("your hammer").."]"..
 
-					"label[0,-0.5;"..S("Anvil").."]"..
-					"label[0,3.0;"..S("Punch anvil with hammer to").."]"..
-					"label[0,3.3;"..S("repair tool in workpiece-slot.").."]"..
+					"label[0,3.5;"..S("Anvil--That is decorative--").."]"..
+--					"label[0,3.0;"..S("Punch anvil with hammer to").."]"..
+--					"label[0,3.3;"..S("repair tool in workpiece-slot.").."]"..
                                 "list[current_player;main;0,4;8,4;]";
 
 
 minetest.register_node("cottages:anvil", {
 	drawtype = "nodebox",
-	description = S("anvil"),
+	description = S("anvil --That is decorative-- ;-)"),
 	tiles = {"default_stone.png"}, -- TODO default_steel_block.png,  default_obsidian.png are also nice
 	paramtype  = "light",
         paramtype2 = "facedir",
@@ -77,7 +77,7 @@ minetest.register_node("cottages:anvil", {
 	on_construct = function(pos)
 
 		local meta = minetest.get_meta(pos);
-               	meta:set_string("infotext", S("Anvil"));
+               	meta:set_string("infotext", S("Anvi--That is decorative-- ;-)l"));
                	local inv = meta:get_inventory();
                	inv:set_size("input",    1);
 --               	inv:set_size("material", 9);
@@ -89,7 +89,7 @@ minetest.register_node("cottages:anvil", {
 	after_place_node = function(pos, placer)
 		local meta = minetest.get_meta(pos);
 		meta:set_string("owner", placer:get_player_name() or "");
-		meta:set_string("infotext", S("Anvil (owned by %s)"):format((meta:get_string("owner") or "")));
+		meta:set_string("infotext", S("Anvil--That is decorative-- ;-) (owned by %s)"):format((meta:get_string("owner") or "")));
                 meta:set_string("formspec",
 					cottages_anvil_formspec,
 					"label[2.5,-0.5;"..S("Owner: %s"):format(meta:get_string('owner') or "").."]");
@@ -112,7 +112,7 @@ minetest.register_node("cottages:anvil", {
 		end
                 return true;
         end,
-
+--[[
 	allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
 		local meta = minetest.get_meta(pos)
                 if( player and player:get_player_name() ~= meta:get_string('owner' ) and from_list~="input") then
@@ -256,11 +256,14 @@ minetest.register_node("cottages:anvil", {
 --				S('Your workpiece improves.'));
 --		end
 	end,
+	
+	]]
 	is_ground_content = false,
+	
 })
 
 
-
+--[[
 ---------------------------------------------------------------------------------------
 -- crafting receipes
 ---------------------------------------------------------------------------------------
@@ -300,4 +303,4 @@ minetest.register_craft({
                 {cottages.craftitem_steel,cottages.craftitem_steel,cottages.craftitem_steel},
                 {'',                   cottages.craftitem_stick,      ''                   } }
 })
-
+]]
