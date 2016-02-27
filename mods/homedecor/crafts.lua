@@ -205,7 +205,7 @@ minetest.register_craft( {
 })
 
 -- Curtains
-
+--[[
 local curtaincolors = {
 	"red",
 	"green",
@@ -244,7 +244,7 @@ for i in ipairs(mats) do
 	})
 end
 
-
+]]
 -- Kitchen stuff
 
 minetest.register_craft({
@@ -464,6 +464,8 @@ minetest.register_craft( {
 ]]
 -- paintings
 
+
+
 minetest.register_craft({
     output = "homedecor:blank_canvas",
     recipe = {
@@ -657,7 +659,7 @@ for _, color in ipairs(bookcolors) do
 		},
 	})
 end
-
+--[[
 local picture_dyes = {
 	{"dye:brown", "dye:green"}, -- the figure sitting by the tree, wielding a pick
 	{"dye:green", "dye:blue"}	-- the "family photo"
@@ -672,7 +674,7 @@ for i in ipairs(picture_dyes) do
 		},
 	})
 end
-
+]]
 
 --FURNATURE
 minetest.register_craft({

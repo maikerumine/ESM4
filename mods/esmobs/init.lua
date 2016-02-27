@@ -154,17 +154,17 @@ esmobs={}
 	end
 
 --IN CASE THROWING IS NOT INSTALLED, THIS DOSEN'T LOAD MCMOBS
-	if not throwing then
+--	if not throwing then
 		dofile(minetest.get_modpath("esmobs").."/throwing.lua")
 		minetest.register_alias("throwing:arrow_entity", "esmobs:throwing_entity")
 		minetest.register_alias("throwing:bow", "esmobs:bow")
 		minetest.register_alias("throwing:arrow", "esmobs:arrow")
-	end
-	if throwing then
-		minetest.register_alias("esmobs:arrow_entity", "throwing:arrow_entity")
-		minetest.register_alias("esmobs:bow", "throwing:bow")
-		minetest.register_alias("esmobs:arrow", "throwing:arrow")
-	end
+--	end
+--	if throwing then
+--		minetest.register_alias("esmobs:arrow_entity", "throwing:arrow_entity")
+--		minetest.register_alias("esmobs:bow", "throwing:bow")
+--		minetest.register_alias("esmobs:arrow", "throwing:arrow")
+--	end
 
 	print("[ES-Mobs] Extreme")
 	print("[ES-Mobs] Survival")

@@ -1,5 +1,5 @@
 local S = homedecor.gettext
-
+--[[
 homedecor.register("ceiling_tile", {
 	description = S("Drop-Ceiling Tile"),
 	drawtype = 'signlike',
@@ -11,7 +11,7 @@ homedecor.register("ceiling_tile", {
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = { type = "wallmounted" },
 })
-
+]]
 
 homedecor.register("beer_tap", {
 	description = "Beer tap",

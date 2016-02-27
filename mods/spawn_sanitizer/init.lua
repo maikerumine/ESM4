@@ -6,7 +6,7 @@
 spawn_sanitizer = {}
 spawn_sanitizer.cleaned=false
 spawn_sanitizer.timer=0
-
+minetest.register_privilege("sanitizer", { description = "Allows to clean up spawn", give_to_singleplayer = false});
 minetest.registered_nodes["bones:bones"].groups = {dig_immediate=3}
 local facedir_for_bones = 4
 
@@ -76,11 +76,13 @@ minetest.register_abm({
 	end,
 })
 
-minetest.after(75, function(dtime)
-
-	if spawn_sanitizer.cleaned==true then
-		return
-	end
+--minetest.after(75, function(dtime)
+minetest.register_chatcommand("sanitize", {
+	func = function()
+	
+--	if spawn_sanitizer.cleaned==true then
+--		return
+--	end
 
 	local positions1 = minetest.find_nodes_in_area(
 		{x=-20, y=-4, z=-20},
@@ -272,8 +274,13 @@ minetest.after(75, function(dtime)
 	if not spawn_sanitizer.cleaned then
 		spawn_sanitizer.cleaned=true
 		minetest.log("action", "Spawn sanitized!")
+		minetest.chat_send_all("Spawn sanitized!")
 	end
-end)
+--end)
+end,
+})
+
+
 
 -- no more protection blocks at spawn!
 local old_node_place = minetest.item_place

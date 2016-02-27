@@ -10,38 +10,6 @@
 mobs = {}
 mobs.mod = "redo"
 
---minetest.register_alias("esmobs:dirt", "default:gravel")
---minetest.register_alias("esmobs:stone", "default:gravel")
---[[
--- rnd: special stone that disappears after 30 seconds, used by mobs
-minetest.register_node("esmobs:stone", {
-	description = "Stone",
-	tiles = {"default_stone.png"},
-	groups = {cracky=3, stone=1},
-	drop = 'default:cobble',
-	legacy_mineral = true,
-	sounds = default.node_sound_stone_defaults(),
-	on_construct = function(pos)
-		minetest.after(30, function()
-			minetest.set_node(pos, {name = "air"})
-		end)
-	end
-})
-
-minetest.register_node("esmobs:dirt", {
-	description = "Dirt",
-	tiles = {"default_dirt.png"},
-	groups = {crumbly=2, dirt=1},
-	drop = 'default:dirt',
-	legacy_mineral = true,
-	sounds = default.node_sound_stone_defaults(),
-	on_construct = function(pos)
-		minetest.after(30, function()
-			minetest.set_node(pos, {name = "air"})
-		end)
-	end
-})
-]]
 
 -- maikerumine: special stone that disappears after 30 seconds, used by mobs
 minetest.register_node("esmobs:stone", {
@@ -71,8 +39,8 @@ local remove_far = minetest.setting_getbool("remove_far_mobs")
 -- PATHFINDING settings
 local enable_pathfinding = true
 local enable_pathfind_digging = true
-local stuck_timeout = 12 -- how long before mob gets stuck in place and starts searching
-local stuck_path_timeout = 25 -- how long will mob follow path before giving up
+local stuck_timeout = 6 -- how long before mob gets stuck in place and starts searching
+local stuck_path_timeout = 22 -- how long will mob follow path before giving up
 
 --bones settings  maikerumine bones code
 local enable_mob_bones = true
@@ -925,7 +893,7 @@ minetest.register_entity(name, {
 	jump_chance = def.jump_chance or 0,
 	drawtype = def.drawtype, -- DEPRECATED, use rotate instead
 	rotate = math.rad(def.rotate or 0), --  0=front, 90=side, 180=back, 270=side2
-	lifetimer = def.lifetimer or 180, -- 3 minutes
+	lifetimer = def.lifetimer or 600, -- 3 minutes
 	hp_min = def.hp_min or 5,
 	hp_max = def.hp_max or 10,
 	physical = true,
@@ -1105,9 +1073,9 @@ minetest.register_entity(name, {
 		end
 
 		-- never go over 100
-		if self.timer > 100 then
-			self.timer = 1
-		end
+--		if self.timer > 100 then
+--			self.timer = 1
+--		end
 
 		-- node replace check (cow eats grass etc.)
 		replace(self, pos)
@@ -1218,9 +1186,9 @@ minetest.register_entity(name, {
 				and obj.type == "monster" then
 
 					-- attack monster
-					p = obj.object:getpos()
+					local p = obj.object:getpos()  --GLOBAL
 
-					dist = get_distance(p, s)
+					local dist = get_distance(p, s)  --GLOBAL
 
 					if dist < min_dist then
 						min_dist = dist
@@ -1334,10 +1302,12 @@ minetest.register_entity(name, {
 							do_jump(self)
 						end
 
-						set_velocity(self, self.walk_velocity)
+						--set_velocity(self, self.walk_velocity)
+						set_velocity(self, self.run_velocity)
 
 						if self.walk_chance ~= 0 then
 							set_animation(self, "walk")
+							--set_animation(self, "run")
 						end
 					else
 						set_velocity(self, 0)
@@ -2147,23 +2117,24 @@ minetest.register_entity(name, {
 
 			effect(pos, self.blood_amount, self.blood_texture)
 		end
---[[    --YOU WILL BE MISSED BLOCKMEN
+
+
 		-- knock back effect
 		if self.knock_back > 0 then
-
+			local dir = self.object:getvelocity() --maikerumine added this hack
 			local v = self.object:getvelocity()
 			local r = 1.4 - math.min(punch_interval, 1.4)
 			local kb = r * 5
 
 			self.object:setvelocity({
 				x = (dir.x or 0) * kb,
-				y = 2,
+				y = 1.5,
 				z = (dir.z or 0) * kb
 			})
 
 			self.pause_timer = r
 		end
-]]
+
 		-- if skittish then run away
 		if self.runaway == true then
 
@@ -2330,9 +2301,12 @@ minetest.register_entity(name, {
 		-- remove mob when out of range unless tamed
 		if remove_far
 		and self.remove_ok
+		and self.state ~= "run"  --maikerumine to fix dissappearing mobs
+		and self.state ~= "attack"  --maikerumine to fix dissappearing mobs
+		and self.state ~= "stand"  --maikerumine to fix dissappearing mobs
 		and not self.tamed then
 
-			--print ("REMOVED " .. self.name)
+			print ("REMOVED " .. self.name)
 
 			self.object:remove()
 

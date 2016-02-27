@@ -25,7 +25,7 @@ zcg.items_in_group = function(group)
 end
 
 local table_copy = function(table)
-	out = {}
+	local out = {}  --GLOBAL
 	for k,v in pairs(table) do
 		out[k] = v
 	end
@@ -100,9 +100,9 @@ end
 
 zcg.formspec = function(pn)
 	if zcg.need_load_all then zcg.load_all() end
-	page = zcg.users[pn].page
-	alt = zcg.users[pn].alt
-	current_item = zcg.users[pn].current_item
+	local page = zcg.users[pn].page  --GLOBAL
+	local alt = zcg.users[pn].alt  --GLOBAL
+	local current_item = zcg.users[pn].current_item  --GLOBAL
 	local formspec = "size[8,7.5]"
 	.. "button[0,0;2,.5;main;Back]"
 	if zcg.users[pn].history.index > 1 then
@@ -171,7 +171,7 @@ minetest.register_on_joinplayer(function(player)
 end)
 
 minetest.register_on_player_receive_fields(function(player,formname,fields)
-	pn = player:get_player_name();
+	local pn = player:get_player_name();  --maikerumine added local
 	if zcg.users[pn] == nil then zcg.users[pn] = {current_item = "", alt = 1, page = 0, history={index=0,list={}}} end
 	if fields.zcg then
 		inventory_plus.set_inventory_formspec(player, zcg.formspec(pn))

@@ -67,7 +67,7 @@ for i in ipairs(chaircolors) do
 	local color2 = chaircolors[i][1]
 	local name = S(chaircolors[i][2])
 	local chairtiles = {
-		defaultwood,
+		default_wood,
 		"wool"..color..".png",
 	}
 

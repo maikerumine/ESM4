@@ -27,6 +27,18 @@ local function hurt_cactus() -- cactus tweak
 end
 hurt_cactus();
 
+-- Over time Cobble placed in water changes to Mossy Cobble
+--From Etheral
+minetest.register_abm({
+	nodenames = {"default:cobble"},
+	neighbors = {"group:water"},
+	interval = 17,
+	chance = 100,
+	catch_up = false,
+	action = function(pos, node)
+		minetest.swap_node(pos, {name = "default:mossycobble"})
+	end
+})
 
 --TECHNIC NODES
 minetest.register_node( "es:granite", {
@@ -367,7 +379,8 @@ minetest.register_node("es:stone_with_infinium", {
 	description = "Infinium Ore - Slightly Radioactive",
 	tiles = {"default_stone.png^infinium_ore.png"},
 	is_ground_content = true,
-	groups = {cracky=1,level = 2, radioactive = (state == "source" and 2 or 2)},
+	--groups = {cracky=1,level = 2, radioactive = (state == "source" and 2 or 2)},
+	groups = {cracky=1,level = 2, radioactive = 2},
 	drop = "es:infinium_goo",
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -376,7 +389,8 @@ minetest.register_node("es:stone_with_purpellium", {
 	description = "Purlellium Ore - Oddly interesting",
 	tiles = {"default_stone.png^purpellium_ore.png"},
 	is_ground_content = true,
-	groups = {cracky=2,level = 2,fall_damage_add_percent = -1000, radioactive = (state == "source" and 2 or 2)},
+	--groups = {cracky=2,level = 2,fall_damage_add_percent = -1000, radioactive = (state == "source" and 2 or 2)},
+	groups = {cracky=2,level = 2,fall_damage_add_percent = -1000, radioactive = 2},
 	drop = "es:purpellium_lump",
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -639,7 +653,8 @@ minetest.register_node("es:desert_stone_with_coal", {
 minetest.register_node("es:depleted_uranium", {
 	description = "Depleted Uranium Ore RADIOACTIVE",
 	tiles = {"default_stone.png^uranium_ore.png"},
-	groups = {cracky = 3, radioactive = (state == "source" and 3 or 2)},
+	--groups = {cracky = 3, radioactive = (state == "source" and 3 or 2)},
+	groups = {cracky = 3, radioactive = 3},
 	drop = 'es:depleted_uranium_lump',
 	sounds = default.node_sound_stone_defaults(),
 	light_source = 12,
@@ -696,7 +711,8 @@ minetest.register_node("es:toxic_water_source", {
 	liquid_viscosity =3,
 	damage_per_second = 3*2,
 	post_effect_color = {a = 255, r = 30, g = 60, b = 90},
-	groups = {water = 3, liquid = 3, puts_out_fire = 1, radioactive = (state == "source" and 2 or 2),},
+	--groups = {water = 3, liquid = 3, puts_out_fire = 1, radioactive = (state == "source" and 2 or 2),},
+	groups = {water = 3, liquid = 3, puts_out_fire = 1, radioactive = 2},
 })
 
 --NOTES:
@@ -749,7 +765,8 @@ minetest.register_node("es:toxic_water_flowing", {
 	damage_per_second = 2*2,
 	post_effect_color = {a = 255, r = 30, g = 60, b = 90},
 	groups = {water = 3, liquid = 3, puts_out_fire = 1,
-		not_in_creative_inventory = 1, radioactive = (state == "source" and 2 or 2),},
+		--not_in_creative_inventory = 1, radioactive = (state == "source" and 2 or 2),},
+		not_in_creative_inventory = 1, radioactive =2},
 })
 --FOR REF
 -- Quicksand (old style, sinking inside shows black instead of yellow effect,

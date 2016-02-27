@@ -21,6 +21,7 @@ minetest.register_alias("lavender:lavender", "flowers:viola")
 minetest.register_alias("jdukebox:box", "default:diamondblock")
 
 
+
 minetest.register_alias("meru:destone", "default:desert_stone")
 minetest.register_alias("meru:stone", "default:sandstone")
 minetest.register_alias("default:desert_stone_with_iron", "es:desert_stone_with_iron")

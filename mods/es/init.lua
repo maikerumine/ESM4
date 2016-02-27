@@ -23,8 +23,8 @@ es.modpath = modpath
 -- REMOVE NODES DO NOT USE IN YOUR WORLD
 -- Alias
 --dofile(modpath.."/technodrem.lua")
-dofile(modpath.."/moreorerem.lua")
-dofile(modpath.."/alias.lua")
+--dofile(modpath.."/moreorerem.lua")
+--dofile(modpath.."/alias.lua")
 
 -- Anticheat by RND
 dofile(modpath.."/anticheat.lua")
