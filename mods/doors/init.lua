@@ -421,7 +421,7 @@ minetest.register_craft({
 	}
 })
 
-
+]]
 ----trapdoor----
 
 function doors.register_trapdoor(name, def)
@@ -500,4 +500,4 @@ minetest.register_craft({
 		{'', '', ''},
 	}
 })
-]]
+
