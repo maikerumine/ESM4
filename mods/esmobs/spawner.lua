@@ -1,4 +1,4 @@
---esmobs v01.0
+--esmobs v01.8
 --maikerumine
 --made for Extreme Survival game
 --License for code WTFPL
@@ -56,15 +56,15 @@ minetest.register_craft({
 	}
 })
 
---mobs:register_spawn("esmobs:dirt2", "esmobs:cursed_stone", 4, -1, 2, 40, 500, -500)  --comment out to disable
+mobs:register_spawn("esmobs:badplayer23", "esmobs:cursed_stone", 4, -1, 2, 10, 500, -500)  --comment out to disable
 --mobs:register_spawn("esmobs:stone_monster2", "esmobs:cursed_stone", 4, -1, 2, 40, 500, -500)  --comment out to disable
-mobs:register_spawn("esmobs:Jasmine", {"esmobs:cursed_stone"}, 5, -1, 2, 10, 500, -500)  --comment out to disable
+--mobs:register_spawn("esmobs:Jasmine", {"esmobs:cursed_stone"}, 5, -1, 2, 10, 500, -500)  --comment out to disable
 
---mobs:register_spawn("esmobs:SepiaSam", "esmobs:blessed_stone", 4, -1, 2, 40, 500, -500)  --comment out to disable
+mobs:register_spawn("esmobs:SepiaSam", "esmobs:blessed_stone", 4, -1, 2, 10, 500, -500)  --comment out to disable
 --mobs:register_spawn("esmobs:Maikerumine", "esmobs:blessed_stone", 4, -1, 2, 40, 500, -500)  --comment out to disable
-mobs:register_spawn("esmobs:Candy", {"esmobs:blessed_stone"}, 5, -1, 2, 10, 500, -500)  --comment out to disable
+mobs:register_spawn("esmobs:Candy", {"esmobs:blessed_stone"}, 4, -1, 2, 10, 500, -500)  --comment out to disable
 
---mobs:register_spawn("esmobs:oerkkii", "esmobs:cursed_stone", 4, -1, 2, 2, 22, -500)  --comment out to disable
+mobs:register_spawn("esmobs:oerkki", "esmobs:cursed_stone", 4, -1, 2, 10, 500, -500)  --comment out to disable
 --mobs:register_spawn("esmobs:herobrines_bloody_ghost", "esmobs:cursed_stone", 4, -1, 2, 1, 500, -500)
 
 

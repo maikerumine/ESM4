@@ -1,10 +1,40 @@
---esmobs v0.1.0
+--esmobs v0.1.8
 --maikerumine
 --made for Extreme Survival game
 --Borrowed code from throwing:
 --https://github.com/PilzAdam/throwing
 --License: WTFPL
 
+-- fireball (weapon)
+mobs:register_arrow("esmobs:fireball", {
+	visual = "sprite",
+	visual_size = {x = 1, y = 1},
+	textures = {"mobs_fireball.png"},
+	velocity = 10,
+
+	-- direct hit, no fire... just plenty of pain
+	hit_player = function(self, player)
+		player:punch(self.object, 1.0, {
+			full_punch_interval = 1.0,
+			damage_groups = {fleshy = 8},
+		}, nil)
+	end,
+
+	hit_mob = function(self, player)
+		player:punch(self.object, 1.0, {
+			full_punch_interval = 1.0,
+			damage_groups = {fleshy = 8},
+		}, nil)
+	end,
+
+	-- node hit, bursts into flame
+	hit_node = function(self, pos, node)
+		--mobs:explode(pos, 1, 1, 0)  --this deletes nodes
+	end
+})
+
+
+--arrow (weapon)
 minetest.register_craftitem("esmobs:arrow", {
 	description = "ESM Arrow",
 	inventory_image = "arrow.png",

@@ -15,16 +15,11 @@ mobs.mod = "redo"
 minetest.register_node("esmobs:stone", {
 	description = "Stone",
 	tiles = {"default_stone.png"},
-	is_ground_content = false,
+	--is_ground_content = false,
+	--drop = nil,
 	groups = {snappy = 3, leafdecay = 3, flammable = 2, leaves = 1},
 })
 
-minetest.register_node("esmobs:dirt", {
-	description = "Dirt",
-	tiles = {"default_dirt.png"},
-	is_ground_content = false,
-	groups = {snappy = 3, leafdecay = 3, flammable = 2, leaves = 1},
-})
 
 
 
@@ -38,9 +33,9 @@ local spawn_protected = tonumber(minetest.setting_get("mobs_spawn_protected")) o
 local remove_far = minetest.setting_getbool("remove_far_mobs")
 -- PATHFINDING settings
 local enable_pathfinding = true
-local enable_pathfind_digging = true
-local stuck_timeout = 6 -- how long before mob gets stuck in place and starts searching
-local stuck_path_timeout = 22 -- how long will mob follow path before giving up
+local enable_pathfind_digging = false
+local stuck_timeout = 3 -- how long before mob gets stuck in place and starts searching
+local stuck_path_timeout = 12 -- how long will mob follow path before giving up
 
 --bones settings  maikerumine bones code
 local enable_mob_bones = true
@@ -258,7 +253,7 @@ if enable_mob_bones == false then
 	end
 end
 --BREAK
-
+--[[
 	-- drop items when dead
 	local obj
 	local pos = self.object:getpos()
@@ -281,7 +276,7 @@ end
 			end
 		end
 	end
-
+]]
 	-- play death sound
 	if self.sounds.death then
 
@@ -2302,8 +2297,8 @@ minetest.register_entity(name, {
 		if remove_far
 		and self.remove_ok
 		and self.state ~= "run"  --maikerumine to fix dissappearing mobs
-		and self.state ~= "attack"  --maikerumine to fix dissappearing mobs
-		and self.state ~= "stand"  --maikerumine to fix dissappearing mobs
+		--and self.state ~= "attack"  --maikerumine to fix dissappearing mobs
+		--and self.state ~= "stand"  --maikerumine to fix dissappearing mobs
 		and not self.tamed then
 
 			print ("REMOVED " .. self.name)
