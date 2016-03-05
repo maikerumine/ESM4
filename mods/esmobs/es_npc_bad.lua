@@ -1,73 +1,7 @@
---esmobs v0.1.8
+--esmobs v1.3
 --maikerumine
 --made for Extreme Survival game
-
 --License for code is WTFPL
-
---REFERENCE
---function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
-
-
-
---[[  --ORG
-mobs:register_spawn("esmobs:badplayer2", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer3", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer4", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer6", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer7", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer8", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer9", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer10", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer11", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer12", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer16", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer18", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer22", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer23", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer24", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer25", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer26", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer27", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer28", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer29", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer30", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer31", {"default:dirt_with_grass","default:stone","meru:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:badplayer35", {"default:sandstone","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, -20)
-mobs:register_spawn("esmobs:Mr_Black", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:Jasmine", {"default:obsidian","es:infiniumblock","es:stone_with_infinium","default:cobble","default:dirt_with_dry_grass"}, 7, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:Infinium_Monster", {"default:dirt_with_grass","default:stone","meru:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 9, -1, 14000, 1, 30000)
-]]
-
-
---LAG
---mobs:register_spawn_near("mobs:griefer_ghost", "default:stone", 4, -1, 2)
---mobs:register_spawn("mobs:stone_monster", "default:stone", 3, -1, 9000, 48, 500, 0)
-mobs:register_spawn("esmobs:badplayer2", "default:dirt_with_grass", 4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer3", "default:stone", 4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer4", "default:stonebrick", 4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer6", "default:cobble", 4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer7", "default:dirt_with_grass", 4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer8","default:cobble", 4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer9",  "default:stonebrick",4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer10", "default:stone",4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer11", "default:dirt_with_grass",4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer12", "default:cobble", 4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer16", "default:cobble", 4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer18", "default:dirt_with_dry_grass", 4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer22", "default:dirt_with_grass", 4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer23", "default:stonebrick", 4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer24", "default:stone", 4, -1, 14000, 1, 50,-6000)
-mobs:register_spawn("esmobs:badplayer25", "default:stonebrick", 4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer26", "default:cobble", 4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer27", "default:stone", 4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer28", "default:stonebrick", 4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer29", "default:dirt_with_grass", 4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer30","default:stone", 4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer31", "default:dirt_with_grass", 4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:badplayer35", "default:sandstone", 4, -1, 14000, 1, -20,0)
-mobs:register_spawn("esmobs:Mr_Black","default:desert_sand", 4, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:Jasmine", "default:obsidian", 7, -1, 14000, 1, 31000,0)
-mobs:register_spawn("esmobs:Infinium_Monster", "default:stone", 9, -1, 14000, 1, 30000,0)
 
 -------------------------
 --BAD NPC'S
@@ -1624,4 +1558,67 @@ mobs:register_mob("esmobs:Infinium_Monster", {
 		attack = "default_punch3",
 		},
 })
+
+
+--REFERENCE
+--function mobs:spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
+--mobs:register_spawn("mobs:dirt_monster", {"default:dirt_with_grass", "ethereal:gray_dirt"}, 7, 0, 7000, 2, 31000)
+
+--NOTE: ALWAYS PUT THE REGISTER_SPAWN BELOW THE REGISTER_ENTITY!!!!!
+--[[
+mobs:register_spawn("esmobs:badplayer2", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer3", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer4", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer6", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer7", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer8", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer9", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer10", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer11", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer12", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer16", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer18", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer22", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer23", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer24", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer25", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer26", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer27", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer28", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer29", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer30", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer31", {"default:dirt_with_grass","default:stone","meru:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:badplayer35", {"default:sandstone","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000, -10000, 3000)
+mobs:register_spawn("esmobs:Mr_Black", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:Jasmine", {"default:obsidian","es:infiniumblock","es:stone_with_infinium","default:cobble","default:dirt_with_dry_grass"},{"air"}, 7, -1, 14000,-10000,3000)
+mobs:register_spawn("esmobs:Infinium_Monster", {"default:dirt_with_grass","default:stone","meru:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 14000, -10000, -3000)
+]]
+
+mobs:register_spawn("esmobs:badplayer2", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer3", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer4", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer6", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer7", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer8", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer9", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer10", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer11", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer12", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer16", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer18", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer22", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer23", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer24", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer25", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer26", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer27", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer28", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer29", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer30", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer31", {"default:dirt_with_grass","default:stone","meru:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:badplayer35", {"default:sandstone","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, -20)
+mobs:register_spawn("esmobs:Mr_Black", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:Jasmine", {"default:obsidian","es:infiniumblock","es:stone_with_infinium","default:cobble","default:dirt_with_dry_grass"}, 7, -1, 14000, 1, -1000)
+mobs:register_spawn("esmobs:Infinium_Monster", {"default:dirt_with_grass","default:stone","meru:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 9, -1, 14000, 1, -3000)
+
 

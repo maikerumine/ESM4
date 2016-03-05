@@ -29,17 +29,16 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'default:stick 4',
+	output = 'default:aspen_wood 4',
 	recipe = {
-		{'group:wood'},
+		{'default:aspen_tree'},
 	}
 })
 
 minetest.register_craft({
-	output = 'default:fence_wood 2',
+	output = 'default:stick 4',
 	recipe = {
-		{'group:stick', 'group:stick', 'group:stick'},
-		{'group:stick', 'group:stick', 'group:stick'},
+		{'group:wood'},
 	}
 })
 
@@ -572,17 +571,6 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'default:mese_crystal',
-	recipe = {
-		{'default:mese_crystal_fragment', 'default:mese_crystal_fragment', 'default:mese_crystal_fragment'},
-		{'default:mese_crystal_fragment', 'default:mese_crystal_fragment', 'default:mese_crystal_fragment'},
-		{'default:mese_crystal_fragment', 'default:mese_crystal_fragment', 'default:mese_crystal_fragment'},
-	}
-})
-
-
-
-minetest.register_craft({
 	output = 'default:meselamp 1',
 	recipe = {
 		{'', 'default:mese_crystal',''},
@@ -645,18 +633,6 @@ minetest.register_craft({
 		{'default:snowblock'},
 	}
 })
-
-minetest.register_craft({
-	output = 'default:desert_cobble 3',
-	recipe = {
-	{'default:clay_brick',},
-    {'default:cobble', },
-    {'default:cobble', },
-}
-})
-
-
-
 
 --
 -- Crafting (tool repair)

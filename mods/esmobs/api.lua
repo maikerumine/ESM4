@@ -1,4 +1,4 @@
---esmobs v01.19
+--esmobs v1.3
 --maikerumine
 --made for Extreme Survival game
 --License for code WTFPL
@@ -10,7 +10,7 @@
 mobs = {}
 mobs.mod = "redo"
 
-
+--[[
 -- maikerumine: special stone that disappears after 30 seconds, used by mobs
 minetest.register_node("esmobs:stone", {
 	description = "Stone",
@@ -19,7 +19,7 @@ minetest.register_node("esmobs:stone", {
 	--drop = nil,
 	groups = {snappy = 3, leafdecay = 3, flammable = 2, leaves = 1},
 })
-
+]]
 
 
 
@@ -779,7 +779,8 @@ function smart_mobs(self, s, p, dtime)
 				if s.y < p1.y then
 
 					if not minetest.is_protected(s, "") then
-						minetest.set_node(s, {name = "esmobs:stone"})
+						--minetest.set_node(s, {name = "esmobs:stone"})
+						minetest.set_node(s, {name = "default:leaves"})
 					end
 
 					local sheight = math.ceil(self.collisionbox[5]) + 1
@@ -2344,8 +2345,7 @@ end -- END mobs:register_mob function
 
 mobs.spawning_mobs = {}
 
-function mobs:spawn_specific(name, nodes, neighbors, min_light, max_light,
-	interval, chance, active_object_count, min_height, max_height)
+function mobs:spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
 
 	mobs.spawning_mobs[name] = true
 

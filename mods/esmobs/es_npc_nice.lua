@@ -1,34 +1,11 @@
---esmobs v0.1.8
+--esmobs v1.3
 --maikerumine
 --made for Extreme Survival game
 --License for code is WTFPL
 
---REFERENCE
---mobs:register_spawn("mobs:dirt_monster", {"default:dirt_with_grass", "ethereal:gray_dirt"}, 7, 0, 7000, 2, 31000)
---function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
-
 --friendly npc drops when right click with gold lump.
 mobs.npc_drops = { "default:pick_steel", "esmobs:meat", "default:sword_steel", "default:shovel_steel", "farming:bread", "default:wood" }--Added 20151121
 mobs.npc2_drops = { "default:pick_mese", "esmobs:meat", "default:sword_diamond", "default:pick_diamond", "farming:bread", "default:wood" }--Added 20151121
-
-mobs:register_spawn("esmobs:Sam","group:cracky", 12, 7, 14000, 1, 200,-200)
-mobs:register_spawn("esmobs:John","group:cracky", 12, 7, 14000, 1,  200,-200)
-mobs:register_spawn("esmobs:Janette", "group:cracky", 12, 7, 14000, 1,  200,-200)
-mobs:register_spawn("esmobs:Crybaby", "group:cracky", 12, 7, 14000, 1, 200,-200)
-mobs:register_spawn("esmobs:SepiaSam", "group:cracky", 12, 7, 14000, 1,  200,-200)
-mobs:register_spawn("esmobs:OGSam", "group:cracky", 12, 7, 14000, 1,  200,-200)
-mobs:register_spawn("esmobs:Vanessa","group:cracky", 12, 7, 14000, 1,  200,-200)
-mobs:register_spawn("esmobs:FemaleSam", "group:cracky", 12, 7, 14000, 1,  200,-200)
-mobs:register_spawn("esmobs:Battleboy", "group:cracky", 12, 7,14000, 1, 200,-200)
-mobs:register_spawn("esmobs:Wilbert", "group:cracky", 12, 7, 14000, 1,  200,-200)
-mobs:register_spawn("esmobs:Thelma", "group:cracky", 12, 7, 14000, 1,  200,-200)
-mobs:register_spawn("esmobs:DrifterDan", "group:cracky", 12, 7,14000, 1, 31000)
-mobs:register_spawn("esmobs:Mr_White","group:cracky", 12, 7, 14000, 1,  200,-200)
-mobs:register_spawn("esmobs:Mr_Pink", "group:cracky", 12, 7, 14000, 1,  200,-200)
-mobs:register_spawn("esmobs:Candy","group:cracky", 12, 7, 14000, 1, 200,-200)
-mobs:register_spawn("esmobs:Infiniumman", "group:cracky", 12, 7, 14000, 1, 200,-200)
-mobs:register_spawn("esmobs:Maikerumine", "group:cracky", 12, 7, 14000, 1, 200,-200)
-
 
 -------------------------
 --GOOD NPC'S
@@ -135,7 +112,7 @@ mobs:register_mob("esmobs:Sam", {
 				end)
 
 			end
-		end	
+		end
 	end,
 
 	attack_type = "dogfight",
@@ -889,8 +866,8 @@ mobs:register_mob("esmobs:Vanessa", {
 		end
 	end,
 
-	--attack_type = "dogfight",
-	attack_type = "dogshoot",
+	attack_type = "dogfight",
+	--attack_type = "dogshoot",
 	shoot_interval = 0.7,
 	arrow = "esmobs:axebullet",
 	shoot_offset = 2,
@@ -2065,8 +2042,8 @@ mobs:register_mob("esmobs:Maikerumine", {
 	walk_velocity = 3,
 	run_velocity = 5,
 	damage = 9,
-	--attack_type = "dogfight",
-	attack_type = "shoot",
+	attack_type = "dogfight",
+	--attack_type = "shoot",
 	shoot_interval = 0.5,
 	arrow = "esmobs:bookbullet",
 	shoot_offset = 2,
@@ -2175,3 +2152,50 @@ mobs:register_mob("esmobs:Maikerumine", {
 	group_attack = true,
 	step = 1,
 })
+
+
+--REFERENCE
+--function mobs:spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
+--mobs:register_spawn("mobs:dirt_monster", {"default:dirt_with_grass", "ethereal:gray_dirt"}, 7, 0, 7000, 2, 31000)
+
+--NOTE: ALWAYS PUT THE REGISTER_SPAWN BELOW THE REGISTER_ENTITY!!!!!
+--[[
+mobs:register_spawn("esmobs:Sam",{"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 14000, 1, -200,2000)
+mobs:register_spawn("esmobs:John",{"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 14000, 1,  -200,2000)
+mobs:register_spawn("esmobs:Janette", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 14000, 1,  -200,2000)
+mobs:register_spawn("esmobs:Crybaby", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 14000, 1, -200,2000)
+mobs:register_spawn("esmobs:SepiaSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 14000, 1,  -200,2000)
+mobs:register_spawn("esmobs:OGSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 14000, 1,  -200,2000)
+mobs:register_spawn("esmobs:Vanessa",{"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 14000, 1,  -200,2000)
+mobs:register_spawn("esmobs:FemaleSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 14000, 1,  -200,2000)
+mobs:register_spawn("esmobs:Battleboy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7,14000, 1, -200,2000)
+mobs:register_spawn("esmobs:Wilbert", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 14000, 1,  -200,2000)
+mobs:register_spawn("esmobs:Thelma", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 14000, 1,  -200,2000)
+mobs:register_spawn("esmobs:DrifterDan", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7,14000, 1,-200, 2000)
+mobs:register_spawn("esmobs:Mr_White",{"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 14000, 1,  -200,2000)
+mobs:register_spawn("esmobs:Mr_Pink", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 14000, 1,  -200,2000)
+mobs:register_spawn("esmobs:Candy",{"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 14000, 1, -200,2000)
+mobs:register_spawn("esmobs:Infiniumman", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 14000, 1, -200,2000)
+mobs:register_spawn("esmobs:Maikerumine", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 14000, 1, -200,2000)
+]]
+mobs:register_spawn("esmobs:Sam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7, 14000, 1, 31000)
+mobs:register_spawn("esmobs:John", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7, 14000, 1, 31000)
+mobs:register_spawn("esmobs:Janette", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7, 14000, 1, 31000)
+mobs:register_spawn("esmobs:Crybaby", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7, 14000, 1, 31000)
+mobs:register_spawn("esmobs:SepiaSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7, 14000, 1, 31000)
+mobs:register_spawn("esmobs:OGSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7, 14000, 1, 31000)
+mobs:register_spawn("esmobs:Vanessa", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7, 14000, 1, 31000)
+mobs:register_spawn("esmobs:FemaleSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7, 14000, 1, 31000)
+mobs:register_spawn("esmobs:Battleboy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7,14000, 1, 31000)
+mobs:register_spawn("esmobs:Wilbert", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble"}, 12, 7, 14000, 1, 31000)
+mobs:register_spawn("esmobs:Thelma", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble"}, 12, 7, 14000, 1, 31000)
+mobs:register_spawn("esmobs:DrifterDan", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7,14000, 1, 31000)
+mobs:register_spawn("esmobs:Mr_White", {"default:dirt_with_grass", "ethereal:green_dirt","default:grass","default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7, 14000, 1, 31000)
+mobs:register_spawn("esmobs:Mr_Pink", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7, 14000, 1, 31000)
+mobs:register_spawn("esmobs:Candy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 7, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:Infiniumman", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 20, 1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:Maikerumine", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 20, 1, 14000, 1, 31000)
+
+
+
+

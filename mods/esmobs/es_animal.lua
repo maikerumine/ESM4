@@ -1,22 +1,7 @@
---esmobs v01.8
+--esmobs v1.3
 --maikerumine
 --made for Extreme Survival game
 --License for code is WTFPL
-
---REFERENCE
---function mobs:spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
---function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
-
-mobs:register_spawn("esmobs:rat", "default:stone", 20, -1, 10000, 2, 10,-1000)
-mobs:register_spawn("esmobs:sheep_white", "default:dirt_with_grass", 20, 10, 15000, 1, 300,-20)
-mobs:register_spawn("esmobs:pumba", "default:dirt_with_dry_grass", 20, 10, 18000, 1, 310,1)
-mobs:register_spawn("esmobs:cow", "default:dirt_with_grass", 20, 10, 11000, 1, 200,-5)
-mobs:register_spawn("esmobs:chicken", "default:dirt_with_grass", 20, 12, 17000, 2, 3100,-50)
-mobs:register_spawn("esmobs:horse", "default:dirt_with_dry_grass", 20, 15, 17000, 1, 110,-5)
-mobs:register_spawn("esmobs:horse2", "default:dirt_with_dry_grass", 20, 15, 17000, 1,  110,-5)
-mobs:register_spawn("esmobs:horse3", "default:desert_sand", 20, 15, 17000, 1,  110,-5)
-
-
 
 ------------------------------
 --MINETEST ANIMALS
@@ -771,3 +756,31 @@ mobs:register_mob("esmobs:horse3", {
 		end
 	end,
 })
+
+
+--REFERENCE
+--function mobs:spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
+--mobs:register_spawn("mobs:dirt_monster", {"default:dirt_with_grass", "ethereal:gray_dirt"}, 7, 0, 7000, 2, 31000)
+
+--NOTE: ALWAYS PUT THE REGISTER_SPAWN BELOW THE REGISTER_ENTITY!!!!!
+--[[
+mobs:register_spawn("esmobs:rat", {"default:stone"},{"air"}, 14, -1, 10000, 2, -1000,10)
+mobs:register_spawn("esmobs:sheep_white", {"default:dirt_with_grass"},{"air"}, 14, 10, 15000, 1, -30,300)
+mobs:register_spawn("esmobs:pumba", {"default:dirt_with_dry_grass"},{"air"}, 14, 10, 18000, 1, -2,150)
+mobs:register_spawn("esmobs:cow", {"default:dirt_with_grass"},{"air"}, 14, 10, 11000, 1, -2,120)
+mobs:register_spawn("esmobs:chicken", {"default:dirt_with_grass"},{"air"}, 14, 12, 17000, 2, -12,50)
+mobs:register_spawn("esmobs:horse", {"default:dirt_with_dry_grass"},{"air"}, 14, 10, 17000, 1, 15,25)
+mobs:register_spawn("esmobs:horse2", {"default:dirt_with_dry_grass"},{"air"}, 14, 10, 17000, 1,  75,125)
+mobs:register_spawn("esmobs:horse3", {"default:desert_sand"},{"air"}, 14, 10, 17000, 1,  15,25)
+]]
+
+mobs:register_spawn("esmobs:rat", {"default:dirt_with_grass", "default:stone"}, 20, -1, 10000, 2, 14)
+mobs:register_spawn("esmobs:sheep_white", {"default:dirt_with_grass", "ethereal:green_dirt"}, 20, 10, 15000, 1, 31000)
+mobs:register_spawn("esmobs:pumba", {"default:dirt_with_grass","default:dirt_with_dry_grass"}, 20, 10, 18000, 1, 25)
+mobs:register_spawn("esmobs:cow", {"default:dirt_with_grass"}, 20, 10, 11000, 1, 30)
+mobs:register_spawn("esmobs:chicken", {"default:dirt_with_grass"}, 20, 12, 17000, 2, 55)
+mobs:register_spawn("esmobs:horse", {"default:dirt_with_dry_grass"}, 20, 12, 17000, 1, 12)
+mobs:register_spawn("esmobs:horse2", {"default:dirt_with_dry_grass"}, 20, 12, 17000, 1, 31000)
+mobs:register_spawn("esmobs:horse3", {"default:desert_sand"}, 20, 8, 17000, 1, 5)
+mobs:register_spawn("esmobs:chickoboo", {"default:dirt_with_grass", "ethereal:bamboo_dirt"}, 15, 10, 12000, 1, 31000)
+

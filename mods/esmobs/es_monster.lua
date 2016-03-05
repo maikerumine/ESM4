@@ -1,43 +1,7 @@
---esmobs v0.1.8
+--esmobs v1.3
 --maikerumine
 --made for Extreme Survival game
 --License for code is WTFPL
-
---REFERENCE
---nssm:spawn_specific("nssm:phoenix", {"air"}, {"air"}, 10, 20, 120, 1200000, 1, 10, 40)
---function mobs:spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
---function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
-
---mobs:register_spawn_near("mobs:griefer_ghost", "default:stone", 4, -1, 2)
---mobs:register_spawn("mobs:stone_monster", "default:stone", 3, -1, 9000, 48, 500, 0)
-
-mobs:register_spawn("esmobs:dungeon_master", "default:stone", 2, -1, 7000, 2, -70,-6000)
-mobs:register_spawn("esmobs:tree_monster", "default:jungleleaves", 5, 0, 14000, 1, 31000,-6000)
-mobs:register_spawn("esmobs:sand_monster", "group:sand",4, -1, 14000, 1, 31000,-6000)
-mobs:register_spawn("esmobs:stone_monster", "default:stone", 5, -1, 9000, 10, 500,-6000)
-mobs:register_spawn("esmobs:oerkki", "default:stone", 4, -1, 2000, 3, -50,-6000)
-mobs:register_spawn("esmobs:dirt", "default:dirt_with_grass", 5, -1, 11000, 2, 500,-600)
-mobs:register_spawn("esmobs:spider", "group:choppy", 6, -1, 24000, 1, 71,-6000)
-mobs:register_spawn("esmobs:applmons", "default:stone", 6, -1, 4000, 5, -30,-10000)
-mobs:register_spawn("esmobs:herobrines_bloody_ghost", "default:stone", 4, -1, 22000, 1, -6110,-10000)
-mobs:register_spawn("esmobs:bone_monster","default:stone",6, -1, 17000, 3, 130,-6000)
-mobs:register_spawn("esmobs:icemon", "default:ice", 5, -1, 14000, 1, 3100,-60)
-mobs:register_spawn("esmobs:snowmon", "default:snow", 5, -1, 14000, 12, 31000,-10)
---mobs:register_spawn("esmobs:watermon", {"default:water_source","default:water_flowing"}, 5, -1, 14000, 5, -120,-6000)
-mobs:register_spawn("esmobs:dirt2", "default:stone", 5, -1, 14000, 2, -100,-6000)
-mobs:register_spawn("esmobs:stone_monster2", "default:stone", 5, -1, 14000, 3, -500,-6000)
-mobs:register_spawn("esmobs:chickoboo", "default:dirt_with_dry_grass", 15, 10, 12000, 1, 31000,0)
---mobs:spawn_specific("esmobs:phoenix", {"air"},{"air"}, 2, -1, 30, 18000, 1, 5, 40)
---mobs:register_spawn("esmobs:paniki", "air", 3, -1, 30, 8000, 1, 5, 40)
---mobs:spawn_specific("esmobs:bomber", {"air"},{"air"}, 0, 6, 30, 25000, 1, 90, 20)
-
-
-
-
-
-
-
-
 
 -------------------------
 --MINETEST MOBS
@@ -228,7 +192,7 @@ mobs:register_mob("esmobs:stone_monster", {
 		random = "mobs_stonemonster",
 	},
 	walk_velocity = 0.5,
-	run_velocity = 2.5,
+	run_velocity = 1.5,
 	jump = true,
 	floats = 0,
 	view_range = 15,
@@ -1134,3 +1098,54 @@ mobs:register_mob("esmobs:chickoboo", {
 	end,
 })
 
+--mobs:spawn_specific("esmobs:phoenix", {"air"},{"air"}, 2, -1, 30, 15000, 1, 15, 40)
+--REFERENCE
+--function mobs:spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
+--mobs:register_spawn("mobs:dirt_monster", {"default:dirt_with_grass", "ethereal:gray_dirt"}, 7, 0, 7000, 2, 31000)
+--mobs:register_spawn("esmobs:stone_monster", {"default:stone", "bedrock2:bedrock"}, 5, 2, 9000, 10, 500)
+
+--mobs:register_spawn_near("mobs:griefer_ghost", "default:stone", 4, -1, 2)
+--mobs:register_spawn("mobs:stone_monster", "default:stone", 3, -1, 9000, 48, 500, 0)
+
+--NOTE: ALWAYS PUT THE REGISTER_SPAWN BELOW THE REGISTER_ENTITY!!!!!
+--mobs:register_spawn("esmobs:dungeon_master", {"default:stone"},{"air"}, 2, -1, 7000, 2, -7000,-600)
+--mobs:register_spawn("esmobs:tree_monster", {"default:jungleleaves"},{"air"}, 5, -1, 14000, 1, -31,100)
+--mobs:register_spawn("esmobs:sand_monster", {"group:sand"},{"air"}, 4, -1, 14000, 1, -20,120)
+--[[
+mobs:spawn_specific("esmobs:stone_monster", {"default:stone"},{"air"}, 4, -1,2, 9000, 10, -5,3000)
+mobs:register_spawn("esmobs:oerkki", {"default:stone"},{"air"}, 4, -1, 2000, 3, -7000,-60)
+mobs:register_spawn("esmobs:dirt", {"default:dirt_with_grass"},{"air"}, 5, -1, 11000, 2, -100,3000)
+mobs:register_spawn("esmobs:spider", {"group:choppy"},{"air"}, 6, -1, 24000, 1, -71,6000)
+mobs:register_spawn("esmobs:applmons", {"default:stone"},{"air"}, 6, -1, 4000, 5, -3000,-30)
+mobs:register_spawn("esmobs:herobrines_bloody_ghost", {"default:stone"},{"air"}, 4, -1, 22000, 1, -31000,-6100)
+mobs:register_spawn("esmobs:bone_monster",{"default:stone"},{"air"},6, -1, 17000, 3, -8000,100)
+mobs:register_spawn("esmobs:icemon", {"default:ice"},{"air"}, 5, -1, 14000, 1, -3100,2000)
+mobs:register_spawn("esmobs:snowmon", {"default:snow"},{"air"}, 5, -1, 14000, 12, -3100,500)
+mobs:register_spawn("esmobs:watermon", {"default:water_source","default:water_flowing"},{"air"}, 5, -1, 14000, 5, -10000,-1000)
+mobs:register_spawn("esmobs:dirt2", {"default:stone"},{"air"}, 5, -1, 14000, 2, -10000,-140)
+mobs:register_spawn("esmobs:stone_monster2", {"default:stone"},{"air"}, 5, -1, 14000, 3, -31000,-600)
+mobs:register_spawn("esmobs:chickoboo", {"default:dirt_with_dry_grass"},{"air"}, 15, 10, 12000, 1, -31,50)
+--mobs:spawn_specific("esmobs:phoenix", {"air"},{"air"}, 2, -1, 30, 18000, 1, 15, 140)
+--mobs:register_spawn("esmobs:paniki", {"air"},{"air"}, 3, -1, 30, 8000, 1, 15, 140)
+--mobs:spawn_specific("esmobs:bomber", {"air"},{"air"}, 3, -1, 30, 25000, 1, 15, 2000)
+]]
+--function mobs:spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
+--function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
+mobs:register_spawn("esmobs:spider", {"default:stone" ,"default:cobble","group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 6, -1, 24000, 1, 31000)
+mobs:register_spawn("esmobs:applmons", {"default:stone","nether:rack", "esmobs:cursed_stone"}, 6, -1, 4000, 5, -30)
+mobs:register_spawn("esmobs:herobrines_bloody_ghost", {"default:stone","default:desert_sand","nether:brick", "bedrock2:bedrock"}, 4, -1, 22000, 1, -6030)
+mobs:register_spawn("esmobs:bone_monster", {"default:stone_with_iron","bones:bones","esmobs:bones", "bedrock2:bedrock","default:stone"},6, -1, 17000, 3, 31000)
+mobs:register_spawn("esmobs:icemon", {"default:ice"}, 5, -1, 14000, 1, 3100)
+mobs:register_spawn("esmobs:snowmon", {"default:snow","default:snowblock","default:snow_block", "default:dirt_with_snow"}, 5, -1, 14000, 12, 31000)
+mobs:register_spawn("esmobs:watermon", {"default:water_source","default:water_flowing"}, 5, -1, 14000, 5, -120)
+mobs:register_spawn("esmobs:dirt2", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 16000, 2, -100)
+mobs:register_spawn("esmobs:stone_monster2", {"default:stone","bedrock2:bedrock"}, 5, -1, 14000, 3, -500)
+mobs:register_spawn("esmobs:dungeon_master", {"default:stone"}, 2, 0, 7000, 2, -70)
+mobs:register_spawn("esmobs:tree_monster", {"default:leaves", "default:jungleleaves","default:dirt", "default:jungletree"}, 5, 0, 14000, 1, 31000)
+mobs:register_spawn("esmobs:sand_monster", {"default:sand", "meru:stone","group:sand"},4, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:stone_monster", {"default:stone", "bedrock2:bedrock"}, 5, 2, 9000, 20, 31000)
+mobs:register_spawn("esmobs:oerkki", { "default:stone"}, 4, -1, 2000, 3, -70)
+mobs:register_spawn("esmobs:dirt", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 2, 31000)
+--mobs:spawn_specific("esmobs:phoenix", {"air"},{"air"}, 2, -1, 30, 15000, 1, 15, 40)
+--mobs:spawn_specific("esmobs:paniki", {"air"},{"air"}, 3, -1, 30, 15000, 1, 15, 40)
+--mobs:spawn_specific("esmobs:bomber", {"air"},{"air"}, 0, 6, 30, 25000, 1, 90, 20)

@@ -1,4 +1,4 @@
---esmobs v01.8
+--esmobs v1.3
 --maikerumine
 --made for Extreme Survival game
 --License for code WTFPL
@@ -14,14 +14,52 @@ es?
 ]]
 esmobs={}
 --API AND CONFIG
-	--dofile(minetest.get_modpath("esmobs").."/config.lua")
+	dofile(minetest.get_modpath("esmobs").."/config.lua")
 	dofile(minetest.get_modpath("esmobs").."/api.lua")
 
---MOB SELECTION
+--[[
+--MOB SELECTION ALL
 		dofile(minetest.get_modpath("esmobs").."/es_animal.lua")
 		dofile(minetest.get_modpath("esmobs").."/es_npc_nice.lua")
 		dofile(minetest.get_modpath("esmobs").."/es_npc_bad.lua")
 		dofile(minetest.get_modpath("esmobs").."/es_monster.lua")
+]]
+
+--MOB SELECTION SWITCH
+	if esmobs.MOB_SETTING == 5 then
+		dofile(minetest.get_modpath("esmobs").."/es_animal.lua")
+		dofile(minetest.get_modpath("esmobs").."/es_npc_nice.lua")
+		dofile(minetest.get_modpath("esmobs").."/es_npc_bad.lua")
+		dofile(minetest.get_modpath("esmobs").."/es_monster.lua")
+	end
+
+	if esmobs.MOB_SETTING == 4 then
+		dofile(minetest.get_modpath("esmobs").."/es_animal.lua")
+		dofile(minetest.get_modpath("esmobs").."/es_npc_nice.lua")
+		--dofile(minetest.get_modpath("esmobs").."/es_npc_bad.lua")
+		dofile(minetest.get_modpath("esmobs").."/es_monster.lua")
+	end
+
+	if esmobs.MOB_SETTING == 3 then
+		--dofile(minetest.get_modpath("esmobs").."/es_animal.lua")
+		dofile(minetest.get_modpath("esmobs").."/es_npc_nice.lua")
+		dofile(minetest.get_modpath("esmobs").."/es_npc_bad.lua")
+		dofile(minetest.get_modpath("esmobs").."/es_monster.lua")
+	end
+
+	if esmobs.MOB_SETTING == 2 then
+		dofile(minetest.get_modpath("esmobs").."/es_animal.lua")
+		dofile(minetest.get_modpath("esmobs").."/es_npc_nice.lua")
+		--dofile(minetest.get_modpath("esmobs").."/es_npc_bad.lua")
+		--dofile(minetest.get_modpath("esmobs").."/es_monster.lua")
+	end
+
+	if esmobs.MOB_SETTING == 1 then
+		dofile(minetest.get_modpath("esmobs").."/es_animal.lua")
+		--dofile(minetest.get_modpath("esmobs").."/es_npc_nice.lua")
+		--dofile(minetest.get_modpath("esmobs").."/es_npc_bad.lua")
+		--dofile(minetest.get_modpath("esmobs").."/es_monster.lua")
+	end
 
 --CRAFTS AND MISC
 	dofile(minetest.get_modpath("esmobs").."/crafts.lua")

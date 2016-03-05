@@ -1,4 +1,4 @@
---esmobs v01.0
+--esmobs v1.3
 --maikerumine
 --made for Extreme Survival game
 --License for code WTFPL
@@ -54,5 +54,5 @@ minetest.register_node("esmobs:bones", {
 			end
 		end
 	end
-	
+
 	})

@@ -1,4 +1,4 @@
---esmobs v01.0
+--esmobs v1.3
 --maikerumine
 --made for Extreme Survival game
 --License for code WTFPL
@@ -9,9 +9,6 @@
 -----------------------------------------------------------------------------
 -- set to true to have cute, happy little aminals to ride and play with!
 esmobs.animals = true;
-
--- if set to true,  the Mancrapft mobs like zombie, creepy, skele, and piggy will spawn.
-esmobs.mc_like_mobs = true;
 
 -- if set to true,  The Minetest monsters will spawn like sand, dirt, tree, stone monster and oerkii will spawn.
 esmobs.mt_monsters = true;
@@ -30,16 +27,10 @@ esmobs.MOB_SETTING = 5;
 -----------------------------------------------------------------------------
 --MOB PACKAGES
 -----------------------------------------------------------------------------
---esmobs.MOB_SETTING = 12;		MT Monsters
---esmobs.MOB_SETTING = 11;		MT monsters, ES Monsters, and Bad npc's.
---esmobs.MOB_SETTING = 10;		Good npc's
---esmobs.MOB_SETTING = 9;		MT monsters and Animals.
---esmobs.MOB_SETTING = 8;		Animals.
---esmobs.MOB_SETTING = 7;		Good npc, Bad npc's.
---esmobs.MOB_SETTING = 6;		MT Monsters, Bad npc's.
---esmobs.MOB_SETTING = 5;		Animals, Good npc, MT monsters, ES monsters,  and Bad npc's. All of them.
---esmobs.MOB_SETTING = 4;		Animals, Good npc, MT monsters.
---esmobs.MOB_SETTING = 3;		Animals, Good npc, and MT monsters.
+
+--esmobs.MOB_SETTING = 5;		Animals, Good npc, monsters, and Bad npc's. All of them.
+--esmobs.MOB_SETTING = 4;		Animals, Good npc, and monsters.
+--esmobs.MOB_SETTING = 3;		Good npc, Bad npc, and monsters.
 --esmobs.MOB_SETTING = 2;		Animals and good npc's.
 --esmobs.MOB_SETTING = 1;		Just Animals.
 
