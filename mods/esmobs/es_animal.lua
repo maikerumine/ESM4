@@ -45,28 +45,40 @@ mobs:register_mob("esmobs:rat", {
 })
 
 local all_colours = {
-	"grey", "black", "red", "yellow", "green", "cyan", "blue", "magenta",
-	"white", "orange", "violet", "brown", "pink", "dark_grey", "dark_green"
+	{"black",      "Black",      "#000000b0"},
+	{"blue",       "Blue",       "#015dbb70"},
+	{"brown",      "Brown",      "#663300a0"},
+	{"cyan",       "Cyan",       "#01ffd870"},
+	{"dark_green", "Dark Green", "#005b0770"},
+	{"dark_grey",  "Dark Grey",  "#303030b0"},
+	{"green",      "Green",      "#61ff0170"},
+	{"grey",       "Grey",       "#5b5b5bb0"},
+	{"magenta",    "Magenta",    "#ff05bb70"},
+	{"orange",     "Orange",     "#ff840170"},
+	{"pink",       "Pink",       "#ff65b570"},
+	{"red",        "Red",        "#ff0000a0"},
+	{"violet",     "Violet",     "#2000c970"},
+	{"white",      "White",      "#abababc0"},
+	{"yellow",     "Yellow",     "#e3ff0070"},
 }
 
--- Sheep by PilzAdam
+-- Sheep by PilzAdam, texture converted to minetest by AMMOnym from Summerfield pack
 
 for _, col in pairs(all_colours) do
 
-	mobs:register_mob("esmobs:sheep_"..col, {
+	mobs:register_mob("esmobs:sheep_"..col[1], {
 		type = "animal",
 		passive = true,
 		hp_min = 8,
 		hp_max = 10,
 		armor = 200,
-		--collisionbox = {-0.4, -1, -0.4, 0.4, 0.3, 0.4},
 		collisionbox = {-0.5, -1, -0.5, 0.5, 0.3, 0.5},
 		visual = "mesh",
 		mesh = "mobs_sheep.b3d",
 		textures = {
-			{"esmobs_sheep_"..col..".png"},
+			{"mobs_sheep_base.png^(mobs_sheep_wool.png^[colorize:" .. col[3] .. ")"},
 		},
-		gotten_texture = {"esmobs_sheep_shaved.png"},
+		gotten_texture = {"mobs_sheep_shaved.png"},
 		gotten_mesh = "mobs_sheep_shaved.b3d",
 		makes_footstep_sound = true,
 		sounds = {
@@ -77,10 +89,8 @@ for _, col in pairs(all_colours) do
 		runaway = true,
 		jump = true,
 		drops = {
-			{name = "esmobs:meat_raw",
-			chance = 1, min = 1, max = 2},
-			{name = "wool:"..col,
-			chance = 1, min = 1, max = 1},
+			{name = "esmobs:meat_raw", chance = 1, min = 1, max = 2},
+			{name = "wool:"..col[1], chance = 1, min = 1, max = 1},
 		},
 		water_damage = 1,
 		lava_damage = 5,
@@ -101,20 +111,24 @@ for _, col in pairs(all_colours) do
 		replace_offset = -1,
 		fear_height = 3,
 		on_rightclick = function(self, clicker)
+
 			local shpcolor = string.split(self.name,"_")[2]
+
 			if shpcolor =="dark" then
 				shpcolor = shpcolor.."_"..string.split(self.name,"_")[3]
 			end
 
 			--are we feeding?
 			if mobs:feed_tame(self, clicker, 8, true, true) then
+
 				--if full grow fuzz
 				if self.gotten == false then
 					self.object:set_properties({
-						textures = {"esmobs_sheep_"..shpcolor..".png"},
+						textures = {"mobs_sheep_wool.png^[colorize:" .. col[3] .. "^mobs_sheep_base.png"},
 						mesh = "mobs_sheep.b3d",
 					})
 				end
+
 				return
 			end
 
@@ -123,12 +137,18 @@ for _, col in pairs(all_colours) do
 
 			--are we giving a haircut>
 			if itemname == "esmobs:shears" then
+
 				if self.gotten == false and self.child == false then
+
 					self.gotten = true -- shaved
+
 					if minetest.get_modpath("wool") then
+
 						local pos = self.object:getpos()
 						pos.y = pos.y + 0.5
+
 						local obj = minetest.add_item(pos, ItemStack("wool:"..shpcolor.." "..math.random(1,3)))
+
 						if obj then
 							obj:setvelocity({
 								x = math.random(-1,1),
@@ -136,14 +156,18 @@ for _, col in pairs(all_colours) do
 								z = math.random(-1,1)
 							})
 						end
+
 						item:add_wear(650) -- 100 uses
+
 						clicker:set_wielded_item(item)
 					end
+
 					self.object:set_properties({
-						textures = {"esmobs_sheep_shaved.png"},
+						textures = {"mobs_sheep_shaved.png"},
 						mesh = "mobs_sheep_shaved.b3d",
 					})
 				end
+
 				return
 			end
 
@@ -151,28 +175,39 @@ for _, col in pairs(all_colours) do
 
 			--are we coloring?
 			if itemname:find("dye:") then
+
 				if self.gotten == false
 				and self.child == false
 				and self.tamed == true
 				and name == self.owner then
-					local col = string.split(itemname,":")[2]
+
+					local colr = string.split(itemname,":")[2]
+
 					for _,c in pairs(all_colours) do
-						if c == col then
+
+						if c[1] == colr then
+
 							local pos = self.object:getpos()
+
 							self.object:remove()
-							local mob = minetest.add_entity(pos, "esmobs:sheep_"..col)
+
+							local mob = minetest.add_entity(pos, "esmobs:sheep_"..colr)
 							local ent = mob:get_luaentity()
+
 							ent.owner = name
 							ent.tamed = true
+
 							-- take item
 							if not minetest.setting_getbool("creative_mode") then
 								item:take_item()
 								clicker:set_wielded_item(item)
 							end
+
 							break
 						end
 					end
 				end
+
 				return
 			end
 
@@ -181,11 +216,10 @@ for _, col in pairs(all_colours) do
 		end
 	})
 
-	mobs:register_egg("esmobs:sheep_"..col, "Sheep ("..col..")", "wool_"..col..".png", 1)
+	mobs:register_egg("esmobs:sheep_"..col[1], col[2] .. "Sheep", "wool_"..col[1]..".png", 1)
 
 end
 
---mobs:register_spawn("mobs:sheep_white", {"default:dirt_with_grass", "ethereal:green_dirt"}, 20, 10, 15000, 2, 31000)
 
 -- compatibility (item and entity)
 minetest.register_alias("esmobs:sheep", "esmobs:sheep_white")
@@ -197,31 +231,19 @@ minetest.register_entity("esmobs:sheep", {
 	visual = "mesh",
 	mesh = "mobs_sheep.b3d",
 	visual_size = {x = 1, y = 1},
-	textures = {"esmobs_sheep.png"},
+	textures = {"mobs_18.png"},
 	velocity = {x = 0, y = 0, z = 0},
 	collisionbox = {-0.4, -1, -0.4, 0.4, 0.3, 0.4},
 	is_visible = true,
-	speed = 0,
-	timer = 0,
 
-	on_rightclick = function(self, clicker)
-		clicker:get_inventory():add_item("main", "esmobs:sheep_white")
+	on_activate = function(self, staticdata, dtime_s)
+
+		local pos = self.object:getpos()
+
 		self.object:remove()
-	end,
 
-	on_step = function(self, dtime)
-
-		self.timer = self.timer + dtime
-		if self.timer >= 1 then
-			self.timer = 0
-			self.object:setacceleration({
-				x = 0,
-				y = -10,
-				z = 0
-			})
-		end
-	end,
-
+		minetest.add_entity(pos, "esmobs:sheep_white")
+	end
 })
 
 -- Chicken by JK Murray
@@ -237,8 +259,8 @@ mobs:register_mob("esmobs:chicken", {
 	mesh = "mobs_chicken.x",
 	-- seems a lot of textures but this fixes the problem with the model
 	textures = {
-		{"mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png",
-		"mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png"},
+		{"mobs_21.png", "mobs_21.png", "mobs_21.png", "mobs_21.png",
+		"mobs_21.png", "mobs_21.png", "mobs_21.png", "mobs_21.png", "mobs_21.png"},
 		{"mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png",
 		"mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png"},
 	},
@@ -310,7 +332,8 @@ mobs:register_mob("esmobs:cow", {
 	visual = "mesh",
 	mesh = "mobs_cow.x",
 	textures = {
-		{"mobs_cow.png"},
+		{"mobs_19.png"},
+		{"mobs_cow2.png"},
 	},
 	makes_footstep_sound = true,
 	sounds = {
@@ -406,7 +429,7 @@ mobs:register_mob("esmobs:pumba", {
 	visual = "mesh",
 	mesh = "mobs_pumba.x",
 	textures = {
-		{"mobs_pumba.png"},
+		{"mobs_20.png"},
 	},
 	makes_footstep_sound = true,
 	sounds = {
@@ -637,7 +660,7 @@ mobs:register_mob("esmobs:horse", {
 	hp_max = 10,
 	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1, 0.4},
 	textures = {
-		{"mobs_28.png"},
+		{"mobs_22.png"},
 	},
 	visual = "mesh",
 	mesh = "mobs_horse.x",
@@ -679,7 +702,7 @@ mobs:register_mob("esmobs:horse2", {
 	hp_max = 10,
 	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1, 0.4},
 	textures = {
-		{"mobs_29.png"},
+		{"mobs_23.png"},
 	},
 	visual = "mesh",
 	mesh = "mobs_horse.x",
@@ -721,7 +744,7 @@ mobs:register_mob("esmobs:horse3", {
 	hp_max = 10,
 	collisionbox = {-0.4, -0.01, -0.4, 0.4, 1, 0.4},
 	textures = {
-		{"mobs_30.png"},
+		{"mobs_24.png"},
 	},
 	visual = "mesh",
 	mesh = "mobs_horse.x",

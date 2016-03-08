@@ -8,7 +8,7 @@ skins.type = { SPRITE=0, MODEL=1 }
 
 skins.skins = {}
 skins.default = function()
-	return "character_1"
+	return "character_39"
 end
 
 skins.get_type = function(texture)
@@ -56,7 +56,7 @@ skins.formspec.main = function(name)
 			.. "image[1,.75;1,2;"..skins.skins[name].."_preview_back.png]"
 			.. "label[6,.5;Raw texture:]"
 			.. "image[6,1;2,1;"..skins.skins[name]..".png]"
-		
+
 	else
 		formspec = formspec
 			.. "image[0,.75;1,2;"..skins.skins[name]..".png]"

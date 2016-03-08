@@ -40,6 +40,7 @@ minetest.register_node("bones:bones", {
 	paramtype2 = "facedir",
 	groups = {cracky = 2, oddly_breakable_by_hand = 2},
 --	groups = {dig_immediate=1},
+	stack_max = 999,
 	sounds = default.node_sound_dirt_defaults({
 		footstep = {name="default_gravel_footstep", gain=0.5},
 		dug = {name="default_gravel_footstep", gain=1.0},

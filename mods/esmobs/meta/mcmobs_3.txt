@@ -1,5 +1,0 @@
-name = "Zombie",
-type = "Monster",
-hp = "35",
-drops = "steel tools, carrot, potato, rotten flesh, steel ingot",
-info = "Decent drops, easy to kill.",

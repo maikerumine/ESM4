@@ -387,3 +387,4 @@ mobs:register_arrow("esmobs:axebullet", {
 		--mobs:explosion(pos, 1, 1, 0)  --this deletes nodes
 	end
 })
+

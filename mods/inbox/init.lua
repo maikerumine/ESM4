@@ -10,6 +10,7 @@ minetest.register_craft({
 	}
 })
 
+
 local mb_cbox = {
 	type = "fixed",
 	fixed = { -5/16, -8/16, -8/16, 5/16, 2/16, 8/16 }

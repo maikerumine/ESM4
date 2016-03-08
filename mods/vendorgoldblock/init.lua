@@ -57,17 +57,17 @@ minetest.register_node("vendorgoldblock:depositor", {
 minetest.register_craft({
 	output = 'vendorgoldblock:vendor',
 	recipe = {
-                {'default:wood', 'default:wood', 'default:wood'},
-                {'default:wood', 'default:gold_ingot', 'default:wood'},
-                {'default:wood', 'default:gold_ingot', 'default:wood'},
+                {'group:wood', 'group:wood', 'group:wood'},
+                {'group:wood', 'default:gold_ingot', 'group:wood'},
+                {'group:wood', 'default:gold_ingot', 'group:wood'},
         }
 })
 
 minetest.register_craft({
 	output = 'vendorgoldblock:depositor',
 	recipe = {
-                {'default:wood', 'default:gold_ingot', 'default:wood'},
-                {'default:wood', 'default:gold_ingot', 'default:wood'},
-                {'default:wood', 'default:wood', 'default:wood'},
+                {'group:wood', 'default:gold_ingot', 'group:wood'},
+                {'group:wood', 'default:gold_ingot', 'group:wood'},
+                {'group:wood', 'group:wood', 'group:wood'},
         }
 })

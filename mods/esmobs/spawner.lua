@@ -255,15 +255,15 @@ mobs:register_egg("esmobs:dirt2", "Dirt Mons II", "default_dirt.png^[colorize:#0
 mobs:register_egg("esmobs:spider", "Spider", "mobs_cobweb.png", 1)
 mobs:register_egg("esmobs:oerkki", "Oerkki", "default_obsidian.png", 1)
 mobs:register_egg("esmobs:dungeon_master", "Dungeon Master", "fire_basic_flame.png", 1)
-mobs:register_egg("esmobs:applmons", "Apple Mons", "mobs_10.png", 1)
-mobs:register_egg("esmobs:herobrines_bloody_ghost", "Herobrines Bloody Ghost", "mobs_11.png", 1)
-mobs:register_egg("esmobs:paniki", "Paniki", "mobs_12.png", 1)
-mobs:register_egg("esmobs:phoenix", "Phoenix", "mobs_12.png^fire_basic_flame.png", 1)
-mobs:register_egg("esmobs:bomber", "Bomber", "mobs_13.png", 1)
-mobs:register_egg("esmobs:bone_monster", "Bone Mons", "mobs_14.png", 1)
-mobs:register_egg("esmobs:icemon", "Ice Mons", "mobs_15.png", 1)
-mobs:register_egg("esmobs:snowmon", "Snow Mons", "mobs_16.png", 1)
-mobs:register_egg("esmobs:watermon", "Water Mons", "mobs_17.png", 1)
+mobs:register_egg("esmobs:applmons", "Apple Mons", "mobs_7.png", 1)
+mobs:register_egg("esmobs:herobrines_bloody_ghost", "Herobrines Bloody Ghost", "mobs_8.png", 1)
+mobs:register_egg("esmobs:paniki", "Paniki", "mobs_9.png", 1)
+mobs:register_egg("esmobs:phoenix", "Phoenix", "mobs_9.png^fire_basic_flame.png", 1)
+mobs:register_egg("esmobs:bomber", "Bomber", "mobs_10.png", 1)
+mobs:register_egg("esmobs:bone_monster", "Bone Mons", "mobs_11.png", 1)
+mobs:register_egg("esmobs:icemon", "Ice Mons", "mobs_12.png", 1)
+mobs:register_egg("esmobs:snowmon", "Snow Mons", "mobs_13.png", 1)
+mobs:register_egg("esmobs:watermon", "Water Mons", "mobs_14.png", 1)
 
 
 --Badplayer spawn eggs
@@ -289,7 +289,7 @@ mobs:register_egg("esmobs:badplayer28", "BP Slenderman", "badplayer_28.png", 1)
 mobs:register_egg("esmobs:badplayer29", "BP Snow Beast", "badplayer_29.png", 1)
 mobs:register_egg("esmobs:badplayer30", "BP Jojoa", "badplayer_30.png", 1)
 mobs:register_egg("esmobs:badplayer31", "BP Cactus man", "badplayer_31.png", 1)
-mobs:register_egg("esmobs:badplayer35", "BP Infinium Mons", "badplayer_21.png", 1)
+mobs:register_egg("esmobs:badplayer35", "BP Cactus man ", "badplayer_21.png", 1)
 mobs:register_egg("esmobs:Mr_Black", "BP Mr. Black", "badplayer_33.png", 1)
 mobs:register_egg("esmobs:Jasmine", "BP Jasmine", "badplayer_42.png", 1)
 mobs:register_egg("esmobs:Infinium_Monster", "BP Infinium Mons", "badplayer_32.png", 1)
@@ -311,12 +311,3 @@ mobs:register_egg("esmobs:Mr_Pink", "NPC Mr. Pink", "badplayer_37.png", 1)
 mobs:register_egg("esmobs:Candy", "NPC Candy", "badplayer_41.png", 1)
 mobs:register_egg("esmobs:Infiniumman", "NPC Infinium Man", "badplayer_40.png", 1)
 mobs:register_egg("esmobs:Maikerumine", "NPC Maikerumine", "badplayer_39.png", 1)
-
-
-
-
-
-
-
-
-

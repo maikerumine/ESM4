@@ -1,5 +1,0 @@
-name = "Creepy",
-type = "Monster",
-hp = "30",
-drops = "jukebox discs, far orb, and tnt",
-info = "Will explode and ruin un-protected land.",

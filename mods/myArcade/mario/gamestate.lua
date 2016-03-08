@@ -67,7 +67,7 @@ function mario.game_start(pos, player, gamedef)
 	-- Set start positions
 	mario.game_reset(id, player)
 	mario.update_hud(id, player)
-	minetest.sound_play("mario-game-start", {pos = pos,max_hear_distance = 20,gain = 10.0,})
+	minetest.sound_play("mario-game-start", {pos = pos,max_hear_distance = 6,gain = 1.0,})
 end
 
 -- Finish the game with the given id
@@ -206,7 +206,7 @@ function mario.on_player_got_coin(player)
 
 			-- Set start positions
 			mario.game_reset(gamestate.id, player)
-			minetest.sound_play("mario-game-start", {pos = pos,max_hear_distance = 20,gain = 10.0,})
+			minetest.sound_play("mario-game-start", {pos = pos,max_hear_distance = 6,gain = 1.0,})
 		end)
 	end
 
@@ -236,15 +236,15 @@ function mario.on_player_death(id, player)
 	if gamestate.lives < 1 then
 		minetest.chat_send_player(gamestate.player_name,"Game Over")
 		mario.game_end(id)
-		minetest.sound_play("mario-game-over", {max_hear_distance = 20, object=player})
+		minetest.sound_play("mario-game-over", {max_hear_distance = 6, object=player})
 	elseif gamestate.lives == 1 then
 		minetest.chat_send_player(gamestate.player_name,"This is your last life")
 		mario.game_reset(id, player)
-		minetest.sound_play("mario-continue", {max_hear_distance = 10, object=player})
+		minetest.sound_play("mario-continue", {max_hear_distance = 6, object=player})
 	else
 		minetest.chat_send_player(gamestate.player_name,"You have ".. gamestate.lives .." lives left")
 		mario.game_reset(id, player)
-		minetest.sound_play("mario-continue", {max_hear_distance = 10, object=player})
+		minetest.sound_play("mario-continue", {max_hear_distance = 6, object=player})
 	end
 end
 

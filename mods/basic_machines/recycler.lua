@@ -21,7 +21,6 @@ local recycler_process = function(pos)
 		if fueladd.time == 0 then -- no fuel inserted, try look for outlet
 				-- No valid fuel in fuel list
 				supply = basic_machines.check_power({x=pos.x,y=pos.y,z=pos.z}) or 0;
-				minetest.chat_send_all("supply "..supply);
 				if supply>0 then 
 					fueladd.time = 40 -- same as 10 coal
 				else
@@ -48,7 +47,7 @@ local recycler_process = function(pos)
 		if stack:is_empty() then return end; -- nothing to do
 
 		local src_item = stack:to_string();
-		local pos=string.find(src_item," "); if pos then src_item = string.sub(src_item,1,pos-1) end -- take first word to determine what item was 
+		local p=string.find(src_item," "); if p then src_item = string.sub(src_item,1,p-1) end -- take first word to determine what item was 
 		
 		-- look if we already handled this item
 		local known_recipe=true;
@@ -91,7 +90,6 @@ local recycler_process = function(pos)
 			if math.random(1, 4)<=3 then -- probability 3/4 = 75%
 				if not string.find(v,"group") then -- dont add if item described with group
 					local par = string.find(v,"\"") or 0;
-					--minetest.chat_send_all(" par location at " .. par .. " item ".. v);
 					if inv:room_for_item("dst", ItemStack(v)) then -- can item be put in
 						inv:add_item("dst",ItemStack(v));
 					else return
@@ -162,7 +160,7 @@ minetest.register_node("basic_machines:recycler", {
 	end,
 	
 	on_metadata_inventory_put = function(pos, listname, index, stack, player) 
-		if listname == "fuel" or listname =="dst" then return end -- just put fuel in, nothing else
+		if listname =="dst" then return end
 		recycler_process(pos);
 	end,
 	
@@ -180,7 +178,6 @@ minetest.register_node("basic_machines:recycler", {
 	},
 	
 	on_receive_fields = function(pos, formname, fields, sender) 
-		--	minetest.chat_send_all("Player "..sender:get_player_name().." submitted fields "..dump(fields))
 		if fields.quit then return end
 		local meta = minetest.get_meta(pos);
 		local recipe=1;

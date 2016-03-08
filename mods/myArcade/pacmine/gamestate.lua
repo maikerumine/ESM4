@@ -65,7 +65,7 @@ function pacmine.game_start(pos, player, gamedef)
 	-- Set start positions
 	pacmine.game_reset(id, player)
 	pacmine.update_hud(id, player)
-	minetest.sound_play("pacmine_beginning", {pos = pos,max_hear_distance = 20,gain = 10.0,})
+	minetest.sound_play("pacmine_beginning", {pos = pos,max_hear_distance = 6,gain = 1.0,})
 end
 
 -- Finish the game with the given id
@@ -205,7 +205,7 @@ function pacmine.on_player_got_pellet(player)
 
 			-- Set start positions
 			pacmine.game_reset(gamestate.id, player)
-			minetest.sound_play("pacmine_beginning", {pos = pos,max_hear_distance = 20,gain = 10.0,})
+			minetest.sound_play("pacmine_beginning", {pos = pos,max_hear_distance = 6,gain = 1.0,})
 		end)
 	end
 
@@ -228,7 +228,7 @@ function pacmine.on_player_got_power_pellet(player)
 	pacmine.update_hud(gamestate.id, player)
 
 	local boardcenter = vector.add(gamestate.pos, {x=13,y=0.5,z=15})
-	local powersound = minetest.sound_play("pacmine_powerup", {pos = boardcenter,max_hear_distance = 20, object=player, loop=true})
+	local powersound = minetest.sound_play("pacmine_powerup", {pos = boardcenter,max_hear_distance = 6, object=player, loop=true})
 
 	minetest.after(power_pellet_duration, function()
 		minetest.sound_stop(powersound)

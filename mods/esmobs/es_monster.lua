@@ -76,7 +76,7 @@ mobs:register_mob("esmobs:tree_monster", {
 	visual = "mesh",
 	mesh = "mobs_tree_monster.b3d",
 	textures = {
-		"mobs_4.png"
+		"mobs_2.png"
 	},
 	blood_texture = "default_wood.png",
 	makes_footstep_sound = true,
@@ -136,7 +136,7 @@ mobs:register_mob("esmobs:sand_monster", {
 	visual = "mesh",
 	mesh = "mobs_sand_monster.b3d",
 	textures = {
-		"mobs_5.png"
+		"mobs_3.png"
 	},
 	makes_footstep_sound = true,
 	sounds = {
@@ -185,7 +185,7 @@ mobs:register_mob("esmobs:stone_monster", {
 	visual = "mesh",
 	mesh = "mobs_stone_monster.b3d",
 	textures = {
-		"mobs_6.png"
+		"mobs_4.png"
 	},
 	makes_footstep_sound = true,
 	sounds = {
@@ -236,7 +236,7 @@ mobs:register_mob("esmobs:oerkki", {
 	visual = "mesh",
 	mesh = "mobs_oerkki.b3d",
 	textures = {
-		"mobs_8.png"
+		"mobs_6.png"
 
 	},
 	makes_footstep_sound = false,
@@ -283,7 +283,7 @@ mobs:register_mob("esmobs:dirt", {
 	collisionbox = {-0.4, -1, -0.4, 0.4, 0.9, 0.4},
 	visual = "mesh",
 	mesh = "mobs_stone_monster.b3d",
-	textures = {"mobs_20.png"},
+	textures = {"mobs_15.png"},
 	--visual_size = {x=3.5, y=2.8},
 	makes_footstep_sound = true,
 	view_range = 24,
@@ -347,7 +347,7 @@ mobs:register_mob("esmobs:spider", {
 	visual = "mesh",
 	mesh = "mobs_spider.x",
 	textures = {
-		"mobs_7.png"
+		"mobs_5.png"
 	},
 	visual_size = {x=3,y=3},
 	makes_footstep_sound = false,
@@ -389,7 +389,7 @@ mobs:register_mob("esmobs:applmons", {
 	collisionbox = {-0.4, -0.3, -0.4, 0.4, 0.6, 0.4},
 	visual = "mesh",
 	mesh = "mobs_dungeon_master.b3d",
-	textures = {"mobs_10.png"},
+	textures = {"mobs_7.png"},
 	visual_size = {x=0.6, y=0.3},
 	makes_footstep_sound = true,
 	view_range = 15,
@@ -442,7 +442,7 @@ mobs:register_mob("esmobs:herobrines_bloody_ghost", {
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "badplayer.x",
-	textures = {"mobs_11.png"},
+	textures = {"mobs_8.png"},
 	visual_size = {x=1, y=1.0},
 	makes_footstep_sound = true,
 	view_range = 19,
@@ -483,43 +483,41 @@ mobs:register_mob("esmobs:paniki", {
 	type = "monster",
 	hp_max = 60,
 	hp_min = 50,
-	collisionbox = {-0.65, -0.4, -0.65, 0.65, 0.4, 0.65},
+	damage = 2,
+	collisionbox = {-0.15, -0.2, -0.15, 0.15, 0.2, 0.15},
 	visual = "mesh",
 	mesh = "phoenix.b3d",  --paniki from minetest defense
-	textures = {"mobs_12.png"},  --paniki from minetest defense
-	visual_size = {x=1, y=1},
+	textures = {"mobs_9.png"},  --paniki from minetest defense
+	visual_size = {x=0.2, y=0.2},
 	view_range = 90,
 	lifetimer = 500,
 	floats=1,
 	rotate = 270,
-	walk_velocity = 2.5,
-	run_velocity = 3.5,
-  fall_speed = 1,
-  stepheight = 3,
+	walk_velocity = 1.5,
+	run_velocity = 2.5,
+  fall_speed = 2,
+  stepheight = 1,
   sounds = {
-		random = "phoenix",
-		attack = "mobs_fireball",
+		--random = "phoenix",
+		attack = "mobs_rat",
+		random = "mobs_rat",
 		distance = 15,
 	},
 	damage = 2,
 	--jump = true,
 	drops = {
-		{name = "default:sand",
-		chance = 1,
-		min = 7,
-		max = 8,},
 		{name = "esmobs:feather",
 		chance = 1,
 		min = 1,
 		max = 1,},
-		{name = "esmobs:chicken",
+		{name = "esmobs:meat_raw",
 		chance = 1,
-		min = 5,
-		max = 6,},
+		min = 1,
+		max = 1,},
 		{name = "default:gold_lump",
 		chance = 6,
-		min = 10,
-		max = 20,},
+		min = 1,
+		max = 2,},
 	},
 	armor = 60,
 	--drawtype = "side",
@@ -559,10 +557,11 @@ mobs:register_mob("esmobs:phoenix", {
 	type = "monster",
 	hp_max = 60,
 	hp_min = 50,
+	damage = 2,
 	collisionbox = {-0.65, -0.4, -0.65, 0.65, 0.4, 0.65},
 	visual = "mesh",
 	mesh = "phoenix.b3d",  --paniki from minetest defense
-	textures = {"mobs_12.png"},  --paniki from minetest defense
+	textures = {"mobs_9.png"},  --paniki from minetest defense
 	visual_size = {x=4, y=4},
 	view_range = 90,
 	lifetimer = 500,
@@ -573,17 +572,16 @@ mobs:register_mob("esmobs:phoenix", {
   fall_speed = 1,
   stepheight = 3,
   sounds = {
-		random = "phoenix",
+		--random = "phoenix",
 		attack = "mobs_fireball",
+		random = "Fuse",
+		shoot_attack = "mobs_fireball",
 		distance = 15,
 	},
 	damage = 2,
 	--jump = true,
 	drops = {
-		{name = "default:sand",
-		chance = 1,
-		min = 7,
-		max = 8,},
+	
 		{name = "esmobs:feather",
 		chance = 1,
 		min = 1,
@@ -633,28 +631,29 @@ mobs:register_mob("esmobs:bomber", {
 	type = "monster",
 	hp_max = 60,
 	hp_min = 50,
-	collisionbox = {-0.65, -0.4, -0.65, 0.65, 0.4, 0.65},
+	collisionbox = {-1.65, -1.4, -1.65, 1.65, 0.4, 1.65},
 	visual = "mesh",
 	mesh = "phoenix.b3d",  --paniki from minetest defense
-	textures = {"mobs_13.png"},  --paniki from minetest defense made into a plane
-	visual_size = {x=17, y=7},
+	textures = {"mobs_10.png"},  --paniki from minetest defense made into a plane
+	visual_size = {x=10, y=3},
 	view_range = 90,
 	lifetimer = 500,
 	floats=1,
-	rotate = 4.5,
-	walk_velocity = -1.5,
-	run_velocity = -2.5,
-  fall_speed = 0,
-  stepheight = 12,
+	rotate = 270,
+	walk_velocity = 2.5,
+	run_velocity = 6.5,
+  fall_speed = 1,
+  stepheight = 3,
   sounds = {
 		random = "explo",
+		shoot_attack = "mobs_stonemonster",
 		attack = "Fuse",
 		distance = 45,
 	},
 	damage = 2,
-	jump = true,
+	--jump = true,
 	drops = {
-		{name = "default:sand",
+		{name = "default:stone",
 		chance = 1,
 		min = 7,
 		max = 8,},
@@ -662,17 +661,14 @@ mobs:register_mob("esmobs:bomber", {
 		chance = 1,
 		min = 1,
 		max = 1,},
-		{name = "esmobs:chicken",
+		{name = "esmobs:stone_monster",
 		chance = 1,
-		min = 5,
-		max = 6,},
-		{name = "esmobs:bomb",
-		chance = 6,
-		min = 0,
-		max = 20,},
+		min = 1,
+		max = 1,},
+
 	},
 	armor = 60,
-	drawtype = "side",
+	--drawtype = "side",
 	water_damage = 5,
 	lava_damage = 0,
 	light_damage = 10,
@@ -683,9 +679,11 @@ mobs:register_mob("esmobs:bomber", {
 		--arrow = "default:lava_flowing",
 		--arrow = "esmobs:bonebullet",
 		--arrow = "esmobs:tnt2_ent",
-		arrow = "esmobs:bone_monster",
+		--arrow = "esmobs:bone_monster",
+		arrow = "esmobs:stone_monster",
+		--arrow = "esmobs:smbullet",
 		reach = 1,
-		shoot_interval = 5,
+		shoot_interval = 2,
 
 	animation = {
 		speed_normal = 22,
@@ -721,7 +719,7 @@ mobs:register_mob("esmobs:bone_monster", {
 	visual = "mesh",
 	mesh = "bone_monster.x",
 	textures = {
-	"mobs_14.png"
+	"mobs_11.png"
 	},
 	visual_size = {x=0.9,y=0.9},
 	makes_footstep_sound = true,
@@ -772,7 +770,7 @@ mobs:register_mob("esmobs:icemon", {
 	collisionbox = {-0.4, -1, -0.4, 0.4, 0.9, 0.4},
 	visual = "mesh",
 	mesh = "mobs_stone_monster.b3d",
-	textures = {"mobs_15.png"},
+	textures = {"mobs_12.png"},
 	--visual_size = {x=3.5, y=2.8},
 	makes_footstep_sound = true,
 	view_range = 14,
@@ -818,7 +816,7 @@ mobs:register_mob("esmobs:snowmon", {
 	collisionbox = {-0.4, -1, -0.4, 0.4, 0.9, 0.4},
 	visual = "mesh",
 	mesh = "mobs_stone_monster.b3d",
-	textures = {"mobs_16.png"},
+	textures = {"mobs_13.png"},
 	--visual_size = {x=5.5, y=2.8},
 	makes_footstep_sound = true,
 	view_range = 14,
@@ -864,7 +862,7 @@ mobs:register_mob("esmobs:watermon", {
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
 	mesh = "3d_armor_character.x",
-	textures = {"mobs_17.png",
+	textures = {"mobs_14.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:pick_wood"].inventory_image,
 			},
@@ -913,7 +911,7 @@ mobs:register_mob("esmobs:dirt2", {
 	collisionbox = {-0.4, -1, -0.4, 0.4, 0.9, 0.4},
 	visual = "mesh",
 	mesh = "mobs_stone_monster.b3d",
-	textures = {"mobs_21.png"},
+	textures = {"mobs_16.png"},
 	--visual_size = {x=3.5, y=2.8},
 	makes_footstep_sound = true,
 	view_range = 24,
@@ -972,7 +970,7 @@ mobs:register_mob("esmobs:stone_monster2", {
 	visual = "mesh",
 	mesh = "mobs_stone_monster.b3d",
 	textures = {
-		"mobs_6.png^[colorize:#FF0000:100"
+		"mobs_4.png^[colorize:#FF0000:100"
 	},
 	--visual_size = {x=3, y=2.6},
 	makes_footstep_sound = true,
@@ -1022,8 +1020,8 @@ mobs:register_mob("esmobs:chickoboo", {
 	visual = "mesh",
 	mesh = "mobs_chicken.x",
 	textures = {
-		{"mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png",
-		"mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png", "mobs_chicken.png"},
+		{"mobs_21.png", "mobs_21.png", "mobs_21.png", "mobs_21.png",
+		"mobs_21.png", "mobs_21.png", "mobs_21.png", "mobs_21.png", "mobs_21.png"},
 		{"mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png",
 		"mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png", "mobs_chicken_black.png"},
 	},
@@ -1146,6 +1144,6 @@ mobs:register_spawn("esmobs:sand_monster", {"default:sand", "meru:stone","group:
 mobs:register_spawn("esmobs:stone_monster", {"default:stone", "bedrock2:bedrock"}, 5, 2, 9000, 20, 31000)
 mobs:register_spawn("esmobs:oerkki", { "default:stone"}, 4, -1, 2000, 3, -70)
 mobs:register_spawn("esmobs:dirt", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 2, 31000)
---mobs:spawn_specific("esmobs:phoenix", {"air"},{"air"}, 2, -1, 30, 15000, 1, 15, 40)
---mobs:spawn_specific("esmobs:paniki", {"air"},{"air"}, 3, -1, 30, 15000, 1, 15, 40)
---mobs:spawn_specific("esmobs:bomber", {"air"},{"air"}, 0, 6, 30, 25000, 1, 90, 20)
+mobs:register_spawn("esmobs:phoenix",{"air"}, 4,-1, 16000, 1, 90,false)
+mobs:register_spawn("esmobs:paniki", {"default:stone_with_coal", "default:stone"}, 5,-1, 11000, 1, 90,false)
+mobs:register_spawn("esmobs:bomber", {"air"}, 4,-1, 18000, 1, 90,false)

@@ -1,5 +1,0 @@
-name = "Skelee",
-type = "Monster",
-hp = "30",
-drops = "bows, arrows, bones",
-info = "Great way to collect arrows.",

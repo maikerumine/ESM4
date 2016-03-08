@@ -1,6 +1,6 @@
 local bedrock = {}
 
-bedrock.layer = -6001 -- determined as appropriate by experiment
+bedrock.layer = -6100 -- determined as appropriate by experiment
 bedrock.node = {name = "bedrock2:bedrock"}
 
 local depth = tonumber(minetest.setting_get("bedrock2_y"))

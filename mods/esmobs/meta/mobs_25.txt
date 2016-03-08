@@ -1,5 +1,0 @@
-name = "MC Pig",
-type = "Animal",
-hp = "25",
-drops = "pork chop",
-info = "Follows carrot, can be ridden, use carrot on stick to control.",

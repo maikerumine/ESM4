@@ -399,9 +399,3 @@ stairs.register_stair_and_slab("goldblock", "default:goldblock",
 		"Gold Block Slab",
 		default.node_sound_stone_defaults())
 
---[[stairs.register_stair_and_slab("granite", "technic:granite",
-		{cracky = 1},
-		{"technic_granite.png"},
-		"Granite Block Stair",
-		"Granite Block Slab",
-		default.node_sound_stone_defaults())]]

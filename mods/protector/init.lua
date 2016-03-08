@@ -63,8 +63,8 @@ protector.generate_formspec = function(meta)
 	local formspec = "size[8,7]"
 		..default.gui_bg..default.gui_bg_img..default.gui_slots
 		.."label[2.5,0;-- Protector interface --]"
-		.."label[0,1;PUNCH node to show protected area or USE for area check]"
-		.."label[0,2;Members: (type player name then press Enter to add--BROKEN!!)]"
+		.."label[0,1;PUNCH node to show protected area or USE for area check.]"
+		.."label[0,2;Members: (type player name then press Enter to add them.)]"
 		.. "button_exit[2.5,6.2;3,0.5;close_me;Close]"
 
 	local members = protector.get_member_list(meta)
@@ -208,12 +208,12 @@ end
 
 protector.old_is_protected = minetest.is_protected
 
+
+
 function minetest.is_protected(pos, digger)
 
 	if not protector.can_dig(protector.radius, pos, digger, false, 1) then
-
 		local player = minetest.get_player_by_name(digger)
-
 		if protector.hurt > 0
 		and player then
 			player:set_hp(player:get_hp() - protector.hurt)
@@ -476,8 +476,8 @@ minetest.register_entity("protector:display", {
 
 	on_activate = function(self, staticdata)
 
-		-- Xanadu server only
-		if mobs and mobs.entity and mobs.entity == false then
+		-- ESM server only
+		if esmobs and esmobs.entity and esmobs.entity == false then
 			self.object:remove()
 		end
 	end,
