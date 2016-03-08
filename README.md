@@ -4,17 +4,14 @@
  (c) 2014-2016 by: maikerumine<br>
  https://github.com/maikerumine<br>
  LGPLv2.1  (SEE BOTTOM)<br>
-
-
 =======================
 
-___________         __                                    _________                  .__              .__
-\_   _____/__  ____/  |________   ____   _____   ____    /   _____/__ ____________  _|__|__  _______  |  |
- |    __)_\  \/  /\   __\_  __ \_/ __ \ /     \_/ __ \   \_____  \|  |  \_  __ \  \/ /  \  \/ /\__  \ |  |
- |        \>    <  |  |  |  | \/\  ___/|  Y Y  \  ___/   /        \  |  /|  | \/\   /|  |\   /  / __ \|  |__
-/_______  /__/\_ \ |__|  |__|    \___  >__|_|  /\___  > /_______  /____/ |__|    \_/ |__| \_/  (____  /____/
-        \/      \/                   \/      \/     \/          \/                                  \/
-
+___________         __                                    _________                  .__              .__   <br>
+\_   _____/__  ____/  |________   ____   _____   ____    /   _____/__ ____________  _|__|__  _______  |  |  <br>
+ |    __)_\  \/  /\   __\_  __ \_/ __ \ /     \_/ __ \   \_____  \|  |  \_  __ \  \/ /  \  \/ /\__  \ |  |  <br>
+ |        \>    <  |  |  |  | \/\  ___/|  Y Y  \  ___/   /        \  |  /|  | \/\   /|  |\   /  / __ \|  |__<br>
+/_______  /__/\_ \ |__|  |__|    \___  >__|_|  /\___  > /_______  /____/ |__|    \_/ |__| \_/  (____  /____/<br>
+        \/      \/                   \/      \/     \/          \/                                  \/    <br>
 
 [es] Maikerumine's Extreme Survival mod, has extra crafting recipies for tools and ores.
 ===============================================================
@@ -72,46 +69,28 @@ Aikerum, Emerald, Ruby crystals go in usual spots to craft, the handle however, 
 
 
 Pick Crafting:<br>
-
 				[RRR]<br>
-
 				[#I#]<br>
-
 				[#I#]<br>
-
 
 Sword Crafting:<br>
-
 				[#R#]<br>
-
 				[#R#]<br>
-
 				[#I#]<br>
-
-
-
 
 [STAIRS]
 --------------------------
 Stair crafting the following blocks will give you a stair or slab:<br>
-
 Aikerum<br>
-
 Dirt<br>
-
 Emerald<br>
-
 Infinium<br>
-
 Purpellium<br>
-
 Ruby<br>
-
 
 [ARMOR]
 ----------------------------
 Must have 3d_armor installed to craft the Infinium Armor.
-
 
 License of source code:
 -----------------------
