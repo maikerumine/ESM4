@@ -27,27 +27,44 @@ ___________         __                                    _________             
 
 [CRAFTING]
 ----------------------------
-Craft dirt	 					from 9 papyrus.. or 9 bones
-Craft sand						from 5 bones in an "X"
-Craft coal						from 5 bones in an "+"
-Craft gravel					from 3 bones in an "_"
-Craft Mese Crystal	 			from 9 Mese Shards...  (dependancy to mese_crystals mod changed by maikerumine)
-Craft Messymese					from 9 mesecook_crystals
-Craft 3 Desert Cobble 			from one brick and two cobble, brick on top of craft...
-Craft depleted_uranium_ingot	from 9 technic:chernobylite_block
-Craft Punkin					from 9 depleted_uranium_ingot
-Craft Boneblock					from 8 bones surrounding 1 steelblock
-Craft Infinium container		from glass_bottle+infinium_goo+water_flowing (shapeless)
+Craft dirt	 					from 9 papyrus.. or 9 bones<br>
+
+Craft sand						from 5 bones in an "X"<br>
+
+Craft coal						from 5 bones in an "+"<br>
+
+Craft gravel					from 3 bones in an "_"<br>
+
+Craft Mese Crystal	 			from 9 Mese Shards...<br>
+  (dependancy to mese_crystals mod changed by maikerumine)
+Craft Messymese					from 9 mesecook_crystals<br>
+
+Craft 3 Desert Cobble 			from one brick and two<br>
+ cobble, brick on top of craft...
+Craft depleted_uranium_ingot	from 9<br>
+ technic:chernobylite_block
+Craft Punkin					from 9<br>
+ depleted_uranium_ingot
+Craft Boneblock					from 8 bones surrounding 1<br>
+ steelblock
+Craft Infinium container		from glass_bottle+infinium_goo+water_flowing (shapeless)<br>
+
 
 
 
 [COOKING]
 -------------------------
-Craft Water flowing 			from cooking ice in furnace.
-Craft Mese Crystal 				from cooking mesecook_crystal in furnace.
-Craft Infinium ingot			from cooking infinium_container in furnace.
-Craft technic:uranium			from cooking depleted_uranium_ingot in furnace.
-Craft depleted_uranium_ingot	from depleted_uranium_lump in furnace.
+Craft Water flowing 			from cooking ice in furnace.<br>
+
+Craft Mese Crystal 				from cooking <br>
+mesecook_crystal in furnace.<br>
+
+Craft Infinium ingot			from cooking infinium_container<br>
+ in furnace.
+Craft technic:uranium			from cooking depleted_uranium_ingot in furnace.<br>
+
+Craft depleted_uranium_ingot	from depleted_uranium_lump in furnace.<br>
+
 
 [FUEL] --need technic mod
 technic:uranium_block=> 604800 burntime
@@ -55,48 +72,72 @@ technic:uranium_block=> 604800 burntime
 
 [ORES]
 ---------------------------
-Emeralds: 						Below -1000
-Rubys: 						Below -3000
-Aikerum: 						Below -4000
-Infinium: 						Below -4300
-Purpellium:					Below -4300
-Depleted uranium: 				Above -1000
+Emeralds: 						Below -1000<br>
 
-Coal, Iron, and Gold now generate in desert stone.
+Rubys: 						Below -3000<br>
+
+Aikerum: 						Below -4000<br>
+
+Infinium: 						Below -4300<br>
+
+Purpellium:					Below -4300<br>
+
+Depleted uranium: 				Above -1000<br>
+
+
+Coal, Iron, and Gold now generate in desert stone.<br>
+
 
 
 These new ores can craft into very strong tools and weapons. As of current the Infinuim ingots can be made into infinium armour, (soft dependancy to armor mod.)  You can consider finding Infinium winning the game.
 To craft these tools you will replace the stick with an iron ingot.
-To craft an Infinium ingot you must craft first a vessel with Infinium goo to get Infinium container and water flowing. then cook the Infinium container in furnace to get ingot.
+To craft an Infinium ingot you must craft first a vessel with Infinium goo to get Infinium container and water flowing. then cook the Infinium container in furnace to get ingot.<br>
+
 
 [TOOLS]
 ------------------------
 ES Sword and pick crafting is different than default minetest.
 Aikerum, Emerald, Ruby crystals go in usual spots to craft, the handle however, substitutes the sticks for an steel ingot.
 
-		Ruby Tools Example:		R=Ruby  I=Steel_ingot #=Air
+		Ruby Tools Example:		R=Ruby  I=Steel_ingot #=Air<br>
 
-Pick Crafting:
-				[RRR]
-				[#I#]
-				[#I#]
 
-Sword Crafting:
-				[#R#]
-				[#R#]
-				[#I#]
+Pick Crafting:<br>
+
+				[RRR]<br>
+
+				[#I#]<br>
+
+				[#I#]<br>
+
+
+Sword Crafting:<br>
+
+				[#R#]<br>
+
+				[#R#]<br>
+
+				[#I#]<br>
+
 
 
 
 [STAIRS]
 --------------------------
-Stair crafting the following blocks will give you a stair or slab:
-Aikerum
-Dirt
-Emerald
-Infinium
-Purpellium
-Ruby
+Stair crafting the following blocks will give you a stair or slab:<br>
+
+Aikerum<br>
+
+Dirt<br>
+
+Emerald<br>
+
+Infinium<br>
+
+Purpellium<br>
+
+Ruby<br>
+
 
 [ARMOR]
 ----------------------------
