@@ -16,77 +16,47 @@ ___________         __                                    _________             
         \/      \/                   \/      \/     \/          \/                                  \/
 
 
-
-
-
-
-
-
 [es] Maikerumine's Extreme Survival mod, has extra crafting recipies for tools and ores.
 ===============================================================
 
 [CRAFTING]
 ----------------------------
 Craft dirt	 					from 9 papyrus.. or 9 bones<br>
-
 Craft sand						from 5 bones in an "X"<br>
-
 Craft coal						from 5 bones in an "+"<br>
-
 Craft gravel					from 3 bones in an "_"<br>
-
 Craft Mese Crystal	 			from 9 Mese Shards...<br>
   (dependancy to mese_crystals mod changed by maikerumine)
 Craft Messymese					from 9 mesecook_crystals<br>
-
 Craft 3 Desert Cobble 			from one brick and two cobble, brick on top of craft...
 Craft depleted_uranium_ingot	from 9 technic:chernobylite_block<br>
-
 Craft Punkin					from 9 depleted_uranium_ingot<br>
-
 Craft Boneblock					from 8 bones surrounding 1 steelblock<br>
-
 Craft Infinium container		from glass_bottle+infinium_goo+water_flowing (shapeless)<br>
-
-
-
 
 [COOKING]
 -------------------------
 Craft Water flowing 			from cooking ice in furnace.<br>
-
 Craft Mese Crystal 				from cooking <br>
 mesecook_crystal in furnace.<br>
-
 Craft Infinium ingot			from cooking infinium_container in furnace.<br>
-
 Craft technic:uranium			from cooking depleted_uranium_ingot in furnace.<br>
-
 Craft depleted_uranium_ingot	from depleted_uranium_lump in furnace.<br>
 
-
 [FUEL] --need technic mod
-technic:uranium_block=> 604800 burntime
-
+technic:uranium_block=> 604800 burntime<br>
+es:depleted_uranium -->three minute burn time.<br>
 
 [ORES]
 ---------------------------
 Emeralds: 						Below -1000<br>
-
 Rubys: 						Below -3000<br>
-
 Aikerum: 						Below -4000<br>
-
 Infinium: 						Below -4300<br>
-
 Purpellium:					Below -4300<br>
-
 Depleted uranium: 				Above -1000<br>
 
-
 Coal, Iron, and Gold now generate in desert stone.<br>
-
-
 
 These new ores can craft into very strong tools and weapons. As of current the Infinuim ingots can be made into infinium armour, (soft dependancy to armor mod.)  You can consider finding Infinium winning the game.
 To craft these tools you will replace the stick with an iron ingot.
