@@ -1,9 +1,9 @@
--- Extreme Survival created by maikerumine
--- Minetest 0.4.13 mod: "Extreme Survival"
--- namespace: extreme_survival
--- (c) 2014-2015 by: maikerumine
--- https://github.com/maikerumine
--- LGPLv2.1  (SEE BOTTOM)
+ Extreme Survival created by maikerumine
+ Minetest 0.4.13 mod: "Extreme Survival"
+ namespace: extreme_survival
+ (c) 2014-2015 by: maikerumine
+ https://github.com/maikerumine
+ LGPLv2.1  (SEE BOTTOM)
 
 =======================
 
