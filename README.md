@@ -39,14 +39,13 @@ Craft Mese Crystal	 			from 9 Mese Shards...<br>
   (dependancy to mese_crystals mod changed by maikerumine)
 Craft Messymese					from 9 mesecook_crystals<br>
 
-Craft 3 Desert Cobble 			from one brick and two<br>
- cobble, brick on top of craft...
-Craft depleted_uranium_ingot	from 9<br>
- technic:chernobylite_block
-Craft Punkin					from 9<br>
- depleted_uranium_ingot
-Craft Boneblock					from 8 bones surrounding 1<br>
- steelblock
+Craft 3 Desert Cobble 			from one brick and two cobble, brick on top of craft...
+Craft depleted_uranium_ingot	from 9 technic:chernobylite_block<br>
+
+Craft Punkin					from 9 depleted_uranium_ingot<br>
+
+Craft Boneblock					from 8 bones surrounding 1 steelblock<br>
+
 Craft Infinium container		from glass_bottle+infinium_goo+water_flowing (shapeless)<br>
 
 
@@ -59,8 +58,8 @@ Craft Water flowing 			from cooking ice in furnace.<br>
 Craft Mese Crystal 				from cooking <br>
 mesecook_crystal in furnace.<br>
 
-Craft Infinium ingot			from cooking infinium_container<br>
- in furnace.
+Craft Infinium ingot			from cooking infinium_container in furnace.<br>
+
 Craft technic:uranium			from cooking depleted_uranium_ingot in furnace.<br>
 
 Craft depleted_uranium_ingot	from depleted_uranium_lump in furnace.<br>
