@@ -21,7 +21,8 @@ ___________         __                                    _________             
 
 
 
---[[es]]-- Maikerumine's Extreme Survival mod, has extra crafting recipies for tools and ores.
+
+[es] Maikerumine's Extreme Survival mod, has extra crafting recipies for tools and ores.
 ===============================================================
 
 [CRAFTING]
