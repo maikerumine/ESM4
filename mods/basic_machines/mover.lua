@@ -530,14 +530,15 @@ minetest.register_node("basic_machines:mover", {
 
 local function use_keypad(pos,ttl) -- position, time to live ( how many times can signal travel before vanishing to prevent infinite recursion )
 	
+	if ttl<0 then return end;
 	local meta = minetest.get_meta(pos);	
 	local name =  meta:get_string("owner");
 	if minetest.is_protected(pos,name) then meta:set_string("infotext", "Protection fail. reset."); meta:set_int("count",0) end
 	local count = meta:get_int("count") or 0; -- counts how many repeats left
 	local active_repeats = meta:get_int("active_repeats") or 0;
 		
-	if count<=0 and ttl<0 then return end;
 	
+	if count < 0 then return end
 	count = count - 1; meta:set_int("count",count); 
 	
 	if count>=0 then
@@ -592,7 +593,10 @@ local function check_keypad(pos,name,ttl) -- called only when manually activated
 	local meta = minetest.get_meta(pos);
 	local pass =  meta:get_string("pass");
 	if pass == "" then 
-		meta:set_int("count",meta:get_int("iter")); use_keypad(pos,machines_TTL) -- time to live set when punched
+		local iter = meta:get_int("iter");
+		local count = meta:get_int("count");
+		if count<iter-1 or iter<2 then meta:set_int("active_repeats",0) end -- so that keypad can work again, at least one operation must have occured though
+		meta:set_int("count",iter); use_keypad(pos,machines_TTL) -- time to live set when punched
 		return 
 	end
 	if name == "" then return end
@@ -864,9 +868,6 @@ minetest.register_abm({
 
 -- DISTRIBUTOR: spreads one signal to two outputs
 
--- TO DO: add delay option
-
-
 minetest.register_node("basic_machines:distributor", {
 	description = "Distributor",
 	tiles = {"distributor.png"},
@@ -877,7 +878,7 @@ minetest.register_node("basic_machines:distributor", {
 		meta:set_string("infotext", "Distributor. Right click/punch to set it up.")
 		meta:set_string("owner", placer:get_player_name()); meta:set_int("public",0);
 		for i=1,10 do
-			meta:set_int("x"..i,0);meta:set_int("y"..i,0);meta:set_int("z"..i,0);meta:set_int("active"..i,1) -- target i
+			meta:set_int("x"..i,0);meta:set_int("y"..i,1);meta:set_int("z"..i,0);meta:set_int("active"..i,1) -- target i
 		end
 		meta:set_int("n",2); -- how many targets initially
 		meta:set_float("delay",0); -- delay when transmitting signal
@@ -892,6 +893,16 @@ minetest.register_node("basic_machines:distributor", {
 			if type(ttl)~="number" then ttl = 1 end
 			if not(ttl>0) then return end
 			local meta = minetest.get_meta(pos);
+			local t1 = meta:get_int("t");
+			local t0 = minetest.get_gametime(); 
+			if t0<=t1 then 
+				local delay = machines_timer+1;
+				minetest.sound_play("default_cool_lava",{pos = pos, max_hear_distance = 16, gain = 0.25})
+				meta:set_string("infotext","DISTRIBUTOR: burned out due to too fast activation. Wait "..delay.."s for cooldown."); meta:set_int("t",t1+delay); return 
+			elseif meta:get_string("infotext")~="" then 
+					meta:set_string("infotext","")
+			end
+			meta:set_int("t",t1); -- update last activation time
 			local posf = {}; local active = {};
 			local n = meta:get_int("n");local delay = meta:get_float("delay");
 			for i =1,n do
@@ -926,7 +937,6 @@ minetest.register_node("basic_machines:distributor", {
 					end
 				end
 			end
-			
 	end,
 	
 	action_off = function (pos, node,ttl) 
@@ -934,6 +944,16 @@ minetest.register_node("basic_machines:distributor", {
 			if type(ttl)~="number" then ttl = 1 end
 			if not(ttl>0) then return end
 			local meta = minetest.get_meta(pos);
+			local t0 = meta:get_int("t");
+			local t1 = minetest.get_gametime(); 
+			if t1<=t0 then 
+				local delay = machines_timer+1;
+				minetest.sound_play("default_cool_lava",{pos = pos, max_hear_distance = 16, gain = 0.25})
+				meta:set_string("infotext","DISTRIBUTOR: burned out due to too fast activation. Wait "..delay.."s for cooldown."); meta:set_int("t",t1+delay); return 
+			elseif meta:get_string("infotext")~="" then 
+					meta:set_string("infotext","")
+			end
+			meta:set_int("t",t1); -- update last activation time
 			local posf = {}; local active = {};
 			local n = meta:get_int("n");
 			for i =1,n do
@@ -1275,7 +1295,7 @@ minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
 					minetest.chat_send_player(name, "DISTRIBUTOR: Punch closer to distributor. aborting.")
 					punchset[name].state = 0; return
 				end
-				minetest.chat_send_player(name, "DETECTOR: target set.")
+				minetest.chat_send_player(name, "DISTRIBUTOR: target set.")
 				local meta = minetest.get_meta(punchset[name].pos);
 				local x = pos.x-punchset[name].pos.x;
 				local y = pos.y-punchset[name].pos.y;
@@ -1283,7 +1303,7 @@ minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
 				local j = punchset[name].state;
 				
 				meta:set_int("x"..j,x);meta:set_int("y"..j,y);meta:set_int("z"..j,z);
-				
+				if x==0 and y==0 and z==0 then meta:set_int("active"..j,0) end
 				machines.pos1[name] = pos;machines.mark_pos1(name) -- mark pos1
 				punchset[name].state = 0; 
 				return
@@ -1427,6 +1447,7 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 		
 		if meta:get_int("count")<=0 then -- only accept new operation requests if idle
 			meta:set_int("count",meta:get_int("iter")); 
+			meta:set_int("active_repeats",0);
 			use_keypad(pos,machines_TTL)
 			else meta:set_int("count",0); meta:set_string("infotext","operation aborted by user. punch to activate.") -- reset
 		end
@@ -1521,7 +1542,11 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 				end
 			
 				meta:set_int("x"..i,posf[i].x);meta:set_int("y"..i,posf[i].y);meta:set_int("z"..i,posf[i].z);
-				meta:set_int("active"..i,active[i]);
+				if posf[i].x==0 and posf[i].y==0 and posf[i].z==0 then
+					meta:set_int("active"..i,0); -- no point in activating itself
+					else
+					meta:set_int("active"..i,active[i]);
+				end
 				if fields.delay then
 					meta:set_float("delay", fields.delay);
 				end
