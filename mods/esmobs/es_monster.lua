@@ -66,10 +66,11 @@ mobs:register_mob("esmobs:dungeon_master", {
 mobs:register_mob("esmobs:tree_monster", {
 	type = "monster",
 	passive = false,
-	attack_type = "dogfight",
+	--attack_type = "dogfight",
+	attack_type = "explode",
 	reach = 2,
 	damage = 2,
-	hp_min = 7,
+	hp_min = 17,
 	hp_max = 33,
 	armor = 100,
 	collisionbox = {-0.4, -1, -0.4, 0.4, 0.8, 0.4},
@@ -82,9 +83,13 @@ mobs:register_mob("esmobs:tree_monster", {
 	makes_footstep_sound = true,
 	sounds = {
 		random = "mobs_treemonster",
+		--random = "Fuse",
+		explode = "explo",
+		attack = "mobs_treemonster",
+		war_cry  = "Fuse",
 	},
-	walk_velocity = 3,
-	run_velocity = 4,
+	walk_velocity = 2.5,
+	run_velocity = 3.5,
 	jump = true,
 	view_range = 15,
 	drops = {
@@ -97,7 +102,7 @@ mobs:register_mob("esmobs:tree_monster", {
 	},
 	water_damage = 1,
 	lava_damage = 5,
-	light_damage = 2,
+	light_damage = 0,
 	fall_damage = 0,
 	group_attack = true,
 	animation = {
@@ -481,9 +486,9 @@ mobs:register_mob("esmobs:herobrines_bloody_ghost", {
 --mobs:register_spawn("esmobs:phoenix", {"air","air"}, 6, -1, 170000, 1, 100)
 mobs:register_mob("esmobs:paniki", {
 	type = "monster",
-	hp_max = 60,
-	hp_min = 50,
-	damage = 2,
+	hp_max = 40,
+	hp_min = 20,
+	damage = 1,
 	collisionbox = {-0.15, -0.2, -0.15, 0.15, 0.2, 0.15},
 	visual = "mesh",
 	mesh = "phoenix.b3d",  --paniki from minetest defense
@@ -493,8 +498,8 @@ mobs:register_mob("esmobs:paniki", {
 	lifetimer = 500,
 	floats=1,
 	rotate = 270,
-	walk_velocity = 1.5,
-	run_velocity = 2.5,
+	walk_velocity = 0.5,
+	run_velocity = 2.0,
   fall_speed = 2,
   stepheight = 1,
   sounds = {
@@ -522,7 +527,7 @@ mobs:register_mob("esmobs:paniki", {
 	armor = 60,
 	--drawtype = "side",
 	water_damage = 5,
-	lava_damage = 0,
+	lava_damage = 40,
 	light_damage = 10,
 	--fear_height = 70,
 	on_rightclick = nil,
@@ -581,7 +586,7 @@ mobs:register_mob("esmobs:phoenix", {
 	damage = 2,
 	--jump = true,
 	drops = {
-	
+
 		{name = "esmobs:feather",
 		chance = 1,
 		min = 1,
@@ -683,7 +688,7 @@ mobs:register_mob("esmobs:bomber", {
 		arrow = "esmobs:stone_monster",
 		--arrow = "esmobs:smbullet",
 		reach = 1,
-		shoot_interval = 2,
+		shoot_interval = 10,
 
 	animation = {
 		speed_normal = 22,
@@ -1130,20 +1135,20 @@ mobs:register_spawn("esmobs:chickoboo", {"default:dirt_with_dry_grass"},{"air"},
 --function mobs:spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
 --function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
 mobs:register_spawn("esmobs:spider", {"default:stone" ,"default:cobble","group:crumbly", "group:cracky", "group:choppy", "group:snappy"}, 6, -1, 24000, 1, 31000)
-mobs:register_spawn("esmobs:applmons", {"default:stone","nether:rack", "esmobs:cursed_stone"}, 6, -1, 4000, 5, -30)
+mobs:register_spawn("esmobs:applmons", {"default:stone","nether:rack", "esmobs:cursed_stone"}, 6, -1, 4000, 1, -30)
 mobs:register_spawn("esmobs:herobrines_bloody_ghost", {"default:stone","default:desert_sand","nether:brick", "bedrock2:bedrock"}, 4, -1, 22000, 1, -6030)
-mobs:register_spawn("esmobs:bone_monster", {"default:stone_with_iron","bones:bones","esmobs:bones", "bedrock2:bedrock","default:stone"},6, -1, 17000, 3, 31000)
+mobs:register_spawn("esmobs:bone_monster", {"default:stone_with_iron","bones:bones","esmobs:bones", "bedrock2:bedrock","default:stone"},6, -1, 17000, 1, 31000)
 mobs:register_spawn("esmobs:icemon", {"default:ice"}, 5, -1, 14000, 1, 3100)
-mobs:register_spawn("esmobs:snowmon", {"default:snow","default:snowblock","default:snow_block", "default:dirt_with_snow"}, 5, -1, 14000, 12, 31000)
-mobs:register_spawn("esmobs:watermon", {"default:water_source","default:water_flowing"}, 5, -1, 14000, 5, -120)
-mobs:register_spawn("esmobs:dirt2", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 16000, 2, -100)
-mobs:register_spawn("esmobs:stone_monster2", {"default:stone","bedrock2:bedrock"}, 5, -1, 14000, 3, -500)
-mobs:register_spawn("esmobs:dungeon_master", {"default:stone"}, 2, 0, 7000, 2, -70)
+mobs:register_spawn("esmobs:snowmon", {"default:snow","default:snowblock","default:snow_block", "default:dirt_with_snow"}, 5, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:watermon", {"default:water_source","default:water_flowing"}, 5, -1, 14000, 1, -120)
+mobs:register_spawn("esmobs:dirt2", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 16000, 1, -100)
+mobs:register_spawn("esmobs:stone_monster2", {"default:stone","bedrock2:bedrock"}, 5, -1, 14000, 1, -500)
+mobs:register_spawn("esmobs:dungeon_master", {"default:stone"}, 2, 0, 7000, 1, -70)
 mobs:register_spawn("esmobs:tree_monster", {"default:leaves", "default:jungleleaves","default:dirt", "default:jungletree"}, 5, 0, 14000, 1, 31000)
 mobs:register_spawn("esmobs:sand_monster", {"default:sand", "meru:stone","group:sand"},4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:stone_monster", {"default:stone", "bedrock2:bedrock"}, 5, 2, 9000, 20, 31000)
-mobs:register_spawn("esmobs:oerkki", { "default:stone"}, 4, -1, 2000, 3, -70)
-mobs:register_spawn("esmobs:dirt", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 2, 31000)
-mobs:register_spawn("esmobs:phoenix",{"air"}, 4,-1, 16000, 1, 90,false)
-mobs:register_spawn("esmobs:paniki", {"default:stone_with_coal", "default:stone"}, 5,-1, 11000, 1, 90,false)
-mobs:register_spawn("esmobs:bomber", {"air"}, 4,-1, 18000, 1, 90,false)
+mobs:register_spawn("esmobs:stone_monster", {"default:stone", "bedrock2:bedrock"}, 5, 2, 9000, 1, 31000)
+mobs:register_spawn("esmobs:oerkki", { "default:stone"}, 4, -1, 2000, 1, -70)
+mobs:register_spawn("esmobs:dirt", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 1, 31000)
+--mobs:register_spawn("esmobs:phoenix",{"air"}, 4,-1, 16000, 1, 90,false)
+mobs:register_spawn("esmobs:paniki", {"air", "default:stone_with_coal", "default:stone"}, 5,-1, 13100, 1, 20,false)
+--mobs:register_spawn("esmobs:bomber", {"air"}, 4,-1, 18000, 1, 90,false)

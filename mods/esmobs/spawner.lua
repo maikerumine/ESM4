@@ -244,7 +244,8 @@ mobs:register_egg("esmobs:horse3", "Arabic Horse", "mobs_horse_ara_inv.png", 0)
 mobs:register_egg("esmobs:horseh1", "Tamed Brown Horse", "mobs_horse_inv.png", 0)
 mobs:register_egg("esmobs:horsepegh1", "Tamed White Horse", "mobs_horse_peg_inv.png", 0)
 mobs:register_egg("esmobs:horsearah1", "Tamed Arabic Horse", "mobs_horse_ara_inv.png", 0)
-
+mobs:register_egg("esmobs:wolf", "Wolf", "wool_grey.png", 1)
+mobs:register_egg("esmobs:dog", "Dog", "wool_brown.png", 1)
 
 --MT monster spawn eggs
 mobs:register_egg("esmobs:tree_monster", "Tree Monster", "default_tree_top.png", 1)

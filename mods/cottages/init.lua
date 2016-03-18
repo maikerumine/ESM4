@@ -40,13 +40,16 @@ dofile(minetest.get_modpath("cottages").."/adaptions.lua");
 -- add a stack size if you want a higher yield
 cottages.handmill_product = {};
 cottages.handmill_product[ cottages.craftitem_seed_wheat ] = 'farming:flour 1';
-cottages.handmill_product[ 'es:purpellium_lump' ] = 'es:purpellium_dust 1';
-cottages.handmill_product[ 'default:cobble' ] = 'default:gravel';
-cottages.handmill_product[ 'default:gravel' ] = 'default:sand';
-cottages.handmill_product[ 'default:sand'   ] = 'default:dirt 2';
-cottages.handmill_product[ 'flowers:rose'   ] = 'dye:red 6';
-cottages.handmill_product[ 'default:cactus' ] = 'dye:green 6';
-cottages.handmill_product[ 'default:coal_lump'] = 'dye:black 6';
+--cottages.handmill_product[ 'es:purpellium_lump' ] = 'es:purpellium_dust 1';
+--cottages.handmill_product[ 'es:aikerum_crystal' ] = 'es:aikerum_dust 1';
+--cottages.handmill_product[ 'es:ruby_crystal' ] = 'es:ruby_dust 1';
+--cottages.handmill_product[ 'es:emerald_crystal' ] = 'es:emerald_dust 1';
+--cottages.handmill_product[ 'default:cobble' ] = 'default:gravel';
+--cottages.handmill_product[ 'default:gravel' ] = 'default:sand';
+--cottages.handmill_product[ 'default:sand'   ] = 'default:dirt 2';
+--cottages.handmill_product[ 'flowers:rose'   ] = 'dye:red 6';
+--cottages.handmill_product[ 'default:cactus' ] = 'dye:green 6';
+--cottages.handmill_product[ 'default:coal_lump'] = 'dye:black 6';
 
 -- process that many inputs per turn
 cottages.handmill_max_per_turn = 20;

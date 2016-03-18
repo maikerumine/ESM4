@@ -2084,7 +2084,7 @@ mobs:register_mob("esmobs:Maikerumine", {
 	water_damage = 0,
 	lava_damage = 50,
 	light_damage = 0,
-	fear_height = 5,
+	fear_height = 4,
 		on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		local_chat(clicker:getpos(),"Maikerumine: Maybe a new game is in the works...  Hmmm...",3)

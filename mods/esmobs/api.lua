@@ -1095,9 +1095,9 @@ minetest.register_entity(name, {
 		end
 
 		-- never go over 100
---		if self.timer > 100 then
---			self.timer = 1
---		end
+		if self.timer > 100 then
+			self.timer = 1
+		end
 
 		-- node replace check (cow eats grass etc.)
 		replace(self, pos)
@@ -1354,7 +1354,7 @@ minetest.register_entity(name, {
 
 			return
 		end
-		
+
 		if self.state == "stand" then
 
 			if math.random(1, 4) == 1 then
@@ -1728,7 +1728,7 @@ minetest.register_entity(name, {
 				-- path finding by rnd
 				if self.pathfinding -- only if mob has pathfinding enabled
 				and enable_pathfinding then
-				
+
 					smart_mobs(self, s, p, dist, dtime)
 				end
 
@@ -1846,7 +1846,7 @@ minetest.register_entity(name, {
 				local obj = minetest.add_entity(p, self.arrow)
 				local ent = obj:get_luaentity()
 				local amount = (vec.x * vec.x + vec.y * vec.y + vec.z * vec.z) ^ 0.5
-				--local v = ent.velocity 
+				--local v = ent.velocity
 				local v = 7.2
 				ent.switch = 1
 
@@ -1861,7 +1861,7 @@ minetest.register_entity(name, {
 		end
 
 		end -- END if self.state == "attack"
-		
+
 	end,
 
 	on_punch = function(self, hitter, tflp, tool_capabilities, dir)
@@ -1974,7 +1974,7 @@ minetest.register_entity(name, {
 
 		-- knock back effect
 		if self.knock_back > 0 then
-		
+
 			local dir = self.object:getvelocity() --maikerumine added this hack
 			local v = self.object:getvelocity()
 			local r = 1.4 - math.min(punch_interval, 1.4)
@@ -1984,9 +1984,9 @@ minetest.register_entity(name, {
 			-- if already in air then dont go up anymore when hit
 			if v.y > 0
 			or self.fly then
-				up = 0  
+				up = 0
 			end
-			
+
 			self.object:setvelocity({
 				x = dir.x * kb,
 				y = dir.y * kb,		--was up
@@ -2158,11 +2158,12 @@ minetest.register_entity(name, {
 		if remove_far
 		and self.remove_ok
 		and self.state ~= "run"  --maikerumine to fix dissappearing mobs
+		and self.state ~= "follow"  --maikerumine to fix dissappearing mobs
 		--and self.state ~= "attack"  --maikerumine to fix dissappearing mobs
-		--and self.state ~= "stand"  --maikerumine to fix dissappearing mobs
+		and self.state ~= "stand"  --maikerumine to fix dissappearing mobs
 		and not self.tamed then
 
-			print ("REMOVED " .. self.name)
+			--print ("REMOVED " .. self.name)
 
 			self.object:remove()
 
@@ -2258,7 +2259,7 @@ function mobs:spawn_specific(name, nodes, neighbors, min_light, max_light, inter
 					end
 				end
 			end
-			
+
 			-- spawn above node
 			pos.y = pos.y + 1
 
@@ -2835,7 +2836,7 @@ end)
 					end
 				end
 			end
-			
+
 			--maikeruminefollow
 			function mobs:team_player(self,pos)
 				if tamed == true or
