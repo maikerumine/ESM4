@@ -18,7 +18,7 @@ end
 
 protector.is_member = function (meta, name)
 
-	for _, n in ipairs(protector.get_member_list(meta)) do
+	for _, n in pairs(protector.get_member_list(meta)) do
 
 		if n == name then
 			return true
@@ -45,7 +45,7 @@ protector.del_member = function(meta, name)
 
 	local list = protector.get_member_list(meta)
 
-	for i, n in ipairs(list) do
+	for i, n in pairs(list) do
 
 		if n == name then
 			table.remove(list, i)
@@ -61,17 +61,19 @@ end
 protector.generate_formspec = function(meta)
 
 	local formspec = "size[8,7]"
-		..default.gui_bg..default.gui_bg_img..default.gui_slots
-		.."label[2.5,0;-- Protector interface --]"
-		.."label[0,1;PUNCH node to show protected area or USE for area check.]"
-		.."label[0,2;Members: (type player name then press Enter to add them.)]"
+		.. default.gui_bg
+		.. default.gui_bg_img
+		.. default.gui_slots
+		.. "label[2.5,0;-- Protector interface --]"
+		.. "label[0,1;PUNCH node to show protected area or USE for area check]"
+		.. "label[0,2;Members: (type player name then press Enter to add)]"
 		.. "button_exit[2.5,6.2;3,0.5;close_me;Close]"
 
 	local members = protector.get_member_list(meta)
 	local npp = 12 -- max users added onto protector list
 	local i = 0
 
-	for _, member in ipairs(members) do
+	for _, member in pairs(members) do
 
 		if i < npp then
 
@@ -88,7 +90,7 @@ protector.generate_formspec = function(meta)
 
 		i = i + 1
 	end
-
+	
 	if i < npp then
 
 		-- user name entry field
@@ -136,13 +138,13 @@ protector.can_dig = function(r, pos, digger, onlyowner, infolevel)
 
 	local meta, owner, members
 
-	for _, pos in ipairs(positions) do
+	for _, pos in pairs(positions) do
 
 		meta = minetest.get_meta(pos)
 		owner = meta:get_string("owner")
 		members = meta:get_string("members")
 
-		if owner ~= digger then
+		if owner ~= digger then 
 
 			if onlyowner
 			or not protector.is_member(meta, digger) then
@@ -208,35 +210,41 @@ end
 
 protector.old_is_protected = minetest.is_protected
 
-
-
 function minetest.is_protected(pos, digger)
 
 	if not protector.can_dig(protector.radius, pos, digger, false, 1) then
+
 		local player = minetest.get_player_by_name(digger)
+
+		-- hurt player if protection violated
 		if protector.hurt > 0
 		and player then
 			player:set_hp(player:get_hp() - protector.hurt)
 		end
 
+		-- drop tool/item if protection violated
 		if protector.drop == true
 		and player then
-			-- drop tool/item if protection violated
-			local tool = player:get_wielded_item()
-			--local wear = tool:get_wear()
-			local num = player:get_wield_index()
-			local player_inv = player:get_inventory()
-			local inv = player_inv:get_stack("main", num)
-			local sta = inv:take_item(inv:get_count())
-			local obj = minetest.add_item(player:getpos(), sta)
 
-			if obj then
-				obj:setvelocity({x = 0, y = 5, z = 0})
-				player:set_wielded_item(nil)
-				minetest.after(0.2, function()
-					player_inv:set_stack("main", num, nil)
+			local holding = player:get_wielded_item()
+
+			if holding:to_string() ~= "" then
+
+				-- take stack
+				local sta = holding:take_item(holding:get_count())
+				player:set_wielded_item(holding)
+
+				-- incase of lag, reset stack
+				minetest.after(0.1, function()
+					player:set_wielded_item(holding)
+
+					-- drop stack
+					local obj = minetest.add_item(player:getpos(), sta)
+					obj:setvelocity({x = 0, y = 5, z = 0})
 				end)
+
 			end
+
 		end
 
 		return true
@@ -254,9 +262,7 @@ function protector.check_overlap(itemstack, placer, pointed_thing)
 		return itemstack
 	end
 
-	if not protector.can_dig(protector.radius * 2, pointed_thing.under,
-	placer:get_player_name(), true, 3)
-	or not protector.can_dig(protector.radius * 2, pointed_thing.above,
+	if not protector.can_dig(protector.radius * 2, pointed_thing.above,
 	placer:get_player_name(), true, 3) then
 
 		minetest.chat_send_player(placer:get_player_name(),
@@ -316,8 +322,9 @@ minetest.register_node("protector:protect", {
 
 		local meta = minetest.get_meta(pos)
 
-		if protector.can_dig(1, pos,clicker:get_player_name(), true, 1) then
-			minetest.show_formspec(clicker:get_player_name(),
+		if meta
+		and protector.can_dig(1, pos,clicker:get_player_name(), true, 1) then
+			minetest.show_formspec(clicker:get_player_name(), 
 			"protector:node_" .. minetest.pos_to_string(pos), protector.generate_formspec(meta))
 		end
 	end,
@@ -335,6 +342,8 @@ minetest.register_node("protector:protect", {
 
 		return protector.can_dig(1, pos, player:get_player_name(), true, 1)
 	end,
+
+	on_blast = function() end,
 })
 
 minetest.register_craft({
@@ -396,7 +405,7 @@ minetest.register_node("protector:protect2", {
 
 		if protector.can_dig(1, pos, clicker:get_player_name(), true, 1) then
 
-			minetest.show_formspec(clicker:get_player_name(),
+			minetest.show_formspec(clicker:get_player_name(), 
 			"protector:node_" .. minetest.pos_to_string(pos), protector.generate_formspec(meta))
 		end
 	end,
@@ -414,6 +423,8 @@ minetest.register_node("protector:protect2", {
 
 		return protector.can_dig(1, pos, player:get_player_name(), true, 1)
 	end,
+
+	on_blast = function() end,
 })
 
 minetest.register_craft({
@@ -441,7 +452,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 
 		if fields.protector_add_member then
 
-			for _, i in ipairs(fields.protector_add_member:split(" ")) do
+			for _, i in pairs(fields.protector_add_member:split(" ")) do
 				protector.add_member(meta, i)
 			end
 		end
@@ -452,7 +463,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 				protector.del_member(meta, string.sub(field,string.len("protector_del_member_") + 1))
 			end
 		end
-
+		
 		if not fields.close_me then
 			minetest.show_formspec(player:get_player_name(), formname, protector.generate_formspec(meta))
 		end
@@ -460,8 +471,6 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	end
 
 end)
-
-
 
 -- Display entity shown when protector node is punched
 
@@ -476,8 +485,8 @@ minetest.register_entity("protector:display", {
 
 	on_activate = function(self, staticdata)
 
-		-- ESM server only
-		if esmobs and esmobs.entity and esmobs.entity == false then
+		-- Xanadu server only
+		if mobs and mobs.entity and mobs.entity == false then
 			self.object:remove()
 		end
 	end,

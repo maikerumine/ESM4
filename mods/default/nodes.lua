@@ -146,9 +146,11 @@ default:chest_locked
 
 default:bookshelf
 
-default:sign_wall
+default:sign_wall_wood
+default:sign_wall_steel
 
-default:ladder
+default:ladder_wood
+default:ladder_steel
 
 default:fence_wood
 default:fence_acacia_wood
@@ -351,8 +353,14 @@ minetest.register_node("default:gravel", {
 		footstep = {name = "default_gravel_footstep", gain = 0.5},
 		dug = {name = "default_gravel_footstep", gain = 1.0},
 	}),
+	drop = {
+		max_items = 1,
+		items = {
+			{items = {'default:flint'}, rarity = 16},
+			{items = {'default:gravel'}}
+		}
+	}
 })
-
 
 minetest.register_node("default:clay", {
 	description = "Clay",
@@ -815,7 +823,7 @@ minetest.register_node("default:bronzeblock", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
-
+--[[
 minetest.register_node("default:stone_with_mese", {
 	description = "Mese Ore",
 	tiles = {"default_stone.png^default_mineral_mese.png"},
@@ -823,7 +831,7 @@ minetest.register_node("default:stone_with_mese", {
 	drop = "default:mese_crystal",
 	sounds = default.node_sound_stone_defaults(),
 })
-
+]]
 minetest.register_node("default:mese", {
 	description = "Mese Block",
 	tiles = {"default_mese_block.png"},
@@ -876,13 +884,9 @@ minetest.register_node("default:cactus", {
 	tiles = {"default_cactus_top.png", "default_cactus_top.png",
 		"default_cactus_side.png"},
 	paramtype2 = "facedir",
-	groups = {snappy = 1, choppy = 3, flammable = 2},
+	groups = {snappy = 1, choppy = 3, flammable = 2,fall_damage_add_percent = 400},
 	sounds = default.node_sound_wood_defaults(),
 	on_place = minetest.rotate_node,
-
-	after_dig_node = function(pos, node, metadata, digger)
-		default.dig_up(pos, node, digger)
-	end,
 })
 
 minetest.register_node("default:papyrus", {
@@ -1414,7 +1418,14 @@ local function get_locked_chest_formspec(pos)
 end
 
 local function has_locked_chest_privilege(meta, player)
-	if player:get_player_name() ~= meta:get_string("owner") then
+	local name = ""
+	if player then
+		if minetest.check_player_privs(player, "protection_bypass") then
+			return true
+		end
+		name = player:get_player_name()
+	end
+	if name ~= meta:get_string("owner") then
 		return false
 	end
 	return true
@@ -1449,11 +1460,13 @@ minetest.register_node("default:chest", {
 	end,
     on_metadata_inventory_put = function(pos, listname, index, stack, player)
 		minetest.log("action", player:get_player_name() ..
-			" moves stuff to chest at " .. minetest.pos_to_string(pos))
+			" moves " .. stack:get_name() ..
+			" to chest at " .. minetest.pos_to_string(pos))
 	end,
     on_metadata_inventory_take = function(pos, listname, index, stack, player)
 		minetest.log("action", player:get_player_name() ..
-			" takes stuff from chest at " .. minetest.pos_to_string(pos))
+			" takes " .. stack:get_name() ..
+			" from chest at " .. minetest.pos_to_string(pos))
 	end,
 })
 
@@ -1509,11 +1522,13 @@ minetest.register_node("default:chest_locked", {
 	end,
     on_metadata_inventory_put = function(pos, listname, index, stack, player)
 		minetest.log("action", player:get_player_name() ..
-			" moves stuff to locked chest at " .. minetest.pos_to_string(pos))
+			" moves " .. stack:get_name() ..
+			" to locked chest at " .. minetest.pos_to_string(pos))
 	end,
     on_metadata_inventory_take = function(pos, listname, index, stack, player)
 		minetest.log("action", player:get_player_name() ..
-			" takes stuff from locked chest at " .. minetest.pos_to_string(pos))
+			" takes " .. stack:get_name()  ..
+			" from locked chest at " .. minetest.pos_to_string(pos))
 	end,
 	on_rightclick = function(pos, node, clicker)
 		local meta = minetest.get_meta(pos)
@@ -1605,56 +1620,67 @@ minetest.register_node("default:bookshelf", {
 	end,
 })
 
+local function register_sign(material, desc, def)
+	minetest.register_node("default:sign_wall_" .. material, {
+		description = desc .. " Sign",
+		drawtype = "nodebox",
+		tiles = {"default_sign_wall_" .. material .. ".png"},
+		inventory_image = "default_sign_" .. material .. ".png",
+		wield_image = "default_sign_" .. material .. ".png",
+		paramtype = "light",
+		paramtype2 = "wallmounted",
+		sunlight_propagates = true,
+		is_ground_content = false,
+		walkable = false,
+		node_box = {
+			type = "wallmounted",
+			wall_top    = {-0.4375, 0.4375, -0.3125, 0.4375, 0.5, 0.3125},
+			wall_bottom = {-0.4375, -0.5, -0.3125, 0.4375, -0.4375, 0.3125},
+			wall_side   = {-0.5, -0.3125, -0.4375, -0.4375, 0.3125, 0.4375},
+		},
+		groups = def.groups,
+		legacy_wallmounted = true,
+		sounds = def.sounds,
 
-minetest.register_node("default:sign_wall", {
-	description = "Sign",
-	drawtype = "nodebox",
-	tiles = {"default_sign.png"},
-	inventory_image = "default_sign_wall.png",
-	wield_image = "default_sign_wall.png",
-	paramtype = "light",
-	paramtype2 = "wallmounted",
-	sunlight_propagates = true,
-	is_ground_content = false,
-	walkable = false,
-	node_box = {
-		type = "wallmounted",
-		wall_top    = {-0.4375, 0.4375, -0.3125, 0.4375, 0.5, 0.3125},
-		wall_bottom = {-0.4375, -0.5, -0.3125, 0.4375, -0.4375, 0.3125},
-		wall_side   = {-0.5, -0.3125, -0.4375, -0.4375, 0.3125, 0.4375},
-	},
-	groups = {choppy = 2, dig_immediate = 2, attached_node = 1},
-	legacy_wallmounted = true,
-	sounds = default.node_sound_defaults(),
+		on_construct = function(pos)
+			--local n = minetest.get_node(pos)
+			local meta = minetest.get_meta(pos)
+			meta:set_string("formspec", "field[text;;${text}]")
+			meta:set_string("infotext", "\"\"")
+		end,
+		on_receive_fields = function(pos, formname, fields, sender)
+			--print("Sign at "..minetest.pos_to_string(pos).." got "..dump(fields))
+			local player_name = sender:get_player_name()
+			if minetest.is_protected(pos, player_name) then
+				minetest.record_protection_violation(pos, player_name)
+				return
+			end
+			local meta = minetest.get_meta(pos)
+			if not fields.text then return end
+			minetest.log("action", (player_name or "") .. " wrote \"" ..
+				fields.text .. "\" to sign at " .. minetest.pos_to_string(pos))
+			meta:set_string("text", fields.text)
+			meta:set_string("infotext", '"' .. fields.text .. '"')
+		end,
+	})
+end
 
-	on_construct = function(pos)
-		--local n = minetest.get_node(pos)
-		local meta = minetest.get_meta(pos)
-		meta:set_string("formspec", "field[text;;${text}]")
-		meta:set_string("infotext", "\"\"")
-	end,
-	on_receive_fields = function(pos, formname, fields, sender)
-		--print("Sign at "..minetest.pos_to_string(pos).." got "..dump(fields))
-		if minetest.is_protected(pos, sender:get_player_name()) then
-			minetest.record_protection_violation(pos, sender:get_player_name())
-			return
-		end
-		local meta = minetest.get_meta(pos)
-		if not fields.text then return end
-		minetest.log("action", (sender:get_player_name() or "") .. " wrote \"" ..
-			fields.text .. "\" to sign at " .. minetest.pos_to_string(pos))
-		meta:set_string("text", fields.text)
-		meta:set_string("infotext", '"' .. fields.text .. '"')
-	end,
+register_sign("wood", "Wooden", {
+	sounds = default.node_sound_wood_defaults(),
+	groups = {choppy = 2, attached_node = 1, flammable = 2}
 })
 
+register_sign("steel", "Steel", {
+	sounds = default.node_sound_defaults(),
+	groups = {cracky = 2, attached_node = 1}
+})
 
-minetest.register_node("default:ladder", {
-	description = "Ladder",
+minetest.register_node("default:ladder_wood", {
+	description = "Wooden Ladder",
 	drawtype = "signlike",
-	tiles = {"default_ladder.png"},
-	inventory_image = "default_ladder.png",
-	wield_image = "default_ladder.png",
+	tiles = {"default_ladder_wood.png"},
+	inventory_image = "default_ladder_wood.png",
+	wield_image = "default_ladder_wood.png",
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	sunlight_propagates = true,
@@ -1672,6 +1698,94 @@ minetest.register_node("default:ladder", {
 	sounds = default.node_sound_wood_defaults(),
 })
 
+minetest.register_node("default:ladder_steel", {
+	description = "Steel Ladder",
+	drawtype = "signlike",
+	tiles = {"default_ladder_steel.png"},
+	inventory_image = "default_ladder_steel.png",
+	wield_image = "default_ladder_steel.png",
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	sunlight_propagates = true,
+	walkable = false,
+	climbable = true,
+	is_ground_content = false,
+	selection_box = {
+		type = "wallmounted",
+		--wall_top = = <default>
+		--wall_bottom = = <default>
+		--wall_side = = <default>
+	},
+	groups = {cracky = 2},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+--[[
+--NEW CODE
+local fence_texture =
+	"default_fence_overlay.png^default_wood.png^default_fence_overlay.png^[makealpha:255,126,126"
+minetest.register_node("default:fence_wood", {
+	description = "Wooden Fence",
+	drawtype = "fencelike",
+	tiles = {"default_wood.png"},
+	inventory_image = fence_texture,
+	wield_image = fence_texture,
+	paramtype = "light",
+	sunlight_propagates = true,
+	is_ground_content = false,
+	selection_box = {
+		type = "fixed",
+		fixed = {-1/7, -1/2, -1/7, 1/7, 1/2, 1/7},
+	},
+	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
+	sounds = default.node_sound_wood_defaults(),
+})
+
+
+
+
+default.register_fence("default:fence_wood", {
+	description = "Wooden Fence",
+	texture = "default_fence_wood.png",
+	material = "default:wood",
+	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
+	sounds = default.node_sound_wood_defaults()
+})
+
+default.register_fence("default:fence_acacia_wood", {
+	description = "Acacia Fence",
+	texture = "default_fence_acacia_wood.png",
+	material = "default:acacia_wood",
+	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
+	sounds = default.node_sound_wood_defaults()
+})
+
+default.register_fence("default:fence_junglewood", {
+	description = "Junglewood Fence",
+	texture = "default_fence_junglewood.png",
+	material = "default:junglewood",
+	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
+	sounds = default.node_sound_wood_defaults()
+})
+
+default.register_fence("default:fence_pine_wood", {
+	description = "Pine Fence",
+	texture = "default_fence_pine_wood.png",
+	material = "default:pine_wood",
+	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
+	sounds = default.node_sound_wood_defaults()
+})
+
+default.register_fence("default:fence_aspen_wood", {
+	description = "Aspen Fence",
+	texture = "default_fence_aspen_wood.png",
+	material = "default:aspen_wood",
+	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
+	sounds = default.node_sound_wood_defaults()
+})
+]]
+
+--OLD CODE
 default.register_fence("default:fence_wood", {
 	description = "Wooden Fence",
 	texture = "default_wood.png",
@@ -1711,6 +1825,7 @@ default.register_fence("default:fence_aspen_wood", {
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
 	sounds = default.node_sound_wood_defaults()
 })
+
 
 minetest.register_node("default:glass", {
 	description = "Glass",
