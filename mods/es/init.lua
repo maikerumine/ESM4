@@ -27,7 +27,7 @@ es.modpath = modpath
 --dofile(modpath.."/alias.lua")
 
 -- Anticheat by RND
-dofile(modpath.."/anticheat.lua")
+--dofile(modpath.."/anticheat.lua")
 -- Armor [abort migration]
 dofile(modpath.."/armor.lua")
 -- Craft recipes for items
@@ -41,7 +41,7 @@ dofile(modpath.."/spawn.lua")
 
 -- Nodes
 dofile(modpath.."/nodes.lua")
-
+dofile(modpath.."/crushingfurnace.lua")
 
 
 -- Ore Generation

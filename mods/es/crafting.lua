@@ -149,6 +149,12 @@ minetest.register_craft({
 }
 })
 
+minetest.register_craft({
+	type = "shapeless",
+	output = "es:mud",
+	recipe = {"es:dry_dirt","default:water_flowing"},
+})
+
 
 --[[For ref
 minetest.register_node("default:dirt_with_grass", {
@@ -313,16 +319,33 @@ minetest.register_craft({
 	recipe = {"vessels:glass_bottle", "es:purpellium_dust","default:water_flowing"},
 })
 
-minetest.register_craftitem("es:purpellium_container", {
-	description = "Potion to do wonders!  (gives 50+ hunger for extra endurance mining.)",
-	inventory_image = "purpellium_container.png",
-	on_use = minetest.item_eat(50),
+minetest.register_craft({
+	type = "shapeless",
+	output = "es:aikerum_container",
+	recipe = {"vessels:glass_bottle", "es:aikerum_dust","default:water_flowing"},
 })
-	-- HEAL HP in hunger hud  
---	if minetest.get_modpath("es") ~= nil then
---overwrite("es:purpellium_container", 50,"vessels:glass_bottle",nil,50)
---end
+minetest.register_craft({
+	type = "shapeless",
+	output = "es:ruby_container",
+	recipe = {"vessels:glass_bottle", "es:ruby_dust","default:water_flowing"},
+})
 
+minetest.register_craft({
+	type = "shapeless",
+	output = "es:emerald_container",
+	recipe = {"vessels:glass_bottle", "es:emerald_dust","default:water_flowing"},
+})
+
+
+
+--IF COTTAGES USE FOR GRINDING
+--place in init in cottages
+--cottages.handmill_product[ 'es:purpellium_lump' ] = 'es:purpellium_dust 1';
+--cottages.handmill_product[ 'es:aikerum_crystal' ] = 'es:aikerum_dust 1';
+--cottages.handmill_product[ 'es:ruby_crystal' ] = 'es:ruby_dust 1';
+--cottages.handmill_product[ 'es:emerald_crystal' ] = 'es:emerald_dust 1';
+
+--ES GRINDER:
 
 
 minetest.register_craftitem("es:purpellium_dust", {
@@ -330,12 +353,168 @@ minetest.register_craftitem("es:purpellium_dust", {
 	inventory_image = "dye_violet.png",
 })
 
-minetest.register_craft({
-	type = "shapeless",
-	output = "es:mud",
-	recipe = {"es:dry_dirt","default:water_flowing"},
+minetest.register_craftitem("es:aikerum_dust", {
+	description = "Aikerum Dust",
+	inventory_image = "dye_blue.png",
 })
 
+minetest.register_craftitem("es:ruby_dust", {
+	description = "Ruby Dust",
+	inventory_image = "dye_red.png",
+})
+
+minetest.register_craftitem("es:emerald_dust", {
+	description = "Emerald Dust",
+	inventory_image = "dye_green.png",
+})
+
+--purpellium potion give endurance
+minetest.register_craftitem("es:purpellium_container", {
+	description = "Potion to do wonders!  (gives 50+ hunger for extra endurance mining.)",
+	inventory_image = "purpellium_container.png",
+	on_use = minetest.item_eat(50),
+})
+
+-- HEAL HP in hunger hud
+--place inhunger inhunger
+--	if minetest.get_modpath("es") ~= nil then
+--overwrite("es:purpellium_container", 50,"vessels:glass_bottle",nil,50)
+--end
+
+--aikerum potion special use
+minetest.register_craftitem("es:aikerum_container", {
+	description = "Convert diamond tool into aikerum tool!  (Put diamond tool and this potion in crafting to get aikerum tool.)",
+	inventory_image = "aikerum_container.png",
+	--inventory_image = "purpellium_container.png^[colorize:#0000ff:170",
+})
+
+--ruby potion special use heal armor
+minetest.register_craftitem("es:ruby_container", {
+	description = "Fix your armour!  (Put bad armour and this potion in crafting to fix.)",
+	inventory_image = "ruby_container.png",
+	--inventory_image = "purpellium_container.png^[colorize:#ff0000:170",
+})
+
+--emerald potion special use
+minetest.register_craftitem("es:emerald_container", {
+	description = "Speed Up Mese production!  (Put messymese block and this potion in crafting to get 9 mese crystals.)",
+	inventory_image = "emerald_container.png",
+	--inventory_image = "purpellium_container.png^[colorize:#00ff00:170",
+})
+
+--POTION TO MAKE MESE CRYSTAL  (EMERALD)
+minetest.register_craft({
+	output = 'default:mese_crystal 9',
+	type = "shapeless",
+	recipe =
+		{'es:emerald_container', 'es:messymese' },
+})
+
+--POTION TO MAKE AIKERUM TOOL FROM DIAMOND TOOL (AIKERUM)
+minetest.register_craft({
+	output = 'es:sword_aikerum',
+	type = "shapeless",
+	recipe =
+		{'es:aikerum_container', 'default:sword_diamond' },
+})
+
+minetest.register_craft({
+	output = 'es:pick_aikerum',
+	type = "shapeless",
+	recipe =
+		{'es:aikerum_container', 'default:pick_diamond' },
+})
+minetest.register_craft({
+	output = 'es:axe_aikerum',
+	type = "shapeless",
+	recipe =
+		{'es:aikerum_container', 'default:axe_diamond' },
+})
+minetest.register_craft({
+	output = 'es:shovel_aikerum',
+	type = "shapeless",
+	recipe =
+		{'es:aikerum_container', 'default:shovel_diamond' },
+})
+
+--POTION TO FIX ARMOUR (RUBY)
+--infinium
+minetest.register_craft({
+	output = 'es:helmet_infinium',
+	type = "shapeless",
+	recipe =
+		{'es:ruby_container', 'es:helmet_infinium' },
+})
+minetest.register_craft({
+	output = 'es:chestplate_infinium',
+	type = "shapeless",
+	recipe =
+		{'es:ruby_container', 'es:chestplate_infinium'},
+})
+minetest.register_craft({
+	output = 'es:leggings_infinium',
+	type = "shapeless",
+	recipe =
+		{'es:ruby_container', 'es:leggings_infinium'},
+})
+minetest.register_craft({
+	output = 'es:boots_infinium',
+	type = "shapeless",
+	recipe =
+		{'es:ruby_container', 'es:boots_infinium' },
+})
+
+--aikerum
+minetest.register_craft({
+	output = 'es:helmet_aikerum',
+	type = "shapeless",
+	recipe =
+		{'es:ruby_container', 'es:helmet_aikerum' },
+})
+minetest.register_craft({
+	output = 'es:chestplate_aikerum',
+	type = "shapeless",
+	recipe =
+		{'es:ruby_container', 'es:chestplate_aikerum'},
+})
+minetest.register_craft({
+	output = 'es:leggings_aikerum',
+	type = "shapeless",
+	recipe =
+		{'es:ruby_container', 'es:leggings_aikerum'},
+})
+minetest.register_craft({
+	output = 'es:boots_aikerum',
+	type = "shapeless",
+	recipe =
+		{'es:ruby_container', 'es:boots_aikerum' },
+})
+
+--emerald
+minetest.register_craft({
+	output = 'es:helmet_emerald',
+	type = "shapeless",
+	recipe =
+		{'es:ruby_container', 'es:helmet_emerald' },
+})
+minetest.register_craft({
+	output = 'es:chestplate_emerald',
+	type = "shapeless",
+	recipe =
+		{'es:ruby_container', 'es:chestplate_emerald'},
+})
+minetest.register_craft({
+	output = 'es:leggings_emerald',
+	type = "shapeless",
+	recipe =
+		{'es:ruby_container', 'es:leggings_emerald'},
+})
+minetest.register_craft({
+	output = 'es:boots_emerald',
+	type = "shapeless",
+	recipe =
+		{'es:ruby_container', 'es:boots_emerald' },
+})
 
 
 
@@ -353,8 +532,6 @@ minetest.register_craftitem("es:handle", {
 	inventory_image = "es_handle.png",
 	--inventory_image = "default_steel_ingot.png^default_diamond.png^default_mese_crystal.png^farming_cotton.png",
 })
-
-
 
 --SWORDS
 minetest.register_craft({
@@ -495,6 +672,7 @@ minetest.register_craft({
 })
 
 --[[
+--OLD EASY CRAFTS
 --Weapon &Tool Crafting:
 --SWORDS
 minetest.register_craft({
@@ -668,7 +846,7 @@ minetest.register_craft({
 minetest.register_craft({
 	type = "cooking",
 	cooktime = 30,
-	output = "es:purpellium_ingot",
+	output = "es:purpellium_ingot 1",
 	recipe = "es:purpellium_lump",
 })
 
@@ -686,8 +864,6 @@ minetest.register_craft({
 	output = "default:mese_crystal",
 	recipe = "es:mesecook_crystal",
 })
-
-
 
 
 --MUST HAVE DEFAULT ORE GENERATION SET

@@ -95,7 +95,7 @@ minetest.register_ore({
 		    ore            = "es:stone_with_ruby",
 		    wherein        = "default:stone",
 		    clust_scarcity = 20*20*20,
-		    clust_num_ores = 7,
+		    clust_num_ores = 4,
 		    clust_size     = 3,
 		    height_min     = -3000,
 		    height_max     = -1300,
