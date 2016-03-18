@@ -9,7 +9,7 @@ local wool = {}
 -- colors, and then some recipes using more specific colors for a few non-base
 -- colors available. When crafting, the last recipes will be checked first.
 wool.dyes = {
-	{"white",      "White",      nil},
+	{"white",      "White",      "basecolor_white"},
 	{"grey",       "Grey",       "basecolor_grey"},
 	{"black",      "Black",      "basecolor_black"},
 	{"red",        "Red",        "basecolor_red"},
@@ -34,7 +34,7 @@ for _, row in ipairs(wool.dyes) do
 	minetest.register_node("wool:"..name, {
 		description = desc.." Wool",
 		tiles = {"wool_"..name..".png"},
-		--tiles = {"wool_white.png^[colorize:"..name..":170"},
+		is_ground_content = false,
 		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=3,flammable=3,wool=1},
 		sounds = default.node_sound_defaults(),
 	})

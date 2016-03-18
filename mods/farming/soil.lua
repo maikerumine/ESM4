@@ -26,6 +26,7 @@ minetest.register_abm({
 	interval = 15,
 	chance = 4,
 	catch_up = false,
+
 	action = function(pos, node)
 
 		pos.y = pos.y + 1
@@ -52,8 +53,10 @@ minetest.register_abm({
 			if node.name == "farming:soil" then
 				minetest.set_node(pos, {name = "farming:soil_wet"})
 			end
+
 		elseif node.name == "farming:soil_wet" then
 			minetest.set_node(pos, {name = "farming:soil"})
+
 		elseif node.name == "farming:soil" then
 			minetest.set_node(pos, {name = "default:dirt"})
 		end

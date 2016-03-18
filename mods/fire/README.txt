@@ -1,7 +1,5 @@
-This is maikerumine's no burn fire for no griefing on a server.
-
-Minetest 0.4 mod: fire
-======================
+Minetest Game mod: fire
+=======================
 
 License of source code:
 -----------------------
@@ -32,3 +30,7 @@ fire_large.ogg sampled from:
 
 fire_basic_flame_animated.png:
   Muadtralk
+
+fire_flint_steel.png
+  Gambit (WTFPL)
+

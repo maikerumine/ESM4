@@ -2,17 +2,21 @@
 -- Hoe registration function
 
 farming.register_hoe = function(name, def)
+
 	-- Check for : prefix (register new hoes in your mod's namespace)
 	if name:sub(1,1) ~= ":" then
 		name = ":" .. name
 	end
+
 	-- Check def table
 	if def.description == nil then
 		def.description = "Hoe"
 	end
+
 	if def.inventory_image == nil then
 		def.inventory_image = "unknown_item.png"
 	end
+
 	if def.recipe == nil then
 		def.recipe = {
 			{"air","air",""},
@@ -20,9 +24,11 @@ farming.register_hoe = function(name, def)
 			{"","group:stick",""}
 		}
 	end
+
 	if def.max_uses == nil then
 		def.max_uses = 30
 	end
+
 	-- Register the tool
 	minetest.register_tool(name, {
 		description = def.description,
@@ -31,6 +37,7 @@ farming.register_hoe = function(name, def)
 			return farming.hoe_on_use(itemstack, user, pointed_thing, def.max_uses)
 		end
 	})
+
 	-- Register its recipe
 	if def.material == nil then
 		minetest.register_craft({
@@ -52,7 +59,9 @@ end
 -- Turns dirt with group soil=1 into soil
 
 function farming.hoe_on_use(itemstack, user, pointed_thing, uses)
+
 	local pt = pointed_thing
+
 	-- check if pointing at a node
 	if not pt or pt.type ~= "node" then
 		return
@@ -87,10 +96,13 @@ function farming.hoe_on_use(itemstack, user, pointed_thing, uses)
 	
 	-- turn the node into soil, wear out item and play sound
 	minetest.set_node(pt.under, {name = "farming:soil"})
+
 	minetest.sound_play("default_dig_crumbly", {pos = pt.under, gain = 0.5})
+
 	if not minetest.setting_getbool("creative_mode") then
 		itemstack:add_wear(65535/(uses-1))
 	end
+
 	return itemstack
 end
 
