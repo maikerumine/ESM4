@@ -24,6 +24,7 @@ minetest.after(0, function()
 			drops = def.drops,
 			flammable = def.groups.flammable,
 			on_blast = def.on_blast,
+			groups = def.groups,
 		}
 	end
 end)
@@ -89,6 +90,15 @@ local fire_node = {name="fire:basic_flame"}
 
 local function destroy(drops, pos, cid)
 	if minetest.is_protected(pos, "") then
+		return
+	end
+		local def = cid_data[cid]
+	-- bedrock
+	if def and def.groups.immortal ~= nil then
+		return
+	end
+	-- obsidian
+	if def and def.name == "default:obsidian" then
 		return
 	end
 	local def = cid_data[cid]
@@ -295,7 +305,7 @@ minetest.register_node("tnt:gunpowder", {
 	},
 	groups = {dig_immediate=2,attached_node=1,connect_to_raillike=minetest.raillike_group("gunpowder")},
 	sounds = default.node_sound_leaves_defaults(),
-	
+
 	on_punch = function(pos, node, puncher)
 		if puncher:get_wielded_item():get_name() == "default:torch" then
 			burn(pos)
