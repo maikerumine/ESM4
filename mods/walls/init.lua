@@ -51,7 +51,7 @@ walls.register = function(wall_name, wall_desc, wall_texture, wall_mat, wall_sou
 
 end
 ]]
-
+--OLD CODE FENCE LIKE
 walls.register = function(wall_name, wall_desc, wall_texture, wall_mat, wall_sounds)
 	-- inventory node, and pole-type wall start item
 	minetest.register_node(wall_name, {
@@ -83,6 +83,16 @@ walls.register = function(wall_name, wall_desc, wall_texture, wall_mat, wall_sou
 			{ '', '', '' },
 			{ wall_mat, wall_mat, wall_mat},
 			{ wall_mat, wall_mat, wall_mat},
+		}
+	})
+
+		-- reverse crafting recipe
+	minetest.register_craft({
+		output = wall_mat .. " 6",
+		recipe = {
+			{ '', '', '' },
+			{ wall_name, wall_name, wall_name},
+			{ wall_name, wall_name, wall_name},
 		}
 	})
 
@@ -146,4 +156,92 @@ walls.register("walls:mossycobble", "Mossy Cobblestone Wall", "default_mossycobb
 
 walls.register("walls:desertcobble", "Desert Cobblestone Wall", "default_desert_cobble.png",
 		"default:desert_cobble", default.node_sound_stone_defaults())
+
+walls.register("walls:stone", "Stone Wall", "default_stone.png",
+		"default:stone", default.node_sound_stone_defaults())
+
+walls.register("walls:stonebrick", "Stone Brick Wall", "default_stone_brick.png",
+		"default:stonebrick", default.node_sound_stone_defaults())
+
+walls.register("walls:desert_stone", "Desert Stone Wall", "default_desert_stone.png",
+		"default:desert_stone", default.node_sound_stone_defaults())
+
+walls.register("walls:desert_stonebrick", "Desert Stone Brick Wall", "default_desert_stone_brick.png",
+		"default:desert_stonebrick", default.node_sound_stone_defaults())
+
+walls.register("walls:sandstone", "Sandstone Wall", "default_sandstone.png",
+		"default:sandstone", default.node_sound_stone_defaults())
+
+walls.register("walls:sandstonebrick", "Sandstone Brick Wall", "default_sandstone_brick.png",
+		"default:sandstonebrick", default.node_sound_stone_defaults())
+
+walls.register("walls:obsidianbrick", "Obsidian Brick Wall", "default_obsidian_brick.png",
+		"default:obsidianbrick", default.node_sound_stone_defaults())
+
+walls.register("walls:brick", "Brick Wall", "default_brick.png",
+		"default:brick", default.node_sound_stone_defaults())
+
+walls.register("walls:diamondblock", "Diamond Block Wall", "default_diamond_block.png",
+		"default:diamondblock", default.node_sound_stone_defaults())
+
+walls.register("walls:goldblock", "Gold Block Wall", "default_gold_block.png",
+		"default:goldblock", default.node_sound_stone_defaults())
+
+walls.register("walls:mese", "Mese Block Wall", "default_mese_block.png",
+		"default:mese", default.node_sound_stone_defaults())
+
+walls.register("walls:bronzeblock", "Bronze Block Wall", "default_bronze_block.png",
+		"default:bronzeblock", default.node_sound_stone_defaults())
+
+walls.register("walls:copperblock", "Copper Block Wall", "default_copper_block.png",
+		"default:copperblock", default.node_sound_stone_defaults())
+
+walls.register("walls:steelblock", "Steel Block Wall", "default_steel_block.png",
+		"default:steelblock", default.node_sound_stone_defaults())
+
+walls.register("walls:goldblock", "Gold Block Wall", "default_gold_block.png",
+		"default:goldblock", default.node_sound_stone_defaults())
+
+walls.register("walls:waterflowing", "Water Flowing Wall", "default_water.png",
+		"default:water_flowing", default.node_sound_stone_defaults())
+
+walls.register("walls:nyancat_rainbow", "Nyan Cat Rainbow Wall", "default_nc_rb.png",
+		"default:nyancat_rainbow", default.node_sound_stone_defaults())
+
+walls.register("walls:torch", "Torch Wall", "fire_basic_flame.png",
+		"default:torch", default.node_sound_stone_defaults())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
