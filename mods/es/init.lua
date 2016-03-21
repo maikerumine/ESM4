@@ -20,16 +20,22 @@ local load_start = os.clock()
 local modpath = minetest.get_modpath("es")
 es.modpath = modpath
 
+
+
+
+
 -- REMOVE NODES DO NOT USE IN YOUR WORLD
 -- Alias
---dofile(modpath.."/technodrem.lua")
---dofile(modpath.."/moreorerem.lua")
---dofile(modpath.."/alias.lua")
+dofile(modpath.."/technodrem.lua")
+dofile(modpath.."/moreorerem.lua")
+dofile(modpath.."/alias.lua")
 
 -- Anticheat by RND
---dofile(modpath.."/anticheat.lua")
+dofile(modpath.."/anticheat.lua")
+
 -- Armor [abort migration]
 dofile(modpath.."/armor.lua")
+
 -- Craft recipes for items
 dofile(modpath.."/crafting.lua")
 
@@ -64,16 +70,38 @@ end
 if stairs then
 dofile(modpath.."/stair.lua")
 end
+--[[
+minetest.register_on_mapgen_init(function(mgparams)
+	minetest.set_mapgen_params({mgname="mg_v7"})
+end)
+]]
 
+--MAP GENERATION SELECTION SWITCH
+es.MAP_SETTING = 4;
 
 -- Map Generation
 --(CURRENTLY YOU NEED TO REPLACE THE DEFAULT WITH
 --the one that says stone IF YOU WANT AN ALL STONE WORLD.)
+--MAP GENERATION SELECTION SWITCH
+--ES OVERRIDE  SETTINGS IN INIT FILE IN ES FOLDER
 
+	if es.MAP_SETTING == 0 then	--DEFAULT MAPGEN
+		dofile(minetest.get_modpath("default").."/mapgen.lua")
+	end
+	if es.MAP_SETTING == 1 then	--ALL STONE LIKE JUST TEST
+		dofile(modpath.."/mapgen-stone.lua")
+	end
+	if es.MAP_SETTING == 2 then	--STONE, DESERT, ALPINE CLIMATE
+		dofile(modpath.."/mapgen-es.lua")
+	end
+	if es.MAP_SETTING == 3 then	--NO DESERT OR COLD CLIMATE
+		dofile(modpath.."/mapgen-v7green.lua")
+	end
+	if es.MAP_SETTING == 4 then	--ALWAYS CURRENT  FROM MINETEST_GAME
+		dofile(modpath.."/mapgen-v7green_current.lua")
+	end
 
-
-
---MAPFIX CODE
+--MAPFIX CODE  (USE WHEN DARK SHADOWS FORM, TYPE /MAPFIX)
 minetest.register_chatcommand("mapfix", {
 	params = "<size>",
 	description = "Recalculate the flowing liquids of a chunk",
