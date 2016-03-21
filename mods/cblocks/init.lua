@@ -1,3 +1,8 @@
+
+--maikerumine added slabs and stairs
+--20160321
+--for extreme survival game
+
 local colours = {
 	{"black",      "Black",      "#000000b0"},
 	{"blue",       "Blue",       "#015dbb70"},
@@ -51,5 +56,25 @@ minetest.register_craft({
 		{"default:stonebrick","default:stonebrick", "dye:" .. colours[i][1]},
 	}
 })
+
+--LET US REGISTER STAIRS!
+--maikerumine 20160321
+
+--wood
+stairs.register_stair_and_slab("wood_" .. colours[i][1], "cblocks:wood_" .. colours[i][1],
+		{snappy = 2, choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
+		{"default_wood.png^[colorize:" .. colours[i][3]},
+		"Wooden Stair",
+		"Wooden Slab",
+		default.node_sound_wood_defaults())
+
+
+--stonebrick
+stairs.register_stair_and_slab("stonebrick_" .. colours[i][1], "cblocks:stonebrick_" .. colours[i][1],
+		{cracky = 3},
+		{"default_stone_brick.png^[colorize:" .. colours[i][3]},
+		"Stone Brick Stair",
+		"Stone Brick Slab",
+		default.node_sound_stone_defaults())
 
 end
