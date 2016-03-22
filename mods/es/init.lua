@@ -20,15 +20,13 @@ local load_start = os.clock()
 local modpath = minetest.get_modpath("es")
 es.modpath = modpath
 
-
-
-
-
 -- REMOVE NODES DO NOT USE IN YOUR WORLD
+dofile(modpath.."/technodrem.lua")
+dofile(modpath.."/moreorerem.lua")
+dofile(modpath.."/villrem.lua")
+
 -- Alias
---dofile(modpath.."/technodrem.lua")
---dofile(modpath.."/moreorerem.lua")
---dofile(modpath.."/alias.lua")
+dofile(modpath.."/alias.lua")
 
 -- Anticheat by RND
 dofile(modpath.."/anticheat.lua")
@@ -49,9 +47,9 @@ dofile(modpath.."/spawn.lua")
 dofile(modpath.."/nodes.lua")
 dofile(modpath.."/crushingfurnace.lua")
 
-
 -- Ore Generation
 dofile(modpath.."/oregen.lua")
+
 -- Tools
 dofile(modpath.."/tools.lua")
 --dofile(modpath.."/hoes.lua")
@@ -70,14 +68,10 @@ end
 if stairs then
 dofile(modpath.."/stair.lua")
 end
---[[
-minetest.register_on_mapgen_init(function(mgparams)
-	minetest.set_mapgen_params({mgname="mg_v7"})
-end)
-]]
 
 --MAP GENERATION SELECTION SWITCH
-es.MAP_SETTING = 4;
+--Enter a number between 0 and 5 to choose map style.
+es.MAP_SETTING = 0;
 
 -- Map Generation
 --(CURRENTLY YOU NEED TO REPLACE THE DEFAULT WITH
@@ -91,13 +85,16 @@ es.MAP_SETTING = 4;
 	if es.MAP_SETTING == 1 then	--ALL STONE LIKE JUST TEST
 		dofile(modpath.."/mapgen-stone.lua")
 	end
-	if es.MAP_SETTING == 2 then	--STONE, DESERT, ALPINE CLIMATE
+	if es.MAP_SETTING == 2 then	--ALL DESERT -STONE STARTS AT -413
+		dofile(modpath.."/mapgen-desert.lua")
+	end
+	if es.MAP_SETTING == 3 then	--STONE, DESERT, ALPINE CLIMATE
 		dofile(modpath.."/mapgen-es.lua")
 	end
-	if es.MAP_SETTING == 3 then	--NO DESERT OR COLD CLIMATE
+	if es.MAP_SETTING == 4 then	--NO DESERT OR COLD CLIMATE
 		dofile(modpath.."/mapgen-v7green.lua")
 	end
-	if es.MAP_SETTING == 4 then	--ALWAYS CURRENT  FROM MINETEST_GAME
+	if es.MAP_SETTING == 5 then	--ALWAYS CURRENT  FROM MINETEST_GAME
 		dofile(modpath.."/mapgen-v7green_current.lua")
 	end
 
@@ -121,8 +118,3 @@ minetest.register_chatcommand("mapfix", {
 		return true, "Done."
 	end,
 })
-
-
-
-
-

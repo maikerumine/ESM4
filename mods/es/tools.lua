@@ -58,11 +58,11 @@ minetest.register_tool("es:sword_purpellium", {
 	inventory_image = "es_tool_purpelliumsword.png",
 	tool_capabilities = {
 		full_punch_interval = 0.5,
-		max_drop_level=1,
+		max_drop_level=4,
 		groupcaps={
-			snappy={times={[1]=1.10, [2]=0.30, [3]=0.10}, uses=500, maxlevel=3},
+			snappy={times={[1]=1.10, [2]=0.30, [3]=0.10}, uses=1500, maxlevel=3},
 		},
-		damage_groups = {fleshy=10},
+		damage_groups = {fleshy=23},
 	}
 })
 
@@ -115,11 +115,11 @@ minetest.register_tool("es:pick_purpellium", {
 	inventory_image = "es_tool_purpelliumpick.png",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
-		max_drop_level=3,
+		max_drop_level=4,
 		groupcaps={
-			cracky = {times={[1]=2.10, [2]=1.30, [3]=0.70}, uses=500, maxlevel=3},
+			cracky = {times={[1]=2.10, [2]=1.30, [3]=0.70}, uses=1500, maxlevel=3},
 		},
-		damage_groups = {fleshy=8},
+		damage_groups = {fleshy=18},
 	},
 })
 

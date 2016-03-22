@@ -1,8 +1,8 @@
-Minetest Game mod: beds
-=======================
-by BlockMen (c) 2014-2015
+Minetest mod "Beds"
+===================
+by BlockMen (c) 2014
 
-Version: 1.1.1
+Version: 1.1
 
 About
 ~~~~~
@@ -12,15 +12,30 @@ players are in bed too. If all players are sleeping the night gets skipped aswel
 if more than 50% of the players are lying in bed and use this option.
 
 Another feature is a controled respawning. If you have slept in bed (not just lying in it) your respawn point
-is set to the beds location and you will respawn there after death.
-You can disable the respawn at beds by setting "enable_bed_respawn = false" in minetest.conf
-You can also disable the night skip feature by setting "enable_bed_night_skip = false" in minetest.conf or by using
-the /set command ingame.
+is set to the beds location. If dying you will respawn there.
+
+
+
+You can craft two types of beds:
+
+
+Simple shaped bed:
+
+wool wool wool
+wood wood wood
+
+Fancy shaped bed:
+
+wool wool stick
+wood wood wood
+
+Notice: You can use any color of wood or wool, mixing different is also possible.
 
 
 License of source code, textures: WTFPL
 ---------------------------------------
-(c) Copyright BlockMen (2014-2015)
+(c) Copyright BlockMen (2014)
+
 
 
 This program is free software. It comes without any warranty, to

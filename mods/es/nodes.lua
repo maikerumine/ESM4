@@ -14,6 +14,16 @@
 
 
 --tweaks and overrides
+--Override mese
+minetest.override_item('default:stone_with_mese', {
+     drop = {
+          max_items = 1,
+          items = {
+               { items = {'es:mesecook_crystal'},}
+          },
+     },
+})
+
 --rnd code
 --cactus tweaks
 local function hurt_cactus() -- cactus tweak

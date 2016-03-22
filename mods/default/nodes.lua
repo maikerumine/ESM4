@@ -823,7 +823,6 @@ minetest.register_node("default:bronzeblock", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
---[[
 minetest.register_node("default:stone_with_mese", {
 	description = "Mese Ore",
 	tiles = {"default_stone.png^default_mineral_mese.png"},
@@ -831,7 +830,7 @@ minetest.register_node("default:stone_with_mese", {
 	drop = "default:mese_crystal",
 	sounds = default.node_sound_stone_defaults(),
 })
-]]
+
 minetest.register_node("default:mese", {
 	description = "Mese Block",
 	tiles = {"default_mese_block.png"},
