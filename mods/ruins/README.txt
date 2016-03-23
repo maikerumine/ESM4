@@ -6,6 +6,8 @@ License of source code: WTFPL
 -----------------------------
 (c) Copyright BlockMen (2013)
 
+changed by maikerumine to add beds, furnace, and chest on 20160321
+
 This program is free software. It comes without any warranty, to
 the extent permitted by applicable law. You can redistribute it
 and/or modify it under the terms of the Do What The Fuck You Want

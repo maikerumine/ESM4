@@ -1,12 +1,5 @@
 # Inventory Plus for Minetest
 
-[![home](https://img.shields.io/badge/inventory_plus-home-blue.svg?style=flat-square)](http://cornernote.github.io/minetest-inventory_plus/)
-[![download](https://img.shields.io/github/tag/cornernote/minetest-inventory_plus.svg?style=flat-square&label=release)](https://github.com/cornernote/minetest-inventory_plus/archive/master.zip)
-[![git](https://img.shields.io/badge/git-project-green.svg?style=flat-square)](https://github.com/cornernote/minetest-inventory_plus)
-[![forum](https://img.shields.io/badge/minetest-mod-green.svg?style=flat-square)](http://forum.minetest.net/viewtopic.php?t=6204)
-[![bower](https://img.shields.io/badge/bower-mod-green.svg?style=flat-square)](https://minetest-bower.herokuapp.com/mods/inventory_plus)
-
-
 ## Description
 
 Allows additional formspec buttons to be added to the player inventory.
@@ -27,6 +20,7 @@ Allows additional formspec buttons to be added to the player inventory.
 * [Forum](http://forum.minetest.net/viewtopic.php?t=6204)
 * [Bower](https://minetest-bower.herokuapp.com/mods/inventory_plus)
 
+This version of the mod has been edited by TenPlus1 to work on Minetest 0.4.13+
 
 ## Support
 
