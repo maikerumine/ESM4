@@ -16,10 +16,6 @@
 
 --groups = {not_in_craft_guide=1},
 
-
-
-
-
 -- Minetest 0.4 mod: bone_collector
 -- Bones can be crafted to clay, sand or coal to motivate players clear the playground.
 --
@@ -67,8 +63,28 @@ minetest.register_craft({
 })
 --END BONE COLLECTOR
 
+minetest.register_craft({
+	output = 'es:marble_bricks',
+	recipe = {
+		{"es:marble", "es:marble"},
+		{"es:marble", "es:marble"},
+	},
+})
+
+minetest.register_craft({
+	output = 'es:granite_bricks',
+	recipe = {
+		{"es:granite", "es:granite"},
+		{"es:granite", "es:granite"},
+	},
+})
 
 
+--MESE
+minetest.register_craftitem("es:mesecook_crystal", {
+	description = "Cookable Raw MESE",
+	inventory_image = "default_mineral_mese.png",
+})
 minetest.register_craft({
 	output = 'es:messymese',
 	recipe = {
@@ -77,7 +93,6 @@ minetest.register_craft({
 		{"es:mesecook_crystal", "es:mesecook_crystal", "es:mesecook_crystal"},
 	},
 })
-
 minetest.register_craft({
 	output = 'es:mesecook_crystal 9',
 	recipe = {
@@ -85,11 +100,22 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = 'default:mese_crystal',
+	recipe = {
+		{'default:mese_crystal_fragment', 'default:mese_crystal_fragment', 'default:mese_crystal_fragment'},
+		{'default:mese_crystal_fragment', 'default:mese_crystal_fragment', 'default:mese_crystal_fragment'},
+		{'default:mese_crystal_fragment', 'default:mese_crystal_fragment', 'default:mese_crystal_fragment'},
+	}
+})
+
+
 minetest.register_craftitem("es:depleted_uranium_ingot", {
 	description = "Depleted uranium",
 	--inventory_image = "technic_uranium_ingot.png",
 	inventory_image = "technic_uranium_ingot.png",
 })
+
 minetest.register_craft({
 	output = 'es:boneblock',
 	recipe = {
@@ -107,11 +133,6 @@ minetest.register_craft({
 	{"es:depleted_uranium_ingot","es:depleted_uranium_ingot","es:depleted_uranium_ingot"},
 	}
 })
-
-
-
-
-
 
 --ES HELPFUL CRAFTS
 minetest.register_craft({
@@ -155,24 +176,6 @@ minetest.register_craft({
 	recipe = {"es:dry_dirt","default:water_flowing"},
 })
 
-
---[[For ref
-minetest.register_node("default:dirt_with_grass", {
-	description = "Dirt with Grass",
-	tiles = {"default_grass.png", "default_dirt.png",
-		{name = "default_dirt.png^default_grass_side.png",
-			tileable_vertical = false}},
-	groups = {crumbly = 3, soil = 1},
-	drop = 'default:dirt',
-	sounds = default.node_sound_dirt_defaults({
-		footstep = {name = "default_grass_footstep", gain = 0.25},
-	}),
-})]]
-
-
-
-
-
 minetest.register_craft({
 	output = 'default:desert_cobble 3',
 	recipe = {
@@ -182,16 +185,10 @@ minetest.register_craft({
 }
 })
 
-minetest.register_craft({
-	output = 'default:mese_crystal',
-	recipe = {
-		{'default:mese_crystal_fragment', 'default:mese_crystal_fragment', 'default:mese_crystal_fragment'},
-		{'default:mese_crystal_fragment', 'default:mese_crystal_fragment', 'default:mese_crystal_fragment'},
-		{'default:mese_crystal_fragment', 'default:mese_crystal_fragment', 'default:mese_crystal_fragment'},
-	}
-})
+
 
 --ES SPECIAL BLOCKS
+--emerald
 minetest.register_craft({
 	output = 'es:emeraldblock',
 	recipe = {
@@ -206,8 +203,14 @@ minetest.register_craft({
 		{'stairs:stair_Emerald', 'stairs:stair_Emerald', 'stairs:stair_Emerald'},
 	}
 })
+minetest.register_craft({
+	output = 'es:emerald_crystal 9',
+	recipe = {
+		{'es:emeraldblock'},
+	}
+})
 
-
+--aikerum
 minetest.register_craft({
 	output = 'es:aikerumblock',
 	recipe = {
@@ -222,8 +225,14 @@ minetest.register_craft({
 		{'stairs:stair_Aikerum', 'stairs:stair_Aikerum', 'stairs:stair_Aikerum'},
 	}
 })
+minetest.register_craft({
+	output = 'es:aikerum_crystal 9',
+	recipe = {
+		{'es:aikerumblock'},
+	}
+})
 
-
+--ruby
 minetest.register_craft({
 	output = 'es:rubyblock',
 	recipe = {
@@ -238,8 +247,14 @@ minetest.register_craft({
 		{'stairs:stair_Ruby', 'stairs:stair_Ruby', 'stairs:stair_Ruby'},
 	}
 })
+minetest.register_craft({
+	output = 'es:ruby_crystal 9',
+	recipe = {
+		{'es:rubyblock'},
+	}
+})
 
-
+--infinium
 minetest.register_craft({
 	output = 'es:infiniumblock',
 	recipe = {
@@ -254,7 +269,14 @@ minetest.register_craft({
 		{'stairs:stair_Infinium', 'stairs:stair_Infinium', 'stairs:stair_Infinium'},
 	}
 })
+minetest.register_craft({
+	output = 'es:infinium_ingot 9',
+	recipe = {
+		{'es:infiniumblock'},
+	}
+})
 
+--purpellium
 minetest.register_craft({
 	output = 'es:purpelliumblock',
 	recipe = {
@@ -270,35 +292,6 @@ minetest.register_craft({
 		{'stairs:stair_Purpellium', 'stairs:stair_Purpellium', 'stairs:stair_Purpellium'},
 	}
 })
-
-minetest.register_craft({
-	output = 'es:emerald_crystal 9',
-	recipe = {
-		{'es:emeraldblock'},
-	}
-})
-
-minetest.register_craft({
-	output = 'es:ruby_crystal 9',
-	recipe = {
-		{'es:rubyblock'},
-	}
-})
-
-minetest.register_craft({
-	output = 'es:aikerum_crystal 9',
-	recipe = {
-		{'es:aikerumblock'},
-	}
-})
-
-minetest.register_craft({
-	output = 'es:infinium_ingot 9',
-	recipe = {
-		{'es:infiniumblock'},
-	}
-})
-
 minetest.register_craft({
 	output = 'es:purpellium_ingot 9',
 	recipe = {
@@ -306,19 +299,18 @@ minetest.register_craft({
 	}
 })
 
---crafting
+
+--crafting containers
 minetest.register_craft({
 	type = "shapeless",
 	output = "es:infinium_container",
 	recipe = {"vessels:glass_bottle", "es:infinium_goo","default:water_flowing"},
 })
-
 minetest.register_craft({
 	type = "shapeless",
 	output = "es:purpellium_container",
 	recipe = {"vessels:glass_bottle", "es:purpellium_dust","default:water_flowing"},
 })
-
 minetest.register_craft({
 	type = "shapeless",
 	output = "es:aikerum_container",
@@ -329,7 +321,6 @@ minetest.register_craft({
 	output = "es:ruby_container",
 	recipe = {"vessels:glass_bottle", "es:ruby_dust","default:water_flowing"},
 })
-
 minetest.register_craft({
 	type = "shapeless",
 	output = "es:emerald_container",
@@ -346,23 +337,18 @@ minetest.register_craft({
 --cottages.handmill_product[ 'es:emerald_crystal' ] = 'es:emerald_dust 1';
 
 --ES GRINDER:
-
-
 minetest.register_craftitem("es:purpellium_dust", {
 	description = "Purpellium Dust",
 	inventory_image = "dye_violet.png",
 })
-
 minetest.register_craftitem("es:aikerum_dust", {
 	description = "Aikerum Dust",
 	inventory_image = "dye_blue.png",
 })
-
 minetest.register_craftitem("es:ruby_dust", {
 	description = "Ruby Dust",
 	inventory_image = "dye_red.png",
 })
-
 minetest.register_craftitem("es:emerald_dust", {
 	description = "Emerald Dust",
 	inventory_image = "dye_green.png",
@@ -438,7 +424,7 @@ minetest.register_craft({
 })
 
 --POTION TO FIX ARMOUR (RUBY)
---infinium
+--infinium armour fix
 minetest.register_craft({
 	output = 'es:helmet_infinium',
 	type = "shapeless",
@@ -464,7 +450,7 @@ minetest.register_craft({
 		{'es:ruby_container', 'es:boots_infinium' },
 })
 
---aikerum
+--aikerum armour fix
 minetest.register_craft({
 	output = 'es:helmet_aikerum',
 	type = "shapeless",
@@ -490,7 +476,7 @@ minetest.register_craft({
 		{'es:ruby_container', 'es:boots_aikerum' },
 })
 
---emerald
+--emerald armour fix
 minetest.register_craft({
 	output = 'es:helmet_emerald',
 	type = "shapeless",
@@ -517,8 +503,7 @@ minetest.register_craft({
 })
 
 
-
---Weapon &Tool Crafting:
+--WEAPONS AND TOOLS
 minetest.register_craft({
 	output = 'es:handle',
 	recipe = {
@@ -542,7 +527,6 @@ minetest.register_craft({
 		{'es:handle'},
 	}
 })
-
 minetest.register_craft({
 	output = 'es:sword_ruby',
 	recipe = {
@@ -551,7 +535,6 @@ minetest.register_craft({
 		{'es:handle'},
 	}
 })
-
 minetest.register_craft({
 	output = 'es:sword_aikerum',
 	recipe = {
@@ -560,7 +543,6 @@ minetest.register_craft({
 		{'es:handle'},
 	}
 })
-
 minetest.register_craft({
 	output = 'es:sword_purpellium',
 	recipe = {
@@ -579,7 +561,6 @@ minetest.register_craft({
 		{'', 'es:handle', ''},
 	}
 })
-
 minetest.register_craft({
 	output = 'es:pick_ruby',
 	recipe = {
@@ -588,7 +569,6 @@ minetest.register_craft({
 		{'', 'es:handle', ''},
 	}
 })
-
 minetest.register_craft({
 	output = 'es:pick_aikerum',
 	recipe = {
@@ -597,7 +577,6 @@ minetest.register_craft({
 		{'', 'es:handle', ''},
 	}
 })
-
 minetest.register_craft({
 	output = 'es:pick_aikerum',
 	recipe = {
@@ -606,7 +585,6 @@ minetest.register_craft({
 		{'', 'es:handle', ''},
 	}
 })
-
 minetest.register_craft({
 	output = 'es:pick_purpellium',
 	recipe = {
@@ -625,7 +603,6 @@ minetest.register_craft({
 		{'', 'es:handle', ''},
 	}
 })
-
 minetest.register_craft({
 	output = 'es:axe_ruby',
 	recipe = {
@@ -634,7 +611,6 @@ minetest.register_craft({
 		{'', 'es:handle', ''},
 	}
 })
-
 minetest.register_craft({
 	output = 'es:axe_aikerum',
 	recipe = {
@@ -814,7 +790,7 @@ minetest.register_craft({
 
 ]]
 
---Default override Cooking
+--COOKING RECIPIES
 minetest.register_craft({
 	type = "cooking",
 	output = "default:water_flowing",
@@ -866,11 +842,33 @@ minetest.register_craft({
 })
 
 
---MUST HAVE DEFAULT ORE GENERATION SET
-minetest.register_craftitem("es:mesecook_crystal", {
-	description = "Cookable Raw MESE",
-	inventory_image = "default_mineral_mese.png",
+--Dust cooking
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 90,
+	output = "es:purpellium_lump",
+	recipe = "es:purpellium_dust",
 })
 
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 90,
+	output = "es:aikerum_crystal",
+	recipe = "es:aikerum_dust",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 90,
+	output = "es:ruby_crystal",
+	recipe = "es:ruby_dust",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 90,
+	output = "es:emerald_crystal",
+	recipe = "es:emerald_dust",
+})
 
 

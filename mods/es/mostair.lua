@@ -18,6 +18,42 @@ es = {}
 --Compatibility with Moreblocks / stairsplus
 
 	if minetest.get_modpath("moreblocks") and enable_stairsplus then
+	register_stair_slab_panel_micro("es", "granite", "es:granite",
+	{cracky=3},
+	{"technic_granite.png"},
+	"Granite",
+	"granite",
+	0)
+end
+
+	if minetest.get_modpath("moreblocks") and enable_stairsplus then
+	register_stair_slab_panel_micro("es", "granitebricks", "es:granite_bricks",
+	{cracky=3},
+	{ "technic_granite_bricks.png",},
+	"Granite Bricks",
+	"granitebricks",
+	0)
+end
+
+	if minetest.get_modpath("moreblocks") and enable_stairsplus then
+	register_stair_slab_panel_micro("es", "marble", "es:marble",
+	{cracky=3},
+	{"technic_marble.png"},
+	"Marble",
+	"marble",
+	0)
+end
+
+	if minetest.get_modpath("moreblocks") and enable_stairsplus then
+	register_stair_slab_panel_micro("es", "marblebricks", "es:marble_bricks",
+	{cracky=3},
+	{"technic_marble_bricks.png"},
+	"Marble Bricks",
+	"marblebricks",
+	0)
+end
+
+	if minetest.get_modpath("moreblocks") and enable_stairsplus then
 	register_stair_slab_panel_micro("es", "emeraldblock", "es:emeraldblock",
 	{cracky=3},
 	{"emerald_block.png"},

@@ -59,6 +59,14 @@ minetest.register_node( "es:granite", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
+minetest.register_node( "es:granite_bricks", {
+	description = "Granite Bricks",
+	tiles = { "technic_granite_bricks.png",},
+	is_ground_content = true,
+	groups = {cracky=3},
+	sounds = default.node_sound_stone_defaults(),
+})
+
 minetest.register_node( "es:marble", {
 	description = "Marble",
 	tiles = { "technic_marble.png" },

@@ -21,9 +21,9 @@ local modpath = minetest.get_modpath("es")
 es.modpath = modpath
 
 -- REMOVE NODES DO NOT USE IN YOUR WORLD
---dofile(modpath.."/technodrem.lua")
---dofile(modpath.."/moreorerem.lua")
---dofile(modpath.."/villrem.lua")
+dofile(modpath.."/technodrem.lua")
+dofile(modpath.."/moreorerem.lua")
+dofile(modpath.."/villrem.lua")
 
 -- Alias
 dofile(modpath.."/alias.lua")
@@ -52,6 +52,7 @@ dofile(modpath.."/oregen.lua")
 
 -- Tools
 dofile(modpath.."/tools.lua")
+dofile(modpath.."/screwdriver.lua")
 --dofile(modpath.."/hoes.lua")
 
 -- Climate  very laggy
