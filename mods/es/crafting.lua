@@ -112,8 +112,40 @@ minetest.register_craft({
 
 minetest.register_craftitem("es:depleted_uranium_ingot", {
 	description = "Depleted uranium",
-	--inventory_image = "technic_uranium_ingot.png",
 	inventory_image = "technic_uranium_ingot.png",
+})
+
+minetest.register_craftitem("es:depleted_uranium_lump", {
+	description = "Depleted Uranium use for long term fuel, first cook the lump into an ingot, then use ingot for fuel.",
+	inventory_image = "uranium_lump.png",
+})
+
+--this is a lame craft tree, need to integrate buckets
+minetest.register_craftitem("es:bucket_toxic", {
+	description = "Use this bucket to make dangerous things.... TBD",
+	inventory_image = "bucket_toxic.png",
+})
+minetest.register_craft({
+	type = "shapeless",
+	output = "es:bucket_toxic",
+	recipe = {"es:toxic_water_flowing","bucket:bucket_empty"},
+})
+minetest.register_craft({
+	output = "es:toxic_water_flowing",
+	recipe = {
+	{"es:depleted_uranium_ingot","es:depleted_uranium_ingot","es:depleted_uranium_ingot"},
+	{"es:depleted_uranium_ingot","bucket:bucket_river_water","es:depleted_uranium_ingot"},
+	{"es:depleted_uranium_ingot","es:depleted_uranium_ingot","es:depleted_uranium_ingot"},
+	},
+})
+
+minetest.register_craft({
+	output = "es:vault",
+	recipe = {
+	{"es:boneblock","es:depleted_uranium_ingot","es:boneblock"},
+	{"es:depleted_uranium_ingot","es:bucket_toxic","es:depleted_uranium_ingot"},
+	{"es:boneblock","es:depleted_uranium_ingot","es:boneblock"},
+	},
 })
 
 minetest.register_craft({
@@ -131,7 +163,7 @@ minetest.register_craft({
 	{"es:depleted_uranium_ingot","es:depleted_uranium_ingot","es:depleted_uranium_ingot"},
 	{"es:depleted_uranium_ingot","es:depleted_uranium_ingot","es:depleted_uranium_ingot"},
 	{"es:depleted_uranium_ingot","es:depleted_uranium_ingot","es:depleted_uranium_ingot"},
-	}
+	},
 })
 
 --ES HELPFUL CRAFTS
@@ -209,27 +241,9 @@ minetest.register_craft({
 		{'es:emeraldblock'},
 	}
 })
-
---aikerum
-minetest.register_craft({
-	output = 'es:aikerumblock',
-	recipe = {
-		{'es:aikerum_crystal', 'es:aikerum_crystal', 'es:aikerum_crystal'},
-		{'es:aikerum_crystal', 'es:aikerum_crystal', 'es:aikerum_crystal'},
-		{'es:aikerum_crystal', 'es:aikerum_crystal', 'es:aikerum_crystal'},
-	}
-})
-minetest.register_craft({
-	output = 'es:aikerumblock 2',
-	recipe = {
-		{'stairs:stair_Aikerum', 'stairs:stair_Aikerum', 'stairs:stair_Aikerum'},
-	}
-})
-minetest.register_craft({
-	output = 'es:aikerum_crystal 9',
-	recipe = {
-		{'es:aikerumblock'},
-	}
+minetest.register_craftitem("es:emerald_crystal", {
+	description = "Emerald Crystal",
+	inventory_image = "emerald.png",
 })
 
 --ruby
@@ -253,6 +267,36 @@ minetest.register_craft({
 		{'es:rubyblock'},
 	}
 })
+minetest.register_craftitem("es:ruby_crystal", {
+	description = "Ruby Crystal",
+	inventory_image = "ruby.png",
+})
+
+--aikerum
+minetest.register_craft({
+	output = 'es:aikerumblock',
+	recipe = {
+		{'es:aikerum_crystal', 'es:aikerum_crystal', 'es:aikerum_crystal'},
+		{'es:aikerum_crystal', 'es:aikerum_crystal', 'es:aikerum_crystal'},
+		{'es:aikerum_crystal', 'es:aikerum_crystal', 'es:aikerum_crystal'},
+	}
+})
+minetest.register_craft({
+	output = 'es:aikerumblock 2',
+	recipe = {
+		{'stairs:stair_Aikerum', 'stairs:stair_Aikerum', 'stairs:stair_Aikerum'},
+	}
+})
+minetest.register_craft({
+	output = 'es:aikerum_crystal 9',
+	recipe = {
+		{'es:aikerumblock'},
+	}
+})
+minetest.register_craftitem("es:aikerum_crystal", {
+	description = "Aikerum Crystal",
+	inventory_image = "aikerum.png",
+})
 
 --infinium
 minetest.register_craft({
@@ -274,6 +318,15 @@ minetest.register_craft({
 	recipe = {
 		{'es:infiniumblock'},
 	}
+})
+minetest.register_craftitem("es:infinium_goo", {
+	description = "Infinium Goo--Need to craft with vessel to contain.",
+	inventory_image = "infinium.png",
+})
+
+minetest.register_craftitem("es:infinium_ingot", {
+	description = "Infinium Ingot--TBD CRAFTING Special Armour and Lab Equipment",
+	inventory_image = "infinium_ingot.png",
 })
 
 --purpellium
@@ -298,7 +351,15 @@ minetest.register_craft({
 		{'es:purpelliumblock'},
 	}
 })
+minetest.register_craftitem("es:purpellium_lump", {
+	description = "Purpellium Lump",
+	inventory_image = "purpellium_lump.png",
+})
 
+minetest.register_craftitem("es:purpellium_ingot", {
+	description = "Purpellium Ingot",
+	inventory_image = "purpellium_ingot.png",
+})
 
 --crafting containers
 minetest.register_craft({
@@ -326,7 +387,11 @@ minetest.register_craft({
 	output = "es:emerald_container",
 	recipe = {"vessels:glass_bottle", "es:emerald_dust","default:water_flowing"},
 })
-
+minetest.register_craft({
+	type = "shapeless",
+	output = "es:toxic_container",
+	recipe = {"vessels:glass_bottle", "es:bucket_toxic"},
+})
 
 
 --IF COTTAGES USE FOR GRINDING
@@ -355,10 +420,59 @@ minetest.register_craftitem("es:emerald_dust", {
 })
 
 --purpellium potion give endurance
-minetest.register_craftitem("es:purpellium_container", {
+minetest.register_node("es:purpellium_container", {
 	description = "Potion to do wonders!  (gives 50+ hunger for extra endurance mining.)",
-	inventory_image = "purpellium_container.png",
+	tiles = { "purpellium_container.png"},
+	wield_image = "purpellium_container.png",
+	drawtype = "plantlike",
 	on_use = minetest.item_eat(50),
+		paramtype = "light",
+	is_ground_content = false,
+	drop ={
+		items = {
+			{
+			items = {"vessels:glass_fragments"},
+			},
+			{
+			items = {"es:purpellium_dust"},
+			}
+		}
+	},
+	walkable = false,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
+	},
+	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	sounds = default.node_sound_glass_defaults(),
+})
+
+--infinium gives ingots for best armour
+minetest.register_node("es:infinium_container", {
+	description = "Cook for Infinium Ingots  (gives ingot to craft armour)",
+	tiles = {"infinium_container.png"},
+	wield_image = "infinium_container.png",
+	drawtype = "plantlike",
+	--on_use = minetest.item_eat(50),
+		paramtype = "light",
+	is_ground_content = false,
+	drop ={
+		items = {
+			{
+			items = {"vessels:glass_fragments"},
+			},
+			{
+			items = {"es:infinium_goo"},
+			}
+		}
+	},
+	walkable = false,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
+	},
+	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	sounds = default.node_sound_glass_defaults(),
 })
 
 -- HEAL HP in hunger hud
@@ -368,24 +482,112 @@ minetest.register_craftitem("es:purpellium_container", {
 --end
 
 --aikerum potion special use
-minetest.register_craftitem("es:aikerum_container", {
+minetest.register_node("es:aikerum_container", {
 	description = "Convert diamond tool into aikerum tool!  (Put diamond tool and this potion in crafting to get aikerum tool.)",
-	inventory_image = "aikerum_container.png",
-	--inventory_image = "purpellium_container.png^[colorize:#0000ff:170",
+	tiles = {"aikerum_container.png"},
+	wield_image = "aikerum_container.png",
+	drawtype = "plantlike",
+	paramtype = "light",
+	is_ground_content = false,
+	drop ={
+		items = {
+			{
+			items = {"vessels:glass_fragments"},
+			},
+			{
+			items = {"es:aikerum_dust"},
+			}
+		}
+	},
+	walkable = false,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
+	},
+	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	sounds = default.node_sound_glass_defaults(),
 })
 
 --ruby potion special use heal armor
-minetest.register_craftitem("es:ruby_container", {
+minetest.register_node("es:ruby_container", {
 	description = "Fix your armour!  (Put bad armour and this potion in crafting to fix.)",
-	inventory_image = "ruby_container.png",
-	--inventory_image = "purpellium_container.png^[colorize:#ff0000:170",
+	tiles = {"ruby_container.png"},
+	wield_image = "ruby_container.png",
+	drawtype = "plantlike",
+	paramtype = "light",
+	is_ground_content = false,
+	drop ={
+		items = {
+			{
+			items = {"vessels:glass_fragments"},
+			},
+			{
+			items = {"es:ruby_dust"},
+			}
+		}
+	},
+	walkable = false,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
+	},
+	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	sounds = default.node_sound_glass_defaults(),
 })
 
 --emerald potion special use
-minetest.register_craftitem("es:emerald_container", {
+minetest.register_node("es:emerald_container", {
 	description = "Speed Up Mese production!  (Put messymese block and this potion in crafting to get 9 mese crystals.)",
-	inventory_image = "emerald_container.png",
-	--inventory_image = "purpellium_container.png^[colorize:#00ff00:170",
+	tiles = {"emerald_container.png"},
+	wield_image = "emerald_container.png",
+	drawtype = "plantlike",
+	paramtype = "light",
+	is_ground_content = false,
+	drop ={
+		items = {
+			{
+			items = {"vessels:glass_fragments"},
+			},
+			{
+			items = {"es:emerald_dust"},
+			}
+		}
+	},
+	walkable = false,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
+	},
+	groups = {vessel=1,dig_immediate=3,attached_node=1},
+	sounds = default.node_sound_glass_defaults(),
+})
+
+--toxic potion special use
+minetest.register_node("es:toxic_container", {
+	description = "Poison.  Place in front of enemies.",
+	tiles = {"toxic_container.png"},
+	wield_image = "toxic_container.png",
+	drawtype = "plantlike",
+	paramtype = "light",
+	light_source = 14,
+	is_ground_content = false,
+	drop ={
+		items = {
+			{
+			items = {"vessels:glass_fragments"},
+			},
+			{
+			items = {"es:toxic_water_flowing"},
+			}
+		}
+	},
+	walkable = false,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.25, -0.5, -0.25, 0.25, 0.4, 0.25}
+	},
+	groups = {vessel=1,dig_immediate=3,attached_node=1,radioactive =8},
+	sounds = default.node_sound_glass_defaults(),
 })
 
 --POTION TO MAKE MESE CRYSTAL  (EMERALD)
@@ -517,6 +719,10 @@ minetest.register_craftitem("es:handle", {
 	inventory_image = "es_handle.png",
 	--inventory_image = "default_steel_ingot.png^default_diamond.png^default_mese_crystal.png^farming_cotton.png",
 })
+
+
+--BUCKET
+
 
 --SWORDS
 minetest.register_craft({

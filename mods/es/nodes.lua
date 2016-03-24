@@ -58,7 +58,6 @@ minetest.register_node( "es:granite", {
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
 })
-
 minetest.register_node( "es:granite_bricks", {
 	description = "Granite Bricks",
 	tiles = { "technic_granite_bricks.png",},
@@ -66,7 +65,6 @@ minetest.register_node( "es:granite_bricks", {
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
 })
-
 minetest.register_node( "es:marble", {
 	description = "Marble",
 	tiles = { "technic_marble.png" },
@@ -74,7 +72,6 @@ minetest.register_node( "es:marble", {
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
 })
-
 minetest.register_node( "es:marble_bricks", {
 	description = "Marble Bricks",
 	tiles = { "technic_marble_bricks.png" },
@@ -361,10 +358,6 @@ minetest.register_abm({
 })
 
 
-
-
-
-
 --ES Node Definition
 minetest.register_node("es:stone_with_emerald", {
 	description = "Emerald Ore",
@@ -374,7 +367,6 @@ minetest.register_node("es:stone_with_emerald", {
 	drop = "es:emerald_crystal",
 	sounds = default.node_sound_stone_defaults(),
 })
-
 minetest.register_node("es:stone_with_ruby", {
 	description = "Ruby Ore",
 	tiles = {"default_stone.png^ruby_ore.png"},
@@ -383,7 +375,6 @@ minetest.register_node("es:stone_with_ruby", {
 	drop = "es:ruby_crystal",
 	sounds = default.node_sound_stone_defaults(),
 })
-
 minetest.register_node("es:stone_with_aikerum", {
 	description = "Aikerum Ore",
 	tiles = {"default_stone.png^aikerum_ore.png"},
@@ -392,7 +383,6 @@ minetest.register_node("es:stone_with_aikerum", {
 	drop = "es:aikerum_crystal",
 	sounds = default.node_sound_stone_defaults(),
 })
-
 minetest.register_node("es:stone_with_infinium", {
 	description = "Infinium Ore - Slightly Radioactive",
 	tiles = {"default_stone.png^infinium_ore.png"},
@@ -402,13 +392,12 @@ minetest.register_node("es:stone_with_infinium", {
 	drop = "es:infinium_goo",
 	sounds = default.node_sound_stone_defaults(),
 })
-
 minetest.register_node("es:stone_with_purpellium", {
 	description = "Purlellium Ore - Oddly interesting",
 	tiles = {"default_stone.png^purpellium_ore.png"},
 	is_ground_content = true,
 	--groups = {cracky=2,level = 2,fall_damage_add_percent = -1000, radioactive = (state == "source" and 2 or 2)},
-	groups = {cracky=2,level = 2,fall_damage_add_percent = -1000, radioactive = 2},
+	groups = {cracky=2,level = 2, radioactive = 2},
 	drop = "es:purpellium_lump",
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -421,12 +410,6 @@ minetest.register_node("es:emeraldblock", {
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
 })
-
-minetest.register_craftitem("es:emerald_crystal", {
-	description = "Emerald Crystal",
-	inventory_image = "emerald.png",
-})
-
 --Ruby located at -3000
 minetest.register_node("es:rubyblock", {
 	description = "Ruby Block",
@@ -435,12 +418,6 @@ minetest.register_node("es:rubyblock", {
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
 })
-
-minetest.register_craftitem("es:ruby_crystal", {
-	description = "Ruby Crystal",
-	inventory_image = "ruby.png",
-})
-
 --Aikerum located at -4000
 minetest.register_node("es:aikerumblock", {
 	description = "Aikerum Block",
@@ -449,13 +426,6 @@ minetest.register_node("es:aikerumblock", {
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
 })
-
-minetest.register_craftitem("es:aikerum_crystal", {
-	description = "Aikerum Crystal",
-	inventory_image = "aikerum.png",
-})
-
-
 --Infinium located at -4300
 minetest.register_node("es:infiniumblock", {
 	description = "infinium Block",
@@ -464,43 +434,141 @@ minetest.register_node("es:infiniumblock", {
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
 })
-
-minetest.register_craftitem("es:infinium_goo", {
-	description = "Infinium Goo--Need to craft with vessel to contain.",
-	inventory_image = "infinium.png",
-})
-
-minetest.register_craftitem("es:infinium_ingot", {
-	description = "Infinium Ingot--TBD CRAFTING Special Armour and Lab Equipment",
-	--inventory_image = "infinium_ingot.png",
-	inventory_image = "infinium_ingot.png",
-})
-
-minetest.register_craftitem("es:infinium_container", {
-	description = "Infinium Container--Cook to get Infinium Ingot",
-	inventory_image = "infinium_container.png",
-})
-
 --Purpellium located at -4000
 minetest.register_node("es:purpelliumblock", {
 	description = "Purpellium Block - Fall from great height without any damage if landing on this block",
 	tiles = {"purpellium_block.png"},
 	is_ground_content = true,
-	groups = {cracky=1,level=2},
+	groups = {cracky=1,level=2,fall_damage_add_percent = -1000},
 	sounds = default.node_sound_stone_defaults(),
 })
 
-minetest.register_craftitem("es:purpellium_lump", {
-	description = "Purpellium Lump",
-	inventory_image = "purpellium_lump.png",
+--ESM VAULT
+--Code from default chests and protector redo
+local function get_locked_chest_formspec(pos)
+	local spos = pos.x .. "," .. pos.y .. "," .. pos.z
+	local formspec =
+		"size[16,10]" ..
+		default.gui_bg ..
+		default.gui_bg_img ..
+		default.gui_slots ..
+		"label[0.25,-0.1;EXTREME LOCKED CHEST: ]"..
+		"list[nodemeta:" .. spos .. ";main;0,0.3;16,5;]" ..
+		"list[current_player;main;4,5.85;,1;]" ..
+		"list[current_player;main;4,7.08;8,3;8]" ..
+		"listring[nodemeta:" .. spos .. ";main]" ..
+		"listring[current_player;main]" ..
+		default.get_hotbar_bg(4,5.85)
+ return formspec
+end
+local function has_locked_chest_privilege(meta, player)
+	local name = ""
+	if player then
+		if minetest.check_player_privs(player, "protection_bypass") then
+			return true
+		end
+		name = player:get_player_name()
+	end
+	if name ~= meta:get_string("owner") then
+		return false
+	end
+	return true
+end
+--node def
+minetest.register_node("es:vault", {
+	description = "Use this to store MANY items.",
+	tiles = { "vault.png", "vault.png", "vault.png",
+		"vault.png", "vault.png",  "(vault.png^default_nc_front.png^[colorize:#00FF00:110)"},
+	inventory_image = "vault.png",
+	light_source = 14,
+	paramtype2 = "facedir",
+	sounds = default.node_sound_stone_defaults(),
+	groups = {cracky = 1, level = 2},
+	legacy_facedir_simple = true,
+	is_ground_content = false,
+
+	after_place_node = function(pos, placer)
+		local meta = minetest.get_meta(pos)
+		meta:set_string("owner", placer:get_player_name() or "")
+		meta:set_string("infotext", "Super ESM Locked Chest (owned by " ..
+				meta:get_string("owner") .. ")")
+	end,
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
+		meta:set_string("infotext", "Super ESM Locked Chest")
+		meta:set_string("owner", "")
+		local inv = meta:get_inventory()
+		inv:set_size("main", 16 * 5)
+	end,
+	can_dig = function(pos,player)
+		local meta = minetest.get_meta(pos);
+		local inv = meta:get_inventory()
+		return inv:is_empty("main") and has_locked_chest_privilege(meta, player)
+	end,
+	allow_metadata_inventory_move = function(pos, from_list, from_index,
+			to_list, to_index, count, player)
+		local meta = minetest.get_meta(pos)
+		if not has_locked_chest_privilege(meta, player) then
+			return 0
+		end
+		return count
+	end,
+    allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+		local meta = minetest.get_meta(pos)
+		if not has_locked_chest_privilege(meta, player) then
+			return 0
+		end
+		return stack:get_count()
+	end,
+    allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+		local meta = minetest.get_meta(pos)
+		if not has_locked_chest_privilege(meta, player) then
+			return 0
+		end
+		return stack:get_count()
+	end,
+    on_metadata_inventory_put = function(pos, listname, index, stack, player)
+		minetest.log("action", player:get_player_name() ..
+			" moves " .. stack:get_name() ..
+			" to super ESM locked chest at " .. minetest.pos_to_string(pos))
+	end,
+    on_metadata_inventory_take = function(pos, listname, index, stack, player)
+		minetest.log("action", player:get_player_name() ..
+			" takes " .. stack:get_name()  ..
+			" from super ESM locked chest at " .. minetest.pos_to_string(pos))
+	end,
+	on_rightclick = function(pos, node, clicker)
+		local meta = minetest.get_meta(pos)
+		if has_locked_chest_privilege(meta, clicker) then
+			minetest.show_formspec(
+				clicker:get_player_name(),
+				"es:vault",
+				get_locked_chest_formspec(pos)
+			)
+			else
+			clicker:set_hp( 1)
+			local holding = clicker:get_wielded_item()
+
+			if holding:to_string() ~= "" then
+
+				-- take stack
+				local sta = holding:take_item(holding:get_count())
+				clicker:set_wielded_item(holding)
+
+				-- incase of lag, reset stack
+				minetest.after(0.1, function()
+					clicker:set_wielded_item(holding)
+
+					-- drop stack
+					local obj = minetest.add_item(clicker:getpos(), sta)
+					obj:setvelocity({x = 0, y = 5, z = 0})
+				end)
+
+			end
+		end
+	end,
+	on_blast = function() end,	
 })
-
-minetest.register_craftitem("es:purpellium_ingot", {
-	description = "Purpellium Ingot",
-	inventory_image = "purpellium_ingot.png",
-})
-
-
 
 --BONEBLOCK
 minetest.register_node("es:boneblock", {
@@ -521,7 +589,6 @@ minetest.register_node("es:boneblock", {
 	}),
 })
 
-
 --INPERVIOUS NODES  CANNOT BREAK- Great for prison walls.
 minetest.register_node("es:hgglass", {
 	description = "High Density Glass",
@@ -534,7 +601,6 @@ minetest.register_node("es:hgglass", {
 	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
 	sounds = default.node_sound_glass_defaults(),
 })
-
 minetest.register_node("es:steelblock", {
 	description = "High Density Steel Block",
 	tiles = {"default_steel_block.png"},
@@ -542,7 +608,6 @@ minetest.register_node("es:steelblock", {
 	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
-
 minetest.register_node("es:stoneblock", {
 	description = "High Density Stone Block",
 	tiles = {"default_stone.png"},
@@ -550,7 +615,6 @@ minetest.register_node("es:stoneblock", {
 	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
-
 minetest.register_node("es:sandstonebrick", {
 	description = "High Density Sandstone Brick",
 	tiles = {"default_stone_brick.png^[colorize:#CCCC99:150"},
@@ -558,7 +622,6 @@ minetest.register_node("es:sandstonebrick", {
 	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
-
 minetest.register_node("es:stonebrick", {
 	description = "High Density Stone Brick",
 	tiles = {"default_stone_brick.png"},
@@ -566,7 +629,6 @@ minetest.register_node("es:stonebrick", {
 	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
-
 minetest.register_node("es:junglewood", {
 	description = "High Density Junglewood Planks",
 	tiles = {"default_junglewood.png"},
@@ -586,6 +648,7 @@ minetest.register_node("es:messymese", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
+--this block is like gambling.
 minetest.register_node("es:what", {
 	description = "The What Block - Dig for random gift",
 	drawtype = "glasslike_framed_optional^bubble.png",
@@ -617,11 +680,7 @@ minetest.register_node("es:what", {
 	sounds = default.node_sound_glass_defaults(),
 })
 
-
-
-
 --Default addons as they should be.  I changed ore generation to keep unique for compatibility.
-
 --Dry dirt added
 minetest.register_node("es:dry_dirt", {
 	description = "Some dry dirt",
@@ -678,14 +737,12 @@ minetest.register_node("es:depleted_uranium", {
 	light_source = 12,
 })
 
-minetest.register_craftitem("es:depleted_uranium_lump", {
-	description = "Depleted Uranium use for long term fuel, first cook the lump into an ingot, then use ingot for fuel.",
-	inventory_image = "uranium_lump.png",
-})
-
-
 
 --ES CUSTOM LIQUIDS:
+--NOTES:
+--		radioactive = (state == "source" and 32 or 16),
+--THIS IS DEFAULT SETTING FROM TECHNIC
+--toxic
 minetest.register_node("es:toxic_water_source", {
 	description = "Toxic_Water Source",
 	inventory_image = minetest.inventorycube("es_toxic_water.png"),
@@ -716,6 +773,7 @@ minetest.register_node("es:toxic_water_source", {
 	},
 	alpha = 240,
 	paramtype = "light",
+	light_source = 14,
 	walkable = false,
 	pointable = false,
 	diggable = false,
@@ -733,15 +791,8 @@ minetest.register_node("es:toxic_water_source", {
 	groups = {water = 3, liquid = 3, puts_out_fire = 1, radioactive = 2},
 })
 
---NOTES:
---		radioactive = (state == "source" and 32 or 16),
---THIS IS DEFAULT SETTING FROM TECHNIC
-
-
-
 minetest.register_node("es:toxic_water_flowing", {
 	description = "Toxic_Flowing Water",
-	inventory_image = minetest.inventorycube("es_toxic_water.png"),
 	drawtype = "flowingliquid",
 	tiles = {"es_toxic_water.png"},
 	special_tiles = {
@@ -769,6 +820,7 @@ minetest.register_node("es:toxic_water_flowing", {
 	alpha = 240,
 	paramtype = "light",
 	paramtype2 = "flowingliquid",
+	light_source = 12,
 	walkable = false,
 	pointable = false,
 	diggable = false,
@@ -786,19 +838,18 @@ minetest.register_node("es:toxic_water_flowing", {
 		--not_in_creative_inventory = 1, radioactive = (state == "source" and 2 or 2),},
 		not_in_creative_inventory = 1, radioactive =2},
 })
---FOR REF
--- Quicksand (old style, sinking inside shows black instead of yellow effect,
--- works ok with noclip enabled though)
+
+--mud
 minetest.register_node("es:mud", {
 	description = "Mud",
 	tiles = {"es_mud.png"},
 	--drop = "es:mud",
-	liquid_viscosity = 19,
+	liquid_viscosity = 18,
 	liquidtype = "source",
-	liquid_alternative_flowing = "es:mud",
+	liquid_alternative_flowing = "es:mud_flowing",
 	liquid_alternative_source = "es:mud",
 	liquid_renewable = false,
-	liquid_range = 0,
+	--liquid_range = 1,
 	drowning = 3,
 	walkable = false,
 	climbable = false,
@@ -807,84 +858,11 @@ minetest.register_node("es:mud", {
 	sounds = default.node_sound_sand_defaults(),
 })
 
-
-
---this code is broken and makes the server not allow kindle players
---[[
-minetest.register_node("es:mud_source", {
-	description = "Mud Source",
-	inventory_image = minetest.inventorycube("es_mud.png"),
-	drawtype = "liquid",
-		tiles = {"es_mud.png"},
-	tiles = {
-		{
-			name = "default_mud_source_animated.png",
-			animation = {
-				type = "vertical_frames",
-				aspect_w = 16,
-				aspect_h = 16,
-				length = 2.0,
-			},
-		},
-	},
-	special_tiles = {
-		-- New-style water source material (mostly unused)
-		{
-			name = "default_mud_source_animated.png",
-			animation = {
-				type = "vertical_frames",
-				aspect_w = 16,
-				aspect_h = 16,
-				length = 2.0,
-			},
-			backface_culling = false,
-		},
-	},
-	alpha = 255,
-	paramtype = "light",
-	walkable = false,
-	pointable = false,
-	diggable = false,
-	buildable_to = true,
-	is_ground_content = false,
-	drop = "",
-	drowning = 1,
-	--damage_per_second = 3*2,
-	liquidtype = "source",
-	liquid_alternative_flowing = "es:mud_flowing",
-	liquid_alternative_source = "es:mud_source",
-	liquid_viscosity = 18,
-	post_effect_color = {a = 255, r = 43, g = 23, b = 9},
-	groups = {water = 3, liquid = 3, puts_out_fire = 1, },
-})
-
 minetest.register_node("es:mud_flowing", {
 	description = "Flowing  mud",
-	inventory_image = minetest.inventorycube("es_mud.png"),
 	drawtype = "liquid",--change to liquid for a solid look
 	tiles = {"es_mud.png"},
-	special_tiles = {
-		{
-			name = "es_mud_flowing_animated.png",
-			backface_culling = false,
-			animation = {
-				type = "vertical_frames",
-				aspect_w = 16,
-				aspect_h = 16,
-				length = 0.8,
-			},
-		},
-		{
-			name = "es_mud_flowing_animated.png",
-			backface_culling = true,
-			animation = {
-				type = "vertical_frames",
-				aspect_w = 16,
-				aspect_h = 16,
-				length = 0.8,
-			},
-		},
-	},
+
 	alpha = 250,
 	paramtype = "light",
 	paramtype2 = "flowingliquid",
@@ -895,13 +873,11 @@ minetest.register_node("es:mud_flowing", {
 	is_ground_content = false,
 	drop = "",
 	drowning = 1,
-	--damage_per_second = 3*2,
 	liquidtype = "flowing",
 	liquid_alternative_flowing = "es:mud_flowing",
-	liquid_alternative_source = "es:mud_source",
+	liquid_alternative_source = "es:mud",
 	liquid_viscosity = 19,
 	post_effect_color = {a = 255, r = 43, g = 23, b = 9},
 	groups = {water = 3, liquid = 3, puts_out_fire = 1,
 		not_in_creative_inventory = 1, },
 })
-]]
