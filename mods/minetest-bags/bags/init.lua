@@ -5,6 +5,10 @@ Bags for Minetest
 Copyright (c) 2012 cornernote, Brett O'Donnell <cornernote@gmail.com>
 Source Code: https://github.com/cornernote/minetest-bags
 License: BSD-3-Clause https://raw.github.com/cornernote/minetest-bags/master/LICENSE
+Modified by maikerumine to suit Extreme Survival Game
+20160323
+changed craft to be expensive and force overwrite.
+Now you must re-craft bags the new way and replace with same size bag.
 
 ]]--
 
@@ -30,7 +34,7 @@ local get_formspec = function(player,page)
 			return "size[8,8.5]"
 				.."list[current_player;main;0,4.5;8,4;]"
 				.."button[0,0;2,0.5;main;Main]"
-				.."button[2,0;2,0.5;bags;Bags]"
+				.."button[2,0;2,0.5;bags;Bags MESE]"
 				.."image[7,0;1,1;"..image.."]"
 				.."list[current_player;bag"..i.."contents;0,1;8,3;]"
 		end
@@ -57,7 +61,7 @@ end)
 
 -- register_on_joinplayer
 minetest.register_on_joinplayer(function(player)
-	inventory_plus.register_button(player,"bags","Bags")
+	inventory_plus.register_button(player,"bags","Bags MESE")
 	local player_inv = player:get_inventory()
 	local bags_inv = minetest.create_detached_inventory(player:get_player_name().."_bags",{
 		on_put = function(inv, listname, index, stack, player)
@@ -94,43 +98,45 @@ minetest.register_on_joinplayer(function(player)
 end)
 
 -- register bag tools
-minetest.register_tool("bags:small", {
-	description = "Small Bag",
+minetest.register_tool("bags:small_mese", {
+	description = "Small MESE Bag",
 	inventory_image = "bags_small.png",
 	groups = {bagslots=8},
 })
-minetest.register_tool("bags:medium", {
-	description = "Medium Bag",
+minetest.register_tool("bags:medium_mese", {
+	description = "Medium MESE Bag",
 	inventory_image = "bags_medium.png",
 	groups = {bagslots=16},
 })
-minetest.register_tool("bags:large", {
-	description = "Large Bag",
+minetest.register_tool("bags:large_mese", {
+	description = "Large MESE Bag",
 	inventory_image = "bags_large.png",
 	groups = {bagslots=24},
 })
 
 -- register bag crafts
 minetest.register_craft({
-	output = "bags:small",
+	output = "bags:small_mese",
 	recipe = {
-        {"", "default:stick", ""},
-        {"default:wood", "default:wood", "default:wood"},
-        {"default:wood", "default:wood", "default:wood"},
+        {"", "default:mese", ""},
+        {"esmobs:leather", "esmobs:leather", "esmobs:leather"},
+        {"esmobs:leather", "esmobs:leather", "esmobs:leather"},
     },
 })
 minetest.register_craft({
-	output = "bags:medium",
+	output = "bags:medium_mese",
 	recipe = {
-        {"bags:small", "bags:small"},
-        {"bags:small", "bags:small"},
+	{"default:copper_ingot", "default:copper_ingot", },
+        {"bags:small_mese", "bags:small_mese"},
+        {"bags:small_mese", "bags:small_mese"},
     },
 })
 minetest.register_craft({
-	output = "bags:large",
+	output = "bags:large_mese",
 	recipe = {
-        {"bags:medium", "bags:medium"},
-        {"bags:medium", "bags:medium"},
+	{"default:steel_ingot", "default:steel_ingot", },
+        {"bags:medium_mese", "bags:medium_mese"},
+        {"bags:medium_mese", "bags:medium_mese"},
     },
 })
 

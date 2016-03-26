@@ -54,3 +54,5 @@ minetest.register_alias("meru:stone", "default:sandstone")
 --newer carts
 minetest.register_alias("carts:rail_brake","carts:brakerail")
 minetest.register_alias("carts:rail_power","carts:powerrail")
+--es Screwdriver ;-)
+minetest.register_alias("screwdriver:screwdriver","es:screwdriver")

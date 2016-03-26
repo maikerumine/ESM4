@@ -21,7 +21,7 @@ http://www.gnu.org/licenses/lgpl-2.1.html
 
 License of media (textures and sounds)
 --------------------------------------
-Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)                                 
+Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
 http://creativecommons.org/licenses/by-sa/3.0/
 
 Created by Gambit (WTFPL):
@@ -40,13 +40,13 @@ local function nextrange(x, max)
 	return x
 end
 
-screwdriver.ROTATE_FACE = 1
-screwdriver.ROTATE_AXIS = 2
-screwdriver.disallow = function(pos, node, user, mode, new_param2)
+es.ROTATE_FACE = 1
+es.ROTATE_AXIS = 2
+es.disallow = function(pos, node, user, mode, new_param2)
 	return false
 end
-screwdriver.rotate_simple = function(pos, node, user, mode, new_param2)
-	if mode ~= screwdriver.ROTATE_FACE then
+es.rotate_simple = function(pos, node, user, mode, new_param2)
+	if mode ~= es.ROTATE_FACE then
 		return false
 	end
 end
@@ -72,9 +72,9 @@ local function screwdriver_handler(itemstack, user, pointed_thing, mode)
 	local preservePart = node.param2 - rotationPart
 	local axisdir = math.floor(rotationPart / 4)
 	local rotation = rotationPart - axisdir * 4
-	if mode == screwdriver.ROTATE_FACE then
+	if mode == es.ROTATE_FACE then
 		rotationPart = axisdir * 4 + nextrange(rotation, 3)
-	elseif mode == screwdriver.ROTATE_AXIS then
+	elseif mode == es.ROTATE_AXIS then
 		rotationPart = nextrange(axisdir, 5) * 4
 	end
 
@@ -119,13 +119,13 @@ end
 -- Screwdriver
 minetest.register_tool("es:screwdriver", {
 	description = "Screwdriver (left-click rotates face, right-click rotates axis)",
-	inventory_image = "screwdriver.png^[colorize:#0000FF:180",
+	inventory_image = "screwdriver.png",
 	on_use = function(itemstack, user, pointed_thing)
-		screwdriver_handler(itemstack, user, pointed_thing, screwdriver.ROTATE_FACE)
+		screwdriver_handler(itemstack, user, pointed_thing, es.ROTATE_FACE)
 		return itemstack
 	end,
 	on_place = function(itemstack, user, pointed_thing)
-		screwdriver_handler(itemstack, user, pointed_thing, screwdriver.ROTATE_AXIS)
+		screwdriver_handler(itemstack, user, pointed_thing, es.ROTATE_AXIS)
 		return itemstack
 	end,
 })
