@@ -36,11 +36,18 @@ stairs.register_stair_and_slab("marble", "es:marble",
 		"Marble Block Slab",
 		default.node_sound_stone_defaults())
 
-stairs.register_stair_and_slab("marble bricks", "es:marble_bricks",
+stairs.register_stair_and_slab("marblebricks", "es:marble_bricks",
 		{cracky = 1},
 		{"technic_marble_bricks.png" },
 		"Marble Brick Block Stair",
 		"Marble Brick Block Slab",
+		default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab("granitebricks", "es:granite_bricks",
+		{cracky = 1},
+		{"technic_granite_bricks.png" },
+		"Granite Brick Block Stair",
+		"Granite Brick Block Slab",
 		default.node_sound_stone_defaults())
 
 

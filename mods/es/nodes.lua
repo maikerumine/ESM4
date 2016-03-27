@@ -567,7 +567,7 @@ minetest.register_node("es:vault", {
 			end
 		end
 	end,
-	on_blast = function() end,	
+	on_blast = function() end,
 })
 
 --BONEBLOCK
@@ -860,7 +860,7 @@ minetest.register_node("es:mud", {
 
 minetest.register_node("es:mud_flowing", {
 	description = "Flowing  mud",
-	drawtype = "liquid",--change to liquid for a solid look
+	--drawtype = "liquid",--change to liquid for a solid look
 	tiles = {"es_mud.png"},
 
 	alpha = 250,
