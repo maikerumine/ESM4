@@ -35,6 +35,8 @@ mobs:register_mob("esmobs:dungeon_master", {
 	run_velocity = 4,
 	jump = true,
 	view_range = 15,
+	group_attack = true,
+	peaceful = false,
 	drops = {
 		{name = "default:mese_crystal_fragment",
 		chance = 1, min = 1, max = 3},
@@ -66,8 +68,8 @@ mobs:register_mob("esmobs:dungeon_master", {
 mobs:register_mob("esmobs:tree_monster", {
 	type = "monster",
 	passive = false,
-	--attack_type = "dogfight",
-	attack_type = "explode",
+	attack_type = "dogfight",
+	--attack_type = "explode",
 	reach = 2,
 	damage = 2,
 	hp_min = 17,
@@ -105,6 +107,7 @@ mobs:register_mob("esmobs:tree_monster", {
 	light_damage = 0,
 	fall_damage = 0,
 	group_attack = true,
+	peaceful = false,
 	animation = {
 		speed_normal = 15,
 		speed_run = 15,
@@ -161,6 +164,7 @@ mobs:register_mob("esmobs:sand_monster", {
 	light_damage = 0,
 	fear_height = 3,
 	group_attack = true,
+	peaceful = false,
 	animation = {
 		speed_normal = 15,
 		speed_run = 15,
@@ -189,19 +193,25 @@ mobs:register_mob("esmobs:stone_monster", {
 	collisionbox = {-0.4, -1, -0.4, 0.4, 0.9, 0.4},
 	visual = "mesh",
 	mesh = "mobs_stone_monster.b3d",
-	textures = {
-		"mobs_4.png"
-	},
+--	textures = {
+--		"mobs_4.png"
+--	},
+	--mesh = "3d_armor_character.b3d",
+	textures = {"mobs_4.png",
+			"3d_armor_trans.png",
+				minetest.registered_items["default:sword_steel"].inventory_image,
+			},
 	makes_footstep_sound = true,
 	sounds = {
 		random = "mobs_stonemonster",
 	},
-	walk_velocity = 0.5,
-	run_velocity = 1.5,
+	walk_velocity = 1.5,
+	run_velocity = 2.9,
 	jump = true,
 	floats = 0,
 	view_range = 15,
 	group_attack = true,
+	peaceful = false,
 	drops = {
 		{name = "default:torch",
 		chance = 2, min = 0, max = 2,},
@@ -209,6 +219,8 @@ mobs:register_mob("esmobs:stone_monster", {
 		chance=5, min=0, max=1,},
 		{name = "default:coal_lump",
 		chance=3, min=0, max=1,},
+		{name = "esmobs:leather",
+		chance = 1, min = 0, max = 1},
 	},
 	water_damage = 0,
 	lava_damage = 1,
@@ -216,8 +228,8 @@ mobs:register_mob("esmobs:stone_monster", {
 	animation = {
 		speed_normal = 15,		speed_run = 15,
 		stand_start = 0,		stand_end = 14,
-		walk_start = 15,		walk_end = 38,
-		run_start = 40,			run_end = 63,
+		walk_start = 15,		walk_end = 48,
+		run_start = 50,			run_end = 73,
 		punch_start = 40,		punch_end = 63,
 	},
 })
@@ -277,6 +289,7 @@ mobs:register_mob("esmobs:oerkki", {
 	replace_with = "air",
 	replace_offset = -1,
 	group_attack = true,
+	peaceful = false,
 })
 
 
@@ -317,6 +330,7 @@ mobs:register_mob("esmobs:dirt", {
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	group_attack = true,
+	peaceful = false,
 	animation = {
 		speed_normal = 15,
 		speed_run = 15,
@@ -366,6 +380,7 @@ mobs:register_mob("esmobs:spider", {
 	view_range = 15,
 	floats = 0,
 	group_attack = true,
+	peaceful = false,
     drops = {
 		{name = "farming:string",
 		chance = 1, min = 1, max = 5,},
@@ -424,6 +439,7 @@ mobs:register_mob("esmobs:applmons", {
 	on_rightclick = nil,
 	attack_type = "dogfight",
 	group_attack = true,
+	peaceful = false,
 	animation = {
 		speed_normal = 15,
 		speed_run = 15,
@@ -468,6 +484,8 @@ mobs:register_mob("esmobs:herobrines_bloody_ghost", {
 	fear_height = 30,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	group_attack = true,
+	peaceful = false,
 	animation = {
 		speed_normal = 15,
 		speed_run = 15,
@@ -531,6 +549,8 @@ mobs:register_mob("esmobs:paniki", {
 	light_damage = 10,
 	--fear_height = 70,
 	on_rightclick = nil,
+	group_attack = true,
+	peaceful = false,
 	fly = true,
 	--attack_type = "shoot",
 	attack_type = "dogfight",
@@ -740,6 +760,8 @@ mobs:register_mob("esmobs:bone_monster", {
 	fall_speed = -0.5,
 	stepheight = 3,
 	fear_height = 30,
+	group_attack = true,
+	peaceful = false,
 	floats = 1,
 	drops = {
 		{name = "bones:bones",
@@ -799,6 +821,8 @@ mobs:register_mob("esmobs:icemon", {
 	fear_height = 30,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	group_attack = true,
+	peaceful = false,
 	animation = {
 		speed_normal = 15,
 		speed_run = 15,
@@ -845,6 +869,8 @@ mobs:register_mob("esmobs:snowmon", {
 	fear_height = 3,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	group_attack = true,
+	peaceful = false,
 	animation = {
 		speed_normal = 15,
 		speed_run = 15,
@@ -866,7 +892,7 @@ mobs:register_mob("esmobs:watermon", {
 	hp_max = 75,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
-	mesh = "3d_armor_character.x",
+	mesh = "3d_armor_character.b3d",
 	textures = {"mobs_14.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:pick_wood"].inventory_image,
@@ -896,6 +922,8 @@ mobs:register_mob("esmobs:watermon", {
 	fear_height = 3,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	group_attack = true,
+	peaceful = false,
 	animation = {
 		speed_normal = 30,		speed_run = 30,
 		stand_start = 0,		stand_end = 79,
@@ -943,6 +971,8 @@ mobs:register_mob("esmobs:dirt2", {
 	fear_height = 6,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	group_attack = true,
+	peaceful = false,
 	animation = {
 		speed_normal = 15,
 		speed_run = 15,
@@ -967,6 +997,8 @@ mobs:register_mob("esmobs:stone_monster2", {
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",
+	group_attack = true,
+	peaceful = false,
 	damage = 6,
 	hp_min = 82,
 	hp_max = 105,
@@ -975,18 +1007,21 @@ mobs:register_mob("esmobs:stone_monster2", {
 	visual = "mesh",
 	mesh = "mobs_stone_monster.b3d",
 	textures = {
-		"mobs_4.png^[colorize:#FF0000:100"
+		"mobs_4.png^[colorize:#FF0000:130"
 	},
 	--visual_size = {x=3, y=2.6},
 	makes_footstep_sound = true,
 	sounds = {
 		random = "mobs_stone_attack",
 	},
-	walk_velocity = 1.5,
-	run_velocity = 2.6,
+	walk_velocity = 0.5,
+	run_velocity = 1.6,
 	jump = true,
 	floats = 1,
-	view_range = 10,
+	jump_height = 17,
+	fall_damage = 0,
+	fall_speed = -13.5,
+	view_range = 13,
 	drops = {
 		{name = "default:stone",
 		chance = 2, min = 0, max = 2,},
@@ -998,13 +1033,13 @@ mobs:register_mob("esmobs:stone_monster2", {
 	water_damage = 5,
 	lava_damage = 0,
 	light_damage = 1,
-	fear_height = 3,
+	fear_height = 33,
 	animation = {
 		speed_normal = 15,		speed_run = 15,
 		stand_start = 0,		stand_end = 14,
 		walk_start = 15,		walk_end = 38,
-		run_start = 40,			run_end = 63,
-		punch_start = 40,		punch_end = 63,
+		run_start = 40,			run_end = 43,
+		punch_start = 43,		punch_end = 43,
 	},
 })
 
@@ -1016,6 +1051,8 @@ mobs:register_mob("esmobs:chickoboo", {
 	type = "animal",
 	passive = false,
 	attack_type = "dogfight",
+	group_attack = true,
+	peaceful = false,
 	damage = 3,
 	hp_min = 50,
 	hp_max = 80,
@@ -1146,7 +1183,7 @@ mobs:register_spawn("esmobs:stone_monster2", {"default:stone","bedrock2:bedrock"
 mobs:register_spawn("esmobs:dungeon_master", {"default:stone"}, 2, 0, 7000, 1, -70)
 mobs:register_spawn("esmobs:tree_monster", {"default:leaves", "default:jungleleaves","default:dirt", "default:jungletree"}, 5, 0, 14000, 1, 31000)
 mobs:register_spawn("esmobs:sand_monster", {"default:sand", "meru:stone","group:sand"},4, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:stone_monster", {"default:stone", "bedrock2:bedrock"}, 5, 2, 9000, 1, 31000)
+mobs:register_spawn("esmobs:stone_monster", {"default:stone", "bedrock2:bedrock"}, 5, -1, 4000, 4, 31000)
 mobs:register_spawn("esmobs:oerkki", { "default:stone"}, 4, -1, 2000, 1, -70)
 mobs:register_spawn("esmobs:dirt", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 5, -1, 11000, 1, 31000)
 --mobs:register_spawn("esmobs:phoenix",{"air"}, 4,-1, 16000, 1, 90,false)

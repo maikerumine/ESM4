@@ -16,7 +16,7 @@ mobs:register_mob("esmobs:Sam", {
 	hp_max = 35,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
-	mesh = "3d_armor_character.x",
+	mesh = "3d_armor_character.b3d",
 	textures = {"badplayer_1.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_steel"].inventory_image,
@@ -141,7 +141,7 @@ mobs:register_mob("esmobs:John", {
 	hp_max = 34,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
-	mesh = "3d_armor_character.x",
+	mesh = "3d_armor_character.b3d",
 	textures = {"badplayer_5.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_wood"].inventory_image,
@@ -266,7 +266,7 @@ mobs:register_mob("esmobs:Janette", {
 	hp_max = 15,
 	collisionbox = {-0.3, -0.8, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
-	mesh = "3d_armor_character.x",
+	mesh = "3d_armor_character.b3d",
 	textures = {"badplayer_13.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:stick"].inventory_image,
@@ -393,7 +393,7 @@ mobs:register_mob("esmobs:Crybaby", {
 	hp_max = 45,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
-	mesh = "3d_armor_character.x",
+	mesh = "3d_armor_character.b3d",
 	textures = {"badplayer_14.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_wood"].inventory_image,
@@ -520,7 +520,7 @@ mobs:register_mob("esmobs:SepiaSam", {
 	hp_max = 55,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
-	mesh = "3d_armor_character.x",
+	mesh = "3d_armor_character.b3d",
 	textures = {"badplayer_15.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_mese"].inventory_image,
@@ -645,7 +645,7 @@ mobs:register_mob("esmobs:OGSam", {
 	hp_max = 45,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
-	mesh = "3d_armor_character.x",
+	mesh = "3d_armor_character.b3d",
 	textures = {"badplayer_17.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_wood"].inventory_image,
@@ -774,7 +774,7 @@ mobs:register_mob("esmobs:Vanessa", {
 	hp_max = 35,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
-	mesh = "3d_armor_character.x",
+	mesh = "3d_armor_character.b3d",
 	textures = {"badplayer_19.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:axe_mese"].inventory_image,
@@ -902,7 +902,7 @@ mobs:register_mob("esmobs:FemaleSam", {
 	hp_max = 125,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
-	mesh = "3d_armor_character.x",
+	mesh = "3d_armor_character.b3d",
 	textures = {"badplayer_20.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:pick_steel"].inventory_image,
@@ -1027,7 +1027,7 @@ mobs:register_mob("esmobs:Battleboy", {
 	hp_max = 180,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
-	mesh = "3d_armor_character.x",
+	mesh = "3d_armor_character.b3d",
 	textures = {"badplayer_21.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:pick_mese"].inventory_image,
@@ -1151,7 +1151,7 @@ mobs:register_mob("esmobs:Wilbert", {
 	hp_max = 115,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
-	mesh = "3d_armor_character.x",
+	mesh = "3d_armor_character.b3d",
 	textures = {"badplayer_35.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_steel"].inventory_image,
@@ -1280,7 +1280,7 @@ mobs:register_mob("esmobs:Thelma", {
 	hp_max = 115,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
-	mesh = "3d_armor_character.x",
+	mesh = "3d_armor_character.b3d",
 	textures = {"badplayer_34.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_steel"].inventory_image,
@@ -1411,7 +1411,7 @@ mobs:register_mob("esmobs:DrifterDan", {
 	hp_max = 129,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
-	mesh = "3d_armor_character.x",
+	mesh = "3d_armor_character.b3d",
 	textures = {"badplayer_36.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:pick_mese"].inventory_image,
@@ -1536,7 +1536,7 @@ mobs:register_mob("esmobs:Mr_White", {
 	hp_max = 65,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
-	mesh = "3d_armor_character.x",
+	mesh = "3d_armor_character.b3d",
 	textures = {"badplayer_38.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_wood"].inventory_image,
@@ -1661,7 +1661,7 @@ mobs:register_mob("esmobs:Mr_Pink", {
 	hp_max = 65,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
-	mesh = "3d_armor_character.x",
+	mesh = "3d_armor_character.b3d",
 	textures = {"badplayer_37.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_stone"].inventory_image,
@@ -1792,7 +1792,7 @@ mobs:register_mob("esmobs:Candy", {
 	hp_max = 135,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
-	mesh = "3d_armor_character.x",
+	mesh = "3d_armor_character.b3d",
 	textures = {"badplayer_41.png",
 			"3d_armor_trans.png",
 				--minetest.registered_items["default:diamond"].inventory_image,
@@ -1919,7 +1919,7 @@ mobs:register_mob("esmobs:Infiniumman", {
 	hp_max = 35,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
-	mesh = "3d_armor_character.x",
+	mesh = "3d_armor_character.b3d",
 	textures = {"badplayer_40.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:sword_diamond"].inventory_image,
@@ -2045,7 +2045,7 @@ mobs:register_mob("esmobs:Maikerumine", {
 	hp_max = 175,
 	collisionbox = {-0.3, -1.0, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
-	mesh = "3d_armor_character.x",
+	mesh = "3d_armor_character.b3d",
 	textures = {"badplayer_39.png",
 			"3d_armor_trans.png",
 				minetest.registered_items["default:book"].inventory_image,
@@ -2197,6 +2197,7 @@ mobs:register_spawn("esmobs:Maikerumine", {"default:dirt_with_grass","default:st
 ]]
 mobs:register_spawn("esmobs:Sam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7, 14000, 1, 31000)
 mobs:register_spawn("esmobs:John", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7, 14000, 1, 31000)
+mobs:register_spawn("esmobs:John", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 5, -1, 14000, 1, 31000)
 mobs:register_spawn("esmobs:Janette", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7, 14000, 1, 31000)
 mobs:register_spawn("esmobs:Crybaby", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7, 14000, 1, 31000)
 mobs:register_spawn("esmobs:SepiaSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7, 14000, 1, 31000)
@@ -2209,9 +2210,10 @@ mobs:register_spawn("esmobs:Thelma", {"default:dirt_with_grass","default:snowblo
 mobs:register_spawn("esmobs:DrifterDan", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7,14000, 1, 31000)
 mobs:register_spawn("esmobs:Mr_White", {"default:dirt_with_grass", "ethereal:green_dirt","default:grass","default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7, 14000, 1, 31000)
 mobs:register_spawn("esmobs:Mr_Pink", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7, 14000, 1, 31000)
-mobs:register_spawn("esmobs:Candy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"}, 7, -1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:Infiniumman", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 20, 1, 14000, 1, 31000)
-mobs:register_spawn("esmobs:Maikerumine", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 20, 1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:Candy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"},12, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:Candy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble"},5, -1, 14000, 1, 31000)
+mobs:register_spawn("esmobs:Infiniumman", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7, 14000, 1, 31000)
+mobs:register_spawn("esmobs:Maikerumine", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"}, 12, 7, 14000, 1, 31000)
 
 
 

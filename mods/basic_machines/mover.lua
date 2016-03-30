@@ -12,20 +12,20 @@ local max_range = 10; -- machines normal range of operation
 local machines_operations = 10; -- 1 coal will provide 10 mover basic operations ( moving dirt 1 block distance)
 local machines_timer = 5 -- main timestep
 local machines_TTL = 16; -- time to live for signals
-local MOVER_FUEL_STORAGE_CAPACITY =  5; -- how many operations from one coal lump  - base unit
 
 
---DEPRECATED: fuels used to power mover, now battery is used
-basic_machines.fuels = {["default:coal_lump"]=30,["default:cactus"]=5,["default:tree"]=10,["default:jungletree"]=12,["default:pinetree"]=12,["default:acacia_tree"]=10,["default:coalblock"]=500,["default:lava_source"]=5000,["basic_machines:charcoal"]=20}
-
--- how hard it is to move blocks, default factor 1
+-- how hard it is to move blocks, default factor 1, note fuel cost is this multiplied by distance and divided by machine_operations..
 basic_machines.hardness = {
 ["default:stone"]=4,["default:tree"]=2,["default:jungletree"]=2,["default:pinetree"]=2,["default:acacia_tree"]=2,
-["default:lava_source"]=1000,["default:water_source"]=1000,["default:obsidian"]=20,["bedrock2:bedrock"]=10000};
+["default:lava_source"]=21890,["default:water_source"]=11000,["default:obsidian"]=20,["bedrock2:bedrock"]=999999};
 basic_machines.hardness["basic_machines:mover"]=0.;
+
+basic_machines.hardness["es:toxic_water_source"]=21890.;basic_machines.hardness["es:toxic_water_flowing"]=11000;
+basic_machines.hardness["default:river_water_source"]=21890.;
+
 -- farming operations are much cheaper
-basic_machines.hardness["farming:wheat_8"]=0.1;basic_machines.hardness["farming:cotton_8"]=0.1;
-basic_machines.hardness["farming:seed_wheat"]=0.05;basic_machines.hardness["farming:seed_cotton"]=0.05;
+basic_machines.hardness["farming:wheat_8"]=1;basic_machines.hardness["farming:cotton_8"]=1;
+basic_machines.hardness["farming:seed_wheat"]=0.5;basic_machines.hardness["farming:seed_cotton"]=0.5;
 
 
 -- define which nodes are dug up completely, like a tree
@@ -43,6 +43,9 @@ basic_machines.plant_table  = {["farming:seed_barley"]="farming:barley_1",["farm
 ["farming:melon_slice"]="farming:melon_1",["farming:potato"]="farming:potato_1",["farming:pumpkin_slice"]="farming:pumpkin_1",
 ["farming:raspberries"]="farming:raspberry_1",["farming:rhubarb"]="farming:rhubarb_1",["farming:tomato"]="farming:tomato_1",
 ["farming:seed_wheat"]="farming:wheat_1"}
+
+--DEPRECATED: fuels used to power mover, now battery is used
+basic_machines.fuels = {["default:coal_lump"]=30,["default:cactus"]=5,["default:tree"]=10,["default:jungletree"]=12,["default:pinetree"]=12,["default:acacia_tree"]=10,["default:coalblock"]=500,["default:lava_source"]=5000,["basic_machines:charcoal"]=20}
 
 
 --  *** END OF SETTINGS *** --
@@ -75,7 +78,7 @@ minetest.register_node("basic_machines:mover", {
 		meta:set_string("prefer", "");
 		meta:set_string("mode", "normal");
 		meta:set_float("upgrade", 1);
-		local inv = meta:get_inventory();inv:set_size("upgrade", 1*1) 
+		local inv = meta:get_inventory();inv:set_size("upgrade", 1*1);inv:set_size("filter", 1*1) 
 
 		
 		
@@ -145,21 +148,22 @@ minetest.register_node("basic_machines:mover", {
 
 		
 		local form  = 
-		"size[5,5]" ..  -- width, height
+		"size[8,9.5]" ..  -- width, height
 		--"size[6,10]" ..  -- width, height
 		"field[0.25,0.5;1,1;x0;source1;"..x0.."] field[1.25,0.5;1,1;y0;;"..y0.."] field[2.25,0.5;1,1;z0;;"..z0.."]"..
 		"dropdown[3,0.25;1.5,1;inv1;".. inv_list1 ..";" .. inv1 .."]"..
 		"field[0.25,1.5;1,1;x1;source2;"..x1.."] field[1.25,1.5;1,1;y1;;"..y1.."] field[2.25,1.5;1,1;z1;;"..z1.."]"..
 		"field[0.25,2.5;1,1;x2;Target;"..x2.."] field[1.25,2.5;1,1;y2;;"..y2.."] field[2.25,2.5;1,1;z2;;"..z2.."]"..
 		"dropdown[3,2.25;1.5,1;inv2;".. inv_list2 .. ";" .. inv2 .."]"..
-		"button_exit[4,4.4;1,1;OK;OK] field[0.25,3.5;3,1;prefer;filter;"..prefer.."]"..
-		"button[4.,3.25;1,1;help;help]"..
-		"label[0.,4.0;MODE selection]"..
-		"dropdown[0,4.5;3,1;mode;normal,dig,drop,object,inventory,transport;".. mode .."]"..
-		"list[nodemeta:"..pos.x..','..pos.y..','..pos.z ..";upgrade;3,4.3;1,1;]".."label[3,3.9;upgrade]" .. 
-		"field[3.25,3.5;1,1;reverse;reverse;"..mreverse.."]";
+		"button_exit[4,3.25;1,1;OK;OK] field[0.25,4.5;3,1;prefer;filter;"..prefer.."]"..
+		"button[3,3.25;1,1;help;help]"..
+		"label[0.,3.0;MODE selection]"..
+		"dropdown[0.,3.35;3,1;mode;normal,dig,drop,object,inventory,transport;".. mode .."]"..
+		"list[nodemeta:"..pos.x..','..pos.y..','..pos.z ..";filter;3,4.4;1,1;]"..
+		"list[nodemeta:"..pos.x..','..pos.y..','..pos.z ..";upgrade;4,4.4;1,1;]".."label[4,4;upgrade]" .. 
+		"field[3.25,1.5;1.,1;reverse;reverse;"..mreverse.."]" .. "list[current_player;main;0,5.5;8,4;]";
 		
-		--"field[0.25,4.5;2,1;mode;mode;"..mode.."]";
+		
 		
 		if meta:get_string("owner")==player:get_player_name() then
 			minetest.show_formspec(player:get_player_name(), "basic_machines:mover_"..minetest.pos_to_string(pos), form)
@@ -169,6 +173,14 @@ minetest.register_node("basic_machines:mover", {
 	end,
 	
 	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+		if listname == "filter" then
+			local meta = minetest.get_meta(pos);
+			local itemname = stack:get_name() or "";
+			meta:set_string("prefer",itemname);
+			-- local inv = meta:get_inventory();
+			-- inv:set_stack("filter",1, ItemStack({name=itemname})) 
+			return 1;
+		end
 		return stack:get_count();
 	end,
 	
@@ -444,7 +456,7 @@ minetest.register_node("basic_machines:mover", {
 					
 					for _, pos3 in ipairs(positions) do
 						-- dont take coal from source or target location to avoid chest/fuel confusion isssues
-						if count>15 then break end
+						if count>16 then break end
 						minetest.set_node(pos3,{name="air"}); count = count+1;
 					end
 					
@@ -902,9 +914,9 @@ minetest.register_node("basic_machines:distributor", {
 			if type(ttl)~="number" then ttl = 1 end
 			if not(ttl>0) then return end
 			local meta = minetest.get_meta(pos);
-			local t1 = meta:get_int("t");
-			local t0 = minetest.get_gametime(); 
-			if t0<=t1 then 
+			local t0 = meta:get_int("t");
+			local t1 = minetest.get_gametime(); 
+			if t1<=t0 then 
 				local delay = machines_timer+1;
 				minetest.sound_play("default_cool_lava",{pos = pos, max_hear_distance = 16, gain = 0.25})
 				meta:set_string("infotext","DISTRIBUTOR: burned out due to too fast activation. Wait "..delay.."s for cooldown."); meta:set_int("t",t1+delay); return 
@@ -919,31 +931,34 @@ minetest.register_node("basic_machines:distributor", {
 				active[i]=meta:get_int("active"..i);
 			end
 			
-			local node, table
-			
+			local table,node;
 			for i=1,n do
-				if active[i]~=0 then
+				if active[i]~=0 then 
 					node = minetest.get_node(posf[i]);if not node.name then return end -- error
 					table = minetest.registered_nodes[node.name];
-					if not table then return end -- error
-					if not table.mesecons then return end -- error
-					if not table.mesecons.effector then return end -- error
-					local effector=table.mesecons.effector;
-					local delay = minetest.get_meta(pos):get_float("delay");
-				
-					if (active[i] == 1 or active[i] == 2) and effector.action_on then -- normal OR only forward input ON
+					
+					if table and table.mesecons and table.mesecons.effector then -- check if all elements exist, safe cause it checks from left to right
+						-- alternative way: overkill
+						--ret = pcall(function() if not table.mesecons.effector then end end); -- exception handling to determine if structure exists
+													
+						local effector=table.mesecons.effector;
+						local delay = minetest.get_meta(pos):get_float("delay");
+						
+						if (active[i] == 1 or active[i] == 2) and effector.action_on then -- normal OR only forward input ON
+								if delay>0 then
+									minetest.after(delay, function() effector.action_on(posf[i],node,ttl-1) end); 
+								else
+									effector.action_on(posf[i],node,ttl-1); 
+								end
+						elseif active[i] == -1 and effector.action_off then 
 							if delay>0 then
-								minetest.after(delay, function() effector.action_on(posf[i],node,ttl-1) end); 
+								minetest.after(delay, function() effector.action_off(posf[i],node,ttl-1) end);
 							else
-								effector.action_on(posf[i],node,ttl-1); 
+								effector.action_off(posf[i],node,ttl-1)
 							end
-					elseif active[i] == -1 and effector.action_off then 
-						if delay>0 then
-							minetest.after(delay, function() effector.action_off(posf[i],node,ttl-1) end);
-						else
-							effector.action_off(posf[i],node,ttl-1)
 						end
 					end
+					
 				end
 			end
 	end,
@@ -976,22 +991,23 @@ minetest.register_node("basic_machines:distributor", {
 				if active[i]~=0 then
 					node = minetest.get_node(posf[i]);if not node.name then return end -- error
 					table = minetest.registered_nodes[node.name];
-					if not table then return end -- error
-					if not table.mesecons then return end -- error
-					if not table.mesecons.effector then return end -- error
-					local effector=table.mesecons.effector;
-					local delay = minetest.get_meta(pos):get_float("delay");
-					if (active[i] == 1 or active[i]==-2) and effector.action_off then  -- normal OR only forward input OFF
-						if delay>0 then
-							minetest.after(delay, function() effector.action_off(posf[i],node,ttl-1) end);
-						else
-							effector.action_off(posf[i],node,ttl-1); 
-						end
-					elseif (active[i] == -1) and effector.action_on then 
-						if delay>0 then
-							minetest.after(delay, function() effector.action_on(posf[i],node,ttl-1) end);
-						else
-							effector.action_on(posf[i],node,ttl-1); 
+					
+					if table and table.mesecons and table.mesecons.effector then 
+		
+						local effector=table.mesecons.effector;
+						local delay = minetest.get_meta(pos):get_float("delay");
+						if (active[i] == 1 or active[i]==-2) and effector.action_off then  -- normal OR only forward input OFF
+							if delay>0 then
+								minetest.after(delay, function() effector.action_off(posf[i],node,ttl-1) end);
+							else
+								effector.action_off(posf[i],node,ttl-1); 
+							end
+						elseif (active[i] == -1) and effector.action_on then 
+							if delay>0 then
+								minetest.after(delay, function() effector.action_on(posf[i],node,ttl-1) end);
+							else
+								effector.action_on(posf[i],node,ttl-1); 
+							end
 						end
 					end
 				end

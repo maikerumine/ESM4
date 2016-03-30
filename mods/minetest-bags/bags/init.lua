@@ -98,17 +98,17 @@ minetest.register_on_joinplayer(function(player)
 end)
 
 -- register bag tools
-minetest.register_tool("bags:small_mese", {
+minetest.register_tool("bags:small_esmmese", {
 	description = "Small MESE Bag",
 	inventory_image = "bags_small.png",
 	groups = {bagslots=8},
 })
-minetest.register_tool("bags:medium_mese", {
+minetest.register_tool("bags:medium_esmmese", {
 	description = "Medium MESE Bag",
 	inventory_image = "bags_medium.png",
 	groups = {bagslots=16},
 })
-minetest.register_tool("bags:large_mese", {
+minetest.register_tool("bags:large_esmmese", {
 	description = "Large MESE Bag",
 	inventory_image = "bags_large.png",
 	groups = {bagslots=24},
@@ -116,7 +116,7 @@ minetest.register_tool("bags:large_mese", {
 
 -- register bag crafts
 minetest.register_craft({
-	output = "bags:small_mese",
+	output = "bags:small_esmmese",
 	recipe = {
         {"", "default:mese", ""},
         {"esmobs:leather", "esmobs:leather", "esmobs:leather"},
@@ -124,19 +124,19 @@ minetest.register_craft({
     },
 })
 minetest.register_craft({
-	output = "bags:medium_mese",
+	output = "bags:medium_esmmese",
 	recipe = {
 	{"default:copper_ingot", "default:copper_ingot", },
-        {"bags:small_mese", "bags:small_mese"},
-        {"bags:small_mese", "bags:small_mese"},
+        {"bags:small_esmmese", "bags:small_esmmese"},
+        {"bags:small_esmmese", "bags:small_esmmese"},
     },
 })
 minetest.register_craft({
-	output = "bags:large_mese",
+	output = "bags:large_esmmese",
 	recipe = {
 	{"default:steel_ingot", "default:steel_ingot", },
-        {"bags:medium_mese", "bags:medium_mese"},
-        {"bags:medium_mese", "bags:medium_mese"},
+        {"bags:medium_esmmese", "bags:medium_esmmese"},
+        {"bags:medium_esmmese", "bags:medium_esmmese"},
     },
 })
 

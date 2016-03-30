@@ -56,16 +56,17 @@ minetest.register_craft({
 	}
 })
 
-mobs:register_spawn("esmobs:badplayer23", "esmobs:cursed_stone", 4, -1, 2, 10, 500, -500)  --comment out to disable
---mobs:register_spawn("esmobs:stone_monster2", "esmobs:cursed_stone", 4, -1, 2, 40, 500, -500)  --comment out to disable
---mobs:register_spawn("esmobs:Jasmine", {"esmobs:cursed_stone"}, 5, -1, 2, 10, 500, -500)  --comment out to disable
-
-mobs:register_spawn("esmobs:SepiaSam", "esmobs:blessed_stone", 4, -1, 2, 10, 500, -500)  --comment out to disable
---mobs:register_spawn("esmobs:Maikerumine", "esmobs:blessed_stone", 4, -1, 2, 40, 500, -500)  --comment out to disable
-mobs:register_spawn("esmobs:Candy", {"esmobs:blessed_stone"}, 4, -1, 2, 10, 500, -500)  --comment out to disable
-
-mobs:register_spawn("esmobs:oerkki", "esmobs:cursed_stone", 4, -1, 2, 10, 500, -500)  --comment out to disable
+--mobs:register_spawn("esmobs:badplayer23", "esmobs:cursed_stone", 5, -1, 2, 2, 500, -500)  --comment out to disable
+mobs:register_spawn("esmobs:stone_monster2", "esmobs:cursed_stone", 5, -1, 3, 8, 500, -500)  --comment out to disable
+--mobs:register_spawn("esmobs:Jasmine", {"esmobs:cursed_stone"}, 5, -1, 2, 1, 500, -500)  --comment out to disable
+mobs:register_spawn("esmobs:oerkki", "esmobs:cursed_stone", 4, -1,3,7, 500, -500)  --comment out to disable
 --mobs:register_spawn("esmobs:herobrines_bloody_ghost", "esmobs:cursed_stone", 4, -1, 2, 1, 500, -500)
+
+--mobs:register_spawn("esmobs:SepiaSam", "esmobs:blessed_stone", 6, -1, 2, 20, 500, -500)  --comment out to disable
+--mobs:register_spawn("esmobs:Maikerumine", "esmobs:blessed_stone", 4, -1, 2, 40, 500, -500)  --comment out to disable
+mobs:register_spawn("esmobs:Candy", "esmobs:blessed_stone",  5, -1, 3,4, 500, -500)  --comment out to disable
+mobs:register_spawn("esmobs:John", "esmobs:blessed_stone",  5, -1, 3,14, 500, -500)  --comment out to disable
+
 
 
 -- mob spawner
