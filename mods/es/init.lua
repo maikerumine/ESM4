@@ -16,12 +16,15 @@ es = {}
 --NOTE:  THIS--v  v--MUST BE FIRST IN THE INIT FOR EVERYTHING TO WORK
 enable_stairsplus = true
 
+
+
+
 local load_start = os.clock()
 local modpath = minetest.get_modpath("es")
 es.modpath = modpath
 
 -- REMOVE NODES DO NOT USE IN YOUR WORLD
---dofile(modpath.."/technodrem.lua")
+--ofile(modpath.."/technodrem.lua")
 --dofile(modpath.."/moreorerem.lua")
 --dofile(modpath.."/villrem.lua")
 
@@ -47,12 +50,19 @@ dofile(modpath.."/spawn.lua")
 dofile(modpath.."/nodes.lua")
 dofile(modpath.."/crushingfurnace.lua")
 
+--Radioactive materials switch
+--CONFIG SWITCHES
+	es.RADIOACTIVE = 1;	--1 is on 0 is off
+if es.RADIOACTIVE == 1 then	--add radiation
+	dofile(modpath.."/radiation.lua")
+end
+
 -- Ore Generation
 dofile(modpath.."/oregen.lua")
 
 -- Tools
 dofile(modpath.."/tools.lua")
-dofile(modpath.."/screwdriver.lua")
+ --dofile(modpath.."/screwdriver.lua")
 --dofile(modpath.."/hoes.lua")
 
 -- Climate  very laggy
@@ -70,11 +80,10 @@ if stairs then
 dofile(modpath.."/stair.lua")
 end
 
---MAP GENERATION SELECTION SWITCH
---Enter a number between 0 and 5 to choose map style.
-es.MAP_SETTING = 0;
+--CONFIG SWITCHES
+	es.MAP_SETTING = 0;	--Enter a number between 0 and 5 to choose map style.  See line 83 for details.
 
--- Map Generation
+--MAP GENERATION SELECTION SWITCH
 --(CURRENTLY YOU NEED TO REPLACE THE DEFAULT WITH
 --the one that says stone IF YOU WANT AN ALL STONE WORLD.)
 --MAP GENERATION SELECTION SWITCH
@@ -99,6 +108,7 @@ es.MAP_SETTING = 0;
 		dofile(modpath.."/mapgen-v7green_current.lua")
 	end
 
+
 --MAPFIX CODE  (USE WHEN DARK SHADOWS FORM, TYPE /MAPFIX)
 minetest.register_chatcommand("mapfix", {
 	params = "<size>",
@@ -119,3 +129,25 @@ minetest.register_chatcommand("mapfix", {
 		return true, "Done."
 	end,
 })
+
+--RND CODE
+--NO GRIEF WITH liquids
+local function disable_placing_above_ground(name)
+
+   local table = minetest.registered_nodes[name]; if not table then return end
+   local table2 = {}
+   for i,v in pairs(table) do table2[i] = v end
+   table2.after_place_node = function(pos, placer, itemstack, pointed_thing)
+      if pos.y>=0 then minetest.set_node(pos,{name = "air"}) end
+   end
+   minetest.register_node(":"..name, table2)
+end
+
+minetest.after(0,function()
+   disable_placing_above_ground("default:water_source");
+   disable_placing_above_ground("default:river_water_source");
+   disable_placing_above_ground("default:lava_source");
+   disable_placing_above_ground("es:toxic_water_source");
+   disable_placing_above_ground("es:mud");
+   -- add here all other sources: toxic water, mud ,....
+end)

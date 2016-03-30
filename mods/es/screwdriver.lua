@@ -53,7 +53,7 @@ end
 local USES = 3000
 
 -- Handles rotation
-local function screwdriver_handler(itemstack, user, pointed_thing, mode)
+local function es_handler(itemstack, user, pointed_thing, mode)
 	if pointed_thing.type ~= "node" then
 		return
 	end
@@ -67,6 +67,10 @@ local function screwdriver_handler(itemstack, user, pointed_thing, mode)
 
 	local node = minetest.get_node(pos)
 	local ndef = minetest.registered_nodes[node.name]
+		-- verify node is facedir (expected to be rotatable)
+	if ndef.paramtype2 ~= "facedir" then
+		return
+	end
 	-- Compute param2
 	local rotationPart = node.param2 % 32 -- get first 4 bits
 	local preservePart = node.param2 - rotationPart
@@ -121,11 +125,11 @@ minetest.register_tool("es:screwdriver", {
 	description = "Screwdriver (left-click rotates face, right-click rotates axis)",
 	inventory_image = "screwdriver.png",
 	on_use = function(itemstack, user, pointed_thing)
-		screwdriver_handler(itemstack, user, pointed_thing, es.ROTATE_FACE)
+		es_handler(itemstack, user, pointed_thing, es.ROTATE_FACE)
 		return itemstack
 	end,
 	on_place = function(itemstack, user, pointed_thing)
-		screwdriver_handler(itemstack, user, pointed_thing, es.ROTATE_AXIS)
+		es_handler(itemstack, user, pointed_thing, es.ROTATE_AXIS)
 		return itemstack
 	end,
 })
