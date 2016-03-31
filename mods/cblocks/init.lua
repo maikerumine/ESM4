@@ -78,6 +78,21 @@ minetest.register_craft({
 	}
 })
 
+--Clay
+minetest.register_node( "cblocks:clay_" .. colours[i][1], {
+	description = colours[i][2] .. " Clay",
+	tiles = {"default_clay.png^[colorize:" .. colours[i][3]},
+	is_ground_content = false,
+	groups = {crumbly = 2, oddly_breakable_by_hand = 2},
+	sounds = default.node_sound_glass_defaults(),
+})
+
+minetest.register_craft({
+	output = "cblocks:clay_".. colours[i][1] .. " 2",
+	recipe = {
+		{"default:clay","default:clay", "dye:" .. colours[i][1]},
+	}
+})
 
 --LET US REGISTER STAIRS!
 --maikerumine 20160321

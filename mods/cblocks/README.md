@@ -9,3 +9,4 @@ Released under WTFPL
 0.1 - Initial release
 0.2 - Added coloured glass and fixed violet
 0.3 - Added stair and slabs -maikerumine 20160321
+0.4 - Added clay to the mix -maikerumine 20160331
