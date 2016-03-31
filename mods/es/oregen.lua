@@ -40,6 +40,142 @@ minetest.register_ore({
 	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 })
 
+--CBLOCKS CLAY!!
+minetest.register_ore({
+	ore_type       = "sheet",
+	ore            = "cblocks:clay_magenta",
+	wherein        = {"default:desert_stone"},
+	clust_scarcity = 1,
+	clust_num_ores = 3,
+	clust_size     = 4,
+	height_min     = 70,
+	height_max     = 190,
+	noise_threshhold = 0.4,
+	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
+})
+
+minetest.register_ore({
+	ore_type       = "sheet",
+	ore            = "cblocks:clay_red",
+	wherein        = {"default:desert_stone"},
+	clust_scarcity = 1,
+	clust_num_ores = 8,
+	clust_size     = 4,
+	height_min     = 44,
+	height_max     = 70,
+	noise_threshhold = 0.4,
+	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
+})
+
+minetest.register_ore({
+	ore_type       = "sheet",
+	ore            = "cblocks:clay_orange",
+	wherein        ={"default:desert_stone","default:desert_sand"},
+	clust_scarcity = 1,
+	clust_num_ores = 5,
+	clust_size     = 5,
+	height_min     = 10,
+	height_max     = 40,
+	noise_threshhold = 0.4,
+	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
+})
+
+minetest.register_ore({
+	ore_type       = "sheet",
+	ore            = "cblocks:clay_brown",
+	wherein        = {"default:desert_stone","default:desert_sand"},
+	clust_scarcity = 1,
+	clust_num_ores = 12,
+	clust_size     = 4,
+	height_min     = -12,
+	height_max     = 7,
+	noise_threshhold = 0.4,
+	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
+})
+
+
+
+--DEFAULT STRATA
+minetest.register_ore({
+	ore_type       = "sheet",
+	ore            = "default:stone",
+	wherein        = {"default:desert_stone","default:desert_sand"},
+	clust_scarcity = 1,
+	clust_num_ores = 3,
+	clust_size     = 4,
+	height_min     = 50,
+	height_max     = 90,
+	noise_threshhold = 0.4,
+	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
+})
+
+minetest.register_ore({
+	ore_type       = "sheet",
+	ore            = "default:clay",
+	wherein        = {"default:desert_stone","default:desert_sand","default:stone"},
+	clust_scarcity = 1,
+	clust_num_ores = 12,
+	clust_size     = 8,
+	height_min     = 24,
+	height_max     = 50,
+	noise_threshhold = 0.4,
+	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
+})
+
+minetest.register_ore({
+	ore_type       = "sheet",
+	ore            = "default:sandstone",
+	wherein        ={"default:desert_stone","default:desert_sand","default:stone"},
+	clust_scarcity = 1,
+	clust_num_ores = 12,
+	clust_size     = 10,
+	height_min     = 10,
+	height_max     = 30,
+	noise_threshhold = 0.2,
+	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
+})
+
+minetest.register_ore({
+	ore_type       = "sheet",
+	ore            = "es:dry_dirt",
+	wherein        = {"default:desert_stone","default:desert_sand","default:stone"},
+	clust_scarcity = 1,
+	clust_num_ores = 12,
+	clust_size     = 4,
+	height_min     = -12,
+	height_max     = 7,
+	noise_threshhold = 0.4,
+	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
+})
+
+--UNDERGROUND
+minetest.register_ore({
+	ore_type       = "sheet",
+	ore            = "es:strange_clay",
+	wherein        = {"default:desert_stone","default:desert_sand","default:stone"},
+	clust_scarcity = 1,
+	clust_num_ores = 12,
+	clust_size     = 4,
+	height_min     = -31000,
+	height_max     = -120,
+	noise_threshhold = 0.4,
+	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
+})
+
+--SAVANNA
+minetest.register_ore({
+	ore_type       = "sheet",
+	ore            = "es:dry_dirt",
+	wherein        = {"default:dirt_with_dry_grass"},
+	clust_scarcity = 1,
+	clust_num_ores = 12,
+	clust_size     = 8,
+	height_min     = -12,
+	height_max     = 88,
+	noise_threshhold = 0.4,
+	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
+})
+
 --ES LIQUIDS
 minetest.register_ore({
 		ore_type       = "scatter",
@@ -53,9 +189,8 @@ minetest.register_ore({
 
 	})
 
-
 minetest.register_ore({
-		ore_type       = "scatter",
+		ore_type       = "sheet",
 		ore            = "es:mud",
 		wherein        =  {"default:dry_dirt", "default:dirt_with_dry_grass", "default:dirt"},
 		clust_scarcity = 11*5*10,

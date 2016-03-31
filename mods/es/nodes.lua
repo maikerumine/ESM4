@@ -58,6 +58,7 @@ minetest.register_node( "es:granite", {
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
 })
+
 minetest.register_node( "es:granite_bricks", {
 	description = "Granite Bricks",
 	tiles = { "technic_granite_bricks.png",},
@@ -65,6 +66,7 @@ minetest.register_node( "es:granite_bricks", {
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
 })
+
 minetest.register_node( "es:marble", {
 	description = "Marble",
 	tiles = { "technic_marble.png" },
@@ -72,6 +74,7 @@ minetest.register_node( "es:marble", {
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
 })
+
 minetest.register_node( "es:marble_bricks", {
 	description = "Marble Bricks",
 	tiles = { "technic_marble_bricks.png" },
@@ -89,6 +92,7 @@ minetest.register_node("es:stone_with_emerald", {
 	drop = "es:emerald_crystal",
 	sounds = default.node_sound_stone_defaults(),
 })
+
 minetest.register_node("es:stone_with_ruby", {
 	description = "Ruby Ore",
 	tiles = {"default_stone.png^ruby_ore.png"},
@@ -97,6 +101,7 @@ minetest.register_node("es:stone_with_ruby", {
 	drop = "es:ruby_crystal",
 	sounds = default.node_sound_stone_defaults(),
 })
+
 minetest.register_node("es:stone_with_aikerum", {
 	description = "Aikerum Ore",
 	tiles = {"default_stone.png^aikerum_ore.png"},
@@ -105,6 +110,7 @@ minetest.register_node("es:stone_with_aikerum", {
 	drop = "es:aikerum_crystal",
 	sounds = default.node_sound_stone_defaults(),
 })
+
 minetest.register_node("es:stone_with_infinium", {
 	description = "Infinium Ore - Slightly Radioactive",
 	tiles = {"default_stone.png^infinium_ore.png"},
@@ -114,12 +120,13 @@ minetest.register_node("es:stone_with_infinium", {
 	drop = "es:infinium_goo",
 	sounds = default.node_sound_stone_defaults(),
 })
+
 minetest.register_node("es:stone_with_purpellium", {
 	description = "Purlellium Ore - Oddly interesting",
 	tiles = {"default_stone.png^purpellium_ore.png"},
 	is_ground_content = true,
 	--groups = {cracky=2,level = 2,fall_damage_add_percent = -1000, radioactive = (state == "source" and 2 or 2)},
-	groups = {cracky=2,level = 2, radioactive = 2},
+	groups = {cracky=2,level = 2,fall_damage_add_percent = -1000, radioactive = 2},
 	drop = "es:purpellium_lump",
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -132,6 +139,12 @@ minetest.register_node("es:emeraldblock", {
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
 })
+
+minetest.register_craftitem("es:emerald_crystal", {
+	description = "Emerald Crystal",
+	inventory_image = "emerald.png",
+})
+
 --Ruby located at -3000
 minetest.register_node("es:rubyblock", {
 	description = "Ruby Block",
@@ -140,6 +153,12 @@ minetest.register_node("es:rubyblock", {
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
 })
+
+minetest.register_craftitem("es:ruby_crystal", {
+	description = "Ruby Crystal",
+	inventory_image = "ruby.png",
+})
+
 --Aikerum located at -4000
 minetest.register_node("es:aikerumblock", {
 	description = "Aikerum Block",
@@ -148,6 +167,13 @@ minetest.register_node("es:aikerumblock", {
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
 })
+
+minetest.register_craftitem("es:aikerum_crystal", {
+	description = "Aikerum Crystal",
+	inventory_image = "aikerum.png",
+})
+
+
 --Infinium located at -4300
 minetest.register_node("es:infiniumblock", {
 	description = "infinium Block",
@@ -156,16 +182,158 @@ minetest.register_node("es:infiniumblock", {
 	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
 })
+
+minetest.register_craftitem("es:infinium_goo", {
+	description = "Infinium Goo--Need to craft with vessel to contain.",
+	inventory_image = "infinium.png",
+})
+
+minetest.register_craftitem("es:infinium_ingot", {
+	description = "Infinium Ingot--TBD CRAFTING Special Armour and Lab Equipment",
+	--inventory_image = "infinium_ingot.png",
+	inventory_image = "infinium_ingot.png",
+})
+
+minetest.register_craftitem("es:infinium_container", {
+	description = "Infinium Container--Cook to get Infinium Ingot",
+	inventory_image = "infinium_container.png",
+})
+
 --Purpellium located at -4000
 minetest.register_node("es:purpelliumblock", {
 	description = "Purpellium Block - Fall from great height without any damage if landing on this block",
 	tiles = {"purpellium_block.png"},
 	is_ground_content = true,
-	groups = {cracky=1,level=2,fall_damage_add_percent = -1000},
+	groups = {cracky=1,level=2},
 	sounds = default.node_sound_stone_defaults(),
 })
 
+minetest.register_craftitem("es:purpellium_lump", {
+	description = "Purpellium Lump",
+	inventory_image = "purpellium_lump.png",
+})
 
+minetest.register_craftitem("es:purpellium_ingot", {
+	description = "Purpellium Ingot",
+	inventory_image = "purpellium_ingot.png",
+})
+
+
+
+--BONEBLOCK
+minetest.register_node("es:boneblock", {
+	description = "Bone Blox",
+	tiles = {
+	"bones_top.png",
+	"bones_bottom.png",
+	"bones_side.png",
+	"bones_side.png",
+	"bones_rear.png",
+	"bones_front.png"
+	},
+	paramtype2 = "facedir",
+	groups = {dig_immediate=2},
+	sounds = default.node_sound_dirt_defaults({
+	footstep = {name="default_gravel_footstep", gain=0.5},
+	dug = {name="default_gravel_footstep", gain=1.0},
+	}),
+})
+
+
+--INPERVIOUS NODES  CANNOT BREAK- Great for prison walls.
+minetest.register_node("es:hgglass", {
+	description = "High Density Glass",
+	drawtype = "glasslike_framed_optional",
+	tiles = {"default_glass.png", "default_glass_detail.png"},
+	inventory_image = minetest.inventorycube("default_glass.png"),
+	paramtype = "light",
+	sunlight_propagates = true,
+	is_ground_content = false,
+	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
+	sounds = default.node_sound_glass_defaults(),
+})
+
+minetest.register_node("es:steelblock", {
+	description = "High Density Steel Block",
+	tiles = {"default_steel_block.png"},
+	is_ground_content = false,
+	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("es:stoneblock", {
+	description = "High Density Stone Block",
+	tiles = {"default_stone.png"},
+	is_ground_content = false,
+	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("es:sandstonebrick", {
+	description = "High Density Sandstone Brick",
+	tiles = {"default_stone_brick.png^[colorize:#CCCC99:150"},
+	is_ground_content = false,
+	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("es:stonebrick", {
+	description = "High Density Stone Brick",
+	tiles = {"default_stone_brick.png"},
+	is_ground_content = false,
+	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("es:junglewood", {
+	description = "High Density Junglewood Planks",
+	tiles = {"default_junglewood.png"},
+	is_ground_content = false,
+	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
+	sounds = default.node_sound_wood_defaults(),
+})
+
+
+--A simple way to store your cookable Mese, and it gives off light!
+minetest.register_node("es:messymese", {
+	description = "Messy MESE Block",
+	tiles = {"default_clay.png^bubble.png^mese_cook_mese_crystal.png"},
+	light_source = 14,
+	is_ground_content = true,
+	groups = {cracky=1,level=2},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("es:what", {
+	description = "The What Block - Dig for random gift",
+	drawtype = "glasslike_framed_optional^bubble.png",
+	tiles = {"default_glass.png^bubble.png", "default_glass_detail.png^bubble.png"},
+	inventory_image = minetest.inventorycube("default_glass.png"),
+	paramtype = "light",
+	sunlight_propagates = true,
+	is_ground_content = false,
+	groups = {crumbly=3,},
+	drop = {
+		max_items = 2,
+		items = {
+			{items = {'es:what'}, rarity = 80},
+			{items = {'es:sword_aikerum'}, rarity = 50},
+			{items = {'es:sword_ruby'}, rarity = 40},
+			{items = {'es:sword_emerald'}, rarity = 30},
+			{items = {'es:pick_aikerum'}, rarity = 50},
+			{items = {'es:pick_ruby'}, rarity = 40},
+			{items = {'es:pick_emerald'}, rarity = 30},
+			{items = {'farming:bread 20'}, rarity = 3},
+			{items = {'default:cobble 10'}, rarity = 3},
+			{items = {'default:gold_lump 10'}, rarity = 10},
+			{items = {'default:iron_lump 10'}, rarity = 5},
+			{items = {'default:apple 10'}, rarity = 5},
+			{items = {'default:coal_lump 10'}, rarity = 1},
+			{items = {'es:depleted_uranium_ingot 3'}}
+		}
+	},
+	sounds = default.node_sound_glass_defaults(),
+})
 
 --ESM VAULT
 --Code from default chests and protector redo
@@ -257,7 +425,7 @@ minetest.register_node("es:vault", {
 		end
 		return stack:get_count()
 	end,
-	
+
 	on_metadata_inventory_put = function(pos, listname, index, stack, player)
 		minetest.log("action", player:get_player_name() ..
 			" moves " .. stack:get_name() ..
@@ -268,7 +436,7 @@ minetest.register_node("es:vault", {
 			" takes " .. stack:get_name()  ..
 			" from super ESM locked chest at " .. minetest.pos_to_string(pos))
 	end,
-	
+
 	on_rightclick = function(pos, node, clicker)
 		local meta = minetest.get_meta(pos)
 		if has_locked_chest_privilege(meta, clicker) then
@@ -320,7 +488,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 					end
 				end
 			end
-	
+
 		elseif fields.todn then
 			-- copy contents of chest to players inventory
 			for i, v in pairs (chest_inv:get_list('main') or {}) do
@@ -339,117 +507,88 @@ end)
 ]]
 
 
---BONEBLOCK
-minetest.register_node("es:boneblock", {
-	description = "Bone Blox",
-	tiles = {
-	"bones_top.png",
-	"bones_bottom.png",
-	"bones_side.png",
-	"bones_side.png",
-	"bones_rear.png",
-	"bones_front.png"
-	},
-	paramtype2 = "facedir",
-	groups = {dig_immediate=2},
+--CUSTOM biome stuff
+minetest.register_node("es:strange_grass", {
+	description = "Strange Grass",
+	tiles = {("default_dry_grass.png^[colorize:#00BBFF:130"),
+		"default_dirt.png",
+		{name = "default_dirt.png^(default_dry_grass_side.png^[colorize:#00BBFF:130)",
+			tileable_vertical = false}},
+	groups = {crumbly = 3, soil = 1},
+	drop = 'es:dry_dirt',
 	sounds = default.node_sound_dirt_defaults({
-	footstep = {name="default_gravel_footstep", gain=0.5},
-	dug = {name="default_gravel_footstep", gain=1.0},
+		footstep = {name = "default_grass_footstep", gain = 0.25},
 	}),
 })
 
---INPERVIOUS NODES  CANNOT BREAK- Great for prison walls.
-minetest.register_node("es:hgglass", {
-	description = "High Density Glass",
-	drawtype = "glasslike_framed_optional",
-	tiles = {"default_glass.png", "default_glass_detail.png"},
-	inventory_image = minetest.inventorycube("default_glass.png"),
-	paramtype = "light",
-	sunlight_propagates = true,
-	is_ground_content = false,
-	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
-	sounds = default.node_sound_glass_defaults(),
+minetest.register_node("es:aiden_grass", {
+	description = "Aiden Grass",
+	tiles = {("default_dry_grass.png^[colorize:#FFBBFF:160"),
+		"default_dirt.png",
+		{name = "default_dirt.png^(default_dry_grass_side.png^[colorize:#FFBBFF:160)",
+			tileable_vertical = false}},
+	groups = {crumbly = 3, soil = 1},
+	drop = 'es:dry_dirt',
+	sounds = default.node_sound_dirt_defaults({
+		footstep = {name = "default_grass_footstep", gain = 0.25},
+	}),
 })
-minetest.register_node("es:steelblock", {
-	description = "High Density Steel Block",
-	tiles = {"default_steel_block.png"},
-	is_ground_content = false,
-	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
+minetest.register_node("es:strange_tree", {
+	description = "Strange_tree",
+	tiles = {"aikerum_block.png^default_mineral_coal.png"},
+	paramtype2 = "facedir",
+	groups = {cracky = 3},
+	drop = 'default:coal_lump',
 	sounds = default.node_sound_stone_defaults(),
+
+	on_place = minetest.rotate_node
 })
-minetest.register_node("es:stoneblock", {
-	description = "High Density Stone Block",
-	tiles = {"default_stone.png"},
+
+minetest.register_node("es:aiden_tree", {
+	description = "Aiden Tree",
+	tiles = {"default_jungletree_top.png^[colorize:#FFBBFF:130", "default_jungletree_top.png^[colorize:#FFBBFF:130",
+		"default_jungletree.png^[colorize:#FFBBFF:130"},
+	paramtype2 = "facedir",
 	is_ground_content = false,
-	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
-	sounds = default.node_sound_stone_defaults(),
-})
-minetest.register_node("es:sandstonebrick", {
-	description = "High Density Sandstone Brick",
-	tiles = {"default_stone_brick.png^[colorize:#CCCC99:150"},
-	is_ground_content = false,
-	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
-	sounds = default.node_sound_stone_defaults(),
-})
-minetest.register_node("es:stonebrick", {
-	description = "High Density Stone Brick",
-	tiles = {"default_stone_brick.png"},
-	is_ground_content = false,
-	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
-	sounds = default.node_sound_stone_defaults(),
-})
-minetest.register_node("es:junglewood", {
-	description = "High Density Junglewood Planks",
-	tiles = {"default_junglewood.png"},
-	is_ground_content = false,
-	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
+	drop = 'default:junglewood',
+	groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2},
 	sounds = default.node_sound_wood_defaults(),
+
+	on_place = minetest.rotate_node
 })
 
-
---A simple way to store your cookable Mese, and it gives off light!
-minetest.register_node("es:messymese", {
-	description = "Messy MESE Block",
-	tiles = {"default_clay.png^bubble.png^mese_cook_mese_crystal.png"},
-	light_source = 14,
-	is_ground_content = true,
-	groups = {cracky=1,level=2},
+minetest.register_node("es:strange_leaves", {
+	description = "Strange Leaves",
+	tiles = {"default_jungleleaves.png^default_dry_shrub.png^[colorize:#0000FF:130"},
+	groups = {snappy = 3},
+	drop = 'default:sticks',
 	sounds = default.node_sound_stone_defaults(),
 })
 
---this block is like gambling.
-minetest.register_node("es:what", {
-	description = "The What Block - Dig for random gift",
-	drawtype = "glasslike_framed_optional^bubble.png",
-	tiles = {"default_glass.png^bubble.png", "default_glass_detail.png^bubble.png"},
-	inventory_image = minetest.inventorycube("default_glass.png"),
-	paramtype = "light",
-	sunlight_propagates = true,
-	is_ground_content = false,
-	groups = {crumbly=3,},
-	drop = {
-		max_items = 2,
-		items = {
-			{items = {'es:what'}, rarity = 80},
-			{items = {'es:sword_aikerum'}, rarity = 50},
-			{items = {'es:sword_ruby'}, rarity = 40},
-			{items = {'es:sword_emerald'}, rarity = 30},
-			{items = {'es:pick_aikerum'}, rarity = 50},
-			{items = {'es:pick_ruby'}, rarity = 40},
-			{items = {'es:pick_emerald'}, rarity = 30},
-			{items = {'farming:bread 20'}, rarity = 3},
-			{items = {'default:cobble 10'}, rarity = 3},
-			{items = {'default:gold_lump 10'}, rarity = 10},
-			{items = {'default:iron_lump 10'}, rarity = 5},
-			{items = {'default:apple 10'}, rarity = 5},
-			{items = {'default:coal_lump 10'}, rarity = 1},
-			{items = {'es:depleted_uranium_ingot 3'}}
-		}
-	},
-	sounds = default.node_sound_glass_defaults(),
+minetest.register_node("es:strange_clay", {
+	description = "Strange Clay",
+	tiles = {"default_clay.png^[colorize:#00BBFF:130"},
+	groups = {crumbly = 3},
+	drop = 'default:clay_lump 4',
+	sounds = default.node_sound_dirt_defaults(),
 })
+--[[
+minetest.register_node("default:dirt_with_dry_grass", {
+	description = "Dirt with Dry Grass",
+	tiles = {"default_dry_grass.png",
+		"default_dirt.png",
+		{name = "default_dirt.png^default_dry_grass_side.png",
+			tileable_vertical = false}},
+	groups = {crumbly = 3, soil = 1},
+	drop = 'default:dirt',
+	sounds = default.node_sound_dirt_defaults({
+		footstep = {name = "default_grass_footstep", gain = 0.4},
+	}),
+})
+]]
 
 --Default addons as they should be.  I changed ore generation to keep unique for compatibility.
+
 --Dry dirt added
 minetest.register_node("es:dry_dirt", {
 	description = "Some dry dirt",
@@ -506,12 +645,14 @@ minetest.register_node("es:depleted_uranium", {
 	light_source = 12,
 })
 
+minetest.register_craftitem("es:depleted_uranium_lump", {
+	description = "Depleted Uranium use for long term fuel, first cook the lump into an ingot, then use ingot for fuel.",
+	inventory_image = "uranium_lump.png",
+})
+
+
 
 --ES CUSTOM LIQUIDS:
---NOTES:
---		radioactive = (state == "source" and 32 or 16),
---THIS IS DEFAULT SETTING FROM TECHNIC
---toxic
 minetest.register_node("es:toxic_water_source", {
 	description = "Toxic_Water Source",
 	inventory_image = minetest.inventorycube("es_toxic_water.png"),
@@ -542,11 +683,11 @@ minetest.register_node("es:toxic_water_source", {
 	},
 	alpha = 240,
 	paramtype = "light",
-	light_source = 14,
 	walkable = false,
 	pointable = false,
 	diggable = false,
 	buildable_to = true,
+	liquid_renewable = false,
 	is_ground_content = false,
 	drop = "",
 	drowning = 1,
@@ -560,8 +701,13 @@ minetest.register_node("es:toxic_water_source", {
 	groups = {water = 3, liquid = 3, puts_out_fire = 1, radioactive = 2},
 })
 
+--NOTES:
+--		radioactive = (state == "source" and 32 or 16),
+--THIS IS DEFAULT SETTING FROM TECHNIC
+
 minetest.register_node("es:toxic_water_flowing", {
 	description = "Toxic_Flowing Water",
+	inventory_image = minetest.inventorycube("es_toxic_water.png"),
 	drawtype = "flowingliquid",
 	tiles = {"es_toxic_water.png"},
 	special_tiles = {
@@ -589,7 +735,6 @@ minetest.register_node("es:toxic_water_flowing", {
 	alpha = 240,
 	paramtype = "light",
 	paramtype2 = "flowingliquid",
-	light_source = 12,
 	walkable = false,
 	pointable = false,
 	diggable = false,
@@ -607,21 +752,23 @@ minetest.register_node("es:toxic_water_flowing", {
 		--not_in_creative_inventory = 1, radioactive = (state == "source" and 2 or 2),},
 		not_in_creative_inventory = 1, radioactive =2},
 })
-
---mud
+--FOR REF
+-- Quicksand (old style, sinking inside shows black instead of yellow effect,
+-- works ok with noclip enabled though)
 minetest.register_node("es:mud", {
 	description = "Mud",
 	tiles = {"es_mud.png"},
 	--drop = "es:mud",
-	liquid_viscosity = 18,
+	liquid_viscosity = 19,
 	liquidtype = "source",
-	liquid_alternative_flowing = "es:mud_flowing",
+	liquid_alternative_flowing = "es:mud",
 	liquid_alternative_source = "es:mud",
 	liquid_renewable = false,
-	--liquid_range = 1,
+	liquid_range = 0,
 	drowning = 3,
 	walkable = false,
 	climbable = false,
+	liquid_renewable = false,
 	post_effect_color = { a = 255, r = 43, g = 23, b = 9 },
 	groups = {crumbly=3, falling_node=1, sand=1, liquid=3, disable_jump=1},
 	sounds = default.node_sound_sand_defaults(),
@@ -668,8 +815,9 @@ minetest.register_node("es:mud_flowing", {
 	liquidtype = "flowing",
 	liquid_alternative_flowing = "es:mud_flowing",
 	liquid_alternative_source = "es:mud",
-	liquid_viscosity = 19,
+	liquid_viscosity = 7,
 	post_effect_color = {a = 255, r = 43, g = 23, b = 9},
 	groups = {water = 3, liquid = 3, puts_out_fire = 1,
 		not_in_creative_inventory = 1, },
 })
+
