@@ -321,7 +321,7 @@ function default.register_biomes()
 	minetest.clear_registered_biomes()
 
 	-- Permanent ice
---[[
+
 	minetest.register_biome({
 		name = "glacier",
 		node_dust = "default:snowblock",
@@ -840,7 +840,7 @@ function default.register_biomes()
 		humidity_point = 50,
 	})
 
-]]
+
 --ES BIOMES
 --HOT
 	minetest.register_biome({
