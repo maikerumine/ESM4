@@ -56,12 +56,38 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "sheet",
+	ore            = "cblocks:clay_black",
+	wherein        = {"default:desert_stone","default:stone"},
+	clust_scarcity = 1,
+	clust_num_ores = 12,
+	clust_size     = 4,
+	height_min     = 60,
+	height_max     = 96,
+	noise_threshhold = 0.4,
+	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.80}
+})
+
+minetest.register_ore({
+	ore_type       = "sheet",
 	ore            = "cblocks:clay_red",
 	wherein        = {"default:desert_stone"},
 	clust_scarcity = 1,
 	clust_num_ores = 8,
 	clust_size     = 4,
 	height_min     = 44,
+	height_max     = 70,
+	noise_threshhold = 0.4,
+	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
+})
+
+minetest.register_ore({
+	ore_type       = "sheet",
+	ore            = "cblocks:clay_grey",
+	wherein        = {"default:desert_stone"},
+	clust_scarcity = 1,
+	clust_num_ores = 8,
+	clust_size     = 4,
+	height_min     = 34,
 	height_max     = 70,
 	noise_threshhold = 0.4,
 	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}

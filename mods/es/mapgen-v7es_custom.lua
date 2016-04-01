@@ -857,7 +857,7 @@ function default.register_biomes()
 		--node_river_water = "",
 		y_min = 1,
 		y_max = 31000,
-		heat_point = 85,
+		heat_point = 75,
 		humidity_point = 50,
 	})
 	minetest.register_biome({
@@ -874,7 +874,7 @@ function default.register_biomes()
 		--node_river_water = "",
 		y_min = -112,
 		y_max = 4,
-		heat_point = 85,
+		heat_point = 75,
 		humidity_point = 20,
 	})
 
@@ -895,7 +895,7 @@ function default.register_biomes()
 		--node_river_water = "",
 		y_min = 2,
 		y_max = 31000,
-		heat_point = 15,
+		heat_point = 25,
 		humidity_point = 35,
 	})
 	minetest.register_biome({
@@ -912,8 +912,8 @@ function default.register_biomes()
 		--node_river_water = "",
 		y_min = -112,
 		y_max = 4,
-		heat_point = 85,
-		humidity_point = 20,
+		heat_point = 15,
+		humidity_point = 30,
 	})
 
 

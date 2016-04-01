@@ -24,7 +24,6 @@ es.modpath = modpath
 --dofile(modpath.."/technodrem.lua")
 --dofile(modpath.."/moreorerem.lua")
 --dofile(modpath.."/villrem.lua")
---will delete these
 
 -- Alias
 dofile(modpath.."/alias.lua")
