@@ -561,7 +561,7 @@ minetest.register_node("es:strange_leaves", {
 	description = "Strange Leaves",
 	tiles = {"default_jungleleaves.png^default_dry_shrub.png^[colorize:#0000FF:130"},
 	groups = {snappy = 3},
-	drop = 'default:sticks',
+	drop = 'default:stick',
 	sounds = default.node_sound_stone_defaults(),
 })
 
