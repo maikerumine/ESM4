@@ -77,7 +77,7 @@ minetest.register_abm({
 })
 
 --minetest.after(75, function(dtime)
-minetest.register_chatcommand("sanitize", {
+minetest.register_chatcommand("sanitized", {
 	func = function()
 
 --	if spawn_sanitizer.cleaned==true then

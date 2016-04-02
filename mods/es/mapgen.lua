@@ -1110,7 +1110,7 @@ function default.register_decorations()
 		sidelen = 16,
 		noise_params = {
 			offset = -0.003,
-			scale = 0.005,
+			scale = 0.003,
 			spread = {x = 250, y = 250, z = 250},
 			seed = 2,
 			octaves = 3,
@@ -1129,7 +1129,7 @@ function default.register_decorations()
 		sidelen = 16,
 		noise_params = {
 			offset = -0.003,
-			scale = 0.005,
+			scale = 0.003,
 			spread = {x = 250, y = 250, z = 250},
 			seed = 2,
 			octaves = 3,

@@ -112,7 +112,7 @@ mobs:register_arrow("esmobs:egg_entity", {
 			or minetest.registered_nodes[nod.name].walkable == true then
 				return
 			end
-			local mob = minetest.add_entity(pos, "mobs:chicken")
+			local mob = minetest.add_entity(pos, "esmobs:chicken")
 			local ent2 = mob:get_luaentity()
 			mob:set_properties({
 				textures = ent2.child_texture[1],
