@@ -23,6 +23,7 @@ minetest.register_alias("default:desert_stone_with_gold", "es:desert_stone_with_
 minetest.register_alias("default:desert_stone_with_coal", "es:desert_stone_with_coal")
 minetest.register_alias("default:stone_with_mese", "es:stone_with_mese")
 minetest.register_alias("protector_mese:protect", "protector:protect")
+minetest.register_alias("es:strange_clay", "es:strange_clay_blue")
 
 --This is to fix the old interaction with my modified 3d_armor mod.
 --NEED TO USE THIS FOR 3-D ARMOUR TO WORK!!!!!

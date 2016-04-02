@@ -74,6 +74,7 @@ crop_def.drawtype = "nodebox"
 crop_def.description = "Melon"
 crop_def.tiles = {"farming_melon_top.png", "farming_melon_top.png", "farming_melon_side.png"}
 crop_def.selection_box = {-.5, -.5, -.5, .5, .5, .5}
+crop_def.walkable = true
 crop_def.groups = {snappy = 1, oddly_breakable_by_hand = 1, flammable = 2, plant = 1}
 crop_def.drop = "farming:melon_slice 9"
 minetest.register_node("farming:melon_8", table.copy(crop_def))

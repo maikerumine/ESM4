@@ -217,7 +217,7 @@ minetest.register_craft({
 		{cottages.craftitem_iron, cottages.craftitem_stick,       cottages.craftitem_iron }
 	}
 })
---[[
+
 -- run a wagon wheel over dirt :-)
 minetest.register_craft({
 	output = "cottages:feldweg 4",
@@ -227,7 +227,7 @@ minetest.register_craft({
 	},
         replacements = { {'cottages:wagon_wheel', 'cottages:wagon_wheel'}, }
 })
-
+--[[
 minetest.register_craft({
 	output = "cottages:loam 4",
 	recipe = {

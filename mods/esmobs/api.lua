@@ -1978,7 +1978,7 @@ minetest.register_entity(name, {
 			local dir = self.object:getvelocity() --maikerumine added this hack
 			local v = self.object:getvelocity()
 			local r = 1.4 - math.min(punch_interval, 1.4)
-			local kb = r * 5
+			local kb = r * 2
 			local up = 2
 
 			-- if already in air then dont go up anymore when hit

@@ -1,5 +1,5 @@
 --[[
-	Minetest Farming Redo Mod 1.22 (10th March 2016)
+	Minetest Farming Redo Mod 1.22 (31st March 2016)
 	by TenPlus1
 	NEW growing routine by prestidigitator
 	auto-refill by crabman77
@@ -567,7 +567,7 @@ function farming.place_seed(itemstack, placer, pointed_thing, plantname)
 
 	-- can I replace above node, and am I pointing at soil
 	if not minetest.registered_nodes[above.name].buildable_to
-	or minetest.get_item_group(under.name, "soil") < 2 
+	or minetest.get_item_group(under.name, "soil") < 2
 	-- avoid multiple seed placement bug
 	or minetest.get_item_group(above.name, "plant") ~= 0 then
 		return
@@ -577,6 +577,8 @@ function farming.place_seed(itemstack, placer, pointed_thing, plantname)
 	if not minetest.is_protected(pt.above, placer:get_player_name()) then
 
 		minetest.set_node(pt.above, {name = plantname, param2 = 1})
+
+		minetest.sound_play("default_place_node", {gain = 1.0})
 
 		if not minetest.setting_getbool("creative_mode") then
 
@@ -636,7 +638,7 @@ farming.register_plant = function(name, def)
 
 		on_place = function(itemstack, placer, pointed_thing)
 			return farming.place_seed(itemstack, placer, pointed_thing, mname .. ":"..pname.."_1")
-		end
+		end,
 	})
 
 	-- Register harvest

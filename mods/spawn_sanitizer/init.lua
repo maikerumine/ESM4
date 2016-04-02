@@ -79,7 +79,7 @@ minetest.register_abm({
 --minetest.after(75, function(dtime)
 minetest.register_chatcommand("sanitize", {
 	func = function()
-	
+
 --	if spawn_sanitizer.cleaned==true then
 --		return
 --	end
@@ -122,7 +122,7 @@ minetest.register_chatcommand("sanitize", {
 
 	local positions6 = minetest.find_nodes_in_area(
 		{x=-19, y=2, z=-19},
-		{x=19, y=70, z=19},
+		{x=19, y=170, z=19},
 		{"default:cobble", "default:water_source", "default:lava_source"})
 	for _, pos in ipairs(positions6) do
 		minetest.set_node(pos, {name="air"})
@@ -235,39 +235,40 @@ minetest.register_chatcommand("sanitize", {
 
 	for z1=-27, -16 do
 		minetest.set_node({x=37, y=2, z=z1}, {name="default:rail"})
-        minetest.set_node({x=37, y=1, z=z1}, {name="default:stonebrick"})
+        minetest.set_node({x=37, y=1, z=z1}, {name="default:goldblock"})
 	end
 	for z1=16, 29 do
 		minetest.set_node({x=37, y=2, z=z1}, {name="default:rail"})
-        minetest.set_node({x=37, y=1, z=z1}, {name="default:stonebrick"})
+        minetest.set_node({x=37, y=1, z=z1}, {name="default:goldblock"})
 	end
 	for z1=-15, 15 do
-		minetest.set_node({x=37, y=2, z=z1}, {name="carts:brakerail"})
-        minetest.set_node({x=37, y=1, z=z1}, {name="default:stonebrick"})
+		--minetest.set_node({x=37, y=2, z=z1}, {name="carts:brakerail"})
+		minetest.set_node({x=37, y=2, z=z1}, {name="carts:powerrail"})
+        minetest.set_node({x=37, y=1, z=z1}, {name="default:goldblock"})
 	end
 	for x1=36, 17, -1 do
 		minetest.set_node({x=x1, y=2, z=-27}, {name="default:rail"})
 		minetest.set_node({x=x1, y=2, z=29}, {name="default:rail"})
-        minetest.set_node({x=x1, y=1, z=-27}, {name="default:stonebrick"})
-        minetest.set_node({x=x1, y=1, z=29}, {name="default:stonebrick"})
+        minetest.set_node({x=x1, y=1, z=-27}, {name="default:goldblock"})
+        minetest.set_node({x=x1, y=1, z=29}, {name="default:goldblock"})
 	end
 	for x1=16, 2, -1 do
 		minetest.set_node({x=x1, y=2, z=-27}, {name="carts:powerrail"})
 		minetest.set_node({x=x1, y=2, z=29}, {name="carts:powerrail"})
-        minetest.set_node({x=x1, y=1, z=-27}, {name="default:stonebrick"})
-        minetest.set_node({x=x1, y=1, z=29}, {name="default:stonebrick"})
+        minetest.set_node({x=x1, y=1, z=-27}, {name="default:goldblock"})
+        minetest.set_node({x=x1, y=1, z=29}, {name="default:goldblock"})
 	end
 	for z1=-26, -17 do
 		minetest.set_node({x=2, y=2, z=z1}, {name="default:rail"})
-        minetest.set_node({x=2, y=1, z=z1}, {name="default:stonebrick"})
+        minetest.set_node({x=2, y=1, z=z1}, {name="default:goldblock"})
 	end
 	for z1=17, 28 do
 		minetest.set_node({x=2, y=2, z=z1}, {name="default:rail"})
-        minetest.set_node({x=2, y=1, z=z1}, {name="default:stonebrick"})
+        minetest.set_node({x=2, y=1, z=z1}, {name="default:goldblock"})
 	end
 	for z1=-17, 17 do
 		minetest.set_node({x=3, y=2, z=z1}, {name="default:rail"})
-        minetest.set_node({x=3, y=1, z=z1}, {name="default:stonebrick"})
+        minetest.set_node({x=3, y=1, z=z1}, {name="default:goldblock"})
 	end
 	minetest.add_entity({x=3, y=2, z=0}, "carts:cart")
 

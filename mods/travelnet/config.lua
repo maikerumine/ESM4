@@ -39,7 +39,7 @@ travelnet.elevator_recipe = {
 -- can still add stations to that network
 
 travelnet.allow_attach = function( player_name, owner_name, network_name )
-   return false;
+   return true;
 end
 
 
@@ -73,7 +73,7 @@ travelnet.allow_travel = function( player_name, owner_name, network_name, statio
    if( player_name ~= owner_name ) then
         --minetest.chat_send_player( player_name, 'Only '..tostring( owner_name )..' may use this elevator. Build your own!');
         minetest.chat_send_player( player_name, 'Howdy! '..tostring( owner_name )..' Thanks you for traveling!');
-        return true;
+        return true;--turn off other players
    end
 
    return true;

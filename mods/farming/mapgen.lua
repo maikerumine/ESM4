@@ -2,7 +2,7 @@
 local function register_plant(name, min, max, spawnby, num)
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"default:dirt_with_grass"},
+		place_on = {"default:dirt_with_grass","es:aiden_grass","es:strange_grass"},
 		sidelen = 16,
 		noise_params = {
 			offset = 0,

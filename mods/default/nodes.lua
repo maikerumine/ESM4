@@ -464,7 +464,7 @@ minetest.register_node("default:sapling", {
 
 minetest.register_node("default:leaves", {
 	description = "Leaves",
-	drawtype = "allfaces_optional",
+	drawtype = "plantlike",
 	waving = 1,
 	visual_scale = 1.3,
 	tiles = {"default_leaves.png"},
@@ -541,7 +541,8 @@ minetest.register_node("default:junglewood", {
 
 minetest.register_node("default:jungleleaves", {
 	description = "Jungle Leaves",
-	drawtype = "allfaces_optional",
+	drawtype = "plantlike",
+	walkable = false,
 	waving = 1,
 	visual_scale = 1.3,
 	tiles = {"default_jungleleaves.png"},
@@ -603,7 +604,8 @@ minetest.register_node("default:pine_wood", {
 
 minetest.register_node("default:pine_needles",{
 	description = "Pine Needles",
-	drawtype = "allfaces_optional",
+	drawtype = "plantlike",
+	walkable = false,
 	visual_scale = 1.3,
 	tiles = {"default_pine_needles.png"},
 	waving = 1,
@@ -664,7 +666,8 @@ minetest.register_node("default:acacia_wood", {
 
 minetest.register_node("default:acacia_leaves", {
 	description = "Acacia Leaves",
-	drawtype = "allfaces_optional",
+	drawtype = "plantlike",
+	walkable = false,
 	visual_scale = 1.3,
 	tiles = {"default_acacia_leaves.png"},
 	waving = 1,
@@ -724,7 +727,8 @@ minetest.register_node("default:aspen_wood", {
 
 minetest.register_node("default:aspen_leaves", {
 	description = "Aspen Leaves",
-	drawtype = "allfaces_optional",
+	drawtype = "plantlike",
+	walkable = false,
 	visual_scale = 1.3,
 	tiles = {"default_aspen_leaves.png"},
 	waving = 1,
@@ -896,7 +900,8 @@ minetest.register_node("default:papyrus", {
 	wield_image = "default_papyrus.png",
 	paramtype = "light",
 	sunlight_propagates = true,
-	walkable = false,
+--	walkable = false,
+	walkable =true,
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, 0.5, 0.3}
@@ -919,7 +924,8 @@ minetest.register_node("default:dry_shrub", {
 	wield_image = "default_dry_shrub.png",
 	paramtype = "light",
 	sunlight_propagates = true,
-	walkable = false,
+--	walkable = false,
+	walkable =true,
 	buildable_to = true,
 	groups = {snappy = 3, flammable = 3, attached_node = 1},
 	sounds = default.node_sound_leaves_defaults(),

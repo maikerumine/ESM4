@@ -30,7 +30,7 @@ moretrees.enable_stairsplus		= false
 -- improves some peoples' framerates without resorting to making leaf nodes opaque.
 -- Affects default leaves and default jungle leaves also.
 
-moretrees.plantlike_leaves		= false
+moretrees.plantlike_leaves		= true
 
 -- Set this to true to enable leaf decay of all trees except the default ones.
 

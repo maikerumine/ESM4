@@ -24,6 +24,8 @@ function place_cocoa(itemstack, placer, pointed_thing, plantname)
 	-- add the node and remove 1 item from the itemstack
 	minetest.set_node(pt.above, {name = plantname})
 
+	minetest.sound_play("default_place_node", {gain = 1.0})
+
 	if not minetest.setting_getbool("creative_mode") then
 
 		itemstack:take_item()

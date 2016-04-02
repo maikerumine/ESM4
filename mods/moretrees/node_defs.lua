@@ -28,7 +28,8 @@ local dirs1 = { 21, 20, 23, 22, 21 }
 local dirs2 = { 12, 9, 18, 7, 12 }
 local dirs3 = { 14, 11, 16, 5, 14 }
 
-local moretrees_new_leaves_drawtype = "allfaces_optional"
+--local moretrees_new_leaves_drawtype = "allfaces_optional"
+local moretrees_new_leaves_drawtype = "plantlike"
 local moretrees_new_leaves_extension = ".png"
 local moretrees_plantlike_leaves_visual_scale = 1
 
@@ -158,6 +159,7 @@ for i in ipairs(moretrees.treelist) do
 		minetest.register_node("moretrees:"..treename.."_leaves", {
 			description = S(treedesc.." Leaves"),
 			drawtype = moretrees_new_leaves_drawtype,
+			walkable = false,  --mm added  20160401
 			waving = moretrees_new_leaves_waving,
 			visual_scale = moretrees_plantlike_leaves_visual_scale,
 			tiles = { "moretrees_"..treename.."_leaves"..moretrees_new_leaves_extension },

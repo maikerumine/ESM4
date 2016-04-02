@@ -13,14 +13,14 @@
 --(c) Copyright (2014-2015) maikerumine; CC-BY-SA 3.0
 
 
-es = {}
 
+--[[
 function stairs.register_stair_and_slab(subname, recipeitem, groups, images,
 	desc_stair, desc_slab, sounds)
 	stairs.register_stair(subname, recipeitem, groups, images, desc_stair, sounds)
 	stairs.register_slab(subname, recipeitem, groups, images, desc_slab, sounds)
 end
-
+]]
 --TECHNIC STAIRS
 stairs.register_stair_and_slab("granite", "es:granite",
 		{cracky = 1},

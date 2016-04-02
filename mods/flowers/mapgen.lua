@@ -5,7 +5,7 @@
 local function register_mgv6_flower(name)
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"default:dirt_with_grass"},
+		place_on = {"default:dirt_with_grass","es:strange_grass","es:aiden_grass"},
 		sidelen = 16,
 		noise_params = {
 			offset = 0,
@@ -16,7 +16,7 @@ local function register_mgv6_flower(name)
 			persist = 0.6
 		},
 		y_min = 1,
-		y_max = 30,
+		y_max = 70,
 		decoration = "flowers:"..name,
 	})
 end
@@ -24,18 +24,18 @@ end
 local function register_mgv6_mushroom(name)
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"default:dirt_with_grass"},
+		place_on = {"default:dirt_with_grass","es:strange_grass","es:aiden_grass"},
 		sidelen = 16,
 		noise_params = {
 			offset = 0,
 			scale = 0.04,
-			spread = {x = 100, y = 100, z = 100},
+			spread = {x = 30, y = 30, z = 30},
 			seed = 7133,
 			octaves = 3,
 			persist = 0.6
 		},
 		y_min = 1,
-		y_max = 30,
+		y_max = 90,
 		decoration = "flowers:"..name,
 		spawn_by = "default:tree",
 		num_spawn_by = 1,
@@ -84,7 +84,7 @@ end
 local function register_flower(seed, name)
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"default:dirt_with_grass"},
+		place_on = {"default:dirt_with_grass","es:strange_grass","es:aiden_grass"},
 		sidelen = 16,
 		noise_params = {
 			offset = -0.015,
@@ -95,7 +95,7 @@ local function register_flower(seed, name)
 			persist = 0.6
 		},
 		biomes = {"stone_grassland", "sandstone_grassland",
-			"deciduous_forest", "coniferous_forest"},
+			"deciduous_forest", "coniferous_forest","strangeland","aidenland"},
 		y_min = 1,
 		y_max = 31000,
 		decoration = "flowers:"..name,

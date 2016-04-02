@@ -119,7 +119,45 @@ minetest.register_ore({
 	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 })
 
+--ES Clay
+minetest.register_ore({
+	ore_type       = "sheet",
+	ore            = "es:strange_clay_red",
+	wherein        = {"es:strange_clay_brown","default:desert_sand"},
+	clust_scarcity = 1,
+	clust_num_ores = 9,
+	clust_size     = 12,
+	height_min     = 0,
+	height_max     = 30,
+	noise_threshhold = 0.4,
+	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
+})
 
+minetest.register_ore({
+	ore_type       = "sheet",
+	ore            = "es:strange_clay_maroon",
+	wherein        = {"es:strange_clay_brown"},
+	clust_scarcity = 1,
+	clust_num_ores = 9,
+	clust_size     = 12,
+	height_min     = 0,
+	height_max     = 30,
+	noise_threshhold = 0.4,
+	noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
+})
+
+minetest.register_ore({
+	ore_type       = "sheet",
+	ore            = "cblocks:clay_black",
+	wherein        = {"es:strange_clay_brown"},
+	clust_scarcity = 1,
+	clust_num_ores = 12,
+	clust_size     = 4,
+	height_min     = -5,
+	height_max     = 3,
+	noise_threshhold = 0.4,
+	noise_params = {offset=0, scale=4, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.80}
+})
 
 --DEFAULT STRATA
 minetest.register_ore({
@@ -177,7 +215,7 @@ minetest.register_ore({
 --UNDERGROUND
 minetest.register_ore({
 	ore_type       = "sheet",
-	ore            = "es:strange_clay",
+	ore            = "es:strange_clay_blue",
 	wherein        = {"default:desert_stone","default:desert_sand","default:stone"},
 	clust_scarcity = 1,
 	clust_num_ores = 12,

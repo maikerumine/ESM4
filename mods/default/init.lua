@@ -41,14 +41,8 @@ dofile(minetest.get_modpath("default").."/furnace.lua")
 dofile(minetest.get_modpath("default").."/tools.lua")
 dofile(minetest.get_modpath("default").."/craftitems.lua")
 dofile(minetest.get_modpath("default").."/crafting.lua")
---dofile(minetest.get_modpath("default").."/mapgen.lua")  --turn off so es can override
+dofile(minetest.get_modpath("default").."/mapgen.lua")  --turn off so es can override
 dofile(minetest.get_modpath("default").."/player.lua")
 dofile(minetest.get_modpath("default").."/trees.lua")
 dofile(minetest.get_modpath("default").."/aliases.lua")
 dofile(minetest.get_modpath("default").."/legacy.lua")
---[[
---ES OVERRIDE  SETTINGS IN INIT FILE IN ES FOLDER
-	if es_MAP_SETTING == 0 then
-		dofile(minetest.get_modpath("default").."/mapgen.lua")
-	end
-	]]
