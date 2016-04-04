@@ -84,7 +84,7 @@ minetest.register_node( "cblocks:clay_" .. colours[i][1], {
 	tiles = {"default_clay.png^[colorize:" .. colours[i][3]},
 	is_ground_content = false,
 	groups = {crumbly = 2, oddly_breakable_by_hand = 2},
-	sounds = default.node_sound_glass_defaults(),
+	sounds = default.node_sound_stone_defaults(),
 })
 
 minetest.register_craft({

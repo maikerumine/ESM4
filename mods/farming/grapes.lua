@@ -16,7 +16,7 @@ minetest.register_craftitem("farming:grapes", {
 		if nodename == "farming:trellis" then
 			minetest.set_node(pointed_thing.under, {name = "farming:grapes_1"})
 
-			minetest.sound_play("default_place_node", {gain = 1.0})
+			minetest.sound_play("default_place_node", {pos = pointed_thing.above, gain = 1.0})
 		else
 			return
 		end

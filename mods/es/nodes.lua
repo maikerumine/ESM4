@@ -513,6 +513,7 @@ end)
 
 
 --CUSTOM biome stuff
+
 minetest.register_node("es:strange_grass", {
 	description = "Strange Grass",
 	tiles = {("default_dry_grass.png^[colorize:#00BBFF:130"),
@@ -528,9 +529,9 @@ minetest.register_node("es:strange_grass", {
 
 minetest.register_node("es:aiden_grass", {
 	description = "Aiden Grass",
-	tiles = {("default_dry_grass.png^[colorize:#FFBBFF:160"),
-		"default_dirt.png",
-		{name = "default_dirt.png^(default_dry_grass_side.png^[colorize:#FFBBFF:160)",
+	tiles = {("default_dry_grass.png^[colorize:#8A084B:160"),
+		"default_ice.png",
+		{name = "default_ice.png^(default_dry_grass_side.png^[colorize:#FFBBFF:160)",
 			tileable_vertical = false}},
 	groups = {crumbly = 3, soil = 1},
 	drop = 'es:dry_dirt',
@@ -567,7 +568,7 @@ minetest.register_node("es:old_tree", {
 	tiles = {"default_tree_top.png^[colorize:#585858:170", "default_tree_top.png^[colorize:#585858:170", "default_tree.png^[colorize:#585858:170"},
 	paramtype2 = "facedir",
 	is_ground_content = false,
-	groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2},
+	groups = {choppy = 1, flammable = 2},
 	sounds = default.node_sound_wood_defaults(),
 
 	on_place = minetest.rotate_node
@@ -580,10 +581,26 @@ minetest.register_node("es:strange_leaves", {
 	paramtype = "light",
 	sunlight_propagates = true,
 	walkable = false,
-	tiles = {"default_jungleleaves.png^default_dry_shrub.png^[colorize:#0000FF:190"},
-	groups = {snappy = 3},
-	drop = 'default:stick',
+	tiles = {"default_jungleleaves.png^default_dry_shrub.png^[colorize:#0000FF:170"},
+	groups = {snappy = 3, leafdecay = 3, flammable = 2, leaves = 1},
+	drop = {
+		max_items = 1,
+		items = {
+			{
+				-- player will get sapling with 1/20 chance
+				items = {'default:apple'},
+				rarity = 20,
+			},
+			{
+				-- player will get leaves only if he get no saplings,
+				-- this is because max_items is 1
+				items = {'default:stick'},
+			}
+		}
+	},
 	sounds = default.node_sound_stone_defaults(),
+
+	after_place_node = default.after_place_leaves,
 })
 
 minetest.register_node("es:strange_clay_blue", {
@@ -633,7 +650,57 @@ minetest.register_node("default:dirt_with_dry_grass", {
 })
 ]]
 
+minetest.register_node("es:dry_shrub", {
+	description = "ES Dry Shrub",
+	drawtype = "plantlike",
+	waving = 1,
+	visual_scale = 1.0,
+	tiles = {"default_dry_shrub.png^[colorize:#00BBFF:180"},
+	inventory_image = "default_dry_shrub.png^[colorize:#00BBFF:180",
+	wield_image = "default_dry_shrub.png^[colorize:#00BBFF:180",
+	paramtype = "light",
+	sunlight_propagates = true,
+--	walkable = false,
+	walkable =true,
+	buildable_to = true,
+	groups = {snappy = 3, flammable = 3, attached_node = 1},
+	sounds = default.node_sound_leaves_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
+	},
+})
+
+minetest.register_node("es:junglegrass", {
+	description = "ES Jungle Grass",
+	drawtype = "plantlike",
+	waving = 1,
+	visual_scale = 1.3,
+	tiles = {"default_junglegrass.png^[colorize:#8A0808:180"},
+	inventory_image = "default_junglegrass.png^[colorize:#8A0808:180",
+	wield_image = "default_junglegrass.png^[colorize:#8A0808:180",
+	paramtype = "light",
+	sunlight_propagates = true,
+	walkable = false,
+	buildable_to = true,
+	groups = {snappy = 3, flammable = 2, flora = 1, attached_node = 1},
+	sounds = default.node_sound_leaves_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
+	},
+})
+
+
+
+
+
+
+
 --Default addons as they should be.  I changed ore generation to keep unique for compatibility.
+
+
+
 
 --Dry dirt added
 minetest.register_node("es:dry_dirt", {
@@ -876,7 +943,7 @@ minetest.register_node("es:lava_source", {
 	drawtype = "liquid",
 	tiles = {
 		{
-			name = "default_lava_source_animated.png^[colorize:#0000FF:150",
+			name = "default_lava_source_animated.png",
 			animation = {
 				type = "vertical_frames",
 				aspect_w = 16,
@@ -888,7 +955,7 @@ minetest.register_node("es:lava_source", {
 	special_tiles = {
 		-- New-style lava source material (mostly unused)
 		{
-			name = "es_lava_source_animated.png^[colorize:#0000FF:150",
+			name = "default_lava_source_animated.png",
 			animation = {
 				type = "vertical_frames",
 				aspect_w = 16,
@@ -923,7 +990,7 @@ minetest.register_node("es:lava_flowing", {
 	tiles = {"default_lava.png"},
 	special_tiles = {
 		{
-			name = "default_lava_flowing_animated.png^[colorize:#0000FF:150",
+			name = "default_lava_flowing_animated.png",
 			backface_culling = false,
 			animation = {
 				type = "vertical_frames",
@@ -933,7 +1000,7 @@ minetest.register_node("es:lava_flowing", {
 			},
 		},
 		{
-			name = "default_lava_flowing_animated.png^[colorize:#0000FF:150",
+			name = "default_lava_flowing_animated.png",
 			backface_culling = true,
 			animation = {
 				type = "vertical_frames",

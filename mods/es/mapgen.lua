@@ -1017,7 +1017,7 @@ function default.register_mgv6_decorations()
 	for length = 1, 5 do
 		minetest.register_decoration({
 			deco_type = "simple",
-			place_on = {"default:dirt_with_grass","es:strange_grass","es:aiden_grass"},
+			place_on = {"default:dirt_with_grass"},
 			sidelen = 16,
 			noise_params = {
 				offset = 0,
@@ -1055,10 +1055,13 @@ end
 
 -- All mapgens except mgv6 and singlenode
 
+
+
+
 local function register_grass_decoration(offset, scale, length)
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"default:dirt_with_grass", "default:sand","es:aiden_grass"},
+		place_on = {"default:dirt_with_grass", "default:sand"},
 		sidelen = 16,
 		noise_params = {
 			offset = offset,
@@ -1071,7 +1074,7 @@ local function register_grass_decoration(offset, scale, length)
 		biomes = {"stone_grassland", "sandstone_grassland",
 			"deciduous_forest", "coniferous_forest",
 			"stone_grassland_dunes", "sandstone_grassland_dunes",
-			"coniferous_forest_dunes","aidenland"},
+			"coniferous_forest_dunes"},
 		y_min = 1,
 		y_max = 31000,
 		decoration = "default:grass_"..length,
@@ -1106,7 +1109,7 @@ function default.register_decorations()
 	--AgentNagel42. See https://forum.minetest.net/viewtopic.php?f=5&t=13297
 		minetest.register_decoration({
 		deco_type = "schematic",
-		place_on = {"es:dry_dirt"},
+		place_on = {"es:dry_dirt","es:aiden_grass"},
 		sidelen = 16,
 		noise_params = {
 			offset = -0.003,
@@ -1125,7 +1128,7 @@ function default.register_decorations()
 
 		minetest.register_decoration({
 		deco_type = "schematic",
-		place_on = {"es:dry_dirt"},
+		place_on = {"es:dry_dirt","es:strange_grass"},
 		sidelen = 16,
 		noise_params = {
 			offset = -0.003,
@@ -1144,11 +1147,11 @@ function default.register_decorations()
 
 			minetest.register_decoration({
 		deco_type = "schematic",
-		place_on = {"es:dry_dirt"},
+		place_on = {"es:dry_dirt","es:aiden_grass"},
 		sidelen = 16,
 		noise_params = {
 			offset = -0.003,
-			scale = 0.007,
+			scale = 0.001,
 			spread = {x = 250, y = 250, z = 250},
 			seed = 2,
 			octaves = 3,
@@ -1181,6 +1184,26 @@ function default.register_decorations()
 		schematic = minetest.get_modpath("default").."/schematics/apple_tree.mts",
 		flags = "place_center_x, place_center_z",
 	})
+
+		minetest.register_decoration({
+		deco_type = "schematic",
+		place_on = {"es:strange_grass"},
+		sidelen = 16,
+		noise_params = {
+			offset = 0.003,
+			scale = 0.002,
+			spread = {x = 250, y = 250, z = 250},
+			seed = 2,
+			octaves = 3,
+			persist = 0.66
+		},
+		biomes = {"strangeland"},
+		y_min = 1,
+		y_max = 31000,
+		schematic = minetest.get_modpath("default").."/schematics/apple_tree.mts",
+		flags = "place_center_x, place_center_z",
+	})
+
 
 	minetest.register_decoration({
 		deco_type = "schematic",
@@ -1500,7 +1523,7 @@ function default.register_decorations()
 
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"default:dirt_with_grass","es:aiden_grass"},
+		place_on = {"default:dirt_with_grass"},
 		sidelen = 80,
 		fill_ratio = 0.1,
 		biomes = {"rainforest","aidenland"},
@@ -1528,7 +1551,40 @@ function default.register_decorations()
 		y_max = 31000,
 		decoration = "default:dry_shrub",
 	})
+--ES
 
+	-- Junglegrass
+
+	minetest.register_decoration({
+		deco_type = "simple",
+		place_on = {"es:aiden_grass"},
+		sidelen = 80,
+		fill_ratio = 0.1,
+		biomes = {"aidenland"},
+		y_min = 1,
+		y_max = 31000,
+		decoration = "es:junglegrass",
+	})
+
+	-- Dry shrub
+
+	minetest.register_decoration({
+		deco_type = "simple",
+		place_on = {"es:strange_grass","es:aiden_grass","es:brown_clay"},
+		sidelen = 16,
+		noise_params = {
+			offset = 0,
+			scale = 0.02,
+			spread = {x = 20, y = 20, z = 20},
+			seed = 329,
+			octaves = 3,
+			persist = 0.6
+		},
+		biomes = {"strangeland","aidenland"},
+		y_min = 2,
+		y_max = 31000,
+		decoration = "es:dry_shrub",
+	})
 
 	--ES SCHEMATICS
 	--strange tree
