@@ -21,9 +21,9 @@ local modpath = minetest.get_modpath("es")
 es.modpath = modpath
 
 
-dofile(modpath.."/technodrem.lua")
-dofile(modpath.."/moreorerem.lua")
-dofile(modpath.."/villrem.lua")
+--dofile(modpath.."/technodrem.lua")
+--dofile(modpath.."/moreorerem.lua")
+--dofile(modpath.."/villrem.lua")
 dofile(modpath.."/crafting.lua")
 dofile(modpath.."/alias.lua")
 dofile(modpath.."/anticheat.lua")
@@ -47,7 +47,7 @@ es.RADIOACTIVE = 1;	--1 is on 0 is off
 if es.RADIOACTIVE == 1 then	--add radiation
 	dofile(modpath.."/radiation.lua")
 end
-	
+
 --MOREBLOCKS / STAIRSPLUS SUPPORT
 if moreblocks then
 dofile(modpath.."/mostair.lua")
