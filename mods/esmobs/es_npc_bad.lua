@@ -46,6 +46,7 @@ mobs:register_mob("esmobs:badplayer2", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -102,6 +103,7 @@ mobs:register_mob("esmobs:badplayer3", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -158,6 +160,7 @@ mobs:register_mob("esmobs:badplayer4", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -214,6 +217,7 @@ mobs:register_mob("esmobs:badplayer6", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -270,6 +274,7 @@ mobs:register_mob("esmobs:badplayer7", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -326,6 +331,7 @@ mobs:register_mob("esmobs:badplayer8", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -382,6 +388,7 @@ mobs:register_mob("esmobs:badplayer9", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -438,6 +445,7 @@ mobs:register_mob("esmobs:badplayer10", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -494,6 +502,7 @@ mobs:register_mob("esmobs:badplayer11", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -550,6 +559,7 @@ mobs:register_mob("esmobs:badplayer12", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -607,6 +617,7 @@ mobs:register_mob("esmobs:badplayer16", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -663,6 +674,7 @@ mobs:register_mob("esmobs:badplayer18", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -719,6 +731,7 @@ mobs:register_mob("esmobs:badplayer22", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -780,6 +793,7 @@ mobs:register_mob("esmobs:badplayer23", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -837,6 +851,7 @@ mobs:register_mob("esmobs:badplayer24", {
 	fly = true,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -893,6 +908,7 @@ mobs:register_mob("esmobs:badplayer25", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -949,6 +965,7 @@ mobs:register_mob("esmobs:badplayer26", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -1005,6 +1022,7 @@ mobs:register_mob("esmobs:badplayer27", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -1061,6 +1079,7 @@ mobs:register_mob("esmobs:badplayer28", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -1117,6 +1136,7 @@ mobs:register_mob("esmobs:badplayer29", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -1173,6 +1193,7 @@ mobs:register_mob("esmobs:badplayer30", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -1229,6 +1250,7 @@ mobs:register_mob("esmobs:badplayer31", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -1285,6 +1307,7 @@ mobs:register_mob("esmobs:badplayer35", {
 	fear_height = 5,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -1341,6 +1364,7 @@ mobs:register_mob("esmobs:Mr_Black", {
 	light_damage = 0,
 	fear_height = 5,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	sounds = {
@@ -1536,6 +1560,7 @@ mobs:register_mob("esmobs:Jasmine", {
 		end
 	end,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -1602,6 +1627,7 @@ mobs:register_mob("esmobs:Infinium_Monster", {
 	fear_height = 50,
 	on_rightclick = nil,
 	attack_type = "dogfight",
+	pathfinding = true,
 	group_attack = true,
 	peaceful = false,
 	animation = {
@@ -1624,36 +1650,6 @@ end
 --mobs:register_spawn("mobs:dirt_monster", {"default:dirt_with_grass", "ethereal:gray_dirt"}, 7, 0, 7000, 2, 31000)
 
 --NOTE: ALWAYS PUT THE REGISTER_SPAWN BELOW THE REGISTER_ENTITY!!!!!
---[[
-mobs:register_spawn("esmobs:badplayer2", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer3", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer4", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer6", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer7", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer8", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer9", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer10", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer11", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer12", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer16", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer18", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer22", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer23", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer24", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer25", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer26", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer27", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer28", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer29", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer30", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer31", {"default:dirt_with_grass","default:stone","meru:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:badplayer35", {"default:sandstone","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000, -10000, 3000)
-mobs:register_spawn("esmobs:Mr_Black", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:Jasmine", {"default:obsidian","es:infiniumblock","es:stone_with_infinium","default:cobble","default:dirt_with_dry_grass"},{"air"}, 7, -1, 18000,-10000,3000)
-mobs:register_spawn("esmobs:Infinium_Monster", {"default:dirt_with_grass","default:stone","meru:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 4, -1, 18000, -10000, -3000)
-]]
-
---[[
 mobs:register_spawn("esmobs:badplayer2", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 4, -1, 18000, 1, 31000)
 mobs:register_spawn("esmobs:badplayer3", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 4, -1, 18000, 1, 31000)
 mobs:register_spawn("esmobs:badplayer4", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 4, -1, 18000, 1, 31000)
@@ -1677,8 +1673,6 @@ mobs:register_spawn("esmobs:badplayer29", {"default:dirt_with_grass","default:st
 mobs:register_spawn("esmobs:badplayer30", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 4, -1, 18000, 1, 31000)
 mobs:register_spawn("esmobs:badplayer31", {"default:dirt_with_grass","default:stone","meru:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 4, -1, 18000, 1, 31000)
 mobs:register_spawn("esmobs:badplayer35", {"default:sandstone","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 4, -1, 18000, 1, -20)
-]]
-
 mobs:register_spawn("esmobs:Mr_Black", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 4, -1, 18000, 1, 31000)
 mobs:register_spawn("esmobs:Jasmine", {"default:obsidian","es:infiniumblock","es:stone_with_infinium","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 7, -1, 18000, 1, -1000)
 mobs:register_spawn("esmobs:Infinium_Monster", {"default:obsidian","default:lava_source","default:lava_flowing","es:stone_with_infinium"}, 12, -1, 18000, 3, 10)

@@ -24,7 +24,7 @@ minetest.register_node("esmobs:bones", {
 		fixed = {-0.9, -0.9, -0.9, 0.9, 0.9, 0.9}
 	},
 	paramtype2 = "facedir",
-	groups = {dig_immediate=3},
+	groups = {dig_immediate=1},
 	sounds = default.node_sound_dirt_defaults({
 		footstep = {name="default_gravel_footstep", gain=0.5},
 		dug = {name="default_gravel_footstep", gain=1.0},

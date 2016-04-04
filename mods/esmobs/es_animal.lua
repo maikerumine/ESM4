@@ -224,25 +224,14 @@ end
 -- compatibility (item and entity)
 minetest.register_alias("esmobs:sheep", "esmobs:sheep_white")
 
+-- replace old sheep entity with new white sheep
 minetest.register_entity("esmobs:sheep", {
-	hp_max = 1,
-	physical = true,
-	collide_with_objects = true,
-	visual = "mesh",
-	mesh = "mobs_sheep.b3d",
-	visual_size = {x = 1, y = 1},
-	textures = {"mobs_18.png"},
-	velocity = {x = 0, y = 0, z = 0},
-	collisionbox = {-0.4, -1, -0.4, 0.4, 0.3, 0.4},
-	is_visible = true,
 
 	on_activate = function(self, staticdata, dtime_s)
 
-		local pos = self.object:getpos()
-
 		self.object:remove()
 
-		minetest.add_entity(pos, "esmobs:sheep_white")
+		minetest.add_entity(self.object:getpos(), "esmobs:sheep_white")
 	end
 })
 

@@ -117,6 +117,7 @@ mobs:register_mob("esmobs:Sam", {
 	end,
 
 	attack_type = "dogfight",
+	pathfinding = true,
 	animation = {
 		speed_normal = 30,		speed_run = 30,
 		stand_start = 0,		stand_end = 79,
@@ -242,6 +243,7 @@ mobs:register_mob("esmobs:John", {
 	end,
 
 	attack_type = "dogfight",
+	pathfinding = true,
 	animation = {
 		speed_normal = 30,		speed_run = 30,
 		stand_start = 0,		stand_end = 79,
@@ -368,6 +370,7 @@ mobs:register_mob("esmobs:Janette", {
 	end,
 
 	attack_type = "dogfight",
+	pathfinding = true,
 	animation = {
 		speed_normal = 30,		speed_run = 30,
 		stand_start = 0,		stand_end = 79,
@@ -495,6 +498,7 @@ mobs:register_mob("esmobs:Crybaby", {
 
 
 	attack_type = "dogfight",
+	pathfinding = true,
 	animation = {
 		speed_normal = 30,		speed_run = 30,
 		stand_start = 0,		stand_end = 79,
@@ -621,6 +625,7 @@ mobs:register_mob("esmobs:SepiaSam", {
 	end,
 
 	attack_type = "dogfight",
+	pathfinding = true,
 	animation = {
 		speed_normal = 30,		speed_run = 30,
 		stand_start = 0,		stand_end = 79,
@@ -746,6 +751,7 @@ mobs:register_mob("esmobs:OGSam", {
 	end,
 
 	attack_type = "dogfight",
+	pathfinding = true,
 	animation = {
 		speed_normal = 30,		speed_run = 30,
 		stand_start = 0,		stand_end = 79,
@@ -874,6 +880,7 @@ mobs:register_mob("esmobs:Vanessa", {
 	end,
 
 	attack_type = "dogfight",
+	pathfinding = true,
 	--attack_type = "dogshoot",
 	shoot_interval = 0.7,
 	arrow = "esmobs:axebullet",
@@ -1003,6 +1010,7 @@ mobs:register_mob("esmobs:FemaleSam", {
 	end,
 
 	attack_type = "dogfight",
+	pathfinding = true,
 	animation = {
 		speed_normal = 30,		speed_run = 30,
 		stand_start = 0,		stand_end = 79,
@@ -1128,6 +1136,7 @@ mobs:register_mob("esmobs:Battleboy", {
 	end,
 
 	attack_type = "dogfight",
+	pathfinding = true,
 	animation = {
 		speed_normal = 30,		speed_run = 30,
 		stand_start = 0,		stand_end = 79,
@@ -1257,6 +1266,7 @@ mobs:register_mob("esmobs:Wilbert", {
 	end,
 
 	attack_type = "dogfight",
+	pathfinding = true,
 	animation = {
 		speed_normal = 17,
 		speed_run = 25,
@@ -1386,6 +1396,7 @@ mobs:register_mob("esmobs:Thelma", {
 	end,
 
 	attack_type = "dogfight",
+	pathfinding = true,
 	animation = {
 		speed_normal = 17,
 		speed_run = 25,
@@ -1512,6 +1523,7 @@ mobs:register_mob("esmobs:DrifterDan", {
 	end,
 
 	attack_type = "dogfight",
+	pathfinding = true,
 	animation = {
 		speed_normal = 30,		speed_run = 30,
 		stand_start = 0,		stand_end = 79,
@@ -1642,6 +1654,7 @@ mobs:register_mob("esmobs:Mr_White", {
 
 
 	attack_type = "dogfight",
+	pathfinding = true,
 	animation = {
 		speed_normal = 30,		speed_run = 30,
 		stand_start = 0,		stand_end = 79,
@@ -1696,6 +1709,7 @@ mobs:register_mob("esmobs:Mr_Pink", {
 	light_damage = 0,
 	fear_height = 5,
 	attack_type = "dogfight",
+	pathfinding = true,
 	sounds = {
 		attack = "default_punch3",
 	},
@@ -1894,6 +1908,7 @@ mobs:register_mob("esmobs:Candy", {
 	end,
 
 	attack_type = "dogfight",
+	pathfinding = true,
 	animation = {
 		speed_normal = 30,		speed_run = 30,
 		stand_start = 0,		stand_end = 79,
@@ -2020,6 +2035,7 @@ mobs:register_mob("esmobs:Infiniumman", {
 	end,
 
 	attack_type = "dogfight",
+	pathfinding = true,
 	animation = {
 		speed_normal = 30,		speed_run = 30,
 		stand_start = 0,		stand_end = 79,
@@ -2059,6 +2075,7 @@ mobs:register_mob("esmobs:Maikerumine", {
 	run_velocity = 5,
 	damage = 9,
 	attack_type = "dogfight",
+	pathfinding = true,
 	--attack_type = "shoot",
 	shoot_interval = 0.5,
 	arrow = "esmobs:bookbullet",
@@ -2176,27 +2193,9 @@ mobs:register_mob("esmobs:Maikerumine", {
 --mobs:register_spawn("mobs:dirt_monster", {"default:dirt_with_grass", "ethereal:gray_dirt"}, 7, 0, 7000, 2, 31000)
 
 --NOTE: ALWAYS PUT THE REGISTER_SPAWN BELOW THE REGISTER_ENTITY!!!!!
---[[
-mobs:register_spawn("esmobs:Sam",{"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 18000, 1, -200,2000)
-mobs:register_spawn("esmobs:John",{"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 18000, 1,  -200,2000)
-mobs:register_spawn("esmobs:Janette", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 18000, 1,  -200,2000)
-mobs:register_spawn("esmobs:Crybaby", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 18000, 1, -200,2000)
-mobs:register_spawn("esmobs:SepiaSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 18000, 1,  -200,2000)
-mobs:register_spawn("esmobs:OGSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 18000, 1,  -200,2000)
-mobs:register_spawn("esmobs:Vanessa",{"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 18000, 1,  -200,2000)
-mobs:register_spawn("esmobs:FemaleSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 18000, 1,  -200,2000)
-mobs:register_spawn("esmobs:Battleboy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7,18000, 1, -200,2000)
-mobs:register_spawn("esmobs:Wilbert", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 18000, 1,  -200,2000)
-mobs:register_spawn("esmobs:Thelma", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 18000, 1,  -200,2000)
-mobs:register_spawn("esmobs:DrifterDan", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7,18000, 1,-200, 2000)
-mobs:register_spawn("esmobs:Mr_White",{"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 18000, 1,  -200,2000)
-mobs:register_spawn("esmobs:Mr_Pink", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 18000, 1,  -200,2000)
-mobs:register_spawn("esmobs:Candy",{"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 18000, 1, -200,2000)
-mobs:register_spawn("esmobs:Infiniumman", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 18000, 1, -200,2000)
-mobs:register_spawn("esmobs:Maikerumine", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass"},{"air"}, 14, 7, 18000, 1, -200,2000)
-]]
 
---[[
+
+
 mobs:register_spawn("esmobs:Sam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 18000, 1, 31000)
 mobs:register_spawn("esmobs:John", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 18000, 1, 31000)
 mobs:register_spawn("esmobs:John", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 5, -1, 18000, 1, 31000)
@@ -2209,13 +2208,10 @@ mobs:register_spawn("esmobs:FemaleSam", {"default:dirt_with_grass","default:ston
 mobs:register_spawn("esmobs:Battleboy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7,18000, 1, 31000)
 mobs:register_spawn("esmobs:Wilbert", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble","es:strange_grass","es:aiden_grass"}, 12, 7, 18000, 1, 31000)
 mobs:register_spawn("esmobs:Thelma", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble","es:strange_grass","es:aiden_grass"}, 12, 7, 18000, 1, 31000)
-]]
-
 mobs:register_spawn("esmobs:DrifterDan", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7,18000, 1, 31000)
 mobs:register_spawn("esmobs:Mr_White", {"default:dirt_with_grass", "ethereal:green_dirt","default:grass","default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 18000, 1, 31000)
---mobs:register_spawn("esmobs:Mr_Pink", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 18000, 1, 31000)
-mobs:register_spawn("esmobs:Candy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","es:strange_grass","es:aiden_grass"},12, -1, 18000, 1, 31000)
---mobs:register_spawn("esmobs:Candy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","es:strange_grass","es:aiden_grass"},5, -1, 18000, 1, 31000)
+mobs:register_spawn("esmobs:Mr_Pink", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 18000, 1, 31000)
+mobs:register_spawn("esmobs:Candy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","es:strange_grass","es:aiden_grass"},5, -1, 18000, 1, 31000)
 mobs:register_spawn("esmobs:Infiniumman", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 18000, 1, 31000)
 mobs:register_spawn("esmobs:Maikerumine", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 18000, 1, 31000)
 
