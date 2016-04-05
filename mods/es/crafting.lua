@@ -217,6 +217,23 @@ minetest.register_craft({
 }
 })
 
+minetest.register_craft({
+	output = 'es:strange_grass 2',
+	recipe = {
+	{'es:aikerum_dust',},
+    {'default:dirt', },
+    {'default:dirt', },
+}
+})
+
+minetest.register_craft({
+	output = 'es:aiden_grass 2',
+	recipe = {
+	{'es:ruby_dust',},
+    {'default:dirt', },
+    {'default:dirt', },
+}
+})
 
 
 --ES SPECIAL BLOCKS

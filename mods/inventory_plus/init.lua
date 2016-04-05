@@ -92,7 +92,8 @@ inventory_plus.get_formspec = function(player, page)
 			.. "listring[current_player;main]"
 			-- trash icon
 			.. "list[detached:trash;main;1,2;1,1;]"
-			.. "image[1.1,2.1;0.8,0.8;creative_trash_icon.png]"
+			--.. "image[1.1,2.1;0.8,0.8;creative_trash_icon.png]"
+			.. "image[1.1,2.1;0.8,0.8;crushingfurnace_front_active.png]"
 	end
 
 	-- creative page

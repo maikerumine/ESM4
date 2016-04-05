@@ -858,9 +858,28 @@ function default.register_biomes()
 		--node_river_water = "",
 		y_min = 1,
 		y_max = 31000,
-		heat_point = 75,
-		humidity_point = 50,
+		heat_point = 42,
+		humidity_point = 36,
 	})
+	
+	minetest.register_biome({
+		name = "strangeland_ocean",
+		--node_dust = "",
+		node_top = "default:sand",
+		depth_top = 1,
+		node_filler = "default:sand",
+		depth_filler = 3,
+		node_stone = "default:desert_stone",
+		--node_water_top = "",
+		--depth_water_top = ,
+		--node_water = "",
+		--node_river_water = "",
+		y_min = -112,
+		y_max = 4,
+		heat_point = 42,
+		humidity_point = 36,
+	})	
+	
 		minetest.register_biome({
 		name = "barren",
 		--node_dust = "",
@@ -878,25 +897,26 @@ function default.register_biomes()
 		heat_point = 82,
 		humidity_point = 20,
 	})
-	minetest.register_biome({
-		name = "strangeland_ocean",
+	
+		minetest.register_biome({
+		name = "barren_ocean",
 		--node_dust = "",
-		node_top = "default:sand",
+		node_top = "es:dry_dirt",
 		depth_top = 1,
-		node_filler = "default:sand",
-		depth_filler = 3,
+		node_filler = "es:dry_dirt",
+		depth_filler = 1,
 		node_stone = "default:desert_stone",
 		--node_water_top = "",
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
-		y_min = -112,
-		y_max = 4,
-		heat_point = 75,
+		y_min = 1,
+		y_max = 31000,
+		heat_point = 82,
 		humidity_point = 20,
-	})
-
-
+	})	
+	
+	
 	minetest.register_biome({
 		name = "clay",
 		--node_dust = "",
@@ -914,7 +934,23 @@ function default.register_biomes()
 		heat_point = 66,
 		humidity_point = 30,
 	})
-
+	minetest.register_biome({
+		name = "clay_ocean",
+		--node_dust = "",
+		node_top = "es:strange_clay_brown",
+		depth_top = 1,
+		node_filler = "default:gravel",
+		depth_filler = 3,
+		node_stone = "default:stone",
+		--node_water_top = "",
+		--depth_water_top = ,
+		--node_water = "",
+		--node_river_water = "",
+		y_min = -112,
+		y_max = 1,
+		heat_point = 66,
+		humidity_point = 30,
+	})
 
 	-- Cold
 
@@ -923,7 +959,7 @@ function default.register_biomes()
 		--node_dust = "",
 		node_top = "es:aiden_grass",
 		depth_top = 1,
-		node_filler = "default:ice",
+		node_filler = "default:clay",
 		depth_filler = 1,
 		--node_stone = "",
 		--node_water_top = "",
@@ -938,7 +974,7 @@ function default.register_biomes()
 	minetest.register_biome({
 		name = "strangeland_ocean",
 		--node_dust = "",
-		node_top = "default:ice",
+		node_top = "default:clay",
 		depth_top = 1,
 		node_filler = "default:gravel",
 		depth_filler = 3,
@@ -947,10 +983,10 @@ function default.register_biomes()
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
-		y_min = -112,
-		y_max = 4,
-		heat_point = 15,
-		humidity_point = 30,
+		y_min = 28,
+		y_max = 300,
+		heat_point = 25,
+		humidity_point = 35,
 	})
 
 
@@ -1107,53 +1143,98 @@ function default.register_decorations()
 	--Wasteland
 	--The buildings found in this mod (in the schems/ folder) have been built by
 	--AgentNagel42. See https://forum.minetest.net/viewtopic.php?f=5&t=13297
-		minetest.register_decoration({
+
+	
+			minetest.register_decoration({
 		deco_type = "schematic",
-		place_on = {"es:dry_dirt","es:aiden_grass"},
+		place_on = {"es:dry_dirt","es:aiden_grass","es:strange_grass","es:strange_clay_brown"},
 		sidelen = 16,
 		noise_params = {
-			offset = -0.003,
-			scale = 0.003,
-			spread = {x = 250, y = 250, z = 250},
+			offset = -0.0003,
+			scale = 0.0009,
+			spread = {x = 200, y = 200, z = 200},
 			seed = 2,
 			octaves = 3,
 			persist = 0.66
 		},
-		biomes = {"barren"},
-		y_min = 6,
-		y_max = 200,
+		biomes = {"barren","clay","strangeland","aidenland"},
+		y_min = 2,
+		y_max = 20,
+		schematic = minetest.get_modpath("es").."/schematics/bunker.mts",
+		flags = "place_center_x, place_center_z",
+		rotation = "random",
+	})
+	
+	
+		minetest.register_decoration({
+		deco_type = "schematic",
+		place_on = {"es:dry_dirt","es:aiden_grass","es:strange_clay_brown"},
+		sidelen = 16,
+		noise_params = {
+			offset = -0.0003,
+			scale = 0.0009,
+			spread = {x = 200, y = 200, z = 200},
+			seed = 2,
+			octaves = 3,
+			persist = 0.66
+		},
+		biomes = {"barren","clay"},
+		y_min = 2,
+		y_max = 20,
+		schematic = minetest.get_modpath("es").."/schematics/church_old.mts",
+		flags = "place_center_x, place_center_z",
+		rotation = "random",
+	})	
+	
+		minetest.register_decoration({
+		deco_type = "schematic",
+		place_on = {"es:dry_dirt","es:aiden_grass","es:strange_clay_brown"},
+		sidelen = 16,
+		noise_params = {
+			offset = -0.0003,
+			scale = 0.0009,
+			spread = {x = 200, y = 200, z = 200},
+			seed = 2,
+			octaves = 3,
+			persist = 0.66
+		},
+		biomes = {"barren","clay"},
+		y_min = 2,
+		y_max = 20,
 		schematic = minetest.get_modpath("es").."/schematics/watchtower_old.mts",
 		flags = "place_center_x, place_center_z",
-	})
+		rotation = "random",
+	})		
 
 		minetest.register_decoration({
 		deco_type = "schematic",
-		place_on = {"es:dry_dirt","es:strange_grass"},
+		place_on = {"es:dry_dirt","es:strange_grass","es:strange_clay_brown"},
 		sidelen = 16,
 		noise_params = {
-			offset = -0.003,
-			scale = 0.003,
-			spread = {x = 250, y = 250, z = 250},
+			offset = -0.0003,
+			scale = 0.0009,
+			spread = {x = 200, y = 200, z = 200},
 			seed = 2,
 			octaves = 3,
 			persist = 0.66
 		},
-		biomes = {"barren"},
-		y_min = 6,
-		y_max = 200,
+		biomes = {"barren","clay"},
+		y_min = 2,
+		y_max = 20,
 		schematic = minetest.get_modpath("es").."/schematics/cabin_old.mts",
 		flags = "place_center_x, place_center_z",
+		rotation = "random",
 	})
 
 			minetest.register_decoration({
 		deco_type = "schematic",
-		place_on = {"es:dry_dirt","es:aiden_grass"},
+		place_on = {"es:dry_dirt","es:aiden_grass","es:strange_clay_brown"},
 		sidelen = 16,
 		noise_params = {
-			offset = -0.003,
-			scale = 0.001,
-			spread = {x = 250, y = 250, z = 250},
-			seed = 2,
+			offset = -0.02,
+			scale = 0.024,
+			spread = {x = 100, y = 100, z = 100},
+			seed = 245,
 			octaves = 3,
 			persist = 0.66
 		},
@@ -1162,6 +1243,7 @@ function default.register_decorations()
 		y_max = 200,
 		schematic = minetest.get_modpath("es").."/schematics/old_tree.mts",
 		flags = "place_center_x, place_center_z",
+		rotation = "random",
 	})
 
 	-- Apple tree and log
@@ -1536,7 +1618,7 @@ function default.register_decorations()
 
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"default:desert_sand", "default:dirt_with_snow","es:strange_grass","es:aiden_grass","es:brown_clay"},
+		place_on = {"default:desert_sand", "default:dirt_with_snow","es:strange_grass","es:aiden_grass","es:strange_clay_brown","es:dry_dirt"},
 		sidelen = 16,
 		noise_params = {
 			offset = 0,
@@ -1546,7 +1628,7 @@ function default.register_decorations()
 			octaves = 3,
 			persist = 0.6
 		},
-		biomes = {"desert", "tundra","strangeland","aidenland"},
+		biomes = {"desert", "tundra","strangeland","aidenland","barren","clay"},
 		y_min = 2,
 		y_max = 31000,
 		decoration = "default:dry_shrub",
@@ -1557,10 +1639,10 @@ function default.register_decorations()
 
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"es:aiden_grass"},
+		place_on = {"es:aiden_grass","es:strange_clay_brown"},
 		sidelen = 80,
 		fill_ratio = 0.1,
-		biomes = {"aidenland"},
+		biomes = {"aidenland","barren","clay"},
 		y_min = 1,
 		y_max = 31000,
 		decoration = "es:junglegrass",
@@ -1570,7 +1652,7 @@ function default.register_decorations()
 
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"es:strange_grass","es:aiden_grass","es:brown_clay"},
+		place_on = {"es:strange_grass","es:aiden_grass","es:strange_clay_brown"},
 		sidelen = 16,
 		noise_params = {
 			offset = 0,
@@ -1649,8 +1731,29 @@ function default.register_decorations()
 		flags = "place_center_x, place_center_z",
 		rotation = "random",
 	})
-end
 
+--bunker
+	--rubycane
+			minetest.register_decoration({
+		deco_type = "schematic",
+		place_on = {"es:aiden_grass"},
+		sidelen = 16,
+		noise_params = {
+			offset = 0,
+			scale = 0.001,
+			spread = {x = 200, y = 200, z = 200},
+			seed = 230,
+			octaves = 3,
+			persist = 0.6
+			},
+		biomes = {"aidenland"},
+		y_min = 1,
+		y_max = 31000,
+		schematic = minetest.get_modpath("es").."/schematics/bunker.mts",
+		flags = "place_center_x, place_center_z",
+		rotation = "random",
+	})
+end
 
 --
 -- Generate nyan cats

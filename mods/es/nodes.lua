@@ -530,8 +530,8 @@ minetest.register_node("es:strange_grass", {
 minetest.register_node("es:aiden_grass", {
 	description = "Aiden Grass",
 	tiles = {("default_dry_grass.png^[colorize:#8A084B:160"),
-		"default_ice.png",
-		{name = "default_ice.png^(default_dry_grass_side.png^[colorize:#FFBBFF:160)",
+		"default_clay.png",
+		{name = "default_clay.png^(default_dry_grass_side.png^[colorize:#FFBBFF:160)",
 			tileable_vertical = false}},
 	groups = {crumbly = 3, soil = 1},
 	drop = 'es:dry_dirt',
@@ -568,6 +568,7 @@ minetest.register_node("es:old_tree", {
 	tiles = {"default_tree_top.png^[colorize:#585858:170", "default_tree_top.png^[colorize:#585858:170", "default_tree.png^[colorize:#585858:170"},
 	paramtype2 = "facedir",
 	is_ground_content = false,
+	drop = 'default:tree',
 	groups = {choppy = 1, flammable = 2},
 	sounds = default.node_sound_wood_defaults(),
 
@@ -613,7 +614,8 @@ minetest.register_node("es:strange_clay_blue", {
 
 minetest.register_node("es:strange_clay_red", {
 	description = "Strange Clay Red",
-	tiles = {"default_clay.png^[colorize:#FA5858:180"},
+	--tiles = {"default_clay.png^[colorize:#FA5858:180"},
+	tiles = {"default_clay.png^[colorize:#8A0829:180"},
 	groups = {crumbly = 3},
 	drop = 'default:clay_lump 4',
 	sounds = default.node_sound_dirt_defaults(),
@@ -621,7 +623,8 @@ minetest.register_node("es:strange_clay_red", {
 
 minetest.register_node("es:strange_clay_maroon", {
 	description = "Strange Clay Maroon",
-	tiles = {"default_clay.png^[colorize:#8A0808:180"},
+	--tiles = {"default_clay.png^[colorize:#8A0808:180"},
+	tiles = {"default_clay.png^[colorize:#610B21:180"},
 	groups = {crumbly = 3},
 	drop = 'default:clay_lump 4',
 	sounds = default.node_sound_dirt_defaults(),
@@ -659,6 +662,7 @@ minetest.register_node("es:dry_shrub", {
 	inventory_image = "default_dry_shrub.png^[colorize:#00BBFF:180",
 	wield_image = "default_dry_shrub.png^[colorize:#00BBFF:180",
 	paramtype = "light",
+	light_source = default.LIGHT_MAX - 6,
 	sunlight_propagates = true,
 --	walkable = false,
 	walkable =true,
@@ -683,6 +687,7 @@ minetest.register_node("es:junglegrass", {
 	sunlight_propagates = true,
 	walkable = false,
 	buildable_to = true,
+	damage_per_second = 1,
 	groups = {snappy = 3, flammable = 2, flora = 1, attached_node = 1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
@@ -709,9 +714,7 @@ minetest.register_node("es:dry_dirt", {
 	--tiles = {"dry_dirt.png"},
 	groups = {crumbly = 3},
 	drop = 'es:dry_dirt',
-	sounds = default.node_sound_dirt_defaults({
-		footstep = {name = "default_grass_footstep", gain = 0.25},
-	}),
+	sounds = default.node_sound_dirt_defaults(),
 })
 
 minetest.register_node("es:stone_with_mese", {
@@ -796,6 +799,7 @@ minetest.register_node("es:toxic_water_source", {
 	},
 	alpha = 240,
 	paramtype = "light",
+	light_source = default.LIGHT_MAX - 1,
 	walkable = false,
 	pointable = false,
 	diggable = false,
@@ -848,6 +852,7 @@ minetest.register_node("es:toxic_water_flowing", {
 	},
 	alpha = 240,
 	paramtype = "light",
+	light_source = default.LIGHT_MAX - 1,
 	paramtype2 = "flowingliquid",
 	walkable = false,
 	pointable = false,

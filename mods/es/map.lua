@@ -3,7 +3,7 @@ local modpath = minetest.get_modpath("es")
 es.modpath = modpath
 
 --MAP GENERATION SELECTION SWITCH
-es.MAP_SETTING = 0;	--Enter a number between 0 and 5 to choose map style.  See line 83 for details.
+es.MAP_SETTING = 5;	--Enter a number between 0 and 5 to choose map style.  See line 83 for details.
 
 --(CURRENTLY YOU NEED TO REPLACE THE DEFAULT WITH
 --the one that says stone IF YOU WANT AN ALL STONE WORLD.)

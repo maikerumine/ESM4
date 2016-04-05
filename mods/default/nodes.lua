@@ -465,6 +465,7 @@ minetest.register_node("default:sapling", {
 minetest.register_node("default:leaves", {
 	description = "Leaves",
 	drawtype = "plantlike",
+	walkable = false,
 	waving = 1,
 	visual_scale = 1.3,
 	tiles = {"default_leaves.png"},
