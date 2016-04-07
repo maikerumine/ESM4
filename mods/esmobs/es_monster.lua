@@ -272,6 +272,8 @@ mobs:register_mob("esmobs:oerkki", {
 	drops = {
 		{name = "default:obsidian",
 		chance = 7, min = 1, max = 2},
+		{name = "esmobs:leather",
+		chance = 1, min = 0, max = 1},
 	},
 	water_damage = 2,
 	lava_damage = 4,
@@ -550,6 +552,8 @@ mobs:register_mob("esmobs:paniki", {
 		chance = 6,
 		min = 1,
 		max = 2,},
+		{name = "esmobs:leather",
+		chance = 1, min = 0, max = 1},
 	},
 	armor = 60,
 	--drawtype = "side",

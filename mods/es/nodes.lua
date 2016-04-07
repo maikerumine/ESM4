@@ -531,7 +531,7 @@ minetest.register_node("es:aiden_grass", {
 	description = "Aiden Grass",
 	tiles = {("default_dry_grass.png^[colorize:#8A084B:160"),
 		"default_clay.png",
-		{name = "default_clay.png^(default_dry_grass_side.png^[colorize:#FFBBFF:160)",
+		{name = "default_clay.png^(default_dry_grass_side.png^[colorize:#8A084B:160)",
 			tileable_vertical = false}},
 	groups = {crumbly = 3, soil = 1},
 	drop = 'es:dry_dirt',

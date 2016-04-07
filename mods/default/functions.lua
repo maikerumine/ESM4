@@ -40,9 +40,9 @@ end
 function default.node_sound_sand_defaults(table)
 	table = table or {}
 	table.footstep = table.footstep or
-			{name = "default_sand_footstep", gain = 0.2}
+			{name = "default_sand_footstep", gain = 0.12}
 	table.dug = table.dug or
-			{name = "default_sand_footstep", gain = 0.4}
+			{name = "default_sand_footstep", gain = 0.24}
 	table.place = table.place or
 			{name = "default_place_node", gain = 1.0}
 	default.node_sound_defaults(table)
@@ -195,8 +195,7 @@ function default.dig_up(pos, node, digger)
 	end
 end
 
---[[
---NEW CODE
+
 --
 -- Fence registration helper
 --
@@ -251,51 +250,7 @@ function default.register_fence(name, def)
 
 	minetest.register_node(name, def)
 end
-]]
 
---CURRENT CODE
--- Fence registration helper
---
-function default.register_fence(name, def)
-	minetest.register_craft({
-		output = name .. " 4",
-		recipe = {
-			{ def.material, 'group:stick', def.material },
-			{ def.material, 'group:stick', def.material },
-		}
-	})
-
-	local fence_texture = "default_fence_overlay.png^" .. def.texture ..
-			"^default_fence_overlay.png^[makealpha:255,126,126"
-	-- Allow almost everything to be overridden
-	local default_fields = {
-		paramtype = "light",
-		drawtype = "fencelike",
-		inventory_image = fence_texture,
-		wield_image = fence_texture,
-		tiles = { def.texture },
-		sunlight_propagates = true,
-		is_ground_content = false,
-		selection_box = {
-			type = "fixed",
-			fixed = {-1/7, -1/2, -1/7, 1/7, 1/2, 1/7},
-		},
-		groups = {},
-	}
-	for k, v in pairs(default_fields) do
-		if not def[k] then
-			def[k] = v
-		end
-	end
-
-	-- Always add to the fence group, even if no group provided
-	def.groups.fence = 1
-
-	def.texture = nil
-	def.material = nil
-
-	minetest.register_node(name, def)
-end
 
 --
 -- Leafdecay

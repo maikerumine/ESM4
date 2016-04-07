@@ -45,8 +45,8 @@ basic_machines.plant_table  = {["farming:seed_barley"]="farming:barley_1",["farm
 --DEPRECATED: fuels used to power mover, now battery is used
 basic_machines.fuels = {["default:coal_lump"]=30,["default:cactus"]=5,["default:tree"]=10,["default:jungletree"]=12,["default:pinetree"]=12,["default:acacia_tree"]=10,["default:coalblock"]=500,["default:lava_source"]=5000,["basic_machines:charcoal"]=20}
 
-
 --  *** END OF SETTINGS *** --
+
 
 
 local punchset = {}; 
@@ -55,8 +55,8 @@ minetest.register_on_joinplayer(function(player)
 	local name = player:get_player_name(); if name == nil then return end
 	punchset[name] = {};
 	punchset[name].state = 0;
-end
-)
+end)
+
 
 -- MOVER --
 minetest.register_node("basic_machines:mover", {
@@ -281,7 +281,10 @@ minetest.register_node("basic_machines:mover", {
 				
 			end 
 			
-			if fuel < fuel_cost then meta:set_string("infotext", "Mover block. Energy ".. fuel ..", needed energy " .. fuel_cost .. ". Put nonempty battery next to mover."); return  end
+			if fuel < fuel_cost then 
+				meta:set_string("infotext", "Mover block. Energy ".. fuel ..", needed energy " .. fuel_cost .. ". Put nonempty battery next to mover."); 
+				return  
+			end
 		
 				
 		if mode == "object" then -- teleport objects and return
@@ -544,7 +547,7 @@ minetest.register_node("basic_machines:mover", {
 
 -- KEYPAD --
 
-local function use_keypad(pos,ttl) -- position, time to live ( how many times can signal travel before vanishing to prevent infinite recursion )
+local function use_keypad(pos,ttl, again) -- position, time to live ( how many times can signal travel before vanishing to prevent infinite recursion )
 	
 	if ttl<0 then return end;
 	local meta = minetest.get_meta(pos);	
@@ -566,9 +569,10 @@ local function use_keypad(pos,ttl) -- position, time to live ( how many times ca
 	local count = meta:get_int("count") or 0; -- counts how many repeats left
 	local active_repeats = meta:get_int("active_repeats") or 0;
 		
-	
-	if count < 0 then return end
-	count = count - 1; meta:set_int("count",count); 
+	if again or count>0 then -- this is keypad repeating its activation
+		if count < 0 then return end 
+		count = count - 1; meta:set_int("count",count);  
+	end
 	
 	if count>=0 then
 		meta:set_string("infotext", "Keypad operation: ".. count .." cycles left")
@@ -581,7 +585,7 @@ local function use_keypad(pos,ttl) -- position, time to live ( how many times ca
 			meta:set_int("active_repeats",1);
 			minetest.after(machines_timer, function() 
 				meta:set_int("active_repeats",0);
-				use_keypad(pos,machines_TTL) 
+				use_keypad(pos,machines_TTL,1)  -- third parameter means repeat mode
 			end )  -- repeat operation as many times as set with "iter"
 		end
 	end
@@ -595,6 +599,11 @@ local function use_keypad(pos,ttl) -- position, time to live ( how many times ca
 	
 	local tpos = {x=x0,y=y0,z=z0};
 	local node = minetest.get_node(tpos);if not node.name then return end -- error
+	local text = meta:get_string("text"); 
+	if text ~= "" then 
+		local tmeta = minetest.get_meta(tpos);if not tmeta then return end
+		tmeta:set_string("infotext", text);
+	end
 		
 	local table = minetest.registered_nodes[node.name];
 	if not table then return end -- error
@@ -653,14 +662,14 @@ minetest.register_node("basic_machines:keypad", {
 		local name = placer:get_player_name();punchset[name] =  {};punchset[name].state = 0
 	end,
 		
-	-- mesecons = {effector = { 
-		-- action_on = function (pos, node,ttl) 
-		-- if type(ttl)~="number" then ttl = 1 end
-		-- if ttl<0 then return end -- machines_TTL prevents infinite recursion
-		-- use_keypad(pos,ttl-1)
-	-- end
-	-- }
-	-- },
+	mesecons = {effector = { 
+		action_on = function (pos, node,ttl) 
+		if type(ttl)~="number" then ttl = 1 end
+		if ttl<0 then return end -- machines_TTL prevents infinite recursion
+		use_keypad(pos,0) -- activate just 1 time
+	end
+	}
+	},
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 		local meta = minetest.get_meta(pos);
 		local privs = minetest.get_player_privs(player:get_player_name());
@@ -671,6 +680,7 @@ minetest.register_node("basic_machines:keypad", {
 		end -- only  ppl sharing protection can set up keypad
 		local x0,y0,z0,x1,y1,z1,pass,iter,mode;
 		x0=meta:get_int("x0");y0=meta:get_int("y0");z0=meta:get_int("z0");iter=meta:get_int("iter") or 1;
+		local text = meta:get_string("text") or "";
 		mode = meta:get_int("mode") or 1;
 		
 		machines.pos1[player:get_player_name()] = {x=pos.x+x0,y=pos.y+y0,z=pos.z+z0};machines.mark_pos1(player:get_player_name()) -- mark pos1
@@ -679,7 +689,8 @@ minetest.register_node("basic_machines:keypad", {
 		local form  = 
 		"size[4.25,3.75]" ..  -- width, height
 		"field[0.25,0.5;1,1;x0;target;"..x0.."] field[1.25,0.5;1,1;y0;;"..y0.."] field[2.25,0.5;1,1;z0;;"..z0.."]"..
-		"button_exit[3.25,3.25;1,1;OK;OK] field[0.25,1.5;3.25,1;pass;Password: ;"..pass.."]" .. "field[0.25,2.5;3.25,1;iter;Repeat how many times;".. iter .."]"..
+		"button_exit[3.25,3.25;1,1;OK;OK] field[0.25,1.5;3.25,1;pass;Password: ;"..pass.."]" .. "field[0.25,2.5;1,1;iter;;".. iter .."]"..
+		"label[0.,1.9;repeat]" .."field[1.25,2.5;3.25,1;text;text;".. text .."]" ..
 		"field[0.25,3.5;3.25,1;mode;1=OFF/2=ON/3=TOGGLE;"..mode.."]";
 		-- if meta:get_string("owner")==player:get_player_name() then
 			minetest.show_formspec(player:get_player_name(), "basic_machines:keypad_"..minetest.pos_to_string(pos), form)
@@ -704,7 +715,7 @@ minetest.register_node("basic_machines:detector", {
 		meta:set_string("owner", placer:get_player_name()); meta:set_int("public",0);
 		meta:set_int("x0",0);meta:set_int("y0",0);meta:set_int("z0",0); -- source1: read
 		meta:set_int("x1",0);meta:set_int("y1",0);meta:set_int("z1",0); -- source1: read
-		meta:set_int("x2",0);meta:set_int("y2",0);meta:set_int("z2",0); -- target: activate
+		meta:set_int("x2",0);meta:set_int("y2",1);meta:set_int("z2",0); -- target: activate
 		meta:set_int("r",0)
 		meta:set_string("node","");meta:set_int("NOT",1);
 		meta:set_string("mode","node");
@@ -731,7 +742,7 @@ minetest.register_node("basic_machines:detector", {
 		x1=meta:get_int("x1");y1=meta:get_int("y1");z1=meta:get_int("z1");
 		x2=meta:get_int("x2");y2=meta:get_int("y2");z2=meta:get_int("z2");r=meta:get_int("r");
 		mode=meta:get_string("mode"); op = meta:get_string("op");
-		local mode_list = {["node"]=1,["player"]=2,["object"]=3,["inventory"]=4};
+		local mode_list = {["node"]=1,["player"]=2,["object"]=3,["inventory"]=4, ["infotext"] = 5,  ["light"]=6};
 		mode = mode_list[mode] or 1;
 		local op_list = {[""]=1,["AND"]=2,["OR"]=3};
 		op = op_list[op] or 1;
@@ -762,11 +773,11 @@ minetest.register_node("basic_machines:detector", {
 		"field[0.25,1.5;1,1;x1;source2;"..x1.."] field[1.25,1.5;1,1;y1;;"..y1.."] field[2.25,1.5;1,1;z1;;"..z1.."]".. 
 		"field[0.25,2.5;1,1;x2;target;"..x2.."] field[1.25,2.5;1,1;y2;;"..y2.."] field[2.25,2.5;1,1;z2;;"..z2.."]"..
 		"field[0.25,3.5;2,1;node;Node/player/object: ;"..node.."]".."field[3.25,2.5;1,1;r;radius;"..r.."]"..
-		"dropdown[0,4.5;3,1;mode;node,player,object,inventory;".. mode .."]"..
+		"dropdown[0,4.5;3,1;mode;node,player,object,inventory,infotext,light;".. mode .."]"..
 		"dropdown[0,5.5;3,1;inv1;"..inv_list1..";".. inv1 .."]"..
 		"label[0.,4.0;MODE selection]"..
 		"label[0.,5.2;inventory selection]"..
-		"field[2.25,3.5;2,1;NOT;filter out -2/-1/0/1/2/3;"..NOT.."]"..
+		"field[2.25,3.5;2,1;NOT;filter out -2/-1/0/1/2/3/4;"..NOT.."]"..
 		"button[3.,4.4;1,1;help;help] button_exit[3.,5.4;1,1;OK;OK] "
 		
 		--if meta:get_string("owner")==player:get_player_name() then
@@ -825,9 +836,11 @@ minetest.register_node("basic_machines:detector", {
 			node=meta:get_string("node") or ""; mode=meta:get_string("mode") or ""; op = meta:get_string("op") or "";
 			
 			local trigger = false
+			local detected_obj = "";
 
 			if mode == "node" then
 				local tnode = minetest.get_node({x=x0,y=y0,z=z0}).name; -- read node at source position
+				detected_obj = tnode;
 				
 				if node~="" and string.find(tnode,"default:chest") then -- it source is chest, look inside chest for items
 					local cmeta = minetest.get_meta({x=x0,y=y0,z=z0});
@@ -873,6 +886,13 @@ minetest.register_node("basic_machines:detector", {
 				local stack = ItemStack(node); 
 				local inv1m =meta:get_string("inv1");
 				if inv:contains_item(inv1m, stack) then trigger = true end
+			elseif mode == "infotext" then
+				local cmeta = minetest.get_meta({x=x0,y=y0,z=z0});
+				detected_obj = cmeta:get_string("infotext");
+				if detected_obj == node or node =="" then trigger = true end
+			elseif mode == "light" then
+				detected_obj=minetest.get_node_light({x=x0,y=y0,z=z0}) or 0;
+				if detected_obj>=(tonumber(node) or 0) or node == "" then trigger = true end
 			else -- players/objects
 				local objects = minetest.get_objects_inside_radius({x=x0,y=y0,z=z0}, r)
 				local player_near=false;
@@ -881,16 +901,18 @@ minetest.register_node("basic_machines:detector", {
 						if obj:is_player() then 
 
 							player_near = true
-							if (node=="" or obj:get_player_name()==node) then 
+							detected_obj = obj:get_player_name();
+							if (node=="" or detected_obj==node) then 
 								trigger = true break 
 							end
 							
 						end;
 					elseif mode == "object" and not obj:is_player() then
-						if node=="" then trigger = true break end
 						if obj:get_luaentity() then
-							if obj:get_luaentity().name==node then trigger=true break end
+							detected_obj = obj:get_luaentity().itemstring or "";
+							if detected_obj==node then trigger=true break end
 						end
+						if node=="" then trigger = true break end
 					end
 				end
 				
@@ -928,7 +950,13 @@ minetest.register_node("basic_machines:detector", {
 			if trigger then -- activate target node if succesful
 				meta:set_string("infotext", "detector: on");
 				if not effector.action_on then return end
-			
+				if NOT == 4 then -- set detected object name as target text (target must be keypad)
+					if minetest.get_node({x=x2,y=y2,z=z2}).name == "basic_machines:keypad" then
+						detected_obj = detected_obj or "";
+						local tmeta = minetest.get_meta({x=x2,y=y2,z=z2});
+						tmeta:set_string("text",detected_obj);
+					end
+				end
 				effector.action_on({x=x2,y=y2,z=z2},node,ttl-1); -- run
 				
 			else 
@@ -961,14 +989,14 @@ minetest.register_abm({
 	});
 
 minetest.register_node("basic_machines:clockgen", {
-	description = "Distributor - can forward signal up to 16 different targets",
+	description = "Clock generator - use sparingly, continually activates top block",
 	tiles = {"basic_machine_clock_generator.png"},
 	groups = {oddly_breakable_by_hand=2},
 	sounds = default.node_sound_wood_defaults(),
 	after_place_node = function(pos, placer)
 		local meta =  minetest.get_meta(pos);
 		meta:set_string("owner",placer:get_player_name() or "");
-		meta:set_string("infotext","clock generator: place machine on top to be activated");
+		meta:set_string("infotext","clock generator: place machine to be activated on top of generator");
 	end
 })	
 	
@@ -1616,6 +1644,10 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 				end
 			end
 			
+			if fields.text then
+				meta:set_string("text", fields.text);
+			end
+			
 			meta:set_int("iter",math.min(tonumber(fields.iter) or 1,500));meta:set_int("mode",mode);
 			meta:set_string("infotext", "Punch keypad to use it.");
 			if pass~="" then meta:set_string("infotext",meta:get_string("infotext").. ". Password protected."); end
@@ -1668,7 +1700,8 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 			"write node/player/object name. If you detect players/objects you can specify range of detection. If you want detector to activate target precisely when its not triggered set NOT to 1\n\n"..
 			"For example, to detect empty space write air, to detect tree write default:tree, to detect ripe wheat write farming:wheat_8, for flowing water write default:water_flowing ... ".. 
 			"If source position is chest it will look into it and check if there are items inside. If mode is inventory it will check for items in specified inventory of source node."..
-			"\n\nADVANCED: you can select second source and then select AND/OR from the right top dropdown list to do logical operations. You can also filter output signal:\n -2=only OFF,-1=NOT/0/1=normal,2=only ON, 3 only if changed"
+			"\n\nADVANCED: you can select second source and then select AND/OR from the right top dropdown list to do logical operations. You can also filter output signal:\n -2=only OFF,-1=NOT/0/1=normal,2=only ON, 3 only if changed"..
+			" 4 = if target keypad set its text to detected object name" ;
 			local form = "size [5.5,5.5] textarea[0,0;6,7;help;DETECTOR HELP;".. text.."]"
 			minetest.show_formspec(name, "basic_machines:help_detector", form)
 		end
