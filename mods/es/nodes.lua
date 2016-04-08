@@ -520,7 +520,7 @@ minetest.register_node("es:strange_grass", {
 		"default_clay.png",
 		{name = "default_clay.png^(default_dry_grass_side.png^[colorize:#00BBFF:130)",
 			tileable_vertical = false}},
-	groups = {crumbly = 3, soil = 1},
+	groups = {crumbly = 3, soil = 1, es_grass = 1},
 	drop = 'es:dry_dirt',
 	sounds = default.node_sound_dirt_defaults({
 		footstep = {name = "default_grass_footstep", gain = 0.25},
@@ -533,7 +533,7 @@ minetest.register_node("es:aiden_grass", {
 		"default_clay.png",
 		{name = "default_clay.png^(default_dry_grass_side.png^[colorize:#8A084B:160)",
 			tileable_vertical = false}},
-	groups = {crumbly = 3, soil = 1},
+	groups = {crumbly = 3, soil = 1, es_grass = 1},
 	drop = 'es:dry_dirt',
 	sounds = default.node_sound_dirt_defaults({
 		footstep = {name = "default_grass_footstep", gain = 0.25},
@@ -602,6 +602,37 @@ minetest.register_node("es:strange_leaves", {
 	sounds = default.node_sound_stone_defaults(),
 
 	after_place_node = default.after_place_leaves,
+})
+
+minetest.register_node("es:strange_shrub", {
+	description = "Strange shrub",
+	drawtype = "plantlike",
+	light_source = 14,
+	paramtype = "light",
+	sunlight_propagates = true,
+	walkable = false,
+	tiles = {"default_jungleleaves.png^default_dry_shrub.png^[colorize:#0000FF:170"},
+	groups = {snappy = 3, leafdecay = 3, flammable = 2, leaves = 1},
+	--[[
+	drop = {
+		max_items = 1,
+		items = {
+			{
+				-- player will get sapling with 1/20 chance
+				items = {'default:apple'},
+				rarity = 20,
+			},
+			{
+				-- player will get leaves only if he get no saplings,
+				-- this is because max_items is 1
+				items = {'default:stick'},
+			}
+		}
+	},
+	]]
+	sounds = default.node_sound_stone_defaults(),
+
+	--after_place_node = default.after_place_leaves,
 })
 
 minetest.register_node("es:strange_clay_blue", {
@@ -1035,3 +1066,60 @@ minetest.register_node("es:lava_flowing", {
 	groups = {lava = 3, liquid = 2, hot = 3, igniter = 1,
 		not_in_creative_inventory = 1},
 })
+
+--[[
+
+way too aggro
+--From ethereal mod
+-- check surrounding grass and change dirt to same colour (by Sokomine)
+minetest.register_abm({
+	nodenames = {"default:dirt_with_grass","default:dirt_with_dry_grass"},
+	interval = 5,
+	chance = 2,
+	action = function(pos, node)
+		local count_grasses = {}
+		local curr_max  = 0
+		local curr_type = "es:strange_grass" -- fallback Colour
+		local positions = minetest.find_nodes_in_area(
+			{x=(pos.x-2), y=(pos.y-2), z=(pos.z-2)},
+			{x=(pos.x+2), y=(pos.y+2), z=(pos.z+2)},
+			"group:es_grass")
+		-- count new grass nodes
+		for _,p in ipairs(positions) do
+			local n = minetest.get_node(p)
+			if n and n.name then
+				if not count_grasses[n.name] then
+					count_grasses[n.name] = 1
+				else
+					count_grasses[n.name] = count_grasses[n.name] + 1
+				end
+				-- we found a grass type with more than current max
+				if count_grasses[n.name] > curr_max then
+					curr_max = count_grasses[n.name]
+					curr_type = n.name
+				end
+			end
+		end
+		minetest.set_node(pos, {name = curr_type})
+        end
+})
+
+
+
+
+-- if grass devoid of light, change to dirt
+minetest.register_abm({
+	nodenames = {"group:es_grass"},
+	interval = 2,
+	chance = 20,
+	action = function(pos, node)
+		local name = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
+		local nodedef = minetest.registered_nodes[name]
+		if name ~= "ignore" and nodedef
+		and not ((nodedef.sunlight_propagates or nodedef.paramtype == "light")
+		and nodedef.liquidtype == "none") then
+			minetest.set_node(pos, {name = "default:dirt"})
+		end
+	end
+})
+]]

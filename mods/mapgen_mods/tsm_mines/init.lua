@@ -6,7 +6,7 @@ if not MINE_DEEP_MIN then
     MINE_DEEP_MIN = -50
 end
 if not MINE_DEEP_MAX then
-    MINE_DEEP_MAX = -480
+    MINE_DEEP_MAX = -5080
 end
 if not MINE_FACTOR then
     MINE_FACTOR = 2.5
@@ -45,7 +45,10 @@ if(minetest.get_modpath("farming")~=nil) then
 		{name="default:gold_ingot", max = 2},
 		{name="default:diamond", max = 1},
 		{name="default:pick_steel", max = 1},
-		{name="default:pick_diamond", max = 1}
+		{name="default:pick_diamond", max = 1},
+		{name="es:ruby_crystal", max = 1},
+		{name="es:emerald_crystal", max = 1},
+		{name="es:aikerum_crystal", max = 1}
 	}
 else
 	chest_stuff = {
@@ -136,10 +139,12 @@ local function make_mine(mpos,p2,p3, vm_data, vx_area,cnt)
 			local x2
 			local x3
 			local x4
+			local x5
 			local z1
 			local z2
 			local z3
 			local z4
+			local z5
 			if switch == 1 then
 				x1 = pos.x+1
 				x2 = pos.x
@@ -201,7 +206,7 @@ local function make_mine(mpos,p2,p3, vm_data, vx_area,cnt)
 			vm_data[vx_area:indexp({x=x2, y=pos.y+1, z=z2})] = pillar_top
 			vm_data[vx_area:indexp({x=x3, y=pos.y+1, z=z3})] = pillar_top
 
-			if math.random(0,6) == 3 then 
+			if math.random(0,6) == 3 then
 				vm_data[vx_area:indexp({x=x4, y=pos.y-1, z=z4})] = ids.dummy
 				rotate_torch({x=x4, y=pos.y-1, z=z4})
 			end
@@ -213,16 +218,16 @@ local function make_mine(mpos,p2,p3, vm_data, vx_area,cnt)
 				end
 			end
 		end
-		if switch == 1 then			
+		if switch == 1 then
 			pos.z = pos.z+20
 			--pos.x = pos.x+step
 		elseif switch == 2 then
 			pos.x = pos.x+20
 			--pos.z = pos.z+step
-		elseif switch == 3 then			
+		elseif switch == 3 then
 			pos.z = pos.z-20
 			--pos.x = pos.x+step
-		elseif switch == 4 then	
+		elseif switch == 4 then
 			pos.x = pos.x-20
 			--pos.z = pos.z+step
 		end
@@ -243,7 +248,7 @@ local function find_cave(min,max,vm_data, vx_area)
 		if vm_data[i] == ids.air then
 			local p = vx_area:position(i)
 			if p.y <= MINE_DEEP_MIN then out = p end
-		end		
+		end
 	end
 	return out
 end

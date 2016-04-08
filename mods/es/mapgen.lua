@@ -861,7 +861,7 @@ function default.register_biomes()
 		heat_point = 42,
 		humidity_point = 36,
 	})
-	
+
 	minetest.register_biome({
 		name = "strangeland_ocean",
 		--node_dust = "",
@@ -878,8 +878,8 @@ function default.register_biomes()
 		y_max = 4,
 		heat_point = 42,
 		humidity_point = 36,
-	})	
-	
+	})
+
 		minetest.register_biome({
 		name = "barren",
 		--node_dust = "",
@@ -897,7 +897,7 @@ function default.register_biomes()
 		heat_point = 82,
 		humidity_point = 20,
 	})
-	
+
 		minetest.register_biome({
 		name = "barren_ocean",
 		--node_dust = "",
@@ -914,9 +914,9 @@ function default.register_biomes()
 		y_max = 31000,
 		heat_point = 82,
 		humidity_point = 20,
-	})	
-	
-	
+	})
+
+
 	minetest.register_biome({
 		name = "clay",
 		--node_dust = "",
@@ -1144,7 +1144,7 @@ function default.register_decorations()
 	--The buildings found in this mod (in the schems/ folder) have been built by
 	--AgentNagel42. See https://forum.minetest.net/viewtopic.php?f=5&t=13297
 
-	
+
 			minetest.register_decoration({
 		deco_type = "schematic",
 		place_on = {"es:dry_dirt","es:aiden_grass","es:strange_grass","es:strange_clay_brown"},
@@ -1164,8 +1164,8 @@ function default.register_decorations()
 		flags = "place_center_x, place_center_z",
 		rotation = "random",
 	})
-	
-	
+
+
 		minetest.register_decoration({
 		deco_type = "schematic",
 		place_on = {"es:dry_dirt","es:aiden_grass","es:strange_clay_brown"},
@@ -1184,8 +1184,8 @@ function default.register_decorations()
 		schematic = minetest.get_modpath("es").."/schematics/church_old.mts",
 		flags = "place_center_x, place_center_z",
 		rotation = "random",
-	})	
-	
+	})
+
 		minetest.register_decoration({
 		deco_type = "schematic",
 		place_on = {"es:dry_dirt","es:aiden_grass","es:strange_clay_brown"},
@@ -1204,7 +1204,7 @@ function default.register_decorations()
 		schematic = minetest.get_modpath("es").."/schematics/watchtower_old.mts",
 		flags = "place_center_x, place_center_z",
 		rotation = "random",
-	})		
+	})
 
 		minetest.register_decoration({
 		deco_type = "schematic",
@@ -1633,6 +1633,43 @@ function default.register_decorations()
 		y_max = 31000,
 		decoration = "default:dry_shrub",
 	})
+
+		minetest.register_decoration({
+		deco_type = "simple",
+		place_on = {"es:strange_grass","es:aiden_grass"},
+		sidelen = 16,
+		noise_params = {
+			offset = 0,
+			scale = 0.002,
+			spread = {x = 200, y = 200, z = 200},
+			seed = 329,
+			octaves = 3,
+			persist = 0.6
+		},
+		biomes = {"strangeland","aidenland"},
+		y_min = 2,
+		y_max = 31000,
+		decoration = "default:junglesapling",
+	})
+
+
+			minetest.register_decoration({
+		deco_type = "simple",
+		place_on = {"es:strange_grass","es:aiden_grass"},
+		sidelen = 16,
+		noise_params = {
+			offset = 0,
+			scale = 0.04,
+			spread = {x = 20, y = 10, z = 20},
+			seed = 329,
+			octaves = 3,
+			persist = 0.6
+		},
+		biomes = {"strangeland","aidenland"},
+		y_min = 2,
+		y_max = 31000,
+		decoration = "es:strange_shrub",
+	})
 --ES
 
 	-- Junglegrass
@@ -1733,10 +1770,9 @@ function default.register_decorations()
 	})
 
 --bunker
-	--rubycane
 			minetest.register_decoration({
 		deco_type = "schematic",
-		place_on = {"es:aiden_grass"},
+		place_on = {"es:aiden_grass","default:dirt_with_snow"},
 		sidelen = 16,
 		noise_params = {
 			offset = 0,
@@ -1746,7 +1782,7 @@ function default.register_decorations()
 			octaves = 3,
 			persist = 0.6
 			},
-		biomes = {"aidenland"},
+		biomes = {"aidenland","tundra","tiaga"},
 		y_min = 1,
 		y_max = 31000,
 		schematic = minetest.get_modpath("es").."/schematics/bunker.mts",
