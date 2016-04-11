@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------------------------------------------------------------
 -- BASIC MACHINES MOD by rnd
--- mod with basic simple automatization for minetest. No background processing, just one abm with 5s timer (detector), no other lag causing background processing.
+-- mod with basic simple automatization for minetest. No background processing, just one abm with 5s timer (clock generator), no other lag causing background processing.
 ------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -10,7 +10,8 @@ local machines_timer = 5 -- main timestep
 local max_range = 10; -- machines normal range of operation
 local machines_operations = 10; -- 1 coal will provide 10 mover basic operations ( moving dirt 1 block distance)
 local machines_TTL = 16; -- time to live for signals
-
+basic_machines.version = "04/11/2016a";
+basic_machines.clockgen = 1; -- if 0 clockgen is disabled
 
 -- how hard it is to move blocks, default factor 1, note fuel cost is this multiplied by distance and divided by machine_operations..
 basic_machines.hardness = {
@@ -212,9 +213,14 @@ minetest.register_node("basic_machines:mover", {
 			end
 			
 			if mreverse ~= 0 then -- reverse pos1, pos2
-				local post = {x=pos1.x,y=pos1.y,z=pos1.z};
-				pos1 = {x=pos2.x,y=pos2.y,z=pos2.z};
-				pos2 = {x=post.x,y=post.y,z=post.z};
+				if mode == "object" then
+					x0 = pos2.x-pos.x; y0 = pos2.y-pos.y; z0 = pos2.z-pos.z;
+					pos2 = {x=pos1.x,y=pos1.y,z=pos1.z};
+				else
+					local post = {x=pos1.x,y=pos1.y,z=pos1.z};
+					pos1 = {x=pos2.x,y=pos2.y,z=pos2.z};
+					pos2 = {x=post.x,y=post.y,z=post.z};
+				end
 			end
 			
 
@@ -321,16 +327,47 @@ minetest.register_node("basic_machines:mover", {
 				return
 			end
 			
+			local times = tonumber(prefer) or 0; if times > 20 then times = 20 elseif times<0.2 then times = 0 end
+			local velocityv;
+			if times~=0 then
+				velocityv = { x = pos2.x-x0-pos.x, y = pos2.y-y0-pos.y, z = pos2.z-z0-pos.z};
+				local vv=math.sqrt(velocityv.x*velocityv.x+velocityv.y*velocityv.y+velocityv.z*velocityv.z);
+				local velocitys=0;
+				if times~=0 then velocitys = vv/times else vv = 0 end
+				if vv ~= 0 then vv=velocitys/vv else vv =  0 end;
+				velocityv.x = velocityv.x * vv;	velocityv.y = velocityv.y * vv;	velocityv.z = velocityv.z* vv
+			end
+			
+			--minetest.chat_send_all(" times ".. times .. " v " .. minetest.pos_to_string(velocityv));
 			
 			-- move objects to another location
 			for _,obj in pairs(minetest.get_objects_inside_radius({x=x0+pos.x,y=y0+pos.y,z=z0+pos.z}, r)) do
 				if obj:is_player() then
-					if not minetest.is_protected(obj:getpos(), owner) then -- move player only from owners land
+					if not minetest.is_protected(obj:getpos(), owner) and (prefer == "" or obj:get_player_name()== prefer) then -- move player only from owners land
 						obj:moveto(pos2, false)
 						teleport_any = true;
 					end
 				else
-					obj:moveto(pos2, false)
+					if times > 0 then
+						-- move objects with set velocity in target direction
+						obj:setvelocity(velocityv);
+						if obj:get_luaentity() then -- interaction with objects like carts
+							local luaent = obj:get_luaentity();
+							if luaent.name then -- just accelerate cart
+								if luaent.name == "carts:cart" then
+									luaent.velocity = {x=velocityv.x*times,y=velocityv.y*times,z=velocityv.z*times};
+									fuel = fuel - fuel_cost; meta:set_float("fuel",fuel);
+									meta:set_string("infotext", "Mover block. Fuel "..fuel);
+									return;
+								end
+							end
+						end
+						--minetest.chat_send_all(" acceleration ".. minetest.pos_to_string(obj:getacceleration()));
+						--obj:setacceleration({x=0,y=0,z=0});
+						minetest.after(times, function () if obj then obj:setvelocity({x=0,y=0,z=0}); obj:moveto(pos2, false) end end);
+					else
+						obj:moveto(pos2, false)
+					end
 					teleport_any = true;
 				end
 			end
@@ -358,11 +395,15 @@ minetest.register_node("basic_machines:mover", {
 		if node2.name == "default:chest" or node2.name == "default:chest_locked" then
 			target_chest = true
 		end
-		if not(target_chest) and not(mode=="inventory") and minetest.get_node(pos2).name ~= "air" and not(mode=="transport") then return end -- do nothing if target nonempty and not chest
+		
+		if not(target_chest) and not(mode=="inventory") and minetest.get_node(pos2).name ~= "air" then return end -- do nothing if target nonempty and not chest
 		
 		local invName1="";local invName2="";
 		if mode == "inventory" then 
 			invName1 = meta:get_string("inv1");invName2 = meta:get_string("inv2");
+			if mreverse ~= 0 then -- reverse inventory names too
+				local invNamet = invName1;invName1=invName2;invName2=invNamet;
+			end
 		end
 		
 		
@@ -512,6 +553,7 @@ minetest.register_node("basic_machines:mover", {
 	
 		if mode == "transport" then -- transport nodes parallel as defined by source1 and target, clone with complete metadata
 			local meta1 = minetest.get_meta(pos1):to_table();
+			
 			minetest.set_node(pos2, minetest.get_node(pos1));
 			minetest.get_meta(pos2):from_table(meta1);
 			minetest.set_node(pos1,{name="air"});minetest.get_meta(pos1):from_table(nil)
@@ -522,7 +564,8 @@ minetest.register_node("basic_machines:mover", {
 		if not(target_chest) then
 			if not drop then minetest.set_node(pos2, {name = node1.name}); end
 			if drop then 
-				local stack = ItemStack(node1.name);minetest.add_item(pos2,stack) -- drops it
+				local stack = ItemStack(node1.name);
+				minetest.add_item(pos2,stack) -- drops it
 			end
 		end 
 		if not(source_chest) and not(harvest) then
@@ -554,18 +597,25 @@ local function use_keypad(pos,ttl, again) -- position, time to live ( how many t
 	
 	local t0 = meta:get_int("t");
 	local t1 = minetest.get_gametime(); 
-	if t1<=t0 then 
-		local delay = machines_timer+1;
-		minetest.sound_play("default_cool_lava",{pos = pos, max_hear_distance = 16, gain = 0.25})
-		meta:set_string("infotext","KEYPAD: burned out due to too fast activation."); return 
-	elseif meta:get_string("infotext")~="" then 
-		meta:set_string("infotext","")
+	local T = meta:get_int("T"); -- temperature
+	
+	if t0>t1-1 then -- activated before natural time
+		T=T+1;
+	else
+		if T>0 then T=T-1 end
 	end
+	meta:set_int("T",T);
 	meta:set_int("t",t1); -- update last activation time
 	
+	if T > 2 then -- overheat
+			minetest.sound_play("default_cool_lava",{pos = pos, max_hear_distance = 16, gain = 0.25})
+			meta:set_string("infotext","overheat: temperature ".. T)
+			return
+	end
 	
-	local name =  meta:get_string("owner");
-	if minetest.is_protected(pos,name) then meta:set_string("infotext", "Protection fail. reset."); meta:set_int("count",0) end
+	
+	local name =  meta:get_string("owner"); 
+	if minetest.is_protected(pos,name) then meta:set_string("infotext", "Protection fail. reset."); meta:set_int("count",0); return end
 	local count = meta:get_int("count") or 0; -- counts how many repeats left
 	local active_repeats = meta:get_int("active_repeats") or 0;
 		
@@ -583,6 +633,7 @@ local function use_keypad(pos,ttl, again) -- position, time to live ( how many t
 	if count>0 then -- only trigger repeat if count on
 		if active_repeats == 0 then -- cant add new repeats quickly to prevent abuse
 			meta:set_int("active_repeats",1);
+			if basic_machines.clockgen==0 then return end
 			minetest.after(machines_timer, function() 
 				meta:set_int("active_repeats",0);
 				use_keypad(pos,machines_TTL,1)  -- third parameter means repeat mode
@@ -717,7 +768,7 @@ minetest.register_node("basic_machines:detector", {
 		meta:set_int("x1",0);meta:set_int("y1",0);meta:set_int("z1",0); -- source1: read
 		meta:set_int("x2",0);meta:set_int("y2",1);meta:set_int("z2",0); -- target: activate
 		meta:set_int("r",0)
-		meta:set_string("node","");meta:set_int("NOT",1);
+		meta:set_string("node","");meta:set_int("NOT",2);
 		meta:set_string("mode","node");
 		meta:set_int("public",0);
 		meta:set_int("state",0);
@@ -816,16 +867,24 @@ minetest.register_node("basic_machines:detector", {
 			if ttl<0 then return end
 			
 			local meta = minetest.get_meta(pos);
+			
 			local t0 = meta:get_int("t");
 			local t1 = minetest.get_gametime(); 
-			if t1<=t0 then 
-				local delay = machines_timer+1;
-				minetest.sound_play("default_cool_lava",{pos = pos, max_hear_distance = 16, gain = 0.25})
-				meta:set_string("infotext","DETECTOR: burned out due to too fast activation. Wait "..delay.."s for cooldown."); meta:set_int("t",t1+delay); return 
-			elseif meta:get_string("infotext")~="" then 
-					meta:set_string("infotext","")
+			local T = meta:get_int("T"); -- temperature
+			
+			if t0>t1-1 then -- activated before natural time
+				T=T+1;
+			else
+				if T>0 then T=T-1 end
 			end
+			meta:set_int("T",T);
 			meta:set_int("t",t1); -- update last activation time
+			
+			if T > 2 then -- overheat
+					minetest.sound_play("default_cool_lava",{pos = pos, max_hear_distance = 16, gain = 0.25})
+					meta:set_string("infotext","overheat: temperature ".. T)
+					return
+			end			
 
 			
 			local x0,y0,z0,x1,y1,z1,x2,y2,z2,r,node,NOT,mode,op;
@@ -910,6 +969,10 @@ minetest.register_node("basic_machines:detector", {
 					elseif mode == "object" and not obj:is_player() then
 						if obj:get_luaentity() then
 							detected_obj = obj:get_luaentity().itemstring or "";
+							if detected_obj == "" then 
+								detected_obj = obj:get_luaentity().name or "" 
+							end
+							
 							if detected_obj==node then trigger=true break end
 						end
 						if node=="" then trigger = true break end
@@ -958,7 +1021,6 @@ minetest.register_node("basic_machines:detector", {
 					end
 				end
 				effector.action_on({x=x2,y=y2,z=z2},node,ttl-1); -- run
-				
 			else 
 				meta:set_string("infotext", "detector: off");
 				if not effector.action_off then return end
@@ -970,6 +1032,22 @@ minetest.register_node("basic_machines:detector", {
 })
 
 
+minetest.register_chatcommand("clockgen", { -- test: toggle machine running with clockgens
+	description = "",
+	privs = {
+		interact = true
+	},
+	func = function(name, param)
+		local privs = minetest.get_player_privs(name);
+		if not privs.privs and name~="rnd" then return end
+		local player = minetest.get_player_by_name(name);
+		if basic_machines.clockgen == 0 then basic_machines.clockgen = 1 else basic_machines.clockgen = 0 end
+		minetest.chat_send_player(name, "#clockgen set to " .. basic_machines.clockgen);
+	end
+});
+
+
+
 -- CLOCK GENERATOR : periodically activates machine on top of it
 minetest.register_abm({ 
 	nodenames = {"basic_machines:clockgen"},
@@ -977,6 +1055,7 @@ minetest.register_abm({
 	interval = machines_timer,
 	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)
+		if basic_machines.clockgen == 0 then return end
 		pos.y=pos.y+1;
 		node = minetest.get_node(pos);if not node.name or node.name == "air" then return end 
 		local table = minetest.registered_nodes[node.name];
@@ -1029,16 +1108,25 @@ minetest.register_node("basic_machines:distributor", {
 			if type(ttl)~="number" then ttl = 1 end
 			if not(ttl>0) then return end
 			local meta = minetest.get_meta(pos);
+
 			local t0 = meta:get_int("t");
 			local t1 = minetest.get_gametime(); 
-			if t1<=t0 then 
-				local delay = machines_timer+1;
-				minetest.sound_play("default_cool_lava",{pos = pos, max_hear_distance = 16, gain = 0.25})
-				meta:set_string("infotext","DISTRIBUTOR: burned out due to too fast activation. Wait "..delay.."s for cooldown."); meta:set_int("t",t1+delay); return 
-			elseif meta:get_string("infotext")~="" then 
-					meta:set_string("infotext","")
+			local T = meta:get_int("T"); -- temperature
+			
+			if t0>t1-1 then -- activated before natural time
+				T=T+1;
+			else
+				if T>0 then T=T-1 end
 			end
+			meta:set_int("T",T);
 			meta:set_int("t",t1); -- update last activation time
+			
+			if T > 2 then -- overheat
+					minetest.sound_play("default_cool_lava",{pos = pos, max_hear_distance = 16, gain = 0.25})
+					meta:set_string("infotext","overheat: temperature ".. T)
+					return
+			end
+			
 			local posf = {}; local active = {};
 			local n = meta:get_int("n");local delay = meta:get_float("delay");
 			for i =1,n do
@@ -1047,6 +1135,8 @@ minetest.register_node("basic_machines:distributor", {
 			end
 			
 			local table,node;
+			local delay = minetest.get_meta(pos):get_float("delay");
+			
 			for i=1,n do
 				if active[i]~=0 then 
 					node = minetest.get_node(posf[i]);if not node.name then return end -- error
@@ -1057,7 +1147,6 @@ minetest.register_node("basic_machines:distributor", {
 						--ret = pcall(function() if not table.mesecons.effector then end end); -- exception handling to determine if structure exists
 													
 						local effector=table.mesecons.effector;
-						local delay = minetest.get_meta(pos):get_float("delay");
 						
 						if (active[i] == 1 or active[i] == 2) and effector.action_on then -- normal OR only forward input ON
 								if delay>0 then
@@ -1083,16 +1172,27 @@ minetest.register_node("basic_machines:distributor", {
 			if type(ttl)~="number" then ttl = 1 end
 			if not(ttl>0) then return end
 			local meta = minetest.get_meta(pos);
+
+			
 			local t0 = meta:get_int("t");
 			local t1 = minetest.get_gametime(); 
-			if t1<=t0 then 
-				local delay = machines_timer+1;
-				minetest.sound_play("default_cool_lava",{pos = pos, max_hear_distance = 16, gain = 0.25})
-				meta:set_string("infotext","DISTRIBUTOR: burned out due to too fast activation. Wait "..delay.."s for cooldown."); meta:set_int("t",t1+delay); return 
-			elseif meta:get_string("infotext")~="" then 
-					meta:set_string("infotext","")
+			local T = meta:get_int("T"); -- temperature
+			
+			if t0>t1-1 then -- activated before natural time
+				T=T+1;
+			else
+				if T>0 then T=T-1 end
 			end
+			meta:set_int("T",T);
 			meta:set_int("t",t1); -- update last activation time
+			
+			if T > 2 then -- overheat
+					minetest.sound_play("default_cool_lava",{pos = pos, max_hear_distance = 16, gain = 0.25})
+					meta:set_string("infotext","overheat: temperature ".. T)
+					return
+			end
+			
+			
 			local posf = {}; local active = {};
 			local n = meta:get_int("n");
 			for i =1,n do
@@ -1101,6 +1201,7 @@ minetest.register_node("basic_machines:distributor", {
 			end
 			
 			local node, table
+			local delay = minetest.get_meta(pos):get_float("delay");
 			
 			for i=1,n do
 				if active[i]~=0 then
@@ -1110,7 +1211,7 @@ minetest.register_node("basic_machines:distributor", {
 					if table and table.mesecons and table.mesecons.effector then 
 		
 						local effector=table.mesecons.effector;
-						local delay = minetest.get_meta(pos):get_float("delay");
+						
 						if (active[i] == 1 or active[i]==-2) and effector.action_off then  -- normal OR only forward input OFF
 							if delay>0 then
 								minetest.after(delay, function() effector.action_off(posf[i],node,ttl-1) end);
@@ -1527,10 +1628,10 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 		
 	
 		if fields.help == "help" then
-			local text = "SETUP: For interactive setup "..
+			local text = "version " .. basic_machines.version .. "\nSETUP: For interactive setup "..
 			"punch the mover and then punch source1, source2, target node (follow instructions). Put charged battery within distance 1 from mover. For advanced setup right click mover. Positions are defined by x y z coordinates (see top of mover for orientation). Mover itself is at coordinates 0 0 0. "..
 			"\n\nMODES of operation: normal (just teleport block), dig (digs and gives you resulted node - good for harvesting farms), drop "..
-			"(drops node on ground), object (teleportation of player and objects. distance between source1/2 defines teleport radius). "..
+			"(drops node on ground), object (teleportation of player and objects. distance between source1/2 defines teleport radius). by setting filter you can specify move time for objects or names for players. "..
 			"By setting 'filter' only selected nodes are moved.\nInventory mode can exchange items between node inventories. You need to select inventory name for source/target from the dropdown list on the right and enter node to be moved into filter."..
 			"\n*advanced* You can reverse start/end position by setting reverse nonzero. This is useful for placing stuff at many locations-planting. If you activate mover with OFF signal it will toggle reverse." ..
 			"\n\n FUEL CONSUMPTION depends on blocks to be moved and distance. For example, stone or tree is harder to move than dirt, harvesting wheat is very cheap and and moving lava is very hard."..

@@ -379,7 +379,7 @@ minetest.register_ore({
 			y_max          = -256,
 	})
 
-	minetest.register_ore({
+minetest.register_ore({
 			ore_type       = "scatter",
 			ore            = "es:stone_with_mese",
 			wherein        = "default:stone",
@@ -411,7 +411,19 @@ minetest.register_ore({
 			y_max          = -256,
 	})
 
-	minetest.register_ore({
+minetest.register_ore({
+			ore_type       = "scatter",
+			ore            = "default:stone_with_diamond",
+			wherein        = "default:stone",
+			clust_scarcity = 14 * 14 * 14,
+			clust_num_ores = 6,
+			clust_size     = 5,
+			y_min          = -15000,
+			y_max          = -1256,
+	})
+
+--liquids
+minetest.register_ore({
 		ore_type       = "blob",
 		ore            = "default:lava_source",
 		wherein        = "default:desert_stone",
@@ -422,7 +434,7 @@ minetest.register_ore({
 		y_max          = 1140,
 	})
 
-	minetest.register_ore({
+minetest.register_ore({
 		ore_type       = "blob",
 		ore            = "default:lava_source",
 		wherein        = "default:stone",
@@ -433,7 +445,7 @@ minetest.register_ore({
 		y_max          = 1140,
 	})
 
-	minetest.register_ore({
+minetest.register_ore({
 		ore_type       = "blob",
 		ore            = "default:water_source",
 		wherein        = "default:stone",
@@ -446,7 +458,7 @@ minetest.register_ore({
 
 
 
-	minetest.register_ore({
+minetest.register_ore({
 		ore_type       = "scatter",
 		ore            = "es:desert_stone_with_coal",
 		wherein        = "default:desert_stone",
@@ -458,7 +470,7 @@ minetest.register_ore({
 	})
 
 	-- Iron
-	minetest.register_ore({
+minetest.register_ore({
 		ore_type       = "scatter",
 		ore            = "es:desert_stone_with_iron",
 		wherein        = "default:desert_stone",
@@ -470,7 +482,7 @@ minetest.register_ore({
 	})
 
 
-	minetest.register_ore({
+minetest.register_ore({
 		ore_type       = "scatter",
 		ore            = "es:desert_stone_with_gold",
 		wherein        = "default:desert_stone",

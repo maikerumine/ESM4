@@ -1946,6 +1946,7 @@ minetest.register_entity(name, {
 		if weapon:get_definition().sounds ~= nil then
 
 			local s = math.random(0, #weapon:get_definition().sounds)
+			--local s = math.random(0, weapon:get_definition().sounds)
 
 			minetest.sound_play(weapon:get_definition().sounds[s], {
 				object = hitter,

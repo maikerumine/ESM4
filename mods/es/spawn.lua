@@ -4,7 +4,7 @@ local spawn_limit_max = 180; -- how much time must elapse to be able to use spaw
 
 
 spawn_prison = {}
-spawn_prison.pos = {x=0, y=3, z=0}
+spawn_prison.pos = {x=0, y=10006, z=0}
 
 if minetest.setting_get_pos("static_spawnpoint") then
  spawn_prison.pos = minetest.setting_get_pos("static_spawnpoint")
