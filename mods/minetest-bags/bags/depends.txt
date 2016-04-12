@@ -1,3 +1,0 @@
-default
-esmobs
-inventory_plus
