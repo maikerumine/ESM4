@@ -122,7 +122,7 @@ local function make_mine(mpos,p2,p3, vm_data, vx_area,cnt)
 	local pos = {x=mpos.x,y=mpos.y,z=mpos.z}
 	for j=0,12,1 do
 	local switch = cnt+1
-	n_switch = math.random(1,4)
+	local n_switch = math.random(1,4)  --maikerumine fix
 	while check_dir(n_switch,switch) == true do
 		n_switch = math.random(1,4)
 	end
