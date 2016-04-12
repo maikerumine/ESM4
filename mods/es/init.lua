@@ -21,9 +21,9 @@ local modpath = minetest.get_modpath("es")
 es.modpath = modpath
 
 
---dofile(modpath.."/technodrem.lua")
---dofile(modpath.."/moreorerem.lua")
---dofile(modpath.."/villrem.lua")
+dofile(modpath.."/technodrem.lua")
+dofile(modpath.."/moreorerem.lua")
+dofile(modpath.."/villrem.lua")
 dofile(modpath.."/crafting.lua")
 dofile(modpath.."/alias.lua")
 dofile(modpath.."/anticheat.lua")
@@ -35,6 +35,7 @@ dofile(modpath.."/tools.lua")
 dofile(modpath.."/extra.lua")
 dofile(modpath.."/nodes.lua")
 dofile(modpath.."/oregen.lua")
+dofile(modpath.."/cavespace.lua")
 --dofile(modpath.."/invis.lua")
 --dofile(modpath.."/map.lua")
 -- Climate  very laggy

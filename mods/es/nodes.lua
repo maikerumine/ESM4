@@ -252,12 +252,27 @@ minetest.register_node("es:hgglass", {
 	tiles = {"default_glass.png", "default_glass_detail.png"},
 	inventory_image = minetest.inventorycube("default_glass.png"),
 	paramtype = "light",
+	buildable_to = false,
+	pointable = false,
 	sunlight_propagates = true,
 	is_ground_content = false,
 	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
 	sounds = default.node_sound_glass_defaults(),
 })
 
+minetest.register_node("es:hgglass2", {
+	description = "High Density Glass II",
+	drawtype = "glasslike",
+	tiles = { "default_obsidian_glass.png"},
+	inventory_image = minetest.inventorycube("default_obsidian_glass.png"),
+	paramtype = "light",
+	buildable_to = false,
+	pointable = false,
+	sunlight_propagates = true,
+	is_ground_content = false,
+	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
+	sounds = default.node_sound_glass_defaults(),
+})
 minetest.register_node("es:steelblock", {
 	description = "High Density Steel Block",
 	tiles = {"default_steel_block.png"},
