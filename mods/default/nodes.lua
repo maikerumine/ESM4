@@ -1378,6 +1378,7 @@ minetest.register_node("default:torch", {
 	wield_image = "default_torch_on_floor.png",
 	paramtype = "light",
 	paramtype2 = "wallmounted",
+	damage_per_second = 1,
 	sunlight_propagates = true,
 	is_ground_content = false,
 	walkable = false,

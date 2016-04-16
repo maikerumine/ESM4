@@ -13,11 +13,11 @@ local damage_enabled = minetest.setting_getbool("enable_damage")
 local peaceful_only = minetest.setting_getbool("only_peaceful_mobs")
 local disable_blood = minetest.setting_getbool("mobs_disable_blood")
 local creative = minetest.setting_getbool("creative_mode")
-local spawn_protected = tonumber(minetest.setting_get("mobs_spawn_protected")) or 1
+local spawn_protected = tonumber(minetest.setting_get("mobs_spawn_protected")) or 0
 local remove_far = minetest.setting_getbool("remove_far_mobs")
 
 -- pathfinding settings
-local enable_pathfinding = false
+local enable_pathfinding = true
 local enable_pathfind_digging = false
 local stuck_timeout = 3 -- how long before mob gets stuck in place and starts searching
 local stuck_path_timeout = 10 -- how long will mob follow path before giving up
