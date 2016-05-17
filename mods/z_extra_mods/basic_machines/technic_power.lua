@@ -64,7 +64,7 @@ battery_recharge = function(pos)
 			meta:set_float("energy",energy);
 			meta:set_string("infotext", "(R) energy: " .. math.ceil(energy*10)/10 .. " / ".. capacity);
 			--TODO2: add entity power status display
-			minetest.sound_play("electric_zap", {pos=pos,gain=0.03,max_hear_distance = 8,})
+			minetest.sound_play("electric_zap", {pos=pos,gain=0.05,max_hear_distance = 8,})
 		end
 	end
 	
@@ -154,7 +154,7 @@ minetest.register_node("basic_machines:battery", {
 						energy=energy-0.5; -- use up energy to add fuel
 						
 						-- make furnace start if not already started
-						if node~="default:furnace_active" then machines_activate_furnace(pos) end
+						if node~="default:furnace_active" and machines_activate_furnace then machines_activate_furnace(pos) end
 						-- update energy display
 					end
 					
@@ -366,13 +366,13 @@ minetest.register_abm({
 		
 		if upgrade >= 99 then 
 			crystal = "basic_machines:power_rod"
-			text = "upgrade level 99: generating power rod";
+			text = "high upgrade: power rod";
 			elseif upgrade >=20 then 
 				crystal ="basic_machines:power_block"
-				text = "upgrade level 20: generating power block";
+				text = "medium upgrade: power block";
 			else 
 				crystal ="basic_machines:power_cell"
-				text = "upgrade level 0: generating power cell";
+				text = "low upgrade: power cell";
 		end
 		local morecrystal = ItemStack(crystal)
 		stack:add_item(morecrystal);

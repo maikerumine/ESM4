@@ -73,7 +73,7 @@ end
 if minetest.get_modpath("esmobs") ~= nil then
 overwrite("esmobs:meat", 8)
 overwrite("esmobs:meat_raw", 2)
-overwrite("esmobs:chicken", 6)
+overwrite("esmobs:chicken_cooked", 6)
 overwrite("esmobs:chicken_raw", 2)
 overwrite("esmobs:chicken_egg_fried", 2)
 overwrite("esmobs:rotten_flesh", -6)

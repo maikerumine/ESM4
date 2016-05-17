@@ -63,11 +63,11 @@ esmobs={}
 
 --CRAFTS AND MISC
 	dofile(minetest.get_modpath("esmobs").."/crafts.lua")
-	dofile(minetest.get_modpath("esmobs").."/spawner.lua")
+	--dofile(minetest.get_modpath("esmobs").."/spawner.lua")
 
 --MOB SPECS
 	if inventory_plus then
-		dofile(minetest.get_modpath("esmobs").."/mobspec.lua")
+		--dofile(minetest.get_modpath("esmobs").."/mobspec.lua")
 	end
 
 --IN CASE BONES IS NOT INSTALLED, THIS OVERRIDES NODES SO YOU HAVE THEM FOR MOBS.

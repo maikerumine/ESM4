@@ -20,19 +20,21 @@ basic_machines = {};
 
 
 dofile(minetest.get_modpath("basic_machines").."/mark.lua") -- used for markings, borrowed and adapted from worldedit mod
-dofile(minetest.get_modpath("basic_machines").."/mover.lua")
+dofile(minetest.get_modpath("basic_machines").."/mover.lua") -- mover, detector, keypad, distributor
 dofile(minetest.get_modpath("basic_machines").."/technic_power.lua") -- technic power for mover
 dofile(minetest.get_modpath("basic_machines").."/recycler.lua")
 dofile(minetest.get_modpath("basic_machines").."/grinder.lua")
 dofile(minetest.get_modpath("basic_machines").."/autocrafter.lua") -- borrowed and adapted from pipeworks mod
---dofile(minetest.get_modpath("basic_machines").."/enviro.lua") -- uncomment this to make it work
-
 
 --dofile(minetest.get_modpath("basic_machines").."/cpu.lua") -- experimental
 
+-- OPTIONAL ADDITIONAL STUFF ( comment to disable )
 
-minetest.after(0, function() -- if you want open/close doors with signal, also steel doors are made impervious to dig through, removal by repeat punch
-	dofile(minetest.get_modpath("basic_machines").."/mesecon_doors.lua")
+dofile(minetest.get_modpath("basic_machines").."/ball.lua") 
+dofile(minetest.get_modpath("basic_machines").."/enviro.lua") -- enviro blocks that can change surrounding enviroment physics, uncomment spawn/join code to change global physics, disabled by default
+minetest.after(0, function() 
+	dofile(minetest.get_modpath("basic_machines").."/mesecon_doors.lua") -- if you want open/close doors with signal, also steel doors are made impervious to dig through, removal by repeat punch
+	dofile(minetest.get_modpath("basic_machines").."/mesecon_lights.lua") -- adds ability for other light blocks to toggle light
 end)
 
 
@@ -72,3 +74,7 @@ minetest.register_craft({
 	-- note: to make it you need to use 1 tree block for fuel + 1 tree block, thats 2, caloric value 2*30=60
 	burntime = 40, -- coal lump has 40, tree block 30, coal block 370 (9*40=360!)
 })
+
+-- COMPATIBILITY
+
+minetest.register_alias("basic_machines:diamond_dust", "basic_machines:diamond_dust_66")

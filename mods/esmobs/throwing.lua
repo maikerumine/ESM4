@@ -34,7 +34,7 @@ mobs:register_arrow("esmobs:fireball", {
 
 	-- node hit, bursts into flame
 	hit_node = function(self, pos, node)
-		--mobs:explode(pos, 1, 1, 0)  --this deletes nodes
+		mobs:explosion(pos, 1, 1, 0)  --this deletes nodes
 	end
 })
 

@@ -1,5 +1,4 @@
 -- SOKOBAN GAME
--- basic board game mechanics ( checkers )
 -- by rnd
 
 
@@ -72,14 +71,28 @@ minetest.register_node("games:crate", { -- block that player pushes around, basi
 		if sokoban.blocks~=0 then
 			minetest.chat_send_player(name,"move " .. sokoban.moves .. " : " ..sokoban.blocks .. " crates left ");
 			else 
-				minetest.chat_send_all("#SOKOBAN : ".. name .. " just solved sokoban level ".. sokoban.level .. " in " .. sokoban.moves .. " moves.");
+				minetest.chat_send_all("games: ".. name .. " just solved sokoban level ".. sokoban.level .. " in " .. sokoban.moves .. " moves.");
 				local meta = minetest.get_meta(sokoban.pos);
 				meta:set_string("infotext", name .. " just solved sokoban level ".. sokoban.level .. " in " .. sokoban.moves .. " moves.");
-			
-			-- if playerdata~=nil then -- award xp if playerdata exist
-				-- playerdata[name].xp = playerdata[name].xp + (sokoban.level-0.5)*100
-			-- end
-			sokoban.playername = ""; sokoban.level = 1
+				
+				local imax = meta:get_int("imax"); local jmax = meta:get_int("jmax");
+				
+				local i,j;
+				for i = 1,imax do
+					for j=1,jmax do
+						minetest.set_node({x= sokoban.pos.x+i,y=sokoban.pos.y,z=sokoban.pos.z+j}, {name = "air"}); -- clear level
+					end
+				end
+				
+				-- activates block below sokoban game block upon game completion
+				local pos = {x=sokoban.pos.x,y=sokoban.pos.y-1,z=sokoban.pos.z};
+				local node = minetest.get_node(pos); if not node.name then return end -- error
+				local table = minetest.registered_nodes[node.name];
+				if table and table.mesecons and table.mesecons.effector then 
+					local effector=table.mesecons.effector;
+					effector.action_on(pos,node,16) 
+				end;
+				sokoban.playername = ""; sokoban.level = 1
 		end
 	end,
 })
@@ -99,7 +112,7 @@ description = "sokoban crate",
 		local form  = 
 		"size[3,1]" ..  -- width, height
 		"field[0,0.5;3,1;level;enter level 1 to 90;1]"..
-		"button[2.5,0.25;1,1;OK;OK]"
+		"button_exit[2.5,0.25;1,1;OK;OK]"
 		meta:set_string("formspec", form)
 		meta:set_string("infotext","sokoban level loader, right click to select level")
 		meta:set_int("time", minetest.get_gametime()-300);
@@ -150,13 +163,17 @@ description = "sokoban crate",
 		if not lvl_found then file:close();return end
 		
 		sokoban.blocks = 0;sokoban.level = lvl+1; sokoban.moves=0;
+		local imax=0; local jmax = 0;
 		while str~= nil do
 			str = file:read("*line"); 
 			if str~=nil then 
 				if string.sub(str,1,1)==";" then
-					file:close(); minetest.chat_send_all("Sokoban level "..sokoban.level .." loaded by ".. name .. ". It has " .. sokoban.blocks  .. " boxes to push. "); return 
+					imax=i;
+					meta:set_int("imax",imax); meta:set_int("jmax", jmax); -- remember game dimensions
+					file:close(); minetest.chat_send_all("games: sokoban level "..sokoban.level .." loaded by ".. name .. ". It has " .. sokoban.blocks  .. " boxes to push. "); return 
 				end
 				i=i+1;
+				if string.len(str)>jmax then jmax = string.len(str) end -- determine max dimensions
 				for j = 1,string.len(str) do
 					p.x=pos.x+i;p.y=pos.y; p.z=pos.z+j; s=string.sub(str,j,j);
 					p.y=p.y-1; 
@@ -167,7 +184,12 @@ description = "sokoban crate",
 					if s=="$" then minetest.set_node(p,{name="games:crate"});sokoban.blocks=sokoban.blocks+1 end
 					if s=="." then p.y=p.y-1;minetest.set_node(p,{name=SOKOBAN_GOAL}); p.y=p.y+1;minetest.set_node(p,{name="air"}) end
 					--starting position
-					if s=="@" then p.y=p.y-1;minetest.set_node(p,{name="default:glass"}); p.y=p.y+1;minetest.set_node(p,{name="air"}) end
+					if s=="@" then 
+						sender:setpos({x=p.x,y=p.y+3,z=p.z}); -- move player to start position
+						p.y=p.y-1;minetest.set_node(p,{name="default:glass"}); 
+						p.y=p.y+1;minetest.set_node(p,{name="air"}) 
+						p.y=p.y+2;minetest.set_node(p,{name="default:ladder"}) 
+					end
 					if s~="@" then p.y = pos.y+2;minetest.set_node(p,{name="games:glass_maze"});  
 						else p.y=pos.y+2;minetest.set_node(p,{name="default:ladder"})
 					end -- roof above to block jumps

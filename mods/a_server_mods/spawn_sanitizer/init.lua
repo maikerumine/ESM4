@@ -282,6 +282,32 @@ end,
 })
 
 
+-- no more protection blocks near!
+local old_node_place = minetest.item_place
+function minetest.item_place(itemstack, placer, pointed_thing)
+	if itemstack:get_definition().type == "node" then
+		local ok=true
+		if itemstack:get_name() == "protector:protect" then
+			local pos = pointed_thing.above
+			if not placer or not placer.get_player_name then return false end
+			if pos.x>-250 and pos.x<250 and pos.z>-250 and pos.z<250 and pos.y>4000 then
+				minetest.chat_send_player(placer:get_player_name(), "You must build farther out from here to build in space.  Try past 250meters.  This is to keep congestion low")
+				if minetest.get_player_privs(placer:get_player_name()).delprotect then
+					ok=true
+				else
+					ok=false
+				end
+			end
+		end
+		if ok == true then
+			return old_node_place(itemstack, placer, pointed_thing)
+		else
+			return
+		end
+	end
+	return old_node_place(itemstack, placer, pointed_thing)
+end
+
 
 -- no more protection blocks at spawn!
 local old_node_place = minetest.item_place

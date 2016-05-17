@@ -131,7 +131,8 @@ minetest.register_on_punchplayer(
 			city_block.attacker[pname] = name;city_block.attack[pname]=t;
 			local hp = player:get_hp();
 
-			if hp-damage<=0 then -- player will die
+			--if hp-damage<=0 then -- player will die
+			if hp>0 and hp-damage<=0 then -- player will die
 
 				local pos = player:getpos()
 

@@ -6,9 +6,10 @@
 local enviro = {};
 enviro.skyboxes = {
 	["default"]={type = "regular", tex = {}}, 
-	["space"]={type="skybox", tex={"sky_pos_y.png","sky_neg_y.png","sky_pos_z.png","sky_neg_z.png","sky_neg_x.png","sky_pos_x.png",}},
+	["space"]={type="skybox", tex={"sky_pos_y.png","sky_neg_y.png","sky_pos_z.png","sky_neg_z.png","sky_neg_x.png","sky_pos_x.png",}}, -- need textures installed!
 	["caves"]={type = "cavebox", tex = {"black.png","black.png","black.png","black.png","black.png","black.png",}}};
 
+local space_start = 1500;
 
 	
 local enviro_update_form = function (pos)
@@ -94,8 +95,24 @@ minetest.register_node("basic_machines:enviro", {
 						player:set_sky(0,sky["type"],sky["tex"]);
 					end
 				end
+			end
+			
+			-- attempt to set acceleration to balls, if any around
+			local objects =  minetest.get_objects_inside_radius(pos, r)
+			
+			for _,obj in pairs(objects) do
+				if obj:get_luaentity() then
+					local obj_name = obj:get_luaentity().name or ""
+					if obj_name == "basic_machines:ball" then
+						obj:setacceleration({x=0,y=-g,z=0});
+					end
+				end
 				
 			end
+			
+			
+			
+			
 		end
 	}
 	},
@@ -150,13 +167,12 @@ minetest.register_node("basic_machines:enviro", {
 })
 
 
-
 -- DEFAULT (SPAWN) PHYSICS VALUE/SKYBOX
 
 local reset_player_physics = function(player)
 	if player then
-		player:set_physics_override({speed=1,jump=0.6,gravity=0.2,sneak=true}) -- value set for extreme test space spawn
-		local skybox = enviro.skyboxes["space"]; -- default skybox is "default"
+		player:set_physics_override({speed=1,jump=1,gravity=1,sneak=true}) -- value set for extreme test space spawn
+		local skybox = enviro.skyboxes["default"]; -- default skybox is "default"
 		player:set_sky(0,skybox["type"],skybox["tex"]);
 	end
 end
@@ -166,7 +182,7 @@ enviro_adjust_physics = function(player) -- adjust players physics/skybox 1 seco
 	minetest.after(1, function()
 		if player then
 			local pos = player:getpos(); if not pos then return end
-			if pos.y > 9000 then -- is player in space or not?
+			if pos.y > space_start then -- is player in space or not?
 				player:set_physics_override({speed=1,jump=0.6,gravity=0.2,sneak=true}) -- value set for extreme test space spawn
 				local skybox = enviro.skyboxes["space"];
 				player:set_sky(0,skybox["type"],skybox["tex"]);
@@ -180,10 +196,6 @@ enviro_adjust_physics = function(player) -- adjust players physics/skybox 1 seco
 end
 
 
-
-
-
-
 -- restore default values/skybox on respawn of player
 minetest.register_on_respawnplayer(reset_player_physics)
 
@@ -191,8 +203,91 @@ minetest.register_on_respawnplayer(reset_player_physics)
 minetest.register_on_joinplayer(enviro_adjust_physics)
 
 
--- INSERT SIMILIAR CODE IN ALL EVENTS THAT CHANGE POSITIONS LIKE /spawn
+-- SERVER GLOBAL SPACE CODE: uncomment to enable it
 
+local stimer = 0
+local enviro_space = {};
+minetest.register_globalstep(function(dtime)
+	stimer = stimer + dtime;
+	if stimer >= 5 then
+		stimer = 0;
+		local players = minetest.get_connected_players();
+		for _,player in pairs(players) do
+			local name = player:get_player_name();
+			local pos = player:getpos();
+			local inspace=0; if pos.y>space_start then inspace = 1 end
+			local inspace0=enviro_space[name];
+			if inspace~=inspace0 then -- only adjust player enviroment ONLY if change occured ( earth->space or space->earth !)
+				enviro_space[name] = inspace;
+				enviro_adjust_physics(player);
+			end
+			
+			if inspace==1 then -- special space code
+				local dist = math.abs(pos.x)+math.abs(pos.z);
+				if dist > 50 then -- close to spawn normal
+					local populated = minetest.find_node_near(pos, 5, "protector:protect");
+					if not populated then -- do damage if player found not close to protectors
+						local hp = player:get_hp();
+						local privs = minetest.get_player_privs(name);
+						if hp>0 and not privs.kick then
+							player:set_hp(hp-10); -- dead in 20/10 = 2 events
+							minetest.chat_send_player(name,"WARNING: in space you must stay close to spawn or protected areas");
+						end
+					end
+				end
+				
+			end
+		end
+	end
+end)
+
+-- END OF SPACE CODE
+
+
+-- AIR EXPERIMENT
+-- minetest.register_node("basic_machines:air", {
+	-- description = "enables breathing in space",
+	-- drawtype = "liquid",
+	-- tiles =  {"default_water_source_animated.png"},
+	
+	-- drawtype = "glasslike",
+	-- paramtype = "light",
+	-- alpha =  150,
+	-- sunlight_propagates = true, -- Sunlight shines through
+	-- walkable     = false, -- Would make the player collide with the air node
+	-- pointable    = false, -- You can't select the node
+	-- diggable     = false, -- You can't dig the node
+	-- buildable_to = true,
+	-- drop = "",
+	-- groups = {not_in_creative_inventory=1},
+	-- after_place_node = function(pos, placer, itemstack, pointed_thing) 
+		-- local r = 3;
+		-- for i = -r,r do
+			-- for j = -r,r do
+				-- for k = -r,r do
+					-- local p = {x=pos.x+i,y=pos.y+j,z=pos.z+k};
+					-- if minetest.get_node(p).name == "air" then
+						-- minetest.set_node(p,{name = "basic_machines:air"})
+					-- end
+				-- end
+			-- end
+		-- end
+	-- end
+	
+-- })
+
+-- minetest.register_abm({ 
+	-- nodenames = {"basic_machines:air"},
+	-- neighbors = {"air"},
+	-- interval = 10,
+	-- chance = 1,
+	-- action = function(pos, node, active_object_count, active_object_count_wider)
+			-- minetest.set_node(pos,{name = "air"})
+		-- end
+	-- });
+
+
+	
 
 -- RECIPE: extremely expensive
 

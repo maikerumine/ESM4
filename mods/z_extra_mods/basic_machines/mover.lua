@@ -11,7 +11,7 @@ local machines_minstep = 1 -- minimal allowed activation timestep, if faster mac
 local max_range = 10; -- machines normal range of operation
 local machines_operations = 10; -- 1 coal will provide 10 mover basic operations ( moving dirt 1 block distance)
 local machines_TTL = 16; -- time to live for signals, how many hops before signal dissipates
-basic_machines.version = "04/15/2016a";
+basic_machines.version = "05/13/2016a";
 basic_machines.clockgen = 1; -- if 0 all background continuously running activity (clockgen/keypad) repeating is disabled
 
 -- how hard it is to move blocks, default factor 1, note fuel cost is this multiplied by distance and divided by machine_operations..
@@ -27,16 +27,27 @@ basic_machines.hardness["default:river_water_source"]=21890.;
 basic_machines.hardness["farming:wheat_8"]=1;basic_machines.hardness["farming:cotton_8"]=1;
 basic_machines.hardness["farming:seed_wheat"]=0.5;basic_machines.hardness["farming:seed_cotton"]=0.5;
 
+-- digging mese crystals more expensive
+basic_machines.hardness["mese_crystals:mese_crystal_ore1"] = 10;
+basic_machines.hardness["mese_crystals:mese_crystal_ore2"] = 10;
+basic_machines.hardness["mese_crystals:mese_crystal_ore3"] = 10;
+basic_machines.hardness["mese_crystals:mese_crystal_ore4"] = 10;
+
 
 -- define which nodes are dug up completely, like a tree
 basic_machines.dig_up_table = {["default:cactus"]=true,["default:tree"]=true,["default:jungletree"]=true,["default:pinetree"]=true,
 ["default:acacia_tree"]=true,["default:papyrus"]=true};
 				
 -- set up nodes for harvest when digging: [nodename] = {what remains after harvest, harvest result}
-basic_machines.harvest_table = {["mese_crystals:mese_crystal_ore4"] = {"mese_crystals:mese_crystal_ore1", "es:mesecook_crystal 4"}};
+basic_machines.harvest_table = {
+["mese_crystals:mese_crystal_ore4"] = {"mese_crystals:mese_crystal_ore1", "default:mese_crystal 3"}, -- harvesting mese crystals
+["mese_crystals:mese_crystal_ore3"] = {"mese_crystals:mese_crystal_ore1", "default:mese_crystal 2"},
+["mese_crystals:mese_crystal_ore2"] = {"mese_crystals:mese_crystal_ore1", "default:mese_crystal 1"},
+["mese_crystals:mese_crystal_ore1"] = {"mese_crystals:mese_crystal_ore1", ""},
+};
 
--- set up nodes for plant when placing from chest in digmode(for example seeds -> plant) : [nodename] = plant_name
-basic_machines.plant_table  = {["farming:seed_barley"]="farming:barley_1",["farming:beans"]="farming:beanpole_1",
+-- set up nodes for plant with reverse on and filter set (for example seeds -> plant) : [nodename] = plant_name
+basic_machines.plant_table  = {["farming:seed_barley"]="farming:barley_1",["farming:beans"]="farming:beanpole_1", -- so it works with farming redo mod
 ["farming:blueberries"]="farming:blueberry_1",["farming:carrot"]="farming:carrot_1",["farming:cocoa_beans"]="farming:cocoa_1",
 ["farming:coffee_beans"]="farming:coffee_1",["farming:corn"]="farming:corn_1",["farming:blueberries"]="farming:blueberry_1",
 ["farming:seed_cotton"]="farming:cotton_1",["farming:cucumber"]="farming:cucumber_1",["farming:grapes"]="farming:grapes_1",
@@ -44,8 +55,23 @@ basic_machines.plant_table  = {["farming:seed_barley"]="farming:barley_1",["farm
 ["farming:raspberries"]="farming:raspberry_1",["farming:rhubarb"]="farming:rhubarb_1",["farming:tomato"]="farming:tomato_1",
 ["farming:seed_wheat"]="farming:wheat_1"}
 
---DEPRECATED: fuels used to power mover, now battery is used
-basic_machines.fuels = {["default:coal_lump"]=30,["default:cactus"]=5,["default:tree"]=10,["default:jungletree"]=12,["default:pinetree"]=12,["default:acacia_tree"]=10,["default:coalblock"]=500,["default:lava_source"]=5000,["basic_machines:charcoal"]=20}
+-- list of objects that cant be teleported with mover
+basic_machines.no_teleport_table = {
+["itemframes:item"] = true,
+["signs:text"] = true
+}
+
+-- when activated with keypad these will be "punched" to update their text too
+basic_machines.signs = {
+["default:sign_wall_wood"] = true,
+["signs:sign_wall_green"] = true,
+["signs:sign_wall_green"] = true,
+["signs:sign_wall_yellow"] = true,
+["signs:sign_wall_red"] = true,
+["signs:sign_wall_red"] = true,
+["signs:sign_wall_white_black"] = true,
+["signs:sign_yard"] = true
+}
 
 --  *** END OF SETTINGS *** --
 
@@ -63,7 +89,7 @@ end)
 -- MOVER --
 minetest.register_node("basic_machines:mover", {
 	description = "Mover - universal digging/harvesting/teleporting/transporting machine, its upgradeable.",
-	tiles = {"compass_top.png","default_furnace_top.png", "basic_machine_side.png","basic_machine_side.png","basic_machine_side.png","basic_machine_side.png"},
+	tiles = {"compass_top.png","default_furnace_top.png", "basic_machine_mover_side.png","basic_machine_mover_side.png","basic_machine_mover_side.png","basic_machine_mover_side.png"},
 	groups = {oddly_breakable_by_hand=2,mesecon_effector_on = 1},
 	sounds = default.node_sound_wood_defaults(),
 	after_place_node = function(pos, placer)
@@ -229,11 +255,11 @@ minetest.register_node("basic_machines:mover", {
 			pos1.x = pos.x+pos1.x;pos1.y = pos.y+pos1.y;pos1.z = pos.z+pos1.z;
 			
 			-- special modes that use its own source/target positions:
-			if mode == "transport" then
+			if mode == "transport" and mreverse<2 then
 				pos2 = {x=meta:get_int("x2")-x0+pos1.x,y=meta:get_int("y2")-y0+pos1.y,z=meta:get_int("z2")-z0+pos1.z}; -- translation from pos1
 			end
 			
-			if mreverse ~= 0 then -- reverse pos1, pos2
+			if mreverse ~= 0 and mreverse ~= 2 then -- reverse pos1, pos2
 				if mode == "object" then
 					x0 = pos2.x-pos.x; y0 = pos2.y-pos.y; z0 = pos2.z-pos.z;
 					pos2 = {x=pos1.x,y=pos1.y,z=pos1.z};
@@ -254,10 +280,7 @@ minetest.register_node("basic_machines:mover", {
 			
 			local node1 = minetest.get_node(pos1);local node2 = minetest.get_node(pos2);
 			local prefer = meta:get_string("prefer"); 
-			--minetest.chat_send_all(" pos1 " .. pos1.x .. " " .. pos1.y .. " " .. pos1.z .. " pos2 " .. pos2.x .. " " .. pos2.y .. " " .. pos2.z );
-			
-
-			
+		
 			-- FUEL COST: calculate
 			local dist = math.abs(pos2.x-pos1.x)+math.abs(pos2.y-pos1.y)+math.abs(pos2.z-pos1.z);
 			local fuel_cost = (basic_machines.hardness[node1.name] or 1);
@@ -268,7 +291,7 @@ minetest.register_node("basic_machines:mover", {
 			fuel_cost=fuel_cost*dist/machines_operations; -- machines_operations=10 by default, so 10 basic operations possible with 1 coal
 			if mode == "object" then  
 				fuel_cost=fuel_cost*0.1; 
-				if pos2.x==pos1.x and pos2.z==pos1.z then -- check if elevator mode
+				if pos2.x==pos.x+x0 and pos2.z==pos.z+z0 then -- check if elevator mode
 					local requirement = math.floor(math.abs(pos2.y-pos.y)/100)+1;
 					if upgrade-1<requirement then
 							meta:set_string("infotext","MOVER: Elevator error. Need at least "..requirement .. " diamond block(s) in upgrade (1 for every 100 height). ");
@@ -296,7 +319,6 @@ minetest.register_node("basic_machines:mover", {
 				local fpos = nil;
 				if #positions>0 then fpos = positions[1] end -- pick first battery we found
 				
-				--minetest.chat_send_all(" mover checking for power, found " .. #positions .. " nearby batteries");
 				
 				if fpos then  -- check battery for power
 			
@@ -342,13 +364,16 @@ minetest.register_node("basic_machines:mover", {
 				for _,obj in pairs(minetest.get_objects_inside_radius({x=x0+pos.x,y=y0+pos.y,z=z0+pos.z}, r)) do
 					local lua_entity = obj:get_luaentity() 
 					if not obj:is_player() and lua_entity and lua_entity.itemstring ~= "" then
-						-- put item in chest
-						local stack = ItemStack(lua_entity.itemstring) 
-						if inv:room_for_item("main", stack) then
-							teleport_any = true;
-							inv:add_item("main", stack);
+						local detected_obj = lua_entity.name or "" 
+						if not basic_machines.no_teleport_table[detected_obj] then -- object on no teleport list 
+							-- put item in chest
+							local stack = ItemStack(lua_entity.itemstring) 
+							if inv:room_for_item("main", stack) then
+								teleport_any = true;
+								inv:add_item("main", stack);
+							end
+							obj:remove();
 						end
-						obj:remove();
 					end
 				end
 				if teleport_any then
@@ -385,8 +410,13 @@ minetest.register_node("basic_machines:mover", {
 						obj:setvelocity(velocityv);
 						if obj:get_luaentity() then -- interaction with objects like carts
 							local luaent = obj:get_luaentity();
-							if luaent.name then -- just accelerate cart
-								if luaent.name == "carts:cart" then
+							if luaent.name then 
+								if luaent.name == "basic_machines:ball" then -- move balls for free
+									luaent.velocity = {x=velocityv.x*times,y=velocityv.y*times,z=velocityv.z*times};
+									luaent.owner = owner; 
+									return
+								end
+								if luaent.name == "carts:cart" then -- just accelerate cart
 									luaent.velocity = {x=velocityv.x*times,y=velocityv.y*times,z=velocityv.z*times};
 									fuel = fuel - fuel_cost; meta:set_float("fuel",fuel);
 									meta:set_string("infotext", "Mover block. Fuel "..fuel);
@@ -394,7 +424,6 @@ minetest.register_node("basic_machines:mover", {
 								end
 							end
 						end
-						--minetest.chat_send_all(" acceleration ".. minetest.pos_to_string(obj:getacceleration()));
 						--obj:setacceleration({x=0,y=0,z=0});
 						minetest.after(times, function () if obj then obj:setvelocity({x=0,y=0,z=0}); obj:moveto(pos2, false) end end);
 					else
@@ -433,7 +462,7 @@ minetest.register_node("basic_machines:mover", {
 		local invName1="";local invName2="";
 		if mode == "inventory" then 
 			invName1 = meta:get_string("inv1");invName2 = meta:get_string("inv2");
-			if mreverse ~= 0 then -- reverse inventory names too
+			if mreverse == 1 then -- reverse inventory names too
 				local invNamet = invName1;invName1=invName2;invName2=invNamet;
 			end
 		end
@@ -441,15 +470,34 @@ minetest.register_node("basic_machines:mover", {
 		
 		-- inventory mode
 		if mode == "inventory" then
-					if prefer == "" then meta:set_string("infotext", "Mover block. must set nodes to move (filter) in inventory mode."); return; end
+					--if prefer == "" then meta:set_string("infotext", "Mover block. must set nodes to move (filter) in inventory mode."); return; end
 					
+					local stack, meta1,inv1;
+					if prefer == "" then -- if prefer == "" then just pick one item from chest to transfer
+						meta1 = minetest.get_meta(pos1);
+						inv1 = meta1:get_inventory();
+						if inv1:is_empty(invName1) then return end -- nothing to move
+						local size = inv1:get_size(invName1);
+						
+						local found = false;
+						for i = 1, size do -- find item to move in inventory
+							stack = inv1:get_stack(invName1, i);
+							if not stack:is_empty() then found = true break end
+						end
+						if not found then return end
+					end
+
 					-- can we move item to target inventory?
-					local stack = ItemStack(prefer);
+					if prefer~="" then
+						stack = ItemStack(prefer);
+					end
 					local meta2 = minetest.get_meta(pos2); local inv2 = meta2:get_inventory();
 					if not inv2:room_for_item(invName2, stack) then	return end
 					
 					-- add item to target inventory and remove item from source inventory
-					local meta1 = minetest.get_meta(pos1); local inv1 = meta1:get_inventory();
+					if prefer~="" then
+						meta1 = minetest.get_meta(pos1); inv1 = meta1:get_inventory();
+					end
 					
 					if inv1:contains_item(invName1, stack) then
 						inv2:add_item(invName2, stack);
@@ -479,7 +527,7 @@ minetest.register_node("basic_machines:mover", {
 					else return -- item not found in chest
 				end
 				
-				if mreverse ~= 0 then -- planting mode: check if transform seed->plant is needed
+				if mreverse == 1 then -- planting mode: check if transform seed->plant is needed
 				if basic_machines.plant_table[prefer]~=nil then
 					prefer = basic_machines.plant_table[prefer];
 				end
@@ -571,7 +619,6 @@ minetest.register_node("basic_machines:mover", {
 			
 		end	
 		
-			
 		
 		minetest.sound_play("transporter", {pos=pos2,gain=1.0,max_hear_distance = 8,})
 		
@@ -611,7 +658,7 @@ minetest.register_node("basic_machines:mover", {
 			if type(ttl)~="number" then ttl = 1 end
 			local meta = minetest.get_meta(pos);
 			local mreverse = meta:get_int("reverse");
-			if mreverse ~= 0 then mreverse = 0 else mreverse = 1 end
+			if mreverse == 1 then mreverse = 0 elseif mreverse==0 then mreverse = 1 end
 			meta:set_int("reverse",mreverse);			
 		end
 		
@@ -683,9 +730,83 @@ local function use_keypad(pos,ttl, again) -- position, time to live ( how many t
 	local tpos = {x=x0,y=y0,z=z0};
 	local node = minetest.get_node(tpos);if not node.name then return end -- error
 	local text = meta:get_string("text"); 
-	if text ~= "" then 
+	
+	if text ~= "" then -- set text on target node
+		if text == "@" then -- keyboard mode, set text from input
+			text = meta:get_string("input") or "";
+			meta:set_string("input",""); -- clear input again
+		end
+		
+		if string.byte(text) == 33 then -- if text starts with !, then we send chat text to all nearby players, radius 5
+			text = string.sub(text,2) ; if not text or text == "" then return end
+			local players = minetest.get_connected_players();
+			for _,player in pairs(players) do
+				local pos1 = player:getpos();
+				local dist = math.sqrt((pos1.x-tpos.x)^2 + (pos1.y-tpos.y)^2 + (pos1.z-tpos.z)^2 );
+				if dist<=5 then
+					minetest.chat_send_player(player:get_player_name(), text)
+				end
+			end
+			return
+		elseif string.byte(text) == 36 then-- text starts with $, play sound
+			text = string.sub(text,2) ; if not text or text == "" then return end
+			minetest.sound_play(text, {pos=pos,gain=1.0,max_hear_distance = 16,})
+		end
+		
 		local tmeta = minetest.get_meta(tpos);if not tmeta then return end
 		tmeta:set_string("infotext", text);
+		if basic_machines.signs[node.name] then -- update text on signs with signs_lib
+			tmeta:set_string("text",text);
+			local table = minetest.registered_nodes[node.name];
+			if not table.on_punch then return end -- error
+			-- if signs_lib and signs_lib.update_sign then
+				-- signs_lib.update_sign(pos)
+			-- end
+			table.on_punch(tpos, node, nil);			
+			return
+		end
+		
+		if node.name == "basic_machines:keypad" then -- special modify of target keypad text and change its target
+			local ttext = tmeta:get_string("text");
+			x0=tmeta:get_int("x0");y0=tmeta:get_int("y0");z0=tmeta:get_int("z0");
+			x0=tpos.x+x0;y0=tpos.y+y0;z0=tpos.z+z0;
+			tpos = {x=x0,y=y0,z=z0};
+			if string.byte(ttext) == 64 then -- target keypad's text starts with @ ( ascii code 64)
+				ttext =string.sub(ttext,2); if not ttext or ttext == "" then return end
+				ttext = string.gsub(ttext, "@", text); -- replace every @ in ttext with text
+				
+				-- set target keypad's target's infotext
+				tmeta = minetest.get_meta(tpos);if not tmeta then return end
+				tmeta:set_string("infotext", ttext);
+			else
+				if string.byte(text) == 64 then -- if text starts with @ clear target keypad text
+					tmeta:set_string("text",""); 
+					return
+				end
+				tmeta = minetest.get_meta(tpos);if not tmeta then return end
+				tmeta:set_string("infotext", ttext);
+			end
+			return
+		end
+		
+		if node.name == "basic_machines:detector" then -- change filter on detector
+			if string.byte(text) == 64 then -- if text starts with @ clear the filter
+				tmeta:set_string("node","");
+			else
+				tmeta:set_string("node",text);
+			end
+			return
+		end
+		
+		if node.name == "basic_machines:mover" then -- change filter on mover
+			if string.byte(text) == 64 then -- if text starts with @ clear the filter
+				tmeta:set_string("prefer","");
+			else
+				tmeta:set_string("prefer",text);
+			end
+			return
+		end
+		
 	end
 		
 	local table = minetest.registered_nodes[node.name];
@@ -721,6 +842,15 @@ local function check_keypad(pos,name,ttl) -- called only when manually activated
 		return 
 	end
 	if name == "" then return end
+		
+	if meta:get_string("text") == "@" then -- keypad works as a keyboard
+		local form  = 
+		"size[3,1]" ..  -- width, height
+		"button_exit[0.,0.5;1,1;OK;OK] field[0.25,0.25;3,1;pass;Enter text: ;".."".."]";
+		minetest.show_formspec(name, "basic_machines:check_keypad_"..minetest.pos_to_string(pos), form)
+		return
+	end
+	
 	pass = ""
 	local form  = 
 		"size[3,1]" ..  -- width, height
@@ -736,7 +866,7 @@ minetest.register_node("basic_machines:keypad", {
 	sounds = default.node_sound_wood_defaults(),
 	after_place_node = function(pos, placer)
 		local meta = minetest.env:get_meta(pos)
-		meta:set_string("infotext", "Keypad. Right click to set it up or punch it.")
+		meta:set_string("infotext", "Keypad. Right click to set it up or punch it. Set any password and text \"@\" to work as keyboard.")
 		meta:set_string("owner", placer:get_player_name()); meta:set_int("public",1);
 		meta:set_int("x0",0);meta:set_int("y0",0);meta:set_int("z0",0); -- target
 	
@@ -933,7 +1063,7 @@ minetest.register_node("basic_machines:detector", {
 				local tnode = minetest.get_node({x=x0,y=y0,z=z0}).name; -- read node at source position
 				detected_obj = tnode;
 				
-				if node~="" and string.find(tnode,"default:chest") then -- it source is chest, look inside chest for items
+				if node~="" and string.find(tnode,"default:chest") then -- if source is chest, look inside chest for items
 					local cmeta = minetest.get_meta({x=x0,y=y0,z=z0});
 					local inv = cmeta:get_inventory();
 					local stack = ItemStack(node)
@@ -1045,7 +1175,7 @@ minetest.register_node("basic_machines:detector", {
 			if trigger then -- activate target node if succesful
 				meta:set_string("infotext", "detector: on");
 				if not effector.action_on then return end
-				if NOT == 4 then -- set detected object name as target text (target must be keypad)
+				if NOT == 4 then -- set detected object name as target text (target must be keypad, if not changes infotext)
 					if minetest.get_node({x=x2,y=y2,z=z2}).name == "basic_machines:keypad" then
 						detected_obj = detected_obj or "";
 						local tmeta = minetest.get_meta({x=x2,y=y2,z=z2});
@@ -1315,15 +1445,15 @@ minetest.register_node("basic_machines:light_off", {
 			minetest.swap_node(pos,{name = "basic_machines:light_on"});		
 			local meta = minetest.get_meta(pos);
 			local deactivate = meta:get_int("deactivate");
-			--minetest.chat_send_all("deactivate ".. deactivate)
+			
 			if deactivate > 0 then 
-					meta:set_int("active",0);
+					--meta:set_int("active",0);
 					minetest.after(deactivate, 
 						function()
-							if meta:get_int("active") ~= 1 then -- was not activated again, so turn it off
+							--if meta:get_int("active") ~= 1 then -- was not activated again, so turn it off
 								minetest.swap_node(pos,{name = "basic_machines:light_off"}); -- turn off again
-								meta:set_int("active",0);
-							end
+								--meta:set_int("active",0);
+							--end
 						end
 					)
 			end
@@ -1364,7 +1494,8 @@ minetest.register_node("basic_machines:light_on", {
 		end,
 		action_on = function (pos, node,ttl) 
 			local meta = minetest.get_meta(pos);
-			meta:set_int("active",1); -- remember being activated
+			local count = tonumber(meta:get_string("infotext")) or 0;
+			meta:set_string("infotext",count+1); -- increase activate count
 		end
 				}
 	},
@@ -1697,7 +1828,7 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 			"\n\nMODES of operation: normal (just teleport block), dig (digs and gives you resulted node - good for harvesting farms), drop "..
 			"(drops node on ground), object (teleportation of player and objects. distance between source1/2 defines teleport radius). by setting filter you can specify move time for objects or names for players. "..
 			"By setting 'filter' only selected nodes are moved.\nInventory mode can exchange items between node inventories. You need to select inventory name for source/target from the dropdown list on the right and enter node to be moved into filter."..
-			"\n*advanced* You can reverse start/end position by setting reverse nonzero. This is useful for placing stuff at many locations-planting. If you activate mover with OFF signal it will toggle reverse." ..
+			"\n*advanced* You can reverse start/end position by setting reverse nonzero. This is useful for placing stuff at many locations-planting. If you put reverse=2/3 in transport mode it will disable parallel transport but will still do reverse effect with 3. If you activate mover with OFF signal it will toggle reverse." ..
 			"\n\n FUEL CONSUMPTION depends on blocks to be moved and distance. For example, stone or tree is harder to move than dirt, harvesting wheat is very cheap and and moving lava is very hard."..
 			"\n\n UPGRADE mover by moving mese blocks in upgrade inventory. Each mese block increases mover range by 10, fuel consumption is divided by (number of mese blocks)+1 in upgrade. Max 10 blocks are used for upgrade. Dont forget to click OK to refresh after upgrade. "..
 			"\n\n Activate mover by keypad/detector signal or mese signal (if mesecons mod) .";
@@ -1807,7 +1938,14 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 			
 			meta:set_int("iter",math.min(tonumber(fields.iter) or 1,500));meta:set_int("mode",mode);
 			meta:set_string("infotext", "Punch keypad to use it.");
-			if pass~="" then meta:set_string("infotext",meta:get_string("infotext").. ". Password protected."); end
+			if pass~="" then 
+				if fields.text~="@" then
+					meta:set_string("infotext",meta:get_string("infotext").. ". Password protected."); 
+				else
+					meta:set_string("infotext","punch keyboard to use it."); 
+				end
+			end
+			
 		end
 		return
 	end
@@ -1819,8 +1957,17 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 		local meta = minetest.get_meta(pos)
 	
 		if fields.OK == "OK" then
+			
 			local pass;
 			pass = fields.pass or "";
+			
+			if meta:get_string("text")=="@" then -- keyboard mode
+				meta:set_string("input", pass);
+				use_keypad(pos,machines_TTL);
+				return
+			end
+					
+			
 			pass=minetest.get_password_hash(pos.x, pass..pos.y);pass=minetest.get_password_hash(pos.y, pass..pos.z);
 			
 			if pass~=meta:get_string("pass") then

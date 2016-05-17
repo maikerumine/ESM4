@@ -1777,8 +1777,8 @@ mobs:register_spawn("esmobs:badplayer29", {"default:dirt_with_grass","default:st
 mobs:register_spawn("esmobs:badplayer30", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 4, -1, 18000, 1, 3000)
 mobs:register_spawn("esmobs:badplayer31", {"default:dirt_with_grass","default:stone","meru:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 4, -1, 18000, 1, 3000)
 mobs:register_spawn("esmobs:badplayer35", {"default:sandstone","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 4, -1, 18000, 1, -20)
-mobs:register_spawn("esmobs:Mr_Black", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 4, -1, 18000, 1, 3000)
-mobs:register_spawn("esmobs:Jasmine", {"default:obsidian","es:infiniumblock","es:stone_with_infinium","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 7, -1, 18000, 1, -1000)
-mobs:register_spawn("esmobs:Infinium_Monster", {"default:obsidian","default:lava_source","default:lava_flowing","es:stone_with_infinium"}, 12, -1, 18000, 3, 10)
+--mobs:register_spawn("esmobs:Mr_Black", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 4, -1, 18000, 1, 3000)
+--mobs:register_spawn("esmobs:Jasmine", {"default:obsidian","es:infiniumblock","es:stone_with_infinium","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 7, -1, 18000, 1, -1000)
+--mobs:register_spawn("esmobs:Infinium_Monster", {"default:obsidian","default:lava_source","default:lava_flowing","es:stone_with_infinium"}, 12, -1, 18000, 3, 10)
 
 

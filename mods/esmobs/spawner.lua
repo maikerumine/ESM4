@@ -6,7 +6,7 @@
 
 --minetest.register_alias("lagsmobs:cursed_stone", "esmmobs:cursed_stone")
 --minetest.register_alias("mobs:cursed_stone", "esmmobs:cursed_stone")
-
+--[[
 minetest.register_node("esmobs:cursed_stone", {
 	description = "Cursed stone",
 	tiles = {
@@ -67,7 +67,7 @@ mobs:register_spawn("esmobs:oerkki", "esmobs:cursed_stone", 4, -1,3,7, 500, -500
 mobs:register_spawn("esmobs:Candy", "esmobs:blessed_stone",  5, -1, 3,4, 500, -500)  --comment out to disable
 mobs:register_spawn("esmobs:John", "esmobs:blessed_stone",  5, -1, 3,14, 500, -500)  --comment out to disable
 
-
+]]
 
 -- mob spawner
 
