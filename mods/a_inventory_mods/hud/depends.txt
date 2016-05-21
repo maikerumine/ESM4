@@ -6,7 +6,8 @@ bushes_classic?
 creatures?
 docfarming?
 dwarves?
-esmobs?
+mobs?
+mobs_mc?
 ethereal?
 farming?
 farming_plus?

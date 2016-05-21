@@ -11,7 +11,7 @@ mobs:register_mob("mobs_mc:sheep", {
 	type = "animal",
 	hp_max = 25,
 	collisionbox = {-0.5, -0.01, -0.5, 0.5, 1.5, 0.5},
-
+	
 	visual = "mesh",
 	mesh = "mobs_sheep.x",
 	textures = {
@@ -57,7 +57,7 @@ mobs:register_mob("mobs_mc:sheep", {
 	},
 	follow = "farming:wheat",
 	view_range = 5,
-
+	
 	on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
 		if item:get_name() == "farming:wheat" then
@@ -149,7 +149,6 @@ minetest.register_craft({
 
 -- compatibility
 mobs:alias_mob("mobs:sheep", "mobs_mc:sheep")
-
 
 -- spawn eggs
 mobs:register_egg("mobs_mc:sheep", "Sheep", "spawn_egg_sheep.png")

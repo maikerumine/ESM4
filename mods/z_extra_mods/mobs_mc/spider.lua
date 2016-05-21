@@ -95,8 +95,6 @@ minetest.register_craft({
 mobs:alias_mob("mobs:spider", "mobs_mc:spider")
 mobs:alias_mob("esmobs:spider", "mobs_mc:spider")
 
-mobs:alias_mob("esmobs:cobweb", "mobs:cobweb")
-
 -- spawn eggs
 mobs:register_egg("mobs_mc:spider", "Spider", "mobs_cobweb.png", 1)
 

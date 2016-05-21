@@ -17,14 +17,14 @@ dofile(path .. "/wolf.lua") -- KrupnoPavel
 dofile(path .. "/villager.lua") -- KrupnoPavel
 
 --Monsters
---dofile(path .. "/creeper.lua") -- Mesh by Morn76 Animation by Pavel_S
+dofile(path .. "/creeper.lua") -- Mesh by Morn76 Animation by Pavel_S
 dofile(path .. "/skeleton.lua") -- Mesh by Morn76 Animation by Pavel_S
 dofile(path .. "/zombie.lua") -- Mesh by Morn76 Animation by Pavel_S
---dofile(path .. "/zombiepig.lua") -- Mesh by Morn76 Animation by Pavel_S
+dofile(path .. "/zombiepig.lua") -- Mesh by Morn76 Animation by Pavel_S
 dofile(path .. "/slimes.lua") -- Tomas J. Luis
 dofile(path .. "/spider.lua") -- Spider by AspireMint (fishyWET (CC-BY-SA 3.0 license for texture)
-dofile(path .. "/enderman.lua") --
-dofile(path .. "/ghast.lua") --
+dofile(path .. "/enderman.lua") -- 
+dofile(path .. "/ghast.lua") -- 
 
 
 print ("[MOD] Mobs Redo 'MC' loaded")
