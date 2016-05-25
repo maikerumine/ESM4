@@ -1468,7 +1468,7 @@ mobs:register_mob("mobs_badplayer:Mr_Black", {
 	},
 	on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
-		local_chat(clicker:getpos(),"Mr. Black: Grrrrrrrrrrrr!",3)
+		--local_chat(clicker:getpos(),"Mr. Black: Grrrrrrrrrrrr!",3)
 		if item:get_name() == "mobs:meat" or item:get_name() == "farming:bread" then
 			local hp = self.object:get_hp()
 			if hp + 4 > self.hp_max then return end
@@ -1586,7 +1586,7 @@ mobs:register_mob("mobs_badplayer:Jasmine", {
 	fear_height = 4,
 	on_rightclick = function(self, clicker)
 		local item = clicker:get_wielded_item()
-		local_chat(clicker:getpos(),"Jasmine: Tame me now, come to me later, we will chat after I have cooled off.",3)
+		--local_chat(clicker:getpos(),"Jasmine: Tame me now, come to me later, we will chat after I have cooled off.",3)
 		if item:get_name() == "mobs:meat" or item:get_name() == "farming:bread" then
 			local hp = self.object:get_hp()
 			if hp + 4 > self.hp_max then return end

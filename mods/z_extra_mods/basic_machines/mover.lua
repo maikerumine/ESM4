@@ -11,7 +11,7 @@ local machines_minstep = 1 -- minimal allowed activation timestep, if faster mac
 local max_range = 10; -- machines normal range of operation
 local machines_operations = 10; -- 1 coal will provide 10 mover basic operations ( moving dirt 1 block distance)
 local machines_TTL = 16; -- time to live for signals, how many hops before signal dissipates
-basic_machines.version = "05/13/2016a";
+basic_machines.version = "05/23/2016a";
 basic_machines.clockgen = 1; -- if 0 all background continuously running activity (clockgen/keypad) repeating is disabled
 
 -- how hard it is to move blocks, default factor 1, note fuel cost is this multiplied by distance and divided by machine_operations..
@@ -398,6 +398,7 @@ minetest.register_node("basic_machines:mover", {
 			--minetest.chat_send_all(" times ".. times .. " v " .. minetest.pos_to_string(velocityv));
 			
 			-- move objects to another location
+			local finalsound = true;
 			for _,obj in pairs(minetest.get_objects_inside_radius({x=x0+pos.x,y=y0+pos.y,z=z0+pos.z}, r)) do
 				if obj:is_player() then
 					if not minetest.is_protected(obj:getpos(), owner) and (prefer == "" or obj:get_player_name()== prefer) then -- move player only from owners land
@@ -406,6 +407,7 @@ minetest.register_node("basic_machines:mover", {
 					end
 				else
 					if times > 0 then
+						local finalmove = true;
 						-- move objects with set velocity in target direction
 						obj:setvelocity(velocityv);
 						if obj:get_luaentity() then -- interaction with objects like carts
@@ -413,8 +415,8 @@ minetest.register_node("basic_machines:mover", {
 							if luaent.name then 
 								if luaent.name == "basic_machines:ball" then -- move balls for free
 									luaent.velocity = {x=velocityv.x*times,y=velocityv.y*times,z=velocityv.z*times};
-									luaent.owner = owner; 
-									return
+									finalmove = false;
+									finalsound = false;
 								end
 								if luaent.name == "carts:cart" then -- just accelerate cart
 									luaent.velocity = {x=velocityv.x*times,y=velocityv.y*times,z=velocityv.z*times};
@@ -425,7 +427,9 @@ minetest.register_node("basic_machines:mover", {
 							end
 						end
 						--obj:setacceleration({x=0,y=0,z=0});
-						minetest.after(times, function () if obj then obj:setvelocity({x=0,y=0,z=0}); obj:moveto(pos2, false) end end);
+						if finalmove then -- dont move objects like balls to destination after delay
+							minetest.after(times, function () if obj then obj:setvelocity({x=0,y=0,z=0}); obj:moveto(pos2, false) end end); 
+						end
 					else
 						obj:moveto(pos2, false)
 					end
@@ -436,7 +440,7 @@ minetest.register_node("basic_machines:mover", {
 			if teleport_any then
 				fuel = fuel - fuel_cost; meta:set_float("fuel",fuel);
 				meta:set_string("infotext", "Mover block. Fuel "..fuel);
-				minetest.sound_play("tng_transporter1", {pos=pos2,gain=1.0,max_hear_distance = 8,})
+				if finalsound then minetest.sound_play("tng_transporter1", {pos=pos2,gain=1.0,max_hear_distance = 8,}) end
 			end
 			
 			return 
@@ -503,9 +507,12 @@ minetest.register_node("basic_machines:mover", {
 						inv2:add_item(invName2, stack);
 						inv1:remove_item(invName1, stack);
 					else
-						return
+						if upgrade == -1 then -- admin is owner.. just add stuff
+							inv2:add_item(invName2, stack);
+						else
+							return -- item not found in chest
+						end
 					end
-					
 					
 					minetest.sound_play("chest_inventory_move", {pos=pos2,gain=1.0,max_hear_distance = 8,})
 					fuel = fuel - fuel_cost; meta:set_float("fuel",fuel);
@@ -524,7 +531,8 @@ minetest.register_node("basic_machines:mover", {
 				
 				if inv:contains_item("main", stack) then
 					inv:remove_item("main", stack);
-					else return -- item not found in chest
+				else 
+					return
 				end
 				
 				if mreverse == 1 then -- planting mode: check if transform seed->plant is needed

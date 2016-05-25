@@ -29,7 +29,7 @@ mobs:register_mob("mobs_mc:greensmall", {
 	walk_velocity = .8,
 	run_velocity = 2.6,
 	damage = 1,
-	armor = 80,
+	armor = 100,
 	drops = {
 		{name = "mesecons_materials:glue 1",
 		chance = 3,
@@ -39,10 +39,6 @@ mobs:register_mob("mobs_mc:greensmall", {
 		chance = 1,
 		min = 1,
 		max = 5,},
-		{name = "default:wood",
-		chance = 4,
-		min = 1,
-		max = 3,},
 	},
 	animation = {
 		speed_normal = 24,
@@ -69,7 +65,7 @@ mobs:register_mob("mobs_mc:greensmall", {
 	jump = true,
 	jump_height = 4,
 	jump_chance = 98,
-	fear_height = 12,
+	fear_height = 12,	
 })
 
 mobs:register_mob("mobs_mc:greenmedium", {
@@ -241,7 +237,7 @@ mobs:register_mob("mobs_mc:lavasmall", {
 	drops = {
 		{name = "tnt:gunpowder",
 		chance = 3,
-		min = 0,
+		min = 1,
 		max = 1,},
 		{name = "default:coal",
 		chance = 1,
@@ -273,7 +269,7 @@ mobs:register_mob("mobs_mc:lavasmall", {
 	jump = true,
 	jump_height = 4,
 	jump_chance = 98,
-	fear_height = 12,
+	fear_height = 12,	
 })
 
 mobs:register_mob("mobs_mc:lavabig", {
@@ -352,13 +348,13 @@ mobs:register_spawn("mobs_mc:lavabig", {"nether:rack", "default:lava"}, 7, -1, 5
 mobs:alias_mob("mobs:lavasmall", "mobs_mc:lavasmall")
 mobs:alias_mob("mobs:lavabig", "mobs_mc:lavabig")
 mobs:alias_mob("mobs:greensmall", "mobs_mc:greensmall")
-mobs:alias_mob("mobs:greenmedium", "mobs_mc:greenmedium")
+mobs:alias_mob("mobs:greenmediuml", "mobs_mc:greenmedium")
 mobs:alias_mob("mobs:greenbig", "mobs_mc:greenbig")
 
 mobs:alias_mob("slimes:lavasmall", "mobs_mc:lavasmall")
 mobs:alias_mob("slimes:lavabig", "mobs_mc:lavabig")
 mobs:alias_mob("slimes:greensmall", "mobs_mc:greensmall")
-mobs:alias_mob("slimes:greenmedium", "mobs_mc:greenmedium")
+mobs:alias_mob("slimes:greenmediuml", "mobs_mc:greenmedium")
 mobs:alias_mob("slimes:greenbig", "mobs_mc:greenbig")
 
 

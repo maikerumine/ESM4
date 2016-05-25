@@ -65,7 +65,8 @@ mobs:register_mob("mobs_mc:villager", {
 						minetest.sound_play("Villageraccept", {to_player = player:get_player_name()})
 					end
 					if listname == "input" or listname == "output" then
-						return 1000
+						--return 1000
+						return 0
 					else
 						return 0
 					end
@@ -102,6 +103,7 @@ mobs:register_mob("mobs_mc:villager", {
 					else
 						inv:set_stack("output", 1, ItemStack(""))
 						minetest.sound_play("Villagerdeny", {to_player = player:get_player_name()})
+						
 					end
 				end,
 			})
@@ -139,7 +141,7 @@ mobs:register_mob("mobs_mc:villager", {
 			{"default:diamond 1",		"cake:cake 1"},
 			{"default:diamond 10",		"mobs:saddle 1"},
 			--{"default:diamond 10",		"clock:1 1"},
-			--{"default:diamond 10",		"compass:0 1"},
+			--{"default:diamondd 10",		"compass:0 1"},
 			{"default:diamond 1",		"default:glass 5"},
 			{"default:diamond 1",		"nether:glowstone 3"},
 			{"default:diamond 3",		"mobs:shears 1"},
@@ -149,8 +151,8 @@ mobs:register_mob("mobs_mc:villager", {
 		local tradenum = math.random(#trades)
 		inv:set_stack("wanted", 1, ItemStack(trades[tradenum][1]))
 		inv:set_stack("offered", 1, ItemStack(trades[tradenum][2]))
-
-		local formspec =
+		
+		local formspec = 
 		"size[9,8.75]"..
 		"background[-0.19,-0.25;9.41,9.49;trading_formspec_bg.png]"..
 		"bgcolor[#080808BB;true]"..
@@ -165,7 +167,7 @@ mobs:register_mob("mobs_mc:villager", {
 		minetest.show_formspec(clicker:get_player_name(), "tradespec", formspec)
 	end,
 })
-mobs:register_spawn("mobs_mc:villager", {"default:gravel"}, 20, 8, 5000, 1, 31000)
+mobs:register_spawn("mobs_mc:villager", {"default:gravel"}, 20, 8, 50, 8, 31000)
 
 
 -- compatibility

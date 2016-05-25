@@ -11,7 +11,7 @@ mobs:register_mob("mobs_mc:enderman", {
 	type = "monster",
 	hp_max = 39,
 	collisionbox = {-0.4, -2.4, -0.4, 0.4, 1.8, 0.4},
-
+	
 	visual = "mesh",
 	mesh = "mobs_sand_monster.b3d",
 	textures = {
@@ -27,15 +27,15 @@ mobs:register_mob("mobs_mc:enderman", {
 	walk_velocity = 3.2,
 	run_velocity = 5.4,
 	damage = 1,
-	armor = 80,
+	armor = 200,
 	drops = {
 		{name = "default:obsidian",
-		chance = 9,
+		chance = 4,
 		min = 0,
 		max = 2,},
 		{name = "default:diamond",
 		chance = 11,
-		min = 0,
+		min = 1,
 		max = 1,},
 		{name = "farorb:farorb",
 		chance = 3,
@@ -66,7 +66,7 @@ mobs:register_mob("mobs_mc:enderman", {
 	replace_offset = -1,
 
 })
-mobs:register_spawn("mobs_mc:enderman", {"group:crumbly", "default:sand", "default:desert_sand"}, 7, -1, 5000, 4, 31000)
+mobs:register_spawn("mobs_mc:enderman", { "default:sand", "default:desert_sand"}, 5, -1, 5000, 4, 31000)
 
 
 

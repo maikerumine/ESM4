@@ -119,8 +119,8 @@ minetest.register_craft({
 	output = "bags:small_esmmese",
 	recipe = {
         {"", "default:mese", ""},
-        {"esmobs:leather", "esmobs:leather", "esmobs:leather"},
-        {"esmobs:leather", "esmobs:leather", "esmobs:leather"},
+        {"mobs:leather", "mobs:leather", "mobs:leather"},
+        {"mobs:leather", "mobs:leather", "mobs:leather"},
     },
 })
 minetest.register_craft({

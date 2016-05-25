@@ -223,9 +223,10 @@ minetest.register_node(":mobs:egg", {
 })
 
 -- compatibility
-mobs:alias_mob("esmobs:chicken_egg_fried", "mobsl:chicken_egg_fried")
+mobs:alias_mob("esmobs:chicken_egg_fried", "mobs:chicken_egg_fried")
 mobs:alias_mob("esmobs:chicken_raw", "mobs:chicken_raw")
 mobs:alias_mob("esmobs:chicken_cooked", "mobs:chicken_cooked")
+mobs:alias_mob("esmobs:egg", "mobs:egg")
 
 
 
