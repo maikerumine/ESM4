@@ -48,14 +48,14 @@ minetest.register_node("mobs:spawner", {
 		local xlig = tonumber(comm[3]) -- max light
 		local num = tonumber(comm[4]) -- total mobs in area
 		local pla = tonumber(comm[5]) -- player distance (0 to disable)
-		local yof = tonumber(comm[6]) -- Y offset to spawn mob
+		local yof = tonumber(comm[6]) or 0 -- Y offset to spawn mob
 
 		if mob and mob ~= "" and mobs.spawning_mobs[mob] == true
 		and num and num >= 0 and num <= 10
 		and mlig and mlig >= 0 and mlig <= 15
 		and xlig and xlig >= 0 and xlig <= 15
 		and pla and pla >=0 and pla <= 20
-		and yof > -10 and yof < 10 then
+		and yof and yof > -10 and yof < 10 then
 
 			meta:set_string("command", fields.text)
 			meta:set_string("infotext", "Spawner Active (" .. mob .. ")")
@@ -76,9 +76,6 @@ minetest.register_abm({
 
 	action = function(pos, node, active_object_count, active_object_count_wider)
 
-		-- check objects inside 9x9 area around spawner
-		local objs = minetest.get_objects_inside_radius(pos, 9)
-
 		-- get meta and command
 		local meta = minetest.get_meta(pos)
 		local comm = meta:get_string("command"):split(" ")
@@ -96,6 +93,8 @@ minetest.register_abm({
 			return
 		end
 
+		-- check objects inside 9x9 area around spawner
+		local objs = minetest.get_objects_inside_radius(pos, 9)
 		local count = 0
 		local ent = nil
 

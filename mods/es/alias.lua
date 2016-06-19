@@ -15,6 +15,18 @@
 
 --Alias                      "old"--->"new"
 ------------------------------------------
+
+--vendor
+minetest.register_alias("vendor:vendor", "smartshop:shop")
+minetest.register_alias("vendor:depositor", "smartshop:shop")
+minetest.register_alias("vendorgoldblock:vendor", "smartshop:shop")
+minetest.register_alias("vendorgoldblock:depositor", "smartshop:shop")
+
+
+minetest.register_alias("esmobs:cobweb", "mobs:cobweb")
+
+
+
 --esmobs pathfinding
 minetest.register_alias("esmobs:stone", "default:leaves")
 minetest.register_alias("esmobs:dirt", "default:leaves")

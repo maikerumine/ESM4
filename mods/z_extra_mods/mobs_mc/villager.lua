@@ -167,7 +167,7 @@ mobs:register_mob("mobs_mc:villager", {
 		minetest.show_formspec(clicker:get_player_name(), "tradespec", formspec)
 	end,
 })
-mobs:register_spawn("mobs_mc:villager", {"default:gravel"}, 20, 8, 50, 8, 31000)
+--mobs:register_spawn("mobs_mc:villager", {"default:gravel"}, 20, 8, 50, 8, 31000)
 
 
 -- compatibility

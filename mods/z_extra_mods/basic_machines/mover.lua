@@ -11,7 +11,7 @@ local machines_minstep = 1 -- minimal allowed activation timestep, if faster mac
 local max_range = 10; -- machines normal range of operation
 local machines_operations = 10; -- 1 coal will provide 10 mover basic operations ( moving dirt 1 block distance)
 local machines_TTL = 16; -- time to live for signals, how many hops before signal dissipates
-basic_machines.version = "05/26/2016a";
+basic_machines.version = "06/12/2016a";
 basic_machines.clockgen = 1; -- if 0 all background continuously running activity (clockgen/keypad) repeating is disabled
 
 -- how hard it is to move blocks, default factor 1, note fuel cost is this multiplied by distance and divided by machine_operations..
@@ -59,6 +59,11 @@ basic_machines.plant_table  = {["farming:seed_barley"]="farming:barley_1",["farm
 basic_machines.no_teleport_table = {
 ["itemframes:item"] = true,
 ["signs:text"] = true
+}
+
+-- list of nodes mover cant take from in inventory mode
+basic_machines.limit_inventory_table = { -- node name = {list of bad inventories to take from}
+["basic_machines:autocrafter"]= {["recipe"]=1, ["output"]=1}
 }
 
 -- when activated with keypad these will be "punched" to update their text too
@@ -476,11 +481,19 @@ minetest.register_node("basic_machines:mover", {
 		if mode == "inventory" then
 					--if prefer == "" then meta:set_string("infotext", "Mover block. must set nodes to move (filter) in inventory mode."); return; end
 					
+					-- forbidden nodes to take from in inventory mode - to prevent abuses :
+					if basic_machines.limit_inventory_table[node1.name] then
+						if basic_machines.limit_inventory_table[node1.name][invName1] then -- forbidden to take from this inventory
+							return 
+						end 
+					end
+					
 					local stack, meta1,inv1;
 					if prefer == "" then -- if prefer == "" then just pick one item from chest to transfer
 						meta1 = minetest.get_meta(pos1);
 						inv1 = meta1:get_inventory();
 						if inv1:is_empty(invName1) then return end -- nothing to move
+						
 						local size = inv1:get_size(invName1);
 						
 						local found = false;
@@ -581,8 +594,7 @@ minetest.register_node("basic_machines:mover", {
 					node1.name)
 					
 					for _, pos3 in ipairs(positions) do
-						-- dont take coal from source or target location to avoid chest/fuel confusion isssues
-						if count>16 then break end
+						--if count>16 then break end
 						minetest.set_node(pos3,{name="air"}); count = count+1;
 					end
 					
@@ -689,7 +701,10 @@ local function use_keypad(pos,ttl, again) -- position, time to live ( how many t
 	if t0>t1-machines_minstep then -- activated before natural time
 		T=T+1;
 	else
-		if T>0 then T=T-1 end
+		if T>0 then 
+			T=T-1 
+			if t1-t0>5 then T = 0 end
+		end
 	end
 	meta:set_int("T",T);
 	meta:set_int("t",t1); -- update last activation time
@@ -1226,6 +1241,14 @@ minetest.register_abm({
 	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		if basic_machines.clockgen == 0 then return end
+		local meta = minetest.get_meta(pos); 
+		local machines = meta:get_int("machines");
+		if machines~=1 then -- no machines privilege
+			if not minetest.get_player_by_name(meta:get_string("owner")) then -- owner not online
+				return 
+			end
+		end
+		
 		pos.y=pos.y+1;
 		node = minetest.get_node(pos);if not node.name or node.name == "air" then return end 
 		local table = minetest.registered_nodes[node.name];
@@ -1233,7 +1256,9 @@ minetest.register_abm({
 			else return 
 		end
 		local effector=table.mesecons.effector;
-		effector.action_on(pos,node,machines_TTL); 
+		if effector.action_on then
+			effector.action_on(pos,node,machines_TTL); 
+		end
 	end
 	});
 
@@ -1286,7 +1311,11 @@ minetest.register_node("basic_machines:distributor", {
 			if t0>t1-machines_minstep then -- activated before natural time
 				T=T+1;
 			else
-				if T>0 then T=T-1 end
+				if T>0 then 
+					T=T-1 
+					if t1-t0>5 then T = 0 end -- reset temperature if more than 5s elapsed since last punch
+				end
+				
 			end
 			meta:set_int("T",T);
 			meta:set_int("t",t1); -- update last activation time

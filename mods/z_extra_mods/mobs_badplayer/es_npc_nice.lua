@@ -2195,7 +2195,7 @@ mobs:register_mob("mobs_badplayer:Maikerumine", {
 --NOTE: ALWAYS PUT THE REGISTER_SPAWN BELOW THE REGISTER_ENTITY!!!!!
 
 
-
+--[[
 mobs:register_spawn("mobs_badplayer:Sam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 18000, 1, 31000)
 mobs:register_spawn("mobs_badplayer:John", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 18000, 1, 31000)
 mobs:register_spawn("mobs_badplayer:John", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 5, -1, 18000, 1, 31000)
@@ -2214,7 +2214,7 @@ mobs:register_spawn("mobs_badplayer:Mr_Pink", {"default:dirt_with_grass","defaul
 mobs:register_spawn("mobs_badplayer:Candy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","es:strange_grass","es:aiden_grass"},5, -1, 18000, 1, 31000)
 mobs:register_spawn("mobs_badplayer:Infiniumman", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 18000, 1, 31000)
 mobs:register_spawn("mobs_badplayer:Maikerumine", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 18000, 1, 31000)
-
+]]
 --spawn eggs
 mobs:register_egg("mobs_badplayer:Sam", "NPC Sam", "badplayer_1.png", 1)
 mobs:register_egg("mobs_badplayer:John", "NPC John", "badplayer_5.png", 1)

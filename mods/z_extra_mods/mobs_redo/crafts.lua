@@ -81,13 +81,3 @@ minetest.register_craft({
 		{'', 'group:stick', 'default:steel_ingot'},
 	}
 })
-
-
--- compatibility
-mobs:alias_mob("esmobs:shears", "mobs:shears")
-mobs:alias_mob("esmobs:net", "mobs:net")
-mobs:alias_mob("esmobs:magic_lasso", "mobs:magic_lasso")
-mobs:alias_mob("esmobs:meat", "mobs:meat")
-mobs:alias_mob("esmobs:meat_raw", "mobs:meat_raw")
-mobs:alias_mob("esmobs:leather", "mobs:leather")
-mobs:alias_mob("esmobs:nametag", "mobs:nametag")
