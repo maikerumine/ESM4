@@ -11,14 +11,23 @@ local machines_minstep = 1 -- minimal allowed activation timestep, if faster mac
 local max_range = 10; -- machines normal range of operation
 local machines_operations = 10; -- 1 coal will provide 10 mover basic operations ( moving dirt 1 block distance)
 local machines_TTL = 16; -- time to live for signals, how many hops before signal dissipates
-basic_machines.version = "06/12/2016a";
+basic_machines.version = "07/12/2016a";
 basic_machines.clockgen = 1; -- if 0 all background continuously running activity (clockgen/keypad) repeating is disabled
 
 -- how hard it is to move blocks, default factor 1, note fuel cost is this multiplied by distance and divided by machine_operations..
 basic_machines.hardness = {
 ["default:stone"]=4,["default:tree"]=2,["default:jungletree"]=2,["default:pinetree"]=2,["default:acacia_tree"]=2,
 ["default:lava_source"]=21890,["default:water_source"]=11000,["default:obsidian"]=20,["bedrock2:bedrock"]=999999};
+--move machines for free
 basic_machines.hardness["basic_machines:mover"]=0.;
+basic_machines.hardness["basic_machines:keypad"]=0.;
+basic_machines.hardness["basic_machines:distributor"]=0.;
+basic_machines.hardness["basic_machines:battery"]=0.;
+basic_machines.hardness["basic_machines:detector"]=0.;
+basic_machines.hardness["basic_machines:generator"]=0.;
+basic_machines.hardness["basic_machines:ball_spawner"]=0.;
+basic_machines.hardness["basic_machines:light_on"]=0.;
+basic_machines.hardness["basic_machines:light_off"]=0.;
 
 basic_machines.hardness["es:toxic_water_source"]=21890.;basic_machines.hardness["es:toxic_water_flowing"]=11000;
 basic_machines.hardness["default:river_water_source"]=21890.;
@@ -104,6 +113,7 @@ minetest.register_node("basic_machines:mover", {
 		meta:set_int("x0",0);meta:set_int("y0",-1);meta:set_int("z0",0); -- source1
 		meta:set_int("x1",0);meta:set_int("y1",-1);meta:set_int("z1",0); -- source2: defines cube
 		meta:set_int("pc",0); meta:set_int("dim",1);-- current cube position and dimensions
+		meta:set_int("pc",0); meta:set_int("dim",1);-- current cube position and dimensions
 		meta:set_int("x2",0);meta:set_int("y2",1);meta:set_int("z2",0);
 		meta:set_float("fuel",0)
 		meta:set_string("prefer", "");
@@ -181,6 +191,7 @@ minetest.register_node("basic_machines:mover", {
 		"dropdown[3,2.25;1.5,1;inv2;".. inv_list2 .. ";" .. inv2 .."]"..
 		"button_exit[4,3.25;1,1;OK;OK] field[0.25,4.5;3,1;prefer;filter;"..prefer.."]"..
 		"button[3,3.25;1,1;help;help]"..
+		"button[6,0.25;2,1;altgui;alternate gui]"..
 		"label[0.,3.0;MODE selection]"..
 		"dropdown[0.,3.35;3,1;mode;normal,dig,drop,object,inventory,transport;".. mode .."]"..
 		"list[nodemeta:"..pos.x..','..pos.y..','..pos.z ..";filter;3,4.4;1,1;]"..
@@ -202,7 +213,9 @@ minetest.register_node("basic_machines:mover", {
 			local itemname = stack:get_name() or "";
 			meta:set_string("prefer",itemname);
 			minetest.chat_send_player(player:get_player_name(),"#mover: filter set as " .. itemname)
-			-- local inv = meta:get_inventory();
+			minetest.show_formspec(player:get_player_name(), "basic_machines_inventory", 
+			"size[8, 4] list[current_player;main;0,0;8,4;]");
+		-- local inv = meta:get_inventory();
 			-- inv:set_stack("filter",1, ItemStack({name=itemname})) 
 			return 1;
 		end
@@ -411,32 +424,36 @@ minetest.register_node("basic_machines:mover", {
 						teleport_any = true;
 					end
 				else
-					if times > 0 then
-						local finalmove = true;
-						-- move objects with set velocity in target direction
-						obj:setvelocity(velocityv);
-						if obj:get_luaentity() then -- interaction with objects like carts
-							local luaent = obj:get_luaentity();
-							if luaent.name then 
-								if luaent.name == "basic_machines:ball" then -- move balls for free
-									luaent.velocity = {x=velocityv.x*times,y=velocityv.y*times,z=velocityv.z*times};
-									finalmove = false;
-									finalsound = false;
-								end
-								if luaent.name == "carts:cart" then -- just accelerate cart
-									luaent.velocity = {x=velocityv.x*times,y=velocityv.y*times,z=velocityv.z*times};
-									fuel = fuel - fuel_cost; meta:set_float("fuel",fuel);
-									meta:set_string("infotext", "Mover block. Fuel "..fuel);
-									return;
+				
+					local lua_entity = obj:get_luaentity();
+					local detected_obj = lua_entity.name or "" 
+					if not basic_machines.no_teleport_table[detected_obj] then -- object on no teleport list 
+						if times > 0 then
+							local finalmove = true;
+							-- move objects with set velocity in target direction
+							obj:setvelocity(velocityv);
+							if obj:get_luaentity() then -- interaction with objects like carts
+								if lua_entity.name then 
+									if lua_entity.name == "basic_machines:ball" then -- move balls for free
+										lua_entity.velocity = {x=velocityv.x*times,y=velocityv.y*times,z=velocityv.z*times};
+										finalmove = false;
+										finalsound = false;
+									end
+									if lua_entity.name == "carts:cart" then -- just accelerate cart
+										lua_entity.velocity = {x=velocityv.x*times,y=velocityv.y*times,z=velocityv.z*times};
+										fuel = fuel - fuel_cost; meta:set_float("fuel",fuel);
+										meta:set_string("infotext", "Mover block. Fuel "..fuel);
+										return;
+									end
 								end
 							end
+							--obj:setacceleration({x=0,y=0,z=0});
+							if finalmove then -- dont move objects like balls to destination after delay
+								minetest.after(times, function () if obj then obj:setvelocity({x=0,y=0,z=0}); obj:moveto(pos2, false) end end); 
+							end
+						else
+								obj:moveto(pos2, false)
 						end
-						--obj:setacceleration({x=0,y=0,z=0});
-						if finalmove then -- dont move objects like balls to destination after delay
-							minetest.after(times, function () if obj then obj:setvelocity({x=0,y=0,z=0}); obj:moveto(pos2, false) end end); 
-						end
-					else
-						obj:moveto(pos2, false)
 					end
 					teleport_any = true;
 				end
@@ -754,7 +771,7 @@ local function use_keypad(pos,ttl, again) -- position, time to live ( how many t
 	local node = minetest.get_node(tpos);if not node.name then return end -- error
 	local text = meta:get_string("text"); 
 	
-	if text ~= "" then -- set text on target node
+	if text ~= "" then -- TEXT MODE; set text on target
 		if text == "@" then -- keyboard mode, set text from input
 			text = meta:get_string("input") or "";
 			meta:set_string("input",""); -- clear input again
@@ -782,10 +799,11 @@ local function use_keypad(pos,ttl, again) -- position, time to live ( how many t
 			tmeta:set_string("text",text);
 			local table = minetest.registered_nodes[node.name];
 			if not table.on_punch then return end -- error
-			-- if signs_lib and signs_lib.update_sign then
-				-- signs_lib.update_sign(pos)
-			-- end
-			table.on_punch(tpos, node, nil);			
+			if signs_lib and signs_lib.update_sign then
+				--signs_lib.update_sign(pos)
+				table.on_punch(tpos, node, nil); -- warning - this can cause problems if no signs_lib installed
+			end
+			
 			return
 		end
 		
@@ -794,10 +812,21 @@ local function use_keypad(pos,ttl, again) -- position, time to live ( how many t
 			x0=tmeta:get_int("x0");y0=tmeta:get_int("y0");z0=tmeta:get_int("z0");
 			x0=tpos.x+x0;y0=tpos.y+y0;z0=tpos.z+z0;
 			tpos = {x=x0,y=y0,z=z0};
-			if string.byte(ttext) == 64 then -- target keypad's text starts with @ ( ascii code 64)
+			if string.byte(ttext) == 64 then -- target keypad's text starts with @ ( ascii code 64) -> character replacement
 				ttext =string.sub(ttext,2); if not ttext or ttext == "" then return end
 				ttext = string.gsub(ttext, "@", text); -- replace every @ in ttext with text
 				
+				-- set target keypad's target's infotext
+				tmeta = minetest.get_meta(tpos);if not tmeta then return end
+				tmeta:set_string("infotext", ttext);
+			elseif string.byte(ttext) == 37 then -- target keypad's text starts with % ( ascii code 37) -> word extraction
+				local i = tonumber(string.sub(ttext,2,2)) or 1; --read the number following the %
+
+				--extract i-th word from text 
+				 local j = 0; 
+				 for word in string.gmatch(text, "%S+") do 
+					j=j+1; if j == i then ttext = word; break; end
+				 end
 				-- set target keypad's target's infotext
 				tmeta = minetest.get_meta(tpos);if not tmeta then return end
 				tmeta:set_string("infotext", ttext);
@@ -927,7 +956,10 @@ minetest.register_node("basic_machines:keypad", {
 		"field[0.25,0.5;1,1;x0;target;"..x0.."] field[1.25,0.5;1,1;y0;;"..y0.."] field[2.25,0.5;1,1;z0;;"..z0.."]"..
 		"button_exit[3.25,3.25;1,1;OK;OK] field[0.25,1.5;3.25,1;pass;Password: ;"..pass.."]" .. "field[0.25,2.5;1,1;iter;;".. iter .."]"..
 		"label[0.,1.9;repeat]" .."field[1.25,2.5;3.25,1;text;text;".. text .."]" ..
-		"field[0.25,3.5;3.25,1;mode;1=OFF/2=ON/3=TOGGLE;"..mode.."]";
+		"field[0.25,3.5;3.25,1;mode;1=OFF/2=ON/3=TOGGLE;"..mode.."]"..
+		"button_exit[3.25,0.25;1,1;help;help]"
+		
+		;
 		-- if meta:get_string("owner")==player:get_player_name() then
 			minetest.show_formspec(player:get_player_name(), "basic_machines:keypad_"..minetest.pos_to_string(pos), form)
 		-- else
@@ -1871,7 +1903,47 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 			"\n\n Activate mover by keypad/detector signal or mese signal (if mesecons mod) .";
 			local form = "size [6,7] textarea[0,0;6.5,8.5;help;MOVER HELP;".. text.."]"
 			minetest.show_formspec(name, "basic_machines:help_mover", form)
+			return
 		end
+		
+		if fields.altgui then -- alternate gui without dropdown menu which causes crash for ios tablet users
+		
+			local x0,y0,z0,x1,y1,z1,x2,y2,z2;
+			x0=tonumber(fields.x0) or 0;y0=tonumber(fields.y0) or -1;z0=tonumber(fields.z0) or 0
+			x1=tonumber(fields.x1) or 0;y1=tonumber(fields.y1) or -1;z1=tonumber(fields.z1) or 0
+			x2=tonumber(fields.x2) or 0;y2=tonumber(fields.y2) or 1;z2=tonumber(fields.z2) or 0;
+			local range = meta:get_float("upgrade") or 1;	range = range * max_range;
+			
+			
+			local inv1 = meta:get_string("inv1");local inv2 = meta:get_string("inv2");
+			
+			local prefer =  meta:get_string("prefer");
+			local mode =  meta:get_string("mode");
+			local upgrade =  meta:get_int("upgrade");
+			local mreverse = meta:get_int("reverse");
+
+			
+			local form = "size[8,9.5]" ..  -- width, height
+			--"size[6,10]" ..  -- width, height
+			"field[0.25,0.5;1,1;x0;source1;"..x0.."] field[1.25,0.5;1,1;y0;;"..y0.."] field[2.25,0.5;1,1;z0;;"..z0.."]"..
+			"field[3.25,0.5;1.5,1;inv1;inv1;" .. inv1 .."]"..
+			"field[0.25,1.5;1,1;x1;source2;"..x1.."] field[1.25,1.5;1,1;y1;;"..y1.."] field[2.25,1.5;1,1;z1;;"..z1.."]"..
+			"field[0.25,2.5;1,1;x2;Target;"..x2.."] field[1.25,2.5;1,1;y2;;"..y2.."] field[2.25,2.5;1,1;z2;;"..z2.."]"..
+			"field[3.25,2.5;1.5,1;inv2;inv2;" .. inv2 .."]"..
+			"button_exit[4,3.25;1,1;OK;OK] field[0.25,4.5;3,1;prefer;filter;"..prefer.."]"..
+			"button[3,3.25;1,1;help;help]"..
+			"field[0.25,3.6;3,1;mode;mode;".. mode .."]"..
+			"list[nodemeta:"..pos.x..','..pos.y..','..pos.z ..";filter;3,4.4;1,1;]"..
+			"list[nodemeta:"..pos.x..','..pos.y..','..pos.z ..";upgrade;4,4.4;1,1;]".."label[4,4;upgrade .. ".. upgrade .."]" .. 
+			"field[3.25,1.5;1.,1;reverse;reverse;"..mreverse.."]" .. "list[current_player;main;0,5.5;8,4;]";
+			-- minetest.after(1,
+				-- function()
+					minetest.show_formspec(player:get_player_name(), "basic_machines:mover_"..minetest.pos_to_string(pos), form)
+				-- end
+				-- )
+			return 
+		end
+		
 		
 		if fields.OK == "OK" then
 			local x0,y0,z0,x1,y1,z1,x2,y2,z2;
@@ -1935,7 +2007,7 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 			meta:set_string("infotext", "Mover block. Set up with source coordinates ".. x0 ..","..y0..","..z0.. " -> ".. x1 ..","..y1..","..z1.. " and target coord ".. x2 ..","..y2..",".. z2 .. ". Put charged battery next to it and start it with keypad/mese signal.");
 			if meta:get_float("fuel")<0 then meta:set_float("fuel",0) end -- reset block
 		end
-		return
+		return 
 	end
 	
 	-- KEYPAD
@@ -1946,6 +2018,35 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 		local meta = minetest.get_meta(pos)
 		local privs = minetest.get_player_privs(player:get_player_name());
 		if (minetest.is_protected(pos,name) and not privs.privs) or not fields then return end -- only builder can interact
+		
+		if fields.help then
+			local text = "target : represents coordinates ( x, y, z ) relative to keypad. (0,0,0) is keypad itself, (0,1,0) is one node above, (0,-1,0) one node below. X coordinate axes goes from east to west, Y from down to up, Z from south to north."..
+			"\n\nPassword: enter password and press OK. Password will be encrypted. Next time you use keypad you will need to enter correct password to gain access."..
+				"\n\nrepeat: number to control how many times activation is repeated after initial punch"..
+
+				"\n\ntext: if set then text on target node will be changed. In case target is detector/mover, filter settings will be changed. Can be used for special operations."..
+
+				"\n\n1=OFF/2=ON/3=TOGGLE control the way how target node is activated"..
+
+			"\n**************************************************\nusage\n"..
+
+				"\nJust punch ( left click ) keypad, then the target block will be activated."..
+				"\nTo set text on other nodes ( text shows when you look at node ) just target the node and set nonempty text. Upon activation text will be set. When target node is another keypad, its \"text\" field will be set. When targets is mover/detector, its \"filter\" field will be set. To clear \"filter\" set text to \"@\"."..
+
+				"\n\nkeyboard : to use keypad as keyboard for text input write \"@\" in \"text\" field and set any password. Next time keypad is used it will work as text input device."..
+
+				"\n\ndisplaying messages to nearby players ( up to 5 blocks around keypad's target ): set text to \"!text\". Upon activation player will see \"text\" in their chat."..
+
+				"\n\nplaying sound to nearby players : set text to \"$sound_name\""..
+
+				"\n\nadvanced: "..
+				"\ntext replacement : Suppose keypad A is set with text \"@some @. text @!\" and keypad B is set with text \"insertion\". Suppose we target A with B and activate B. Then text of keypad A will be set to \"some insertion. text insertion!\" insertion\""..
+				"\nword extraction: Suppose keypad A is set with text \"%1\". Then upon activation text of keypad A will be set to  1.st word of keypad B.";
+			
+			local form = "size [6,7] textarea[0,0;6.5,8.5;help;KEYPAD HELP;".. text.."]"
+			minetest.show_formspec(name, "basic_machines:help_keypad", form)
+			return
+		end
 		
 		if fields.OK == "OK" then
 			local x0,y0,z0,pass,mode;

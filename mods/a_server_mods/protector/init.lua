@@ -356,7 +356,7 @@ minetest.register_craft({
 })
 
 --= Protection Logo
---[[
+
 minetest.register_node("protector:protect2", {
 	description = "Protection Logo",
 	tiles = {"protector_logo.png"},
@@ -431,11 +431,11 @@ minetest.register_craft({
 	output = "protector:protect2",
 	recipe = {
 		{"default:stone", "default:stone", "default:stone"},
-		{"default:stone", "default:copper_ingot", "default:stone"},
+		{"default:stone", "es:emeraldblock", "default:stone"},
 		{"default:stone", "default:stone", "default:stone"},
 	}
 })
-]]
+
 -- If name entered or button press
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)

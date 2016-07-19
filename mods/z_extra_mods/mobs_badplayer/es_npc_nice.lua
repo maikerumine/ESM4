@@ -2194,8 +2194,8 @@ mobs:register_mob("mobs_badplayer:Maikerumine", {
 
 --NOTE: ALWAYS PUT THE REGISTER_SPAWN BELOW THE REGISTER_ENTITY!!!!!
 
-
 --[[
+
 mobs:register_spawn("mobs_badplayer:Sam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 18000, 1, 31000)
 mobs:register_spawn("mobs_badplayer:John", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 18000, 1, 31000)
 mobs:register_spawn("mobs_badplayer:John", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 5, -1, 18000, 1, 31000)

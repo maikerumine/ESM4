@@ -1,4 +1,6 @@
 
+local S = mobs.intllib
+
 -- mob spawner
 
 local spawner_default = "mobs_animal:pumba 10 15 0 0"
@@ -8,7 +10,7 @@ minetest.register_node("mobs:spawner", {
 	drawtype = "glasslike",
 	paramtype = "light",
 	walkable = true,
-	description = "Mob Spawner",
+	description = S("Mob Spawner"),
 	groups = {cracky = 1},
 
 	on_construct = function(pos)
@@ -16,8 +18,9 @@ minetest.register_node("mobs:spawner", {
 		local meta = minetest.get_meta(pos)
 
 		-- text entry formspec
-		meta:set_string("formspec", "field[text;Mob MinLight MaxLight Amount PlayerDist;${command}]")
-		meta:set_string("infotext", "Spawner Not Active (enter settings)")
+		meta:set_string("formspec",
+			"field[text;" .. S("Mob MinLight MaxLight Amount PlayerDist") .. ";${command}]")
+		meta:set_string("infotext", S("Spawner Not Active (enter settings)"))
 		meta:set_string("command", spawner_default)
 	end,
 
@@ -58,11 +61,12 @@ minetest.register_node("mobs:spawner", {
 		and yof and yof > -10 and yof < 10 then
 
 			meta:set_string("command", fields.text)
-			meta:set_string("infotext", "Spawner Active (" .. mob .. ")")
+			meta:set_string("infotext", S("Spawner Active (@1)", mob))
 
 		else
-			minetest.chat_send_player(name, "Mob Spawner settings failed!")
-			minetest.chat_send_player(name, "> name min_light[0-14] max_light[0-14] max_mobs_in_area[0 to disable] distance[1-20] y_offset[-10 to 10]")
+			minetest.chat_send_player(name, S("Mob Spawner settings failed!"))
+			minetest.chat_send_player(name,
+				S("> name min_light[0-14] max_light[0-14] max_mobs_in_area[0 to disable] distance[1-20] y_offset[-10 to 10]"))
 		end
 	end,
 })

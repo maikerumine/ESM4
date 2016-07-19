@@ -242,4 +242,19 @@ else
 			return hoe_on_use(itemstack, user, pointed_thing, 220)
 		end,
 	})
+	--maikerumine added mese and diamond hoes
+		minetest.register_tool(":farming:hoe_mese", {
+		description = fishing_setting.func.S("Mese Hoe"),
+		inventory_image = "farming_tool_mesehoe.png",
+		on_use = function(itemstack, user, pointed_thing)
+			return hoe_on_use(itemstack, user, pointed_thing, 350)
+		end,
+	})
+		minetest.register_tool(":farming:hoe_diamond", {
+		description = fishing_setting.func.S("Diamond Hoe"),
+		inventory_image = "farming_tool_diamondhoe.png",
+		on_use = function(itemstack, user, pointed_thing)
+			return hoe_on_use(itemstack, user, pointed_thing, 500)
+		end,
+	})
 end

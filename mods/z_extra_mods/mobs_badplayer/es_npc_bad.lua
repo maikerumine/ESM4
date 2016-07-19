@@ -1747,11 +1747,14 @@ mobs:register_mob("mobs_badplayer:Infinium_Monster", {
 --REFERENCE
 --function mobs:spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
 --mobs:register_spawn("mobs:dirt_monster", {"default:dirt_with_grass", "ethereal:gray_dirt"}, 7, 0, 7000, 2, 31000)
-
+--[[
 --NOTE: ALWAYS PUT THE REGISTER_SPAWN BELOW THE REGISTER_ENTITY!!!!!
 mobs:register_spawn("mobs_badplayer:badplayer2", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 4, -1, 18000, 1, 3000)
 mobs:register_spawn("mobs_badplayer:badplayer3", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 4, -1, 18000, 1, 3000)
+]]
+
 mobs:register_spawn("mobs_badplayer:badplayer4", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 4, -1, 18000, 1, 3000)
+
 mobs:register_spawn("mobs_badplayer:badplayer6", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 4, -1, 18000, 1, 3000)
 mobs:register_spawn("mobs_badplayer:badplayer7", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 4, -1, 18000, 1, 3000)
 mobs:register_spawn("mobs_badplayer:badplayer8", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 4, -1, 18000, 1, 3000)

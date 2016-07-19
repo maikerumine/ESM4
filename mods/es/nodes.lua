@@ -25,6 +25,16 @@ minetest.override_item('default:stone_with_mese', {
      },
 })
 
+--compressed cobble
+minetest.register_node("es:compressedcobble", {
+	description = "Compressed Cobblestone",
+	tiles = {"default_cobble.png^default_ladder.png^[colorize:#000000:170"},
+	is_ground_content = false,
+	groups = {cracky = 3, stone = 2},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+
 --rnd code
 --cactus tweaks
 local function hurt_cactus() -- cactus tweak

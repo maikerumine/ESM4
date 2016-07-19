@@ -1,7 +1,21 @@
 -- BALL: energy ball that flies around, can bounce and activate stuff
 -- rnd 2016:
 
--- TO DO: move mode: ball just rolling around on ground, also if inside slope it would "roll down", just increased velocity in slope direction
+-- TO DO: move mode: ball just rolling around on ground without hopping, also if inside slope it would "roll down", just increased velocity in slope direction
+
+-- SETTINGS
+
+basic_machines.ball = {};
+basic_machines.ball.maxdamage  =  10;  -- player health 20
+basic_machines.ball.bounce_materials = { -- to be used with bounce setting 2 in ball spawner: 1: bounce in x direction, 2: bounce in z direction, otherwise it bounces in y direction
+["default:wood"]=1,
+["xpanes:bar_2"]=1,
+["xpanes:bar_10"]=1,
+["darkage:iron_bars"]=1,
+["default:glass"] = 2,
+};
+
+-- END OF SETTINGS
 
 local ballcount = {};
 local function round(x)
@@ -12,14 +26,6 @@ local function round(x)
 	end
 end
 
-basic_machines.ball = {};
-basic_machines.ball.bounce_materials = { -- to be used with bounce setting 2 in ball spawner: 1: bounce in x direction, 2: bounce in z direction, otherwise it bounces in y direction
-["default:wood"]=1,
-["xpanes:bar_2"]=1,
-["xpanes:bar_10"]=1,
-["darkage:iron_bars"]=1,
-["default:glass"] = 2,
-};
 
 local ball_spawner_update_form = function (pos)
 	
@@ -37,6 +43,8 @@ local ball_spawner_update_form = function (pos)
 		puncheable = meta:get_int("puncheable"); -- if 1 can be punched by players in protection, if 2 can be punched by anyone
 		
 		local texture = meta:get_string("texture") or  "basic_machines_ball.png";
+		local visual = meta:get_string("visual") or "sprite";
+		local scale =  meta:get_int("scale");
 		
 		local form  = 
 		"size[4.25,4.75]" ..  -- width, height
@@ -49,6 +57,7 @@ local ball_spawner_update_form = function (pos)
 		"field[3.25,1.5;1,1;puncheable;puncheable;"..puncheable.."]"..
 		"field[0.25,2.5;1,1;hp;hp;"..hp.."]".."field[1.25,2.5;1,1;hurt;hurt;"..hurt.."]"..
 		"field[0.25,3.5;4,1;texture;texture;"..texture.."]"..
+		"field[0.25,4.5;1,1;scale;scale;"..scale.."]".."field[1.25,4.5;1,1;visual;visual;"..visual.."]"..
 		"button_exit[3.25,4.25;1,1;OK;OK]";
 		
 		
@@ -88,6 +97,7 @@ minetest.register_entity("basic_machines:ball",{
 		
 	on_activate = function(self, staticdata)
 		self.object:set_properties({textures={"basic_machines_ball.png"}})
+		self.object:set_properties({visual_size = {x=1, y=1}});
 		self.timer = 0;self.owner = "";
 		self.origin = self.object:getpos();
 		self.lifetime = 20;
@@ -144,7 +154,14 @@ minetest.register_entity("basic_machines:ball",{
 						local p = obj:getpos();
 						local d = math.sqrt((p.x-pos.x)^2+(p.y-pos.y)^2+(p.z-pos.z)^2);
 						if d>0 then
-							if minetest.is_protected(p,self.owner) then return end
+
+							--if minetest.is_protected(p,self.owner) then return end
+							if math.abs(p.x)<32 and math.abs(p.y)<32 and math.abs(p.z)<32 then return end -- no damage around spawn
+							
+							if obj:is_player() then -- dont hurt owner
+								if obj:get_player_name()==self.owner then break end
+							end
+							
 							obj:set_hp(obj:get_hp()-self.hurt)
 							local count = ballcount[self.owner] or 1; count=count-1; ballcount[self.owner] = count; 
 							self.object:remove(); 
@@ -304,6 +321,8 @@ minetest.register_node("basic_machines:ball_spawner", {
 		meta:set_int("bounce",0); -- if nonzero bounces when hit obstacle, 0 gets absorbed
 		meta:set_float("gravity",0);  -- gravity
 		meta:set_int("puncheable",0); -- if 0 not puncheable, if 1 can be punched by players in protection, if 2 can be punched by anyone
+		meta:set_int("scale",100);
+		meta:set_string("visual","sprite");
 		ball_spawner_update_form(pos);
 		
 	end,
@@ -394,7 +413,17 @@ minetest.register_node("basic_machines:ball_spawner", {
 			end
 			
 			
-			obj:set_properties({textures={meta:get_string("texture")}})
+			local visual = meta:get_string("visual")
+			obj:set_properties({visual=visual});
+			local texture = meta:get_string("texture");
+			if visual=="sprite" then
+				obj:set_properties({textures={texture}})
+			elseif visual == "cube" then
+				obj:set_properties({textures={texture,texture,texture,texture,texture,texture}})
+			end
+			local scale = meta:get_int("scale");if scale<=0 then scale = 1 else scale = scale/100 end
+			obj:set_properties({visual_size = {x=scale, y=scale}});
+			
 			
 			
 		end,
@@ -473,12 +502,111 @@ minetest.register_node("basic_machines:ball_spawner", {
 			if fields.texture then
 				meta:set_string ("texture", fields.texture);
 			end
+			
+			if fields.scale then
+				local scale = math.abs(tonumber(fields.scale)) or 100;
+				if scale>1000 and not privs.privs then scale = 1000 end
+				meta:set_int("scale", scale) 
+			end
+			
+			if fields.visual then
+				local visual  = fields.visual or "";
+				if visual~="sprite" and visual~="cube" then return end
+				meta:set_string ("visual", fields.visual);
+			end
 		
 			ball_spawner_update_form(pos);
 		end
+	end,
+	
+	after_dig_node = function(pos, oldnode, oldmetadata, digger)
+		local name = digger:get_player_name();
+		local inv = digger:get_inventory();
+		inv:remove_item("main", ItemStack("basic_machines:ball_spawner"));
+		local stack = ItemStack("basic_machines:ball_spell");
+		local meta = oldmetadata["fields"];
+		meta["formspec"]=nil;
+		stack:set_metadata(minetest.serialize(meta));
+		inv:add_item("main",stack);
 	end
 	
 })
+
+
+local spelltime = {};
+
+-- ball as magic spell user can cast
+minetest.register_tool("basic_machines:ball_spell", {
+	description = "ball spawner",
+	inventory_image = "basic_machines_ball.png",
+	tool_capabilities = {
+		full_punch_interval = 2,
+		max_drop_level=0,
+	},
+	on_use = function(itemstack, user, pointed_thing)
+		
+		local pos = user:getpos();pos.y=pos.y+1;
+		local meta = minetest.deserialize(itemstack:get_metadata());
+		if not meta then return end
+		local owner = meta["owner"] or "";
+		
+		--if minetest.is_protected(pos,owner) then return end
+		
+		local t0 = spelltime[owner] or 0;
+		local t1 = minetest.get_gametime(); 
+		if t1-t0<2 then return end -- too soon
+		spelltime[owner]=t1;
+		
+		
+		local obj = minetest.add_entity({x=pos.x,y=pos.y,z=pos.z}, "basic_machines:ball");
+		local luaent = obj:get_luaentity();
+
+		
+		local speed,energy,bounce,gravity,puncheable;
+		speed = tonumber(meta["speed"]) or 0;
+		energy = tonumber(meta["energy"]) or 0; -- if positive activates, negative deactivates, 0 does nothing
+		bounce = tonumber(meta["bounce"]) or 0; -- if nonzero bounces when hit obstacle, 0 gets absorbed
+		gravity = tonumber(meta["gravity"]) or 0;  -- gravity
+		puncheable = tonumber(meta["puncheable"]) or 0; -- if 1 can be punched by players in protection, if 2 can be punched by anyone
+		
+		if energy<0 then
+			obj:set_properties({textures={"basic_machines_ball.png^[colorize:blue:120"}})
+		end
+		
+		luaent.bounce = bounce;
+		luaent.energy = energy;
+		if gravity>0 then
+			obj:setacceleration({x=0,y=-gravity,z=0});
+		end
+		luaent.puncheable = puncheable;
+		luaent.owner = meta["owner"];
+		luaent.hurt = math.min(tonumber(meta["hurt"]),basic_machines.ball.maxdamage);
+		
+		obj:set_hp( tonumber(meta["hp"]) );
+		
+		local x0,y0,z0;
+		if speed>0 then luaent.speed = speed end
+		
+		
+
+		local v = user:get_look_dir();
+		v.x=v.x*speed;v.y=v.y*speed;v.z=v.z*speed;
+		obj:setvelocity(v);
+
+		
+		if tonumber(meta["admin"])==1 then 
+			luaent.lifetime = tonumber(meta["lifetime"]);
+		end
+		
+		
+		obj:set_properties({textures={meta["texture"]}})
+		
+		
+	end,
+	
+	
+})
+
 
 
 minetest.register_craft({

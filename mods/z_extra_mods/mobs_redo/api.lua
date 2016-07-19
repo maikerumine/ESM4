@@ -1,11 +1,32 @@
 
--- Mobs Api (9th June 2016)
+-- Mobs Api (18th June 2016)
 
 mobs = {}
 mobs.mod = "redo"
 
--- Invisibility mod
+-- Intllib
+local S
+if minetest.get_modpath("intllib") then
+	S = intllib.Getter()
+else
+	S = function(s, a, ...)
+		if a == nil then
+			return s
+		end
+		a = {a, ...}
+		return s:gsub("(@?)@(%(?)(%d+)(%)?)",
+			function(e, o, n, c)
+				if e == "" then
+					return a[tonumber(n)] .. (o == "" and c or "")
+				else
+					return "@" .. o .. n .. c
+				end
+			end)
+	end
+end
+mobs.intllib = S
 
+-- Invisibility mod
 local invisibility = invisibility or {}
 
 -- Load settings
@@ -13,11 +34,11 @@ local damage_enabled = minetest.setting_getbool("enable_damage")
 local peaceful_only = minetest.setting_getbool("only_peaceful_mobs")
 local disable_blood = minetest.setting_getbool("mobs_disable_blood")
 local creative = minetest.setting_getbool("creative_mode")
-local spawn_protected = tonumber(minetest.setting_get("mobs_spawn_protected")) or 0  --was 1
+local spawn_protected = tonumber(minetest.setting_get("mobs_spawn_protected")) or 1
 local remove_far = minetest.setting_getbool("remove_far_mobs")
 
 -- pathfinding settings
-local enable_pathfinding = false
+local enable_pathfinding = true
 local stuck_timeout = 3 -- how long before mob gets stuck in place and starts searching
 local stuck_path_timeout = 10 -- how long will mob follow path before giving up
 
@@ -195,6 +216,17 @@ function line_of_sight_water(self, pos1, pos2, stepsize)
 
 			return true
 		end
+
+	-- just incase we have a special node for flying/swimming mobs
+	elseif s == false
+	and self.fly
+	and self.fly_in then
+
+		local nod = minetest.get_node(pos_w).name
+
+		if nod == self.fly_in then
+			return true
+		end
 	end
 
 	return false
@@ -274,6 +306,15 @@ function check_for_death(self)
 		if self.health > self.hp_max then
 			self.health = self.hp_max
 		end
+
+		-- backup nametag so we can show health stats
+		if not self.nametag2 then
+			self.nametag2 = self.nametag or ""
+		end
+
+		self.htimer = 2
+
+		self.nametag = "health: " .. self.health .. " of " .. self.hp_max
 
 		update_tag(self)
 
@@ -386,6 +427,15 @@ do_env_damage = function(self)
 	-- feed/tame text timer (so mob 'full' messages dont spam chat)
 	if self.htimer > 0 then
 		self.htimer = self.htimer - 1
+	end
+
+	-- reset nametag after showing health stats
+	if self.htimer < 1 and self.nametag2 then
+
+		self.nametag = self.nametag2
+		self.nametag2 = nil
+
+		update_tag(self)
 	end
 
 	local pos = self.object:getpos()
@@ -1769,7 +1819,7 @@ local mob_punch = function(self, hitter, tflp, tool_capabilities, dir)
 
 	-- error checking when mod profiling is enabled
 	if not tool_capabilities then
-		print ("[MOBS] mod profiling enabled, damage not enabled")
+		print (S("[MOBS] mod profiling enabled, damage not enabled"))
 		return
 	end
 
@@ -2079,7 +2129,7 @@ local mob_step = function(self, dtime)
 			end
 
 			minetest.log("action",
-				"lifetimer expired, removed " .. self.name)
+				S("lifetimer expired, removed @1", self.name))
 
 			effect(pos, 15, "tnt_smoke.png")
 
@@ -2105,7 +2155,11 @@ local mob_step = function(self, dtime)
 
 	-- run custom function (defined in mob lua file)
 	if self.do_custom then
-		self.do_custom(self, dtime)
+
+		-- when false skip going any further
+		if self.do_custom(self, dtime) == false then
+			return
+		end
 	end
 
 	-- attack timer
@@ -2332,13 +2386,13 @@ function mobs:spawn_specific(name, nodes, neighbors, min_light, max_light,
 	if new_chance ~= nil then
 
 		if new_chance == 0 then
-			print("[Mobs Redo] " .. name .. " has spawning disabled")
+			print(S("[Mobs Redo] @1 has spawning disabled", name))
 			return
 		end
 
 		chance = new_chance
 
-		print ("[Mobs Redo] Chance setting for " .. name .. " changed to " .. chance)
+		print (S("[Mobs Redo] Chance setting for @1 changed to @2", name, chance))
 
 	end
 
@@ -2426,8 +2480,8 @@ function mobs:spawn_specific(name, nodes, neighbors, min_light, max_light,
 --				.. minetest.pos_to_string(pos) .. " on "
 --				.. node.name .. " near " .. neighbors[1])
 			else
-				print ("[mobs]" .. name .. " failed to spawn at "
-				.. minetest.pos_to_string(pos))
+				print (S("[mobs] @1 failed to spawn at @2",
+				name, minetest.pos_to_string(pos)))
 			end
 
 		end
@@ -2707,7 +2761,7 @@ function mobs:capture_mob(self, clicker, chance_hand, chance_net, chance_lasso, 
 		if self.tamed == false
 		and force_take == false then
 
-			minetest.chat_send_player(name, "Not tamed!")
+			minetest.chat_send_player(name, S("Not tamed!"))
 
 			return
 		end
@@ -2716,7 +2770,7 @@ function mobs:capture_mob(self, clicker, chance_hand, chance_net, chance_lasso, 
 		if self.owner ~= name
 		and force_take == false then
 
-			minetest.chat_send_player(name, self.owner.." is owner!")
+			minetest.chat_send_player(name, S("@1 is owner!", self.owner))
 
 			return
 		end
@@ -2757,7 +2811,7 @@ function mobs:capture_mob(self, clicker, chance_hand, chance_net, chance_lasso, 
 
 				self.object:remove()
 			else
-				minetest.chat_send_player(name, "Missed!")
+				minetest.chat_send_player(name, S("Missed!"))
 			end
 		end
 	end
@@ -2796,8 +2850,8 @@ function mobs:feed_tame(self, clicker, feed_count, breed, tame)
 			if self.htimer < 1 then
 
 				minetest.chat_send_player(clicker:get_player_name(),
-					self.name:split(":")[2]
-					.. " at full health (" .. tostring(self.health) .. ")")
+					S("@1 at full health (@2)",
+					self.name:split(":")[2], tostring(self.health)))
 
 				self.htimer = 5
 			end
@@ -2831,8 +2885,8 @@ function mobs:feed_tame(self, clicker, feed_count, breed, tame)
 
 				if self.tamed == false then
 					minetest.chat_send_player(clicker:get_player_name(),
-						self.name:split(":")[2]
-						.. " has been tamed!")
+						S("@1 has been tamed!",
+						self.name:split(":")[2]))
 				end
 
 				self.tamed = true
@@ -2872,8 +2926,8 @@ function mobs:feed_tame(self, clicker, feed_count, breed, tame)
 		minetest.show_formspec(name, "mobs_nametag", "size[8,4]"
 			.. default.gui_bg
 			.. default.gui_bg_img
-			.. "field[0.5,1;7.5,0;name;Enter name:;" .. tag .. "]"
-			.. "button_exit[2.5,3.5;3,1;mob_rename;Rename]")
+			.. "field[0.5,1;7.5,0;name;" .. S("Enter name:") .. ";" .. tag .. "]"
+			.. "button_exit[2.5,3.5;3,1;mob_rename;" .. S("Rename") .. "]")
 
 	end
 

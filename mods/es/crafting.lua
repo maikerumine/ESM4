@@ -63,6 +63,24 @@ minetest.register_craft({
 })
 --END BONE COLLECTOR
 
+--compressed cobble
+minetest.register_craft({
+	output = 'es:compressedcobble',
+	recipe = {
+		{'default:cobble', 'default:cobble', 'default:cobble'},
+		{'default:cobble', 'default:cobble', 'default:cobble'},
+		{'default:cobble', 'default:cobble', 'default:cobble'},
+	}
+})
+minetest.register_craft({
+	output = 'default:cobble 9',
+	recipe = {
+		{'es:compressedcobble'},
+	}
+})
+
+
+--marble and granite bricks
 minetest.register_craft({
 	output = 'es:marble_bricks',
 	recipe = {
