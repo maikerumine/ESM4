@@ -500,6 +500,15 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = 'default:sandstone_block 9',
+	recipe = {
+		{'default:sandstone', 'default:sandstone', 'default:sandstone'},
+		{'default:sandstone', 'default:sandstone', 'default:sandstone'},
+		{'default:sandstone', 'default:sandstone', 'default:sandstone'},
+	}
+})
+
+minetest.register_craft({
 	output = 'default:clay',
 	recipe = {
 		{'default:clay_lump', 'default:clay_lump'},
@@ -628,6 +637,15 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = 'default:obsidian_block 9',
+	recipe = {
+		{'default:obsidian', 'default:obsidian', 'default:obsidian'},
+		{'default:obsidian', 'default:obsidian', 'default:obsidian'},
+		{'default:obsidian', 'default:obsidian', 'default:obsidian'},
+	}
+})
+
+minetest.register_craft({
 	output = 'default:stonebrick 4',
 	recipe = {
 		{'default:stone', 'default:stone'},
@@ -636,10 +654,28 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = 'default:stone_block 9',
+	recipe = {
+		{'default:stone', 'default:stone', 'default:stone'},
+		{'default:stone', 'default:stone', 'default:stone'},
+		{'default:stone', 'default:stone', 'default:stone'},
+	}
+})
+
+minetest.register_craft({
 	output = 'default:desert_stonebrick 4',
 	recipe = {
 		{'default:desert_stone', 'default:desert_stone'},
 		{'default:desert_stone', 'default:desert_stone'},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:desert_stone_block 9',
+	recipe = {
+		{'default:desert_stone', 'default:desert_stone', 'default:desert_stone'},
+		{'default:desert_stone', 'default:desert_stone', 'default:desert_stone'},
+		{'default:desert_stone', 'default:desert_stone', 'default:desert_stone'},
 	}
 })
 
@@ -835,18 +871,6 @@ minetest.register_craft({
 	type = "fuel",
 	recipe = "default:chest_locked",
 	burntime = 30,
-})
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "default:nyancat",
-	burntime = 1,
-})
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "default:nyancat_rainbow",
-	burntime = 1,
 })
 
 minetest.register_craft({

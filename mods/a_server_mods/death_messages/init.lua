@@ -92,7 +92,7 @@ minetest.register_on_dieplayer(function(player)
 	local player_name = player:get_player_name()
 	local node = minetest.registered_nodes[minetest.get_node(player:getpos()).name]
 	local pos = player:getpos()
-	local death = {x=0, y=-60, z=0}
+	local death = {x=0, y=-2, z=0}
 	if minetest.is_singleplayer() then
 		player_name = "You"
 	end

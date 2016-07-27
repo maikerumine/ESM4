@@ -157,8 +157,8 @@ walls.register("walls:goldblock", "Gold Block Wall", "default_gold_block.png",
 walls.register("walls:waterflowing", "Water Flowing Wall", "default_water.png",
 		"default:water_flowing", default.node_sound_stone_defaults())
 
-walls.register("walls:nyancat_rainbow", "Nyan Cat Rainbow Wall", "default_nc_rb.png",
-		"default:nyancat_rainbow", default.node_sound_stone_defaults())
+walls.register("walls:nyancat_rainbow", "Nyan Cat Rainbow Wall", "nyancat_rainbow.png",
+		"nyancat:nyancat_rainbow", default.node_sound_stone_defaults())
 
 walls.register("walls:torch", "Torch Wall", "fire_basic_flame.png",
 		"default:torch", default.node_sound_stone_defaults())

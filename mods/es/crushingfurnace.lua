@@ -32,6 +32,7 @@ local crushingfurnace_receipes = {
 	{"es:ruby_crystal", "es:ruby_dust",        23},
 	{"es:emerald_crystal", "es:emerald_dust",        13},
 	{"es:purpellium_lump", "es:purpellium_dust",        20},
+	{"moretrees:rubber_tree_trunk", "es:rubber_dust",        2},
 }
 
 function crushingfurnace_get_craft_result(input)
