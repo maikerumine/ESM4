@@ -27,7 +27,7 @@ end
 mobs.intllib = S
 
 -- Invisibility mod
---local invisibility = invisibility or {}
+local invisibility = invisibility or {}
 
 -- Load settings
 local damage_enabled = minetest.setting_getbool("enable_damage")
