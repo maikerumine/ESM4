@@ -75,7 +75,7 @@ for i = 1, 15 do
     end
     minetest.register_node("army:chainlink_"..i, {
         drawtype = "nodebox",
-        tile_images = {"army_chainlink.png", "army_chainlink.png", texture},
+        tiles = {"army_chainlink.png", "army_chainlink.png", texture},
         paramtype = "light",
         groups = {cracky=2},
         drop = "army:chainlink",

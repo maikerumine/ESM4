@@ -23,11 +23,11 @@ end
 
 dofile(boost_cart.modpath.."/functions.lua")
 dofile(boost_cart.modpath.."/rails.lua")
-
+--[[
 if mesecon then
 	dofile(boost_cart.modpath.."/detector.lua")
 end
-
+]]
 -- Support for non-default games
 if not default.player_attached then
 	default.player_attached = {}

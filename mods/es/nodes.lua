@@ -737,7 +737,7 @@ minetest.register_node("es:dry_dirt", {
 	drop = 'es:dry_dirt',
 	sounds = default.node_sound_dirt_defaults(),
 })
-
+--[[
 minetest.register_node("es:stone_with_mese", {
 	description = "Cookable Mese Ore",
 	tiles = {"default_stone.png^default_mineral_mese.png"},
@@ -747,7 +747,7 @@ minetest.register_node("es:stone_with_mese", {
 	sounds = default.node_sound_stone_defaults(),
 	light_source = 1,
 })
-
+]]
 minetest.register_node("es:desert_stone_with_gold", {
 	description = "Gold Ore",
 	tiles = {"default_desert_stone.png^default_mineral_gold.png"},

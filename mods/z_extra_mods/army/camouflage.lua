@@ -75,7 +75,7 @@ for i = 1, 15 do
     end
     minetest.register_node("army:camouflage_"..i, {
         drawtype = "nodebox",
-        tile_images = {"army_camouflage.png", "army_camouflage.png", texture},
+        tiles = {"army_camouflage.png", "army_camouflage.png", texture},
         paramtype = "light",
         groups = {cracky=2},
         drop = "army:camouflage",
