@@ -1,7 +1,9 @@
 
+local S = farming.intllib
+
 -- barley seeds
 minetest.register_node("farming:seed_barley", {
-	description = "Barley Seed",
+	description = S("Barley Seed"),
 	tiles = {"farming_barley_seed.png"},
 	inventory_image = "farming_barley_seed.png",
 	wield_image = "farming_barley_seed.png",
@@ -19,7 +21,7 @@ minetest.register_node("farming:seed_barley", {
 
 -- harvested barley
 minetest.register_craftitem("farming:barley", {
-	description = "barley",
+	description = S("Barley"),
 	inventory_image = "farming_barley.png",
 })
 

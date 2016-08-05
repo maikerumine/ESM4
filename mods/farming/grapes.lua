@@ -1,7 +1,9 @@
 
+local S = farming.intllib
+
 -- grapes
 minetest.register_craftitem("farming:grapes", {
-	description = "Grapes",
+	description = S("Grapes"),
 	inventory_image = "farming_grapes.png",
 	on_use = minetest.item_eat(2),
 
@@ -51,7 +53,7 @@ minetest.register_craft({
 
 -- trellis
 minetest.register_node("farming:trellis", {
-	description = "Trellis (place on soil before planting grapes)",
+	description = S("Trellis (place on soil before planting grapes)"),
 	drawtype = "plantlike",
 	tiles = {"farming_trellis.png"},
 	inventory_image = "farming_trellis.png",

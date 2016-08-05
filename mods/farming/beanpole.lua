@@ -4,9 +4,11 @@
 	CC-BY-SA-3.0
 ]]
 
+local S = farming.intllib
+
 -- beans
 minetest.register_craftitem("farming:beans", {
-	description = "Green Beans",
+	description = S("Green Beans"),
 	inventory_image = "farming_beans.png",
 	on_use = minetest.item_eat(1),
 
@@ -56,7 +58,7 @@ minetest.register_craft({
 
 -- beanpole
 minetest.register_node("farming:beanpole", {
-	description = "Bean Pole (place on soil before planting beans)",
+	description = S("Bean Pole (place on soil before planting beans)"),
 	drawtype = "plantlike",
 	tiles = {"farming_beanpole.png"},
 	inventory_image = "farming_beanpole.png",

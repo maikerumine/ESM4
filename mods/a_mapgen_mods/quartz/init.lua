@@ -58,7 +58,7 @@ minetest.register_node("quartz:pillar", {
 	on_place = minetest.rotate_node
 })
 
-
+--[[
 --Stairs & Slabs
 stairs.register_stair_and_slab("quartzblock", "quartz:block",
 		{cracky=3, oddly_breakable_by_hand=1},
@@ -73,7 +73,7 @@ stairs.register_slab("quartzstair", "quartz:pillar",
 		"Quartz Pillar stair",
 		"Quartz Pillar slab",
 		default.node_sound_glass_defaults())
-
+]]
 
 
 

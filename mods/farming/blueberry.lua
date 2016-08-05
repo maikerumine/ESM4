@@ -1,7 +1,9 @@
 
+local S = farming.intllib
+
 -- blueberries
 minetest.register_craftitem("farming:blueberries", {
-	description = "Blueberries",
+	description = S("Blueberries"),
 	inventory_image = "farming_blueberries.png",
 	on_place = function(itemstack, placer, pointed_thing)
 		return farming.place_seed(itemstack, placer, pointed_thing, "farming:blueberry_1")
@@ -12,7 +14,7 @@ minetest.register_craftitem("farming:blueberries", {
 -- blueberry muffin (thanks to sosogirl123 @ deviantart.com for muffin image)
 
 minetest.register_craftitem("farming:muffin_blueberry", {
-	description = "Blueberry Muffin",
+	description = S("Blueberry Muffin"),
 	inventory_image = "farming_blueberry_muffin.png",
 	on_use = minetest.item_eat(2),
 })

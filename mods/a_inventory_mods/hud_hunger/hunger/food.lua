@@ -3,13 +3,8 @@ local register_food = hunger.register_food
 
 register_food("default:apple", 2)
 
-
 if minetest.get_modpath("farming") then
 	register_food("farming:bread", 4)
-end
-
-if minetest.get_modpath("default") then
-	register_food("default:cactus", 0.5)
 end
 
 if minetest.get_modpath("flowers") then
@@ -34,38 +29,8 @@ if minetest.get_modpath("mobs") then
 		end
 	else
 		register_food("mobs:meat", 6)
-		register_food("mobs:meat_raw", 3,"", 3)
+		register_food("mobs:meat_raw", 3)
 		register_food("mobs:rat_cooked", 5)
-	end
-end
-
-if minetest.get_modpath("es") ~= nil then
-	register_food("es:purpellium_container", 50,"vessels:glass_bottle",nil,50)
-end
-
-if minetest.get_modpath("mobs_mc") ~= nil then
-	if mobs.mod ~= nil and mobs.mod == "redo" then
-		register_food("mobs:cheese", 4)
-		register_food("mobs:beef_raw", 3,"",10)  --good
-		register_food("mobs:beef_cooked", 9)  --good
-		register_food("mobs:rotten_flesh", 2,"",4)
-		register_food("mobs:meat_raw", 2,"",4)
-		register_food("mobs:meat_cooked", 8)
-		register_food("mobs:meat", 8)
-		register_food("mobs:mutton_cooked", 6)  --good
-		register_food("mobs:mutton_raw", 2,"",4)  --good
-		register_food("mobs:pork_raw", 3, "", 3)
-		register_food("mobs:pork_cooked", 8)
-		register_food("mobs:chicken_cooked", 6)
-		register_food("mobs:chicken_raw", 2, "", 3)
-		register_food("mobs:chicken_egg_fried", 2)
-		if minetest.get_modpath("bucket") then
-			register_food("mobs:bucket_milk", 3, "bucket:bucket_empty")
-		end
-	else
-		register_food("mobs:meat", 6)
-		register_food("mobs:meat_raw", 3,"",6)
-		
 	end
 end
 
@@ -104,28 +69,12 @@ end
 
 if minetest.get_modpath("fishing") then
 	register_food("fishing:fish_raw", 2)
-	register_food("fishing:fish_cooked", 5)	
-	register_food("fishing:clownfish_raw", 2)
-	register_food("fishing:clownfish_cooked", 5)
+	register_food("fishing:fish_cooked", 5)
 	register_food("fishing:sushi", 6)
 	register_food("fishing:shark", 4)
-	register_food("fishing:shark_cooked", 8)	
-	register_food("fishing:bluewhite_raw", 4)
-	register_food("fishing:bluewhite_cooked", 8)
-	register_food("fishing:pike_raw", 2)
+	register_food("fishing:shark_cooked", 8)
 	register_food("fishing:pike", 4)
-	register_food("fishing:pike_cooked", 8)	
-	register_food("fishing:carp_raw", 2)
-	register_food("fishing:carp",4)
-	register_food("fishing:carp_cooked", 8)	
-	register_food("fishing:perch_raw", 2)
-	register_food("fishing:perch", 4)
-	register_food("fishing:perch_cooked", 6)	
-	register_food("fishing:catfish_raw",2)
-	register_food("fishing:catfish",4)
-	register_food("fishing:catfish_cooked", 5)	
-	register_food("fishing:exoticfish_raw", 2)
-	register_food("fishing:exoticfish_cooked", 3)
+	register_food("fishing:pike_cooked", 8)
 end
 
 if minetest.get_modpath("glooptest") then
@@ -370,8 +319,4 @@ if minetest.get_modpath("wine") then
 	register_food("wine:glass_beer", 2)
 	register_food("wine:glass_mead", 2)
 	register_food("wine:glass_cider", 2)
-end
-
-if minetest.get_modpath("xdecor") then
-	register_food("xdecor:bowl_soup", 15)
 end

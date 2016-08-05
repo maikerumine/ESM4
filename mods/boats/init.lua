@@ -34,6 +34,8 @@ end
 
 local boat = {
 	physical = true,
+	-- Warning: Do not change the position of the collisionbox top surface,
+	-- lowering it causes the boat to fall through the world if underwater
 	collisionbox = {-0.5, -0.35, -0.5, 0.5, 0.3, 0.5},
 	visual = "mesh",
 	mesh = "boats_boat.obj",
@@ -77,7 +79,7 @@ function boat.on_rightclick(self, clicker)
 		minetest.after(0.2, function()
 			default.player_set_animation(clicker, "sit" , 30)
 		end)
-		self.object:setyaw(clicker:get_look_yaw() - math.pi / 2)
+		self.object:setyaw(clicker:get_look_horizontal() - math.pi / 2)
 	end
 end
 
@@ -159,13 +161,13 @@ function boat.on_step(self, dtime)
 		self.v = 0
 		return
 	end
-	if math.abs(self.v) > 4.5 then
-		self.v = 4.5 * get_sign(self.v)
+	if math.abs(self.v) > 5 then
+		self.v = 5 * get_sign(self.v)
 	end
 
 	local p = self.object:getpos()
 	p.y = p.y - 0.5
-	local new_velo = {x = 0, y = 0, z = 0}
+	local new_velo
 	local new_acce = {x = 0, y = 0, z = 0}
 	if not is_water(p) then
 		local nodedef = minetest.registered_nodes[minetest.get_node(p).name]
@@ -182,8 +184,8 @@ function boat.on_step(self, dtime)
 		p.y = p.y + 1
 		if is_water(p) then
 			local y = self.object:getvelocity().y
-			if y >= 4.5 then
-				y = 4.5
+			if y >= 5 then
+				y = 5
 			elseif y < 0 then
 				new_acce = {x = 0, y = 20, z = 0}
 			else
@@ -222,10 +224,10 @@ minetest.register_craftitem("boats:boat", {
 
 	on_place = function(itemstack, placer, pointed_thing)
 		if pointed_thing.type ~= "node" then
-			return
+			return itemstack
 		end
 		if not is_water(pointed_thing.under) then
-			return
+			return itemstack
 		end
 		pointed_thing.under.y = pointed_thing.under.y + 0.5
 		minetest.add_entity(pointed_thing.under, "boats:boat")

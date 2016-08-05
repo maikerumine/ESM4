@@ -4,9 +4,11 @@
 	https://forum.minetest.net/viewtopic.php?id=4990
 ]]
 
+local S = farming.intllib
+
 -- carrot
 minetest.register_craftitem("farming:carrot", {
-	description = "Carrot",
+	description = S("Carrot"),
 	inventory_image = "farming_carrot.png",
 	on_place = function(itemstack, placer, pointed_thing)
 		return farming.place_seed(itemstack, placer, pointed_thing, "farming:carrot_1")
@@ -16,7 +18,7 @@ minetest.register_craftitem("farming:carrot", {
 
 -- golden carrot
 minetest.register_craftitem("farming:carrot_gold", {
-	description = "Golden Carrot",
+	description = S("Golden Carrot"),
 	inventory_image = "farming_carrot_gold.png",
 	on_use = minetest.item_eat(6),
 })

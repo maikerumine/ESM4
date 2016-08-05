@@ -1,7 +1,9 @@
 
+local S = farming.intllib
+
 -- cotton seeds
 minetest.register_node("farming:seed_cotton", {
-	description = "Cotton Seed",
+	description = S("Cotton Seed"),
 	tiles = {"farming_cotton_seed.png"},
 	inventory_image = "farming_cotton_seed.png",
 	wield_image = "farming_cotton_seed.png",
@@ -20,7 +22,7 @@ minetest.register_node("farming:seed_cotton", {
 -- cotton / string
 
 minetest.register_craftitem("farming:cotton", {
-	description = "Cotton",
+	description = S("Cotton"),
 	inventory_image = "farming_cotton.png",
 })
 
@@ -112,3 +114,10 @@ crop_def.drop = {
 	}
 }
 minetest.register_node("farming:cotton_8", table.copy(crop_def))
+
+--[[ Cotton (example, is already registered in cotton.lua)
+farming.register_plant("farming:cotton", {
+	description = "Cotton seed",
+	inventory_image = "farming_cotton_seed.png",
+	steps = 8,
+})]]

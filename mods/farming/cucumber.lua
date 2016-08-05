@@ -4,9 +4,11 @@
 	https://forum.minetest.net/viewtopic.php?id=3948
 ]]
 
+local S = farming.intllib
+
 -- cucumber
 minetest.register_craftitem("farming:cucumber", {
-	description = "Cucumber",
+	description = S("Cucumber"),
 	inventory_image = "farming_cucumber.png",
 	on_place = function(itemstack, placer, pointed_thing)
 		return farming.place_seed(itemstack, placer, pointed_thing, "farming:cucumber_1")

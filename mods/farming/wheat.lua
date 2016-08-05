@@ -1,7 +1,9 @@
 
+local S = farming.intllib
+
 -- wheat seeds
 minetest.register_node("farming:seed_wheat", {
-	description = "Wheat Seed",
+	description = S("Wheat Seed"),
 	tiles = {"farming_wheat_seed.png"},
 	inventory_image = "farming_wheat_seed.png",
 	wield_image = "farming_wheat_seed.png",
@@ -19,13 +21,13 @@ minetest.register_node("farming:seed_wheat", {
 
 -- harvested wheat
 minetest.register_craftitem("farming:wheat", {
-	description = "Wheat",
+	description = S("Wheat"),
 	inventory_image = "farming_wheat.png",
 })
 
 -- straw
 minetest.register_node("farming:straw", {
-	description = "Straw",
+	description = S("Straw"),
 	tiles = {"farming_straw.png"},
 	is_ground_content = false,
 	groups = {snappy = 3, flammable = 4},
@@ -50,7 +52,7 @@ minetest.register_craft({
 
 -- flour
 minetest.register_craftitem("farming:flour", {
-	description = "Flour",
+	description = S("Flour"),
 	inventory_image = "farming_flour.png",
 })
 
@@ -62,7 +64,7 @@ minetest.register_craft({
 
 -- bread
 minetest.register_craftitem("farming:bread", {
-	description = "Bread",
+	description = S("Bread"),
 	inventory_image = "farming_bread.png",
 	on_use = minetest.item_eat(5),
 })

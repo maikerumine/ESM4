@@ -1,7 +1,9 @@
 
+local S = farming.intllib
+
 -- coffee
 minetest.register_craftitem("farming:coffee_beans", {
-	description = "Coffee Beans",
+	description = S("Coffee Beans"),
 	inventory_image = "farming_coffee_beans.png",
 	on_place = function(itemstack, placer, pointed_thing)
 		return farming.place_seed(itemstack, placer, pointed_thing, "farming:coffee_1")
@@ -11,7 +13,7 @@ minetest.register_craftitem("farming:coffee_beans", {
 
 -- drinking cup
 minetest.register_node("farming:drinking_cup", {
-	description = "Drinking Cup (empty)",
+	description = S("Drinking Cup (empty)"),
 	drawtype = "plantlike",
 	tiles = {"vessels_drinking_cup.png"},
 	inventory_image = "vessels_drinking_cup.png",
@@ -36,7 +38,7 @@ minetest.register_craft( {
 
 -- cold cup of coffee
 minetest.register_node("farming:coffee_cup", {
-	description = "Cold Cup of Coffee",
+	description = S("Cold Cup of Coffee"),
 	drawtype = "plantlike",
 	tiles = {"farming_coffee_cup.png"},
 	inventory_image = "farming_coffee_cup.png",
@@ -69,7 +71,7 @@ minetest.register_craft({
 
 -- hot cup of coffee
 minetest.register_node("farming:coffee_cup_hot", {
-	description = "Hot Cup of Coffee",
+	description = S("Hot Cup of Coffee"),
 	drawtype = "plantlike",
 	tiles = {"farming_coffee_cup_hot.png"},
 	inventory_image = "farming_coffee_cup_hot.png",
