@@ -201,7 +201,7 @@ function doors.register(name, def)
 	if not name:find(":") then
 		name = "doors:" .. name
 	end
-
+--[[
 	-- replace old doors of this type automatically
 	minetest.register_lbm({
 		name = ":doors:replace_" .. name:gsub(":", "_"),
@@ -236,7 +236,7 @@ function doors.register(name, def)
 				{name = "doors:hidden", param2 = p3})
 		end
 	})
-
+]]
 	minetest.register_craftitem(":" .. name, {
 		description = def.description,
 		inventory_image = def.inventory_image,
