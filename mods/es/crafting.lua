@@ -20,6 +20,28 @@
 -- Bones can be crafted to clay, sand or coal to motivate players clear the playground.
 --
 -- See README.txt for licensing and other information.
+--Lag Block
+--maikerumine
+minetest.register_craft({
+	output = 'es:lag_block',
+	recipe = {
+		{"es:strange_grass", "es:purpelliumblock", "es:infiniumblock"},
+		{"default:diamondblock", "es:lag_ice", "es:emeraldblock"},
+		{"es:pick_aikerum", "es:rubyblock", "default:obsidian_block"},
+	},
+})
+
+minetest.register_craft({
+	output = 'es:lag_ice',
+	recipe = {
+		{'default:snowblock', 'default:snowblock', 'default:snowblock'},
+		{'default:snowblock', 'bucket:bucket_water', 'default:snowblock'},
+		{'default:snowblock', 'default:snowblock', 'default:snowblock'},
+	}
+})
+
+
+
 
 minetest.register_craft({
 	output = 'default:clay_lump',
@@ -471,9 +493,9 @@ minetest.register_craft({
 	--type = "shapeless",
 	output = 'es:rubber_dust 12',
 	recipe = {
-	{"moretrees:rubber_tree_trunk", "moretrees:rubber_tree_trunk","moretrees:rubber_tree_trunk"},
-	{"default:steel_ingot", "default:steel_ingot","default:steel_ingot"},
-	{"moretrees:rubber_tree_trunk", "moretrees:rubber_tree_trunk","moretrees:rubber_tree_trunk"},
+	{"default:jungletree", "default:jungletree","default:jungletree"},
+	{"default:jungletree", "default:steel_ingot","default:jungletree"},
+	{"default:jungletree", "default:jungletree","default:jungletree"},
 	},
 })
 

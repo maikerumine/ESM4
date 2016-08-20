@@ -160,6 +160,9 @@ if enable_horizontal_pillar then
 end
 
 
+
+
+
 --Compatibility with stairsplus
 
 if minetest.get_modpath("moreblocks") and enable_stairsplus then

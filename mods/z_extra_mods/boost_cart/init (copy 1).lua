@@ -2,7 +2,7 @@
 boost_cart = {}
 boost_cart.modpath = minetest.get_modpath("boost_cart")
 boost_cart.speed_max = 10 -- Max speed of the cart in m/s
-boost_cart.punch_speed_min = 7 -- Set to nil to disable punching the cart from inside (min = -1)
+boost_cart.punch_speed_min = 7 -- Set to nil to disable punching the cart from inside
 
 function vector.floor(v)
 	return {
@@ -15,11 +15,6 @@ end
 dofile(boost_cart.modpath.."/functions.lua")
 dofile(boost_cart.modpath.."/rails.lua")
 
-local HAVE_MESECONS_ENABLED = minetest.global_exists("mesecon")
-if HAVE_MESECONS_ENABLED then
-	dofile(boost_cart.modpath .. "/detector.lua")
-end
-
 -- Support for non-default games
 if not default.player_attached then
 	default.player_attached = {}
@@ -30,12 +25,12 @@ boost_cart.cart = {
 	collisionbox = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 	visual = "mesh",
 	mesh = "cart.x",
-	visual_size = {x = 1, y = 1},
+	visual_size = {x=1, y=1},
 	textures = {"cart.png"},
 	driver = nil,
 	punched = false, -- used to re-send velocity and position
-	velocity = {x = 0, y = 0, z = 0}, -- only used on punch
-	old_dir = {x = 0, y =0, z = 0},
+	velocity = {x=0, y=0, z=0}, -- only used on punch
+	old_dir = {x=0, y=0, z=0},
 	old_pos = nil,
 	old_switch = 0,
 	railtype = nil,
@@ -59,15 +54,13 @@ function boost_cart.cart:on_rightclick(clicker)
 	local player_name = clicker:get_player_name()
 
 	if self.driver and player_name == self.driver then
-
 		self.driver = nil
-
+		--clicker:set_detach()
 		boost_cart:manage_attachment(clicker, false)
-
 	elseif not self.driver then
-
 		self.driver = player_name
-
+		--default.player_attached[player_name] = true
+		--clicker:set_attach(self.object, "", {x=0, y=3, z=0}, {x=0, y=0, z=0})
 		boost_cart:manage_attachment(clicker, true, self.object)
 	end
 end
@@ -113,7 +106,6 @@ function boost_cart.cart:on_punch(puncher, time_from_last_punch, tool_capabiliti
 
 	if puncher:get_player_control().sneak then
 
-		-- pick up cart: drop all attachments
 		if self.driver then
 
 			if self.old_pos then
@@ -160,7 +152,7 @@ function boost_cart.cart:on_punch(puncher, time_from_last_punch, tool_capabiliti
 
 	if puncher:get_player_name() == self.driver then
 
-		if math.abs(vel.x + vel.z) > boost_cart.punch_speed_min then
+		if math.abs(vel.x + vel.z) > (boost_cart.punch_speed_min or -1) then -- was > 7
 			return
 		end
 	end
@@ -235,25 +227,21 @@ function boost_cart.cart:on_step(dtime)
 
 		vel = vector.add(vel, self.velocity)
 		self.object:setvelocity(vel)
-		self.old_dir.y = 0 -- ADDED
-
+self.old_dir.y = 0 -- ADDED
 	elseif vector.equals(vel, {x=0, y=0, z=0}) then
 
 		return
 	end
-
-	-- dir: New moving direction of the cart
-	-- last_switch: Currently pressed L/R key, used to ignore the key on the next rail node
-	local dir, last_switch
+	
+	local dir, last_switch = nil, nil
 	local pos = self.object:getpos()
 
 	if self.old_pos and not self.punched then
 
-		local flo_pos = vector.round(pos)
-		local flo_old = vector.round(self.old_pos)
+		local flo_pos = vector.floor(pos)
+		local flo_old = vector.floor(self.old_pos)
 
 		if vector.equals(flo_pos, flo_old) then
-			-- Do not check one node multiple times
 			return
 		end
 	end
@@ -272,20 +260,29 @@ function boost_cart.cart:on_step(dtime)
 
 	if self.old_pos then
 
-		-- Detection for "skipping" nodes
-		local expected_pos = vector.add(self.old_pos, self.old_dir)
-		local found_path = boost_cart:pathfinder(pos, expected_pos, self.old_dir, ctrl, self.old_switch, self.railtype)
+		local diff = vector.subtract(self.old_pos, pos)
 
-		if not found_path then
-			-- No rail found: reset back to the expected position
-			pos = expected_pos
-			update.pos = true
+		for _,v in pairs({"x","y","z"}) do
+
+			if math.abs(diff[v]) > 1.1 then
+
+				local expected_pos = vector.add(self.old_pos, self.old_dir)
+
+				dir, last_switch = boost_cart:get_rail_direction(pos, self.old_dir, ctrl, self.old_switch, self.railtype)
+
+				if vector.equals(dir, {x=0, y=0, z=0}) then
+					dir = false
+					pos = vector.new(expected_pos)
+					update.pos = true
+				end
+
+				break
+			end
 		end
 	end
 	
 	if vel.y == 0 then
 
-		-- Stop cart completely (do not swing)
 		for _,v in pairs({"x", "z"}) do
 
 			if vel[v] ~= 0 and math.abs(vel[v]) < 0.9 then
@@ -306,8 +303,6 @@ function boost_cart.cart:on_step(dtime)
 
 	if vector.equals(dir, {x=0, y=0, z=0}) then
 		vel = {x=0, y=0, z=0}
-		pos = vector.round(pos)
-		update.pos = true
 		update.vel = true
 	else
 		-- If the direction changed
@@ -350,8 +345,7 @@ function boost_cart.cart:on_step(dtime)
 				end
 			end
 
-			-- Try to make it similar to the original carts mod
-			acc = acc + (speed_mod * 10)
+			acc = acc + (speed_mod * 8)
 
 		else
 			acc = acc - 0.4
@@ -364,26 +358,21 @@ function boost_cart.cart:on_step(dtime)
 		
 		new_acc = vector.multiply(dir, acc)
 	end
-
-	if HAVE_MESECONS_ENABLED then
-		boost_cart:signal_detector_rail(vector.round(pos))
-	end
-
+	
+	self.object:setacceleration(new_acc)
+	self.old_pos = vector.new(pos)
+	self.old_dir = vector.new(dir)
+	self.old_switch = last_switch
+	
 	-- Limits
 	for _,v in pairs({"x","y","z"}) do
 
 		if math.abs(vel[v]) > max_vel then
 			vel[v] = boost_cart:get_sign(vel[v]) * max_vel
-			new_acc[v] = 0
 			update.vel = true
 		end
 	end
-
-	self.object:setacceleration(new_acc)
-	self.old_pos = vector.new(pos)
-	self.old_dir = vector.new(dir)
-	self.old_switch = last_switch
-
+	
 	if self.punched then
 
 		-- Collect dropped items

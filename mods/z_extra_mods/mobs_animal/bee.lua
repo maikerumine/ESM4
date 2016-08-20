@@ -41,7 +41,7 @@ mobs:register_mob("mobs_animal:bee", {
 	end,
 })
 
-mobs:register_spawn("mobs_animal:bee", {"group:flower"}, 20, 10, 9000, 1, 31000, true)
+--mobs:register_spawn("mobs_animal:bee", {"group:flower"}, 20, 10, 9000, 1, 31000, true)
 
 mobs:register_egg("mobs_animal:bee", S("Bee"), "mobs_bee_inv.png", 0)
 

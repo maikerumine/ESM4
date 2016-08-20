@@ -1,5 +1,0 @@
-default
-mobs
-farming?
-bones?
-

@@ -1,4 +1,3 @@
-
 function boost_cart:get_sign(z)
 
 	if z == 0 then
@@ -196,34 +195,6 @@ function boost_cart:get_rail_direction(pos_, dir, ctrl, old_switch, railtype)
 	return {x=0, y=0, z=0}
 end
 
-function boost_cart:pathfinder(pos_, expected_pos, old_dir, ctrl, pf_switch, railtype)
-
-	local pos = vector.round(pos_)
-	local pf_pos = vector.round(expected_pos)
-	local pf_dir = vector.new(old_dir)
-
-	for i = 1, 3 do
-
-		if vector.equals(pf_pos, pos) then
-
-			return true -- success! cart moved on correctly
-		end
-
-		pf_dir, pf_switch = boost_cart:get_rail_direction(pf_pos, pf_dir,
-				ctrl, pf_switch, railtype)
-
-		if vector.equals(pf_dir, {x = 0, y = 0, z = 0}) then
-
-			return false -- no way forwards
-		end
-
-		pf_pos = vector.add(pf_pos, pf_dir)
-
-	end
-
-	return false -- cart not found
-end
-
 function boost_cart:boost_rail(pos, amount)
 
 	minetest.get_meta(pos):set_string("cart_acceleration", tostring(amount))
@@ -236,30 +207,4 @@ function boost_cart:boost_rail(pos, amount)
 			obj_:get_luaentity():on_punch()
 		end
 	end
-end
-
-function boost_cart:register_rail(name, def)
-
-	local def_default = {
-		drawtype = "raillike",
-		paramtype = "light",
-		sunlight_propagates = true,
-		is_ground_content = true,
-		walkable = false,
-		selection_box = {
-			type = "fixed",
-			fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
-		}
-	}
-
-	for k, v in pairs(def_default) do
-		def[k] = v
-	end
-
-	if not def.inventory_image then
-		def.wield_image = def.tiles[1]
-		def.inventory_image = def.tiles[1]
-	end
-
-	minetest.register_node(name, def)
 end

@@ -54,13 +54,13 @@ es.RADIOACTIVE = 1;	--1 is on 0 is off
 --CONFIG SWITCHES
 --Radioactive materials switch
 if es.RADIOACTIVE == 1 then	--add radiation
-	--dofile(modpath.."/radiation.lua")
+	dofile(modpath.."/radiation.lua")
 end
 
 --MOREBLOCKS / STAIRSPLUS SUPPORT
-if moreblocks then
-dofile(modpath.."/mostair.lua")
-end
+--if moreblocks then
+--dofile(modpath.."/mostair.lua")
+--end
 
 --STAIR SUPPORT
 --if stairs then

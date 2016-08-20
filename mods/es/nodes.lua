@@ -14,6 +14,28 @@
 --(c) Copyright (2014-2015) maikerumine; CC-BY-SA 3.0
 
 
+minetest.register_node("es:lag_block", {
+	description = "Show this around town to sho you love the original Just Test.  REMEMBER THE TEST.  Lag, This is a dedication block to your ideas, your server, and you.  My skuchayem i lyubyat vas.  WE MISS AND LOVE YOU!",
+	--tiles = {"default_water.png^player.png^gui_furnace_arrow_fg.png^treeprop.png^heart.png"},
+	tiles = {"default_water.png^treeprop.png^heart.png"},
+	is_ground_content = false,
+	walkable = false,
+	light_source = default.LIGHT_MAX,
+	groups = {immortal=1,cracky=1,not_in_creative_inventory = 1},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("es:lag_ice", {
+	description = "Lag's Ice",
+	tiles = {"default_ice.png^default_glass_detail.png"},
+	is_ground_content = false,
+	paramtype = "light",
+	groups = {cracky = 1, puts_out_fire = 1},
+	sounds = default.node_sound_glass_defaults(),
+})
+
+
+
 --tweaks and overrides
 --Override mese
 minetest.override_item('default:stone_with_mese', {
@@ -47,20 +69,7 @@ local function hurt_cactus() -- cactus tweak
 	minetest.register_node(":"..name, table2)
 end
 hurt_cactus();
---[[
--- Over time Cobble placed in water changes to Mossy Cobble
---From Etheral
-minetest.register_abm({
-	nodenames = {"default:cobble"},
-	neighbors = {"group:water"},
-	interval = 17,
-	chance = 100,
-	catch_up = false,
-	action = function(pos, node)
-		minetest.swap_node(pos, {name = "default:mossycobble"})
-	end
-})
-]]
+
 --TECHNIC NODES
 minetest.register_node( "es:granite", {
 	description = "Granite",
@@ -93,8 +102,8 @@ minetest.register_node( "es:marble_bricks", {
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
 })
-
---ES Node Definition
+--[[
+--ES OLD_Node Definition
 minetest.register_node("es:stone_with_emerald", {
 	description = "Emerald Ore",
 	tiles = {"default_stone.png^emerald_ore.png"},
@@ -142,6 +151,74 @@ minetest.register_node("es:stone_with_purpellium", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
+minetest.register_node("es:depleted_uranium", {
+	description = "Depleted Uranium Ore RADIOACTIVE",
+	tiles = {"default_stone.png^uranium_ore.png"},
+	--groups = {cracky = 3, radioactive = (state == "source" and 3 or 2)},
+	groups = {cracky = 3, radioactive = 3},
+	drop = 'es:depleted_uranium_lump',
+	sounds = default.node_sound_stone_defaults(),
+	light_source = 12,
+})
+]]
+
+--ES NEW_Node Definition
+minetest.register_node("es:stone_with_emeralds", {
+	description = "Emerald Ore",
+	tiles = {"default_stone.png^emerald_ore.png"},
+	is_ground_content = true,
+	groups = {cracky=1},
+	drop = "es:emerald_crystal",
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("es:stone_with_rubys", {
+	description = "Ruby Ore",
+	tiles = {"default_stone.png^ruby_ore.png"},
+	is_ground_content = true,
+	groups = {cracky=1},
+	drop = "es:ruby_crystal",
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("es:stone_with_aikerums", {
+	description = "Aikerum Ore",
+	tiles = {"default_stone.png^aikerum_ore.png"},
+	is_ground_content = true,
+	groups = {cracky=1,level = 2},
+	drop = "es:aikerum_crystal",
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("es:stone_with_infiniums", {
+	description = "Infinium Ore - Slightly Radioactive",
+	tiles = {"default_stone.png^infinium_ore.png"},
+	is_ground_content = true,
+	--groups = {cracky=1,level = 2, radioactive = (state == "source" and 2 or 2)},
+	groups = {cracky=1,level = 2, radioactive = 2},
+	drop = "es:infinium_goo",
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("es:stone_with_purpelliums", {
+	description = "Purlellium Ore - Oddly interesting",
+	tiles = {"default_stone.png^purpellium_ore.png"},
+	is_ground_content = true,
+	--groups = {cracky=2,level = 2,fall_damage_add_percent = -1000, radioactive = (state == "source" and 2 or 2)},
+	groups = {cracky=2,level = 2,fall_damage_add_percent = -1000, radioactive = 2},
+	drop = "es:purpellium_lump",
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("es:depleted_uraniums", {
+	description = "Depleted Uranium Ore RADIOACTIVE",
+	tiles = {"default_stone.png^uranium_ore.png"},
+	--groups = {cracky = 3, radioactive = (state == "source" and 3 or 2)},
+	groups = {cracky = 3, radioactive = 3},
+	drop = 'es:depleted_uranium_lump',
+	sounds = default.node_sound_stone_defaults(),
+	light_source = 12,
+})
 --Emerald located at -1000
 minetest.register_node("es:emeraldblock", {
 	description = "Emerald Block",
@@ -233,7 +310,15 @@ minetest.register_craftitem("es:purpellium_ingot", {
 	inventory_image = "purpellium_ingot.png",
 })
 
-
+--Diamond located in sand?
+minetest.register_node("es:sand_with_diamond", {
+	description = "The buried treasure chest is gone, however this gem remains.  Use a shovel!",
+	tiles = {"default_sand.png^default_diamond.png"},
+	--light_source = 7,
+	is_ground_content = true,
+	groups = {crumbly=1,level=2},
+	sounds = default.node_sound_dirt_defaults(),
+})
 
 --BONEBLOCK
 minetest.register_node("es:boneblock", {
@@ -771,7 +856,8 @@ minetest.register_node("es:desert_stone_with_coal", {
 	drop = 'default:coal_lump',
 	sounds = default.node_sound_stone_defaults(),
 })
-
+--[[
+--OLD
 minetest.register_node("es:depleted_uranium", {
 	description = "Depleted Uranium Ore RADIOACTIVE",
 	tiles = {"default_stone.png^uranium_ore.png"},
@@ -781,7 +867,7 @@ minetest.register_node("es:depleted_uranium", {
 	sounds = default.node_sound_stone_defaults(),
 	light_source = 12,
 })
-
+]]
 minetest.register_craftitem("es:depleted_uranium_lump", {
 	description = "Depleted Uranium use for long term fuel, first cook the lump into an ingot, then use ingot for fuel.",
 	inventory_image = "uranium_lump.png",

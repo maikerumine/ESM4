@@ -78,6 +78,9 @@ minetest.register_node("es:furnace", {
 		return true
 	end,
 	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+		if minetest.is_protected(pos, player:get_player_name()) then  --mm added is protectrd
+			return 0
+		end
 		local meta = minetest.get_meta(pos)
 		local inv = meta:get_inventory()
 		if listname == "fuel" then

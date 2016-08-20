@@ -83,3 +83,33 @@ minetest.register_craft({
 		{'', 'group:stick', 'default:steel_ingot'},
 	}
 })
+
+-- cobweb
+minetest.register_node(":mobs:cobweb", {
+	description = S("Cobweb"),
+	drawtype = "plantlike",
+	visual_scale = 1.1,
+	tiles = {"mobs_cobweb.png"},
+	inventory_image = "mobs_cobweb.png",
+	paramtype = "light",
+	sunlight_propagates = true,
+	liquid_viscosity = 11,
+	liquidtype = "source",
+	liquid_alternative_flowing = "mobs:cobweb",
+	liquid_alternative_source = "mobs:cobweb",
+	liquid_renewable = false,
+	liquid_range = 0,
+	walkable = false,
+	groups = {snappy = 1},
+	drop = "farming:cotton",
+	sounds = default.node_sound_leaves_defaults(),
+})
+
+minetest.register_craft({
+	output = "mobs:cobweb",
+	recipe = {
+		{"farming:string", "", "farming:string"},
+		{"", "farming:string", ""},
+		{"farming:string", "", "farming:string"},
+	}
+})
