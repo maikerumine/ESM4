@@ -36,7 +36,7 @@ minetest.register_chatcommand("mapfix", {
 		return true, "Done."
 	end,
 })
-
+--[[
 --RND CODE
 --NO GRIEF WITH liquids
 local function disable_placing_above_ground(name)
@@ -58,3 +58,4 @@ minetest.after(0,function()
    disable_placing_above_ground("es:mud");
    -- add here all other sources: toxic water, mud ,....
 end)
+]]

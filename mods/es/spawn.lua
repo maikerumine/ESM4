@@ -48,7 +48,7 @@ minetest.register_chatcommand("spawn", {
  end,
 })
 
-
+--[[
 --Give initial stuff code
 minetest.register_on_newplayer(function(player)
 	--print("on_newplayer")
@@ -61,7 +61,7 @@ minetest.register_on_newplayer(function(player)
 		player:get_inventory():add_item('main', 'default:wood 3')
 		player:get_inventory():add_item('main', 'farming:bread 10')
 end)
-
+]]
 --disable sneak on player join to make more interesting mining
 
 --Sent: 31 Jan 2016, 10:53

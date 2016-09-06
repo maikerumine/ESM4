@@ -22,7 +22,7 @@ local modpath = minetest.get_modpath("es")
 es.modpath = modpath
 
 dofile(modpath.."/crafting.lua")
-dofile(modpath.."/anticheat.lua")
+dofile(modpath.."/antigrief.lua")
 dofile(modpath.."/armor.lua")
 dofile(modpath.."/shields.lua")
 dofile(modpath.."/shutdown.lua")

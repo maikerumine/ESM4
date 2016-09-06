@@ -78,8 +78,8 @@ mobs:register_mob("mobs_animal:chicken", {
 	end,
 })
 
---mobs:register_spawn("mobs_animal:chicken",
---	{"default:dirt_with_grass", "ethereal:bamboo_dirt"}, 20, 10, 15000, 1, 31000, true)
+mobs:register_spawn("mobs_animal:chicken",
+	{"default:dirt_with_grass", "ethereal:bamboo_dirt"}, 20, 10, 15000, 1, 31000, true)
 
 mobs:register_egg("mobs_animal:chicken", S("Chicken"), "mobs_chicken_inv.png", 0)
 
