@@ -772,7 +772,7 @@ end
 
 		minetest.register_decoration({
 		deco_type = "schematic",
-		place_on = {"es:dry_dirt","es:strange_grass","es:strange_clay_brown"},
+		place_on = {"es:dry_dirt","es:strange_grass","es:strange_clay_brown","default:dirt_with_dry_grass","default:dirt_with_grass"},
 		sidelen = 16,
 		noise_params = {
 			offset = -0.0003,
@@ -782,7 +782,7 @@ end
 			octaves = 3,
 			persist = 0.66
 		},
-		biomes = {"barren","clay"},
+		biomes = {"barren","clay","savanna","sandstone_grassland"},
 		y_min = 2,
 		y_max = 20,
 		schematic = minetest.get_modpath("es").."/schematics/cabin_old.mts",

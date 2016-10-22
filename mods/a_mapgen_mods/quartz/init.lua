@@ -166,21 +166,22 @@ end
 --Compatibility with stairsplus
 
 if minetest.get_modpath("moreblocks") and enable_stairsplus then
-	register_stair_slab_panel_micro("quartz", "block", "quartz:block",
+	--register_stair_slab_panel_micro("quartz", "block", "quartz:block",
+	register_panel_micro("quartz", "block", "quartz:block",
 	{cracky=3},
 	{"quartz_block.png"},
 	"Quartz Block",
 	"block",
 	0)
 
-	register_stair_slab_panel_micro("quartz", "chiseled", "quartz:chiseled",
+	register_panel_micro("quartz", "chiseled", "quartz:chiseled",
 	{cracky=3},
 	{"quartz_chiseled.png"},
 	"Chiseled Quartz",
 	"chiseled",
 	0)
 
-	register_stair_slab_panel_micro("quartz", "pillar", "quartz:pillar",
+	register_panel_micro("quartz", "pillar", "quartz:pillar",
 	{cracky=3},
 	{"quartz_pillar_top.png", "quartz_pillar_top.png", "quartz_pillar_side.png"},
 	"Quartz Pillar",

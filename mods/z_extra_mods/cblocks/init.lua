@@ -29,7 +29,7 @@ minetest.register_node("cblocks:wood_" .. colours[i][1], {
 	description = colours[i][2] .. " Wooden Planks",
 	tiles = {"default_wood.png^[colorize:" .. colours[i][3]},
 	is_ground_content = false,
-	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, wood = 1},
+	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, wood = 1,not_in_craft_guide=1},
 	sounds = default.node_sound_wood_defaults(),
 })
 
@@ -46,7 +46,7 @@ minetest.register_node("cblocks:stonebrick_" .. colours[i][1], {
 	description = colours[i][2] .. " Stone Brick",
 	tiles = {"default_stone_brick.png^[colorize:" .. colours[i][3]},
 	is_ground_content = false,
-	groups = {cracky = 2, stone = 1},
+	groups = {cracky = 2, stone = 1,not_in_craft_guide=1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -67,7 +67,7 @@ minetest.register_node( "cblocks:glass_" .. colours[i][1], {
 	sunlight_propagates = true,
 	use_texture_alpha = true,
 	is_ground_content = false,
-	groups = {cracky = 3, oddly_breakable_by_hand = 3},
+	groups = {cracky = 3, oddly_breakable_by_hand = 3,not_in_craft_guide=1},
 	sounds = default.node_sound_glass_defaults(),
 })
 
@@ -83,7 +83,7 @@ minetest.register_node( "cblocks:clay_" .. colours[i][1], {
 	description = colours[i][2] .. " Clay",
 	tiles = {"default_clay.png^[colorize:" .. colours[i][3]},
 	is_ground_content = false,
-	groups = {crumbly = 2, oddly_breakable_by_hand = 2},
+	groups = {crumbly = 2, oddly_breakable_by_hand = 2,not_in_craft_guide=1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -99,7 +99,7 @@ minetest.register_craft({
 
 --wood
 stairs.register_stair_and_slab("wood_" .. colours[i][1], "cblocks:wood_" .. colours[i][1],
-		{snappy = 2, choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
+		{snappy = 2, choppy = 2, oddly_breakable_by_hand = 2, flammable = 3,not_in_craft_guide=1},
 		{"default_wood.png^[colorize:" .. colours[i][3]},
 		"Wooden Stair",
 		"Wooden Slab",
@@ -108,7 +108,7 @@ stairs.register_stair_and_slab("wood_" .. colours[i][1], "cblocks:wood_" .. colo
 
 --stonebrick
 stairs.register_stair_and_slab("stonebrick_" .. colours[i][1], "cblocks:stonebrick_" .. colours[i][1],
-		{cracky = 3},
+		{cracky = 3,not_in_craft_guide=1},
 		{"default_stone_brick.png^[colorize:" .. colours[i][3]},
 		"Stone Brick Stair",
 		"Stone Brick Slab",

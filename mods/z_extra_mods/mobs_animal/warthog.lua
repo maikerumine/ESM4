@@ -55,8 +55,8 @@ mobs:register_mob("mobs_animal:pumba", {
 	end,
 })
 
---mobs:register_spawn("mobs_animal:pumba",
---	{"ethereal:mushroom_dirt", "default:dirt_with_dry_grass"}, 20, 10, 15000, 1, 31000, true)
+mobs:register_spawn("mobs_animal:pumba",
+	{"ethereal:mushroom_dirt", "default:dirt_with_dry_grass"}, 20, 10, 10000, 1, 31000, true)
 
 mobs:register_egg("mobs_animal:pumba", S("Warthog"), "wool_pink.png", 1)
 

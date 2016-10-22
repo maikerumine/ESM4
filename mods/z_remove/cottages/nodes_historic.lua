@@ -58,14 +58,14 @@ minetest.register_node("cottages:loam", {
 -- create stairs if possible
 if( minetest.get_modpath("stairs") and stairs and stairs.register_stair_and_slab) then
    stairs.register_stair_and_slab("feldweg", "cottages:feldweg",
-		{snappy=2,choppy=2,oddly_breakable_by_hand=2},
+		{snappy=2,choppy=2,oddly_breakable_by_hand=2,not_in_craft_guide=1},
 		{"cottages_feldweg.png","default_dirt.png", "default_grass.png","default_grass.png","cottages_feldweg.png","cottages_feldweg.png"},
 		S("Dirt Road Stairs"),
 		S("Dirt Road, half height"),
 		default.node_sound_dirt_defaults())
 
    stairs.register_stair_and_slab("loam", "cottages:loam",
-		{snappy=2,choppy=2,oddly_breakable_by_hand=2},
+		{snappy=2,choppy=2,oddly_breakable_by_hand=2,not_in_craft_guide=1},
 		{"default_sandstone.png"},
 		S("Loam Stairs"),
 		S("Loam Slab"),
@@ -73,7 +73,7 @@ if( minetest.get_modpath("stairs") and stairs and stairs.register_stair_and_slab
 
    if( minetest.registered_nodes["default:clay"]) then
       stairs.register_stair_and_slab("clay", "default:clay",
-	        {crumbly=3},
+	        {crumbly=3,not_in_craft_guide=1},
 		{"default_clay.png"},
 		S("Clay Stairs"),
 		S("Clay Slab"),

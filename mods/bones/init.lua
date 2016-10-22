@@ -149,7 +149,7 @@ local function may_replace(pos, player)
 end
 
 local drop = function(pos, itemstack)
-	local obj = core.add_item(pos, itemstack:take_item(itemstack:get_count()))
+	local obj = minetest.add_item(pos, itemstack:take_item(itemstack:get_count()))
 	if obj then
 		obj:setvelocity({
 			x = math.random(-10, 10) / 9,
@@ -180,14 +180,14 @@ minetest.register_on_dieplayer(function(player)
 	local pos = vector.round(player:getpos())
 	local player_name = player:get_player_name()
 
-	-- check if it's possible to place bones, if not go 1 higher
+	-- check if it's possible to place bones, if not find space near player
 	if bones_mode == "bones" and not may_replace(pos, player) then
-		pos.y = pos.y + 1
-	end
-
-	-- still cannot place bones? change mode to 'drop'
-	if bones_mode == "bones" and not may_replace(pos, player) then
-		bones_mode = "drop"
+		local air = minetest.find_node_near(pos, 1, {"air"})
+		if air and not minetest.is_protected(air, player_name) then
+			pos = air
+		else
+			bones_mode = "drop"
+		end
 	end
 
 	if bones_mode == "drop" then

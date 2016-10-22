@@ -27,7 +27,7 @@ dofile(minetest.get_modpath("basic_machines").."/grinder.lua")
 dofile(minetest.get_modpath("basic_machines").."/autocrafter.lua") -- borrowed and adapted from pipeworks mod
 
 --dofile(minetest.get_modpath("basic_machines").."/cpu.lua") -- experimental
-dofile(minetest.get_modpath("basic_machines").."/protect.lua") -- experimental, adds on protect event handling
+--dofile(minetest.get_modpath("basic_machines").."/protect.lua") -- experimental, adds on protect event handling
 
 -- OPTIONAL ADDITIONAL STUFF ( comment to disable )
 

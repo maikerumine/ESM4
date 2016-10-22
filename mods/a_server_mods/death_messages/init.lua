@@ -48,9 +48,13 @@ messages.water = {
 	" failed at swimming lessons.",
 	" tried to impersonate an anchor.",
 	" forgot he wasn't a fish.",
-	" drank themselves to death.",
-	" failed to achieve the underwater challenge.",
-	" blew one too many bubbles."
+	" blew one too many bubbles.",
+	" kinda screwed up.",
+	" couldn't fight very well.",
+	" got 0wn3d.",
+	" got SMOKED.",
+	" got hurted by Oerkki.",
+	" got blowed up."
 }
 
 -- Burning death messages
@@ -59,27 +63,21 @@ messages.fire = {
 	" got a little too warm.",
 	" got too close to the camp fire.",
 	" just got roasted, hotdog style.",
-	" gout burned up. More light that way."
+	" got burned up. More light that way."
 }
-
+--[[
 -- Other death messages
 messages.other = {
 	" died.",
 	" did something fatal.",
 	" gave up on life.",
 	" is somewhat dead now.",
-	" kinda screwed up.",
-	" couldn't fight very well.",
-	" got 0wn3d.",
-	" got SMOKED.",
-	" got hurted by Oerkki.",
-	" got blowed up.",
-	" forgot about gravity.",
-	" is a Rusher.",
-	" loves 2b2t.",
-	" passed out -permanently."
+	" passed out -permanently.",
+	" thinks 2b2t is too hard",
+	" is a rusher.",
+	" loves maikerumine's youtube channel!"
 }
-
+]]
 function get_message(mtype)
 	if RANDOM_MESSAGES then
 		return messages[mtype][math.random(1, #messages[mtype])]
@@ -92,31 +90,49 @@ minetest.register_on_dieplayer(function(player)
 	local player_name = player:get_player_name()
 	local node = minetest.registered_nodes[minetest.get_node(player:getpos()).name]
 	local pos = player:getpos()
-	local death = {x=0, y=1000, z=0}
+	local death = {x=0, y=-2, z=0}
 	if minetest.is_singleplayer() then
 		player_name = "You"
 	end
-	
-
-	
-	
 	-- Death by lava
 	if node.groups.lava ~= nil then
-		minetest.chat_send_all(player_name .. get_message("lava")) 
+		minetest.chat_send_all(player_name .. get_message("lava"))
 	-- Death by drowning
 	elseif player:get_breath() == 0 then
-		minetest.chat_send_all(player_name .. get_message("water")) 
+		minetest.chat_send_all(player_name .. get_message("water"))
 	-- Death by fire
 	elseif node.name == "fire:basic_flame" then
-		minetest.chat_send_all(player_name .. get_message("fire")) 
+		minetest.chat_send_all(player_name .. get_message("fire"))
 	-- Death by something else
 	else
-		minetest.chat_send_all(player_name .. get_message("other")) 
+		--minetest.chat_send_all(player_name .. get_message("other"))
 	end
-	
 	player:setpos(death)
-	minetest.chat_send_all(player_name ..(" GG"))
-
+end)
+--bigfoot code
+-- bigfoot547's death messages
+minetest.register_on_punchplayer(function(player, hitter)
+   if not (player or hitter) then
+      return false
+   end
+   if not hitter:get_player_name() == "" then
+      return false
+   end
+   minetest.after(0, function()
+      if player:get_hp() == 0 and hitter:get_player_name() ~= "" then
+        minetest.chat_send_all(player:get_player_name().." was killed by "..hitter:get_player_name()..".")
+        --chat2_send_message(players[i], (player:get_player_name().." was killed by "..hitter:get_player_name().."."), 0xFF0000)
+	 if player=="" or hitter=="" then return end -- no mob killers/victims
+         return true
+      elseif hitter:get_player_name() == "" and player:get_hp() == 0 then
+         minetest.chat_send_all(player:get_player_name().." was killed by "..hitter:get_luaentity().name..".") --error
+         --minetest.chat_send_all(player:get_player_name().." was killed by "..hitter:get_luaentity().name..".") --error
+	 --chat2_send_message(players[i], (player:get_player_name().." was killed by "..hitter:get_luaentity().name.."."), 0xFF0000)
+	 if player=="" or hitter=="" then return end -- no mob killers/victims
+      else
+         return false
+      end
+   end)
 end)
 
 -----------------------------------------------------------------------------------------------
