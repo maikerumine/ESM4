@@ -178,7 +178,7 @@ for _, col in pairs(all_colours) do
 end
 
 mobs:register_spawn("mobs_animal:sheep_white",
-	{"default:dirt_with_grass", "ethereal:green_dirt"}, 20, 10, 10000, 2, 31000, true)
+	{"default:dirt_with_grass", "ethereal:green_dirt"}, 20, 10, 6000, 2, 31000, true)
 
 
 -- compatibility

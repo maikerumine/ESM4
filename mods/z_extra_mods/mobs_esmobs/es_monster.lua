@@ -80,7 +80,7 @@ mobs:register_mob("mobs_esmobs:spider", {
 	hp_min = 40,
 	hp_max = 80,
 	armor = 100,
-	collisionbox = {-0.9, -0.01, -0.7, 0.7, 0.6, 0.7},
+	collisionbox = {-0.5, -0.01, -0.4, 0.4, 0.2, 0.4},
 	visual = "mesh",
 	mesh = "mobs_spider.x",
 	textures = {{

@@ -212,13 +212,13 @@ walls.register("walls:dirt", "Dirt Wall", "default_dirt.png",
 --default glass
 walls.register("walls:meselamp", "Meselamp Wall", "default_meselamp.png",
 		"default:meselamp", default.node_sound_stone_defaults())
-
+--[[
 walls.register("walls:glass", "Glass Wall", "default_glass.png",
 		"default:glass", default.node_sound_stone_defaults())
 		
 walls.register("walls:obsidian_glass", "Obsidian Glass Wall", "default_obsidian_glass.png",
 		"default:obsidian_glass", default.node_sound_stone_defaults())
-
+]]
 --default trees
 walls.register("walls:tree", "Tree Wall", "default_tree.png",
 		"default:tree", default.node_sound_stone_defaults())

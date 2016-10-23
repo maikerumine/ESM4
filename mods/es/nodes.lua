@@ -317,6 +317,7 @@ minetest.register_node("es:sand_with_diamond", {
 	--light_source = 7,
 	is_ground_content = true,
 	groups = {crumbly=1,level=2},
+	drop = "default:diamond",
 	sounds = default.node_sound_dirt_defaults(),
 })
 
