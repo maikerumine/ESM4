@@ -237,7 +237,7 @@ minetest.register_chatcommand("xp", {
 			--local killxp = math.floor((boneworld.killxp[name])*100)/100;
 			msg  = "xp name - show experience of target player"
 			.."\n# "..name .. " has " .. xp .. " bone collecting experience, ".. digxp .. " digging experience"
-			.. " (can dig to ".. math.floor(200+50*math.sqrt(digxp)) .. ")"
+			.. " (can dig to ".. math.floor(1000+50*math.sqrt(digxp)) .. ")"
 			.. "\nTotal xp stored in bones in world is " .. math.floor(boneworld.wastedxp*100)/100;
 		else
 			local xp = math.floor((boneworld.xp[param] or 1)*100)/100;
@@ -256,14 +256,14 @@ minetest.register_chatcommand("xp", {
 local old_is_protected = minetest.is_protected
 function minetest.is_protected(pos, name)
 	
-	if pos.y>-200 or name == "" then 
+	if pos.y>-1000 or name == "" then 
 		return old_is_protected(pos, name) 
 	end
 		
 	--to do : digxp here!!
 	local digxp = boneworld.digxp[name] or 0;
 	
-	local maxdepth = 200+50*math.sqrt(digxp);
+	local maxdepth = 1000+50*math.sqrt(digxp);
 	if pos.y<-maxdepth then
 		minetest.chat_send_player(name, "You can only dig above -"..math.floor(maxdepth) .. ". Get more dig experience to dig deeper");
 		local player = minetest.get_player_by_name(name); if not player then return true end

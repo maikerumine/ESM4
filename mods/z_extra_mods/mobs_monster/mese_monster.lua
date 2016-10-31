@@ -54,7 +54,14 @@ mobs:register_mob("mobs_monster:mese_monster", {
 	},
 })
 
-mobs:register_spawn("mobs_monster:mese_monster", {"default:stone"}, 7, 0, 5000, 1, -20)
+mobs:spawn({
+	name = "mobs_monster:mese_monster",
+	nodes = {"default:stone"},
+	max_light = 7,
+	chance = 5000,
+	active_object_count = 1,
+	max_height = -20,
+})
 
 mobs:register_egg("mobs_monster:mese_monster", S("Mese Monster"), "default_mese_block.png", 1)
 

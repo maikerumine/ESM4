@@ -52,8 +52,15 @@ mobs:register_mob("mobs_animal:kitten", {
 	end
 })
 
---mobs:register_spawn("mobs_animal:kitten",
---	{"default:dirt_with_grass", "ethereal:grove_dirt"}, 20, 12, 22000, 1, 31000, true)
+mobs:spawn({
+	name = "mobs_animal:kitten",
+	nodes = {"default:dirt_with_grass", "ethereal:grove_dirt"},
+	min_light = 12,
+	chance = 22000,
+	min_height = 0,
+	max_height = 31000,
+	day_toggle = true,
+})
 
 mobs:register_egg("mobs_animal:kitten", S("Kitten"), "mobs_kitten_inv.png", 0)
 

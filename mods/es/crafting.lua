@@ -289,7 +289,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'es:emeraldblock 2',
 	recipe = {
-		{'stairs:stair_Emerald', 'stairs:stair_Emerald', 'stairs:stair_Emerald'},
+		{'stairs:stair_emerald', 'stairs:stair_emerald', 'stairs:stair_emerald'},
 	}
 })
 minetest.register_craft({
@@ -315,7 +315,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'es:rubyblock 2',
 	recipe = {
-		{'stairs:stair_Ruby', 'stairs:stair_Ruby', 'stairs:stair_Ruby'},
+		{'stairs:stair_ruby', 'stairs:stair_ruby', 'stairs:stair_ruby'},
 	}
 })
 minetest.register_craft({
@@ -341,7 +341,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'es:aikerumblock 2',
 	recipe = {
-		{'stairs:stair_Aikerum', 'stairs:stair_Aikerum', 'stairs:stair_Aikerum'},
+		{'stairs:stair_aikerum', 'stairs:stair_aikerum', 'stairs:stair_aikerum'},
 	}
 })
 minetest.register_craft({
@@ -367,7 +367,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'es:infiniumblock 2',
 	recipe = {
-		{'stairs:stair_Infinium', 'stairs:stair_Infinium', 'stairs:stair_Infinium'},
+		{'stairs:stair_infinium', 'stairs:stair_infinium', 'stairs:stair_infinium'},
 	}
 })
 minetest.register_craft({
@@ -399,7 +399,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'es:purpelliumblock 2',
 	recipe = {
-		{'stairs:stair_Purpellium', 'stairs:stair_Purpellium', 'stairs:stair_Purpellium'},
+		{'stairs:stair_purpellium', 'stairs:stair_purpellium', 'stairs:stair_purpellium'},
 	}
 })
 minetest.register_craft({

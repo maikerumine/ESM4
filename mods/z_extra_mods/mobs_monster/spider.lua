@@ -52,8 +52,16 @@ mobs:register_mob("mobs_monster:spider", {
 	},
 })
 
-mobs:register_spawn("mobs_monster:spider",
-	{"default:desert_stone", "ethereal:crystal_dirt"}, 13, 0, 7000, 1, 71)
+mobs:spawn({
+	name = "mobs_monster:spider",
+	nodes = {"default:desert_stone", "ethereal:crystal_dirt"},
+	min_light = 0,
+	max_light = 12,
+	chance = 7000,
+	active_object_count = 1,
+	min_height = -50,
+	max_height = 31000,
+})
 
 mobs:register_egg("mobs_monster:spider", S("Spider"), "mobs_cobweb.png", 1)
 

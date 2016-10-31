@@ -1,5 +1,12 @@
 
--- Mobs Api (22nd October 2016)
+-- Mobs Api (26th October 2016)
+--[[
+--maikerumine added bones and follow for mobs:
+--lines 56,57,338-363,1935-1983,3174-3211
+--revised 20161030 by maikerumine
+]]
+
+
 
 mobs = {}
 mobs.mod = "redo"
@@ -42,13 +49,12 @@ local remove_far = minetest.setting_getbool("remove_far_mobs")
 local difficulty = tonumber(minetest.setting_get("mob_difficulty")) or 1.0
 
 -- pathfinding settings
-local enable_pathfinding = true
+local enable_pathfinding = false
 local stuck_timeout = 3 -- how long before mob gets stuck in place and starts searching
 local stuck_path_timeout = 10 -- how long will mob follow path before giving up
 
 --bones settings  maikerumine bones code
 local enable_mob_bones = true
-
 
 -- localize functions
 local pi = math.pi
@@ -1973,11 +1979,9 @@ local mob_punch = function(self, hitter, tflp, tool_capabilities, dir)
 			print ("Clown down ")
 			end
 		end
-	--BREAK
-
-		--return
 	end
-
+	--BREAK
+	
 	--[[ add healthy afterglow when hit (can cause hit lag with larger textures)
 	core.after(0.1, function()
 		self.object:settexturemod("^[colorize:#c9900070")
@@ -2461,7 +2465,7 @@ end -- END mobs:register_mob function
 local count_mobs = function(pos, type)
 
 	local num = 0
-	local objs = minetest.get_objects_inside_radius(pos, 20)
+	local objs = minetest.get_objects_inside_radius(pos, 32)
 
 	for n = 1, #objs do
 
@@ -2636,7 +2640,7 @@ function mobs:spawn(def)
 	local active_object_count = def.active_object_count or 1
 	local min_height = def.min_height or -31000
 	local max_height = def.max_height or 31000
-	local day_toggle = def.day_toggle or nil
+	local day_toggle = def.day_toggle
 	local on_spawn = def.on_spawn
 
 	mobs:spawn_specific(name, nodes, neighbors, min_light, max_light, interval,
@@ -3166,6 +3170,7 @@ function mobs:alias_mob(old_name, new_name)
 		end
 	})
 end
+
 --MAIKERUMINE CODE FOR MOB FOLLOW
 		--Brandon Reese code to face pos
 			function mobs:face_pos(self,pos)

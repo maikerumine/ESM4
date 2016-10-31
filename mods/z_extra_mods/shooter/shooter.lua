@@ -132,6 +132,7 @@ SHOOTER_ENTITIES = {
 	"mobs_esm:Infinium_Monster",
 	"mobs_esm:phoenix",
 	"mobs_badplayer:Jasmine",
+	"mobs_badplayer:Infinium_Monster",
 }
 
 local singleplayer = minetest.is_singleplayer()

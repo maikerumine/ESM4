@@ -41,7 +41,14 @@ mobs:register_mob("mobs_animal:bee", {
 	end,
 })
 
---mobs:register_spawn("mobs_animal:bee", {"group:flower"}, 20, 10, 9000, 1, 31000, true)
+mobs:spawn({
+	name = "mobs_animal:bee",
+	nodes = {"group:flower"},
+	min_light = 10,
+	chance = 9000,
+	min_height = 0,
+	day_toggle = true,
+})
 
 mobs:register_egg("mobs_animal:bee", S("Bee"), "mobs_bee_inv.png", 0)
 
@@ -81,7 +88,7 @@ minetest.register_node(":mobs:beehive", {
 
 		meta:get_inventory():set_size("beehive", 1)
 	end,
---[[
+
 	after_place_node = function(pos, placer, itemstack)
 
 		if placer:is_player() then
@@ -89,11 +96,11 @@ minetest.register_node(":mobs:beehive", {
 			minetest.set_node(pos, {name = "mobs:beehive", param2 = 1})
 
 			if math.random(1, 4) == 1 then
-				minetest.add_entity(pos, "mobs:bee")
+				minetest.add_entity(pos, "mobs_animal:bee")
 			end
 		end
 	end,
-]]
+
 	on_punch = function(pos, node, puncher)
 
 		-- yep, bee's don't like having their home punched by players

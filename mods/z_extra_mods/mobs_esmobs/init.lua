@@ -8,6 +8,7 @@ local path = minetest.get_modpath("mobs_esmobs")
 
 --dofile(minetest.get_modpath("mobs_redo").."/api.lua")
 dofile(path .. "/es_monster.lua")
+dofile(path .. "/mob_jack.lua")
 
 
 
