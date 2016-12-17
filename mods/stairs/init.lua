@@ -18,6 +18,7 @@ stairs.stone = default.node_sound_stone_defaults()
 stairs.glass = default.node_sound_glass_defaults()
 stairs.leaves = default.node_sound_leaves_defaults()
 stairs.wool = default.node_sound_wool_defaults() -- Xanadu only
+stairs.wool = default.node_sound_metal_defaults() -- New Minetest
 --stairs.wool = stairs.leaves
 
 
@@ -446,19 +447,19 @@ stairs.register_all("steelblock", "default:steelblock",
 	{cracky = 1, level = 2,not_in_craft_guide=1},
 	{"default_steel_block.png"},
 	"Steel",
-	stairs.stone)
+	stairs.metal)
 
 stairs.register_all("copperblock", "default:copperblock",
 	{cracky = 1, level = 2,not_in_craft_guide=1},
 	{"default_copper_block.png"},
 	"Copper",
-	stairs.stone)
+	stairs.metal)
 
 stairs.register_all("bronzeblock", "default:bronzeblock",
 	{cracky = 1, level = 2,not_in_craft_guide=1},
 	{"default_bronze_block.png"},
 	"Bronze",
-	stairs.stone)
+	stairs.metal)
 
 stairs.register_all("mese", "default:mese",
 	{cracky = 1, level = 2,not_in_craft_guide=1},
@@ -470,7 +471,7 @@ stairs.register_all("goldblock", "default:goldblock",
 	{cracky = 1,not_in_craft_guide=1},
 	{"default_gold_block.png"},
 	"Gold",
-	stairs.stone)
+	stairs.metal)
 
 stairs.register_all("diamondblock", "default:diamondblock",
 	{cracky = 1, level = 3,not_in_craft_guide=1},
@@ -537,9 +538,9 @@ stairs.register_all("meselamp", "default:meselamp",
 	{cracky = 3, oddly_breakable_by_hand = 3,not_in_craft_guide=1},
 	{"default_meselamp.png"},
 	"Meselamp",
-	stairs.glass,
-	"0,0,0",
-	"14"
+	stairs.glass--,
+	--"0,0,0",
+	--"14"
 	)
 	
 stairs.register_all("sandstonebrick", "default:sandstonebrick",

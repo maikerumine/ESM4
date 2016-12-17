@@ -3,7 +3,7 @@
 --made forMinetest Game
 --License for code lgpl-2.1
 mt_seasons = {}
-mt_seasons.SETTING = 3;
+mt_seasons.SETTING = 2;
 
 
 -----------------------------------------------------------------------------
