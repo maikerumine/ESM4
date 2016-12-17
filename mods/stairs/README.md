@@ -1,3 +1,5 @@
+maikerumine changed to add es nodes and added metal sound compatibility.
+
 Stairs Redo 0.1 based on Minetest 0.4 mod: stairs
 
 License of source code:
