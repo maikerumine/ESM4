@@ -10,12 +10,19 @@ function place_cocoa(itemstack, placer, pointed_thing, plantname)
 	if not pt or pt.type ~= "node" then
 		return
 	end
-	
+
 	local under = minetest.get_node(pt.under)
-	
+
 	-- return if any of the nodes are not registered
 	if not minetest.registered_nodes[under.name] then
 		return
+	end
+
+	-- am I right-clicking on something that has a custom on_place set?
+	-- thanks to Krock for helping with this issue :)
+	local def = minetest.registered_nodes[under.name]
+	if def and def.on_rightclick then
+		return def.on_rightclick(pt.under, under, placer, itemstack)
 	end
 
 	-- check if pointing at jungletree
