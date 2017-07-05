@@ -1,6 +1,7 @@
 
 local S = mobs.intllib
 
+
 -- Tree Monster (or Tree Gollum) by PilzAdam
 
 mobs:register_mob("mobs_monster:tree_monster", {
@@ -31,8 +32,8 @@ mobs:register_mob("mobs_monster:tree_monster", {
 	jump = true,
 	view_range = 15,
 	drops = {
-		{name = "ethereal:tree_sapling", chance = 3, min = 1, max = 2},
-		{name = "ethereal:jungle_tree_sapling", chance = 3, min = 1, max = 2},
+		{name = "default:sapling", chance = 3, min = 1, max = 2},
+		{name = "default:junglesapling", chance = 3, min = 1, max = 2},
 		{name = "default:apple", chance = 2, min = 1, max=3},
 	},
 	water_damage = 0,
@@ -53,6 +54,7 @@ mobs:register_mob("mobs_monster:tree_monster", {
 	},
 })
 
+
 mobs:spawn({
 	name = "mobs_monster:tree_monster",
 	nodes = {"default:leaves", "default:jungleleaves"},
@@ -62,13 +64,8 @@ mobs:spawn({
 	day_toggle = false,
 })
 
+
 mobs:register_egg("mobs_monster:tree_monster", S("Tree Monster"), "default_tree_top.png", 1)
 
--- compatibility
-mobs:alias_mob("mobs:tree_monster", "mobs_monster:tree_monster")
 
--- ethereal sapling compatibility
-if not minetest.get_modpath("ethereal") then
-	minetest.register_alias("ethereal:tree_sapling", "default:sapling")
-	minetest.register_alias("ethereal:jungle_tree_sapling", "default:junglesapling")
-end
+mobs:alias_mob("mobs:tree_monster", "mobs_monster:tree_monster") -- compatibility

@@ -1,6 +1,7 @@
 
 local S = mobs.intllib
 
+
 -- Dirt Monster by PilzAdam
 
 mobs:register_mob("mobs_monster:dirt_monster", {
@@ -49,9 +50,16 @@ mobs:register_mob("mobs_monster:dirt_monster", {
 	},
 })
 
+
+local spawn_on = "default:dirt_with_grass"
+
+if minetest.get_modpath("ethereal") then
+	spawn_on = "ethereal:gray_dirt"
+end
+
 mobs:spawn({
 	name = "mobs_monster:dirt_monster",
-	nodes = {"default:dirt_with_grass", "ethereal:gray_dirt"},
+	nodes = {spawn_on},
 	min_light = 0,
 	max_light = 7,
 	chance = 7000,
@@ -60,7 +68,8 @@ mobs:spawn({
 	day_toggle = false,
 })
 
+
 mobs:register_egg("mobs_monster:dirt_monster", S("Dirt Monster"), "default_dirt.png", 1)
 
--- compatibility
-mobs:alias_mob("mobs:dirt_monster", "mobs_monster:dirt_monster")
+
+mobs:alias_mob("mobs:dirt_monster", "mobs_monster:dirt_monster") -- compatibility

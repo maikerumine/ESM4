@@ -24,6 +24,7 @@ es.modpath = modpath
 dofile(modpath.."/crafting.lua")
 dofile(modpath.."/antigrief.lua")
 dofile(modpath.."/armor.lua")
+dofile(modpath.."/kill.lua")
 dofile(modpath.."/shields.lua")
 dofile(modpath.."/shutdown.lua")
 dofile(modpath.."/spawn.lua")

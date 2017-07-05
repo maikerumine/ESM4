@@ -1,6 +1,7 @@
 
 local S = mobs.intllib
 
+
 -- Stone Monster by PilzAdam
 
 mobs:register_mob("mobs_monster:stone_monster", {
@@ -26,7 +27,8 @@ mobs:register_mob("mobs_monster:stone_monster", {
 	},
 	walk_velocity = 1,
 	run_velocity = 2,
-	jump = true,
+	jump_height = 0,
+	stepheight = 1.1,
 	floats = 0,
 	view_range = 10,
 	drops = {
@@ -51,6 +53,7 @@ mobs:register_mob("mobs_monster:stone_monster", {
 	},
 })
 
+
 mobs:spawn({
 	name = "mobs_monster:stone_monster",
 	nodes = {"default:stone", "default:desert_stone"},
@@ -59,7 +62,8 @@ mobs:spawn({
 	max_height = 0,
 })
 
+
 mobs:register_egg("mobs_monster:stone_monster", S("Stone Monster"), "default_stone.png", 1)
 
--- compatibility
-mobs:alias_mob("mobs:stone_monster", "mobs_monster:stone_monster")
+
+mobs:alias_mob("mobs:stone_monster", "mobs_monster:stone_monster") -- compatibility

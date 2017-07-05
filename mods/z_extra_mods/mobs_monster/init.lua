@@ -22,4 +22,6 @@ dofile(path .. "/lava_flan.lua") -- Zeg9
 dofile(path .. "/mese_monster.lua")
 dofile(path .. "/spider.lua") -- AspireMint
 
+dofile(path .. "/lucky_block.lua")
+
 print ("[MOD] Mobs Redo 'Monsters' loaded")

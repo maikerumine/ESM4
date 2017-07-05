@@ -65,7 +65,7 @@ messages.fire = {
 	" just got roasted, hotdog style.",
 	" got burned up. More light that way."
 }
---[[
+
 -- Other death messages
 messages.other = {
 	" died.",
@@ -77,7 +77,7 @@ messages.other = {
 	" is a rusher.",
 	" loves maikerumine's youtube channel!"
 }
-]]
+
 function get_message(mtype)
 	if RANDOM_MESSAGES then
 		return messages[mtype][math.random(1, #messages[mtype])]
@@ -107,7 +107,7 @@ minetest.register_on_dieplayer(function(player)
 	else
 		--minetest.chat_send_all(player_name .. get_message("other"))
 	end
-	player:setpos(death)
+	--player:setpos(death)
 end)
 --bigfoot code
 -- bigfoot547's death messages

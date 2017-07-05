@@ -13,8 +13,18 @@
 --(c) Copyright (2014-2015) maikerumine; CC-BY-SA 3.0
 
 minetest.register_alias("stairs:slab_Dirt", "stairs:slab_dirt")
+minetest.register_alias("stairs:stair_Dirt", "stairs:stair_dirt")
+
+minetest.register_alias("stairs:slab_Ruby", "stairs:slab_ruby")
+minetest.register_alias("stairs:stair_Ruby", "stairs:stair_ruby")
 
 
+minetest.register_alias("es:stair_dirt_with_grass", "stairs:stair_dirt")
+
+minetest.register_alias("stairs:stair_granite", "stairs:stair_granite")
+minetest.register_alias("stairs:stair_granitebricks", "stairs:stair_granite_bricks")
+minetest.register_alias("stairs:stair_marble", "stairs:stair_marble")
+minetest.register_alias("stairs:stair_marblebricks", "stairs:stair_marble_bricks")
 
 es = {}
 --need micro""_1

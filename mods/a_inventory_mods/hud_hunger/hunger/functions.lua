@@ -101,56 +101,6 @@ function hunger.handle_node_actions(pos, oldnode, player, ext)
 	hunger.players[name].exhaus = exhaus
 end
 
--- sprint settings
-local enable_sprint = minetest.setting_getbool("sprint") ~= false
-local enable_sprint_particles = minetest.setting_getbool("sprint_particles") ~= false
-
--- 3d armor support
-local armor_mod = minetest.get_modpath("3d_armor")
-
--- Sets the sprint state of a player (false = stopped, true = sprinting)
-function set_sprinting(name, sprinting)
-
-	if not hunger.players[name] then
-		return false
-	end
-
-	local player = minetest.get_player_by_name(name)
-
-	-- is 3d_armor active, then set to armor defaults
-	local def = {}
-	if armor_mod and armor and armor.def[name] then
-		def = armor.def[name]
-	end
-
-	def.speed = def.speed or 1
-	def.jump = def.jump or 1
-	def.gravity = def.gravity or 1
-
-	if sprinting == true then
-
-		player:set_physics_override({
-			speed = def.speed + SPRINT_SPEED,
-			jump = def.jump + SPRINT_JUMP,
-			gravity = def.gravity
-		})
-
---print ("Speed:", def.speed + SPRINT_SPEED, "Jump:", def.jump + SPRINT_JUMP, "Gravity:", def.gravity)
-
-	else
-
-		player:set_physics_override({
-			speed = def.speed,
-			jump = def.jump,
-			gravity = def.gravity
-		})
-
---print ("Speed:", def.speed, "Jump:", def.jump, "Gravity:", def.gravity)
-
-	end
-
-	return true
-end
 
 -- Time based hunger functions
 local hunger_timer = 0
@@ -169,61 +119,6 @@ local function hunger_globaltimer(dtime)
 			if controls.up or controls.down or controls.left or controls.right then
 				hunger.handle_node_actions(nil, nil, player)
 			end
-
-			if enable_sprint then
-
-				local name = player:get_player_name()
-
-				-- check if player should be sprinting (hunger must be over 6 points)
-				if player
-				and controls.aux1
-				and controls.up
-				and not minetest.check_player_privs(name, {fast = true})
-				and hunger.players[name].lvl > 6 then
-
-					set_sprinting(name, true)
-
-					-- create particles behind player when sprinting
-					if enable_sprint_particles then
-
-						local pos = player:getpos()
-						local node = minetest.get_node({
-							x = pos.x,
-							y = pos.y - 1,
-							z = pos.z
-						})
-
-						if node.name ~= "air" then
-
-						minetest.add_particlespawner({
-							time = 0.01,
-							amount = 5,
-							minpos = {x = pos.x - 0.25, y = pos.y + 0.1, z = pos.z - 0.25},
-							maxpos = {x = pos.x + 0.25, y = pos.y + 0.1, z = pos.z + 0.25},
-							minvel = {x = -0.5, y = 1, z = -0.5},
-							maxvel = {x = 0.5, y = 2, z = 0.5},
-							minacc = {x = 0, y = -5, z = 0},
-							maxacc = {x = 0, y = -12, z = 0},
-							minexptime = 0.25,
-							maxexptime = 0.5,
-							minsize = 0.5,
-							maxsize = 1.0,
-							vertical = false,
-							collisiondetection = false,
-							texture = "default_dirt.png",
-						})
-
-						end
-					end
-
-					-- Lower the player's hunger
-					update_hunger(player,
-						hunger.players[name].lvl - (SPRINT_DRAIN * HUNGER_MOVE_TICK))
-				else
-					set_sprinting(name, false)
-				end
-			end
-
 		end
 		action_timer = 0
 	end
@@ -267,7 +162,6 @@ local function hunger_globaltimer(dtime)
 		health_timer = 0
 	end
 end
-
 
 if minetest.setting_getbool("enable_damage") then
 	minetest.register_globalstep(hunger_globaltimer)

@@ -40,20 +40,22 @@ minetest.register_craft({
 	cooktime = 5,
 })
 
--- golden lasso
-minetest.register_tool("mobs:magic_lasso", {
-	description = S("Magic Lasso (right-click animal to put in inventory)"),
+-- lasso
+minetest.register_tool("mobs:lasso", {
+	description = S("Lasso (right-click animal to put in inventory)"),
 	inventory_image = "mobs_magic_lasso.png",
 })
 
 minetest.register_craft({
-	output = "mobs:magic_lasso",
+	output = "mobs:lasso",
 	recipe = {
-		{"farming:string", "default:gold_lump", "farming:string"},
-		{"default:gold_lump", "default:diamondblock", "default:gold_lump"},
-		{"farming:string", "default:gold_lump", "farming:string"},
+		{"farming:string", "", "farming:string"},
+		{"", "default:diamond", ""},
+		{"farming:string", "", "farming:string"},
 	}
 })
+
+minetest.register_alias("mobs:magic_lasso", "mobs:lasso")
 
 -- net
 minetest.register_tool("mobs:net", {
@@ -81,5 +83,35 @@ minetest.register_craft({
 	recipe = {
 		{'', 'default:steel_ingot', ''},
 		{'', 'group:stick', 'default:steel_ingot'},
+	}
+})
+
+-- protection rune
+minetest.register_craftitem("mobs:protector", {
+	description = S("Mob Protection Rune"),
+	inventory_image = "mobs_protector.png",
+})
+
+minetest.register_craft({
+	output = "mobs:protector",
+	recipe = {
+		{"default:stone", "default:stone", "default:stone"},
+		{"default:stone", "default:goldblock", "default:stone"},
+		{"default:stone", "default:stone", "default:stone"},
+	}
+})
+
+-- saddle
+minetest.register_craftitem("mobs:saddle", {
+	description = "Saddle",
+	inventory_image = "mobs_saddle.png"
+})
+
+minetest.register_craft({
+	output = "mobs:saddle",
+	recipe = {
+		{"mobs:leather", "mobs:leather", "mobs:leather"},
+		{"mobs:leather", "default:steel_ingot", "mobs:leather"},
+		{"mobs:leather", "default:steel_ingot", "mobs:leather"},
 	}
 })

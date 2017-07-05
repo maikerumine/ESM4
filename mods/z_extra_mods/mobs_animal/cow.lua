@@ -1,6 +1,7 @@
 
 local S = mobs.intllib
 
+
 -- Cow by Krupnovpavel (additional texture by JurajVajda)
 
 mobs:register_mob("mobs_animal:cow", {
@@ -46,19 +47,24 @@ mobs:register_mob("mobs_animal:cow", {
 		punch_end = 100,
 	},
 	follow = "farming:wheat",
-	view_range = 7,
+	view_range = 8,
 	replace_rate = 10,
-	replace_what = {"default:grass_3", "default:grass_4", "default:grass_5", "farming:wheat_8"},
+--	replace_what = {"default:grass_3", "default:grass_4", "default:grass_5", "farming:wheat_8"},
+	replace_what = {
+		{"group:grass", "air", 0},
+		{"default:dirt_with_grass", "default:dirt", -1}
+	},
 	replace_with = "air",
 	fear_height = 2,
 	on_rightclick = function(self, clicker)
 
 		-- feed or tame
-		if mobs:feed_tame(self, clicker, 8, true, true) then
-			return
-		end
+		if mobs:feed_tame(self, clicker, 8, true, true) then return end
+		if mobs:protect(self, clicker) then return end
+		if mobs:capture_mob(self, clicker, 0, 5, 60, false, nil) then return end
 
 		local tool = clicker:get_wielded_item()
+		local name = clicker:get_player_name()
 
 		-- milk cow with empty bucket
 		if tool:get_name() == "bucket:bucket_empty" then
@@ -69,8 +75,8 @@ mobs:register_mob("mobs_animal:cow", {
 			end
 
 			if self.gotten == true then
-				minetest.chat_send_player(clicker:get_player_name(),
-						S("Cow already milked!"))
+				minetest.chat_send_player(name,
+					S("Cow already milked!"))
 				return
 			end
 
@@ -90,14 +96,19 @@ mobs:register_mob("mobs_animal:cow", {
 
 			return
 		end
-
-		mobs:capture_mob(self, clicker, 0, 5, 60, false, nil)
 	end,
 })
 
+
+local spawn_on = "default:dirt_with_grass"
+
+if minetest.get_modpath("ethereal") then
+	spawn_on = "ethereal:green_dirt"
+end
+
 mobs:spawn({
 	name = "mobs_animal:cow",
-	nodes = {"default:dirt_with_grass", "ethereal:green_dirt"},
+	nodes = {spawn_on},
 	min_light = 10,
 	chance = 15000,
 	min_height = 0,
@@ -105,10 +116,12 @@ mobs:spawn({
 	day_toggle = true,
 })
 
+
 mobs:register_egg("mobs_animal:cow", S("Cow"), "default_grass.png", 1)
 
--- compatibility
-mobs:alias_mob("mobs:cow", "mobs_animal:cow")
+
+mobs:alias_mob("mobs:cow", "mobs_animal:cow") -- compatibility
+
 
 -- bucket of milk
 minetest.register_craftitem(":mobs:bucket_milk", {

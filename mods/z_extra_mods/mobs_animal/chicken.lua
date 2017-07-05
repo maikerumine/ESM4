@@ -1,6 +1,7 @@
 
 local S = mobs.intllib
 
+
 -- Chicken by JK Murray
 
 mobs:register_mob("mobs_animal:chicken", {
@@ -30,9 +31,9 @@ mobs:register_mob("mobs_animal:chicken", {
 	walk_velocity = 1,
 	run_velocity = 3,
 	runaway = true,
-	jump = true,
 	drops = {
 		{name = "mobs:chicken_raw", chance = 1, min = 2, max = 2},
+		{name = "mobs:chicken_feather", chance = 3, min = 1, max = 2},
 	},
 	water_damage = 1,
 	lava_damage = 5,
@@ -52,17 +53,21 @@ mobs:register_mob("mobs_animal:chicken", {
 
 	on_rightclick = function(self, clicker)
 
-		if mobs:feed_tame(self, clicker, 8, true, true) then
-			return
-		end
-
-		mobs:capture_mob(self, clicker, 30, 50, 80, false, nil)
+		if mobs:feed_tame(self, clicker, 8, true, true) then return end
+		if mobs:protect(self, clicker) then return end
+		if mobs:capture_mob(self, clicker, 30, 50, 80, false, nil) then return end
 	end,
 
-	do_custom = function(self)
+	do_custom = function(self, dtime)
+
+		self.egg_timer = (self.egg_timer or 0) + dtime
+		if self.egg_timer < 10 then
+			return
+		end
+		self.egg_timer = 0
 
 		if self.child
-		or math.random(1, 5000) > 1 then
+		or math.random(1, 100) > 1 then
 			return
 		end
 
@@ -78,9 +83,16 @@ mobs:register_mob("mobs_animal:chicken", {
 	end,
 })
 
+
+local spawn_on = "default:dirt_with_grass"
+
+if minetest.get_modpath("ethereal") then
+	spawn_on = "ethereal:bamboo_dirt"
+end
+
 mobs:spawn({
 	name = "mobs_animal:chicken",
-	nodes = {"default:dirt_with_grass", "ethereal:bamboo_dirt"},
+	nodes = {spawn_on},
 	min_light = 10,
 	chance = 15000,
 	active_object_count = 2,
@@ -88,10 +100,12 @@ mobs:spawn({
 	day_toggle = true,
 })
 
+
 mobs:register_egg("mobs_animal:chicken", S("Chicken"), "mobs_chicken_inv.png", 0)
 
--- compatibility
-mobs:alias_mob("mobs:chicken", "mobs_animal:chicken")
+
+mobs:alias_mob("mobs:chicken", "mobs_animal:chicken") -- compatibility
+
 
 -- egg entity
 
@@ -102,14 +116,14 @@ mobs:register_arrow("mobs_animal:egg_entity", {
 	velocity = 6,
 
 	hit_player = function(self, player)
-		player:punch(self.object, 1.0, {
+		player:punch(minetest.get_player_by_name(self.playername) or self.object, 1.0, {
 			full_punch_interval = 1.0,
 			damage_groups = {fleshy = 1},
 		}, nil)
 	end,
 
 	hit_mob = function(self, player)
-		player:punch(self.object, 1.0, {
+		player:punch(minetest.get_player_by_name(self.playername) or self.object, 1.0, {
 			full_punch_interval = 1.0,
 			damage_groups = {fleshy = 1},
 		}, nil)
@@ -117,45 +131,45 @@ mobs:register_arrow("mobs_animal:egg_entity", {
 
 	hit_node = function(self, pos, node)
 
-		local num = math.random(1, 10)
-
-		if num == 1 then
-
-			pos.y = pos.y + 1
-
-			local nod = minetest.get_node_or_nil(pos)
-
-			if not nod
-			or not minetest.registered_nodes[nod.name]
-			or minetest.registered_nodes[nod.name].walkable == true then
-				return
-			end
-
-			local mob = minetest.add_entity(pos, "mobs_animal:chicken")
-			local ent2 = mob:get_luaentity()
-
-			mob:set_properties({
-				textures = ent2.child_texture[1],
-				visual_size = {
-					x = ent2.base_size.x / 2,
-					y = ent2.base_size.y / 2
-				},
-				collisionbox = {
-					ent2.base_colbox[1] / 2,
-					ent2.base_colbox[2] / 2,
-					ent2.base_colbox[3] / 2,
-					ent2.base_colbox[4] / 2,
-					ent2.base_colbox[5] / 2,
-					ent2.base_colbox[6] / 2
-				},
-			})
-
-			ent2.child = true
-			ent2.tamed = true
-			ent2.owner = self.playername
+		if math.random(1, 10) > 1 then
+			return
 		end
+
+		pos.y = pos.y + 1
+
+		local nod = minetest.get_node_or_nil(pos)
+
+		if not nod
+		or not minetest.registered_nodes[nod.name]
+		or minetest.registered_nodes[nod.name].walkable == true then
+			return
+		end
+
+		local mob = minetest.add_entity(pos, "mobs_animal:chicken")
+		local ent2 = mob:get_luaentity()
+
+		mob:set_properties({
+			textures = ent2.child_texture[1],
+			visual_size = {
+				x = ent2.base_size.x / 2,
+				y = ent2.base_size.y / 2
+			},
+			collisionbox = {
+				ent2.base_colbox[1] / 2,
+				ent2.base_colbox[2] / 2,
+				ent2.base_colbox[3] / 2,
+				ent2.base_colbox[4] / 2,
+				ent2.base_colbox[5] / 2,
+				ent2.base_colbox[6] / 2
+			},
+		})
+
+		ent2.child = true
+		ent2.tamed = true
+		ent2.owner = self.playername
 	end
 })
+
 
 -- egg throwing item
 
@@ -206,6 +220,7 @@ local mobs_shoot_egg = function (item, player, pointed_thing)
 	return item
 end
 
+
 -- egg
 minetest.register_node(":mobs:egg", {
 	description = S("Chicken Egg"),
@@ -231,9 +246,10 @@ minetest.register_node(":mobs:egg", {
 	on_use = mobs_shoot_egg
 })
 
+
 -- fried egg
 minetest.register_craftitem(":mobs:chicken_egg_fried", {
-description = S("Fried Egg"),
+	description = S("Fried Egg"),
 	inventory_image = "mobs_chicken_egg_fried.png",
 	on_use = minetest.item_eat(2),
 })
@@ -262,4 +278,10 @@ minetest.register_craft({
 	type  =  "cooking",
 	recipe  = "mobs:chicken_raw",
 	output = "mobs:chicken_cooked",
+})
+
+-- feather
+minetest.register_craftitem(":mobs:chicken_feather", {
+	description = S("Feather"),
+	inventory_image = "mobs_chicken_feather.png",
 })

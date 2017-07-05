@@ -20,10 +20,10 @@ es = {}
 --Modified by maikerumine
 -- Time to shut down server.
 -- Default is twice a day: at 06:05 and 18:05
-local H = 18
-local X = 18
-local Y = 19
-local Z = 19
+local H = 19
+local X = 19
+local Y = 20
+local Z = 20
 
 local M = 55
 local N = 00
@@ -41,7 +41,7 @@ minetest.register_globalstep(function(dtime)
    local t = os.date("*t")
    if ((t.hour == H or t.hour == X) and (t.min == M) and (t.sec <= 2)
          and ((D == nil) or (t.wday == D))) then
-      minetest.chat_send_all("Scheduled shutdown.  1900 Eastern Time Zone"
+      minetest.chat_send_all("Scheduled shutdown.  2000 Eastern Time Zone DST  0000 ZULU "
             .."Shutting down in FIVE minutes.  Enjoy the break")
 	          minetest.chat_send_all("STORE YOUR ITEMS WITHIN 4 MINUTES. "
             .."Shutting down in FIVE minutes.")
@@ -49,18 +49,18 @@ minetest.register_globalstep(function(dtime)
    end
       if ((t.hour == Y or t.hour == Z) and (t.min ==N) and (t.sec <= 2)
          and ((D == nil) or (t.wday == D))) then
-      minetest.chat_send_all("SHUTTING SERVER DOWN NOW!"
-            .."  Please come back in a few while map is backed-up.")
-	          minetest.chat_send_all("5   SHUTTING SERVER DOWN NOW!"
-            .."  Please come back in a few while map is backed--up.")
-	          minetest.chat_send_all("4   SHUTTING SERVER DOWN NOW!"
-            .."  Please come back in a few while map is backed---up.")
-	          minetest.chat_send_all("3   SHUTTING SERVER DOWN NOW!"
-            .."  Please come back in a few while map is backed----up.")
-	          minetest.chat_send_all("2   SHUTTING SERVER DOWN NOW!"
-            .."  Please come back in a few while map is backed-----up.")	         
-		minetest.chat_send_all("1   SHUTTING SERVER DOWN NOW!"
-            .."  Please come back in a few while map is backed------up.")
+      minetest.chat_send_all("SHUTTING SERVER DOWN NOW! "
+            .."  Please come back in a few while map is backed-up. ")
+	          minetest.chat_send_all("E   SHUTTING SERVER DOWN NOW! "
+            .."  Please come back in a few while map is backed--up. ")
+	          minetest.chat_send_all("S   SHUTTING SERVER DOWN NOW! "
+            .."  Please come back in a few while map is backed---up. ")
+	          minetest.chat_send_all("M   SHUTTING SERVER DOWN NOW! "
+            .."  Please come back in a few while map is backed----up. ")
+	          minetest.chat_send_all("!   SHUTTING SERVER DOWN NOW! "
+            .."  Please come back in a few while map is backed-----up. ")	         
+		minetest.chat_send_all("!   SHUTTING SERVER DOWN NOW! "
+            .."  Please come back in a few while map is backed------up. ")
       minetest.after(2, minetest.request_shutdown)
    end
 end)

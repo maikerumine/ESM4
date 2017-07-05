@@ -275,7 +275,7 @@ mobs:register_mob("mobs_badplayer:Janette", {
 			},
 	visual_size = {x=1, y=.8},
 	makes_footstep_sound = true,
-	view_range = 19,
+	view_range = 15,
 	walk_velocity = 1.6,
 	run_velocity = 4,
 	damage = 2.5,
@@ -531,7 +531,7 @@ mobs:register_mob("mobs_badplayer:SepiaSam", {
 			},
 	visual_size = {x=1, y=1},
 	makes_footstep_sound = true,
-	view_range = 17,
+	view_range = 15,
 	walk_velocity = 1.3,
 	run_velocity = 3.9,
 	damage = 3,
@@ -787,7 +787,7 @@ mobs:register_mob("mobs_badplayer:Vanessa", {
 			},
 	visual_size = {x=1, y=1},
 	makes_footstep_sound = true,
-	view_range = 25,
+	view_range = 15,
 	walk_velocity = 1.6,
 	run_velocity = 3.8,
 	drops = {
@@ -1814,7 +1814,7 @@ mobs:register_mob("mobs_badplayer:Candy", {
 			},
 	visual_size = {x=1, y=1.0},
 	makes_footstep_sound = true,
-	view_range = 25,
+	view_range = 15,
 	walk_velocity = 1.9,
 	run_velocity = 3.9,
 	damage = 9,
@@ -2196,24 +2196,24 @@ mobs:register_mob("mobs_badplayer:Maikerumine", {
 
 
 
-mobs:register_spawn("mobs_badplayer:Sam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 15000, 1, 31000)
-mobs:register_spawn("mobs_badplayer:John", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 15000, 1, 31000)
-mobs:register_spawn("mobs_badplayer:John", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 5, -1, 15000, 1, 31000)
-mobs:register_spawn("mobs_badplayer:Janette", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 15000, 1, 31000)
-mobs:register_spawn("mobs_badplayer:Crybaby", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 15000, 1, 31000)
-mobs:register_spawn("mobs_badplayer:SepiaSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 15000, 1, 31000)
-mobs:register_spawn("mobs_badplayer:OGSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 15000, 1, 31000)
-mobs:register_spawn("mobs_badplayer:Vanessa", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 15000, 1, 31000)
-mobs:register_spawn("mobs_badplayer:FemaleSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 15000, 1, 31000)
-mobs:register_spawn("mobs_badplayer:Battleboy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7,15000, 1, 31000)
-mobs:register_spawn("mobs_badplayer:Wilbert", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble","es:strange_grass","es:aiden_grass"}, 12, 7, 15000, 1, 31000)
-mobs:register_spawn("mobs_badplayer:Thelma", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble","es:strange_grass","es:aiden_grass"}, 12, 7, 15000, 1, 31000)
-mobs:register_spawn("mobs_badplayer:DrifterDan", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7,15000, 1, 31000)
-mobs:register_spawn("mobs_badplayer:Mr_White", {"default:dirt_with_grass", "ethereal:green_dirt","default:grass","default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 15000, 1, 31000)
-mobs:register_spawn("mobs_badplayer:Mr_Pink", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 15000, 1, 31000)
-mobs:register_spawn("mobs_badplayer:Candy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","es:strange_grass","es:aiden_grass"},5, -1, 15000, 1, 31000)
-mobs:register_spawn("mobs_badplayer:Infiniumman", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 15000, 1, 31000)
-mobs:register_spawn("mobs_badplayer:Maikerumine", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 15000, 1, 31000)
+mobs:register_spawn("mobs_badplayer:Sam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 30000, 1, 31000)
+mobs:register_spawn("mobs_badplayer:John", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 30000, 1, 31000)
+mobs:register_spawn("mobs_badplayer:John", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 5, -1, 30000, 1, 31000)
+mobs:register_spawn("mobs_badplayer:Janette", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 30000, 1, 31000)
+mobs:register_spawn("mobs_badplayer:Crybaby", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 30000, 1, 31000)
+mobs:register_spawn("mobs_badplayer:SepiaSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 30000, 1, 31000)
+mobs:register_spawn("mobs_badplayer:OGSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 30000, 1, 31000)
+mobs:register_spawn("mobs_badplayer:Vanessa", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 30000, 1, 31000)
+mobs:register_spawn("mobs_badplayer:FemaleSam", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 30000, 1, 31000)
+mobs:register_spawn("mobs_badplayer:Battleboy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7,30000, 1, 31000)
+mobs:register_spawn("mobs_badplayer:Wilbert", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble","es:strange_grass","es:aiden_grass"}, 12, 7, 30000, 1, 31000)
+mobs:register_spawn("mobs_badplayer:Thelma", {"default:dirt_with_grass","default:snowblock","default:snow_block","default:stone", "default:stonebrick","default:cobble","es:strange_grass","es:aiden_grass"}, 12, 7, 30000, 1, 31000)
+mobs:register_spawn("mobs_badplayer:DrifterDan", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7,30000, 1, 31000)
+mobs:register_spawn("mobs_badplayer:Mr_White", {"default:dirt_with_grass", "ethereal:green_dirt","default:grass","default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 30000, 1, 31000)
+mobs:register_spawn("mobs_badplayer:Mr_Pink", {"default:dirt_with_grass","default:desert_sand","default:sand","default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 30000, 1, 31000)
+mobs:register_spawn("mobs_badplayer:Candy", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","es:strange_grass","es:aiden_grass"},5, -1, 30000, 1, 31000)
+mobs:register_spawn("mobs_badplayer:Infiniumman", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 30000, 1, 31000)
+mobs:register_spawn("mobs_badplayer:Maikerumine", {"default:dirt_with_grass","default:stone", "default:stonebrick","default:cobble","default:dirt_with_dry_grass","es:strange_grass","es:aiden_grass"}, 12, 7, 30000, 1, 31000)
 
 --spawn eggs
 mobs:register_egg("mobs_badplayer:Sam", "NPC Sam", "badplayer_1.png", 1)

@@ -81,6 +81,19 @@ minetest.register_entity("smartshop:item",{
 	end,
 })
 
+local function has_locked_chest_privilege(meta, player)
+	local name = ""
+	if player then
+		if minetest.check_player_privs(player, "protection_bypass") then
+			return true
+		end
+		name = player:get_player_name()
+	end
+	if name ~= meta:get_string("owner") then
+		return false
+	end
+	return true
+end
 
 smartshop.showform=function(pos,player,re)
 	local meta=minetest.get_meta(pos)
@@ -89,6 +102,11 @@ smartshop.showform=function(pos,player,re)
 	local gui=""
 	local spos=pos.x .. "," .. pos.y .. "," .. pos.z
 	local owner=meta:get_string("owner")==player:get_player_name()
+
+
+
+	
+	
 	if re then owner=false end
 	smartshop.user[player:get_player_name()]=pos
 	if owner then
@@ -183,6 +201,11 @@ minetest.register_on_player_receive_fields(function(player, form, pressed)
 				if meta:get_string("owner")==player:get_player_name() then
 					smartshop.update(smartshop.user[player:get_player_name()],"update")
 				end
+				--=====================
+				if has_locked_chest_privilege(meta, player) then
+					smartshop.update(smartshop.user[player:get_player_name()],"update")
+				end
+				--=====================
 			end
 			smartshop.user[player:get_player_name()]=nil
 		end

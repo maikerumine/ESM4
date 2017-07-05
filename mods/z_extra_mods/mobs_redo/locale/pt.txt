@@ -25,7 +25,7 @@ Nametag = Etiqueta
 Leather = Couro
 Raw Meat = Carne crua
 Meat = Carne
-Magic Lasso (right-click animal to put in inventory) = Laço Magico (clique-direito no animal para por no inventario)
+Magic Lasso (right-click animal to put in inventory) = Laço (clique-direito no animal para por no inventario)
 Net (right-click animal to put in inventory) = Net (clique-direito no animal para por no inventario)
 Steel Shears (right-click to shear) = Tesoura de Aço (clique-direito para tosquiar)
 

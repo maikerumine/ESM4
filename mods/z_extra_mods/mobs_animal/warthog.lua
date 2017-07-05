@@ -1,6 +1,7 @@
 
 local S = mobs.intllib
 
+
 -- Warthog by KrupnoPavel
 
 mobs:register_mob("mobs_animal:pumba", {
@@ -8,6 +9,7 @@ mobs:register_mob("mobs_animal:pumba", {
 	passive = false,
 	attack_type = "dogfight",
 	group_attack = true,
+	owner_loyal = true,
 	reach = 2,
 	damage = 2,
 	hp_min = 5,
@@ -47,17 +49,22 @@ mobs:register_mob("mobs_animal:pumba", {
 	},
 	on_rightclick = function(self, clicker)
 
-		if mobs:feed_tame(self, clicker, 8, true, true) then
-			return
-		end
-
-		mobs:capture_mob(self, clicker, 0, 5, 50, false, nil)
+		if mobs:feed_tame(self, clicker, 8, true, true) then return end
+		if mobs:protect(self, clicker) then return end
+		if mobs:capture_mob(self, clicker, 0, 5, 50, false, nil) then return end
 	end,
 })
 
+
+local spawn_on = "default:dirt_with_grass"
+
+if minetest.get_modpath("ethereal") then
+	spawn_on = "ethereal:mushroom_dirt"
+end
+
 mobs:spawn({
 	name = "mobs_animal:pumba",
-	nodes = {"default:dirt_with_dry_grass", "ethereal:mushroom_dirt"},
+	nodes = {spawn_on},
 	min_light = 10,
 	chance = 15000,
 	min_height = 0,
@@ -65,10 +72,12 @@ mobs:spawn({
 	day_toggle = true,
 })
 
+
 mobs:register_egg("mobs_animal:pumba", S("Warthog"), "wool_pink.png", 1)
 
--- compatibility
-mobs:alias_mob("mobs:pumba", "mobs_animal:pumba")
+
+mobs:alias_mob("mobs:pumba", "mobs_animal:pumba") -- compatibility
+
 
 -- raw porkchop
 minetest.register_craftitem(":mobs:pork_raw", {

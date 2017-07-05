@@ -9,7 +9,7 @@ mobs:register_mob("mobs_animal:bee", {
 	hp_min = 1,
 	hp_max = 2,
 	armor = 200,
-	collisionbox = {-0.2, -0.01, -0.2, 0.2, 0.2, 0.2},
+	collisionbox = {-0.2, -0.01, -0.2, 0.2, 0.5, 0.2},
 	visual = "mesh",
 	mesh = "mobs_bee.x",
 	textures = {
@@ -37,7 +37,7 @@ mobs:register_mob("mobs_animal:bee", {
 		walk_end = 65,
 	},
 	on_rightclick = function(self, clicker)
-		mobs:capture_mob(self, clicker, 25, 80, 0, true, nil)
+		mobs:capture_mob(self, clicker, 50, 90, 0, true, "mobs_animal:bee")
 	end,
 })
 
@@ -66,7 +66,6 @@ minetest.register_craftitem(":mobs:honey", {
 minetest.register_node(":mobs:beehive", {
 	description = S("Beehive"),
 	drawtype = "plantlike",
-	visual_scale = 1.0,
 	tiles = {"mobs_beehive.png"},
 	inventory_image = "mobs_beehive.png",
 	paramtype = "light",
@@ -175,7 +174,7 @@ minetest.register_abm({
 		-- is hive full?
 		local meta = minetest.get_meta(pos)
 		if not meta then return end -- for older beehives
-		local inv = minetest.get_meta(pos):get_inventory()
+		local inv = meta:get_inventory()
 		local honey = inv:get_stack("beehive", 1):get_count()
 
 		-- is hive full?

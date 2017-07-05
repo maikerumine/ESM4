@@ -7,7 +7,7 @@ Bee
 
 Bunny
 
-- Bunnies appear in green grass areas (prairie biome in ethereal) and can be tamed with 4 carrots. Can also be picked up and placed in inventory and gives 1-2 meat when killed.
+- Bunnies appear in green grass areas (prairie biome in ethereal) and can be tamed with 4 carrots or grass. Can also be picked up and placed in inventory and gives 1-2 meat when killed.
 
 Chicken
 
@@ -19,7 +19,7 @@ Cow
 
 Kitten
 
-- Found on green grass these cute cats walk around and can be picked up and placed in inventory as pets or right-clicked with 4x raw fish (found in ethereal) and tamed.
+- Found on green grass these cute cats walk around and can be picked up and placed in inventory as pets or right-clicked with 4x live rats or raw fish (found in ethereal) and tamed.
 
 Rat
 
@@ -33,4 +33,10 @@ Warthog
 
 - Warthogs unlike pigs defend themselves when hit and give 1-3 raw pork when killed, they can also be right-clicked with 8x apples to tame or breed.
 
+Penguin
+
+- These little guys can be found in glacier biomes on top of snow and have the ability to swim if they fall into water.
+
 Note: After breeding animals need to rest for 4 minutes, baby animals take 4 minutes to grow up and feeding them helps them grow quicker...
+
+Lucky Blocks: 14

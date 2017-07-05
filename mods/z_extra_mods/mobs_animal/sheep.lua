@@ -1,6 +1,7 @@
 
 local S = mobs.intllib
 
+
 local all_colours = {
 	{"black",      S("Black"),      "#000000b0"},
 	{"blue",       S("Blue"),       "#015dbb70"},
@@ -19,9 +20,10 @@ local all_colours = {
 	{"yellow",     S("Yellow"),     "#e3ff0070"},
 }
 
+
 -- Sheep by PilzAdam, texture converted to minetest by AMMOnym from Summerfield pack
 
-for _, col in pairs(all_colours) do
+for _, col in ipairs(all_colours) do
 
 	mobs:register_mob("mobs_animal:sheep_"..col[1], {
 		type = "animal",
@@ -165,8 +167,11 @@ for _, col in pairs(all_colours) do
 				return
 			end
 
+			-- protect mod with mobs:protector item
+			if mobs:protect(self, clicker) then return end
+
 			--are we capturing?
-			mobs:capture_mob(self, clicker, 0, 5, 60, false, nil)
+			if mobs:capture_mob(self, clicker, 0, 5, 60, false, nil) then return end
 		end
 	})
 
@@ -177,9 +182,16 @@ for _, col in pairs(all_colours) do
 
 end
 
+
+local spawn_on = "default:dirt_with_grass"
+
+if minetest.get_modpath("ethereal") then
+	spawn_on = "ethereal:green_dirt"
+end
+
 mobs:spawn({
 	name = "mobs_animal:sheep_white",
-	nodes = {"default:dirt_with_grass", "ethereal:green_dirt"},
+	nodes = {spawn_on},
 	min_light = 10,
 	chance = 15000,
 	min_height = 0,
@@ -187,5 +199,5 @@ mobs:spawn({
 	day_toggle = true,
 })
 
--- compatibility
-mobs:alias_mob("mobs:sheep", "mobs_animal:sheep_white")
+
+mobs:alias_mob("mobs:sheep", "mobs_animal:sheep_white") -- compatibility

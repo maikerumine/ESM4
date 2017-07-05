@@ -25,7 +25,7 @@ Nametag = Namensschild
 Leather = Leder
 Raw Meat = Rohes Fleisch
 Meat = Fleisch
-Magic Lasso (right-click animal to put in inventory) = Magisches Lasso (Rechtsklick auf Tier,\num es ins Inventar zu legen)
+Magic Lasso (right-click animal to put in inventory) = Lasso (Rechtsklick auf Tier,\num es ins Inventar zu legen)
 Net (right-click animal to put in inventory) = Netz (Rechtsklick auf Tier,\num es ins Inventar zu legen)
 Steel Shears (right-click to shear) = Stahlschere (Rechtsklick zum Scheren)
 
