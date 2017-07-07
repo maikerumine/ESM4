@@ -6,9 +6,10 @@
 
 
 -- clear default mapgen biomes and decorations
+--[[
 minetest.clear_registered_biomes()
 minetest.clear_registered_decorations()
-
+]]
 
 
 
@@ -113,7 +114,7 @@ end
 -- All mapgens except mgv6 and singlenode
 
 
-function default.register_biomes(upper_limit)
+--function default.register_biomes(upper_limit)
 
 	-- Icesheet
 
@@ -133,7 +134,7 @@ function default.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -8,
 		y_max = upper_limit,
-		heat_point = 0,
+		heat_point = 7,
 		humidity_point = 73,
 	})
 
@@ -151,7 +152,7 @@ function default.register_biomes(upper_limit)
 		--node_river_water = "",
 		y_min = -112,
 		y_max = -9,
-		heat_point = 0,
+		heat_point = 7,
 		humidity_point = 73,
 	})
 
@@ -173,7 +174,7 @@ function default.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 2,
 		y_max = upper_limit,
-		heat_point = 0,
+		heat_point = 7,
 		humidity_point = 40,
 	})
 
@@ -213,7 +214,7 @@ function default.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = -4,
-		heat_point = 0,
+		heat_point = 7,
 		humidity_point = 40,
 	})
 
@@ -319,7 +320,7 @@ function default.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 6,
 		y_max = upper_limit,
-		heat_point = 50,
+		heat_point = 30,
 		humidity_point = 35,
 	})
 
@@ -339,7 +340,7 @@ function default.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 5,
 		y_max = 5,
-		heat_point = 50,
+		heat_point = 30,
 		humidity_point = 35,
 	})
 
@@ -359,7 +360,7 @@ function default.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 4,
-		heat_point = 50,
+		heat_point = 30,
 		humidity_point = 35,
 	})
 
@@ -381,7 +382,7 @@ function default.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 6,
 		y_max = upper_limit,
-		heat_point = 45,
+		heat_point = 35,
 		humidity_point = 70,
 	})
 
@@ -401,7 +402,7 @@ function default.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 5,
 		y_max = 5,
-		heat_point = 45,
+		heat_point = 35,
 		humidity_point = 70,
 	})
 
@@ -421,7 +422,7 @@ function default.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 4,
-		heat_point = 45,
+		heat_point = 35,
 		humidity_point = 70,
 	})
 
@@ -443,7 +444,7 @@ function default.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 1,
 		y_max = upper_limit,
-		heat_point = 60,
+		heat_point = 40,
 		humidity_point = 68,
 	})
 
@@ -463,7 +464,7 @@ function default.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -1,
 		y_max = 0,
-		heat_point = 60,
+		heat_point = 40,
 		humidity_point = 68,
 	})
 
@@ -483,10 +484,29 @@ function default.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = -2,
-		heat_point = 60,
+		heat_point = 40,
 		humidity_point = 68,
 	})
 
+	--maikerumine added :)
+		minetest.register_biome({
+		name = "mesa",
+		--node_dust = "",
+		node_top = "default:desert_sand",
+		depth_top = 1,
+		node_filler = "es:strange_clay_orange",
+		depth_filler = 1,
+		node_stone = "es:strange_clay_orange",
+		--node_water_top = "",
+		--depth_water_top = ,
+		--node_water = "",
+		--node_river_water = "",
+		y_min = -35,
+		y_max = 31000,
+		heat_point = 78,
+		humidity_point = 34,
+	})
+	
 	-- Desert
 
 	minetest.register_biome({
@@ -547,7 +567,7 @@ function default.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 5,
 		y_max = upper_limit,
-		heat_point = 60,
+		heat_point = 50,
 		humidity_point = 0,
 	})
 
@@ -567,7 +587,7 @@ function default.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 4,
-		heat_point = 60,
+		heat_point = 50,
 		humidity_point = 0,
 	})
 
@@ -631,7 +651,7 @@ function default.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 1,
 		y_max = upper_limit,
-		heat_point = 89,
+		heat_point = 75,
 		humidity_point = 42,
 	})
 
@@ -651,7 +671,7 @@ function default.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -1,
 		y_max = 0,
-		heat_point = 89,
+		heat_point = 75,
 		humidity_point = 42,
 	})
 
@@ -671,7 +691,7 @@ function default.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = -2,
-		heat_point = 89,
+		heat_point = 75,
 		humidity_point = 42,
 	})
 
@@ -773,16 +793,16 @@ function default.register_biomes(upper_limit)
 		--node_river_water = "",
 		y_min = 1,
 		y_max = 31000,
-		heat_point = 42,
-		humidity_point = 36,
+		heat_point = 22,
+		humidity_point = 56,
 	})
 
 	minetest.register_biome({
 		name = "strangeland_ocean",
 		--node_dust = "",
-		node_top = "default:sand",
+		node_top = "default:clay",
 		depth_top = 1,
-		node_filler = "default:sand",
+		node_filler = "default:clay",
 		depth_filler = 3,
 		node_stone = "default:desert_stone",
 		--node_water_top = "",
@@ -791,8 +811,8 @@ function default.register_biomes(upper_limit)
 		--node_river_water = "",
 		y_min = -112,
 		y_max = 4,
-		heat_point = 42,
-		humidity_point = 36,
+		heat_point = 22,
+		humidity_point = 56,
 	})
 
 		minetest.register_biome({
@@ -809,7 +829,7 @@ function default.register_biomes(upper_limit)
 		--node_river_water = "",
 		y_min = 1,
 		y_max = 31000,
-		heat_point = 82,
+		heat_point = 72,
 		humidity_point = 20,
 	})
 
@@ -846,8 +866,8 @@ function default.register_biomes(upper_limit)
 		--node_river_water = "",
 		y_min = 0,
 		y_max = 55,
-		heat_point = 66,
-		humidity_point = 30,
+		heat_point = 86,
+		humidity_point = 10,
 	})
 	minetest.register_biome({
 		name = "clay_ocean",
@@ -863,8 +883,8 @@ function default.register_biomes(upper_limit)
 		--node_river_water = "",
 		y_min = -112,
 		y_max = 1,
-		heat_point = 66,
-		humidity_point = 30,
+		heat_point = 86,
+		humidity_point = 10,
 	})
 
 -- COLD
@@ -883,28 +903,122 @@ function default.register_biomes(upper_limit)
 		--node_river_water = "",
 		y_min = 2,
 		y_max = 31000,
-		heat_point = 25,
-		humidity_point = 35,
+		heat_point = 3,
+		humidity_point = 2,
 	})
 	minetest.register_biome({
 		name = "strangeland_ocean",
 		--node_dust = "",
-		node_top = "default:clay",
+		node_top = "default:gravel",
 		depth_top = 1,
 		node_filler = "default:gravel",
 		depth_filler = 3,
-		node_stone = "default:stone",
+		node_stone = "default:gravel",
 		--node_water_top = "",
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
-		y_min = 28,
-		y_max = 300,
-		heat_point = 25,
-		humidity_point = 35,
+		y_min = -28,
+		y_max = 1,
+		heat_point = 3,
+		humidity_point = 2,
 	})
-end
+--end
 
+
+	
+	
+	
+--DEFAULT	V7
+--function default.register_mgv6_decorations()
+
+	-- Papyrus
+
+	minetest.register_decoration({
+		deco_type = "simple",
+		place_on = {"default:dirt_with_grass"},
+		sidelen = 16,
+		noise_params = {
+			offset = -0.3,
+			scale = 0.7,
+			spread = {x = 100, y = 100, z = 100},
+			seed = 354,
+			octaves = 3,
+			persist = 0.7
+		},
+		y_min = 1,
+		y_max = 1,
+		decoration = "default:papyrus",
+		height = 2,
+		height_max = 4,
+		spawn_by = "default:water_source",
+		num_spawn_by = 1,
+	})
+
+	-- Cacti
+
+	minetest.register_decoration({
+		deco_type = "simple",
+		place_on = {"default:desert_sand"},
+		sidelen = 16,
+		noise_params = {
+			offset = -0.012,
+			scale = 0.024,
+			spread = {x = 100, y = 100, z = 100},
+			seed = 230,
+			octaves = 3,
+			persist = 0.6
+		},
+		y_min = 1,
+		y_max = 30,
+		decoration = "default:cactus",
+		height = 3,
+	        height_max = 4,
+	})
+
+	-- Long grasses
+
+	for length = 1, 5 do
+		minetest.register_decoration({
+			deco_type = "simple",
+			place_on = {"default:dirt_with_grass"},
+			sidelen = 16,
+			noise_params = {
+				offset = 0,
+				scale = 0.007,
+				spread = {x = 100, y = 100, z = 100},
+				seed = 329,
+				octaves = 3,
+				persist = 0.6
+			},
+			y_min = 1,
+			y_max = 30,
+			decoration = "default:grass_"..length,
+		})
+	end
+
+	-- Dry shrubs
+
+	minetest.register_decoration({
+		deco_type = "simple",
+		place_on = {"default:desert_sand", "default:dirt_with_snow"},
+		sidelen = 16,
+		noise_params = {
+			offset = 0,
+			scale = 0.035,
+			spread = {x = 100, y = 100, z = 100},
+			seed = 329,
+			octaves = 3,
+			persist = 0.6
+		},
+		y_min = 1,
+		y_max = 30,
+		decoration = "default:dry_shrub",
+	})
+--end
+
+
+-- All mapgens except mgv6
 --DECORATIONS
 
 local function register_dry_grass_decoration(offset, scale, length)
@@ -931,7 +1045,7 @@ end
 	--The buildings found in this mod (in the schems/ folder) have been built by
 	--AgentNagel42. See https://forum.minetest.net/viewtopic.php?f=5&t=13297
 
-
+--function default.register_decorations()
 	minetest.register_decoration({
 		deco_type = "schematic",
 		place_on = {"es:dry_dirt","es:aiden_grass","es:strange_grass","es:strange_clay_brown"},
@@ -1271,100 +1385,8 @@ end
 		flags = "place_center_x, place_center_z",
 		rotation = "random",
 	})
+--end	
 	
-	
-	
---DEFAULT	V7
-function default.register_mgv6_decorations()
-
-	-- Papyrus
-
-	minetest.register_decoration({
-		deco_type = "simple",
-		place_on = {"default:dirt_with_grass"},
-		sidelen = 16,
-		noise_params = {
-			offset = -0.3,
-			scale = 0.7,
-			spread = {x = 100, y = 100, z = 100},
-			seed = 354,
-			octaves = 3,
-			persist = 0.7
-		},
-		y_min = 1,
-		y_max = 1,
-		decoration = "default:papyrus",
-		height = 2,
-		height_max = 4,
-		spawn_by = "default:water_source",
-		num_spawn_by = 1,
-	})
-
-	-- Cacti
-
-	minetest.register_decoration({
-		deco_type = "simple",
-		place_on = {"default:desert_sand"},
-		sidelen = 16,
-		noise_params = {
-			offset = -0.012,
-			scale = 0.024,
-			spread = {x = 100, y = 100, z = 100},
-			seed = 230,
-			octaves = 3,
-			persist = 0.6
-		},
-		y_min = 1,
-		y_max = 30,
-		decoration = "default:cactus",
-		height = 3,
-	        height_max = 4,
-	})
-
-	-- Long grasses
-
-	for length = 1, 5 do
-		minetest.register_decoration({
-			deco_type = "simple",
-			place_on = {"default:dirt_with_grass"},
-			sidelen = 16,
-			noise_params = {
-				offset = 0,
-				scale = 0.007,
-				spread = {x = 100, y = 100, z = 100},
-				seed = 329,
-				octaves = 3,
-				persist = 0.6
-			},
-			y_min = 1,
-			y_max = 30,
-			decoration = "default:grass_"..length,
-		})
-	end
-
-	-- Dry shrubs
-
-	minetest.register_decoration({
-		deco_type = "simple",
-		place_on = {"default:desert_sand", "default:dirt_with_snow"},
-		sidelen = 16,
-		noise_params = {
-			offset = 0,
-			scale = 0.035,
-			spread = {x = 100, y = 100, z = 100},
-			seed = 329,
-			octaves = 3,
-			persist = 0.6
-		},
-		y_min = 1,
-		y_max = 30,
-		decoration = "default:dry_shrub",
-	})
-end
-
-
--- All mapgens except mgv6
-
 local function register_grass_decoration(offset, scale, length)
 	minetest.register_decoration({
 		deco_type = "simple",
@@ -1412,6 +1434,7 @@ function default.register_decorations()
 
 	-- Apple tree and log
 
+
 	minetest.register_decoration({
 		deco_type = "schematic",
 		place_on = {"default:dirt_with_grass"},
@@ -1431,7 +1454,8 @@ function default.register_decorations()
 		flags = "place_center_x, place_center_z",
 		rotation = "random",
 	})
-
+	
+	
 	minetest.register_decoration({
 		deco_type = "schematic",
 		place_on = {"default:dirt_with_grass"},
@@ -1604,6 +1628,9 @@ function default.register_decorations()
 		rotation = "random",
 	})
 
+	
+	
+	
 	-- Large cactus
 
 	minetest.register_decoration({
@@ -1787,7 +1814,7 @@ function default.register_decorations()
 	})
 end
 
-
+--[[
 --
 -- Detect mapgen, flags and parameters to select functions
 --
@@ -1824,3 +1851,4 @@ else
 	default.register_ores()
 	default.register_decorations()
 end
+]]

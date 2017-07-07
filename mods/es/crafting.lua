@@ -303,6 +303,7 @@ minetest.register_craftitem("es:emerald_crystal", {
 	inventory_image = "emerald.png",
 })
 
+
 --ruby
 minetest.register_craft({
 	output = 'es:rubyblock',
@@ -329,6 +330,7 @@ minetest.register_craftitem("es:ruby_crystal", {
 	inventory_image = "ruby.png",
 })
 
+
 --aikerum
 minetest.register_craft({
 	output = 'es:aikerumblock',
@@ -354,6 +356,7 @@ minetest.register_craftitem("es:aikerum_crystal", {
 	description = "Aikerum Crystal",
 	inventory_image = "aikerum.png",
 })
+
 
 --infinium
 minetest.register_craft({
@@ -413,10 +416,7 @@ minetest.register_craftitem("es:purpellium_lump", {
 	inventory_image = "purpellium_lump.png",
 })
 
-minetest.register_craftitem("es:purpellium_ingot", {
-	description = "Purpellium Ingot",
-	inventory_image = "purpellium_ingot.png",
-})
+
 
 --crafting containers
 minetest.register_craft({
@@ -712,25 +712,25 @@ minetest.register_craft({
 --POTION TO FIX ARMOUR (RUBY)
 --infinium armour fix
 minetest.register_craft({
-	output = 'es:helmet_infinium',
+	output = '3d_armor:helmet_infinium',
 	type = "shapeless",
 	recipe =
 		{'es:ruby_container', 'es:helmet_infinium' },
 })
 minetest.register_craft({
-	output = 'es:chestplate_infinium',
+	output = '3d_armor:chestplate_infinium',
 	type = "shapeless",
 	recipe =
 		{'es:ruby_container', 'es:chestplate_infinium'},
 })
 minetest.register_craft({
-	output = 'es:leggings_infinium',
+	output = '3d_armor:leggings_infinium',
 	type = "shapeless",
 	recipe =
 		{'es:ruby_container', 'es:leggings_infinium'},
 })
 minetest.register_craft({
-	output = 'es:boots_infinium',
+	output = '3d_armor:boots_infinium',
 	type = "shapeless",
 	recipe =
 		{'es:ruby_container', 'es:boots_infinium' },
@@ -738,25 +738,25 @@ minetest.register_craft({
 
 --aikerum armour fix
 minetest.register_craft({
-	output = 'es:helmet_aikerum',
+	output = '3d_armor:helmet_aikerum',
 	type = "shapeless",
 	recipe =
 		{'es:ruby_container', 'es:helmet_aikerum' },
 })
 minetest.register_craft({
-	output = 'es:chestplate_aikerum',
+	output = '3d_armor:chestplate_aikerum',
 	type = "shapeless",
 	recipe =
 		{'es:ruby_container', 'es:chestplate_aikerum'},
 })
 minetest.register_craft({
-	output = 'es:leggings_aikerum',
+	output = '3d_armor:leggings_aikerum',
 	type = "shapeless",
 	recipe =
 		{'es:ruby_container', 'es:leggings_aikerum'},
 })
 minetest.register_craft({
-	output = 'es:boots_aikerum',
+	output = '3d_armor:boots_aikerum',
 	type = "shapeless",
 	recipe =
 		{'es:ruby_container', 'es:boots_aikerum' },
@@ -764,25 +764,25 @@ minetest.register_craft({
 
 --emerald armour fix
 minetest.register_craft({
-	output = 'es:helmet_emerald',
+	output = '3d_armor:helmet_emerald',
 	type = "shapeless",
 	recipe =
 		{'es:ruby_container', 'es:helmet_emerald' },
 })
 minetest.register_craft({
-	output = 'es:chestplate_emerald',
+	output = '3d_armor:chestplate_emerald',
 	type = "shapeless",
 	recipe =
 		{'es:ruby_container', 'es:chestplate_emerald'},
 })
 minetest.register_craft({
-	output = 'es:leggings_emerald',
+	output = '3d_armor:leggings_emerald',
 	type = "shapeless",
 	recipe =
 		{'es:ruby_container', 'es:leggings_emerald'},
 })
 minetest.register_craft({
-	output = 'es:boots_emerald',
+	output = '3d_armor:boots_emerald',
 	type = "shapeless",
 	recipe =
 		{'es:ruby_container', 'es:boots_emerald' },
@@ -805,31 +805,89 @@ minetest.register_craftitem("es:handle", {
 })
 
 
---BUCKET
+--INGOTS
+minetest.register_craft({
+	output = 'es:cookable_emerald_ingot',
+	type = "shapeless",
+	recipe =
+		{'es:emerald_dust', 'default:bronze_ingot' },
+})
+minetest.register_craftitem("es:emerald_ingot", {
+	description = "Emerald Ingot Hardened",
+	inventory_image = "default_tin_ingot.png^[colorize:#009900:150",
+})
+minetest.register_craftitem("es:cookable_emerald_ingot", {
+	description = "Cookable Emerald Ingot",
+	inventory_image = "default_bronze_ingot.png^[colorize:#00FF00:200",
+})
 
+minetest.register_craft({
+	output = 'es:cookable_ruby_ingot',
+	type = "shapeless",
+	recipe =
+		{'es:ruby_dust', 'default:bronze_ingot' },
+})
+minetest.register_craftitem("es:ruby_ingot", {
+	description = "Ruby Ingot Hardened",
+	inventory_image = "default_tin_ingot.png^[colorize:#990000:150",
+})
+minetest.register_craftitem("es:cookable_ruby_ingot", {
+	description = "Cookable Ruby Ingot",
+	inventory_image = "default_bronze_ingot.png^[colorize:#FF0000:200",
+})
+
+minetest.register_craft({
+	output = 'es:cookable_aikerum_ingot',
+	type = "shapeless",
+	recipe =
+		{'es:aikerum_dust', 'default:bronze_ingot' },
+})
+minetest.register_craftitem("es:aikerum_ingot", {
+	description = "Aikerum Ingot Hardened",
+	inventory_image = "default_tin_ingot.png^[colorize:#000099:150",
+})
+minetest.register_craftitem("es:cookable_aikerum_ingot", {
+	description = "Cookable Aikerum Ingot",
+	inventory_image = "default_bronze_ingot.png^[colorize:#0000FF:200",
+})
+
+minetest.register_craft({
+	output = 'es:cookable_purpellium_ingot',
+	type = "shapeless",
+	recipe =
+		{'es:purpellium_dust', 'default:bronze_ingot' },
+})
+minetest.register_craftitem("es:purpellium_ingot", {
+	description = "Purpellium Ingot Hardened",
+	inventory_image = "purpellium_ingot.png",
+})
+minetest.register_craftitem("es:cookable_purpellium_ingot", {
+	description = "Cookable Purpellium Ingot Hardened",
+	inventory_image = "default_bronze_ingot.png^[colorize:#FF00FF:200",
+})
 
 --SWORDS
 minetest.register_craft({
 	output = 'es:sword_emerald',
 	recipe = {
-		{'es:emerald_crystal'},
-		{'es:emerald_crystal'},
+		{'es:emerald_ingot'},
+		{'es:emerald_ingot'},
 		{'es:handle'},
 	}
 })
 minetest.register_craft({
 	output = 'es:sword_ruby',
 	recipe = {
-		{'es:ruby_crystal'},
-		{'es:ruby_crystal'},
+		{'es:ruby_ingot'},
+		{'es:ruby_ingot'},
 		{'es:handle'},
 	}
 })
 minetest.register_craft({
 	output = 'es:sword_aikerum',
 	recipe = {
-		{'es:aikerum_crystal'},
-		{'es:aikerum_crystal'},
+		{'es:aikerum_ingot'},
+		{'es:aikerum_ingot'},
 		{'es:handle'},
 	}
 })
@@ -846,7 +904,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'es:pick_emerald',
 	recipe = {
-		{'es:emerald_crystal', 'es:emerald_crystal', 'es:emerald_crystal'},
+		{'es:emerald_ingot', 'es:emerald_ingot', 'es:emerald_ingot'},
 		{'', 'default:steel_ingot', ''},
 		{'', 'es:handle', ''},
 	}
@@ -854,7 +912,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'es:pick_ruby',
 	recipe = {
-		{'es:ruby_crystal', 'es:ruby_crystal', 'es:ruby_crystal'},
+		{'es:ruby_ingot', 'es:ruby_ingot', 'es:ruby_ingot'},
 		{'', 'default:steel_ingot', ''},
 		{'', 'es:handle', ''},
 	}
@@ -862,19 +920,12 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'es:pick_aikerum',
 	recipe = {
-		{'es:aikerum_crystal', 'es:aikerum_crystal', 'es:aikerum_crystal'},
+		{'es:aikerum_ingot', 'es:aikerum_ingot', 'es:aikerum_ingot'},
 		{'', 'default:steel_ingot', ''},
 		{'', 'es:handle', ''},
 	}
 })
-minetest.register_craft({
-	output = 'es:pick_aikerum',
-	recipe = {
-		{'es:aikerum_crystal', 'es:aikerum_crystal', 'es:aikerum_crystal'},
-		{'', 'default:steel_ingot', ''},
-		{'', 'es:handle', ''},
-	}
-})
+
 minetest.register_craft({
 	output = 'es:pick_purpellium',
 	recipe = {
@@ -888,24 +939,24 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'es:axe_emerald',
 	recipe = {
-		{'es:emerald_crystal', 'es:emerald_crystal', ''},
-		{'es:emerald_crystal', 'default:steel_ingot', ''},
+		{'es:emerald_ingot', 'es:emerald_ingot', ''},
+		{'es:emerald_ingot', 'default:steel_ingot', ''},
 		{'', 'es:handle', ''},
 	}
 })
 minetest.register_craft({
 	output = 'es:axe_ruby',
 	recipe = {
-		{'es:ruby_crystal', 'es:ruby_crystal', ''},
-		{'es:ruby_crystal', 'default:steel_ingot', ''},
+		{'es:ruby_ingot', 'es:ruby_ingot', ''},
+		{'es:ruby_ingot', 'default:steel_ingot', ''},
 		{'', 'es:handle', ''},
 	}
 })
 minetest.register_craft({
 	output = 'es:axe_aikerum',
 	recipe = {
-		{'es:aikerum_crystal', 'es:aikerum_crystal', ''},
-		{'es:aikerum_crystal', 'default:steel_ingot', ''},
+		{'es:aikerum_ingot', 'es:aikerum_ingot', ''},
+		{'es:aikerum_ingot', 'default:steel_ingot', ''},
 		{'', 'es:handle', ''},
 	}
 })
@@ -914,7 +965,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'es:shovel_emerald',
 	recipe = {
-		{'', 'es:emerald_crystal', ''},
+		{'', 'es:emerald_ingot', ''},
 		{'', 'default:steel_ingot', ''},
 		{'', 'es:handle', ''},
 	}
@@ -922,7 +973,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'es:shovel_ruby',
 	recipe = {
-		{'', 'es:ruby_crystal', ''},
+		{'', 'es:ruby_ingot', ''},
 		{'', 'default:steel_ingot', ''},
 		{'', 'es:handle', ''},
 	}
@@ -931,7 +982,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'es:shovel_aikerum',
 	recipe = {
-		{'', 'es:aikerum_crystal', ''},
+		{'', 'es:aikerum_ingot', ''},
 		{'', 'default:steel_ingot', ''},
 		{'', 'es:handle', ''},
 	}
@@ -1083,6 +1134,37 @@ minetest.register_craft({
 --COOKING RECIPIES
 minetest.register_craft({
 	type = "cooking",
+	cooktime = 30,
+	output = "es:emerald_ingot 1",
+	recipe = "es:cookable_emerald_ingot",
+})
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 30,
+	output = "es:ruby_ingot 1",
+	recipe = "es:cookable_ruby_ingot",
+})
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 30,
+	output = "es:aikerum_ingot 1",
+	recipe = "es:cookable_aikerum_ingot",
+})
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 30,
+	output = "es:purpellium_ingot 1",
+	recipe = "es:cookable_purpellium_ingot",
+})
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 30,
+	output = "es:purpellium_ingot 1",
+	recipe = "es:cookable_purpellium_ingot",
+})
+
+minetest.register_craft({
+	type = "cooking",
 	output = "default:water_flowing",
 	recipe = "default:ice",
 })
@@ -1108,14 +1190,14 @@ minetest.register_craft({
 	output = "es:infinium_ingot 1",
 	recipe = "es:infinium_container",
 })
-
+--[[
 minetest.register_craft({
 	type = "cooking",
 	cooktime = 30,
 	output = "es:purpellium_ingot 1",
 	recipe = "es:purpellium_lump",
 })
-
+]]
 minetest.register_craft({
 	type = "cooking",
 	cooktime = 30,
@@ -1133,13 +1215,14 @@ minetest.register_craft({
 
 
 --Dust cooking
+--[[
 minetest.register_craft({
 	type = "cooking",
 	cooktime = 90,
 	output = "es:purpellium_lump",
 	recipe = "es:purpellium_dust",
 })
-
+]]
 minetest.register_craft({
 	type = "cooking",
 	cooktime = 90,

@@ -76,13 +76,13 @@ minetest.register_abm({
 	end,
 })
 
---minetest.after(75, function(dtime)
-minetest.register_chatcommand("sanitized", {
-	func = function()
+minetest.after(75, function(dtime)
+--minetest.register_chatcommand("sanitized", {
+	--func = function()
 
---	if spawn_sanitizer.cleaned==true then
---		return
---	end
+	if spawn_sanitizer.cleaned==true then
+		return
+	end
 
 	local positions1 = minetest.find_nodes_in_area(
 		{x=-20, y=-4, z=-20},
@@ -277,9 +277,9 @@ minetest.register_chatcommand("sanitized", {
 		minetest.log("action", "Spawn sanitized!")
 		minetest.chat_send_all("Spawn sanitized!")
 	end
---end)
-end,
-})
+end)
+--end,
+--})
 
 
 -- no more protection blocks near!

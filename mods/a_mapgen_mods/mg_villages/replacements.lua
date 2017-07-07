@@ -172,6 +172,8 @@ mg_villages.replace_tree_trunk = function( replacements, wood_type )
 		table.insert( replacements, {'default:tree',  'default:pine_tree'});
 	elseif( wood_type == 'default:acacia_wood' ) then
 		table.insert( replacements, {'default:tree',  'default:acacia_tree'});
+	elseif( wood_type == 'default:aspen_wood' ) then
+		table.insert( replacements, {'default:tree',  'default:aspen_tree'});
 	elseif( wood_type == 'mg:savannawood' ) then
 		table.insert( replacements, {'default:tree',  'mg:savannatree'});
 	elseif( wood_type == 'mg:pinewood' ) then
@@ -272,6 +274,8 @@ mg_villages.replace_saplings = function( replacements, wood_type )
 		table.insert( replacements, {'default:sapling',  'default:pine_sapling'});
 	elseif( wood_type == 'default:acacia_wood' ) then
 		table.insert( replacements, {'default:sapling',  'default:acacia_sapling'});
+	elseif( wood_type == 'default:aspen_wood' ) then
+		table.insert( replacements, {'default:sapling',  'default:aspen_sapling'});
 	elseif( wood_type == 'mg:savannawood' ) then
 		table.insert( replacements, {'default:sapling',  'mg:savannasapling'});
 	elseif( wood_type == 'mg:pinewood' ) then
@@ -309,6 +313,7 @@ mg_villages.replace_saplings = function( replacements, wood_type )
 				table.insert( replacements, {'default:sapling', "trees:"..v.."_sapling"});
 				table.insert( replacements, {'default:junglesapling', "trees:"..v.."_sapling"});
 				table.insert( replacements, {'default:pine_sapling',  "trees:"..v.."_sapling"});
+				table.insert( replacements, {'default:aspen_sapling', "trees:"..v.."_sapling"});
 			end
 		end
 
@@ -349,6 +354,14 @@ mg_villages.get_replacement_list = function( housetype, pr )
   	table.insert(         replacements, {'default:apple',           'air' });
   	table.insert(         replacements, {'default:cobble',          'default:stone_macadam' });
   	table.insert(         replacements, {'default:obsidian_glass',  'default:glass' });
+
+   -- the default doors from minetest game have been changed since the schematics where built
+   -- TODO: the door replacement function needs to be more complex; doesn't really work this way
+   else
+	table.insert( replacements, {'doors:door_wood_t_1',  'doors:hidden'});
+	table.insert( replacements, {'doors:door_wood_b_1',  'doors:door_wood_a'});
+	table.insert( replacements, {'doors:door_wood_t_2',  'doors:hidden'});
+	table.insert( replacements, {'doors:door_wood_b_2',  'doors:door_wood_b'});
    end
 
    if( housetype and mg_villages.village_type_data[ housetype ] and mg_villages.village_type_data[ housetype ].replacement_function ) then
@@ -378,10 +391,11 @@ mg_villages.replacements_taoki = function( housetype, pr, replacements )
          wood_type = mg_villages.replace_materials( replacements, pr,
 		{'default:wood'},
 		{''},
-		{'default:wood', 'default:junglewood', 'default:pine_wood', 'default:acacia_wood', 'mg:pinewood', 'mg:savannawood',
+		{'default:wood', 'default:junglewood', 'default:pine_wood', 'default:acacia_wood', 'default:aspen_wood', 'mg:pinewood', 'mg:savannawood',
 		'default:clay', 'default:brick', 'default:sandstone', 
 		'default:stonebrick', 'default:desert_stonebrick','default:sandstonebrick', 'default:sandstone','default:stone','default:desert_stone',
-		'default:coalblock','default:steelblock','default:goldblock', 'default:bronzeblock', 'default:copperblock', 'wool:white',
+		--'default:coalblock','default:steelblock','default:goldblock', 'default:bronzeblock', 'default:copperblock', 'wool:white',
+		'es:aiden_tree','es:old_tree','es:strange_clay_blue', 'es:strange_clay_maroon', 'es:strange_clay_brown', 'es:strange_clay_black',
 		'default:stone_flat', 'default:desert_stone_flat', -- realtest
 		'darkage:adobe', 'darkage:basalt', 'darkage:basalt_cobble', 'darkage:chalk',
 		'darkage:gneiss', 'darkage:gneiss_cobble', 'darkage:marble', 'darkage:marble_tile',
@@ -404,7 +418,7 @@ mg_villages.replacements_taoki = function( housetype, pr, replacements )
       mg_villages.replace_materials( replacements, pr,
 		{'stairs:stair_wood'},
 		{'stairs:stair_'},
-		{'stonebrick', 'stone', 'sandstone', 'cobble', 'wood', 'junglewood', 'pine_wood', 'acaica_wood' },
+		{'stonebrick', 'stone', 'sandstone', 'cobble', 'wood', 'junglewood', 'pine_wood', 'acaica_wood', 'aspen_wood' },
 		'wood');
 
       -- brick roofs are a bit odd; but then...
@@ -412,7 +426,7 @@ mg_villages.replacements_taoki = function( housetype, pr, replacements )
       mg_villages.replace_materials( replacements, pr,
 		{'stairs:stair_brick',  'stairs:slab_brick', 'default:brick'},
 		{'stairs:stair_',       'stairs:slab_',      'default:'     },
-		{ 'brick', 'stone', 'cobble', 'stonebrick', 'wood', 'junglewood', 'pine_wood', 'acacia_wood', 'sandstone' },
+		{ 'brick', 'stone', 'cobble', 'stonebrick', 'wood', 'junglewood', 'pine_wood', 'acacia_wood', 'aspen_wood', 'sandstone' },
 		'brick' );
 
       return replacements;
@@ -433,7 +447,7 @@ mg_villages.replacements_nore = function( housetype, pr, replacements )
       local wood_type = mg_villages.replace_materials( replacements, pr,
 		{'default:wood'},
 		{''},
-		{ 'default:wood', 'default:junglewood', 'default:pine_wood', 'default:acacia_wood', 'mg:savannawood', 'mg:pinewood' },
+		{ 'default:wood', 'default:junglewood', 'default:pine_wood', 'default:acacia_wood', 'default:aspen_wood', 'mg:savannawood', 'mg:pinewood' },
 		'default:wood');
       mg_villages.replace_tree_trunk( replacements, wood_type );
       mg_villages.replace_saplings(   replacements, wood_type );
@@ -455,7 +469,7 @@ mg_villages.replacements_lumberjack = function( housetype, pr, replacements )
       local wood_type = mg_villages.replace_materials( replacements, pr,
 		{'default:wood'},
 		{''},
-		{ 'default:wood', 'default:junglewood', 'default:pine_wood', 'default:acacia_wood', 'mg:savannawood', 'mg:pinewood' },
+		{ 'default:wood', 'default:junglewood', 'default:pine_wood', 'default:acacia_wood', 'default:aspen_wood', 'mg:savannawood', 'mg:pinewood' },
 		'default:wood');
       mg_villages.replace_tree_trunk( replacements, wood_type );
       mg_villages.replace_saplings(   replacements, wood_type );
@@ -543,7 +557,7 @@ mg_villages.replacements_chateau = function( housetype, pr, replacements )
       local wood_type = mg_villages.replace_materials( replacements, pr,
 		{'default:wood'},
 		{''},
-		{ 'default:wood', 'default:junglewood', 'default:pine_wood', 'default:acacia_wood', 'mg:savannawood', 'mg:pinewood'}, --, 'default:brick', 'default:sandstone', 'default:desert_cobble' }, 
+		{ 'default:wood', 'default:junglewood', 'default:pine_wood', 'default:acacia_wood', 'default:aspen_wood', 'mg:savannawood', 'mg:pinewood'}, --, 'default:brick', 'default:sandstone', 'default:desert_cobble' },
 		'default:wood');
       mg_villages.replace_tree_trunk( replacements, wood_type );
       mg_villages.replace_saplings(   replacements, wood_type );
@@ -562,7 +576,7 @@ mg_villages.replacements_chateau = function( housetype, pr, replacements )
       local mfs2 = mg_villages.replace_materials( replacements, pr,
 		{'stairs:stair_cobble',  'stairs:slab_cobble', 'default:cobble'},
 		{'stairs:stair_',        'stairs:slab_',       'default:'      },
-		{ 'cobble', 'brick', 'clay', 'desert_cobble', 'desert_stone', 'desert_stonebrick', 'loam', 'sandstone', 'sandstonebrick', 'stonebrick' },
+		{ 'cobble', 'brick', 'clay', 'desert_cobble', 'desert_stone', 'desert_stonebrick', 'sandstone', 'sandstonebrick', 'stonebrick' },
 		'cobble');
 
       return replacements;
@@ -597,12 +611,14 @@ mg_villages.replacements_grasshut = function( housetype, pr, replacements )
          table.insert( replacements, {'cottages:straw',                   'dryplants:wetreed' });
          table.insert( replacements, {'stairs:slab_cobble',               'dryplants:reed_slab' });
       end
+--[[ does not look nice
       if( pr:next( 1, 4) == 1 ) then
          table.insert( replacements, {'dryplants:wetreed_roof_corner',    'default:wood' });
          table.insert( replacements, {'dryplants:wetreed_roof_corner_2',  'default:junglewood' });
       end
+--]]
       if( not( minetest.get_modpath( 'cavestuff' ))) then
-         table.insert( replacements, {'cavestuff:desert_pebble_2',        'default:slab_cobble' });
+         table.insert( replacements, {'cavestuff:desert_pebble_2',        'default:slab_desert_stone' });
       end
    
       table.insert( replacements, {'default:desert_sand', 'default:dirt_with_grass' });
@@ -717,7 +733,7 @@ mg_villages.replacements_medieval = function( housetype, pr, replacements )
    -- loam and clay are mentioned multiple times because those are the most likely building materials in reality
    local materials = {'cottages:loam', 'cottages:loam', 'cottages:loam', 'cottages:loam', 'cottages:loam', 
                       'default:clay',  'default:clay',  'default:clay',  'default:clay',  'default:clay',
-                      'default:wood','default:junglewood', 'default:pine_wood', 'default:acacia_wood', 'default:sandstone',
+                      'default:wood','default:junglewood', 'default:pine_wood', 'default:acacia_wood', 'default:aspen_wood', 'default:sandstone',
                       'default:desert_stone','default:brick','default:cobble','default:stonebrick',
                       'default:desert_stonebrick','default:sandstonebrick','default:stone',
                       'mg:savannawood', 'mg:savannawood', 'mg:savannawood', 'mg:savannawood',
@@ -891,7 +907,9 @@ mg_villages.get_replacement_table = function( housetype, pr, replacements )
 		replacements = mg_villages.get_replacement_list( housetype, pr );
 	end
 	-- it is very problematic if the torches on houses melt snow and cause flooding; thus, we use a torch that is not hot
-	table.insert( replacements, {'default:torch', 'mg_villages:torch'});
+	if( mg_villages.USE_DEFAULT_3D_TORCHES == false ) then
+		table.insert( replacements, {'default:torch', 'mg_villages:torch'});
+	end
 
 	-- make charachoal villages safe from spreading fire
 	if( not( mg_villages.use_normal_unsafe_lava )) then

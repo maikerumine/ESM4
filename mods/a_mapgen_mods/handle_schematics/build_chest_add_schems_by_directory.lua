@@ -13,7 +13,12 @@ local build_chest_add_files_to_menu_from_directory = function( schem, path, entr
 			if( i ) then
 				schemname = string.sub( schem, 1, i-1 );
 			else
-				return;
+				i = string.find( schem, '.schematic', -10 );
+				if( i ) then
+					schemname = string.sub( schem, 1, i-1 );
+				else
+					return;
+				end
 			end
 		end
 	end
@@ -75,6 +80,28 @@ local build_chest_check_all_directories_mods_and_modpacks = function( path, menu
 	end
 end
 
+build_chest.add_files_from_path = function( worldpath, worldname )
+	-- get list of subdirectories
+	local path = worldpath..'/'..worldname;
+	local subdir_list = minetest.get_dir_list( path, true );
+	if( not( subdir_list )) then
+		return;
+	end
+	for _,subdir in ipairs( subdir_list ) do
+		if( subdir=='schems' ) then
+			local file_list = minetest.get_dir_list( path..'/schems', false );
+			for _,filename in ipairs( file_list ) do
+				build_chest_add_files_to_menu_from_directory(
+					filename,
+					path..'/schems/',
+					'import from world',
+					'landscape backups',
+					{'OVERWRITE THIS', worldname });
+			end
+		end
+	end
+end
+
 
 local build_chest_check_all_directories = function()
 	-- find the name of the directory directly above the current worldpath
@@ -106,27 +133,12 @@ local build_chest_check_all_directories = function()
 		end
 	end
 --]]
-	worldpath = string.sub( worldpath, 1, string.len( worldpath )-p );
-
+--	worldpath = string.sub( worldpath, 1, string.len( worldpath )-p );
 
 	-- locate .mts, .wem and .we files in the worlds/WORLDNAME/schems/* folders
 	local d1 = minetest.get_dir_list( worldpath, true );
 	for _,worldname in ipairs( d1 ) do
-		-- get list of subdirectories
-		local d2 = minetest.get_dir_list( worldpath..'/'..worldname, true );
-		for _,subdir in ipairs( d2 ) do
-			if( subdir=='schems' ) then
-				local d3 = minetest.get_dir_list( worldpath..'/'..worldname..'/schems', false );
-				for _,filename in ipairs( d3 ) do
-					build_chest_add_files_to_menu_from_directory(
-						filename,
-						worldpath..'/'..worldname..'/schems/',
-						'import from world',
-						'landscape backups',
-						{'OVERWRITE THIS', worldname });
-				end
-			end
-		end
+		build_chest.add_files_from_path( worldpath, worldname );
 	end
 
 	local main_path = string.sub( worldpath, 1, string.len(worldpath)-string.len('/worlds'));
@@ -145,7 +157,8 @@ end
 
 -- TODO: hopfefully, security will get more relaxed regarding reading directories in the future
 -- if security is enabled, our options to get schematics are a bit limited
-if( minetest.setting_getbool( 'secure.enable_security' )) then
+--if( minetest.settings:get( 'secure.enable_security' )) then
+if( minetest.get_dir_list ) then
 	local worldpath = minetest.get_worldpath();
 	local d3 = minetest.get_dir_list( worldpath..'/schems', false );
 	if( d3 ) then

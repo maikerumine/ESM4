@@ -35,9 +35,40 @@ walls.register = function(wall_name, wall_desc, wall_texture, wall_mat, wall_sou
 
 end
 
-walls.register("walls:cobble", "Cobblestone Wall", "default_cobble.png",
-		"default:cobble", default.node_sound_stone_defaults())
+--Example
+minetest.register_node("walls:cobble", {
+	description = "Cobblestone Wall -EXAMPLE FOR MOST DEFAULT BLOCKS",
+	tiles = {"default_cobble.png"},
+		drawtype = "nodebox",
+		node_box = {
+			type = "connected",
+			fixed = {{-1/4, -1/2, -1/4, 1/4, 1/2, 1/4}},
+			-- connect_bottom =
+			connect_front = {{-3/16, -1/2, -1/2,  3/16, 3/8, -1/4}},
+			connect_left = {{-1/2, -1/2, -3/16, -1/4, 3/8,  3/16}},
+			connect_back = {{-3/16, -1/2,  1/4,  3/16, 3/8,  1/2}},
+			connect_right = {{ 1/4, -1/2, -3/16,  1/2, 3/8,  3/16}},
+		},
+		connects_to = { "group:wall", "group:stone" },
+		paramtype = "light",
+		is_ground_content = false,
+		walkable = true,
+	groups = {cracky = 3, wall = 1, stone = 2, oddly_breakable_by_hand = 1},
+	sounds = default.node_sound_stone_defaults(),
+})
 
+	minetest.register_craft({
+		output = "walls:cobble 6",
+		recipe = {
+			{ '', '', '' },
+			{ 'default:cobble', 'default:cobble', 'default:cobble'},
+			{ 'default:cobble', 'default:cobble', 'default:cobble'},
+		}
+	})
+--[[
+walls.register("walls:cobble", "Cobblestone Wall -EXAMPLE FOR MOST DEFAULT BLOCKS", "default_cobble.png",
+		"default:cobble", default.node_sound_stone_defaults())
+]]
 walls.register("walls:mossycobble", "Mossy Cobblestone Wall", "default_mossycobble.png",
 		"default:mossycobble", default.node_sound_stone_defaults())
 

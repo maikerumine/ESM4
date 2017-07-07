@@ -19,13 +19,11 @@
 --	plant_frequency = 1	The higher this value is, the less plants are placed.
 
 local village_type_data_list = {
-
 	nore         = { min = 20, max = 40,   space_between_buildings=1, mods={},            texture = 'default_stone_brick.png',
 			 replacement_function = mg_villages.replacements_nore },
 	taoki        = { min = 30, max = 70,   space_between_buildings=1, mods={},            texture = 'default_brick.png' ,
 			 sapling_divisor =  5, plant_type = 'farming:cotton_8',    plant_frequency = 1,
 			 replacement_function = mg_villages.replacements_taoki },
-			
 	medieval     = { min = 25, max = 60,   space_between_buildings=2, mods={'cottages'},  texture = 'cottages_darkage_straw.png', -- they often have straw roofs
 			 sapling_divisor = 10, plant_type = 'farming:wheat_8',     plant_frequency = 1,
 			 replacement_function = mg_villages.replacements_medieval,
@@ -57,11 +55,9 @@ local village_type_data_list = {
 			 replacement_function = mg_villages.replacements_medieval },
 	trader       = { only_single = 1, name_prefix = 'Trading post ' },
 	sawmill      = { only_single = 1, name_prefix = 'Sawmill at ' },
-
 	farm_tiny    = { only_single = 1, name_prefix = 'House '},
 	farm_full    = { only_single = 1, name_prefix = 'Farm '},
 	single       = { only_single = 1, name_prefix = 'House '}, -- fallback
-
 }
 
 -- NOTE: Most values of village types added with mg_villages.add_village_type can still be changed later on by

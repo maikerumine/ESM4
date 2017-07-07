@@ -1,4 +1,4 @@
---[[-- TODO: refill chest after some time?
+-- TODO: refill chest after some time?
 -- TODO: alert NPC that something was taken
 
 mg_villages.random_chest_content = {};
@@ -6,6 +6,7 @@ mg_villages.random_chest_content = {};
 -- add random chest content
 local ADD_RCC = function( data )
 	if( data and #data>3 and ( minetest.registered_nodes[ data[1] ] or minetest.registered_items[ data[1] ]) ) then
+		data.chest_default = 1;
 		table.insert( mg_villages.random_chest_content, data );
 	end
 end
@@ -14,25 +15,27 @@ end
 -- contains tables of the following structure: { node_name, probability (in percent, 100=always, 0=never), max_amount, repeat (for more than one stack) }
 mg_villages.random_chest_content = {};
 
-ADD_RCC({"default:pick_stone",             10,  1, 3, farm_tiny=1, farm_full=1, shed=1, lumberjack=1, hut=1, chest_work=1, lumberjack=1 });
-ADD_RCC({"default:pick_steel",              5,  1, 2, forge=1 });
-ADD_RCC({"default:pick_mese",               2,  1, 2, forge=1, lumberjack=1 });
-ADD_RCC({"default:shovel_stone",            5,  1, 3, farm_tiny=1, farm_full=1, shed=1, lumberjack=1, hut=1, chest_work=1 });
-ADD_RCC({"default:shovel_steel",            5,  1, 2, forge=1 });
-ADD_RCC({"default:axe_stone",               5,  1, 3, farm_tiny=1, farm_full=1, chest_work=1, lumberjack=1 });
-ADD_RCC({"default:axe_steel",               5,  1, 2, forge=1, lumberjack=1 });
-ADD_RCC({"default:sword_wood",              1,  1, 3, guard=1 });
-ADD_RCC({"default:sword_stone",             1,  1, 3, guard=1 });
-ADD_RCC({"default:sword_steel",             1,  1, 3, forge=1, guard=1 });
+ADD_RCC({"default:pick_stone",             10,  1, 3, farm_tiny=1, farm_full=1, shed=1, lumberjack=1, hut=1, chest_work=1, lumberjack=1 }); 
+ADD_RCC({"default:pick_steel",              5,  1, 2, forge=1 }); 
+ADD_RCC({"default:pick_mese",               2,  1, 2, forge=1, lumberjack=1 }); 
+ADD_RCC({"default:shovel_stone",            5,  1, 3, farm_tiny=1, farm_full=1, shed=1, lumberjack=1, hut=1, chest_work=1 }); 
+ADD_RCC({"default:shovel_steel",            5,  1, 2, forge=1 }); 
+ADD_RCC({"default:axe_stone",               5,  1, 3, farm_tiny=1, farm_full=1, chest_work=1, lumberjack=1 }); 
+ADD_RCC({"default:axe_steel",               5,  1, 2, forge=1, lumberjack=1 }); 
+ADD_RCC({"default:sword_wood",              1,  1, 3, guard=1 }); 
+ADD_RCC({"default:sword_stone",             1,  1, 3, guard=1 }); 
+ADD_RCC({"default:sword_steel",             1,  1, 3, forge=1, guard=1 }); 
 
-ADD_RCC({"default:stick",                  20, 40, 2, church=1, library=1, chest_private=1, shelf=5, shed=1, lumberjack=1, hut=1 });
+ADD_RCC({"default:stick",                  20, 40, 2, church=1, library=1, chest_private=1, shelf=5, shed=1, lumberjack=1, hut=1 }); 
 ADD_RCC({"default:torch",                  50, 10, 4, church=1, library=1, chest_private=1, shelf=1, shed=1, lumberjack=1, hut=1 });
 
-ADD_RCC({"default:book",                   60,  1, 2, church=1, library=1 });
+ADD_RCC({"default:book",                   60,  1, 1, church=1, library=1 });
+ADD_RCC({"default:book",                   90,  1,12, chest_bookshelf=1 });
+
 ADD_RCC({"default:paper",                  60,  6, 4, church=1, library=1 });
 ADD_RCC({"default:apple",                  50, 10, 2, chest_storage=4, chest_private=1, shelf=5});
 ADD_RCC({"default:ladder",                 20,  1, 2, church=1, library=1, shed=1, lumberjack=1, hut=1 });
-
+        
 ADD_RCC({"default:coal_lump",              80, 30, 1, forge=1, shed=1, lumberjack=1, hut=1});
 ADD_RCC({"default:steel_ingot",            30,  4, 2, forge=1 });
 ADD_RCC({"default:mese_crystal_fragment",  10,  3, 1, forge=1, chest_storage=1 });
@@ -106,7 +109,7 @@ ADD_RCC({'castle:shield',                  50,  1,  1, guard=1 });
 ADD_RCC({'castle:shield_2',                50,  1,  1, guard=1 });
 ADD_RCC({'castle:shield_3',                50,  1,  1, guard=1 });
 
-ADD_RCC({'cottages:anvil',                 80,  1,  2, forge=1 });
+--ADD_RCC({'cottages:anvil',                 80,  1,  2, forge=1 });
 
 ADD_RCC({'currency:minegeld',              80, 10,  2, chest_private=1, chest_work=1 }); -- TODO: could be in any chest with a certain chance
 
@@ -123,7 +126,7 @@ ADD_RCC({"homedecor:candle",               50,  2,  1, church=2, library=1, ches
 ADD_RCC({"homedecor:candle_thin",          50,  2,  1, church=1, library=1, chest_private=1, chest_work=1, chest_storage=1 });
 ADD_RCC({"homedecor:copper_pans",          80,  1,  1, chest_work=1 });
 ADD_RCC({"homedecor:dardboard",            50,  1,  1, tavern=1});
-ADD_RCC({"homedecor:oil_extract",          80,  1,  3, church=1, library=1, chest_private=1, chest_work=1, chest_storage=1 });
+ADD_RCC({"homedecor:oil_extract",          80,  1,  3, church=1, library=1, chest_private=1, chest_work=1, chest_storage=1 }); 
 ADD_RCC({"homedecor:oil_lamp",             50,  2,  1, church=1, library=1, chest_private=1, chest_work=1, chest_storage=1 });
 ADD_RCC({"homedecor:torch_wall",           50,  2,  1, church=1, library=1, chest_private=1, chest_work=1, chest_storage=1 });
 
@@ -152,26 +155,47 @@ mg_villages.fill_chest_random = function( pos, pr, building_nr, building_typ )
 	local meta = minetest.env:get_meta( pos );
 	local inv  = meta:get_inventory();
 
-	local count = 0;
-
+	-- bookshelves use "books" instead of "main" for their inventory
+	local inv_source = 'main';
+	-- which kind of content might be expected for this particular chest?
 	local typ = minetest.get_name_from_content_id( pos.typ );
 	if( pos.typ_name ) then
 		typ = pos.typ_name;
 	end
-	if( not( typ ) or (typ ~= 'cottages:shelf' and typ ~= 'cottages:chest_work' and typ ~= 'cottages:chest_storage' and typ ~= 'cottages:chest_private' )) then
+	if(     typ == 'default:bookshelf') then
+		typ = 'chest_bookshelf';
+		inv_source = 'books';
+	elseif( typ == 'default:chest') then
+		typ = 'chest_default';
+	elseif( not( typ ) or (typ ~= 'cottages:shelf' and typ ~= 'cottages:chest_work' and typ ~= 'cottages:chest_storage' and typ ~= 'cottages:chest_private')) then
 		typ = building_data.typ;
 	else
 		typ = string.sub( typ, 10 );
 	end
 	local typ2 = nil;
-	if( typ == 'cottages:chest_work' and building_data.typ ) then
+	if( typ == 'chest_work' and building_data.typ ) then
 		typ2 = building_data.typ;
 	end
---print('FILLING chest of type '..tostring( typ )..' and '..tostring( typ2));
 	if( not( typ ) or typ=='' ) then
 		return;
 	end
-	local inv_size = inv:get_size('main');
+	local inv_size = inv:get_size( inv_source );
+	mg_villages.fill_one_chest_random( pos, pr, typ, typ2, inv, inv_size, inv_source, building_nr, building_typ, building_data);
+end
+
+
+-- pos: position (x,y,z) of the chest that is to be filled
+-- pr: pseudo-random number generator
+-- typ: typ of the chest (i.e. chest_work, chest_default, chest_bookshelf, ...)
+-- typ2: if the typ is chest_work, typ2 will contain the type of the building
+-- inv: the inventory that is to be filled
+-- inv_size: the size of the inventory that is to be filled
+-- building_nr: number of the building inside the villages data structure
+-- building_typ: i.e. house, farm, church, library, forge, ...
+-- building_data: data about the building that contains the chest
+mg_villages.fill_one_chest_random = function( pos, pr, typ, typ2, inv, inv_size, inv_source, building_nr, building_typ, building_data)
+
+	local count;
 	for i,v in ipairs( mg_villages.random_chest_content ) do
 
 		-- repeat this many times
@@ -181,15 +205,15 @@ mg_villages.fill_chest_random = function( pos, pr, building_nr, building_typ )
 			if(     count<30 -- make sure it does not get too much and there is still room for a new stack
 			 and (v[ typ ] or (typ2 and v[ typ2 ]))
 			 and inv_size and inv_size > 0 and v[ 2 ] > pr:next( 1, 200 )) then
-
+	
 				--inv:add_item('main', v[ 1 ].." "..tostring( math.random( 1, tonumber(v[ 3 ]) )));
-				-- add itemstack at a random position in the chests inventory
-				inv:set_stack( 'main', pr:next( 1, inv:get_size( 'main' )), v[ 1 ].." "..tostring( pr:next( 1, tonumber(v[ 3 ]) )) );
+				-- add itemstack at a random position in the chests inventory 
+				inv:set_stack( inv_source, pr:next( 1, inv_size), v[ 1 ].." "..tostring( pr:next( 1, tonumber(v[ 3 ]) )) );
 				count = count+1;
 			end
 		end
 	end
-end]]
+end
 
 --[[
 --the old code used by Nores mg mapgen
@@ -207,9 +231,9 @@ end]]
 					for i=1, inv:get_size("main") do
 						inv:set_stack("main", i, ItemStack(""))
 					end
-					local numitems = pr:next(3, 20)
+					local numitems = pr:next(3, 20) 
 					for i=1,numitems do
-						local ii = pr:next(1, #items)
+						local ii = pr:next(1, #items) 
 						local prob = items[ii]:get_count() % 2 ^ 8
 						local stacksz = math.floor(items[ii]:get_count() / 2 ^ 8)
 						if pr:next(0, prob) == 0 and stacksz>0 then
@@ -226,58 +250,3 @@ end]]
 		end
 
 --]]
---the code that works
--- adapted from the Mines mod
-
-local chest_stuff = {
-	{name="default:apple", max = 3},
-	{name="farming:bread", max = 3},
-	{name="default:steel_ingot", max = 2},
-	{name="default:gold_ingot", max = 2},
-	{name="default:axe_steel", max = 1},
-	--{name="default:emerald", max = 5},
-	{name="default:pick_steel", max = 1},
-	{name="default:shovel_steel", max = 1},
-	{name="default:book", max = 3},
-	{name="default:torch", max = 13},
-	{name="default:stick", max = 7},
-	{name="default:coal_lump", max = 4},
-	{name="bucket:bucket_empty", max = 1},
-	{name="default:ladder", max = 10},
-	{name="default:mese_crystal_fragment", max = 2},
-	{name="vessels:glass_bottle", max = 1},
-	{name="wool:white", max = 11},
-	--{name="carpet:white", max = 11},
-	--{name="quartz:quartz_crystal", max = 5},
-	--{name="shears:shears", max = 1},
-	--{name="crops:melon_seed", max = 18},
-	--{name="mobs:saddle", max = 3},
-	{name="farming:carrot", max = 3},
-	{name="farming:corn", max = 3},
-	{name="farming:melon_slice", max = 3},
-	{name="farming:potato", max = 3},
-	{name="farming:raspberries", max = 3},
-	{name="farming:rhubarb", max = 3},
-	{name="farming:sugar", max = 3},
-	{name="farming:tomato", max = 3},
-	{name="farming:seed_wheat", max = 3},
-	{name="farming:cucumber", max = 3},
-	{name="farming:grapes", max = 3},
-}
-
--- get some random content for a chest
-mg_villages.fill_chest_random = function( pos, pr, building_nr, building_typ )
-	local meta = minetest.get_meta( pos )
-	local inv  = meta:get_inventory()
-	inv:set_size("main", 8*4)
-	for i=0,pr:next(1,6),1 do
-		local stuff = chest_stuff[pr:next(1,#chest_stuff)]
-		local stack = {name=stuff.name, count = pr:next(1,stuff.max)}
-		if not inv:contains_item("main", stack) then
-			inv:set_stack("main", pr:next(1,32), stack)
-		end
-	end
-end
-
-
-

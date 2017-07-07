@@ -1,2 +1,3 @@
-name = "Fancy Pirate",
-author = "",
+Samantha I
+philipbenr
+CC BY-SA 3.0

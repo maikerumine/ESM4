@@ -1,2 +1,3 @@
-name = "Gothic",
-author = "",
+steel man
+rotor112
+CC BY-SA 3.0

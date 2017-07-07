@@ -31,11 +31,11 @@ dofile(modpath.."/spawn.lua")
 dofile(modpath.."/crushingfurnace.lua")
 dofile(modpath.."/tools.lua")
 dofile(modpath.."/biome.lua")
-
+--[[
 if farming then
 	dofile(modpath.."/farming.lua")
 end
-
+]]
 if flowers then
 	dofile(modpath.."/flowers.lua")
 end

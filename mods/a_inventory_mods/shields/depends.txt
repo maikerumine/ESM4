@@ -1,4 +1,0 @@
-default
-dye
-flowers
-3d_armor

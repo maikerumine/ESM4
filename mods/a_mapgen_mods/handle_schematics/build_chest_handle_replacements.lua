@@ -2,6 +2,43 @@
 --- contains the handling of replacements for the build chest
 -------------------------------------------------------------
 
+build_chest.replacements_get_current = function( meta, village_id )
+
+	-- villages have their own replacement list for the entire village
+	if( village_id~=""
+            and mg_villages
+	    and mg_villages.all_villages
+            and mg_villages.all_villages[ village_id ]
+            and mg_villages.all_villages[ village_id ].to_add_data
+            and mg_villages.all_villages[ village_id ].to_add_data.replacements) then
+
+		return mg_villages.all_villages[ village_id ].to_add_data.replacements;
+	end
+
+	-- but usually, we store the replacement list in the build chest itself
+	return minetest.deserialize( meta:get_string( 'replacements' ));
+end
+
+
+-- store the new set of replacements
+build_chest.replacements_set_current = function( meta, village_id, replacements )
+
+	-- villages have their own replacement list for the entire village
+	if( village_id~=""
+            and mg_villages
+	    and mg_villages.all_villages
+            and mg_villages.all_villages[ village_id ]
+            and mg_villages.all_villages[ village_id ].to_add_data
+            and mg_villages.all_villages[ village_id ].to_add_data.replacements) then
+
+		mg_villages.all_villages[ village_id ].to_add_data.replacements = replacements;
+	end
+
+	-- but usually, we store the replacement list in the build chest itself
+	meta:set_string( 'replacements', minetest.serialize( replacements ));
+end
+
+
 -- internal function
 build_chest.replacements_get_extra_buttons = function( group, name, types_found_list, button_name, extra_buttons )
 	-- find out if there are any nodes that may need a group replacement
@@ -33,17 +70,21 @@ end
 
 
 
-build_chest.replacements_get_list_formspec = function( pos, selected_row )
+build_chest.replacements_get_list_formspec = function( pos, selected_row, allow_changes, meta, village_id, building_name, replace_row )
 	if( not( pos )) then
 		return "";
 	end
-	local meta = minetest.env:get_meta( pos );
-	local replacements  = minetest.deserialize( meta:get_string( 'replacements' ));
-	local building_name = meta:get_string( 'building_name' );
+	if( not( replace_row ) or replace_row<1) then
+		replace_row = -1;
+	end
+	local replacements  = build_chest.replacements_get_current( meta, village_id );
+	if( replace_row == -1 and meta and (not( building_name ) or building_name =="" )) then
+		building_name = meta:get_string( 'building_name' );
+		replace_row = meta:get_int('replace_row');
+	end
 	if( not( building_name ) or not( build_chest.building[ building_name ])) then
 		return "";
 	end
-	local replace_row = meta:get_int('replace_row');
 
 	local formspec = "tableoptions[" ..
 				"color=#ff8000;" ..
@@ -97,6 +138,10 @@ build_chest.replacements_get_list_formspec = function( pos, selected_row )
 					repl = r[2];
 				end
 			end
+			-- show global replacements
+			if( handle_schematics.global_replacement_table[ repl ]) then
+				repl = handle_schematics.global_replacement_table[ repl ];
+			end
 
 			-- avoid empty lines at the end
 			if( not_the_first_entry ) then
@@ -104,10 +149,10 @@ build_chest.replacements_get_list_formspec = function( pos, selected_row )
 			end
 
 			formspec = formspec..'#fff,'..tostring( anz )..',';
-			if( name == repl and repl and minetest.registered_nodes[ repl ]) then
+			if( name == repl and handle_schematics.node_defined( repl )) then
 				formspec = formspec.."#0ff,,#fff,,";
 			else
-				if( name and minetest.registered_nodes[ name ] ) then
+				if( name and handle_schematics.node_defined( name )) then
 					formspec = formspec.."#0f0,"; -- green
 				else
 					formspec = formspec.."#ff0,"; -- yellow
@@ -115,7 +160,7 @@ build_chest.replacements_get_list_formspec = function( pos, selected_row )
 				formspec = formspec..name..',#fff,'..minetest.formspec_escape('-->')..',';
 			end
 
-			if( repl and (minetest.registered_nodes[ repl ] or repl=='air') ) then
+			if( handle_schematics.node_defined( repl ) or repl=='air') then
 				formspec = formspec.."#0f0,"..repl; -- green
 			else
 				formspec = formspec.."#ff0,?"; -- yellow
@@ -129,9 +174,11 @@ build_chest.replacements_get_list_formspec = function( pos, selected_row )
 				end
 			end
 			
-			extra_buttons = build_chest.replacements_get_extra_buttons( 'wood',    name, types_found_list_wood,    'set_wood',    extra_buttons );
-			extra_buttons = build_chest.replacements_get_extra_buttons( 'farming', name, types_found_list_farming, 'set_farming', extra_buttons );
-			extra_buttons = build_chest.replacements_get_extra_buttons( 'roof',    name, types_found_list_farming, 'set_roof',    extra_buttons );
+			if( allow_changes==1 ) then
+				extra_buttons = build_chest.replacements_get_extra_buttons( 'wood',    name, types_found_list_wood,    'set_wood',    extra_buttons );
+				extra_buttons = build_chest.replacements_get_extra_buttons( 'farming', name, types_found_list_farming, 'set_farming', extra_buttons );
+				extra_buttons = build_chest.replacements_get_extra_buttons( 'roof',    name, types_found_list_farming, 'set_roof',    extra_buttons );
+			end
 
 			j=j+1;
 
@@ -139,13 +186,20 @@ build_chest.replacements_get_list_formspec = function( pos, selected_row )
 		end
 	end
 	formspec = formspec.."]";
-	-- add the proceed-button as soon as all unkown materials have been replaced
-	if( may_proceed ) then
-		formspec = formspec.."button[9.9,9.0;2.0,0.5;proceed_with_scaffolding;Proceed]";
-	else
-		formspec = formspec.."button[9.9,9.0;3.2,0.5;replace_rest_with_air;Suggest air for unknown]";
+	if( allow_changes==0) then
+		return formspec.."label[0.5,2.1;Materials and replacements used:]"..
+		-- the back button returns a diffrent (unimportant) value here so that we don't accidently go too far back
+                                 "button[9.9,0.4;2,0.5;back_from_show_materials;Back]";
 	end
-	formspec = formspec.."button[9.9,1.0;2.0,0.5;preview;Preview]";
+	if( meta ) then
+		-- add the proceed-button as soon as all unkown materials have been replaced
+		if( may_proceed ) then
+			formspec = formspec.."button[9.9,9.0;2.0,0.5;proceed_with_scaffolding;Proceed]";
+		else
+			formspec = formspec.."button[9.9,9.0;3.2,0.5;replace_rest_with_air;Suggest air for unknown]";
+		end
+		formspec = formspec.."button[9.9,1.0;2.0,0.5;preview;Preview]";
+	end
 	if( extra_buttons.text and extra_buttons.text ~= "" ) then
 		formspec = formspec..extra_buttons.text..
 			"label[9.9,2.8;Replace by type:]";
@@ -182,14 +236,14 @@ build_chest.replacements_replace_rest_with_air = function( pos, meta )
 				if( r and r[1]==name ) then
 					repl = r[2];
 					-- set replacements for inexisting nodes to air
-					if( not( minetest.registered_nodes[ repl ] )) then
+					if( not( handle_schematics.node_defined( repl ))) then
 						r[2] = 'air';
 					end
 				end
 			end
 
 			-- replace nodes that do not exist with air
-			if( not( repl ) or not( minetest.registered_nodes[ repl ])) then
+			if( not( repl ) or not( handle_schematics.node_defined( repl ))) then
 				table.insert( replacements_orig, { name, 'air' });
 			end
 		end
@@ -200,13 +254,13 @@ end
 
 
 
-build_chest.replacements_apply = function( pos, meta, old_material, new_material )
+build_chest.replacements_apply = function( pos, meta, old_material, new_material, village_id )
 	-- a new value has been entered - we do not need to remember the row any longer
 	meta:set_int('replace_row', 0 );
 	local found = false;
 	-- only accept replacements which can actually be placed
-	if( new_material=='air' or minetest.registered_nodes[ new_material ] ) then
-		local replacements_orig  = minetest.deserialize( meta:get_string( 'replacements' ));
+	if( new_material=='air' or handle_schematics.node_defined( new_material )) then
+		local replacements_orig = build_chest.replacements_get_current( meta, village_id );
 		for i,v in ipairs(replacements_orig) do
 			if( v and v[1]==old_material ) then
 				v[2] = new_material;
@@ -217,7 +271,7 @@ build_chest.replacements_apply = function( pos, meta, old_material, new_material
 			table.insert( replacements_orig, { old_material, new_material });
 		end
 		-- store the new set of replacements
-		meta:set_string( 'replacements', minetest.serialize( replacements_orig ));
+		build_chest.replacements_set_current( meta, village_id, replacements_orig );
 	end
 end
 	
@@ -233,24 +287,24 @@ build_chest.replacements_get_group_list_formspec = function( pos, group, button_
 end
 
  
-build_chest.replacements_apply_for_group = function( pos, meta, group, selected, old_material )
+build_chest.replacements_apply_for_group = function( pos, meta, group, selected, old_material, village_id )
 	local nr = tonumber( selected );
 	if( not(nr) or nr <= 0 or nr > #replacements_group[ group ].found ) then
 		return;
 	end	
 
 	local new_material = replacements_group[ group ].found[ nr ];
-	if( old_material and old_material == new_material ) then
-		return;
-	end
+--	if( old_material and old_material == new_material ) then
+--		return;
+--	end
 
-	local replacements  = minetest.deserialize( meta:get_string( 'replacements' ));
+	local replacements = build_chest.replacements_get_current( meta, village_id );
 	if( not( replacements )) then
 		replacements = {};
 	end
 	replacements_group[ group ].replace_material( replacements, old_material, new_material );
 
 	-- store the new set of replacements
-	meta:set_string( 'replacements', minetest.serialize( replacements ));
+	build_chest.replacements_set_current( meta, village_id, replacements );
 end
 

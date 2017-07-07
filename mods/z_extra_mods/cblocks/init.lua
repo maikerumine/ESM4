@@ -40,6 +40,16 @@ minetest.register_craft({
 	}
 })
 
+
+--example
+minetest.register_node("cblocks:stonebrick_red", {
+	description = "Red Stone Brick -EXAMPLE FOR ALL CBLOCKS: Glass, Wood, Stonebrick, and Clay",
+	tiles = {"default_stone_brick.png^[colorize:#ff000070"},
+	is_ground_content = false,
+	groups = {cracky = 2, stone = 1},
+	sounds = default.node_sound_stone_defaults(),
+})
+
 -- stone brick
 
 minetest.register_node("cblocks:stonebrick_" .. colours[i][1], {
@@ -96,6 +106,21 @@ minetest.register_craft({
 
 --LET US REGISTER STAIRS!
 --maikerumine 20160321
+--EXAMPLE
+--[[
+stairs.register_stair_and_slab("stonebrick_red", "cblocks:stonebrick_red",
+		{cracky = 3},
+		{"default_stone_brick.png^[colorize:#ff000070"},
+		"Red Stone Brick Stair -EXAMPLE FOR ALL CBLOCKS: Glass, Wood, Stonebrick, and Clay",
+		"Red Stone Brick Slab -EXAMPLE FOR ALL CBLOCKS: Glass, Wood, Stonebrick, and Clay",
+		default.node_sound_stone_defaults())
+]]		
+stairs.register_all("stonebrick_red", "cblocks:stonebrick_red",
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3,not_in_craft_guide=1},
+	{"default_stone_brick.png^[colorize:#ff000070"},
+	"Red Stone Brick -EXAMPLE FOR ALL CBLOCKS: Glass, Wood, Stonebrick, and Clay",
+	stairs.stone)
+
 
 --wood
 stairs.register_stair_and_slab("wood_" .. colours[i][1], "cblocks:wood_" .. colours[i][1],

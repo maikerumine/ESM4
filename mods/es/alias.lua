@@ -1,17 +1,17 @@
 --Extreme Survival created by maikerumine
--- Minetest 0.4.13 mod: "Extreme Survival"
+-- Minetest 0.4.16 mod: "Extreme Survival"
 -- namespace: es
---version 1.8
+--version 0.4.16
 --https://github.com/maikerumine
 
 --License:
 --~~~~~~~~
 --Code:
---(c) Copyright 2015 maikerumine; modified zlib-License
+--(c) Copyright 2015-2017 maikerumine; modified zlib-License
 --see "LICENSE.txt" for details.
 
 --Media(if not stated differently):
---(c) Copyright (2014-2015) maikerumine; CC-BY-SA 3.0
+--(c) Copyright (2014-2017) maikerumine; CC-BY-SA 3.0
 
 --Alias                      "old"--->"new"
 ------------------------------------------
@@ -50,18 +50,18 @@ minetest.register_alias("cblocks:clay_brown", "es:strange_clay_brown")
 
 --This is to fix the old interaction with my modified 3d_armor mod.
 --NEED TO USE THIS FOR 3-D ARMOUR TO WORK!!!!!
-minetest.register_alias("3d_armor:helmet_aikerum", "es:helmet_aikerum")
-minetest.register_alias("3d_armor:helmet_emerald", "es:helmet_emerald")
-minetest.register_alias("3d_armor:helmet_infinium", "es:helmet_infinium")
-minetest.register_alias("3d_armor:chestplate_aikerum", "es:chestplate_aikerum")
-minetest.register_alias("3d_armor:chestplate_emerald", "es:chestplate_emerald")
-minetest.register_alias("3d_armor:chestplate_infinium", "es:chestplate_infinium")
-minetest.register_alias("3d_armor:leggings_aikerum", "es:leggings_aikerum")
-minetest.register_alias("3d_armor:leggings_emerald", "es:leggings_emerald")
-minetest.register_alias("3d_armor:leggings_infinium", "es:leggings_infinium")
-minetest.register_alias("3d_armor:boots_aikerum", "es:boots_aikerum")
-minetest.register_alias("3d_armor:boots_emerald", "es:boots_emerald")
-minetest.register_alias("3d_armor:boots_infinium", "es:boots_infinium")
+minetest.register_alias("es:helmet_aikerum", "3d_armor:helmet_aikerum")
+minetest.register_alias("es:helmet_emerald", "3d_armor:helmet_emerald")
+minetest.register_alias("es:helmet_infinium", "3d_armor:helmet_infinium")
+minetest.register_alias("es:chestplate_aikerum", "3d_armor:chestplate_aikerum")
+minetest.register_alias("es:chestplate_emerald", "3d_armor:chestplate_emerald")
+minetest.register_alias("es:chestplate_infinium", "3d_armor:chestplate_infinium")
+minetest.register_alias("es:leggings_aikerum", "3d_armor:leggings_aikerum")
+minetest.register_alias("es:leggings_emerald", "3d_armor:leggings_emerald")
+minetest.register_alias("es:leggings_infinium", "3d_armor:leggings_infinium")
+minetest.register_alias("es:boots_aikerum", "3d_armor:boots_aikerum")
+minetest.register_alias("es:boots_emerald", "3d_armor:boots_emerald")
+minetest.register_alias("es:boots_infinium", "3d_armor:boots_infinium")
 
 --minetest.register_alias("doors:door_wood_t_1", "default:wood")
 --minetest.register_alias("doors:door_wood_b_1", "default:wood")

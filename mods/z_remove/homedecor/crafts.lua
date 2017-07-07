@@ -80,7 +80,7 @@ if not minetest.get_modpath("technic") then
 		type = "shapeless",
 		    output = "technic:brass_ingot 2",
 		recipe = {
-			"moreores:silver_ingot",
+			"default:tin_ingot",
 			"default:copper_ingot",
 		},
 	})

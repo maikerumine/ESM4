@@ -1,2 +1,3 @@
-name = "Karate Kid",
-author = "",
+Jordach
+Jordach
+CC BY-NC-SA 3.0
