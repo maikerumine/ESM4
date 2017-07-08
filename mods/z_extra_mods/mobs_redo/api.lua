@@ -71,7 +71,7 @@ local abr = tonumber(minetest.setting_get("active_block_range"))
 local aoc_range = max(aosrb, abr) * 16
 
 -- pathfinding settings
-local enable_pathfinding = true
+local enable_pathfinding = false
 local stuck_timeout = 3 -- how long before mob gets stuck in place and starts searching
 local stuck_path_timeout = 10 -- how long will mob follow path before giving up
 

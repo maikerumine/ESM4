@@ -1,3 +1,2 @@
-Sam II
-Jordach
-CC BY-SA 3.0
+name = "Default Spriate",
+author = "",

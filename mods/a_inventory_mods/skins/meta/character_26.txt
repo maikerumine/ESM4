@@ -1,3 +1,2 @@
-Sdzen
-sdzen
-CC BY-SA 3.0
+name = "Master Chief",
+author = "",

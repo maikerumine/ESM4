@@ -1,3 +1,2 @@
-horrible spring sdzen
-sdzen
-CC BY-SA 3.0
+name = "Special Ops",
+author = "",
