@@ -1,2 +1,3 @@
-name = "Double Dragon",
-author = "",
+G-Robo v5000
+philipbenr
+CC BY-SA 3.0

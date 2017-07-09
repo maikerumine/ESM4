@@ -1,2 +1,3 @@
-name = "Perry the Platypus",
-author = "",
+Space Sam
+philipbenr
+CC BY-SA 3.0

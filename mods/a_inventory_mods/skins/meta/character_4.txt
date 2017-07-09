@@ -1,2 +1,3 @@
-name = "Army Guy",
-author = "",
+Zeg9
+Zeg9
+CC BY-SA 3.0

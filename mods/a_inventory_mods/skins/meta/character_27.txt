@@ -1,2 +1,3 @@
-name = "Special Ops",
-author = "",
+horrible spring sdzen
+sdzen
+CC BY-SA 3.0

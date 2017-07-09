@@ -6,10 +6,10 @@ mg_villages.ENABLE_VILLAGES = true;
 
 -- generate one random building for each mg_villages.INVERSE_HOUSE_DENSITY th mapchunk;
 -- set to 0 in order to disable spawning of these lone buildings outside villages
-mg_villages.INVERSE_HOUSE_DENSITY = 4;
+mg_villages.INVERSE_HOUSE_DENSITY = 0;
 
 -- cover some villages with artificial snow; probability: 1/mg_villages.artificial_snow_probability
-mg_villages.artificial_snow_probability = 10;
+mg_villages.artificial_snow_probability = 100;
 
 -- if set to true, soil around villaes will get special soil-snow instead of plant + snow cover
 mg_villages.use_soil_snow = false;
@@ -27,15 +27,15 @@ mg_villages.VILLAGE_DETECT_RANGE = 400;
 mg_villages.REQUIRE_PRIV_FOR_TELEPORT = true;
 
 -- if set to true, players cannot modify spawned villages without buying the house from the village first
-mg_villages.ENABLE_PROTECTION = false;
+mg_villages.ENABLE_PROTECTION = true;
 
 -- the first village - the one the player spawns in - will be of this type
-mg_villages.FIRST_VILLAGE_TYPE = 'medieval';
+mg_villages.FIRST_VILLAGE_TYPE = 'nore';
 
 -- the mapgen will disregard mapchunks where min.y > mg_villages.MAX_HEIGHT_TREATED;
 -- you can set this value to 64 if you have a slow machine and a mapgen which does not create extreme mountains
 -- (or if you don't care if extreme mountains may create burried villages occasionally)
-mg_villages.MAX_HEIGHT_TREATED = 200;
+mg_villages.MAX_HEIGHT_TREATED = 64;
 
 -- choose the debug level you want
 mg_villages.DEBUG_LEVEL = mg_villages.DEBUG_LEVEL_NORMAL

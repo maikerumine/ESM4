@@ -63,9 +63,24 @@ minetest.register_alias("es:boots_aikerum", "3d_armor:boots_aikerum")
 minetest.register_alias("es:boots_emerald", "3d_armor:boots_emerald")
 minetest.register_alias("es:boots_infinium", "3d_armor:boots_infinium")
 
+minetest.register_alias("es:shield_aikerum", "shields:shield_aikerum")
+minetest.register_alias("es:shield_emerald", "shields:shield_emerald")
+minetest.register_alias("es:shield_infinium", "shields:shield_infinium")
+minetest.register_alias("es:shield_nomad", "shields:shield_nomad")
+minetest.register_alias("es:shield_rusher", "shields:shield_rusher")
+minetest.register_alias("es:shield_veteran", "shields:shield_veteran")
+
 --minetest.register_alias("doors:door_wood_t_1", "default:wood")
 --minetest.register_alias("doors:door_wood_b_1", "default:wood")
 --minetest.register_alias("doors:door_wood_t_2", "default:wood")
 
 minetest.register_alias("beds:bed_bottom_white", "default:wood")
 minetest.register_alias("beds:bed_top_white", "default:wood")
+
+
+
+
+--bags
+minetest.register_alias("bags:small_esmmese", "unified_inventory:small_esmmese")
+minetest.register_alias("bags:medium_esmmese", "unified_inventory:medium_esmmese")
+minetest.register_alias("bags:large_esmmese", "unified_inventory:large_esmmese")

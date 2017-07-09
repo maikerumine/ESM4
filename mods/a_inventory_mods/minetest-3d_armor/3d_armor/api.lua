@@ -41,10 +41,10 @@ armor = {
 	textures = armor_textures,
 	default_skin = "character",
 	materials = {
-		--wood = "group:wood",
-		--cactus = "default:cactus",
+		wood = "group:wood",
+		cactus = "default:cactus",
 		steel = "default:steel_ingot",
-		--bronze = "default:bronze_ingot",
+		bronze = "default:bronze_ingot",
 		diamond = "default:diamond",
 		gold = "default:gold_ingot",
 		mithril = "moreores:mithril_ingot",
@@ -69,7 +69,7 @@ armor = {
 		on_damage = {},
 		on_destroy = {},
 	},
-	version = "0.4.9",
+	version = "0.4.8",
 }
 
 armor.config = {
@@ -305,8 +305,8 @@ armor.punch = function(self, player, hitter, time_from_last_punch, tool_capabili
 			local use = minetest.get_item_group(name, "armor_use") or 0
 			local damage = use > 0
 			local def = stack:get_definition() or {}
-			if type(def.on_punched) == "function" then
-				damage = def.on_punched(player, hitter, time_from_last_punch,
+			if type(def.on_punch) == "function" then
+				damage = def.on_punch(player, hitter, time_from_last_punch,
 					tool_capabilities) ~= false and damage == true
 			end
 			if damage == true and tool_capabilities then
@@ -366,7 +366,7 @@ end
 armor.damage = function(self, player, index, stack, use)
 	local old_stack = ItemStack(stack)
 	stack:add_wear(use)
-	self:run_callbacks("on_damage", player, index, stack)
+	self:run_callbacks("on_damage", player, i, stack)
 	self:set_inventory_stack(player, index, stack)
 	if stack:get_count() == 0 then
 		self:run_callbacks("on_unequip", player, index, old_stack)
@@ -376,14 +376,18 @@ armor.damage = function(self, player, index, stack, use)
 end
 
 armor.get_player_skin = function(self, name)
-	if (self.skin_mod == "skins" or self.skin_mod == "simple_skins") and skins.skins[name] then
-		return skins.skins[name]..".png"
-	elseif self.skin_mod == "u_skins" and u_skins.u_skins[name] then
-		return u_skins.u_skins[name]..".png"
-	elseif self.skin_mod == "wardrobe" and wardrobe.playerSkins and wardrobe.playerSkins[name] then
-		return wardrobe.playerSkins[name]
+	local skin = nil
+	if self.skin_mod == "skins" or self.skin_mod == "simple_skins" then
+		skin = skins.skins[name]
+	elseif self.skin_mod == "u_skins" then
+		skin = u_skins.u_skins[name]
+	elseif self.skin_mod == "wardrobe" then
+		local skins = wardrobe.playerSkins or {}
+		if skins[name] then
+			skin = string.gsub(skins[name], "%.png$","")
+		end
 	end
-	return armor.default_skin..".png"
+	return skin or armor.default_skin
 end
 
 armor.add_preview = function(self, preview)
@@ -391,7 +395,7 @@ armor.add_preview = function(self, preview)
 end
 
 armor.get_preview = function(self, name)
-	local preview = string.gsub(armor:get_player_skin(name), ".png", "_preview.png")
+	local preview = armor:get_player_skin(name).."_preview.png"
 	if skin_previews[preview] then
 		return preview
 	end
@@ -468,3 +472,4 @@ armor.drop_armor = function(pos, stack)
 		obj:setvelocity({x=math.random(-1, 1), y=5, z=math.random(-1, 1)})
 	end
 end
+

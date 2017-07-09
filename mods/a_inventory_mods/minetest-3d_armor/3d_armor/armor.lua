@@ -254,28 +254,28 @@ if armor.materials.mithril then
 	armor:register_armor("3d_armor:helmet_mithril", {
 		description = S("Mithril Helmet"),
 		inventory_image = "3d_armor_inv_helmet_mithril.png",
-		groups = {armor_head=1, armor_heal=12, armor_use=100},
+		groups = {armor_head=1, armor_heal=14, armor_use=80},
 		armor_groups = {fleshy=15},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor("3d_armor:chestplate_mithril", {
 		description = S("Mithril Chestplate"),
 		inventory_image = "3d_armor_inv_chestplate_mithril.png",
-		groups = {armor_torso=1, armor_heal=12, armor_use=100},
+		groups = {armor_torso=1, armor_heal=14, armor_use=80},
 		armor_groups = {fleshy=20},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor("3d_armor:leggings_mithril", {
 		description = S("Mithril Leggings"),
 		inventory_image = "3d_armor_inv_leggings_mithril.png",
-		groups = {armor_legs=1, armor_heal=12, armor_use=100},
+		groups = {armor_legs=1, armor_heal=14, armor_use=80},
 		armor_groups = {fleshy=20},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor("3d_armor:boots_mithril", {
 		description = S("Mithril Boots"),
 		inventory_image = "3d_armor_inv_boots_mithril.png",
-		groups = {armor_feet=1, armor_heal=12, armor_use=100},
+		groups = {armor_feet=1, armor_heal=14, armor_use=80},
 		armor_groups = {fleshy=15},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
@@ -346,3 +346,4 @@ for k, v in pairs(armor.materials) do
 		},
 	})
 end
+

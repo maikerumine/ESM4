@@ -1,2 +1,3 @@
-name = "Pirate",
-author = "",
+Summer Sam
+philipbenr
+CC BY-SA 3.0

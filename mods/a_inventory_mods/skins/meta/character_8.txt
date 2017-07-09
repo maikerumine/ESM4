@@ -1,2 +1,3 @@
-name = "Penguin",
-author = "",
+Female Sam
+Jordach
+CC BY-NC-SA 3.0

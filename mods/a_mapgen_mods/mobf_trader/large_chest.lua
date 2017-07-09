@@ -266,7 +266,7 @@ minetest.register_node("mobf_trader:large_chest", {
 	end,
 })
 
---[[
+
 minetest.register_craft({
 	output = 'mobf_trader:large_chest',
 	recipe = {
@@ -275,4 +275,4 @@ minetest.register_craft({
 		{'default:chest_locked', 'default:chest_locked', 'default:chest_locked'},
 	}
 })
-]]
+

@@ -65,7 +65,7 @@ armor_water_protect = true
 -- Enable fire protection (defaults true if using ethereal mod)
 armor_fire_protect = false
 
--- Enable punch damage effects.
+-- Enable punch damage effects (only works for armor with `damage_groups` table)
 armor_punch_damage = true
 
 API
@@ -90,7 +90,7 @@ Additional fields supported by 3d_armor:
 	on_unequip = <function>
 	on_destroy = <function>
 	on_damage = <function>
-	on_punched = <function>
+	on_punch = <function>
 
 armor:register_armor_group(group, base)
 
@@ -163,11 +163,11 @@ on_equip = func(player, index, stack)
 on_unequip = func(player, index, stack)
 on_destroy = func(player, index, stack)
 on_damage = func(player, index, stack)
-on_punched = func(player, hitter, time_from_last_punch, tool_capabilities)
+on_punch = func(player, hitter, time_from_last_punch, tool_capabilities)
 
 Notes:
 
-`on_punched` is called every time a player is punched or takes damage, `hitter`,
+`on_punch` is called every time a player is punched or takes damage, `hitter`,
 `time_from_last_punch` and `tool_capabilities` can be `nil` and will be in the
 case of fall damage, etc. When fire protection is enabled, hitter == "fire"
 in the event of fire damage. Return `false` to override armor damage effects.

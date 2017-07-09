@@ -1,2 +1,3 @@
-name = "Link II",
-author = "",
+John
+Evergreen
+CC BY-SA 3.0

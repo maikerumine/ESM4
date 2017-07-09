@@ -1,2 +1,3 @@
-name = "Master Chief",
-author = "",
+Sdzen
+sdzen
+CC BY-SA 3.0

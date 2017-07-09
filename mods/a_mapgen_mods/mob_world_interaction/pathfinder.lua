@@ -11,6 +11,8 @@
 
 mob_world_interaction.pathfinder = {}
 
+mob_world_interaction.pathfinder.max_path_length = 100;
+
 --[[
 minetest.get_content_id(name)
 minetest.registered_nodes
@@ -167,7 +169,7 @@ function mob_world_interaction.find_path(pos, endpos, entity, data)
 				end
 				table.insert(path, closedSet[current_index].pos)
 				current_index = closedSet[current_index].parent
-				if #path > 100 then
+				if #path > mob_world_interaction.pathfinder.max_path_length then
 					-- print("path to long")
 					return
 				end
@@ -291,7 +293,7 @@ function mob_world_interaction.find_path(pos, endpos, entity, data)
 				end
 			end
 		end
-		if count > 100 then
+		if count > mob_world_interaction.pathfinder.max_path_length then
 			-- print("fail")
 			return
 		end

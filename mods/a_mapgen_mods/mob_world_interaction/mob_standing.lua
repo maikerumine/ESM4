@@ -5,17 +5,19 @@
 mob_world_interaction.can_get_through = {};
 
 -- the mob can use beds even if standing on them would not work
-mob_world_interaction.can_get_through[ 'beds:bed_top'] = 1;
+-- value 2: bed; node where the head of the mob rests
+-- value 3: something to sit on
+mob_world_interaction.can_get_through[ 'beds:bed_top'] = 2;
 mob_world_interaction.can_get_through[ 'beds:bed_bottom'] = 1;
-mob_world_interaction.can_get_through[ 'beds:bed_fancy_top'] = 1;
+mob_world_interaction.can_get_through[ 'beds:bed_fancy_top'] = 2;
 mob_world_interaction.can_get_through[ 'beds:bed_fancy_boottom'] = 1;
-mob_world_interaction.can_get_through[ 'cottages:bed_head'] = 1;
+mob_world_interaction.can_get_through[ 'cottages:bed_head'] = 2;
 mob_world_interaction.can_get_through[ 'cottages:bed_foot'] = 1;
-mob_world_interaction.can_get_through[ 'cottages:sleeping_mat_head'] = 1;
-mob_world_interaction.can_get_through[ 'cottages:sleeping_mat'] = 1;
-mob_world_interaction.can_get_through[ 'cottages:straw_mat'] = 1;
+mob_world_interaction.can_get_through[ 'cottages:sleeping_mat_head'] = 2;
+mob_world_interaction.can_get_through[ 'cottages:sleeping_mat'] = 3;
+mob_world_interaction.can_get_through[ 'cottages:straw_mat'] = 3;
 -- benches and tables may sometimes be tricky - still the mob ought to be able to use them
-mob_world_interaction.can_get_through[ 'cottages:bench'] = 1;
+mob_world_interaction.can_get_through[ 'cottages:bench'] = 3;
 mob_world_interaction.can_get_through[ 'cottages:table'] = 1;
 
 -- helper function; determines weather a mob can stand in a given node or not
@@ -111,4 +113,25 @@ mob_world_interaction.find_place_next_to = function( pos, iteration, vector, dat
 		end
 	end
 	return p_curr_opt;
+end
+
+-- let the entity stand around, facing yaw direction
+mob_world_interaction.stand_at = function( entity, pos, yaw )
+	if( not( entity ) or not( entity.object ) or not( pos )) then
+		return;
+	end
+	-- rotate the npc in the right direction
+	if( yaw ) then
+		entity.object:setyaw( math.rad( yaw ));
+	end
+	-- move to the stand position
+	entity.object:setpos( {x=pos.x, y=pos.y+0.55,z=pos.z} );
+
+	mob_world_interaction.set_animation( entity, 'stand' );
+
+-- TODO: this is highly mob-specific and needs to be saved
+	entity.trader_uses = nil;
+	entity.trader_does = 'stand';
+
+	return pos;
 end

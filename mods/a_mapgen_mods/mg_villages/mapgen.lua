@@ -109,6 +109,8 @@ mg_villages.check_if_ground = function( ci )
 			'farming_plus:lemonb', 'farming_plus:orange', 'farming_plus:preachb',
 			'farming_plus:peach_4b', 'farming_plus:peach_5b',
 			'farming:pumpkin', 'farming:pumpkin_face', 'farming:pumpkin_face_light',
+			'es:dry_dirt', 'es:mud', 'es:strange_grass', 'es:aiden_grass', 'es:strange_tree', 'es:aiden_tree', 'es:old_tree', 'es:strange_leaves', 'es:strange_shrub', 'es:dry_shrub', 'es:junglegrass',
+			'es:strange_clay_blue', 'es:strange_clay_red', 'es:strange_clay_maroon', 'es:strange_clay_brown', 'es:strange_clay_orange', 'es:strange_clay_black', 'es:strange_clay_grey',
 			'cavestuff:desert_pebble_2', 'cavestuff:desert_pebble_1',
 			'cavestuff:pebble_1', 'cavestuff:pebble_2'};
 		-- TODO: add all those other tree and leaf nodes that might be added by mapgen
@@ -119,6 +121,8 @@ mg_villages.check_if_ground = function( ci )
 		end
 		local ground_nodes = {'ethereal:dry_dirt', 'default:dirt_with_dry_grass','default:stone','default:sandstone','default:desertstone',
                         'ethereal:grey_dirt', 'default:dirt_with_snow', 'default:dirt_with_grass', 'ethereal:grove_dirt', 'ethereal:green_dirt',
+			'es:dry_dirt', 'es:mud',
+			'es:strange_clay_blue', 'es:strange_clay_red', 'es:strange_clay_maroon', 'es:strange_clay_brown', 'es:strange_clay_orange', 'es:strange_clay_black', 'es:strange_clay_grey',
 			'ethereal:grove_dirt','ethereal:jungle_dirt'};
 		for _,name in ipairs( ground_nodes ) do
 			if( minetest.registered_nodes[ name ]) then

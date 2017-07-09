@@ -375,6 +375,10 @@ mob_world_interaction.find_all_front_doors = function( building_data, pos_inside
 		return;
 	end
 
+	-- allow longer paths (this search has to be done only once for each house)
+	local old_max_path_length = mob_world_interaction.pathfinder.max_path_length;
+	mob_world_interaction.pathfinder.max_path_length = 200;
+
 	local all_path_info = {};
 	local all_front_doors = {};
 
@@ -420,5 +424,6 @@ mob_world_interaction.find_all_front_doors = function( building_data, pos_inside
 		table.remove( building_data.nodenames, #building_data.nodenames );
 	end
 
+	mob_world_interaction.pathfinder.max_path_length = old_max_path_length;
 	return all_path_info;
 end

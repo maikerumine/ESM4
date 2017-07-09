@@ -41,11 +41,11 @@ end
 -- Load Configuration
 
 for name, config in pairs(armor.config) do
-	local setting = minetest.settings:get("armor_"..name)
+	local setting = minetest.setting_get("armor_"..name)
 	if type(config) == "number" then
 		setting = tonumber(setting)
 	elseif type(config) == "boolean" then
-		setting = minetest.settings:get_bool("armor_"..name)
+		setting = minetest.setting_getbool("armor_"..name)
 	end
 	if setting ~= nil then
 		armor.config[name] = setting
@@ -57,6 +57,8 @@ for material, _ in pairs(armor.materials) do
 		armor.materials[material] = nil
 	end
 end
+
+dofile(modpath.."/armor.lua")
 
 -- Mod Compatibility
 
@@ -84,8 +86,6 @@ end
 if not minetest.get_modpath("ethereal") then
 	armor.materials.crystal = nil
 end
-
-dofile(modpath.."/armor.lua")
 
 -- Armor Initialization
 
@@ -177,7 +177,7 @@ local function init_player_armor(player)
 	end
 	local skin = armor:get_player_skin(name)
 	armor.textures[name] = {
-		skin = skin,
+		skin = skin..".png",
 		armor = "3d_armor_trans.png",
 		wielditem = "3d_armor_trans.png",
 		preview = armor.default_skin.."_preview.png",
@@ -224,7 +224,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		if string.find(field, "skins_set") then
 			minetest.after(0, function(player)
 				local skin = armor:get_player_skin(name)
-				armor.textures[name].skin = skin
+				armor.textures[name].skin = skin..".png"
 				armor:set_player_armor(player)
 			end, player)
 		end

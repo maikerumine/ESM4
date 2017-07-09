@@ -1,0 +1,84 @@
+COMPLETED:
+- coded to search surroundings to determine region/clothing type
+
+TODO:
+- look into spawning villagers AFTER all the village has spawned
+- add check for unsupported mods. do not load villager's mod if unsupported mods are present
+- rename 'region' and 'region_type' to 'clothing'
+- use nodemetadata to track how mand mystery and simplyjob traders will spawn..
+-- then can spawn mystery trader and coin exchange trader
+- minetest.after removing chat bubbles when many are in screen. 
+- create mystery merchants that sell only one valueable items at a time (only one in each village)
+
+- prevent manual spawning if in water
+- villagers in snowy region will offer some snow for free
+- create custom main dialogue for traders
+- make metalsmith use only mineral and metal related dialogue from 'game facts'
+- make chat dialogue based on scm type and not building type anymore
+-- for now, only librarians, smith, tower gaurds, and house residents give random game facts.
+- slightly reduce the chance for smalltalk chat for each villager
+- make item stock based on the item type: expensive items have less stock, but bigger villages have more stock.
+
+- make villagers who spawn in homes with multiple inhabitants follow these patterns:
+-- 1 inhab: a) adult male b) adult female c) old male d) old female
+-- 2 inhab: a) adult male and female b) old male and female c) more to come
+-- 3 inhab: a) adult male and female and young b) old male and female and young
+-- 4 inhab: a) adult male and female and two young b) old male and female and adult female and young
+-- 5 inhab: a) adult male and female and three young b) old male and female and adult male and female and young
+
+- make custom dialogue also based on village type. Ex: huts in medieval are larger and have beds and huts in cornernote do not.
+
+- make the village region type (hot, cold, normal, native, desert) not based purely on the village type, but instead
+-- based on the surrounding blocks and village tree types from the village spawn point. 
+
+- allow villagers to open/close and walk through doors and gates
+- while villager is walking and attempting to chat, show chat bubble 'pardon me', 'excuse me', 'sorry', 'coming through', 'walking here', etc.
+- due to many more spawned villagers matching each bed, make most of these villagers walk the roads instead of randomly wandering around the plot
+
+- add new variable 'vDoorFound' and 'vDoorPosition' that stores the position of a found door as verifyPath() executes
+- after each walk action, check if vDoorFound is true contains a position and currPos + 2 nodes forward doesn't hit maxDistance, then set action to USEDOOR
+- USEDOOR: villager opens door, walks forward two nodes, and closes door, then sets action to STAND.
+
+- have villagers appear on bed laying down at night
+- make villagers that have no beds lay on the ground at night with a sleeping mat (maybe next to a tree or building)
+
+- have guards wield a shield and/or weapon
+- make tower villagers appear atop tower
+
+- have farmers/field workers plant seedlings if they encounter bare soil
+- make field villagers stay near their fields and not wander off
+- villager wields the tool depending on what item digging - shovel for snow, hoe for crops and soil, etc
+
+- add unique chat dialogue for remaining villager types
+- add better clothing textures for 'church' villager types
+- add clothing textures that match old aged villagers
+- make church villagers look for and stay inside the church
+
+- add support for weather mod
+- have villagers say something different depending on weather
+
+- when adding more hair textures start using v1.8 type
+- add probability for adult and old males to have beards
+- add probability for gloves in cold regions
+- add more jacket styles
+- add more female short sleeved, long sleeved and sleeveless shirt styles
+- add different dress type of males (currently using slightly modified texture of female full dress)
+- add more full dress styles for females
+
+- tower guard spawn atop the tower too!
+- free roaming villagers that just walk the streets and chat
+- villagers climb stairs and villagers sit on furniture
+- support for Farming Redo items for trading
+
+- allow villagers to kill mobs
+- allow villagers to get 'knocked out' (but not die) from attackes
+- knocked out villagers will automatically recover and stand back up after some time
+- cannot trade with a knocked out villager
+- knocked out villager can only respond like 'uuuhg', 'ouch', 'help', etc when knocked out
+- player can right-click on villager with a healing item to help recovery
+
+ISSUES/BUGS:
+
+- player who initiated a chat or trade might have chat bubble stick when 
+-- another player chats same villager
+- on very rare occasions villagers seen to walk diagonally
