@@ -26,13 +26,13 @@ minetest.register_alias("vendorgoldblock:depositor", "smartshop:shop")
 minetest.register_alias("tnt:tnt", "default:wood")
 minetest.register_alias("tsm_mines:dummy", "default:torch")
 
-minetest.register_alias("bedrock2:bedrock", "default:coalblock")
+--minetest.register_alias("bedrock2:bedrock", "default:coalblock")
 
-minetest.register_alias("travelnet:elevator", "default:diamondblock")
-minetest.register_alias("travelnet:elevator_door_glass_open", "default:bronzeblock")
-minetest.register_alias("travelnet:elevator_door_glass_closed", "default:bronzeblock")
-minetest.register_alias("travelnet:elevator_door_stone_open", "default:bronzeblock")
-minetest.register_alias("travelnet:elevator_door_stone_closed", "default:bronzeblock")
+--minetest.register_alias("travelnet:elevator", "default:diamondblock")
+--minetest.register_alias("travelnet:elevator_door_glass_open", "default:bronzeblock")
+--minetest.register_alias("travelnet:elevator_door_glass_closed", "default:bronzeblock")
+--minetest.register_alias("travelnet:elevator_door_stone_open", "default:bronzeblock")
+--minetest.register_alias("travelnet:elevator_door_stone_closed", "default:bronzeblock")
 
 --[[
 minetest.register_alias("esmobs:cobweb", "mobs:cobweb")
