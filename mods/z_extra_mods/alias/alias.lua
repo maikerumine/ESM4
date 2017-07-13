@@ -23,8 +23,9 @@ minetest.register_alias("vendorgoldblock:vendor", "smartshop:shop")
 minetest.register_alias("vendorgoldblock:depositor", "smartshop:shop")
 
 
-minetest.register_alias("tnt:tnt", "default:wood")
+--minetest.register_alias("tnt:tnt", "default:wood")
 minetest.register_alias("tsm_mines:dummy", "default:torch")
+
 
 --minetest.register_alias("bedrock2:bedrock", "default:coalblock")
 

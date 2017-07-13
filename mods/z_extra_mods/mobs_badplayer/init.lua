@@ -21,3 +21,7 @@ print("[ES-Mobs] Extreme")
 print("[ES-Mobs] Survival")
 print("[ES-Mobs] Mobs")
 print("[ES-Mobs] Loaded!")
+
+--FK VILLAGERS
+minetest.register_alias("villagers:villager", "mobf_trader:trader")
+mobs:alias_mob("villagers:villager", "mobf_trader:trader") -- compatibility
