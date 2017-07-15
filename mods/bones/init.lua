@@ -26,17 +26,50 @@ local share_bones_time_early = tonumber(minetest.setting_get("share_bones_time_e
 
 minetest.register_node("bones:bones", {
 	description = "Bones",
+	--physical = true,
+	drawtype = "mesh",
+	--visual = "mesh",
+	mesh = "bones.x",
+	visual_scale = 0.1,
+	wield_image = "bones_front.png",
+	wield_scale = {x=0.3, y=0.3, z=0.3},
+	paramtype = "light",
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.25, -0.5, 0.5, 0, 0.5}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.25, -0.5, 0.5, 0, 0.5}
+	},
 	tiles = {
-		"bones_top.png^[transform2",
-		"bones_bottom.png",
-		"bones_side.png",
-		"bones_side.png",
-		"bones_rear.png",
-		"bones_front.png"
+		--{"character_1.png"},
+		--{"character_6.png"},
+		--{"character_8.png"},
+		--{"character_19.png"},
+		--{"character_20.png"},
+		--{"character_52.png"},
+		--{"character_111.png"},
+		"character_314.png",
+		--{"character_902.png"},
+		--{"character_923.png"},
+		--{"character_938.png"},
+		--{"character_932.png"},
+		--{"character_1039.png"},
+		--{"character_1073.png"},
+		--{"character_1187.png"},
+		--{"character_1121.png"},
+		--{"character_1199.png"},
+		--{"character_1202.png"},
+
 	},
 	paramtype2 = "facedir",
-	groups = {dig_immediate = 2},
-	sounds = default.node_sound_gravel_defaults(),
+	groups = {cracky = 2, choppy = 2, falling_node = 1},
+--	groups = {dig_immediate=1},
+	sounds = default.node_sound_dirt_defaults({
+		footstep = {name="default_gravel_footstep", gain=0.5},
+		dug = {name="default_gravel_footstep", gain=1.0},
+	}),
 
 	can_dig = function(pos, player)
 		local inv = minetest.get_meta(pos):get_inventory()

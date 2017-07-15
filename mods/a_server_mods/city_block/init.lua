@@ -156,7 +156,7 @@ minetest.register_on_punchplayer(
 							hitter_inv:set_list("main", {})
 							hitter_inv:set_list("craft", {})
 						end
-						hitter:setpos( {x=0, y=0, z=0} )
+						hitter:setpos( {x=2025, y=230, z=1525} )
 						minetest.chat_send_all("Player "..name.." sent to jail for killing " .. pname .." without reason in town")
 						minetest.log("action", "Player "..name.." warned for killing in town")
 					end

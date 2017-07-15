@@ -305,6 +305,15 @@ if armor.config.punch_damage == true then
 		if name then
 			armor:punch(player, hitter, time_from_last_punch, tool_capabilities)
 			last_punch_time[name] = minetest.get_gametime()
+			--==================
+			--==================
+			--==================
+			--==================
+			--==================
+			--==================
+			--==================
+			--==================
+			if player=="" or hitter=="" then return end -- no killers/victims
 		end
 	end)
 end

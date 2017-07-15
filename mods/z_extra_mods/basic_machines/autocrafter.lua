@@ -245,7 +245,7 @@ minetest.register_node("basic_machines:autocrafter", {
 	description = "Autocrafter", 
 	drawtype = "normal", 
 	tiles = {"pipeworks_autocrafter.png"}, 
-	groups = {snappy = 3, tubedevice = 1, tubedevice_receiver = 1}, 
+	groups = {cracky=3, mesecon_effector_on = 1},
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		local inv = meta:get_inventory()
@@ -337,11 +337,11 @@ minetest.register_node("basic_machines:autocrafter", {
 	--on_timer = run_autocrafter -- rnd
 })
 
-minetest.register_craft( {
-	output = "basic_machines:autocrafter",
-	recipe = {
-	        { "default:steel_ingot", "default:mese_crystal", "default:steel_ingot" },
-	        { "default:diamondblock", "default:steel_ingot", "default:diamondblock" },
-	        { "default:steel_ingot", "default:mese_crystal", "default:steel_ingot" }
-	},
-})
+-- minetest.register_craft( {
+	-- output = "basic_machines:autocrafter",
+	-- recipe = {
+	        -- { "default:steel_ingot", "default:mese_crystal", "default:steel_ingot" },
+	        -- { "default:diamondblock", "default:steel_ingot", "default:diamondblock" },
+	        -- { "default:steel_ingot", "default:mese_crystal", "default:steel_ingot" }
+	-- },
+-- })

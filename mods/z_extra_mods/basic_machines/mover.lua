@@ -11,7 +11,7 @@ local machines_minstep = 1 -- minimal allowed activation timestep, if faster mac
 local max_range = 10; -- machines normal range of operation
 local machines_operations = 10; -- 1 coal will provide 10 mover basic operations ( moving dirt 1 block distance)
 local machines_TTL = 16; -- time to live for signals, how many hops before signal dissipates
-basic_machines.version = "07/12/2016a";
+basic_machines.version = "01/17/2017a";
 basic_machines.clockgen = 1; -- if 0 all background continuously running activity (clockgen/keypad) repeating is disabled
 
 -- how hard it is to move blocks, default factor 1, note fuel cost is this multiplied by distance and divided by machine_operations..
@@ -25,9 +25,14 @@ basic_machines.hardness["basic_machines:distributor"]=0.;
 basic_machines.hardness["basic_machines:battery"]=0.;
 basic_machines.hardness["basic_machines:detector"]=0.;
 basic_machines.hardness["basic_machines:generator"]=0.;
+basic_machines.hardness["basic_machines:clockgen"]=0.;
 basic_machines.hardness["basic_machines:ball_spawner"]=0.;
 basic_machines.hardness["basic_machines:light_on"]=0.;
 basic_machines.hardness["basic_machines:light_off"]=0.;
+
+-- grief potential items need highest possible upgrades
+basic_machines.hardness["boneworld:acid_source_active"]=21890.;
+basic_machines.hardness["darkage:mud"]=21890.;
 
 basic_machines.hardness["es:toxic_water_source"]=21890.;basic_machines.hardness["es:toxic_water_flowing"]=11000;
 basic_machines.hardness["default:river_water_source"]=21890.;
@@ -72,7 +77,8 @@ basic_machines.no_teleport_table = {
 
 -- list of nodes mover cant take from in inventory mode
 basic_machines.limit_inventory_table = { -- node name = {list of bad inventories to take from}
-["basic_machines:autocrafter"]= {["recipe"]=1, ["output"]=1}
+	["basic_machines:autocrafter"]= {["recipe"]=1, ["output"]=1},
+	["basic_machines:constructor"]= {["recipe"]=1},
 }
 
 -- when activated with keypad these will be "punched" to update their text too
@@ -99,12 +105,74 @@ minetest.register_on_joinplayer(function(player)
 	punchset[name].state = 0;
 end)
 
+local get_mover_form = function(pos,player)
+	
+	if not player then return end
+	local meta = minetest.get_meta(pos);
+	local x0,y0,z0,x1,y1,z1,x2,y2,z2,prefer,mode,mreverse;
+	
+	x0=meta:get_int("x0");y0=meta:get_int("y0");z0=meta:get_int("z0");x1=meta:get_int("x1");y1=meta:get_int("y1");z1=meta:get_int("z1");x2=meta:get_int("x2");y2=meta:get_int("y2");z2=meta:get_int("z2");
+
+	machines.pos1[player:get_player_name()] = {x=pos.x+x0,y=pos.y+y0,z=pos.z+z0};machines.mark_pos1(player:get_player_name()) -- mark pos1
+	machines.pos11[player:get_player_name()] = {x=pos.x+x1,y=pos.y+y1,z=pos.z+z1};machines.mark_pos11(player:get_player_name()) -- mark pos11
+	machines.pos2[player:get_player_name()] = {x=pos.x+x2,y=pos.y+y2,z=pos.z+z2};machines.mark_pos2(player:get_player_name()) -- mark pos2
+	
+	prefer = meta:get_string("prefer");
+	local mreverse = meta:get_int("reverse");
+	local list_name = "nodemeta:"..pos.x..','..pos.y..','..pos.z
+	local mode_list = {["normal"]=1,["dig"]=2, ["drop"]=3, ["object"]=4, ["inventory"]=5, ["transport"]=6};
+	
+	local mode = mode_list[meta:get_string("mode")] or "";
+	
+	local meta1 = minetest.get_meta({x=pos.x+x0,y=pos.y+y0,z=pos.z+z0}); -- source meta
+	local meta2 = minetest.get_meta({x=pos.x+x2,y=pos.y+y2,z=pos.z+z2}); -- target meta
+	
+	
+	local inv1=1; local inv2=1;
+	local inv1m = meta:get_string("inv1");local inv2m = meta:get_string("inv2");
+	
+	local list1 = meta1:get_inventory():get_lists(); local inv_list1 = ""; local j;
+	j=1; -- stupid dropdown requires item index but returns string on receive so we have to find index.. grrr, one other solution: invert the table: key <-> value
+	
+	
+	for i in pairs( list1) do 
+		inv_list1 = inv_list1 .. i .. ","; 
+		if i == inv1m then inv1=j end; j=j+1;
+	end
+	local list2 = meta2:get_inventory():get_lists(); local inv_list2 = "";
+	j=1;
+	for i in pairs( list2) do 
+		inv_list2 = inv_list2 .. i .. ",";
+		if i == inv2m then inv2=j; end; j=j+1; 
+	end
+
+	local upgrade = meta:get_float("upgrade"); if upgrade>0 then upgrade = upgrade - 1 end
+	
+	local form  = 
+	"size[8,9.5]" ..  -- width, height
+	--"size[6,10]" ..  -- width, height
+	"field[0.25,0.5;1,1;x0;source1;"..x0.."] field[1.25,0.5;1,1;y0;;"..y0.."] field[2.25,0.5;1,1;z0;;"..z0.."]"..
+	"dropdown[3,0.25;1.5,1;inv1;".. inv_list1 ..";" .. inv1 .."]"..
+	"field[0.25,1.5;1,1;x1;source2;"..x1.."] field[1.25,1.5;1,1;y1;;"..y1.."] field[2.25,1.5;1,1;z1;;"..z1.."]"..
+	"field[0.25,2.5;1,1;x2;Target;"..x2.."] field[1.25,2.5;1,1;y2;;"..y2.."] field[2.25,2.5;1,1;z2;;"..z2.."]"..
+	"dropdown[3,2.25;1.5,1;inv2;".. inv_list2 .. ";" .. inv2 .."]"..
+	"button_exit[4,3.25;1,1;OK;OK] field[0.25,4.5;3,1;prefer;filter;"..prefer.."]"..
+	"button[3,3.25;1,1;help;help]"..
+	"button[6,0.25;2,1;altgui;alternate gui]"..
+	"label[0.,3.0;MODE selection]"..
+	"dropdown[0.,3.35;3,1;mode;normal,dig,drop,object,inventory,transport;".. mode .."]"..
+	"list[nodemeta:"..pos.x..','..pos.y..','..pos.z ..";filter;3,4.4;1,1;]"..
+	"list[nodemeta:"..pos.x..','..pos.y..','..pos.z ..";upgrade;4,4.4;1,1;]".."label[4,4;upgrade .. ".. upgrade .."]" .. 
+	"field[3.25,1.5;1.,1;reverse;reverse;"..mreverse.."]" .. "list[current_player;main;0,5.5;8,4;]";
+	return form
+end
+
 
 -- MOVER --
 minetest.register_node("basic_machines:mover", {
 	description = "Mover - universal digging/harvesting/teleporting/transporting machine, its upgradeable.",
 	tiles = {"compass_top.png","default_furnace_top.png", "basic_machine_mover_side.png","basic_machine_mover_side.png","basic_machine_mover_side.png","basic_machine_mover_side.png"},
-	groups = {oddly_breakable_by_hand=2,mesecon_effector_on = 1},
+	groups = {cracky=3, mesecon_effector_on = 1},
 	sounds = default.node_sound_wood_defaults(),
 	after_place_node = function(pos, placer)
 		local meta = minetest.env:get_meta(pos)
@@ -125,6 +193,18 @@ minetest.register_node("basic_machines:mover", {
 		
 		local inv = meta:get_inventory();inv:set_size("upgrade", 1*1);inv:set_size("filter", 1*1) 
 		local name = placer:get_player_name(); punchset[name].state = 0
+		
+		
+		local text = "This machine can move anything. General idea is the following : \n\n"..
+		"First you need to define rectangle work area (where it takes, marked by two number 1 boxes that appear in world) and target area (where it puts, marked by one number 2 box) by punching mover then following CHAT instructions exactly.\n\n"..
+		"CHECK why it doesnt work: 1. did you click OK in mover after changing setting 2. does it have battery, 3. does battery have enough fuel\n\n"..
+		"IMPORTANT: Please read the help button inside machine before first use.";
+		
+			local form = "size [5.5,5.5] textarea[0,0;6,7;help;MOVER INTRODUCTION;".. text.."]"
+			minetest.show_formspec(name, "basic_machines:intro_mover", form)
+		
+		
+		
 	end,
 	
 	can_dig = function(pos, player) -- dont dig if upgrades inside, cause they will be destroyed
@@ -135,76 +215,12 @@ minetest.register_node("basic_machines:mover", {
 	
 	
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-		local meta = minetest.get_meta(pos);
 		local privs = minetest.get_player_privs(player:get_player_name());
 		local cant_build = minetest.is_protected(pos,player:get_player_name());
-		if not privs.privs  and cant_build then 
-			return 
-		end -- only ppl sharing protection can setup
+		if not privs.privs and cant_build then return end -- only ppl sharing protection can setup
 		
-		local x0,y0,z0,x1,y1,z1,x2,y2,z2,prefer,mode,mreverse;
-		
-		x0=meta:get_int("x0");y0=meta:get_int("y0");z0=meta:get_int("z0");x1=meta:get_int("x1");y1=meta:get_int("y1");z1=meta:get_int("z1");x2=meta:get_int("x2");y2=meta:get_int("y2");z2=meta:get_int("z2");
-
-		machines.pos1[player:get_player_name()] = {x=pos.x+x0,y=pos.y+y0,z=pos.z+z0};machines.mark_pos1(player:get_player_name()) -- mark pos1
-		machines.pos11[player:get_player_name()] = {x=pos.x+x1,y=pos.y+y1,z=pos.z+z1};machines.mark_pos11(player:get_player_name()) -- mark pos11
-		machines.pos2[player:get_player_name()] = {x=pos.x+x2,y=pos.y+y2,z=pos.z+z2};machines.mark_pos2(player:get_player_name()) -- mark pos2
-		
-		prefer = meta:get_string("prefer");
-		local mreverse = meta:get_int("reverse");
-		local list_name = "nodemeta:"..pos.x..','..pos.y..','..pos.z
-		local mode_list = {["normal"]=1,["dig"]=2, ["drop"]=3, ["object"]=4, ["inventory"]=5, ["transport"]=6};
-		
-		local mode = mode_list[meta:get_string("mode")] or "";
-		
-		local meta1 = minetest.get_meta({x=pos.x+x0,y=pos.y+y0,z=pos.z+z0}); -- source meta
-		local meta2 = minetest.get_meta({x=pos.x+x2,y=pos.y+y2,z=pos.z+z2}); -- target meta
-		
-		
-		local inv1=1; local inv2=1;
-		local inv1m = meta:get_string("inv1");local inv2m = meta:get_string("inv2");
-		
-		local list1 = meta1:get_inventory():get_lists(); local inv_list1 = ""; local j;
-		j=1; -- stupid dropdown requires item index but returns string on receive so we have to find index.. grrr, one other solution: invert the table: key <-> value
-		
-		
-		for i in pairs( list1) do 
-			inv_list1 = inv_list1 .. i .. ","; 
-			if i == inv1m then inv1=j end; j=j+1;
-		end
-		local list2 = meta2:get_inventory():get_lists(); local inv_list2 = "";
-		j=1;
-		for i in pairs( list2) do 
-			inv_list2 = inv_list2 .. i .. ",";
-			if i == inv2m then inv2=j; end; j=j+1; 
-		end
-
-		local upgrade = meta:get_float("upgrade"); if upgrade>0 then upgrade = upgrade - 1 end
-		
-		local form  = 
-		"size[8,9.5]" ..  -- width, height
-		--"size[6,10]" ..  -- width, height
-		"field[0.25,0.5;1,1;x0;source1;"..x0.."] field[1.25,0.5;1,1;y0;;"..y0.."] field[2.25,0.5;1,1;z0;;"..z0.."]"..
-		"dropdown[3,0.25;1.5,1;inv1;".. inv_list1 ..";" .. inv1 .."]"..
-		"field[0.25,1.5;1,1;x1;source2;"..x1.."] field[1.25,1.5;1,1;y1;;"..y1.."] field[2.25,1.5;1,1;z1;;"..z1.."]"..
-		"field[0.25,2.5;1,1;x2;Target;"..x2.."] field[1.25,2.5;1,1;y2;;"..y2.."] field[2.25,2.5;1,1;z2;;"..z2.."]"..
-		"dropdown[3,2.25;1.5,1;inv2;".. inv_list2 .. ";" .. inv2 .."]"..
-		"button_exit[4,3.25;1,1;OK;OK] field[0.25,4.5;3,1;prefer;filter;"..prefer.."]"..
-		"button[3,3.25;1,1;help;help]"..
-		"button[6,0.25;2,1;altgui;alternate gui]"..
-		"label[0.,3.0;MODE selection]"..
-		"dropdown[0.,3.35;3,1;mode;normal,dig,drop,object,inventory,transport;".. mode .."]"..
-		"list[nodemeta:"..pos.x..','..pos.y..','..pos.z ..";filter;3,4.4;1,1;]"..
-		"list[nodemeta:"..pos.x..','..pos.y..','..pos.z ..";upgrade;4,4.4;1,1;]".."label[4,4;upgrade .. ".. upgrade .."]" .. 
-		"field[3.25,1.5;1.,1;reverse;reverse;"..mreverse.."]" .. "list[current_player;main;0,5.5;8,4;]";
-		
-		
-		
-		-- if meta:get_string("owner")==player:get_player_name() then
-			minetest.show_formspec(player:get_player_name(), "basic_machines:mover_"..minetest.pos_to_string(pos), form)
-		-- else
-			-- minetest.show_formspec(player:get_player_name(), "view_only_basic_machines_mover", form)
-		-- end
+		local form = get_mover_form(pos,player)
+		minetest.show_formspec(player:get_player_name(), "basic_machines:mover_"..minetest.pos_to_string(pos), form)
 	end,
 	
 	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
@@ -212,11 +228,9 @@ minetest.register_node("basic_machines:mover", {
 			local meta = minetest.get_meta(pos);
 			local itemname = stack:get_name() or "";
 			meta:set_string("prefer",itemname);
-			minetest.chat_send_player(player:get_player_name(),"#mover: filter set as " .. itemname)
-			minetest.show_formspec(player:get_player_name(), "basic_machines_inventory", 
-			"size[8, 4] list[current_player;main;0,0;8,4;]");
-		-- local inv = meta:get_inventory();
-			-- inv:set_stack("filter",1, ItemStack({name=itemname})) 
+			--minetest.chat_send_player(player:get_player_name(),"#mover: filter set as " .. itemname)
+			local form = get_mover_form(pos,player)
+			minetest.show_formspec(player:get_player_name(), "basic_machines:mover_"..minetest.pos_to_string(pos), form)
 			return 1;
 		end
 		
@@ -291,19 +305,24 @@ minetest.register_node("basic_machines:mover", {
 
 			-- PROTECTION CHECK
 			local owner = meta:get_string("owner");
-			if minetest.is_protected(pos1, owner) or minetest.is_protected(pos2, owner) then
-				meta:set_float("fuel", -1);
-				meta:set_string("infotext", "Mover block. Protection fail. Deactivated.")
-			return end
+			if (minetest.is_protected(pos1, owner) or minetest.is_protected(pos2, owner)) and mode~="object" then
+				meta:set_string("infotext", "Mover block. Protection fail. ")
+			return 
+			end
 			
 			local node1 = minetest.get_node(pos1);local node2 = minetest.get_node(pos2);
 			local prefer = meta:get_string("prefer"); 
 		
 			-- FUEL COST: calculate
 			local dist = math.abs(pos2.x-pos1.x)+math.abs(pos2.y-pos1.y)+math.abs(pos2.z-pos1.z);
-			local fuel_cost = (basic_machines.hardness[node1.name] or 1);
+			local hardness = basic_machines.hardness[node1.name];
+			-- no free teleports from machine blocks
+			if hardness == 0 and mode == "object" then hardness = 1 end
+			local fuel_cost = hardness or 1;
+			
 			local upgrade =  meta:get_float("upgrade") or 1;
 			
+			-- taking items from chests/inventory move
 			if node1.name == "default:chest_locked" or mode == "inventory" then fuel_cost = basic_machines.hardness[prefer] or 1 end;
 			
 			fuel_cost=fuel_cost*dist/machines_operations; -- machines_operations=10 by default, so 10 basic operations possible with 1 coal
@@ -706,7 +725,7 @@ minetest.register_node("basic_machines:mover", {
 
 -- KEYPAD --
 
-local function use_keypad(pos,ttl, again) -- position, time to live ( how many times can signal travel before vanishing to prevent infinite recursion )
+local function use_keypad(pos,ttl, again) -- position, time to live ( how many times can signal travel before vanishing to prevent infinite recursion ), do we want to activate again
 	
 	if ttl<0 then return end;
 	local meta = minetest.get_meta(pos);	
@@ -736,11 +755,25 @@ local function use_keypad(pos,ttl, again) -- position, time to live ( how many t
 	local name =  meta:get_string("owner"); 
 	if minetest.is_protected(pos,name) then meta:set_string("infotext", "Protection fail. reset."); meta:set_int("count",0); return end
 	local count = meta:get_int("count") or 0; -- counts how many repeats left
-	local active_repeats = meta:get_int("active_repeats") or 0;
-		
-	if again or count>0 then -- this is keypad repeating its activation
-		if count < 0 then return end 
+	
+	local repeating = meta:get_int("repeating");
+	
+	if repeating==1 and again~=1 then 
+		-- stop it
+		meta:set_int("repeating",0);
+		meta:set_int("count", 0)
+		meta:set_int("T",4);
+		meta:set_string("infotext", "#KEYPAD: reseting. Punch again after 5s to activate")
+		return;
+	end	
+	
+	
+	
+	if count>0 then -- this is keypad repeating its activation
 		count = count - 1; meta:set_int("count",count);  
+	else
+		meta:set_int("repeating",0); 
+		--return 
 	end
 	
 	if count>=0 then
@@ -750,14 +783,12 @@ local function use_keypad(pos,ttl, again) -- position, time to live ( how many t
 	end
 		
 	if count>0 then -- only trigger repeat if count on
-		if active_repeats == 0 then -- cant add new repeats quickly to prevent abuse
-			meta:set_int("active_repeats",1);
+			if repeating == 0 then meta:set_int("repeating",1); end-- its repeating now
 			if basic_machines.clockgen==0 then return end
 			minetest.after(machines_timer, function() 
-				meta:set_int("active_repeats",0);
-				use_keypad(pos,machines_TTL,1)  -- third parameter means repeat mode
-			end )  -- repeat operation as many times as set with "iter"
-		end
+				use_keypad(pos,machines_TTL,1) 
+			end )  
+		
 	end
 	
 	local x0,y0,z0,mode;
@@ -859,6 +890,18 @@ local function use_keypad(pos,ttl, again) -- position, time to live ( how many t
 			return
 		end
 		
+		if node.name == "basic_machines:distributor" then
+			local i = string.find(text," ");
+			if i then
+				local ti = tonumber(string.sub(text,1,i-1)) or 1;
+				local tm = tonumber(string.sub(text,i+1)) or 1;
+				if ti>=1 and ti<=16 and tm>=-2 and tm<=2 then
+					tmeta:set_int("active"..ti,tm)
+				end
+			end
+		return
+		end
+		
 	end
 		
 	local table = minetest.registered_nodes[node.name];
@@ -871,8 +914,8 @@ local function use_keypad(pos,ttl, again) -- position, time to live ( how many t
 		local state = meta:get_int("state") or 0;state = 1-state; meta:set_int("state",state);
 		if state == 0 then mode = 1 else mode = 2 end
 	end
-	
 	-- pass the signal on to target
+	
 	if mode == 2 then -- on
 		if not effector.action_on then return end
 		effector.action_on(tpos,node,ttl-1); -- run
@@ -890,7 +933,7 @@ local function check_keypad(pos,name,ttl) -- called only when manually activated
 		local iter = meta:get_int("iter");
 		local count = meta:get_int("count");
 		if count<iter-1 or iter<2 then meta:set_int("active_repeats",0) end -- so that keypad can work again, at least one operation must have occured though
-		meta:set_int("count",iter); use_keypad(pos,machines_TTL) -- time to live set when punched
+		meta:set_int("count",iter); use_keypad(pos,machines_TTL,0) -- time to live set when punched
 		return 
 	end
 	if name == "" then return end
@@ -908,13 +951,14 @@ local function check_keypad(pos,name,ttl) -- called only when manually activated
 		"size[3,1]" ..  -- width, height
 		"button_exit[0.,0.5;1,1;OK;OK] field[0.25,0.25;3,1;pass;Enter Password: ;".."".."]";
 		minetest.show_formspec(name, "basic_machines:check_keypad_"..minetest.pos_to_string(pos), form)
+	return
 
 end
 
 minetest.register_node("basic_machines:keypad", {
 	description = "Keypad - basic way to activate machines by sending signal",
 	tiles = {"keypad.png"},
-	groups = {oddly_breakable_by_hand=2},
+	groups = {cracky=3, mesecon_effector_on = 1},
 	sounds = default.node_sound_wood_defaults(),
 	after_place_node = function(pos, placer)
 		local meta = minetest.env:get_meta(pos)
@@ -931,7 +975,7 @@ minetest.register_node("basic_machines:keypad", {
 		action_on = function (pos, node,ttl) 
 		if type(ttl)~="number" then ttl = 1 end
 		if ttl<0 then return end -- machines_TTL prevents infinite recursion
-		use_keypad(pos,0) -- activate just 1 time
+		use_keypad(pos,0,0) -- activate just 1 time
 	end
 	}
 	},
@@ -975,7 +1019,7 @@ minetest.register_node("basic_machines:keypad", {
 minetest.register_node("basic_machines:detector", {
 	description = "Detector - can detect blocks/players/objects and activate machines",
 	tiles = {"detector.png"},
-	groups = {oddly_breakable_by_hand=2},
+	groups = {cracky=3, mesecon_effector_on = 1},
 	sounds = default.node_sound_wood_defaults(),
 	after_place_node = function(pos, placer)
 		local meta = minetest.env:get_meta(pos)
@@ -1249,20 +1293,20 @@ minetest.register_node("basic_machines:detector", {
 })
 
 
-minetest.register_chatcommand("clockgen", { -- test: toggle machine running with clockgens
+minetest.register_chatcommand("clockgen", { -- test: toggle machine running with clockgens, useful for debugging
+-- i.e. seeing how machines running affect server performance
 	description = "",
 	privs = {
 		interact = true
 	},
 	func = function(name, param)
 		local privs = minetest.get_player_privs(name);
-		if not privs.privs and name~="rnd" then return end
+		if not privs.privs then return end
 		local player = minetest.get_player_by_name(name);
 		if basic_machines.clockgen == 0 then basic_machines.clockgen = 1 else basic_machines.clockgen = 0 end
 		minetest.chat_send_player(name, "#clockgen set to " .. basic_machines.clockgen);
 	end
-});
-
+})
 
 
 -- CLOCK GENERATOR : periodically activates machine on top of it
@@ -1271,6 +1315,7 @@ minetest.register_abm({
 	neighbors = {""},
 	interval = machines_timer,
 	chance = 1,
+	
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		if basic_machines.clockgen == 0 then return end
 		local meta = minetest.get_meta(pos); 
@@ -1297,23 +1342,60 @@ minetest.register_abm({
 minetest.register_node("basic_machines:clockgen", {
 	description = "Clock generator - use sparingly, continually activates top block",
 	tiles = {"basic_machine_clock_generator.png"},
-	groups = {oddly_breakable_by_hand=2},
+	groups = {cracky=3, mesecon_effector_on = 1},
 	sounds = default.node_sound_wood_defaults(),
 	after_place_node = function(pos, placer)
 		local meta =  minetest.get_meta(pos);
-		meta:set_string("owner",placer:get_player_name() or "");
-		meta:set_string("infotext","clock generator: place machine to be activated on top of generator");
+		local owner = placer:get_player_name() or "";
+		local privs = minetest.get_player_privs(owner);
+		if privs.machines then meta:set_int("machines",1) end
+		
+		meta:set_string("owner",owner);
+		meta:set_string("infotext","clock generator (owned by " .. owner .. "): place machine to be activated on top of generator");
 	end
 })	
 	
 
 
 -- DISTRIBUTOR --
+local get_distributor_form = function(pos,player)
+	if not player then return end
+	local meta = minetest.get_meta(pos);
+	local privs = minetest.get_player_privs(player:get_player_name());
+	local cant_build = minetest.is_protected(pos,player:get_player_name());
+	--meta:get_string("owner")~=player:get_player_name() and 
+	if not privs.privs and cant_build then 
+		return 
+	end 
+	
+	local p = {}; local active = {};
+	local n = meta:get_int("n");
+	local delay = meta:get_float("delay");
+	for i =1,n do
+		p[i]={x=meta:get_int("x"..i),y=meta:get_int("y"..i),z=meta:get_int("z"..i)};
+		active[i]=meta:get_int("active"..i);
+	end
+	
+	local list_name = "nodemeta:"..pos.x..','..pos.y..','..pos.z
+	local form  = 
+	"size[7,"..(0.75+(n)*0.75).."]" ..  -- width, height
+	"label[0,-0.25;target: x y z, MODE -2=only OFF, -1=NOT input/0/1=input, 2 = only ON]";
+	for i =1,n do
+		form = form.."field[0.25,"..(0.5+(i-1)*0.75)..";1,1;x"..i..";;"..p[i].x.."] field[1.25,"..(0.5+(i-1)*0.75)..";1,1;y"..i..";;"..p[i].y.."] field[2.25,"..(0.5+(i-1)*0.75)..";1,1;z"..i..";;"..p[i].z.."] field [ 3.25,"..(0.5+(i-1)*0.75)..";1,1;active"..i..";;" .. active[i] .. "]"
+		form = form .. "button[4.,"..(0.25+(i-1)*0.75)..";1.5,1;SHOW"..i..";SHOW "..i.."]".."button_exit[5.25,"..(0.25+(i-1)*0.75)..";1,1;SET"..i..";SET]".."button[6.25,"..(0.25+(i-1)*0.75)..";1,1;X"..i..";X]"
+	end
+	
+	form=form.."button_exit[4.25,"..(0.25+(n)*0.75)..";1,1;ADD;ADD]".."button_exit[3.,"..(0.25+(n)*0.75)..";1,1;OK;OK]".."field[0.25,"..(0.5+(n)*0.75)..";1,1;delay;delay;"..delay .. "]";
+	form = form.."button[6.25,"..(0.25+(n)*0.75)..";1,1;help;help]";
+	return form
+
+end
+
 
 minetest.register_node("basic_machines:distributor", {
 	description = "Distributor - can forward signal up to 16 different targets",
 	tiles = {"distributor.png"},
-	groups = {oddly_breakable_by_hand=2},
+	groups = {cracky=3, mesecon_effector_on = 1},
 	sounds = default.node_sound_wood_defaults(),
 	after_place_node = function(pos, placer)
 		local meta = minetest.env:get_meta(pos)
@@ -1358,44 +1440,42 @@ minetest.register_node("basic_machines:distributor", {
 					return
 			end
 			
-			local posf = {}; local active = {};
-			local n = meta:get_int("n");local delay = meta:get_float("delay");
-			for i =1,n do
-				posf[i]={x=meta:get_int("x"..i)+pos.x,y=meta:get_int("y"..i)+pos.y,z=meta:get_int("z"..i)+pos.z};
-				active[i]=meta:get_int("active"..i);
-			end
-			
-			local table,node;
 			local delay = minetest.get_meta(pos):get_float("delay");
 			
-			for i=1,n do
-				if active[i]~=0 then 
-					node = minetest.get_node(posf[i]);if not node.name then return end -- error
-					table = minetest.registered_nodes[node.name];
-					
-					if table and table.mesecons and table.mesecons.effector then -- check if all elements exist, safe cause it checks from left to right
-						-- alternative way: overkill
-						--ret = pcall(function() if not table.mesecons.effector then end end); -- exception handling to determine if structure exists
-													
-						local effector=table.mesecons.effector;
+			local activate = function()
+				local posf = {}; local active = {};
+				local n = meta:get_int("n");local delay = meta:get_float("delay");
+				for i =1,n do
+					posf[i]={x=meta:get_int("x"..i)+pos.x,y=meta:get_int("y"..i)+pos.y,z=meta:get_int("z"..i)+pos.z};
+					active[i]=meta:get_int("active"..i);
+				end
+				
+				local table,node;
+			
+				for i=1,n do
+					if active[i]~=0 then 
+						node = minetest.get_node(posf[i]);if not node.name then return end -- error
+						table = minetest.registered_nodes[node.name];
 						
-						if (active[i] == 1 or active[i] == 2) and effector.action_on then -- normal OR only forward input ON
-								if delay>0 then
-									minetest.after(delay, function() effector.action_on(posf[i],node,ttl-1) end); 
-								else
-									effector.action_on(posf[i],node,ttl-1); 
-								end
-						elseif active[i] == -1 and effector.action_off then 
-							if delay>0 then
-								minetest.after(delay, function() effector.action_off(posf[i],node,ttl-1) end);
-							else
+						if table and table.mesecons and table.mesecons.effector then -- check if all elements exist, safe cause it checks from left to right
+							-- alternative way: overkill
+							--ret = pcall(function() if not table.mesecons.effector then end end); -- exception handling to determine if structure exists
+														
+							local effector=table.mesecons.effector;
+							
+							if (active[i] == 1 or active[i] == 2) and effector.action_on then -- normal OR only forward input ON
+								effector.action_on(posf[i],node,ttl-1); 
+							elseif active[i] == -1 and effector.action_off then 
 								effector.action_off(posf[i],node,ttl-1)
 							end
 						end
+						
 					end
-					
 				end
 			end
+			
+			if delay>0 then minetest.after(delay, activate) else activate() end
+			
 	end,
 	
 	action_off = function (pos, node,ttl) 
@@ -1422,37 +1502,28 @@ minetest.register_node("basic_machines:distributor", {
 					meta:set_string("infotext","overheat: temperature ".. T)
 					return
 			end
-			
-			
-			local posf = {}; local active = {};
-			local n = meta:get_int("n");
-			for i =1,n do
-				posf[i]={x=meta:get_int("x"..i)+pos.x,y=meta:get_int("y"..i)+pos.y,z=meta:get_int("z"..i)+pos.z};
-				active[i]=meta:get_int("active"..i);
-			end
-			
-			local node, table
 			local delay = minetest.get_meta(pos):get_float("delay");
 			
-			for i=1,n do
-				if active[i]~=0 then
-					node = minetest.get_node(posf[i]);if not node.name then return end -- error
-					table = minetest.registered_nodes[node.name];
-					
-					if table and table.mesecons and table.mesecons.effector then 
-		
-						local effector=table.mesecons.effector;
-						
-						if (active[i] == 1 or active[i]==-2) and effector.action_off then  -- normal OR only forward input OFF
-							if delay>0 then
-								minetest.after(delay, function() effector.action_off(posf[i],node,ttl-1) end);
-							else
+			local activate = function()
+				local posf = {}; local active = {};
+				local n = meta:get_int("n");
+				for i =1,n do
+					posf[i]={x=meta:get_int("x"..i)+pos.x,y=meta:get_int("y"..i)+pos.y,z=meta:get_int("z"..i)+pos.z};
+					active[i]=meta:get_int("active"..i);
+				end
+				
+				local node, table
+				
+				
+				for i=1,n do
+					if active[i]~=0 then
+						node = minetest.get_node(posf[i]);if not node.name then return end -- error
+						table = minetest.registered_nodes[node.name];
+						if table and table.mesecons and table.mesecons.effector then 
+							local effector=table.mesecons.effector;
+							if (active[i] == 1 or active[i]==-2) and effector.action_off then  -- normal OR only forward input OFF
 								effector.action_off(posf[i],node,ttl-1); 
-							end
-						elseif (active[i] == -1) and effector.action_on then 
-							if delay>0 then
-								minetest.after(delay, function() effector.action_on(posf[i],node,ttl-1) end);
-							else
+							elseif (active[i] == -1) and effector.action_on then 
 								effector.action_on(posf[i],node,ttl-1); 
 							end
 						end
@@ -1460,44 +1531,14 @@ minetest.register_node("basic_machines:distributor", {
 				end
 			end
 			
+			if delay>0 then minetest.after(delay, activate) else activate() end
+			
 	end
 	}
 	},
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-		local meta = minetest.get_meta(pos);
-		local privs = minetest.get_player_privs(player:get_player_name());
-		local cant_build = minetest.is_protected(pos,player:get_player_name());
-		--meta:get_string("owner")~=player:get_player_name() and 
-		if not privs.privs and cant_build then 
-			return 
-		end 
-		
-		local p = {}; local active = {};
-		local n = meta:get_int("n");
-		local delay = meta:get_float("delay");
-		for i =1,n do
-			p[i]={x=meta:get_int("x"..i),y=meta:get_int("y"..i),z=meta:get_int("z"..i)};
-			active[i]=meta:get_int("active"..i);
-		end
-		
-		-- machines.pos1[player:get_player_name()] = {x=pos.x+x1,y=pos.y+y1,z=pos.z+z1};machines.mark_pos1(player:get_player_name()) -- mark pos1
-		-- machines.pos2[player:get_player_name()] = {x=pos.x+x2,y=pos.y+y2,z=pos.z+z2};machines.mark_pos2(player:get_player_name()) -- mark pos2
-				
-		local list_name = "nodemeta:"..pos.x..','..pos.y..','..pos.z
-		local form  = 
-		"size[7,"..(0.75+(n)*0.75).."]" ..  -- width, height
-		"label[0,-0.25;target: x y z, MODE -2=only OFF, -1=NOT input/0/1=input, 2 = only ON]";
-		for i =1,n do
-			form = form.."field[0.25,"..(0.5+(i-1)*0.75)..";1,1;x"..i..";;"..p[i].x.."] field[1.25,"..(0.5+(i-1)*0.75)..";1,1;y"..i..";;"..p[i].y.."] field[2.25,"..(0.5+(i-1)*0.75)..";1,1;z"..i..";;"..p[i].z.."] field [ 3.25,"..(0.5+(i-1)*0.75)..";1,1;active"..i..";;" .. active[i] .. "]"
-			form = form .. "button[4.,"..(0.25+(i-1)*0.75)..";1.5,1;SHOW"..i..";SHOW "..i.."]".."button_exit[5.25,"..(0.25+(i-1)*0.75)..";1,1;SET"..i..";SET]".."button_exit[6.25,"..(0.25+(i-1)*0.75)..";1,1;X"..i..";X]"
-		end
-		
-		form=form.."button_exit[4.25,"..(0.25+(n)*0.75)..";1,1;ADD;ADD]".."button_exit[3.,"..(0.25+(n)*0.75)..";1,1;OK;OK]".."field[0.25,"..(0.5+(n)*0.75)..";1,1;delay;delay;"..delay .. "]";
-		--if meta:get_string("owner")==player:get_player_name() then
-			minetest.show_formspec(player:get_player_name(), "basic_machines:distributor_"..minetest.pos_to_string(pos), form)
-		-- else
-			-- minetest.show_formspec(player:get_player_name(), "view_only_basic_machines_distributor", form)
-		--end
+		local form = get_distributor_form(pos,player)
+		if form then minetest.show_formspec(player:get_player_name(), "basic_machines:distributor_"..minetest.pos_to_string(pos), form) end
 	end,
 	}
 )
@@ -1508,7 +1549,7 @@ minetest.register_node("basic_machines:distributor", {
 minetest.register_node("basic_machines:light_off", {
 	description = "Light off",
 	tiles = {"light_off.png"},
-	groups = {oddly_breakable_by_hand=2},
+	groups = {cracky=3, mesecon_effector_on = 1},
 	mesecons = {effector = {
 		action_on = function (pos, node,ttl) 
 			minetest.swap_node(pos,{name = "basic_machines:light_on"});		
@@ -1535,7 +1576,7 @@ minetest.register_node("basic_machines:light_off", {
 minetest.register_node("basic_machines:light_on", {
 	description = "Light on",
 	tiles = {"light.png"},
-	groups = {oddly_breakable_by_hand=2},
+	groups = {cracky=3, mesecon_effector_on = 1},
 	light_source = LIGHT_MAX,
 	after_place_node = function(pos, placer)
 		local meta = minetest.get_meta(pos);
@@ -1578,6 +1619,9 @@ punchset.known_nodes = {["basic_machines:mover"]=true,["basic_machines:keypad"]=
 -- SETUP BY PUNCHING
 minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
 	
+	-- STRANGE PROBLEM: if player doesnt move it takes another punch at same block for this function to run again, and it works normally if player moved at least one block from his previous position
+	-- it only happens with keypad - maybe caused by formspec displayed..
+	
 	local name = puncher:get_player_name(); if name==nil then return end
 	if punchset[name]== nil then  -- set up punchstate
 		punchset[name] = {} 
@@ -1596,10 +1640,6 @@ minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
 			if node.name~="basic_machines:keypad" then -- keypad is supposed to be punch interactive!
 				if minetest.is_protected(pos, name) then return end
 			end
-			-- local meta = minetest.get_meta(pos);
-			-- if not (meta:get_int("public") == 1) then
-				-- if meta:get_string("owner")~= name then return end
-			-- end
 	end
 	
 	if node.name == "basic_machines:mover" then -- mover init code
@@ -1737,9 +1777,12 @@ minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
 	
 	-- KEYPAD
 	if node.name == "basic_machines:keypad" then -- keypad init/usage code
+		
 		local meta = minetest.get_meta(pos);
 		if not (meta:get_int("x0")==0 and meta:get_int("y0")==0 and meta:get_int("z0")==0) then -- already configured
 			check_keypad(pos,name)-- not setup, just standard operation
+			punchset[name].state = 0;
+			return;
 		else
 			if minetest.is_protected(pos, name) then return minetest.chat_send_player(name, "KEYPAD: You must be able to build to set up keypad.") end
 			--if meta:get_string("owner")~= name then minetest.chat_send_player(name, "KEYPAD: Only owner can set up keypad.") return end
@@ -2031,7 +2074,7 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 			"\n**************************************************\nusage\n"..
 
 				"\nJust punch ( left click ) keypad, then the target block will be activated."..
-				"\nTo set text on other nodes ( text shows when you look at node ) just target the node and set nonempty text. Upon activation text will be set. When target node is another keypad, its \"text\" field will be set. When targets is mover/detector, its \"filter\" field will be set. To clear \"filter\" set text to \"@\"."..
+				"\nTo set text on other nodes ( text shows when you look at node ) just target the node and set nonempty text. Upon activation text will be set. When target node is another keypad, its \"text\" field will be set. When targets is mover/detector, its \"filter\" field will be set. To clear \"filter\" set text to \"@\".  When target is distributor, you can change i-th target of distributor to mode mode with \"i mode\""..
 
 				"\n\nkeyboard : to use keypad as keyboard for text input write \"@\" in \"text\" field and set any password. Next time keypad is used it will work as text input device."..
 
@@ -2101,7 +2144,8 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 			
 			if meta:get_string("text")=="@" then -- keyboard mode
 				meta:set_string("input", pass);
-				use_keypad(pos,machines_TTL);
+				meta:set_int("count",1);
+				use_keypad(pos,machines_TTL,0);
 				return
 			end
 					
@@ -2117,8 +2161,10 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 		if meta:get_int("count")<=0 then -- only accept new operation requests if idle
 			meta:set_int("count",meta:get_int("iter")); 
 			meta:set_int("active_repeats",0);
-			use_keypad(pos,machines_TTL)
-			else meta:set_int("count",0); meta:set_string("infotext","operation aborted by user. punch to activate.") -- reset
+			use_keypad(pos,machines_TTL,0)
+		else 
+			meta:set_int("count",0); 
+			meta:set_string("infotext","operation aborted by user. punch to activate.") -- reset
 		end
 		
 		return
@@ -2234,6 +2280,8 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 		if fields["ADD"] then
 			local n = meta:get_int("n");
 			if n<16 then meta:set_int("n",n+1);	end -- max 16 outputs
+			local form = get_distributor_form(pos,player)
+			minetest.show_formspec(player:get_player_name(), "basic_machines:distributor_"..minetest.pos_to_string(pos), form)
 			return
 		end
 		
@@ -2274,10 +2322,24 @@ minetest.register_on_player_receive_fields(function(player,formname,fields)
 				end
 				
 				meta:set_int("n",n-1);
+				local form = get_distributor_form(pos,player)
+				minetest.show_formspec(player:get_player_name(), "basic_machines:distributor_"..minetest.pos_to_string(pos), form)
 				return;
 			end
 		end
 		
+		if fields.help == "help" then
+			local text = "SETUP: to select target nodes for activation click SET then click target node.\n"..
+			"You can add more targets with ADD. To see where target node is click SHOW button next to it.\n"..
+			"Numbers in each row represent (from left to right) : first 3 numbers are target coordinates,\n"..
+			"last number controls how signal is passed to target. For example, to only pass OFF signal use -2,\n"..
+			"to only pass ON use 2, -1 negates the signal, 1 = pass original signal, 0 blocks signal\n"..
+			"delay option adds delay to activations, in seconds\n\n"..
+			"ADVANCED: you can use distributor as an event handler. First you must deactivate first target by putting 0 at\n"..
+			"last place in first line. Meanings of first 2 numbers are as follows: first number 0/1 controls if node/n".. "listens to failed interact attempts around it, second number -1/1 listens to chat and can mute it";
+			local form = "size [5.5,5.5] textarea[0,0;6,7;help;DISTRIBUTOR HELP;".. text.."]"
+			minetest.show_formspec(name, "basic_machines:help_distributor", form)
+		end
 		
 	end
 	
@@ -2288,54 +2350,54 @@ end)
 
 -- CRAFTS --
 
-minetest.register_craft({
-	output = "basic_machines:keypad",
-	recipe = {
-		{"default:stick"},
-		{"default:wood"},
-	}
-})
+-- minetest.register_craft({
+	-- output = "basic_machines:keypad",
+	-- recipe = {
+		-- {"default:stick"},
+		-- {"default:wood"},
+	-- }
+-- })
 
-minetest.register_craft({
-	output = "basic_machines:mover",
-	recipe = {
-		{"default:mese_crystal", "default:mese_crystal","default:mese_crystal"},
-		{"default:mese_crystal", "default:mese_crystal","default:mese_crystal"},
-		{"default:stone", "basic_machines:keypad", "default:stone"}
-	}
-})
+-- minetest.register_craft({
+	-- output = "basic_machines:mover",
+	-- recipe = {
+		-- {"default:mese_crystal", "default:mese_crystal","default:mese_crystal"},
+		-- {"default:mese_crystal", "default:mese_crystal","default:mese_crystal"},
+		-- {"default:stone", "basic_machines:keypad", "default:stone"}
+	-- }
+-- })
 
-minetest.register_craft({
-	output = "basic_machines:detector",
-	recipe = {
-		{"default:mese_crystal", "default:mese_crystal"},
-		{"default:mese_crystal", "default:mese_crystal"},
-		{"basic_machines:keypad",""}
-	}
-})
+-- minetest.register_craft({
+	-- output = "basic_machines:detector",
+	-- recipe = {
+		-- {"default:mese_crystal", "default:mese_crystal"},
+		-- {"default:mese_crystal", "default:mese_crystal"},
+		-- {"basic_machines:keypad",""}
+	-- }
+-- })
 
-minetest.register_craft({
-	output = "basic_machines:light_on",
-	recipe = {
-		{"default:torch", "default:torch"},
-		{"default:torch", "default:torch"}
-	}
-})
+-- minetest.register_craft({
+	-- output = "basic_machines:light_on",
+	-- recipe = {
+		-- {"default:torch", "default:torch"},
+		-- {"default:torch", "default:torch"}
+	-- }
+-- })
 
 
-minetest.register_craft({
-	output = "basic_machines:distributor",
-	recipe = {
-		{"default:steel_ingot"},
-		{"default:mese_crystal"},
-		{"basic_machines:keypad"}
-	}
-})
+-- minetest.register_craft({
+	-- output = "basic_machines:distributor",
+	-- recipe = {
+		-- {"default:steel_ingot"},
+		-- {"default:mese_crystal"},
+		-- {"basic_machines:keypad"}
+	-- }
+-- })
 
-minetest.register_craft({
-	output = "basic_machines:clockgen",
-	recipe = {
-		{"default:diamondblock"},
-		{"basic_machines:keypad"}
-	}
-})
+-- minetest.register_craft({
+	-- output = "basic_machines:clockgen",
+	-- recipe = {
+		-- {"default:diamondblock"},
+		-- {"basic_machines:keypad"}
+	-- }
+-- })
