@@ -1,10 +1,19 @@
--- Minetest 0.4 mod: stairs
+-- Minetest 0.7 mod: stairs
 -- See README.txt for licensing and other information.
-
+-- maikerumines custom version with slopes and thin slabs
 
 -- Global namespace for functions
 
 stairs = {}
+
+stairs.wood = default.node_sound_wood_defaults()
+stairs.dirt = default.node_sound_dirt_defaults()
+stairs.stone = default.node_sound_stone_defaults()
+stairs.glass = default.node_sound_glass_defaults()
+stairs.leaves = default.node_sound_leaves_defaults()
+--stairs.wool = default.node_sound_wool_defaults()
+stairs.wool = default.node_sound_leaves_defaults()
+stairs.metal = default.node_sound_metal_defaults()
 
 
 -- Register aliases for new pine node names
@@ -508,7 +517,7 @@ stairs.register_all(
 	{"default_wood.png"},
 	"Wooden Stair",
 	"Wooden Slab",
-	default.node_sound_wood_defaults()
+	stairs.wood
 )
 
 stairs.register_all(
@@ -518,7 +527,7 @@ stairs.register_all(
 	{"default_junglewood.png"},
 	"Jungle Wood Stair",
 	"Jungle Wood Slab",
-	default.node_sound_wood_defaults()
+	stairs.wood
 )
 
 stairs.register_all(
@@ -528,7 +537,7 @@ stairs.register_all(
 	{"default_pine_wood.png"},
 	"Pine Wood Stair",
 	"Pine Wood Slab",
-	default.node_sound_wood_defaults()
+	stairs.wood
 )
 
 stairs.register_stair_and_slab(
@@ -538,7 +547,7 @@ stairs.register_stair_and_slab(
 	{"default_acacia_wood.png"},
 	"Acacia Wood Stair",
 	"Acacia Wood Slab",
-	default.node_sound_wood_defaults()
+	stairs.wood
 )
 
 stairs.register_all(
@@ -548,7 +557,7 @@ stairs.register_all(
 	{"default_aspen_wood.png"},
 	"Aspen Wood Stair",
 	"Aspen Wood Slab",
-	default.node_sound_wood_defaults()
+	stairs.wood
 )
 
 stairs.register_all(
@@ -558,7 +567,7 @@ stairs.register_all(
 	{"default_stone.png"},
 	"Stone Stair",
 	"Stone Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -568,7 +577,7 @@ stairs.register_all(
 	{"default_cobble.png"},
 	"Cobblestone Stair -EXAMPLE FOR ALL  DEFAULT BLOCKS",
 	"Cobblestone Slab -EXAMPLE FOR ALL DEFAULT BLOCKS",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -579,7 +588,7 @@ stairs.register_all(
 	{"default_mossycobble.png"},
 	"Mossy Cobblestone Stair",
 	"Mossy Cobblestone Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -589,7 +598,7 @@ stairs.register_all(
 	{"default_stone_brick.png"},
 	"Stone Brick Stair",
 	"Stone Brick Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -599,7 +608,7 @@ stairs.register_all(
 	{"default_stone_block.png"},
 	"Stone Block Stair",
 	"Stone Block Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -609,7 +618,7 @@ stairs.register_all(
 	{"default_desert_stone.png"},
 	"Desert Stone Stair",
 	"Desert Stone Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -619,7 +628,7 @@ stairs.register_all(
 	{"default_desert_cobble.png"},
 	"Desert Cobblestone Stair",
 	"Desert Cobblestone Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -629,7 +638,7 @@ stairs.register_all(
 	{"default_desert_stone_brick.png"},
 	"Desert Stone Brick Stair",
 	"Desert Stone Brick Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -639,7 +648,7 @@ stairs.register_all(
 	{"default_desert_stone_block.png"},
 	"Desert Stone Block Stair",
 	"Desert Stone Block Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -649,7 +658,7 @@ stairs.register_all(
 	{"default_sandstone.png"},
 	"Sandstone Stair",
 	"Sandstone Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -659,7 +668,7 @@ stairs.register_all(
 	{"default_sandstone_brick.png"},
 	"Sandstone Brick Stair",
 	"Sandstone Brick Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -669,7 +678,7 @@ stairs.register_all(
 	{"default_sandstone_block.png"},
 	"Sandstone Block Stair",
 	"Sandstone Block Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -679,7 +688,7 @@ stairs.register_all(
 	{"default_desert_sandstone.png"},
 	"Desert Sandstone Stair",
 	"Desert Sandstone Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -689,7 +698,7 @@ stairs.register_all(
 	{"default_desert_sandstone_brick.png"},
 	"Desert Sandstone Brick Stair",
 	"Desert Sandstone Brick Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -699,7 +708,7 @@ stairs.register_all(
 	{"default_desert_sandstone_block.png"},
 	"Desert Sandstone Block Stair",
 	"Desert Sandstone Block Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -709,7 +718,7 @@ stairs.register_all(
 	{"default_silver_sandstone.png"},
 	"Silver Sandstone Stair",
 	"Silver Sandstone Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -719,7 +728,7 @@ stairs.register_all(
 	{"default_silver_sandstone_brick.png"},
 	"Silver Sandstone Brick Stair",
 	"Silver Sandstone Brick Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -729,7 +738,7 @@ stairs.register_all(
 	{"default_silver_sandstone_block.png"},
 	"Silver Sandstone Block Stair",
 	"Silver Sandstone Block Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 --===========
@@ -777,7 +786,7 @@ stairs.register_all(
 	{"default_obsidian.png"},
 	"Obsidian Stair",
 	"Obsidian Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -787,7 +796,7 @@ stairs.register_all(
 	{"default_obsidian_brick.png"},
 	"Obsidian Brick Stair",
 	"Obsidian Brick Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -797,7 +806,7 @@ stairs.register_all(
 	{"default_obsidian_block.png"},
 	"Obsidian Block Stair",
 	"Obsidian Block Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -807,7 +816,7 @@ stairs.register_all(
 	{"default_brick.png"},
 	"Brick Stair",
 	"Brick Slab",
-	default.node_sound_stone_defaults()
+	stairs.stone
 )
 
 stairs.register_all(
@@ -817,7 +826,7 @@ stairs.register_all(
 	{"farming_straw.png"},
 	"Straw Stair",
 	"Straw Slab",
-	default.node_sound_leaves_defaults()
+	stairs.leaves
 )
 
 stairs.register_all(
@@ -827,7 +836,7 @@ stairs.register_all(
 	{"default_steel_block.png"},
 	"Steel Block Stair",
 	"Steel Block Slab",
-	default.node_sound_metal_defaults()
+	stairs.metal
 )
 
 stairs.register_all(
@@ -837,7 +846,7 @@ stairs.register_all(
 	{"default_copper_block.png"},
 	"Copper Block Stair",
 	"Copper Block Slab",
-	default.node_sound_metal_defaults()
+	stairs.metal
 )
 
 stairs.register_all(
@@ -847,7 +856,7 @@ stairs.register_all(
 	{"default_bronze_block.png"},
 	"Bronze Block Stair",
 	"Bronze Block Slab",
-	default.node_sound_metal_defaults()
+	stairs.metal
 )
 
 stairs.register_all(
@@ -857,7 +866,7 @@ stairs.register_all(
 	{"default_gold_block.png"},
 	"Gold Block Stair",
 	"Gold Block Slab",
-	default.node_sound_metal_defaults()
+	stairs.metal
 )
 
 stairs.register_all("diamondblock", "default:diamondblock",
@@ -873,7 +882,7 @@ stairs.register_all(
 	{"default_ice.png"},
 	"Ice Stair",
 	"Ice Slab",
-	default.node_sound_glass_defaults()
+	stairs.glass
 )
 
 stairs.register_all(
@@ -894,51 +903,31 @@ stairs.register_all("dirt", "default:dirt",
 	{crumbly = 3, soil = 1, not_in_craft_guide=1},
 	{"default_dirt.png"},
 	"Dirt",
-	default.node_sound_dirt_defaults()
+	stairs.dirt
 )
 
 stairs.register_all("dirt_with_grass", "default:dirt_with_grass",
 	 {crumbly = 3, soil = 1, spreading_dirt_type = 1},
 	{"default_grass.png", "default_dirt.png", "default_dirt.png^default_grass_side.png"},
 	"Dirt with grass",
-	default.node_sound_dirt_defaults()	
+	stairs.dirt
 )
 	
 stairs.register_all("dirt_with_snow", "default:dirt_with_snow",
 	 {crumbly = 3, soil = 1, spreading_dirt_type = 1, not_in_craft_guide=1},
 	{"default_snow.png", "default_dirt.png", "default_dirt.png^default_snow_side.png"},
 	"Dirt with grass with snow",
-	default.node_sound_dirt_defaults()		
+	stairs.dirt
 )
 	
 stairs.register_all("dirt_with_dry_grass", "default:dirt_with_dry_grass",
 	{crumbly = 3, soil = 1, spreading_dirt_type = 1, not_in_craft_guide=1},
 	{"default_dry_grass.png", "default_dirt.png", "default_dirt.png^default_dry_grass_side.png"},
 	"Dirt with dry grass",
-	default.node_sound_dirt_defaults()		
+	stairs.dirt
 )
 
---es grass
-stairs.register_all("dry_dirt", "es:dry_dirt",
-	{crumbly = 3, soil = 1, spreading_dirt_type = 1, not_in_craft_guide=1},
-	{"default_dry_dirt.png"},
-	"Some dry dirt",
-	default.node_sound_dirt_defaults()		
-)
 
-stairs.register_all("strange_grass", "es:strange_grass",
-	{crumbly = 3, soil = 1, spreading_dirt_type = 1, es_grass = 1, not_in_craft_guide=1},
-	{"default_dry_grass.png^[colorize:#00BBFF:130", "default_clay.png", "default_clay.png^(default_dry_grass_side.png^[colorize:#00BBFF:130)"},
-	"Strange Grass",
-	default.node_sound_dirt_defaults()		
-)
-
-stairs.register_all("aiden_grass", "es:aiden_grass",
-	{crumbly = 3, soil = 1, spreading_dirt_type = 1, es_grass = 1, not_in_craft_guide=1},
-	{"default_dry_grass.png^[colorize:#8A084B:160", "default_clay.png", "default_clay.png^(default_dry_grass_side.png^[colorize:#8A084B:160)"},
-	"Aiden Grass",
-	default.node_sound_dirt_defaults()		
-)
 
 	
 --========================
@@ -1038,6 +1027,29 @@ if minetest.get_modpath("es") then
 
 grp = {cracky = 3,not_in_craft_guide=1}
 
+--es grass
+stairs.register_all("dry_dirt", "es:dry_dirt",
+	{crumbly = 3, soil = 1, spreading_dirt_type = 1, not_in_craft_guide=1},
+	{"default_dry_dirt.png"},
+	"Some dry dirt",
+	stairs.dirt
+)
+
+stairs.register_all("strange_grass", "es:strange_grass",
+	{crumbly = 3, soil = 1, spreading_dirt_type = 1, es_grass = 1, not_in_craft_guide=1},
+	{"default_dry_grass.png^[colorize:#00BBFF:130", "default_clay.png", "default_clay.png^(default_dry_grass_side.png^[colorize:#00BBFF:130)"},
+	"Strange Grass",
+	stairs.dirt
+)
+
+stairs.register_all("aiden_grass", "es:aiden_grass",
+	{crumbly = 3, soil = 1, spreading_dirt_type = 1, es_grass = 1, not_in_craft_guide=1},
+	{"default_dry_grass.png^[colorize:#8A084B:160", "default_clay.png", "default_clay.png^(default_dry_grass_side.png^[colorize:#8A084B:160)"},
+	"Aiden Grass",
+	stairs.dirt
+)
+
+
 --Technic marble / Granite
 stairs.register_all("granite", "es:granite",
 	grp,
@@ -1068,19 +1080,19 @@ stairs.register_all("emerald", "es:emeraldblock",
 	grp,
 	{"emerald_block.png"},
 	"Emerald Block",
-	stairs.stone)
+	stairs.glass)
 	
 stairs.register_all("ruby", "es:rubyblock",
 	grp,
 	{"ruby_block.png"},
 	"Ruby Block",
-	stairs.stone)
+	stairs.glass)
 
 stairs.register_all("aikerum", "es:aikerumblock",
 	grp,
 	{"aikerum_block.png"},
 	"Aikerum Block",
-	stairs.stone)
+	stairs.glass)
 
 stairs.register_all("infinium", "es:infiniumblock",
 	grp,
@@ -1092,13 +1104,7 @@ stairs.register_all("purpellium", "es:purpelliumblock",
 	grp,
 	{"purpellium_block.png"},
 	"Purpellium Block",
-	stairs.stone)
-
-stairs.register_all("dirt", "default:dirt",
-	{crumbly = 2,oddly_breakable_by_hand=1,not_in_craft_guide=1},
-	{"default_dirt.png"},
-	"Dirt Block",
-	stairs.stone)	
+	stairs.glass)
 	
 stairs.register_all("boneblock", "es:boneblock",
 	{crumbly = 2,oddly_breakable_by_hand=1,not_in_craft_guide=1},
@@ -1140,8 +1146,3 @@ end
 
 
 --========================
-
-
-
-
-

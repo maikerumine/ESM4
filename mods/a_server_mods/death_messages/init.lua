@@ -29,6 +29,9 @@ dofile(minetest.get_modpath("death_messages").."/settings.txt")
 
 -- A table of quips for death messages.  The first item in each sub table is the
 -- default message used when RANDOM_MESSAGES is disabled.
+
+
+
 local messages = {}
 
 -- Toxic death messages
@@ -164,103 +167,112 @@ function get_message(mtype)
 end
 
 
+minetest.register_on_dieplayer(function(player, hitter)
 
-
-
-minetest.register_on_dieplayer(function(player)
-	local player_name = player:get_player_name()
-	local node = minetest.registered_nodes[minetest.get_node(player:getpos()).name]
-	local pos = player:getpos()
-	local death = {x=0, y=23, z=-1.5}
-	minetest.sound_play("player_death", {pos = pos, gain = 1})
-	pos.x = math.floor(pos.x + 0.5)
-	pos.y = math.floor(pos.y + 0.5)
-	pos.z = math.floor(pos.z + 0.5)
-	local param2 = minetest.dir_to_facedir(player:get_look_dir())
-	local player_name = player:get_player_name()
-	if minetest.is_singleplayer() then
-		player_name = "You"
-	end
-	
-	-- Death by lava
-	if node.name == "default:lava_source" then
-		minetest.chat_send_all(
-		string.char(0x1b).."(c@#ffffff)"..player_name .. 
-		string.char(0x1b).."(c@#ff0000)"..get_message("lava"))
-		player:setpos(death)
-	elseif node.name == "default:lava_flowing"  then
-		minetest.chat_send_all(
-		string.char(0x1b).."(c@#ffffff)"..player_name .. 
-		string.char(0x1b).."(c@#ff0000)"..get_message("lava"))
-		player:setpos(death)
-	-- Death by drowning
-	elseif player:get_breath() == 0 then
-		minetest.chat_send_all(
-		string.char(0x1b).."(c@#ffffff)"..player_name .. 
-		string.char(0x1b).."(c@#ff0000)"..get_message("water"))
-		player:setpos(death)
-	-- Death by fire
-	elseif node.name == "fire:basic_flame" then
-		minetest.chat_send_all(
-		string.char(0x1b).."(c@#ffffff)"..player_name .. 
-		string.char(0x1b).."(c@#ff0000)"..get_message("fire"))
-		player:setpos(death)
-	-- Death by Toxic water
-	elseif node.name == "es:toxic_water_source" then
-		minetest.chat_send_all(
-		string.char(0x1b).."(c@#ffffff)"..player_name .. 
-		string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
-		player:setpos(death)
-	elseif node.name == "es:toxic_water_flowing" then
-		minetest.chat_send_all(
-		string.char(0x1b).."(c@#ffffff)"..player_name .. 
-		string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
-		player:setpos(death)
-	elseif node.name == "groups:radioactive" then
-		minetest.chat_send_all(
-		string.char(0x1b).."(c@#ffffff)"..player_name .. 
-		string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
-		player:setpos(death)	
+		local player_name = player:get_player_name()
+		local node = minetest.registered_nodes[minetest.get_node(player:getpos()).name]
+		local pos = player:getpos()
+		local death = {x=0, y=23, z=-1.5}
+		minetest.sound_play("player_death", {pos = pos, gain = 1})
+		pos.x = math.floor(pos.x + 0.5)
+		pos.y = math.floor(pos.y + 0.5)
+		pos.z = math.floor(pos.z + 0.5)
+		local param2 = minetest.dir_to_facedir(player:get_look_dir())
+		local player_name = player:get_player_name()
 		
-	-- Death by something else
-	else
-		minetest.chat_send_all(
-		string.char(0x1b).."(c@#ffffff)"..player_name .. 
-		string.char(0x1b).."(c@#ff0000)"..get_message("other"))  --toospammy
-		minetest.after(0.5, function(holding)
-			player:setpos(death)  --gamebreaker?
-		end)
-	end
-	
-	
-	minetest.chat_send_all(string.char(0x1b).."(c@#000000)".."[DEATH COORDINATES] "..string.char(0x1b).."(c@#ffffff)" .. player_name .. string.char(0x1b).."(c@#000000)".." left a corpse full of diamonds here: " ..
-	minetest.pos_to_string(pos) .. string.char(0x1b).."(c@#aaaaaa)".." Come and get them!")
-	--player:setpos(death)
-	--minetest.sound_play("pacmine_death", { gain = 0.35})  NOPE!!!
-	
-end)
 
+		if minetest.is_singleplayer() then
+			player_name = "You"
+		end
+		
+			
+		-- Death by lava
+		if node.name == "default:lava_source" then
+			minetest.chat_send_all(
+			string.char(0x1b).."(c@#ffffff)"..player_name .. 
+			string.char(0x1b).."(c@#ff0000)"..get_message("lava"))
+			if player:get_hp() == 0 then end
+			--player:setpos(death)
+		elseif node.name == "default:lava_flowing"  then
+			minetest.chat_send_all(
+			string.char(0x1b).."(c@#ffffff)"..player_name .. 
+			string.char(0x1b).."(c@#ff0000)"..get_message("lava"))
+			if player:get_hp() == 0 then end
+			--player:setpos(death)
+		-- Death by drowning
+		elseif player:get_breath() == 0 then
+			minetest.chat_send_all(
+			string.char(0x1b).."(c@#ffffff)"..player_name .. 
+			string.char(0x1b).."(c@#ff0000)"..get_message("water"))
+			if player:get_hp() == 0 then end
+			--player:setpos(death)
+		-- Death by fire
+		elseif node.name == "fire:basic_flame" then
+			minetest.chat_send_all(
+			string.char(0x1b).."(c@#ffffff)"..player_name .. 
+			string.char(0x1b).."(c@#ff0000)"..get_message("fire"))
+			if player:get_hp() == 0 then end
+			--player:setpos(death)
+		-- Death by Toxic water
+		elseif node.name == "es:toxic_water_source" or node.name == "es:toxic_water_flowing" or node.name == "groups:radioactive" then
+			minetest.chat_send_all(
+			string.char(0x1b).."(c@#ffffff)"..player_name .. 
+			string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
+			minetest.after(1.5, function()  return
+				player:setpos(death)  --gamebreaker?
+			end)
+			if player:get_hp() == 0 then return end
+			--player:setpos(death)
+
+		-- Death by something else
+		else
+			--minetest.chat_send_all(
+			--string.char(0x1b).."(c@#ffffff)"..player_name .. 
+			--string.char(0x1b).."(c@#ff0000)"..get_message("other"))  --toospammy
+			--minetest.after(1.5, function()  return
+				--player:setpos(death)  --gamebreaker?
+			--end)
+			--if player:get_hp() == 0 then end
+		--player:setpos(death)
+		--minetest.sound_play("pacmine_death", { gain = 0.35})  NOPE!!!	
+		end
+
+--=====================
+--=====================
+		minetest.chat_send_all(string.char(0x1b).."(c@#000000)".."[DEATH COORDINATES] "..string.char(0x1b).."(c@#ffffff)" .. player_name .. string.char(0x1b).."(c@#000000)".." left a corpse full of diamonds here: " ..
+		minetest.pos_to_string(pos) .. string.char(0x1b).."(c@#aaaaaa)".." Come and get them!")
+--=====================
+--=====================
+	end)--after
+	
+
+
+--=====================
+--=====================
+--=====================
 --bigfoot code
 -- bigfoot547's death messages
 -- hacked by maikerumine
 
 -- get tool/item when  hitting   get_name()  returns item name (e.g. "default:stone")
+
 minetest.register_on_punchplayer(function(player, hitter)
-	local pos = player:getpos()
-	local death = {x=0, y=23, z=-1.5}
-   if not (player or hitter) then
-      return false
-   end
-   if not hitter:get_player_name() == "" then
-      return false
-   end
-   minetest.after(0, function(holding)
-      if player:get_hp() == 0 and hitter:get_player_name() ~= "" and holding == hitter:get_wielded_item() ~= "" then
-	  
+
+	
+--	local pos = player:getpos()
+--	local death = {x=0, y=23, z=-1.5}
+  if not (player or hitter) then
+  return false   end
+  if not hitter:get_player_name() == "" then
+     return false  end
+  minetest.after(0, function(holding)
+ local hp = 1
+      if player:get_hp() >= 0.01 and hitter:get_player_name() ~= "" and holding == hitter:get_wielded_item() ~= "" then
+			
 			local holding = hitter:get_wielded_item() 
 				if holding:to_string() ~= "" then  
 				local weap = holding:get_name(holding:get_name())
-					if holding then  
+					--if holding and player:get_hp() == 0 then  
 					minetest.chat_send_all(
 					string.char(0x1b).."(c@#ffffff)"..player:get_player_name()..
 					string.char(0x1b).."(c@#ff0000)".." was"..
@@ -271,12 +283,13 @@ minetest.register_on_punchplayer(function(player, hitter)
 					string.char(0x1b).."(c@#00bbff)"..weap..
 					string.char(0x1b).."(c@#00bbff)"..get_message("player"))  --TODO: make custom mob death messages
 					
-					end 	
+					--end 	
+					
 				end
-
+		
+		
 		if player=="" or hitter=="" then return end -- no killers/victims
         return true
-	
 
 		elseif hitter:get_player_name() == "" and player:get_hp() == 0 then
 					minetest.chat_send_all(
@@ -290,12 +303,27 @@ minetest.register_on_punchplayer(function(player, hitter)
 		if player=="" or hitter=="" or hitter=="*"  then return end -- no mob killers/victims
 		else
 		
-        return false
-      end
-	   
-   end)
+			if player:get_hp() == 0 then end
+        return false	
+      end  --if player and and
+   end)  --after
    
-end)
+   
+   
+   --[[
+   	while player:get_hp() == 0 and hitter:get_player_name() ~= "" and holding == hitter:get_wielded_item() ~= ""  --make more specific
+	do
+
+
+		if player:get_hp() == 0 then
+			break
+		end
+	end
+]] --  example dowhile
+
+ 
+end)  --hitter func
+
 
 -----------------------------------------------------------------------------------------------
 print("[Mod] "..title.." ["..version.."] ["..mname.."] Loaded...")
