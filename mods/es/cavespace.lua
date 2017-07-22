@@ -35,6 +35,7 @@ minetest.register_globalstep(function(dtime)
 		time = 0
 
 		local name = player:get_player_name()
+		local sky = player:get_attribute("skybox:skybox")--ADDED SKYBOX
 		local pos = player:getpos()
 	
 	       --If the player has reached Space
@@ -53,8 +54,9 @@ minetest.register_globalstep(function(dtime)
 				player:set_physics_override(1, 1, 1,true,true) -- speed, jump, gravity [default]
 				--player:set_sky({}, "regular", {}) -- Sets skybox, in this case it sets the skybox to it's default setting if and only if the player's Y value is less than the value of space.
 				--player:set_sky(color, "plain", nil)  --problem updating color
-				player:set_sky(color, "regular", nil)  --seems to work but weather color is stuck
-				skycolor.update_sky_color()
+				--player:set_sky(color, "regular", nil)  --seems to work but weather color is stuck
+				skybox.set(player, 5)--ADDED SKYBOX
+				--skycolor.update_sky_color()
 				
 
 				

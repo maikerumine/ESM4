@@ -9,13 +9,13 @@ weather = {
   next_check = 0,
   
   -- default weather recalculation interval
-  check_interval = 3300,
+  check_interval = 300,
   
   -- weather min duration
   min_duration = 240,
   
   -- weather max duration
-  max_duration = 2600,
+  max_duration = 3600,
   
   -- weather calculated end time
   end_time = nil,

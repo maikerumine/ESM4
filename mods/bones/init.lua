@@ -24,47 +24,59 @@ local bones_formspec =
 local share_bones_time = tonumber(minetest.setting_get("share_bones_time")) or 1200
 local share_bones_time_early = tonumber(minetest.setting_get("share_bones_time_early")) or share_bones_time / 4
 
+minetest.register_abm({
+	nodenames = {"bones:bones"},
+	interval = 60,
+	chance = 2,
+	action = function(pos, node)
+	--minetest.sound_play("default_gravel_footstep", { gain = 0.35})  --play to all
+	minetest.sound_play("default_gravel_footstep", {pos=target,gain=0.15,max_hear_distance = 8,})  --play to player
+	minetest.add_particlespawner(
+			1, --amount
+			1, --time
+			{x = pos.x - 0.25, y = pos.y - 0.25, z = pos.z - 0.25}, --minpos
+			{x = pos.x + 0.25, y = pos.y + 0.25, z = pos.z + 0.25}, --maxpos
+			{x = -0.8, y = -0.8, z = -0.8}, --minvel
+			{x = 0.8, y = 0.8, z = 0.8}, --maxvel
+			{x = 0, y = 0, z = 0}, --minacc
+			{x = 0, y = 0, z = 0}, --maxacc
+			4.5, --minexptime
+			10, --maxexptime
+			8, --minsize
+			10, --maxsize
+			true, --collisiondetection
+			--"default_particle.png^[colorize:#FF0000:150" --texture
+			"character_314_preview.png" --texture
+			
+	)
+	end,
+})
+
+
 minetest.register_node("bones:bones", {
 	description = "Bones",
-	--physical = true,
-	drawtype = "mesh",
-	--visual = "mesh",
+	drawtype = "mesh",  --works fine
 	mesh = "bones.x",
-	visual_scale = 0.1,
+	visual_scale = 0.09,
 	wield_image = "bones_front.png",
-	wield_scale = {x=0.3, y=0.3, z=0.3},
+	wield_scale = {x=0.5, y=0.5, z=0.5},
 	paramtype = "light",
 	selection_box = {
 		type = "fixed",
-		fixed = {-0.5, -0.25, -0.5, 0.5, 0, 0.5}
+		fixed = {-0.35, 0.18, 0, 0.35, -0.18, 1.5}
 	},
 	collision_box = {
 		type = "fixed",
-		fixed = {-0.5, -0.25, -0.5, 0.5, 0, 0.5}
+		fixed = {-0.35, 0.18, 0, 0.35, -0.18, 1.5}
 	},
+	--Name:		PencilSam
+	--Author:	sazonov.pavlik73-nickli
+	--License:  CC BY-SA 3.0
 	tiles = {
-		--{"character_1.png"},
-		--{"character_6.png"},
-		--{"character_8.png"},
-		--{"character_19.png"},
-		--{"character_20.png"},
-		--{"character_52.png"},
-		--{"character_111.png"},
 		"character_314.png",
-		--{"character_902.png"},
-		--{"character_923.png"},
-		--{"character_938.png"},
-		--{"character_932.png"},
-		--{"character_1039.png"},
-		--{"character_1073.png"},
-		--{"character_1187.png"},
-		--{"character_1121.png"},
-		--{"character_1199.png"},
-		--{"character_1202.png"},
-
 	},
 	paramtype2 = "facedir",
-	groups = {cracky = 2, choppy = 2, falling_node = 1},
+	groups = {cracky = 2, choppy = 2, falling_node = 1, oddly_breakable_by_hand = 2},
 --	groups = {dig_immediate=1},
 	sounds = default.node_sound_dirt_defaults({
 		footstep = {name="default_gravel_footstep", gain=0.5},
@@ -144,8 +156,33 @@ minetest.register_node("bones:bones", {
 		local meta = minetest.get_meta(pos)
 		local time = meta:get_int("time") + elapsed
 		if time >= share_bones_time then
-			meta:set_string("infotext", meta:get_string("owner") .. "'s old bones")
-			meta:set_string("owner", "")
+		
+		
+		
+			--meta:set_string("infotext", meta:get_string("owner") .. "'s old bones")
+			--meta:set_string("owner", "")
+ --BEGIN TIME AFTER BONE EXPIRE              if hitter and hitter:is_player() and hitter:get_inventory() then 
+ 			local time = os.date("*t");--for this on new map 
+
+ 			meta:set_string("infotext", "R.I.P. ".. 
+			meta:get_string("owner").." at ".. 
+			time.year .. "/".. 
+			time.month .. "/" .. 
+			time.day .. ", " ..
+			time.hour.. ":".. 
+			time.min .."by: ("..
+			meta:get_string("hitter_name")..")");--new old bones code
+ 			meta:set_string("owner", "") 
+		
+	--========	
+	--========	
+	--========	
+	--========	
+		
+		
+		
+		
+		
 		else
 			meta:set_int("time", time)
 			return true
@@ -192,7 +229,7 @@ local drop = function(pos, itemstack)
 	end
 end
 
-minetest.register_on_dieplayer(function(player)
+minetest.register_on_dieplayer(function(player, hitter, self)  --added , hitter, self
 
 	local bones_mode = minetest.setting_get("bones_mode") or "bones"
 	if bones_mode ~= "bones" and bones_mode ~= "drop" and bones_mode ~= "keep" then
@@ -266,7 +303,20 @@ minetest.register_on_dieplayer(function(player)
 	meta:set_string("owner", player_name)
 
 	if share_bones_time ~= 0 then
-		meta:set_string("infotext", player_name .. "'s fresh bones")
+	
+	
+		--meta:set_string("infotext", player_name .. "'s fresh bones")
+ 		local time = os.date("*t"); 
+ 		meta:set_string("infotext", player_name.." was killed".." at ".. time.year .. "/".. time.month .. "/" .. time.day .. ", " ..time.hour.. ":".. time.min .." by:("..meta:get_string("hitter_name")..")"); 
+
+
+
+--=======
+
+
+--=======
+--=======
+--=======
 
 		if share_bones_time_early == 0 or not minetest.is_protected(pos, player_name) then
 			meta:set_int("time", 0)
