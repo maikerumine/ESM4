@@ -1,0 +1,107 @@
+#Green kelps' sand's max height
+sea_plants_sand_kelp_green_max (Green kelps' sand's max height) int -14
+
+#Green kelps' sand's min height
+sea_plants_sand_kelp_green_min (Green kelps' sand's min height) int -31000
+
+#Green kelps' dirt's max height
+sea_plants_dirt_kelp_green_max (Green kelps' dirt's max height) int -14
+
+#Green kelps' dirt's min height
+sea_plants_dirt_kelp_green_min (Green kelps' dirt's min height) int -31000
+
+#Brown kelps' sand's max height
+sea_plants_sand_kelp_brown_max (Brown kelps' sand's max height) int -14
+
+#Brown kelps' sand's min height
+sea_plants_sand_kelp_brown_min (Brown kelps' sand's min height) int -31000
+
+#Brown kelps' dirt's max height
+sea_plants_dirt_kelp_brown_max (Brown kelps' dirt's max height) int -14
+
+#Brown kelps' dirt's min height
+sea_plants_dirt_kelp_brown_min (Brown kelps' dirt's min height) int -31000
+
+#Green grasses' sand's max height
+sea_plants_sand_sea_grass_green_max (Green grasses' sand's max height) int -14
+
+#Green grasses' sand's min height
+sea_plants_sand_sea_grass_green_min (Green grasses' sand's min height) int -31000
+
+#Green grasses' dirt's max height
+sea_plants_dirt_sea_grass_green_max (Green grasses' dirt's max height) int -14
+
+#Green grasses' dirt's min height
+sea_plants_dirt_sea_grass_green_min (Green grasses' dirt's min height) int -31000
+
+#Red grasses' sand's max height
+sea_plants_sand_sea_grass_red_max (Red grasses' sand's max height) int -14
+
+#Red grasses' sand's min height
+sea_plants_sand_sea_grass_redn_min (Red grasses' sand's min height) int -31000
+
+#Red grasses' dirt's max height
+sea_plants_dirt_sea_grass_red_max (Red grasses' dirt's max height) int -14
+
+#Red grasses' dirt's min height
+sea_plants_dirt_sea_grass_red_min (Red grasses' dirt's min height) int -31000
+
+#Green kelps' sand's ABM interval 
+sea_plants_sand_kelp_green_interval (Green kelps' sand's ABM interval) int 12
+
+#Green kelps' sand's ABM chance
+sea_plants_sand_kelp_green_chance (Green kelps' sand's ABM chance) int 12
+
+#Green kelps' dirt's ABM interval
+sea_plants_dirt_kelp_green_interval (Green kelps' dirt's ABM interval) int 12
+
+#Green kelps' dirt's ABM chance
+sea_plants_dirt_kelp_green_chance (Green kelps' dirt's ABM chance) int 12
+
+#Green kelps' ABM interval
+sea_plants_kelp_green_interval (Green kelps' ABM interval) int 6
+
+#Green kelps' ABM chance
+sea_plants_kelp_green_chance (Green kelps' ABM chance) int 3
+
+#Brown kelps' sand's ABM interval 
+sea_plants_sand_kelp_brown_interval (Brown kelps' sand's ABM interval) int 12
+
+#Brown kelps' sand's ABM chance
+sea_plants_sand_kelp_brown_chance (Brown kelps' sand's ABM chance) int 12
+
+#Brown kelps' dirt's ABM interval
+sea_plants_dirt_kelp_brown_interval (Brown kelps' dirt's ABM interval) int 12
+
+#Brown kelps' dirt's ABM chance
+sea_plants_dirt_kelp_brown_chance (Brown kelps' dirt's ABM chance) int 12
+
+#Brown kelps' ABM interval
+sea_plants_kelp_brown_interval (Brown kelps' ABM interval) int 6
+
+#Brown kelps' ABM chance
+sea_plants_kelp_brown_chance (Brown kelps' ABM chance) int 3
+
+#Green grasses' sand's ABM interval 
+sea_plants_sand_sea_grass_green_interval (Green grasses' sand's ABM interval) int 12
+
+#Green grasses' sand's ABM chance
+sea_plants_sand_sea_grass_green_chance (Green grasses' sand's ABM chance) int 12
+
+#Green grasses' dirt's ABM interval
+sea_plants_dirt_sea_grass_green_interval (Green grasses' dirt's ABM interval) int 12
+
+#Green grasses' dirt's ABM chance
+sea_plants_dirt_sea_grass_green_chance (Green grasses' dirt's ABM chance) int 12
+
+#Red grasses' sand's ABM interval 
+sea_plants_sand_sea_grass_red_interval (Red grasses' sand's ABM interval) int 12
+
+#Red grasses' sand's ABM chance
+sea_plants_sand_sea_grass_redn_chance (Red grasses' sand's ABM chance) int 12
+
+#Red grasses' dirt's ABM interval
+sea_plants_dirt_sea_grass_red_interval (Red grasses' dirt's ABM interval) int 12
+
+#Red grasses' dirt's ABM chance
+sea_plants_dirt_sea_grass_red_chance (Red grasses' dirt's ABM chance) int 12

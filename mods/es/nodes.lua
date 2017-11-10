@@ -50,7 +50,7 @@ minetest.override_item('default:stone_with_mese', {
 --compressed cobble
 minetest.register_node("es:compressedcobble", {
 	description = "Compressed Cobblestone",
-	tiles = {"default_cobble.png^default_ladder.png^[colorize:#000000:170"},
+	tiles = {"default_cobble.png^default_ladder_wood.png^[colorize:#000000:170"},
 	is_ground_content = false,
 	groups = {cracky = 3, stone = 2},
 	sounds = default.node_sound_stone_defaults(),
@@ -73,7 +73,8 @@ hurt_cactus();
 --TECHNIC NODES
 minetest.register_node( "es:granite", {
 	description = "Granite",
-	tiles = { "technic_granite.png" },
+	--tiles = { "technic_granite.png" },
+	tiles = { "mcl_core_granite.png" },
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
@@ -81,7 +82,8 @@ minetest.register_node( "es:granite", {
 
 minetest.register_node( "es:granite_bricks", {
 	description = "Granite Bricks",
-	tiles = { "technic_granite_bricks.png",},
+	--tiles = { "technic_granite_bricks.png",},
+	tiles = { "mcl_core_granite_smooth.png",},
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
@@ -89,7 +91,8 @@ minetest.register_node( "es:granite_bricks", {
 
 minetest.register_node( "es:marble", {
 	description = "Marble",
-	tiles = { "technic_marble.png" },
+	--tiles = { "technic_marble.png" },
+	tiles = { "mcl_core_diorite.png" },
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
@@ -97,7 +100,8 @@ minetest.register_node( "es:marble", {
 
 minetest.register_node( "es:marble_bricks", {
 	description = "Marble Bricks",
-	tiles = { "technic_marble_bricks.png" },
+	--tiles = { "technic_marble_bricks.png" },
+	tiles = { "mcl_core_diorite_smooth.png" },
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
@@ -422,13 +426,15 @@ minetest.register_node("es:messymese", {
 
 minetest.register_node("es:what", {
 	description = "The What Block - Dig for random gift",
-	drawtype = "glasslike_framed_optional^bubble.png",
-	tiles = {"default_glass.png^bubble.png", "default_glass_detail.png^bubble.png"},
-	inventory_image = minetest.inventorycube("default_glass.png"),
+	drawtype = "glasslike_framed_optional",
+	tiles = {"default_obsidian_glass.png^bubble.png", "default_obsidian_glass_detail.png^bubble.png"},
+	inventory_image = minetest.inventorycube("default_obsidian_glass.png^bubble.png"),
 	paramtype = "light",
-	sunlight_propagates = true,
+	paramtype2 = "glasslikeliquidlevel",
 	is_ground_content = false,
-	groups = {crumbly=3,},
+	sunlight_propagates = true,
+	sounds = default.node_sound_glass_defaults(),
+	groups = {cracky = 3},
 	drop = {
 		max_items = 2,
 		items = {
@@ -492,7 +498,7 @@ end
 minetest.register_node("es:vault", {
 	description = "Use this to store MANY items.",
 	tiles = { "vault.png", "vault.png", "vault.png",
-		"vault.png", "vault.png",  "(vault.png^default_nc_front.png^[colorize:#00FF00:110)"},
+		"vault.png", "vault.png",  "(vault.png^nyancat_front.png^[colorize:#00FF00:110)"},
 	inventory_image = "vault.png",
 	light_source = 14,
 	paramtype2 = "facedir",

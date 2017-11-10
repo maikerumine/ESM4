@@ -478,31 +478,31 @@ end
 
 --======
 stairs.register_all("tree", "default:tree",
-	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3 ,not_in_craft_guide=1},
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
 	{"default_tree_top.png"},
 	"Wooden",
 	stairs.wood)
 	
 stairs.register_all("jungletree", "default:jungletree",
-	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3,not_in_craft_guide=1},
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
 	{"default_jungletree_top.png"},
 	"Wooden",
 	stairs.wood)
 
 stairs.register_all("pine_tree", "default:pine_tree",
-	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3,not_in_craft_guide=1},
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
 	{"default_pine_tree_top.png"},
 	"Wooden",
 	stairs.wood)
 
 stairs.register_all("acacia_tree", "default:acacia_tree",
-	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3,not_in_craft_guide=1},
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
 	{"default_acacia_tree_top.png"},
 	"Wooden",
 	stairs.wood)
 
 stairs.register_all("aspen_tree", "default:aspen_tree",
-	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3,not_in_craft_guide=1},
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
 	{"default_aspen_tree_top.png"},
 	"Wooden",
 	stairs.wood)
@@ -513,7 +513,7 @@ stairs.register_all("aspen_tree", "default:aspen_tree",
 stairs.register_all(
 	"wood",
 	"default:wood",
-	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 2, not_in_craft_guide=1},
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
 	{"default_wood.png"},
 	"Wooden Stair",
 	"Wooden Slab",
@@ -523,7 +523,7 @@ stairs.register_all(
 stairs.register_all(
 	"junglewood",
 	"default:junglewood",
-	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 2, not_in_craft_guide=1},
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
 	{"default_junglewood.png"},
 	"Jungle Wood Stair",
 	"Jungle Wood Slab",
@@ -533,7 +533,7 @@ stairs.register_all(
 stairs.register_all(
 	"pine_wood",
 	"default:pine_wood",
-	{choppy = 3, oddly_breakable_by_hand = 2, flammable = 3, not_in_craft_guide=1},
+	{choppy = 3, oddly_breakable_by_hand = 2, flammable = 3},
 	{"default_pine_wood.png"},
 	"Pine Wood Stair",
 	"Pine Wood Slab",
@@ -543,7 +543,7 @@ stairs.register_all(
 stairs.register_stair_and_slab(
 	"acacia_wood",
 	"default:acacia_wood",
-	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 2, not_in_craft_guide=1},
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
 	{"default_acacia_wood.png"},
 	"Acacia Wood Stair",
 	"Acacia Wood Slab",
@@ -553,7 +553,7 @@ stairs.register_stair_and_slab(
 stairs.register_all(
 	"aspen_wood",
 	"default:aspen_wood",
-	{choppy = 3, oddly_breakable_by_hand = 2, flammable = 3, not_in_craft_guide=1},
+	{choppy = 3, oddly_breakable_by_hand = 2, flammable = 3},
 	{"default_aspen_wood.png"},
 	"Aspen Wood Stair",
 	"Aspen Wood Slab",
@@ -563,7 +563,7 @@ stairs.register_all(
 stairs.register_all(
 	"stone",
 	"default:stone",
-	{cracky = 3, not_in_craft_guide=1},
+	{cracky = 3},
 	{"default_stone.png"},
 	"Stone Stair",
 	"Stone Slab",
@@ -584,7 +584,7 @@ stairs.register_all(
 	"mossycobble",
 	--nil,
 	"default:mossycobble",
-	{cracky = 3, not_in_craft_guide=1},
+	{cracky = 3},
 	{"default_mossycobble.png"},
 	"Mossy Cobblestone Stair",
 	"Mossy Cobblestone Slab",
@@ -594,7 +594,7 @@ stairs.register_all(
 stairs.register_all(
 	"stonebrick",
 	"default:stonebrick",
-	{cracky = 2, not_in_craft_guide=1},
+	{cracky = 2},
 	{"default_stone_brick.png"},
 	"Stone Brick Stair",
 	"Stone Brick Slab",
@@ -604,7 +604,7 @@ stairs.register_all(
 stairs.register_all(
 	"stone_block",
 	"default:stone_block",
-	{cracky = 2, not_in_craft_guide=1},
+	{cracky = 2},
 	{"default_stone_block.png"},
 	"Stone Block Stair",
 	"Stone Block Slab",
@@ -614,7 +614,7 @@ stairs.register_all(
 stairs.register_all(
 	"desert_stone",
 	"default:desert_stone",
-	{cracky = 3, not_in_craft_guide=1},
+	{cracky = 3},
 	{"default_desert_stone.png"},
 	"Desert Stone Stair",
 	"Desert Stone Slab",
@@ -624,7 +624,7 @@ stairs.register_all(
 stairs.register_all(
 	"desert_cobble",
 	"default:desert_cobble",
-	{cracky = 3, not_in_craft_guide=1},
+	{cracky = 3},
 	{"default_desert_cobble.png"},
 	"Desert Cobblestone Stair",
 	"Desert Cobblestone Slab",
@@ -634,7 +634,7 @@ stairs.register_all(
 stairs.register_all(
 	"desert_stonebrick",
 	"default:desert_stonebrick",
-	{cracky = 2, not_in_craft_guide=1},
+	{cracky = 2},
 	{"default_desert_stone_brick.png"},
 	"Desert Stone Brick Stair",
 	"Desert Stone Brick Slab",
@@ -644,7 +644,7 @@ stairs.register_all(
 stairs.register_all(
 	"desert_stone_block",
 	"default:desert_stone_block",
-	{cracky = 2, not_in_craft_guide=1},
+	{cracky = 2},
 	{"default_desert_stone_block.png"},
 	"Desert Stone Block Stair",
 	"Desert Stone Block Slab",
@@ -654,7 +654,7 @@ stairs.register_all(
 stairs.register_all(
 	"sandstone",
 	"default:sandstone",
-	{crumbly = 1, cracky = 3, not_in_craft_guide=1},
+	{crumbly = 1, cracky = 3},
 	{"default_sandstone.png"},
 	"Sandstone Stair",
 	"Sandstone Slab",
@@ -664,7 +664,7 @@ stairs.register_all(
 stairs.register_all(
 	"sandstonebrick",
 	"default:sandstonebrick",
-	{cracky = 2, not_in_craft_guide=1},
+	{cracky = 2},
 	{"default_sandstone_brick.png"},
 	"Sandstone Brick Stair",
 	"Sandstone Brick Slab",
@@ -674,7 +674,7 @@ stairs.register_all(
 stairs.register_all(
 	"sandstone_block",
 	"default:sandstone_block",
-	{cracky = 2, not_in_craft_guide=1},
+	{cracky = 2},
 	{"default_sandstone_block.png"},
 	"Sandstone Block Stair",
 	"Sandstone Block Slab",
@@ -684,7 +684,7 @@ stairs.register_all(
 stairs.register_all(
 	"desert_sandstone",
 	"default:desert_sandstone",
-	{crumbly = 1, cracky = 3, not_in_craft_guide=1},
+	{crumbly = 1, cracky = 3},
 	{"default_desert_sandstone.png"},
 	"Desert Sandstone Stair",
 	"Desert Sandstone Slab",
@@ -694,7 +694,7 @@ stairs.register_all(
 stairs.register_all(
 	"desert_sandstone_brick",
 	"default:desert_sandstone_brick",
-	{cracky = 2, not_in_craft_guide=1},
+	{cracky = 2},
 	{"default_desert_sandstone_brick.png"},
 	"Desert Sandstone Brick Stair",
 	"Desert Sandstone Brick Slab",
@@ -704,7 +704,7 @@ stairs.register_all(
 stairs.register_all(
 	"desert_sandstone_block",
 	"default:desert_sandstone_block",
-	{cracky = 2, not_in_craft_guide=1},
+	{cracky = 2},
 	{"default_desert_sandstone_block.png"},
 	"Desert Sandstone Block Stair",
 	"Desert Sandstone Block Slab",
@@ -714,7 +714,7 @@ stairs.register_all(
 stairs.register_all(
 	"silver_sandstone",
 	"default:silver_sandstone",
-	{crumbly = 1, cracky = 3, not_in_craft_guide=1},
+	{crumbly = 1, cracky = 3},
 	{"default_silver_sandstone.png"},
 	"Silver Sandstone Stair",
 	"Silver Sandstone Slab",
@@ -724,7 +724,7 @@ stairs.register_all(
 stairs.register_all(
 	"silver_sandstone_brick",
 	"default:silver_sandstone_brick",
-	{cracky = 2, not_in_craft_guide=1},
+	{cracky = 2},
 	{"default_silver_sandstone_brick.png"},
 	"Silver Sandstone Brick Stair",
 	"Silver Sandstone Brick Slab",
@@ -734,7 +734,7 @@ stairs.register_all(
 stairs.register_all(
 	"silver_sandstone_block",
 	"default:silver_sandstone_block",
-	{cracky = 2, not_in_craft_guide=1},
+	{cracky = 2},
 	{"default_silver_sandstone_block.png"},
 	"Silver Sandstone Block Stair",
 	"Silver Sandstone Block Slab",
@@ -745,7 +745,7 @@ stairs.register_all(
 --function stairs.register_all(subname, recipeitem, groups, images, desc, snds, alpha,light)
 --[[
 stairs.register_all("meselamp", "default:meselamp",
-	{cracky = 3, oddly_breakable_by_hand = 3,not_in_craft_guide=1},
+	{cracky = 3, oddly_breakable_by_hand = 3},
 	{"default_meselamp.png"},
 	"Meselamp",
 	stairs.glass,
@@ -758,7 +758,7 @@ stairs.register_all("meselamp", "default:meselamp",
 stairs.register_all(
 	"meselamp",
 	"default:meselamp",
-	{cracky = 3, not_in_craft_guide=1},
+	{cracky = 3},
 	{"default_meselamp.png"},
 	"Meselamp",
 	stairs.glass,
@@ -767,13 +767,13 @@ stairs.register_all(
 )
 
 stairs.register_all("glass", "default:glass",
-	{cracky = 3, oddly_breakable_by_hand = 3, not_in_craft_guide=1},
+	{cracky = 3, oddly_breakable_by_hand = 3},
 	{"default_glass.png"},
 	"Glass",
 	stairs.glass)
 
 stairs.register_all("obsidian_glass", "default:obsidian_glass",
-	{cracky = 2,not_in_craft_guide=1},
+	{cracky = 2},
 	{"default_obsidian_glass.png"},
 	"Obsidian Glass",
 	stairs.glass)
@@ -782,7 +782,7 @@ stairs.register_all("obsidian_glass", "default:obsidian_glass",
 stairs.register_all(
 	"obsidian",
 	"default:obsidian",
-	{cracky = 1, level = 2, not_in_craft_guide=1},
+	{cracky = 1, level = 2},
 	{"default_obsidian.png"},
 	"Obsidian Stair",
 	"Obsidian Slab",
@@ -792,7 +792,7 @@ stairs.register_all(
 stairs.register_all(
 	"obsidianbrick",
 	"default:obsidianbrick",
-	{cracky = 1, level = 2, not_in_craft_guide=1},
+	{cracky = 1, level = 2},
 	{"default_obsidian_brick.png"},
 	"Obsidian Brick Stair",
 	"Obsidian Brick Slab",
@@ -802,7 +802,7 @@ stairs.register_all(
 stairs.register_all(
 	"obsidian_block",
 	"default:obsidian_block",
-	{cracky = 1, level = 2, not_in_craft_guide=1},
+	{cracky = 1, level = 2},
 	{"default_obsidian_block.png"},
 	"Obsidian Block Stair",
 	"Obsidian Block Slab",
@@ -812,7 +812,7 @@ stairs.register_all(
 stairs.register_all(
 	"brick",
 	"default:brick",
-	{cracky = 3, not_in_craft_guide=1},
+	{cracky = 3},
 	{"default_brick.png"},
 	"Brick Stair",
 	"Brick Slab",
@@ -822,7 +822,7 @@ stairs.register_all(
 stairs.register_all(
 	"straw",
 	"farming:straw",
-	{snappy = 3, flammable = 4, not_in_craft_guide=1},
+	{snappy = 3, flammable = 4},
 	{"farming_straw.png"},
 	"Straw Stair",
 	"Straw Slab",
@@ -832,7 +832,7 @@ stairs.register_all(
 stairs.register_all(
 	"steelblock",
 	"default:steelblock",
-	{cracky = 1, level = 2, not_in_craft_guide=1},
+	{cracky = 1, level = 2},
 	{"default_steel_block.png"},
 	"Steel Block Stair",
 	"Steel Block Slab",
@@ -842,7 +842,7 @@ stairs.register_all(
 stairs.register_all(
 	"copperblock",
 	"default:copperblock",
-	{cracky = 1, level = 2, not_in_craft_guide=1},
+	{cracky = 1, level = 2},
 	{"default_copper_block.png"},
 	"Copper Block Stair",
 	"Copper Block Slab",
@@ -852,7 +852,7 @@ stairs.register_all(
 stairs.register_all(
 	"bronzeblock",
 	"default:bronzeblock",
-	{cracky = 1, level = 2, not_in_craft_guide=1},
+	{cracky = 1, level = 2},
 	{"default_bronze_block.png"},
 	"Bronze Block Stair",
 	"Bronze Block Slab",
@@ -862,7 +862,7 @@ stairs.register_all(
 stairs.register_all(
 	"goldblock",
 	"default:goldblock",
-	{cracky = 1, not_in_craft_guide=1},
+	{cracky = 1},
 	{"default_gold_block.png"},
 	"Gold Block Stair",
 	"Gold Block Slab",
@@ -870,7 +870,7 @@ stairs.register_all(
 )
 
 stairs.register_all("diamondblock", "default:diamondblock",
-	{cracky = 1, level = 3, not_in_craft_guide=1},
+	{cracky = 1, level = 3},
 	{"default_diamond_block.png"},
 	"Diamond",
 	stairs.stone)
@@ -878,7 +878,7 @@ stairs.register_all("diamondblock", "default:diamondblock",
 stairs.register_all(
 	"ice",
 	"default:ice",
-	{cracky = 3, puts_out_fire = 1, cools_lava = 1, not_in_craft_guide=1},
+	{cracky = 3, puts_out_fire = 1, cools_lava = 1},
 	{"default_ice.png"},
 	"Ice Stair",
 	"Ice Slab",
@@ -888,7 +888,7 @@ stairs.register_all(
 stairs.register_all(
 	"snowblock",
 	"default:snowblock",
-	{crumbly = 3, puts_out_fire = 1, cools_lava = 1, snowy = 1, not_in_craft_guide=1},
+	{crumbly = 3, puts_out_fire = 1, cools_lava = 1, snowy = 1},
 	{"default_snow.png"},
 	"Snow Block Stair",
 	"Snow Block Slab",
@@ -900,7 +900,7 @@ stairs.register_all(
 )
 
 stairs.register_all("dirt", "default:dirt",
-	{crumbly = 3, soil = 1, not_in_craft_guide=1},
+	{crumbly = 3, soil = 1},
 	{"default_dirt.png"},
 	"Dirt",
 	stairs.dirt
@@ -914,14 +914,14 @@ stairs.register_all("dirt_with_grass", "default:dirt_with_grass",
 )
 	
 stairs.register_all("dirt_with_snow", "default:dirt_with_snow",
-	 {crumbly = 3, soil = 1, spreading_dirt_type = 1, not_in_craft_guide=1},
+	 {crumbly = 3, soil = 1, spreading_dirt_type = 1},
 	{"default_snow.png", "default_dirt.png", "default_dirt.png^default_snow_side.png"},
 	"Dirt with grass with snow",
 	stairs.dirt
 )
 	
 stairs.register_all("dirt_with_dry_grass", "default:dirt_with_dry_grass",
-	{crumbly = 3, soil = 1, spreading_dirt_type = 1, not_in_craft_guide=1},
+	{crumbly = 3, soil = 1, spreading_dirt_type = 1},
 	{"default_dry_grass.png", "default_dirt.png", "default_dirt.png^default_dry_grass_side.png"},
 	"Dirt with dry grass",
 	stairs.dirt
@@ -954,16 +954,33 @@ if minetest.get_modpath("cblocks") then
 
 for i = 1, #colours, 1 do
 
--- wood stair
+-- stonebrick / clay / wood / glass /  -stair
+stairs.register_all(colours[i][1] .. "_stonebrick", "cblocks:stonebrick_" .. colours[i][1],
+	{cracky = 2},
+	{"default_stone_brick.png^[colorize:" .. colours[i][3]},
+	colours[i][2] .. " Stonebrick",
+	stairs.stone)
+	
+stairs.register_all(colours[i][1] .. "_stone", "cblocks:stone_" .. colours[i][1],
+	{cracky = 2},
+	{"default_stone.png^[colorize:" .. colours[i][3]},
+	colours[i][2] .. " Stonebrick",
+	stairs.stone)
+	
+stairs.register_all(colours[i][1] .. "_clay", "cblocks:clay_" .. colours[i][1],
+	{crumbly = 2, oddly_breakable_by_hand = 2},
+	{"default_clay.png^[colorize:" .. colours[i][3]},
+	colours[i][2] .. " Clay",
+	stairs.dirt)
 
 stairs.register_all(colours[i][1] .. "_wood", "cblocks:wood_" .. colours[i][1],
-	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3,not_in_craft_guide=1},
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
 	{"default_wood.png^[colorize:" .. colours[i][3]},
 	colours[i][2] .. " Wooden",
 	stairs.wood)
 
 stairs.register_all(colours[i][1] .. "_glass", "cblocks:glass_" .. colours[i][1],
-	{cracky = 3, oddly_breakable_by_hand = 3,not_in_craft_guide=1},
+	{cracky = 3, oddly_breakable_by_hand = 3},
 	{"cblocks.png^[colorize:" .. colours[i][3]},
 	colours[i][2] .. " Glass",
 	stairs.glass, true)
@@ -977,7 +994,7 @@ end
 if minetest.get_modpath("farming") then
 
 stairs.register_all("straw", "farming:straw",
-	{snappy = 3, flammable = 4,not_in_craft_guide=1},
+	{snappy = 3, flammable = 4},
 	{"farming_straw.png"},
 	"Straw",
 	stairs.leaves)
@@ -988,7 +1005,7 @@ end
 
 if mobs and mobs.mod and mobs.mod == "redo" then
 
-grp = {crumbly = 3, flammable = 2,not_in_craft_guide=1}
+grp = {crumbly = 3, flammable = 2}
 
 stairs.register_all("cheeseblock", "mobs:cheeseblock",
 	grp,
@@ -1012,7 +1029,7 @@ if minetest.get_modpath("wool") then
 for i = 1, #colours, 1 do
 
 stairs.register_all("wool_" .. colours[i][1], "wool:" .. colours[i][1],
-	{snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3,not_in_craft_guide=1},
+	{snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3},
 	{"wool_" .. colours[i][1] .. ".png"},
 	colours[i][2] .. " Wool",
 	stairs.stone)
@@ -1025,25 +1042,25 @@ end
 
 if minetest.get_modpath("es") then
 
-grp = {cracky = 3,not_in_craft_guide=1}
+grp = {cracky = 3}
 
 --es grass
 stairs.register_all("dry_dirt", "es:dry_dirt",
-	{crumbly = 3, soil = 1, spreading_dirt_type = 1, not_in_craft_guide=1},
+	{crumbly = 3, soil = 1, spreading_dirt_type = 1},
 	{"default_dry_dirt.png"},
 	"Some dry dirt",
 	stairs.dirt
 )
 
 stairs.register_all("strange_grass", "es:strange_grass",
-	{crumbly = 3, soil = 1, spreading_dirt_type = 1, es_grass = 1, not_in_craft_guide=1},
+	{crumbly = 3, soil = 1, spreading_dirt_type = 1, es_grass = 1},
 	{"default_dry_grass.png^[colorize:#00BBFF:130", "default_clay.png", "default_clay.png^(default_dry_grass_side.png^[colorize:#00BBFF:130)"},
 	"Strange Grass",
 	stairs.dirt
 )
 
 stairs.register_all("aiden_grass", "es:aiden_grass",
-	{crumbly = 3, soil = 1, spreading_dirt_type = 1, es_grass = 1, not_in_craft_guide=1},
+	{crumbly = 3, soil = 1, spreading_dirt_type = 1, es_grass = 1},
 	{"default_dry_grass.png^[colorize:#8A084B:160", "default_clay.png", "default_clay.png^(default_dry_grass_side.png^[colorize:#8A084B:160)"},
 	"Aiden Grass",
 	stairs.dirt
@@ -1053,25 +1070,29 @@ stairs.register_all("aiden_grass", "es:aiden_grass",
 --Technic marble / Granite
 stairs.register_all("granite", "es:granite",
 	grp,
-	{"technic_granite.png"},
+	--{"technic_granite.png"},
+	{"mcl_core_granite.png"},
 	"Granite Block",	
 	stairs.stone)
 
 stairs.register_all("marble", "es:marble",
 	grp,
-	{"technic_marble.png"},
+	--{"technic_marble.png"},
+	{"mcl_core_diorite.png"},
 	"Marble Block",
 	stairs.stone)
 
 stairs.register_all("granite_bricks", "es:granite_bricks",
 	grp,
-	{"technic_granite_bricks.png"},
+	--{"technic_granite_bricks.png"},
+	{"mcl_core_diorite_smooth.png"},
 	"Granite Bricks Block",
 	stairs.stone)
 	
 stairs.register_all("marble_bricks", "es:marble_bricks",
 	grp,
-	{"technic_marble_bricks.png"},
+	--{"technic_marble_bricks.png"},
+	{"mcl_core_granite_smooth.png"},
 	"Marble Bricks Block",
 	stairs.stone)
 	
@@ -1107,13 +1128,13 @@ stairs.register_all("purpellium", "es:purpelliumblock",
 	stairs.glass)
 	
 stairs.register_all("boneblock", "es:boneblock",
-	{crumbly = 2,oddly_breakable_by_hand=1,not_in_craft_guide=1},
+	{crumbly = 2,oddly_breakable_by_hand=1},
 	{"bones_front.png"},
 	"Bone Block",
 	stairs.stone)
 
 stairs.register_all("messymese", "es:messymese",
-	{crumbly = 2,oddly_breakable_by_hand=1,not_in_craft_guide=1},
+	{crumbly = 2,oddly_breakable_by_hand=1},
 	{"default_clay.png^bubble.png^mese_cook_mese_crystal.png"},
 	"messymese",
 	stairs.stone)	
@@ -1122,7 +1143,7 @@ end
 
 if minetest.get_modpath("quartz") then
 
-grp = {cracky=3, oddly_breakable_by_hand=1,not_in_craft_guide=1}
+grp = {cracky=3, oddly_breakable_by_hand=1}
 
 --Quartz
 stairs.register_all("quartzblock", "quartz:block",

@@ -29,7 +29,7 @@ dofile(modpath.."/kill.lua")
 dofile(modpath.."/shields.lua")
 dofile(modpath.."/shutdown.lua")
 dofile(modpath.."/spawn.lua")
-dofile(modpath.."/crushingfurnace.lua")
+--dofile(modpath.."/crushingfurnace.lua")
 dofile(modpath.."/tools.lua")
 dofile(modpath.."/biome.lua")
 --[[
@@ -61,7 +61,7 @@ end
 
 --MOREBLOCKS / STAIRSPLUS SUPPORT
 --if moreblocks then
---dofile(modpath.."/mostair.lua")
+dofile(modpath.."/mostair.lua")
 --end
 
 --STAIR SUPPORT

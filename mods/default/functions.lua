@@ -1,5 +1,3 @@
--- mods/default/functions.lua
-
 --
 -- Sounds
 --
@@ -117,6 +115,21 @@ function default.node_sound_water_defaults(table)
 	return table
 end
 
+function default.node_sound_snow_defaults(table)
+	table = table or {}
+	table.footstep = table.footstep or
+			{name = "default_snow_footstep", gain = 0.2}
+	table.dig = table.dig or
+			{name = "default_snow_footstep", gain = 0.3}
+	table.dug = table.dug or
+			{name = "default_snow_footstep", gain = 0.3}
+	table.place = table.place or
+			{name = "default_place_node", gain = 1.0}
+	default.node_sound_defaults(table)
+	return table
+end
+
+
 --
 -- Lavacooling
 --
@@ -136,15 +149,18 @@ if minetest.settings:get_bool("enable_lavacooling") ~= false then
 		label = "Lava cooling",
 		nodenames = {"default:lava_source", "default:lava_flowing"},
 		neighbors = {"group:cools_lava", "group:water"},
-		interval = 1,
+		interval = 2,
 		chance = 2,
 		catch_up = false,
-		action = default.cool_lava,
+		action = function(...)
+			default.cool_lava(...)
+		end,
 	})
 end
 
+
 --
--- optimized helper to put all items in an inventory into a drops list
+-- Optimized helper to put all items in an inventory into a drops list
 --
 
 function default.get_inventory_drops(pos, inventory, drops)
@@ -159,11 +175,12 @@ function default.get_inventory_drops(pos, inventory, drops)
 	end
 end
 
+
 --
 -- Papyrus and cactus growing
 --
 
--- wrapping the functions in abm action is necessary to make overriding them possible
+-- Wrapping the functions in ABM action is necessary to make overriding them possible
 
 function default.grow_cactus(pos, node)
 	if node.param2 >= 4 then
@@ -222,7 +239,9 @@ minetest.register_abm({
 	neighbors = {"group:sand"},
 	interval = 12,
 	chance = 83,
-	action = default.grow_cactus
+	action = function(...)
+		default.grow_cactus(...)
+	end
 })
 
 minetest.register_abm({
@@ -231,12 +250,14 @@ minetest.register_abm({
 	neighbors = {"default:dirt", "default:dirt_with_grass"},
 	interval = 14,
 	chance = 71,
-	action = default.grow_papyrus
+	action = function(...)
+		default.grow_papyrus(...)
+	end
 })
 
 
 --
--- dig upwards
+-- Dig upwards
 --
 
 function default.dig_up(pos, node, digger)
@@ -291,7 +312,7 @@ function default.register_fence(name, def)
 		groups = {},
 	}
 	for k, v in pairs(default_fields) do
-		if not def[k] then
+		if def[k] == nil then
 			def[k] = v
 		end
 	end
@@ -379,6 +400,7 @@ function default.register_leafdecay(def)
 		})
 	end
 end
+
 
 --
 -- Convert dirt to something that fits the environment
@@ -532,7 +554,7 @@ minetest.register_abm({
 
 
 --
--- NOTICE: This method is not an official part of the API yet!
+-- NOTICE: This method is not an official part of the API yet.
 -- This method may change in future.
 --
 
@@ -552,7 +574,7 @@ function default.can_interact_with_node(player, pos)
 		return true
 	end
 
-	-- is player wielding the right key?
+	-- Is player wielding the right key?
 	local item = player:get_wielded_item()
 	if item:get_name() == "default:key" then
 		local key_meta = item:get_meta()

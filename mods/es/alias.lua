@@ -22,10 +22,10 @@ minetest.register_alias("vendor:depositor", "smartshop:shop")
 minetest.register_alias("vendorgoldblock:vendor", "smartshop:shop")
 minetest.register_alias("vendorgoldblock:depositor", "smartshop:shop")
 
---[[
-minetest.register_alias("esmobs:cobweb", "mobs:cobweb")
-]]
 
+minetest.register_alias("esmobs:cobweb", "mobs:cobweb")
+
+minetest.register_alias("mg_villages:torch", "default:torch")
 
 --esmobs pathfinding
 minetest.register_alias("esmobs:stone", "default:leaves")
@@ -70,12 +70,31 @@ minetest.register_alias("es:shield_nomad", "shields:shield_nomad")
 minetest.register_alias("es:shield_rusher", "shields:shield_rusher")
 minetest.register_alias("es:shield_veteran", "shields:shield_veteran")
 
---minetest.register_alias("doors:door_wood_t_1", "default:wood")
---minetest.register_alias("doors:door_wood_b_1", "default:wood")
---minetest.register_alias("doors:door_wood_t_2", "default:wood")
+--[[
+minetest.register_alias("doors:door_wood_t_1", "default:wood")
+minetest.register_alias("doors:door_wood_b_1", "default:wood")
+minetest.register_alias("doors:door_wood_b_2", "default:wood")
+minetest.register_alias("doors:door_wood_t_2", "default:wood")
+]]
 
-minetest.register_alias("beds:bed_bottom_white", "default:wood")
-minetest.register_alias("beds:bed_top_white", "default:wood")
+
+
+minetest.register_alias("doors:door_wood_t_1", "doors:hidden")
+minetest.register_alias("doors:door_wood_b_1", "doors:door_wood_a")
+minetest.register_alias("doors:door_wood_b_2", "doors:door_wood_b")
+minetest.register_alias("doors:door_wood_t_2", "doors:hidden")
+
+minetest.register_alias("doors:door_steel_t_1", "doors:hidden")
+minetest.register_alias("doors:door_steel_b_1", "doors:door_steel_a")
+minetest.register_alias("doors:door_steel_b_2", "doors:door_steel_b")
+minetest.register_alias("doors:door_steel_t_2", "doors:hidden")
+
+
+minetest.register_alias("beds:bed_bottom_white", "beds:bed_bottom")
+minetest.register_alias("beds:bed_top_white", "beds:bed_top")
+
+
+minetest.register_alias("fishing:pole", "fishing:pole_wood")
 
 
 

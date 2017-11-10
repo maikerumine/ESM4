@@ -1,0 +1,79 @@
+# ITALIAN LOCALE FILE FOR THE SEA_PLANTS MODULE.
+# Copyright (C) 2017 Hamlet
+# This file is distributed under the same license as the SEA_PLANTS package.
+# Hamlet <h4mlet@riseup.net>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Sea Plants 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-07 22:05+0200\n"
+"PO-Revision-Date: 2017-09-07 22:13+0100\n"
+"Last-Translator: H4mlet <h4mlet@riseup.net>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.6.10\n"
+
+#: init.lua
+msgid "Green Kelp"
+msgstr "Laminariale verde"
+
+#: init.lua
+msgid "Green Kelp middle"
+msgstr "Parte centrale della laminariale verde"
+
+#: init.lua
+msgid "Brown Kelp "
+msgstr "Laminariale marrone"
+
+#: init.lua
+msgid "Brown Kelp middle"
+msgstr "Parte centrale della laminariale marrone"
+
+#: init.lua
+msgid "Green Seagrass"
+msgstr "Erba marina verde"
+
+#: init.lua
+msgid "Red Seagrass"
+msgstr "Erba marina rossa"
+
+#: init.lua
+msgid "Sea plants sand kelp green"
+msgstr "Sea Plants - sabbia della laminariale verde"
+
+#: init.lua
+msgid "Sea plants dirt kelp green"
+msgstr "Sea Plants - terra della laminariale verde"
+
+#: init.lua
+msgid "Sea plants sand kelp brown"
+msgstr "Sea Plants - sabbia della laminariale marrone"
+
+#: init.lua
+msgid "Sea plants dirt kelp brown"
+msgstr "Sea Plants - terra della laminariale marrone"
+
+#: init.lua
+msgid "Sea plants sand seagrass green"
+msgstr "Sea Plants - sabbia dell'erba marina verde"
+
+#: init.lua
+msgid "Sea plants dirt seagrass green"
+msgstr "Sea Plants - terra dell'erba marina verde"
+
+#: init.lua
+msgid "Sea plants sand seagrass red"
+msgstr "Sea Plants - sabbia dell'erba marina rossa"
+
+#: init.lua
+msgid "Sea plants dirt seagrass red"
+msgstr "Sea Plants - terra dell'erba marina rossa"
+
+#: init.lua
+msgid "Sea salad mix"
+msgstr "Insalata marina"

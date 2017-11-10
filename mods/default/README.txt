@@ -17,6 +17,7 @@ Cisoun's texture pack (CC BY-SA 3.0):
   default_lava.png
   default_leaves.png
   default_sapling.png
+  default_bush_sapling.png
   default_stone.png
   default_tree.png
   default_tree_top.png
@@ -53,12 +54,6 @@ Calinou (CC BY-SA 3.0):
   default_mineral_copper.png
   default_glass_detail.png
 
-MirceaKitsune (CC BY-SA 3.0):
-  character.x
-
-Jordach (CC BY-SA 3.0):
-  character.png
-
 PilzAdam (CC BY-SA 3.0):
   default_jungleleaves.png
   default_junglesapling.png
@@ -77,10 +72,6 @@ Splizard (CC BY-SA 3.0):
 
 Zeg9 (CC BY-SA 3.0):
   default_coal_block.png
-  default_steel_block.png
-  default_copper_block.png
-  default_bronze_block.png
-  default_gold_block.png
 
 paramat (CC BY-SA 3.0):
   wieldhand.png -- Copied from character.png by Jordach (CC BY-SA 3.0)
@@ -88,10 +79,14 @@ paramat (CC BY-SA 3.0):
   default_pinetree_top.png
   default_pinewood.png
   default_acacia_leaves.png
+  default_acacia_leaves_simple.png
   default_acacia_sapling.png
+  default_acacia_bush_sapling.png
   default_acacia_tree.png
   default_acacia_tree_top.png
   default_acacia_wood.png
+  default_acacia_bush_stem.png
+  default_bush_stem.png
   default_junglewood.png
   default_jungletree_top.png
   default_sandstone_brick.png
@@ -112,11 +107,18 @@ paramat (CC BY-SA 3.0):
   default_grass_side.png
   default_mese_block.png
   default_silver_sand.png
+  default_mese_post_light_side.png
+  default_mese_post_light_side_dark.png
+  default_mese_post_light_top.png
+  default_silver_sandstone.png -- Derived from a texture by GreenXenith (CC-BY-SA 3.0)
+  default_silver_sandstone_brick.png -- Derived from a texture by GreenXenith (CC-BY-SA 3.0)
+  default_silver_sandstone_block.png -- Derived from a texture by GreenXenith (CC-BY-SA 3.0)
 
-brunob.santos (CC BY-SA 4.0):
-  default_desert_cobble.png
+TumeniNodes (CC BY-SA 4.0):
+  default_desert_cobble.png -- Derived from a texture by brunob.santos (CC BY-SA 4.0)
 
 BlockMen (CC BY-SA 3.0):
+  default_aspen_leaves.png -- Derived from Sofar's texture
   default_wood.png
   default_clay_brick.png
   default_iron_ingot.png
@@ -137,13 +139,18 @@ BlockMen (CC BY-SA 3.0):
   bubble.png
   gui_*.png
 
+Wuzzy (CC BY-SA 3.0):
+  default_bookshelf_slot.png (based on default_book.png)
+
 sofar (CC BY-SA 3.0):
   default_book_written.png, based on default_book.png
   default_aspen_sapling
-  default_aspen_leaves
   default_aspen_tree
   default_aspen_tree_top, derived from default_pine_tree_top (by paramat)
   default_aspen_wood, derived from default_pine_wood (by paramat)
+  default_chest_inside
+
+sofar (WTFPL):
   default_gravel.png -- Derived from Gambit's PixelBOX texture pack light gravel
 
 Neuromancer (CC BY-SA 2.0):
@@ -171,11 +178,13 @@ Gambit (CC BY-SA 3.0):
   default_snow.png
   default_snow_side.png
   default_snowball.png
+  default_key.png
+  default_key_skeleton.png
 
 asl97 (CC BY-SA 3.0):
   default_ice.png
 
-KevDoy (CC BY-SA 3.0)
+KevDoy (CC BY-SA 3.0):
   heart.png
 
 Pithydon (CC BY-SA 3.0)
@@ -183,9 +192,31 @@ Pithydon (CC BY-SA 3.0)
   default_coral_orange.png
   default_coral_skeleton.png
 
-Ferk (CC0 1.0)
+Ferk (CC0 1.0):
   default_item_smoke.png
   default_item_smoke.ogg, based on sound by http://opengameart.org/users/bart
+
+npx (CC BY-SA 3.0):
+  default_rainforest_litter.png
+  default_rainforest_litter_side.png
+
+kaeza (CC-BY-SA 3.0):
+  default_desert_sandstone.png
+  default_desert_sandstone_brick.png
+  default_desert_sandstone_block.png
+
+kilbith (CC BY-SA 3.0):
+  default_steel_block.png
+  default_copper_block.png
+  default_bronze_block.png
+  default_gold_block.png
+  default_tin_block.png
+  default_mineral_tin.png
+  default_tin_ingot.png
+  default_tin_lump.png
+
+tobyplowy (CC BY-SA 3.0):
+  default_kelp.png
 
 Glass breaking sounds (CC BY 3.0):
   1: http://www.freesound.org/people/cmusounddesign/sounds/71947/
@@ -195,7 +226,6 @@ Glass breaking sounds (CC BY 3.0):
 sonictechtonic (CC BY 3.0):
 https://www.freesound.org/people/sonictechtonic/sounds/241872/
   player_damage.ogg
-  player_falling_damage.ogg
 
 Mito551 (sounds) (CC BY-SA 3.0):
   default_dig_choppy.ogg
@@ -219,8 +249,6 @@ Mito551 (sounds) (CC BY-SA 3.0):
   default_place_node.3.ogg
   default_place_node_hard.1.ogg
   default_place_node_hard.2.ogg
-  default_snow_footstep.1.ogg
-  default_snow_footstep.2.ogg
   default_hard_footstep.1.ogg
   default_hard_footstep.2.ogg
   default_hard_footstep.3.ogg
@@ -242,3 +270,29 @@ Metal sounds:
   default_place_node_metal.*.ogg - Ogrebane - CC0
   - http://opengameart.org/content/wood-and-metal-sound-effects-volume-2
 
+Tool breaking sounds added by sofar: CC-BY-3.0
+  default_tool_breaks.* - http://www.freesound.org/people/HerbertBoland/sounds/33206/
+
+AGFX (CC BY 3.0):
+https://www.freesound.org/people/AGFX/packs/1253/
+  default_water_footstep.1.ogg
+  default_water_footstep.2.ogg
+  default_water_footstep.3.ogg
+(default_water_footstep.4.ogg is silent)
+
+blukotek (CC0 1.0):
+https://www.freesound.org/people/blukotek/sounds/251660/
+  default_dig_snappy.ogg
+
+Chests sounds added by sofar, derived of several files mixed together:
+  default_chest_open.ogg
+  default_chest_close.ogg
+    - http://www.freesound.org/people/Sevin7/sounds/269722/ CC0
+    - http://www.freesound.org/people/Percy%20Duke/sounds/23448/ CC-BY-3.0
+    - http://www.freesound.org/people/kingsamas/sounds/135576/ CC-BY-3.0
+    - http://www.freesound.org/people/bulbastre/sounds/126887/ CC-BY-3.0
+    - http://www.freesound.org/people/Yoyodaman234/sounds/183541/ CC0
+
+Ryding (CC0 1.0):
+http://freesound.org/people/Ryding/sounds/94337/
+  default_snow_footstep.*.ogg

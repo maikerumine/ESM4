@@ -1,8 +1,9 @@
 --CrushingFurnace mod by sfan5
 --v1.1
 --Added to es 20160318 maikerumine
-minetest.register_alias("cottages:handmill", "es:furnace")
-
+--minetest.register_alias("es:furnace", "es:compressedcobble")
+--minetest.register_alias("es:furnace_active", "es:compressedcobble")
+-- furnace
 local function get_furnace_active_formspec(pos, percent)
 	local formspec =
 		"size[8,9]"..
@@ -48,7 +49,7 @@ function crushingfurnace_get_craft_result(input)
 	return {item = ItemStack(""), time=0}, {items = ItemStack("")}
 end
 
-minetest.register_node("es:furnace", {
+minetest.register_node("es:cfurnace", {
 	description = "Crushing Furnace",
 	tiles = {"default_furnace_top.png", "default_furnace_bottom.png", "default_furnace_side.png",
 		"default_furnace_side.png", "default_furnace_side.png", "crushingfurnace_front.png"},
@@ -119,12 +120,12 @@ minetest.register_node("es:furnace", {
 	end,
 })
 
-minetest.register_node("es:furnace_active", {
+minetest.register_node("es:cfurnace_active", {
 	tiles = {"default_furnace_top.png", "default_furnace_bottom.png", "default_furnace_side.png",
 		"default_furnace_side.png", "default_furnace_side.png", "crushingfurnace_front_active.png"},
 	paramtype2 = "facedir",
 	light_source = 8,
-	drop = "es:furnace",
+	drop = "es:cfurnace",
 	groups = {cracky=2, not_in_creative_inventory=1,hot=1},
 	legacy_facedir_simple = true,
 	sounds = default.node_sound_stone_defaults(),
@@ -202,7 +203,7 @@ function hacky_swap_node(pos,name)
 end
 
 minetest.register_abm({
-	nodenames = {"es:furnace","es:furnace_active"},
+	nodenames = {"es:cfurnace","es:cfurnace_active"},
 	interval = 1.0,
 	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)
@@ -252,7 +253,7 @@ minetest.register_abm({
 			local percent = math.floor(meta:get_float("fuel_time") /
 					meta:get_float("fuel_totaltime") * 100)
 			meta:set_string("infotext","Crushing Furnace active: "..percent.."%")
-			hacky_swap_node(pos,"es:furnace_active")
+			hacky_swap_node(pos,"es:cfurnace_active")
 			meta:set_string("formspec", get_furnace_active_formspec(pos, percent))
 			return
 		end
@@ -272,7 +273,7 @@ minetest.register_abm({
 
 		if fuel.time <= 0 then
 			meta:set_string("infotext", "Crushing Furnace out of fuel")
-			hacky_swap_node(pos, "es:furnace")
+			hacky_swap_node(pos, "es:cfurnace")
 			meta:set_string("formspec", furnace_inactive_formspec)
 			return
 		end
@@ -280,7 +281,7 @@ minetest.register_abm({
 		if cooked.item:is_empty() then
 			if was_active then
 				meta:set_string("infotext", "Crushing Furnace is empty")
-				hacky_swap_node(pos, "es:furnace")
+				hacky_swap_node(pos, "es:cfurnace")
 				meta:set_string("formspec", furnace_inactive_formspec)
 			end
 			return
@@ -294,7 +295,7 @@ minetest.register_abm({
 })
 
 minetest.register_craft({
-	output = 'es:furnace',
+	output = 'es:cfurnace',
 	recipe = {
 		{'default:cobble', 'default:steelblock', 'default:cobble'},
 		{'', 'default:diamondblock', ''},

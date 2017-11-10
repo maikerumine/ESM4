@@ -43,12 +43,12 @@ minetest.register_alias("mapgen_stair_sandstone_block", "stairs:stair_sandstone_
 -- Register ores
 --
 
--- Blob ores
--- These first to avoid other ores in blobs
-
 -- Mgv6
 
-function default.register_mgv6_blob_ores()
+function default.register_mgv6_ores()
+
+	-- Blob ore
+	-- These first to avoid other ores in blobs
 
 	-- Clay
 	-- This first to avoid clay in sand blobs
@@ -134,123 +134,8 @@ function default.register_mgv6_blob_ores()
 			persist = 0.0
 		},
 	})
-end
 
-
--- All mapgens except mgv6
-
-function default.register_blob_ores()
-
-	-- Clay
-
-	minetest.register_ore({
-		ore_type        = "blob",
-		ore             = "default:clay",
-		wherein         = {"default:sand"},
-		clust_scarcity  = 16 * 16 * 16,
-		clust_size      = 5,
-		y_min           = -15,
-		y_max           = 0,
-		noise_threshold = 0.0,
-		noise_params    = {
-			offset = 0.5,
-			scale = 0.2,
-			spread = {x = 5, y = 5, z = 5},
-			seed = -316,
-			octaves = 1,
-			persist = 0.0
-		},
-	})
-
-	-- Silver sand
-
-	minetest.register_ore({
-		ore_type        = "blob",
-		ore             = "default:silver_sand",
-		wherein         = {"default:stone"},
-		clust_scarcity  = 16 * 16 * 16,
-		clust_size      = 5,
-		y_min           = -31000,
-		y_max           = 31000,
-		noise_threshold = 0.0,
-		noise_params    = {
-			offset = 0.5,
-			scale = 0.2,
-			spread = {x = 5, y = 5, z = 5},
-			seed = 2316,
-			octaves = 1,
-			persist = 0.0
-		},
-		biomes = {"icesheet_ocean", "tundra", "tundra_beach", "tundra_ocean",
-			"taiga", "taiga_ocean", "snowy_grassland", "snowy_grassland_ocean",
-			"grassland", "grassland_dunes", "grassland_ocean", "coniferous_forest",
-			"coniferous_forest_dunes", "coniferous_forest_ocean", "deciduous_forest",
-			"deciduous_forest_shore", "deciduous_forest_ocean", "cold_desert",
-			"cold_desert_ocean", "savanna", "savanna_shore", "savanna_ocean",
-			"rainforest", "rainforest_swamp", "rainforest_ocean", "underground",
-			"floatland_ocean", "floatland_grassland", "floatland_coniferous_forest"}
-	})
-
-	-- Dirt
-
-	minetest.register_ore({
-		ore_type        = "blob",
-		ore             = "default:dirt",
-		wherein         = {"default:stone"},
-		clust_scarcity  = 16 * 16 * 16,
-		clust_size      = 5,
-		y_min           = -31,
-		y_max           = 31000,
-		noise_threshold = 0.0,
-		noise_params    = {
-			offset = 0.5,
-			scale = 0.2,
-			spread = {x = 5, y = 5, z = 5},
-			seed = 17676,
-			octaves = 1,
-			persist = 0.0
-		},
-		biomes = {"taiga", "snowy_grassland", "grassland", "coniferous_forest",
-			"deciduous_forest", "deciduous_forest_shore", "savanna", "savanna_shore",
-			"rainforest", "rainforest_swamp", "floatland_grassland",
-			"floatland_coniferous_forest"}
-	})
-
-	-- Gravel
-
-	minetest.register_ore({
-		ore_type        = "blob",
-		ore             = "default:gravel",
-		wherein         = {"default:stone"},
-		clust_scarcity  = 16 * 16 * 16,
-		clust_size      = 5,
-		y_min           = -31000,
-		y_max           = 31000,
-		noise_threshold = 0.0,
-		noise_params    = {
-			offset = 0.5,
-			scale = 0.2,
-			spread = {x = 5, y = 5, z = 5},
-			seed = 766,
-			octaves = 1,
-			persist = 0.0
-		},
-		biomes = {"icesheet_ocean", "tundra", "tundra_beach", "tundra_ocean",
-			"taiga", "taiga_ocean", "snowy_grassland", "snowy_grassland_ocean",
-			"grassland", "grassland_dunes", "grassland_ocean", "coniferous_forest",
-			"coniferous_forest_dunes", "coniferous_forest_ocean", "deciduous_forest",
-			"deciduous_forest_shore", "deciduous_forest_ocean", "cold_desert",
-			"cold_desert_ocean", "savanna", "savanna_shore", "savanna_ocean",
-			"rainforest", "rainforest_swamp", "rainforest_ocean", "underground",
-			"floatland_ocean", "floatland_grassland", "floatland_coniferous_forest"}
-	})
-end
-
-
--- Scatter ores
--- All mapgens
-
-function default.register_ores()
+	-- Scatter ores
 
 	-- Coal
 
@@ -519,6 +404,401 @@ function default.register_ores()
 		clust_size     = 2,
 		y_min          = -31000,
 		y_max          = -1024,
+	})
+end
+
+
+-- All mapgens except mgv6
+
+function default.register_ores()
+
+	-- Blob ore
+	-- These first to avoid other ores in blobs
+
+	-- Clay
+	-- This first to avoid clay in sand blobs
+
+	minetest.register_ore({
+		ore_type        = "blob",
+		ore             = "default:clay",
+		wherein         = {"default:sand"},
+		clust_scarcity  = 16 * 16 * 16,
+		clust_size      = 5,
+		y_min           = -15,
+		y_max           = 0,
+		noise_threshold = 0.0,
+		noise_params    = {
+			offset = 0.5,
+			scale = 0.2,
+			spread = {x = 5, y = 5, z = 5},
+			seed = -316,
+			octaves = 1,
+			persist = 0.0
+		},
+	})
+
+	-- Silver sand
+
+	minetest.register_ore({
+		ore_type        = "blob",
+		ore             = "default:silver_sand",
+		wherein         = {"default:stone"},
+		clust_scarcity  = 16 * 16 * 16,
+		clust_size      = 5,
+		y_min           = -31000,
+		y_max           = 31000,
+		noise_threshold = 0.0,
+		noise_params    = {
+			offset = 0.5,
+			scale = 0.2,
+			spread = {x = 5, y = 5, z = 5},
+			seed = 2316,
+			octaves = 1,
+			persist = 0.0
+		},
+		biomes = {"icesheet_ocean", "tundra", "tundra_beach", "tundra_ocean",
+			"taiga", "taiga_ocean", "snowy_grassland", "snowy_grassland_ocean",
+			"grassland", "grassland_dunes", "grassland_ocean", "coniferous_forest",
+			"coniferous_forest_dunes", "coniferous_forest_ocean", "deciduous_forest",
+			"deciduous_forest_shore", "deciduous_forest_ocean", "cold_desert",
+			"cold_desert_ocean", "savanna", "savanna_shore", "savanna_ocean",
+			"rainforest", "rainforest_swamp", "rainforest_ocean", "underground",
+			"floatland_coniferous_forest", "floatland_coniferous_forest_ocean"}
+	})
+
+	-- Dirt
+
+	minetest.register_ore({
+		ore_type        = "blob",
+		ore             = "default:dirt",
+		wherein         = {"default:stone"},
+		clust_scarcity  = 16 * 16 * 16,
+		clust_size      = 5,
+		y_min           = -31,
+		y_max           = 31000,
+		noise_threshold = 0.0,
+		noise_params    = {
+			offset = 0.5,
+			scale = 0.2,
+			spread = {x = 5, y = 5, z = 5},
+			seed = 17676,
+			octaves = 1,
+			persist = 0.0
+		},
+		biomes = {"taiga", "snowy_grassland", "grassland", "coniferous_forest",
+			"deciduous_forest", "deciduous_forest_shore", "savanna", "savanna_shore",
+			"rainforest", "rainforest_swamp", "floatland_coniferous_forest"}
+	})
+
+	-- Gravel
+
+	minetest.register_ore({
+		ore_type        = "blob",
+		ore             = "default:gravel",
+		wherein         = {"default:stone"},
+		clust_scarcity  = 16 * 16 * 16,
+		clust_size      = 5,
+		y_min           = -31000,
+		y_max           = 31000,
+		noise_threshold = 0.0,
+		noise_params    = {
+			offset = 0.5,
+			scale = 0.2,
+			spread = {x = 5, y = 5, z = 5},
+			seed = 766,
+			octaves = 1,
+			persist = 0.0
+		},
+		biomes = {"icesheet_ocean", "tundra", "tundra_beach", "tundra_ocean",
+			"taiga", "taiga_ocean", "snowy_grassland", "snowy_grassland_ocean",
+			"grassland", "grassland_dunes", "grassland_ocean", "coniferous_forest",
+			"coniferous_forest_dunes", "coniferous_forest_ocean", "deciduous_forest",
+			"deciduous_forest_shore", "deciduous_forest_ocean", "cold_desert",
+			"cold_desert_ocean", "savanna", "savanna_shore", "savanna_ocean",
+			"rainforest", "rainforest_swamp", "rainforest_ocean", "underground",
+			"floatland_coniferous_forest", "floatland_coniferous_forest_ocean"}
+	})
+
+	-- Scatter ores
+
+	-- Coal
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_coal",
+		wherein        = "default:stone",
+		clust_scarcity = 8 * 8 * 8,
+		clust_num_ores = 9,
+		clust_size     = 3,
+		y_min          = 1025,
+		y_max          = 31000,
+	})
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_coal",
+		wherein        = "default:stone",
+		clust_scarcity = 8 * 8 * 8,
+		clust_num_ores = 8,
+		clust_size     = 3,
+		y_min          = -31000,
+		y_max          = 64,
+	})
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_coal",
+		wherein        = "default:stone",
+		clust_scarcity = 24 * 24 * 24,
+		clust_num_ores = 27,
+		clust_size     = 6,
+		y_min          = -31000,
+		y_max          = 0,
+	})
+
+	-- Iron
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_iron",
+		wherein        = "default:stone",
+		clust_scarcity = 9 * 9 * 9,
+		clust_num_ores = 12,
+		clust_size     = 3,
+		y_min          = 1025,
+		y_max          = 31000,
+	})
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_iron",
+		wherein        = "default:stone",
+		clust_scarcity = 7 * 7 * 7,
+		clust_num_ores = 5,
+		clust_size     = 3,
+		y_min          = -31000,
+		y_max          = 0,
+	})
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_iron",
+		wherein        = "default:stone",
+		clust_scarcity = 24 * 24 * 24,
+		clust_num_ores = 27,
+		clust_size     = 6,
+		y_min          = -31000,
+		y_max          = -64,
+	})
+
+	-- Tin
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_tin",
+		wherein        = "default:stone",
+		clust_scarcity = 10 * 10 * 10,
+		clust_num_ores = 5,
+		clust_size     = 3,
+		y_min          = 1025,
+		y_max          = 31000,
+	})
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_tin",
+		wherein        = "default:stone",
+		clust_scarcity = 13 * 13 * 13,
+		clust_num_ores = 4,
+		clust_size     = 3,
+		y_min          = -127,
+		y_max          = -64,
+	})
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_tin",
+		wherein        = "default:stone",
+		clust_scarcity = 10 * 10 * 10,
+		clust_num_ores = 5,
+		clust_size     = 3,
+		y_min          = -31000,
+		y_max          = -128,
+	})
+
+	-- Copper
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_copper",
+		wherein        = "default:stone",
+		clust_scarcity = 9 * 9 * 9,
+		clust_num_ores = 5,
+		clust_size     = 3,
+		y_min          = 1025,
+		y_max          = 31000,
+	})
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_copper",
+		wherein        = "default:stone",
+		clust_scarcity = 12 * 12 * 12,
+		clust_num_ores = 4,
+		clust_size     = 3,
+		y_min          = -255,
+		y_max          = -128,
+	})
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_copper",
+		wherein        = "default:stone",
+		clust_scarcity = 9 * 9 * 9,
+		clust_num_ores = 5,
+		clust_size     = 3,
+		y_min          = -31000,
+		y_max          = -256,
+	})
+
+	-- Gold
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_gold",
+		wherein        = "default:stone",
+		clust_scarcity = 13 * 13 * 13,
+		clust_num_ores = 5,
+		clust_size     = 3,
+		y_min          = 1025,
+		y_max          = 31000,
+	})
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_gold",
+		wherein        = "default:stone",
+		clust_scarcity = 15 * 15 * 15,
+		clust_num_ores = 3,
+		clust_size     = 2,
+		y_min          = -1023,
+		y_max          = -256,
+	})
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_gold",
+		wherein        = "default:stone",
+		clust_scarcity = 13 * 13 * 13,
+		clust_num_ores = 5,
+		clust_size     = 3,
+		y_min          = -31000,
+		y_max          = -1024,
+	})
+
+	-- Diamond
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_diamond",
+		wherein        = "default:stone",
+		clust_scarcity = 15 * 15 * 15,
+		clust_num_ores = 4,
+		clust_size     = 3,
+		y_min          = 1025,
+		y_max          = 31000,
+	})
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_diamond",
+		wherein        = "default:stone",
+		clust_scarcity = 17 * 17 * 17,
+		clust_num_ores = 4,
+		clust_size     = 3,
+		y_min          = -1023,
+		y_max          = -512,
+	})
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_diamond",
+		wherein        = "default:stone",
+		clust_scarcity = 15 * 15 * 15,
+		clust_num_ores = 4,
+		clust_size     = 3,
+		y_min          = -31000,
+		y_max          = -1024,
+	})
+
+	-- Mese crystal
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_mese",
+		wherein        = "default:stone",
+		clust_scarcity = 14 * 14 * 14,
+		clust_num_ores = 5,
+		clust_size     = 3,
+		y_min          = 1025,
+		y_max          = 31000,
+	})
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_mese",
+		wherein        = "default:stone",
+		clust_scarcity = 18 * 18 * 18,
+		clust_num_ores = 3,
+		clust_size     = 2,
+		y_min          = -1023,
+		y_max          = -512,
+	})
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:stone_with_mese",
+		wherein        = "default:stone",
+		clust_scarcity = 14 * 14 * 14,
+		clust_num_ores = 5,
+		clust_size     = 3,
+		y_min          = -31000,
+		y_max          = -1024,
+	})
+
+	-- Mese block
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:mese",
+		wherein        = "default:stone",
+		clust_scarcity = 36 * 36 * 36,
+		clust_num_ores = 3,
+		clust_size     = 2,
+		y_min          = 1025,
+		y_max          = 31000,
+	})
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:mese",
+		wherein        = "default:stone",
+		clust_scarcity = 36 * 36 * 36,
+		clust_num_ores = 3,
+		clust_size     = 2,
+		y_min          = -2047,
+		y_max          = -1024,
+	})
+
+	minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "default:mese",
+		wherein        = "default:stone",
+		clust_scarcity = 28 * 28 * 28,
+		clust_num_ores = 5,
+		clust_size     = 3,
+		y_min          = -31000,
+		y_max          = -2048,
 	})
 end
 
@@ -1177,31 +1457,9 @@ end
 
 -- Biomes for floatlands
 
+-- TODO Temporary simple biomes to be replaced by special floatland biomes later.
+
 function default.register_floatland_biomes(floatland_level, shadow_limit)
-
-	-- Coniferous forest
-
-	minetest.register_biome({
-		name = "floatland_coniferous_forest",
-		--node_dust = "",
-		node_top = "default:dirt_with_grass",
-		depth_top = 1,
-		node_filler = "default:dirt",
-		depth_filler = 3,
-		--node_stone = "",
-		--node_water_top = "",
-		--depth_water_top = ,
-		--node_water = "",
-		--node_river_water = "",
-		--node_riverbed = "",
-		--depth_riverbed = ,
-		y_min = floatland_level + 2,
-		y_max = 31000,
-		heat_point = 50,
-		humidity_point = 70,
-	})
-
-	-- Grassland
 
 	minetest.register_biome({
 		name = "floatland_grassland",
@@ -1217,38 +1475,14 @@ function default.register_floatland_biomes(floatland_level, shadow_limit)
 		--node_river_water = "",
 		--node_riverbed = "",
 		--depth_riverbed = ,
-		y_min = floatland_level + 2,
+		y_min = floatland_level + 4,
 		y_max = 31000,
 		heat_point = 50,
-		humidity_point = 35,
+		humidity_point = 50,
 	})
 
-	-- Sandstone desert
-
 	minetest.register_biome({
-		name = "floatland_sandstone_desert",
-		--node_dust = "",
-		node_top = "default:sand",
-		depth_top = 1,
-		node_filler = "default:sand",
-		depth_filler = 1,
-		node_stone = "default:sandstone",
-		--node_water_top = "",
-		--depth_water_top = ,
-		--node_water = "",
-		--node_river_water = "",
-		--node_riverbed = "",
-		--depth_riverbed = ,
-		y_min = floatland_level + 2,
-		y_max = 31000,
-		heat_point = 50,
-		humidity_point = 0,
-	})
-
-	-- Floatland ocean / underground
-
-	minetest.register_biome({
-		name = "floatland_ocean",
+		name = "floatland_grassland_ocean",
 		--node_dust = "",
 		node_top = "default:sand",
 		depth_top = 1,
@@ -1262,7 +1496,7 @@ function default.register_floatland_biomes(floatland_level, shadow_limit)
 		--node_riverbed = "",
 		--depth_riverbed = ,
 		y_min = shadow_limit,
-		y_max = floatland_level + 1,
+		y_max = floatland_level + 3,
 		heat_point = 50,
 		humidity_point = 50,
 	})
@@ -1380,7 +1614,7 @@ local function register_grass_decoration(offset, scale, length)
 		},
 		biomes = {"grassland", "grassland_dunes", "deciduous_forest",
 			"coniferous_forest", "coniferous_forest_dunes",
-			"floatland_grassland", "floatland_coniferous_forest"},
+			"floatland_grassland"},
 		y_min = 1,
 		y_max = 31000,
 		decoration = "default:grass_" .. length,
@@ -1494,7 +1728,7 @@ function default.register_decorations()
 			octaves = 3,
 			persist = 0.66
 		},
-		biomes = {"taiga", "coniferous_forest", "floatland_coniferous_forest"},
+		biomes = {"taiga", "coniferous_forest"},
 		y_min = 2,
 		y_max = 31000,
 		schematic = minetest.get_modpath("default") .. "/schematics/pine_tree.mts",
@@ -1785,6 +2019,37 @@ function default.register_decorations()
 		flags = "place_center_x, place_center_z",
 		rotation = "random",
 	})
+
+	-- Kelp
+
+	minetest.register_decoration({
+		deco_type = "simple",
+		place_on = {"default:sand"},
+		place_offset_y = -1,
+		sidelen = 16,
+		noise_params = {
+			offset = -0.04,
+			scale = 0.1,
+			spread = {x = 200, y = 200, z = 200},
+			seed = 87112,
+			octaves = 3,
+			persist = 0.7
+		},
+		biomes = {
+			"taiga_ocean",
+			"snowy_grassland_ocean",
+			"grassland_ocean",
+			"coniferous_forest_ocean",
+			"deciduous_forest_ocean",
+			"sandstone_desert_ocean",
+			"cold_desert_ocean"},
+		y_min = -10,
+		y_max = -5,
+		flags = "force_placement",
+		decoration = "default:sand_with_kelp",
+		param2 = 48,
+		param2_max = 96,
+	})
 end
 
 
@@ -1794,33 +2059,39 @@ end
 
 -- Get setting or default
 local mgv7_spflags = minetest.get_mapgen_setting("mgv7_spflags") or
-	"mountains, ridges, nofloatlands"
+	"mountains, ridges, nofloatlands, caverns"
 local captures_float = string.match(mgv7_spflags, "floatlands")
 local captures_nofloat = string.match(mgv7_spflags, "nofloatlands")
 
-local mgv7_floatland_level = minetest.get_mapgen_setting("mgv7_floatland_level") or 1280
-local mgv7_shadow_limit = minetest.get_mapgen_setting("mgv7_shadow_limit") or 1024
+-- Get setting or default
+-- Make global for mods to use to register floatland biomes
+default.mgv7_floatland_level =
+	minetest.get_mapgen_setting("mgv7_floatland_level") or 1280
+default.mgv7_shadow_limit =
+	minetest.get_mapgen_setting("mgv7_shadow_limit") or 1024
 
 minetest.clear_registered_biomes()
 minetest.clear_registered_ores()
 minetest.clear_registered_decorations()
 
 local mg_name = minetest.get_mapgen_setting("mg_name")
+
 if mg_name == "v6" then
-	default.register_mgv6_blob_ores()
-	default.register_ores()
+	default.register_mgv6_ores()
 	default.register_mgv6_decorations()
-elseif mg_name == "v7" and captures_float == "floatlands" and
+-- Need to check for 'nofloatlands' because that contains
+-- 'floatlands' which makes the second condition true.
+elseif mg_name == "v7" and
+		captures_float == "floatlands" and
 		captures_nofloat ~= "nofloatlands" then
-	-- Mgv7 with floatlands
-	default.register_biomes(mgv7_shadow_limit - 1)
-	default.register_floatland_biomes(mgv7_floatland_level, mgv7_shadow_limit)
-	default.register_blob_ores()
+	-- Mgv7 with floatlands and floatland biomes
+	default.register_biomes(default.mgv7_shadow_limit - 1)
+	default.register_floatland_biomes(
+		default.mgv7_floatland_level, default.mgv7_shadow_limit)
 	default.register_ores()
 	default.register_decorations()
 else
 	default.register_biomes(31000)
-	default.register_blob_ores()
 	default.register_ores()
 	default.register_decorations()
 end

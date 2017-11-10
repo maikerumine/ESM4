@@ -1,7 +1,8 @@
 default
 farming?
 flowers?
-stairs
+stairs?
+moreblocks?
 cblocks?
 moreblocks?
 
