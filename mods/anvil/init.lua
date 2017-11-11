@@ -12,6 +12,8 @@ anvil = {
 }
 
 minetest.register_alias("castle:anvil", "anvil:anvil")
+minetest.register_alias("cottages:hammer", "anvil:hammer")
+minetest.register_alias("cottages:anvil", "anvil:anvil")
 
 -- internationalization boilerplate
 local MP = minetest.get_modpath(minetest.get_current_modname())

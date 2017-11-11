@@ -18,15 +18,14 @@ local modpath = minetest.get_modpath("alias")
 alias.modpath = modpath
 
 
-minetest.register_alias("es:furnace", "es:cfurnace")
-minetest.register_alias("es:furnace_active", "es:cfurnace_active")
+
 
 --dofile(modpath.."/alias.lua")
 dofile(modpath.."/moreorerem.lua")
 dofile(modpath.."/pathv6rem.lua")
 dofile(modpath.."/technodrem.lua")
 --dofile(modpath.."/villrem.lua")
---dofile(modpath.."/esorerem.lua")
+dofile(modpath.."/esorerem.lua")
 dofile(modpath.."/esmobs.lua")
 --dofile(modpath.."/moreblocksrem.lua")
 --dofile(modpath.."/moresnowrem.lua")
