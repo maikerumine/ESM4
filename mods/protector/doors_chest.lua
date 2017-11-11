@@ -1,7 +1,9 @@
 
 -- Since the doors mod has changed in the latest daily builds I have taken the
 -- WTFPL licenced code from the old doors mod and included an edited version
--- of it within this mod for local use.
+-- within this mod for local use.
+
+local S = protector.intllib
 
 -- Registers a door
 function register_door(name, def)
@@ -295,7 +297,7 @@ end
 local name = "protector:door_wood"
 
 register_door(name, {
-	description = "Protected Wooden Door",
+	description = S("Protected Wooden Door"),
 	inventory_image = "doors_wood.png^protector_logo.png",
 	groups = {
 		snappy = 1, choppy = 2, oddly_breakable_by_hand = 2,
@@ -328,7 +330,7 @@ minetest.register_craft({
 local name = "protector:door_steel"
 
 register_door(name, {
-	description = "Protected Steel Door",
+	description = S("Protected Steel Door"),
 	inventory_image = "doors_steel.png^protector_logo.png",
 	groups = {
 		snappy = 1, bendy = 2, cracky = 1,
@@ -419,7 +421,7 @@ end
 -- Protected Wooden Trapdoor
 
 register_trapdoor("protector:trapdoor", {
-	description = "Protected Trapdoor",
+	description = S("Protected Trapdoor"),
 	inventory_image = "doors_trapdoor.png^protector_logo.png",
 	wield_image = "doors_trapdoor.png^protector_logo.png",
 	tile_front = "doors_trapdoor.png^protector_logo.png",
@@ -450,7 +452,7 @@ minetest.register_craft({
 -- Protected Steel Trapdoor
 
 register_trapdoor("protector:trapdoor_steel", {
-	description = "Protected Steel Trapdoor",
+	description = S("Protected Steel Trapdoor"),
 	inventory_image = "doors_trapdoor_steel.png^protector_logo.png",
 	wield_image = "doors_trapdoor_steel.png^protector_logo.png",
 	tile_front = "doors_trapdoor_steel.png^protector_logo.png",
@@ -480,7 +482,7 @@ minetest.register_craft({
 -- Protected Chest
 
 minetest.register_node("protector:chest", {
-	description = "Protected Chest",
+	description = S("Protected Chest"),
 	tiles = {
 		"default_chest_top.png", "default_chest_top.png",
 		"default_chest_side.png", "default_chest_side.png",
@@ -497,7 +499,7 @@ minetest.register_node("protector:chest", {
 		local meta = minetest.get_meta(pos)
 		local inv = meta:get_inventory()
 
-		meta:set_string("infotext", "Protected Chest")
+		meta:set_string("infotext", S("Protected Chest"))
 		meta:set_string("name", "")
 		inv:set_size("main", 8 * 4)
 	end,
@@ -517,16 +519,47 @@ minetest.register_node("protector:chest", {
 
 	on_metadata_inventory_put = function(pos, listname, index, stack, player)
 
-		minetest.log("action", player:get_player_name()
-		.. " moves stuff to protected chest at "
-		.. minetest.pos_to_string(pos))
+		minetest.log("action", S("@1 moves stuff to protected chest at @2",
+			player:get_player_name(), minetest.pos_to_string(pos)))
 	end,
 
 	on_metadata_inventory_take = function(pos, listname, index, stack, player)
 
-		minetest.log("action", player:get_player_name()
-		.. " takes stuff from protected chest at "
-		.. minetest.pos_to_string(pos))
+		minetest.log("action", S("@1 takes stuff from protected chest at @2",
+			player:get_player_name(), minetest.pos_to_string(pos)))
+	end,
+
+	on_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
+
+		minetest.log("action", S("@1 moves stuff inside protected chest at @2",
+			player:get_player_name(), minetest.pos_to_string(pos)))
+	end,
+
+	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+
+		if minetest.is_protected(pos, player:get_player_name()) then
+			return 0
+		end
+
+		return stack:get_count()
+	end,
+
+	allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+
+		if minetest.is_protected(pos, player:get_player_name()) then
+			return 0
+		end
+
+		return stack:get_count()
+	end,
+
+	allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
+
+		if minetest.is_protected(pos, player:get_player_name()) then
+			return 0
+		end
+
+		return count
 	end,
 
 	on_rightclick = function(pos, node, clicker)
@@ -547,10 +580,10 @@ minetest.register_node("protector:chest", {
 			.. default.gui_bg_img
 			.. default.gui_slots
 			.. "list[nodemeta:".. spos .. ";main;0,0.3;8,4;]"
-			.. "button[0,4.5;2,0.25;toup;To Chest]"
+			.. "button[0,4.5;2,0.25;toup;" .. S("To Chest") .. "]"
 			.. "field[2.3,4.8;4,0.25;chestname;;"
 			.. meta:get_string("name") .. "]"
-			.. "button[6,4.5;2,0.25;todn;To Inventory]"
+			.. "button[6,4.5;2,0.25;todn;" .. S("To Inventory") .. "]"
 			.. "list[current_player;main;0,5;8,1;]"
 			.. "list[current_player;main;0,6.08;8,3;8]"
 			.. "listring[nodemeta:" .. spos .. ";main]"
@@ -569,67 +602,71 @@ minetest.register_node("protector:chest", {
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 
-	if string.sub(formname, 0, string.len("protector:chest_")) == "protector:chest_" then
-
-		local pos_s = string.sub(formname,string.len("protector:chest_") + 1)
-		local pos = minetest.string_to_pos(pos_s)
-		local meta = minetest.get_meta(pos)
-		local chest_inv = meta:get_inventory()
-		local player_inv = player:get_inventory()
-		local leftover
-
-		if fields.toup then
-
-			-- copy contents of players inventory to chest
-			for i, v in pairs (player_inv:get_list("main") or {}) do
-
-				if chest_inv
-				and chest_inv:room_for_item('main', v) then
-
-					leftover = chest_inv:add_item('main', v)
-
-					player_inv:remove_item("main", v)
-
-					if leftover
-					and not leftover:is_empty() then
-						player_inv:add_item("main", v)
-					end
-				end
-			end
-	
-		elseif fields.todn then
-
-			-- copy contents of chest to players inventory
-			for i, v in pairs (chest_inv:get_list('main') or {}) do
-
-				if player_inv:room_for_item("main", v) then
-
-					leftover = player_inv:add_item("main", v)
-
-					chest_inv:remove_item('main', v)
-
-					if leftover
-					and not leftover:is_empty() then
-						chest_inv:add_item('main', v)
-					end
-				end
-			end
-
-		elseif fields.chestname then
-
-			-- change chest infotext to display name
-			if fields.chestname ~= "" then
-
-				meta:set_string("name", fields.chestname)
-				meta:set_string("infotext",
-				"Protected Chest (" .. fields.chestname .. ")")
-			else
-				meta:set_string("infotext", "Protected Chest")
-			end
-
-		end
+	if string.sub(formname, 0, string.len("protector:chest_")) ~= "protector:chest_" then
+		return
 	end
 
+	local pos_s = string.sub(formname,string.len("protector:chest_") + 1)
+	local pos = minetest.string_to_pos(pos_s)
+
+	if minetest.is_protected(pos, player:get_player_name()) then
+		return
+	end
+
+	local meta = minetest.get_meta(pos) ; if not meta then return end
+	local chest_inv = meta:get_inventory() ; if not chest_inv then return end
+	local player_inv = player:get_inventory()
+	local leftover
+
+	if fields.toup then
+
+		-- copy contents of players inventory to chest
+		for i, v in ipairs(player_inv:get_list("main") or {}) do
+
+			if chest_inv:room_for_item("main", v) then
+
+				leftover = chest_inv:add_item("main", v)
+
+				player_inv:remove_item("main", v)
+
+				if leftover
+				and not leftover:is_empty() then
+					player_inv:add_item("main", v)
+				end
+			end
+		end
+	
+	elseif fields.todn then
+
+		-- copy contents of chest to players inventory
+		for i, v in ipairs(chest_inv:get_list("main") or {}) do
+
+			if player_inv:room_for_item("main", v) then
+
+				leftover = player_inv:add_item("main", v)
+
+				chest_inv:remove_item("main", v)
+
+				if leftover
+				and not leftover:is_empty() then
+					chest_inv:add_item("main", v)
+				end
+			end
+		end
+
+	elseif fields.chestname then
+
+		-- change chest infotext to display name
+		if fields.chestname ~= "" then
+
+			meta:set_string("name", fields.chestname)
+			meta:set_string("infotext",
+				S("Protected Chest (@1)", fields.chestname))
+		else
+			meta:set_string("infotext", S("Protected Chest"))
+		end
+
+	end
 end)
 
 -- Protected Chest recipes
