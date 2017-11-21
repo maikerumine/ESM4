@@ -111,7 +111,7 @@ end
 	Big thanks to PainterlyPack.net for allowing me to use these textures
 ]]
 
-
+--[[
 -- pumpkin
 minetest.register_node("mt_seasons:pumpkin", {
 	description = "Pumpkin",
@@ -136,11 +136,11 @@ minetest.register_node("mt_seasons:pumpkin", {
 minetest.register_craftitem("mt_seasons:pumpkin_slice", {
 	description ="Pumpkin Slice",
 	inventory_image = "farming_pumpkin_slice.png",
-	--[[
-	on_place = function(itemstack, placer, pointed_thing)
-		return farming.place_seed(itemstack, placer, pointed_thing, "default:pumpkin_1")
-	end,
-	]]
+	
+	--on_place = function(itemstack, placer, pointed_thing)
+	--	return farming.place_seed(itemstack, placer, pointed_thing, "default:pumpkin_1")
+	--end,
+	
 	on_use = minetest.item_eat(2),
 })
 
@@ -199,7 +199,7 @@ minetest.register_node("mt_seasons:jackolantern_on", {
 		minetest.swap_node(pos, node)
 	end,
 })
-
+]]
 
 --[[
 --moved to autumn
@@ -236,7 +236,7 @@ minetest.register_craft({
 	recipe = "mt_seasons:pumpkin_dough",
 	cooktime = 10
 })
-]]
+
 -- pumpkin definition
 local crop_def = {
 	drawtype = "plantlike",
@@ -254,7 +254,7 @@ local crop_def = {
 	},
 	sounds = default.node_sound_leaves_defaults()
 }
---[[
+
 -- stage 1
 minetest.register_node("mt_seasons:pumpkin_1", table.copy(crop_def))
 
@@ -281,7 +281,7 @@ minetest.register_node("mt_seasons:pumpkin_6", table.copy(crop_def))
 -- stage 7
 crop_def.tiles = {"farming_pumpkin_7.png"}
 minetest.register_node("mt_seasons:pumpkin_7", table.copy(crop_def))
-]]
+
 -- stage 8 (final)
 crop_def.tiles = {"farming_pumpkin_8.png"}
 crop_def.groups.growing = 0
@@ -306,3 +306,4 @@ minetest.register_alias("default:pumpkin_bread", "mt_seasons:pumpkin_bread")
 minetest.register_alias("default:pumpkin_dough", "mt_seasons:pumpkin_dough")
 minetest.register_alias("default:jackolantern", "mt_seasons:jackolantern")
 minetest.register_alias("default:jackolantern_on", "mt_seasons:jackolantern_on")
+]]

@@ -52,7 +52,7 @@ minetest.register_abm({
       end
     end
   })
-
+--[[]]
 -- Flowers grow in spring, flower spread ABM is in flower mod, this just gives
 -- initial population as that ABM won't grow flowers where there are none.
 minetest.register_abm({
@@ -89,3 +89,4 @@ minetest.register_abm({
       end
     end
   })
+--]]

@@ -24,11 +24,40 @@ minetest.register_node("esm_map:map_spawn", {
 		sounds = default.node_sound_wood_defaults(),
 })
 
+minetest.register_node("esm_map:map_spawn_201711", {
+	description = "-=Map of ESM Spawn November 2017=-  Created by maikerumine",
+		drawtype = "nodebox",
+	tiles = {"20171118-ESM-1000.png"},
+	inventory_image =  {"20171118-ESM-1000.png"},
+	wield_image = {"20171118-ESM-1000.png"},
+		paramtype = "light",
+		paramtype2 = "wallmounted",
+		sunlight_propagates = true,
+		walkable = false,
+		node_box = {
+			type = "wallmounted",
+			wall_top    = {-0.5, 0.4375, -0.5, 0.5, 0.5, 0.5},
+			wall_bottom = {-0.5, -0.5, -0.5, 0.5, -0.4375, 0.5},
+			wall_side   = {-0.5, -0.5, -0.5, -0.4375, 0.5, 0.5},
+		},
+		groups = {snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3 },
+		sounds = default.node_sound_wood_defaults(),
+})
+
 minetest.register_craft({
 	output = "esm_map:map_spawn",
 	recipe = {
 			{"wool:white", "wool:white", "wool:white"},
 			{"wool:white",  "default:diamond", "wool:white"},
+			{ "", "group:stick", ""},
+	}
+})
+
+minetest.register_craft({
+	output = "esm_map:map_spawn_201711",
+	recipe = {
+			{"wool:white", "wool:white", "wool:white"},
+			{"wool:white",  "default:goldblock", "wool:white"},
 			{ "", "group:stick", ""},
 	}
 })

@@ -1,6 +1,7 @@
 --Originally made by TenPlus1
 --maikerumine added slabs and stairs
 --20160321
+--20171121  -added more blocks and intergrate with moreblocks / stairs plus
 --for extreme survival game
 
 local colours = {
@@ -22,9 +23,18 @@ local colours = {
 }
 
 for i = 1, #colours, 1 do
+--example
+--[[
+minetest.register_node("cblocks:stonebrick_red", {
+	description = "Red Stone Brick -EXAMPLE FOR ALL CBLOCKS: Glass, Wood, Stonebrick, and Clay",
+	tiles = {"default_stone_brick.png^[colorize:#ff000070"},
+	is_ground_content = false,
+	groups = {cracky = 2, stone = 1},
+	sounds = default.node_sound_stone_defaults(),
+})
+]]
 
 -- wood
-
 minetest.register_node("cblocks:wood_" .. colours[i][1], {
 	description = colours[i][2] .. " Wooden Planks",
 	tiles = {"default_wood.png^[colorize:" .. colours[i][3]},
@@ -41,18 +51,24 @@ minetest.register_craft({
 })
 
 
---example
---[[
-minetest.register_node("cblocks:stonebrick_red", {
-	description = "Red Stone Brick -EXAMPLE FOR ALL CBLOCKS: Glass, Wood, Stonebrick, and Clay",
-	tiles = {"default_stone_brick.png^[colorize:#ff000070"},
+--Cobble
+minetest.register_node("cblocks:cobble_" .. colours[i][1], {
+	description = colours[i][2] .. " Cobble",
+	tiles = {"default_cobble.png^[colorize:" .. colours[i][3]},
 	is_ground_content = false,
-	groups = {cracky = 2, stone = 1},
+	groups = {cracky = 3, stone = 1,not_in_craft_guide=1},
 	sounds = default.node_sound_stone_defaults(),
 })
-]]
--- stone brick
 
+minetest.register_craft({
+	output = "cblocks:cobble_".. colours[i][1] .. " 2",
+	recipe = {
+		{"default:cobble","default:cobble", "dye:" .. colours[i][1]},
+	}
+})
+
+
+-- stone brick
 minetest.register_node("cblocks:stonebrick_" .. colours[i][1], {
 	description = colours[i][2] .. " Stone Brick",
 	tiles = {"default_stone_brick.png^[colorize:" .. colours[i][3]},
@@ -69,7 +85,6 @@ minetest.register_craft({
 })
 
 -- stone
-
 minetest.register_node("cblocks:stone_" .. colours[i][1], {
 	description = colours[i][2] .. " Stone",
 	tiles = {"default_stone.png^[colorize:" .. colours[i][3]},
@@ -86,7 +101,6 @@ minetest.register_craft({
 })
 
 -- glass
-
 minetest.register_node( "cblocks:glass_" .. colours[i][1], {
 	description = colours[i][2] .. " Glass",
 	tiles = {"cblocks.png^[colorize:" .. colours[i][3]},
@@ -168,12 +182,14 @@ end
 
 --Alias to swap stairs.
 	minetest.register_alias("stairs:stair_stone_" .. colours[i][1] ,	"stairs:stair_".. colours[i][1].. "_stone")
+	minetest.register_alias("stairs:stair_cobble_" .. colours[i][1] ,	"stairs:stair_".. colours[i][1].. "_cobble")
 	minetest.register_alias("stairs:stair_stonebrick_".. colours[i][1] ,	"stairs:stair_".. colours[i][1].. "_stonebrick")
 	minetest.register_alias("stairs:stair_clay_" .. colours[i][1] ,	"stairs:stair_".. colours[i][1].. "_clay")
 	minetest.register_alias("stairs:stair_wood_" .. colours[i][1] ,	"stairs:stair_".. colours[i][1].. "_wood")
 	minetest.register_alias("stairs:stair_glass_" .. colours[i][1] ,	"stairs:stair_".. colours[i][1].. "_glass")
 --Alias to swap slabs.
 	minetest.register_alias("stairs:slab_stone_" .. colours[i][1] ,	"stairs:slab_".. colours[i][1].. "_stone")
+	minetest.register_alias("stairs:slab_cobble_" .. colours[i][1] ,	"stairs:slab_".. colours[i][1].. "_cobble")
 	minetest.register_alias("stairs:slab_stonebrick_".. colours[i][1] ,	"stairs:slab_".. colours[i][1].. "_stonebrick")
 	minetest.register_alias("stairs:slab_clay_" .. colours[i][1] ,	"stairs:slab_".. colours[i][1].. "_clay")
 	minetest.register_alias("stairs:slab_wood_" .. colours[i][1] ,	"stairs:slab_".. colours[i][1].. "_wood")
@@ -182,15 +198,7 @@ end
 			
 if minetest.get_modpath("moreblocks") then
 
---[[
-	stairsplus:register_all("darkage", "serpentine", "darkage:serpentine", {
-		description = "Serpentine",
-		tiles = {"darkage_serpentine.png"},
-		groups = {cracky=3},
-		sounds = default.node_sound_stone_defaults(),
-		sunlight_propagates = true,
-	})
-	]]
+
 --wood
 	stairsplus:register_all("wood_" .. colours[i][1], "wood", "cblocks:wood_" .. colours[i][1], {
 		description = "Coloured Wood",
@@ -200,11 +208,20 @@ if minetest.get_modpath("moreblocks") then
 		sunlight_propagates = true,
 	})
 
+--cobble
+	stairsplus:register_all("cobble_" .. colours[i][1], "cobble",  "cblocks:cobble_" .. colours[i][1], {
+		description = "Coloured Cobble",
+		tiles ={"default_cobble.png^[colorize:" .. colours[i][3]},
+		groups = {cracky = 3},
+		sounds = default.node_sound_stone_defaults(),
+		sunlight_propagates = true,
+	})
+	
 --stonebrick
 	stairsplus:register_all("stonebrick_" .. colours[i][1], "stonebrick",  "cblocks:stonebrick_" .. colours[i][1], {
 		description = "Coloured Stonebrick",
 		tiles ={"default_stone_brick.png^[colorize:" .. colours[i][3]},
-		groups = {cracky = 3},
+		groups = {cracky = 2},
 		sounds = default.node_sound_stone_defaults(),
 		sunlight_propagates = true,
 	})

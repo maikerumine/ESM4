@@ -20,4 +20,4 @@ mymonths.snow_on_ground = true
 ------------------------------------------------------------------------
 --Puddles appear when raining
 
-mymonths.use_puddles = true
+mymonths.use_puddles = false
