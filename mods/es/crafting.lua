@@ -476,7 +476,7 @@ minetest.register_craftitem("es:emerald_dust", {
 	inventory_image = "dye_green.png",
 })
 
-
+--[[[
 --ES RUBBER
 minetest.register_craftitem("es:rubber_dust", {
 	description = "Rubber Dust",
@@ -498,7 +498,7 @@ minetest.register_craft({
 	{"default:jungletree", "default:jungletree","default:jungletree"},
 	},
 })
-
+]]
 
 
 

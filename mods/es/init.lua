@@ -24,6 +24,8 @@ es.modpath = modpath
 dofile(modpath.."/alias.lua")
 dofile(modpath.."/crafting.lua")
 dofile(modpath.."/antigrief.lua")
+dofile(modpath.."/itemdrop.lua")
+dofile(modpath.."/musicmod.lua")
 dofile(modpath.."/armor.lua")
 dofile(modpath.."/kill.lua")
 dofile(modpath.."/shields.lua")
