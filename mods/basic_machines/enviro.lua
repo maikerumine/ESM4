@@ -7,16 +7,16 @@ local enviro = {};
 enviro.skyboxes = {
 	["default"]={type = "regular", tex = {}}, 
 	["space"]={type="skybox", tex={"sky_pos_y.png","sky_neg_y.png","sky_pos_z.png","sky_neg_z.png","sky_neg_x.png","sky_pos_x.png",}}, -- need textures installed!
-	["caves"]={type = "cavebox", tex = {"black.png","black.png","black.png","black.png","black.png","black.png",}}};
+	["caves"]={type = "cavebox", tex = {"black.png","black.png","black.png","black.png","black.png","black.png",}},
+	};
 	
-local space_start = 1500;
-
+local space_start = 1100;
+local ENABLE_SPACE_EFFECTS = false -- enable damage outside protected areas
 	
 local enviro_update_form = function (pos)
 	
 		local meta = minetest.get_meta(pos);
-		
-		
+			
 		local x0,y0,z0;
 		x0=meta:get_int("x0");y0=meta:get_int("y0");z0=meta:get_int("z0");
 
@@ -36,28 +36,33 @@ local enviro_update_form = function (pos)
 		local list_name = "nodemeta:"..pos.x..','..pos.y..','..pos.z;
 		
 		local form  = 
-		"size[8,8.5]" ..  -- width, height
-		"field[0.25,0.5;1,1;x0;target;"..x0.."] field[1.25,0.5;1,1;y0;;"..y0.."] field[2.25,0.5;1,1;z0;;"..z0.."]"..
-		"field[3.25,0.5;1,1;r;radius;"..r.."]"..
-		--speed, jump, gravity,sneak
-		"field[0.25,1.5;1,1;speed;speed;"..speed.."]"..
-		"field[1.25,1.5;1,1;jump;jump;".. jump.."]"..
-		"field[2.25,1.5;1,1;g;gravity;"..g.."]"..
-		"field[3.25,1.5;1,1;sneak;sneak;"..sneak.."]"..
-		"label[0.,3.0;Skybox selection]"..
-		"dropdown[0.,3.35;3,1;skybox;"..skylist..";".. sky_ind .."]"..
-		"button_exit[3.25,3.25;1,1;OK;OK]"..
-		"list["..list_name..";fuel;3.25,2.25;1,1;]"..
-		"list[current_player;main;0,4.5;8,4;]";
-		meta:set_string("formspec",form);
-
+			"size[8,8.5]"..	-- width, height
+			"field[0.25,0.5;1,1;x0;target;"..x0.."] field[1.25,0.5;1,1;y0;;"..y0.."] field[2.25,0.5;1,1;z0;;"..z0.."]"..
+			"field[3.25,0.5;1,1;r;radius;"..r.."]"..
+			--speed, jump, gravity,sneak
+			"field[0.25,1.5;1,1;speed;speed;"..speed.."]"..
+			"field[1.25,1.5;1,1;jump;jump;"..jump.."]"..
+			"field[2.25,1.5;1,1;g;gravity;"..g.."]"..
+			"field[3.25,1.5;1,1;sneak;sneak;"..sneak.."]"..
+			"label[0.,3.0;Skybox selection]"..
+			"dropdown[0.,3.35;3,1;skybox;"..skylist..";"..sky_ind.."]"..
+			"button_exit[3.25,3.25;1,1;OK;OK]"..
+			"list["..list_name..";fuel;3.25,2.25;1,1;]"..
+			"list[current_player;main;0,4.5;8,4;]"..
+			"listring[current_player;main]"..
+			"listring["..list_name..";fuel]"..
+			"listring[current_player;main]"
+		meta:set_string("formspec",form)
 end
 	
 -- enviroment changer
 minetest.register_node("basic_machines:enviro", {
 	description = "Changes enviroment for players around target location",
 	tiles = {"enviro.png"},
-	groups = {oddly_breakable_by_hand=2},
+	drawtype = "allfaces",
+	paramtype = "light",
+	param1=1,
+	groups = {cracky=3, mesecon_effector_on = 1},
 	sounds = default.node_sound_wood_defaults(),
 	after_place_node = function(pos, placer)
 		local meta = minetest.env:get_meta(pos)
@@ -190,6 +195,14 @@ minetest.register_node("basic_machines:enviro", {
 		if meta:get_string("owner")~=player:get_player_name() and not privs.privs then return 0 end
 		return stack:get_count();
 	end,
+	
+	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+		local meta = minetest.get_meta(pos);
+		local privs = minetest.get_player_privs(player:get_player_name());
+		if meta:get_string("owner")~=player:get_player_name() and not privs.privs then return 0 end
+		return stack:get_count();
+	end,
+	
 })
 
 
@@ -197,7 +210,7 @@ minetest.register_node("basic_machines:enviro", {
 
 local reset_player_physics = function(player)
 	if player then
-		player:set_physics_override({speed=1,jump=1,gravity=1,sneak=true}) -- value set for extreme test space spawn
+		player:set_physics_override({speed=1,jump=1,gravity=1}) -- value set for extreme test space spawn
 		local skybox = enviro.skyboxes["default"]; -- default skybox is "default"
 		player:set_sky(0,skybox["type"],skybox["tex"]);
 	end
@@ -209,11 +222,11 @@ enviro_adjust_physics = function(player) -- adjust players physics/skybox 1 seco
 		if player then
 			local pos = player:getpos(); if not pos then return end
 			if pos.y > space_start then -- is player in space or not?
-				player:set_physics_override({speed=1,jump=0.6,gravity=0.2,sneak=true}) -- value set for extreme test space spawn
+				player:set_physics_override({speed=1,jump=0.5,gravity=0.1}) -- value set for extreme test space spawn
 				local skybox = enviro.skyboxes["space"];
 				player:set_sky(0,skybox["type"],skybox["tex"]);
 			else
-				player:set_physics_override({speed=1,jump=1,gravity=1,sneak=true}) -- value set for extreme test space spawn
+				player:set_physics_override({speed=1,jump=1,gravity=1}) -- value set for extreme test space spawn
 				local skybox = enviro.skyboxes["default"];
 				player:set_sky(0,skybox["type"],skybox["tex"]);
 			end
@@ -230,6 +243,13 @@ minetest.register_on_joinplayer(enviro_adjust_physics)
 
 
 -- SERVER GLOBAL SPACE CODE: uncomment to enable it
+
+local round = math.floor;
+local protector_position = function(pos) 
+	local r = 20;
+	local ry = 2*r;
+	return {x=round(pos.x/r+0.5)*r,y=round(pos.y/ry+0.5)*ry,z=round(pos.z/r+0.5)*r};
+end
 
 local stimer = 0
 local enviro_space = {};
@@ -248,20 +268,36 @@ minetest.register_globalstep(function(dtime)
 				enviro_adjust_physics(player);
 			end
 			
-			if inspace==1 then -- special space code
-				local dist = math.abs(pos.x)+math.abs(pos.z);
-				if dist > 50 then -- close to spawn normal
-					local populated = minetest.find_node_near(pos, 5, "protector:protect");
-					if not populated then -- do damage if player found not close to protectors
+			if ENABLE_SPACE_EFFECTS and inspace==1 then -- special space code
+				
+					
+					if pos.y<1500 and pos.y>1120 then
 						local hp = player:get_hp();
-						local privs = minetest.get_player_privs(name);
-						if hp>0 and not privs.kick then
-							player:set_hp(hp-10); -- dead in 20/10 = 2 events
-							minetest.chat_send_player(name,"WARNING: in space you must stay close to spawn or protected areas");
+						
+						if hp>0 then
+							minetest.chat_send_player(name,"WARNING: you entered DEADLY RADIATION ZONE");
+							local privs = minetest.get_player_privs(name)
+							if not privs.kick then player:set_hp(hp-15) end
+						end
+						return
+					else
+					
+						local ppos = protector_position(pos);
+						local populated = (minetest.get_node(ppos).name=="basic_protect:protector");
+						if populated then 
+							if minetest.get_meta(ppos):get_int("space") == 1 then populated = false end
+						end
+						
+						if not populated then -- do damage if player found not close to protectors
+							local hp = player:get_hp();
+							local privs = minetest.get_player_privs(name);
+							if hp>0 and not privs.kick then
+								player:set_hp(hp-10); -- dead in 20/10 = 2 events
+								minetest.chat_send_player(name,"WARNING: in space you must stay close to spawn or protected areas");
+							end
 						end
 					end
-				end
-				
+			
 			end
 		end
 	end
@@ -316,6 +352,9 @@ end)
 minetest.register_on_punchplayer( -- bring gravity closer to normal with each punch
 	function(player, hitter, time_from_last_punch, tool_capabilities, dir, damage)
 	
+		if player:get_physics_override() == nil then return end
+		local pos = player:getpos(); if pos.y>= space_start then return end
+		
 		local gravity = player:get_physics_override().gravity;
 		if gravity<1 then
 			gravity = 0.5*gravity+0.5;
@@ -329,11 +368,11 @@ minetest.register_on_punchplayer( -- bring gravity closer to normal with each pu
 
 -- RECIPE: extremely expensive
 
-minetest.register_craft({
-	output = "basic_machines:enviro",
-	recipe = {
-		{"basic_machines:generator", "basic_machines:clockgen","basic_machines:generator"},
-		{"basic_machines:generator", "basic_machines:generator","basic_machines:generator"},
-		{"basic_machines:generator", "basic_machines:generator", "basic_machines:generator"}
-	}
-})
+-- minetest.register_craft({
+	-- output = "basic_machines:enviro",
+	-- recipe = {
+		-- {"basic_machines:generator", "basic_machines:clockgen","basic_machines:generator"},
+		-- {"basic_machines:generator", "basic_machines:generator","basic_machines:generator"},
+		-- {"basic_machines:generator", "basic_machines:generator", "basic_machines:generator"}
+	-- }
+-- })

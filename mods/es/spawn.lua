@@ -4,7 +4,7 @@ local spawn_limit_max = 180; -- how much time must elapse to be able to use spaw
 
 
 spawn_prison = {}
-spawn_prison.pos = {x=-15, y=4, z=0}
+spawn_prison.pos = {x=0, y=15, z=0}
 
 if minetest.setting_get_pos("static_spawnpoint") then
  spawn_prison.pos = minetest.setting_get_pos("static_spawnpoint")
@@ -35,6 +35,7 @@ minetest.register_chatcommand("spawn", {
  if pos.x>-20 and pos.x<20 and pos.y>-20 and pos.z>-20 and pos.z<20
  then
  minetest.chat_send_player(name, "YOU MUST MOVE FARTHER FROM SPAWN!")
+ --[[
  else
  if pos.x<-47 and pos.x>-255 and pos.y>-20 and pos.z<1078 and pos.z>820
  then
@@ -43,11 +44,13 @@ minetest.register_chatcommand("spawn", {
  if pos.x<2085 and pos.x>1971 and pos.y>1598 and pos.z<1438 and pos.z>820
  then
  minetest.chat_send_player(name, "YOU MUST DIE TO ESCAPE!")
+ ]]
+ 
  else
  player:setpos(spawn_prison.pos)
  minetest.chat_send_player(name, "Teleported to spawn!")
- end
- end
+ --end
+ --end
  end
  end,
 })

@@ -123,7 +123,7 @@ minetest.after(75, function(dtime)
 	local positions6 = minetest.find_nodes_in_area(
 		{x=-19, y=2, z=-19},
 		{x=19, y=170, z=19},
-		{"default:cobble", "default:water_source", "default:lava_source"})
+		{"default:stone", "default:stone_with_coal", "default:dirt_with_grass", "default:dirt", "default:cobble", "default:water_source", "default:lava_source"})
 	for _, pos in ipairs(positions6) do
 		minetest.set_node(pos, {name="air"})
 	end
@@ -235,40 +235,40 @@ minetest.after(75, function(dtime)
 
 	for z1=-27, -16 do
 		minetest.set_node({x=37, y=2, z=z1}, {name="default:rail"})
-        minetest.set_node({x=37, y=1, z=z1}, {name="default:goldblock"})
+        minetest.set_node({x=37, y=1, z=z1}, {name="default:cobble"})
 	end
 	for z1=16, 29 do
 		minetest.set_node({x=37, y=2, z=z1}, {name="default:rail"})
-        minetest.set_node({x=37, y=1, z=z1}, {name="default:goldblock"})
+        minetest.set_node({x=37, y=1, z=z1}, {name="default:cobble"})
 	end
 	for z1=-15, 15 do
 		--minetest.set_node({x=37, y=2, z=z1}, {name="carts:brakerail"})
 		minetest.set_node({x=37, y=2, z=z1}, {name="carts:powerrail"})
-        minetest.set_node({x=37, y=1, z=z1}, {name="default:goldblock"})
+        minetest.set_node({x=37, y=1, z=z1}, {name="default:cobble"})
 	end
 	for x1=36, 17, -1 do
 		minetest.set_node({x=x1, y=2, z=-27}, {name="default:rail"})
 		minetest.set_node({x=x1, y=2, z=29}, {name="default:rail"})
-        minetest.set_node({x=x1, y=1, z=-27}, {name="default:goldblock"})
-        minetest.set_node({x=x1, y=1, z=29}, {name="default:goldblock"})
+        minetest.set_node({x=x1, y=1, z=-27}, {name="default:cobble"})
+        minetest.set_node({x=x1, y=1, z=29}, {name="default:cobble"})
 	end
 	for x1=16, 2, -1 do
 		minetest.set_node({x=x1, y=2, z=-27}, {name="carts:powerrail"})
 		minetest.set_node({x=x1, y=2, z=29}, {name="carts:powerrail"})
-        minetest.set_node({x=x1, y=1, z=-27}, {name="default:goldblock"})
-        minetest.set_node({x=x1, y=1, z=29}, {name="default:goldblock"})
+        minetest.set_node({x=x1, y=1, z=-27}, {name="default:cobble"})
+        minetest.set_node({x=x1, y=1, z=29}, {name="default:cobble"})
 	end
 	for z1=-26, -17 do
 		minetest.set_node({x=2, y=2, z=z1}, {name="default:rail"})
-        minetest.set_node({x=2, y=1, z=z1}, {name="default:goldblock"})
+        minetest.set_node({x=2, y=1, z=z1}, {name="default:cobble"})
 	end
 	for z1=17, 28 do
 		minetest.set_node({x=2, y=2, z=z1}, {name="default:rail"})
-        minetest.set_node({x=2, y=1, z=z1}, {name="default:goldblock"})
+        minetest.set_node({x=2, y=1, z=z1}, {name="default:cobble"})
 	end
 	for z1=-17, 17 do
 		minetest.set_node({x=3, y=2, z=z1}, {name="default:rail"})
-        minetest.set_node({x=3, y=1, z=z1}, {name="default:goldblock"})
+        minetest.set_node({x=3, y=1, z=z1}, {name="default:cobble"})
 	end
 	minetest.add_entity({x=3, y=2, z=0}, "carts:cart")
 
@@ -287,10 +287,10 @@ local old_node_place = minetest.item_place
 function minetest.item_place(itemstack, placer, pointed_thing)
 	if itemstack:get_definition().type == "node" then
 		local ok=true
-		if itemstack:get_name() == "protector:protect" then
+		if itemstack:get_name() == "protector:protect2" then
 			local pos = pointed_thing.above
 			if not placer or not placer.get_player_name then return false end
-			if pos.x>-250 and pos.x<250 and pos.z>-250 and pos.z<250 and pos.y>4000 then
+			if pos.x>-200 and pos.x<200 and pos.z>-200 and pos.z<200 and pos.y>4000 then
 				minetest.chat_send_player(placer:get_player_name(), "You must build farther out from here to build in space.  Try past 250meters.  This is to keep congestion low")
 				if minetest.get_player_privs(placer:get_player_name()).delprotect then
 					ok=true
@@ -317,7 +317,7 @@ function minetest.item_place(itemstack, placer, pointed_thing)
 		if itemstack:get_name() == "protector:protect" then
 			local pos = pointed_thing.above
 			if not placer or not placer.get_player_name then return false end
-			if pos.x>-21 and pos.x<21 and pos.z>-21 and pos.z<21 then
+			if pos.x>-200 and pos.x<200 and pos.z>-200 and pos.z<200 then
 				minetest.chat_send_player(placer:get_player_name(), "Spawn belongs to all")
 				if minetest.get_player_privs(placer:get_player_name()).delprotect then
 					ok=true

@@ -2,7 +2,7 @@
 -- get minetest.conf settings
 protector = {}
 protector.mod = "redo"
-protector.radius = tonumber(minetest.settings:get("protector_radius")) or 3
+protector.radius = tonumber(minetest.settings:get("protector_radius")) or 5
 protector.flip = minetest.settings:get_bool("protector_flip") or false
 protector.hurt = tonumber(minetest.settings:get("protector_hurt")) or 0
 protector.spawn = tonumber(minetest.settings:get("protector_spawn")

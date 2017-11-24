@@ -1,5 +1,6 @@
 
 local S = farming.intllib
+local tr = minetest.get_modpath("toolranks")
 
 -- Hoe registration function
 
@@ -68,7 +69,7 @@ function farming.hoe_on_use(itemstack, user, pointed_thing, uses)
 	if not pt or pt.type ~= "node" then
 		return
 	end
-	
+
 	local under = minetest.get_node(pt.under)
 	local upos = pointed_thing.under
 
@@ -79,30 +80,42 @@ function farming.hoe_on_use(itemstack, user, pointed_thing, uses)
 
 	local p = {x = pt.under.x, y = pt.under.y + 1, z = pt.under.z}
 	local above = minetest.get_node(p)
-	
+
 	-- return if any of the nodes is not registered
 	if not minetest.registered_nodes[under.name]
 	or not minetest.registered_nodes[above.name] then
 		return
 	end
-	
+
 	-- check if the node above the pointed thing is air
 	if above.name ~= "air" then
 		return
 	end
-	
+
 	-- check if pointing at dirt
 	if minetest.get_item_group(under.name, "soil") ~= 1 then
 		return
 	end
-	
+
 	-- turn the node into soil, wear out item and play sound
 	minetest.set_node(pt.under, {name = "farming:soil"})
 
 	minetest.sound_play("default_dig_crumbly", {pos = pt.under, gain = 0.5})
 
-	if not minetest.setting_getbool("creative_mode") then
-		itemstack:add_wear(65535/(uses-1))
+	local wear = 65535 / (uses -1)
+
+	if farming.is_creative(user:get_player_name()) then
+		if tr then
+			wear = 1
+		else
+			wear = 0
+		end
+	end
+
+	if tr then
+		itemstack = toolranks.new_afteruse(itemstack, user, under, {wear = wear})
+	else
+		itemstack:add_wear(wear)
 	end
 
 	return itemstack
@@ -115,6 +128,12 @@ farming.register_hoe(":farming:hoe_wood", {
 	inventory_image = "farming_tool_woodhoe.png",
 	max_uses = 30,
 	material = "group:wood"
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "farming:hoe_wood",
+	burntime = 5,
 })
 
 farming.register_hoe(":farming:hoe_stone", {
@@ -151,3 +170,31 @@ farming.register_hoe(":farming:hoe_diamond", {
 	max_uses = 500,
 	material = "default:diamond"
 })
+
+-- Toolranks support
+if tr then
+
+minetest.override_item("farming:hoe_wood", {
+	original_description = "Wood Hoe",
+	description = toolranks.create_description("Wood Hoe")})
+
+minetest.override_item("farming:hoe_stone", {
+	original_description = "Stone Hoe",
+	description = toolranks.create_description("Stone Hoe")})
+
+minetest.override_item("farming:hoe_steel", {
+	original_description = "Steel Hoe",
+	description = toolranks.create_description("Steel Hoe")})
+
+minetest.override_item("farming:hoe_bronze", {
+	original_description = "Bronze Hoe",
+	description = toolranks.create_description("Bronze Hoe")})
+
+minetest.override_item("farming:hoe_mese", {
+	original_description = "Mese Hoe",
+	description = toolranks.create_description("Mese Hoe")})
+
+minetest.override_item("farming:hoe_diamond", {
+	original_description = "Diamond Hoe",
+	description = toolranks.create_description("Diamond Hoe")})
+end

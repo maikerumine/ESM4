@@ -4,20 +4,24 @@ local machines_minstep = 1
 -- BATTERY
 
 local battery_update_meta = function(pos)
-		local meta = minetest.get_meta(pos);
-		local list_name = "nodemeta:"..pos.x..','..pos.y..','..pos.z 
-		local capacity = meta:get_float("capacity");
-		local maxpower = meta:get_float("maxpower");
-		local energy = math.ceil(10*meta:get_float("energy"))/10;
-		local form  = 
-		"size[8,6.5]" ..  -- width, height
+	local meta = minetest.get_meta(pos)
+	local list_name = "nodemeta:"..pos.x..','..pos.y..','..pos.z 
+	local capacity = meta:get_float("capacity")
+	local maxpower = meta:get_float("maxpower")
+	local energy = math.ceil(10*meta:get_float("energy"))/10
+	local form  = 
+		"size[8,6.5]"..	-- width, height
 		"label[0,0;FUEL] ".."label[6,0;UPGRADE] "..
 		"label[1,0;ENERGY ".. energy .."/ ".. capacity..", maximum power output ".. maxpower .."]"..
 		"label[1,1;UPGRADE LEVEL ".. meta:get_int("upgrade") .. " (mese and diamond block)]"..
 		"list["..list_name..";fuel;0.,0.5;1,1;]".. "list["..list_name..";upgrade;6.,0.5;2,1;]" ..
 		"list[current_player;main;0,2.5;8,4;]"..
-		"button[4.5,0.35;1.5,1;OK;REFRESH]";
-		meta:set_string("formspec", form);
+		"button[4.5,0.35;1.5,1;OK;REFRESH]"..
+		"listring["..list_name..";upgrade]"..
+		"listring[current_player;main]"..
+		"listring["..list_name..";fuel]"..
+		"listring[current_player;main]"
+	meta:set_string("formspec", form)		
 end
 
 --[power crystal name] = energy provided
@@ -39,7 +43,9 @@ battery_recharge = function(pos)
 	
 	local add_energy=0;
 	add_energy = basic_machines.energy_crystals[item] or 0;
+	
 	if add_energy>0 then
+		if pos.y>1500 then add_energy=2*add_energy end -- in space recharge is more efficient
 		crystal = true;
 		if energy+add_energy<=capacity then
 			stack:take_item(1); 
@@ -85,6 +91,9 @@ battery_upgrade = function(pos)
 		end
 	end
 	if count1<count2 then count =count1 else count=count2 end
+	
+	if pos.y>1500 then count = 2*count end -- space increases efficiency
+	
 	meta:set_int("upgrade",count);
 	-- adjust capacity
 	local capacity = 10+20*count;
@@ -103,7 +112,7 @@ local machines_activate_furnace = minetest.registered_nodes["default:furnace"].o
 minetest.register_node("basic_machines:battery", {
 	description = "battery - stores energy, generates energy from fuel, can power nearby machines, or accelerate/run furnace above it. Its upgradeable.",
 	tiles = {"basic_machine_outlet.png","basic_machine_side.png","basic_machine_battery.png"},
-	groups = {oddly_breakable_by_hand=2,mesecon_effector_on = 1},
+	groups = {cracky=3, mesecon_effector_on = 1},
 	sounds = default.node_sound_wood_defaults(),
 	after_place_node = function(pos, placer)
 		local meta = minetest.get_meta(pos);
@@ -142,9 +151,11 @@ minetest.register_node("basic_machines:battery", {
 					meta:set_int("ftime",t1);
 					
 					local upgrade = meta:get_int("upgrade");upgrade=upgrade*0.1;
+					
 					--if fuel_time>4 then  --  accelerated cooking
 					local src_time = fmeta:get_float("src_time") or 0
 					energy = energy - 0.25*upgrade; -- use energy to accelerate burning
+					
 					fmeta:set_float("src_time",src_time+machines_timer*upgrade); -- with max 99 upgrades battery furnace works 6x faster
 					--end
 					
@@ -253,13 +264,19 @@ local generator_update_meta = function(pos)
 		local list_name = "nodemeta:"..pos.x..','..pos.y..','..pos.z 
 		
 		local form  = 
-		"size[8,6.5]" ..  -- width, height
-		"label[0,0;POWER CRYSTALS] ".."label[6,0;UPGRADE] "..
-		"label[1,1;UPGRADE LEVEL ".. meta:get_int("upgrade") .. " (gold and diamond block)]"..
-		"list["..list_name..";fuel;0.,0.5;1,1;]".. "list["..list_name..";upgrade;6.,0.5;2,1;]" ..
-		"list[current_player;main;0,2.5;8,4;]"..
-		"button[4.5,1.5;1.5,1;OK;REFRESH]" .. "button[6,1.5;1.5,1;help;help]";
-		meta:set_string("formspec", form);
+			"size[8,6.5]" ..  -- width, height
+			"label[0,0;POWER CRYSTALS] ".."label[6,0;UPGRADE] "..
+			"label[1,1;UPGRADE LEVEL ".. meta:get_int("upgrade").." (gold and diamond block)]"..
+			"list["..list_name..";fuel;0.,0.5;1,1;]"..
+			"list["..list_name..";upgrade;6.,0.5;2,1;]"..
+			"list[current_player;main;0,2.5;8,4;]"..
+			"button[4.5,1.5;1.5,1;OK;REFRESH]"..
+			"button[6,1.5;1.5,1;help;help]"..
+			"listring["..list_name..";fuel]"..
+			"listring[current_player;main]"..
+			"listring["..list_name..";upgrade]"..
+			"listring[current_player;main]"	
+		meta:set_string("formspec", form)
 end
 
 
@@ -284,7 +301,7 @@ end
 minetest.register_node("basic_machines:generator", {
 	description = "Generator - very expensive, generates power crystals that provide power. Its upgradeable.",
 	tiles = {"basic_machine_side.png","basic_machine_side.png","basic_machine_generator.png"},
-	groups = {oddly_breakable_by_hand=2,mesecon_effector_on = 1},
+	groups = {cracky=3, mesecon_effector_on = 1},
 	sounds = default.node_sound_wood_defaults(),
 	after_place_node = function(pos, placer)
 		local meta = minetest.get_meta(pos);
@@ -431,25 +448,25 @@ end
 -- CRAFTS
 ------------------------
 
-minetest.register_craft({
-	output = "basic_machines:battery",
-	recipe = {
-		{"","default:steel_ingot",""},
-		{"default:steel_ingot","default:mese","default:steel_ingot"},
-		{"","default:diamond",""},
+-- minetest.register_craft({
+	-- output = "basic_machines:battery",
+	-- recipe = {
+		-- {"","default:steel_ingot",""},
+		-- {"default:steel_ingot","default:mese","default:steel_ingot"},
+		-- {"","default:diamond",""},
 		
-	}
-})
+	-- }
+-- })
 
-minetest.register_craft({
-	output = "basic_machines:generator",
-	recipe = {
-		{"","",""},
-		{"default:diamondblock","basic_machines:battery","default:diamondblock"},
-		{"default:diamondblock","default:diamondblock","default:diamondblock"}
+-- minetest.register_craft({
+	-- output = "basic_machines:generator",
+	-- recipe = {
+		-- {"","",""},
+		-- {"default:diamondblock","basic_machines:battery","default:diamondblock"},
+		-- {"default:diamondblock","default:diamondblock","default:diamondblock"}
 		
-	}
-})
+	-- }
+-- })
 
 minetest.register_craftitem("basic_machines:power_cell", {
 	description = "Power cell - provides 1 power",

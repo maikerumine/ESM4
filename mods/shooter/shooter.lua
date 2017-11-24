@@ -9,18 +9,18 @@ shooter = {
 
 SHOOTER_ADMIN_WEAPONS = false
 SHOOTER_ENABLE_BLASTING = true
-SHOOTER_ENABLE_CROSSBOW = false
+SHOOTER_ENABLE_CROSSBOW = true
 SHOOTER_ENABLE_GUNS = true
-SHOOTER_ENABLE_FLARES = false
-SHOOTER_ENABLE_HOOK = false
-SHOOTER_ENABLE_GRENADES = false
-SHOOTER_ENABLE_ROCKETS = false
-SHOOTER_ENABLE_TURRETS = false
+SHOOTER_ENABLE_FLARES = true
+SHOOTER_ENABLE_HOOK = true
+SHOOTER_ENABLE_GRENADES = true
+SHOOTER_ENABLE_ROCKETS = true
+SHOOTER_ENABLE_TURRETS = true
 SHOOTER_ENABLE_CRAFTING = true
 SHOOTER_ENABLE_PARTICLE_FX = true
 SHOOTER_ENABLE_PROTECTION = true
 SHOOTER_EXPLOSION_TEXTURE = "shooter_hit.png"
-SHOOTER_ALLOW_NODES = false
+SHOOTER_ALLOW_NODES = true
 SHOOTER_ALLOW_ENTITIES = true
 SHOOTER_ALLOW_PLAYERS = false
 SHOOTER_OBJECT_RELOAD_TIME = 1
@@ -29,118 +29,121 @@ SHOOTER_ROUNDS_UPDATE_TIME = 0.4
 SHOOTER_PLAYER_OFFSET = {x=0, y=1, z=0}
 SHOOTER_ENTITY_OFFSET = {x=0, y=0, z=0}
 SHOOTER_ENTITIES = {
-	"mobs_monster:dirt_monster",
-	"mobs_monster:stone_monster",
-	"mobs_monster:sand_monster",
-	"mobs_monster:tree_monster",
-	"mobs_monster:lava_flan",
-	"mobs_monster:mese_monster",
-	"mobs_monster:dungeon_master",
-	"mobs_monster:oerkki",
-	"mobs_monster:spider",
-	"mobs_mc:cow",
-	"mobs_mc:pig",
-	"mobs_mc:sheep",
-	"mobs_mc:zombie",
-	"mobs_mc:zombiepigman",
-	"mobs_mc:skeleton",
-	"mobs_mc:creeper",
-	"mobs_mc:spider",
-	"mobs_mc:ghast",
-	"mobs_mc:enderman",
-	"mobs_mc:greensmall",
-	"mobs_mc:greenmedium",
-	"mobs_mc:greenbig",
-	"mobs_mc:lavasmall",
-	"mobs_mc:lavabig",
-	"mobs_animal:rat",
-	"mobs_monster:oerkki",
-	"mobs_badplayer:dungeon_master",
-	"mobs_badplayer:badplayer1",
-	"mobs_badplayer:badplayer2",
-	"mobs_badplayer:badplayer3",
-	"mobs_badplayer:badplayer4",
-	"mobs_badplayer:badplayer5",
-	"mobs_badplayer:badplayer6",
-	"mobs_badplayer:badplayer7",
-	"mobs_badplayer:badplayer8",
-	"mobs_badplayer:badplayer9",
-	"mobs_badplayer:badplayer10",
-	"mobs_badplayer:badplayer11",
-	"mobs_badplayer:badplayer12",
-	"mobs_badplayer:badplayer13",
-	"mobs_badplayer:badplayer14",
-	"mobs_badplayer:badplayer15",
-	"mobs_badplayer:badplayer16",
-	"mobs_badplayer:badplayer17",
-	"mobs_badplayer:badplayer18",
-	"mobs_badplayer:badplayer19",
-	"mobs_badplayer:badplayer20",
-	"mobs_badplayer:badplayer21",
-	"mobs_badplayer:badplayer22",
-	"mobs_badplayer:badplayer23",
-	"mobs_badplayer:badplayer24",
-	"mobs_badplayer:badplayer25",
-	"mobs_badplayer:badplayer26",
-	"mobs_badplayer:badplayer27",
-	"mobs_badplayer:badplayer28",
-	"mobs_badplayer:badplayer29",
-	"mobs_badplayer:badplayer30",
-	"mobs_badplayer:badplayer31",
-	"mobs_badplayer:badplayer32",
-	"mobs_badplayer:badplayer33",
-	"mobs_badplayer:badplayer34",
-	"mobs_badplayer:badplayer35",
-	"mobs_badplayer:badplayer36",
-	"mobs_monster:tree_monster",
-	"mobs_mc:spider",
-	"mobs_esmobs:applmons",
-	"mobs_esmobs:aggressormob",
-	"mobs:sand_monster",
+	"mobs:dirt_monster",
 	"mobs:stone_monster",
-	"mobs_esmobs:stone_monster2",
-	"mobs_monster:oerkki",
-	"mobs_animal:sheep",
+	"mobs:sand_monster",
+	"mobs:tree_monster",
+	"mobs:sheep",
+	"mobs:rat",
+	"mobs:oerkki",
+	"mobs:dungeon_master",
+	"esmobs:badplayer1",
+	"esmobs:badplayer2",
+	"esmobs:badplayer3",
+	"esmobs:badplayer4",
+	"esmobs:badplayer5",
+	"esmobs:badplayer6",
+	"esmobs:badplayer7",
+	"esmobs:badplayer8",
+	"esmobs:badplayer9",
+	"esmobs:badplayer10",
+	"esmobs:badplayer11",
+	"esmobs:badplayer12",
+	"esmobs:badplayer13",
+	"esmobs:badplayer14",
+	"esmobs:badplayer15",
+	"esmobs:badplayer16",
+	"esmobs:badplayer17",
+	"esmobs:badplayer18",
+	"esmobs:badplayer19",
+	"esmobs:badplayer20",
+	"esmobs:badplayer21",
+	"esmobs:badplayer22",
+	"esmobs:badplayer23",
+	"esmobs:badplayer24",
+	"esmobs:badplayer25",
+	"esmobs:badplayer26",
+	"esmobs:badplayer27",
+	"esmobs:badplayer28",
+	"esmobs:badplayer29",
+	"esmobs:badplayer30",
+	"esmobs:badplayer31",
+	"esmobs:badplayer32",
+	"esmobs:badplayer33",
+	"esmobs:badplayer34",
+	"esmobs:badplayer35",
+	"esmobs:badplayer36",
+	"esmobs:tree_monster",
+	"esmobs:spider",
+	"esmobs:applmons",
+	"esmobs:aggressormob",
+	"esmobs:sand_monster",
+	"esmobs:stone_monster",
+	"esmobs:oerkkii",
+	"esmobs:sheep",
 	"lagsmobs:griefer_ghost",
-	"mobs_esmobs:bonemons",
 	"lagsmobs:stone_monster",
-	"lagsmobs:stonemons",
-	"mobs_monster:dirtmons",
-	"mobs_monster:dirt",
-	"mobs_esmobs:dirt2",
-	"mobs_esmobs:blue",
-	"mobs_esmobs:spider",
-	"mobs_esmobs:snowmon",
-	"mobs_esmobs:snowmons",
-	"mobs_esmobs:icemons",
-	"mobs_esmobs:icemon",
-	"mobs_esmobs:watermon",
-	"mobs_esmobs:watermons",
+	"esmobs:dirt",
+	"esmobs:dirt2",
+	"esmobs:snowmon",
+	"esmobs:icemon",
+	"esmobs:watermon",
 	"creatures:zombie",
 	"creatures:ghost",
-	"mobs_monster:dungeon_master",
-	"mobs_mc:wolf",
-	"futuremobs:goodbot_fighter",
-	"futuremobs:goodbot_gunner",
-	"futuremobs:badbot_fighter",
-	"futuremobs:badbot_gunner",
-	"futuremobs:claw_alien",
-	"futuremobs:alien",
-	"futuremobs:destroyed_bot",
-	"mobs_esmobs:herobrines_bloody_ghost",
-	"mobs_esmobs:bomber",
-	"mobs_esmobs:bone_monster",
-	"mobs_badplayer:Mr_Black",
-	"mobs_esmobs:chickoboo",
-	"mobs_esmobs:paniki",
-	"mobs_animal:sheep_white",
-	"mobs_animal:chicken",
-	"mobs_animal:cow",
-	"mobs_animal:pumba",
-	"mobs_esmobs:Infinium_Monster",
-	"mobs_esmobs:phoenix",
-	"mobs_badplayer:Jasmine",
-	"mobs_badplayer:Infinium_Monster",
+	"esmobs:man",
+	"esmobs:woman",
+	"mobs_futuremobs:goodbot_fighter",
+	"mobs_futuremobs:goodbot_gunner",
+	"mobs_futuremobs:badbot_fighter",
+	"mobs_futuremobs:badbot_gunner",
+	"mobs_futuremobs:claw_alien",
+	"mobs_futuremobs:alien",
+	"mobs_futuremobs:destroyed_bot",
+	"creatures:zombie",
+	"creatures:ghost",
+	"esmobs:goodnpc",
+	"esmobs:badnpc",
+	"esmobs:chickoboo",
+	"mobs_fallout:sheep", 
+	"mobs_fallout:Mr_Black",
+	"mobs_fallout:Mr_White",
+	"mobs_fallout:Mr_Pink",
+	"mobs_fallout:Bajan",
+	"mobs_fallout:John",
+	"mobs_fallout:Krock",
+	"mobs_fallout:Just_Test_Griefer", 
+	"mobs_fallout:SepiaSam",
+	"mobs_fallout:Hobo",
+	"mobs_fallout:Simon", 
+	"mobs_fallout:Infantry_man",
+	"mobs_fallout:Mage",
+	"mobs_fallout:Bajan",
+	"mobs_fallout:Calinou",
+	"mobs_fallout:Castaway",
+	"mobs_fallout:cx384", 
+	"mobs_fallout:FloatingWraith",
+	"mobs_fallout:Ghost",
+	"mobs_fallout:Zombie_Rex",
+	"mobs_fallout:Lovehart",
+	"mobs_fallout:Minetestian", 
+	"mobs_fallout:Andromeda",
+	"mobs_fallout:Phil",
+	"mobs_fallout:IvanbotXD", 
+	"mobs_fallout:Orc", 
+	"mobs_fallout:Luke",
+	"mobs_fallout:Seth_Rollins",
+	"mobs_fallout:Sgt_Prf",
+	"mobs_fallout:Willy_Rex",
+	"mobs_fallout:Zombie_Drogado_A",
+	"mobs_fallout:Zombie_Drogado_B",
+	"mobs_fallout:Zombie_Drogado_C",
+	"mobs_fallout:Zombie_Drogado_D",
+	"mobs_fallout:Zombie_Drogado_E",
+	"mobs_fallout:Zombie_Drogado_F",
+	"mobs_fallout:radbug",
+	"mobs_fallout:moonheron",
+	"mobs_fallout:mudworm",
+	
 }
 
 local singleplayer = minetest.is_singleplayer()
@@ -305,10 +308,11 @@ function shooter:process_round(round)
 			shooter:punch_node(pos, round.def)
 			return 1
 		end
-	elseif SHOOTER_ALLOW_NODES == true then
+	elseif SHOOTER_ALLOW_NODES then
 		local d = round.def.step
 		local p2 = vector.add(p1, vector.multiply(v1, {x=d, y=d, z=d}))
 		local success, pos = minetest.line_of_sight(p1, p2, 1)
+
 		if pos then
 			shooter:punch_node(pos, round.def)
 			return 1
@@ -488,6 +492,11 @@ function shooter:blast(pos, radius, fleshy, distance, user)
 			{x=-0.5, y=5, z=-0.5}, {x=0.5, y=5, z=0.5},
 			0.1, 1, 8, 15, false, "tnt_smoke.png"
 		)
+		minetest.add_particlespawner(50, 0.1,
+			p1, p2, {x=-0, y=-0, z=-0}, {x=0, y=0, z=0},
+			{x=-0.5, y=5, z=-0.5}, {x=0.5, y=5, z=0.5},
+			0.1, 1, 8, 15, false, "fire_basic_flame.png"
+		)
 	end
 	local objects = minetest.get_objects_inside_radius(pos, distance)
 	for _,obj in ipairs(objects) do
@@ -525,7 +534,7 @@ function shooter:blast(pos, radius, fleshy, distance, user)
 							(radius * radius) + pr:next(-radius, radius) then
 						if SHOOTER_ENABLE_PROTECTION then
 							if not minetest.is_protected(vp, name) then
-								data[vi] = c_air
+								--data[vi] = c_air  --commented out due to buggy
 							end
 						else
 							data[vi] = c_air
@@ -571,3 +580,94 @@ if not singleplayer and SHOOTER_ADMIN_WEAPONS then
 		end
 	end)
 end
+--[[
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 60,
+	output = "default:steel_ingot 2",
+	recipe = "shooter:rifle",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 60,
+	output = "default:steel_ingot",
+	recipe = "shooter:pistol",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 60,
+	output = "default:steel_ingot 2",
+	recipe = "shooter:machine_gun",
+})
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 60,
+	output = "default:steel_ingot",
+	recipe = "shooter:grenade",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 60,
+	output = "default:steel_ingot 2",
+	recipe = "shooter:shotgun",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 60,
+	output = "default:copper_ingot",
+	recipe = "shooter:ammo",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 60,
+	output = "default:steel_ingot",
+	recipe = "shooter:hook",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 60,
+	output = "default:steel_ingot",
+	recipe = "shooter:grapple_hook",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 60,
+	output = "default:steel_ingot",
+	recipe = "shooter:grapple_gun",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 60,
+	output = "default:bronze_ingot 2",
+	recipe = "shooter:rocket_gun_loaded",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 60,
+	output = "default:steel_ingot 3",
+	recipe = "shooter:rocket_gun",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 60,
+	output = "default:steel_ingot",
+	recipe = "shooter:flare_gun",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 60,
+	output = "default:steel_ingot 2",
+	recipe = "shooter:crossbow",
+})
+]]

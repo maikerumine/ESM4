@@ -88,7 +88,7 @@ end
 
 -- provide debug information about mobs, let mobf_traders work around to some degree etc
 mg_villages.mob_spanwer_on_rightclick = function( pos, node, clicker, itemstack, pointed_thing)
---[[
+
 	if( not( clicker )) then
 		return;
 	end
@@ -158,8 +158,8 @@ mg_villages.mob_spanwer_on_rightclick = function( pos, node, clicker, itemstack,
 	move_obj:walk_path( path, 1, {find_path == true});
 
 	minetest.chat_send_player( clicker:get_player_name(), str.."Mob data: "..minetest.serialize(mob_info));
-	]]
-	minetest.chat_send_player( clicker:get_player_name(), "These are BROKEN!!  Grrrrrr. ");
+	
+	--minetest.chat_send_player( clicker:get_player_name(), "These are BROKEN!!  Grrrrrr. ");
 end
 
 

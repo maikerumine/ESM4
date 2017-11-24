@@ -1,4 +1,4 @@
--- make other light blocks toggle able:
+-- make other light blocks work with mesecon signals - can toggle on/off
 
 local function enable_toggle_light(name)
 
@@ -14,7 +14,6 @@ local table = minetest.registered_nodes[name]; if not table then return end
 	
 	table2.mesecons = {effector = { -- action to toggle light off
 		action_off  =  function (pos,node,ttl)
-			if ttl<0 then return end
 			minetest.swap_node(pos,{name = offname});
 		end
 		}
@@ -32,7 +31,6 @@ local table = minetest.registered_nodes[name]; if not table then return end
 	table3.light_source = 0; -- off block has light off
 	table3.mesecons = {effector = {
 		action_on  =  function (pos,node,ttl)
-			if ttl<0 then return end
 			minetest.swap_node(pos,{name = name});
 		end
 		}
@@ -48,3 +46,5 @@ enable_toggle_light("xdecor:wooden_lightbox");
 enable_toggle_light("xdecor:iron_lightbox");
 enable_toggle_light("moreblocks:slab_meselamp_1");
 enable_toggle_light("moreblocks:slab_super_glow_glass");
+
+enable_toggle_light("darkage:lamp");

@@ -33,7 +33,7 @@ local ball_spawner_update_form = function (pos)
 		local x0,y0,z0;
 		x0=meta:get_int("x0");y0=meta:get_int("y0");z0=meta:get_int("z0"); -- direction of velocity
 		
-		local energy,bounce,g,puncheable, gravity,hp,hurt;
+		local energy,bounce,g,puncheable, gravity,hp,hurt,solid;
 		local speed = meta:get_float("speed"); -- if positive sets initial ball speed
 		energy = meta:get_float("energy"); -- if positive activates, negative deactivates, 0 does nothing
 		bounce = meta:get_int("bounce"); -- if nonzero bounces when hit obstacle, 0 gets absorbed
@@ -41,6 +41,7 @@ local ball_spawner_update_form = function (pos)
 		hp = meta:get_float("hp");
 		hurt = meta:get_float("hurt");
 		puncheable = meta:get_int("puncheable"); -- if 1 can be punched by players in protection, if 2 can be punched by anyone
+		solid = meta:get_int("solid"); -- if 1 then entity is solid - cant be walked on
 		
 		local texture = meta:get_string("texture") or  "basic_machines_ball.png";
 		local visual = meta:get_string("visual") or "sprite";
@@ -55,8 +56,9 @@ local ball_spawner_update_form = function (pos)
 		"field[1.25,1.5;1,1;bounce;bounce;".. bounce.."]"..
 		"field[2.25,1.5;1,1;gravity;gravity;"..gravity.."]"..
 		"field[3.25,1.5;1,1;puncheable;puncheable;"..puncheable.."]"..
+		"field[3.25,2.5;1,1;solid;solid;"..solid.."]"..
 		"field[0.25,2.5;1,1;hp;hp;"..hp.."]".."field[1.25,2.5;1,1;hurt;hurt;"..hurt.."]"..
-		"field[0.25,3.5;4,1;texture;texture;"..texture.."]"..
+		"field[0.25,3.5;4,1;texture;texture;"..minetest.formspec_escape(texture).."]"..
 		"field[0.25,4.5;1,1;scale;scale;"..scale.."]".."field[1.25,4.5;1,1;visual;visual;"..visual.."]"..
 		"button_exit[3.25,4.25;1,1;OK;OK]";
 		
@@ -77,13 +79,14 @@ end
 minetest.register_entity("basic_machines:ball",{
 	timer = 0, 
 	lifetime = 20, -- how long it exists before disappearing
-	energy = 1, -- if negative it will deactivate stuff, positive will activate, 0 wont do anything
+	energy = 0, -- if negative it will deactivate stuff, positive will activate, 0 wont do anything
 	puncheable = 1, -- can be punched by players in protection
 	bounce = 0, -- 0: absorbs in block, 1 = proper bounce=lag buggy, -- to do: 2 = line of sight bounce
 	gravity = 0,
 	speed = 5, -- velocity when punched
 	hurt = 0, -- how much damage it does to target entity, if 0 damage disabled
 	owner = "",
+	state = false,
 	origin = {x=0,y=0,z=0},
 	lastpos = {x=0,y=0,z=0}, -- last not-colliding position
 	hp_max = 100,
@@ -102,6 +105,13 @@ minetest.register_entity("basic_machines:ball",{
 		self.origin = self.object:getpos();
 		self.lifetime = 20;
 	end,
+	
+	get_staticdata = function(self) -- this gets called before object put in world and before it hides
+		if not self.state then return nil end
+		self.object:remove();
+		return nil
+	end,
+	
 	
 	on_punch = function (self, puncher, time_from_last_punch, tool_capabilities, dir)
 		if self.puncheable == 0 then return end
@@ -127,6 +137,7 @@ minetest.register_entity("basic_machines:ball",{
 			return 
 		end
 		
+		if not self.state then self.state = true end
 		local pos=self.object:getpos()
 		
 		local origin = self.origin;
@@ -148,7 +159,7 @@ minetest.register_entity("basic_machines:ball",{
 		if not walkable then 
 			self.lastpos = pos 
 			if self.hurt~=0 then -- check for coliding nearby objects
-				local objects = minetest.get_objects_inside_radius(pos,1);
+				local objects = minetest.get_objects_inside_radius(pos,2);
 				if #objects>1 then
 					for _, obj in pairs(objects) do
 						local p = obj:getpos();
@@ -158,11 +169,36 @@ minetest.register_entity("basic_machines:ball",{
 							--if minetest.is_protected(p,self.owner) then return end
 							if math.abs(p.x)<32 and math.abs(p.y)<32 and math.abs(p.z)<32 then return end -- no damage around spawn
 							
-							if obj:is_player() then -- dont hurt owner
-								if obj:get_player_name()==self.owner then break end
+							if obj:is_player() then --player
+								if obj:get_player_name()==self.owner then break end -- dont hurt owner
+							
+								local hp = obj:get_hp()
+								local newhp = hp-self.hurt;
+								if newhp<=0 and boneworld and boneworld.killxp then
+									local killxp =  boneworld.killxp[self.owner];
+									if killxp then
+										boneworld.killxp[self.owner] = killxp + 0.01;
+									end
+								end
+								obj:set_hp(newhp)
+							else -- non player
+								local lua_entity = obj:get_luaentity();
+								if lua_entity and lua_entity.itemstring then
+									local entname = lua_entity.itemstring;
+									if entname == "robot" then 
+										self.object:remove()
+										return;
+									end
+								end
+								local hp = obj:get_hp()
+								local newhp = hp-self.hurt;
+								minetest.chat_send_player(self.owner,"#ball: target hp " .. newhp)
+								if newhp<=0 then obj:remove() else obj:set_hp(newhp) end
 							end
 							
-							obj:set_hp(obj:get_hp()-self.hurt)
+							
+							
+							
 							local count = ballcount[self.owner] or 1; count=count-1; ballcount[self.owner] = count; 
 							self.object:remove(); 
 							return
@@ -176,13 +212,17 @@ minetest.register_entity("basic_machines:ball",{
 		if walkable then -- we hit a node
 			--minetest.chat_send_all(" hit node at " .. minetest.pos_to_string(pos))
 			
+			
 			local node = minetest.get_node(pos);
 			local table = minetest.registered_nodes[node.name];
 			if table and table.mesecons and table.mesecons.effector then -- activate target
 
-				if minetest.is_protected(pos,self.owner) then return end
-				local effector = table.mesecons.effector;
 				local energy = self.energy;
+				if energy~=0 then
+					if minetest.is_protected(pos,self.owner) then return end
+				end
+				local effector = table.mesecons.effector;
+				
 				self.object:remove();
 				
 				if energy>0 then
@@ -299,7 +339,7 @@ minetest.register_entity("basic_machines:ball",{
 minetest.register_node("basic_machines:ball_spawner", {
 	description = "Spawns energy ball one block above",
 	tiles = {"basic_machines_ball.png"},
-	groups = {oddly_breakable_by_hand=2,mesecon_effector_on = 1},
+	groups = {cracky=3, mesecon_effector_on = 1},
 	drawtype = "allfaces",
 	paramtype = "light",
 	param1=1,
@@ -374,12 +414,13 @@ minetest.register_node("basic_machines:ball_spawner", {
 			local luaent = obj:get_luaentity();
 			local meta = minetest.get_meta(pos);
 			
-			local speed,energy,bounce,gravity,puncheable;
+			local speed,energy,bounce,gravity,puncheable,solid;
 			speed = meta:get_float("speed");
 			energy = meta:get_float("energy"); -- if positive activates, negative deactivates, 0 does nothing
 			bounce = meta:get_int("bounce"); -- if nonzero bounces when hit obstacle, 0 gets absorbed
 			gravity = meta:get_float("gravity");  -- gravity
 			puncheable = meta:get_int("puncheable"); -- if 1 can be punched by players in protection, if 2 can be punched by anyone
+			solid = meta:get_int("solid");
 			
 			if energy<0 then
 				obj:set_properties({textures={"basic_machines_ball.png^[colorize:blue:120"}})
@@ -393,6 +434,9 @@ minetest.register_node("basic_machines:ball_spawner", {
 			luaent.puncheable = puncheable;
 			luaent.owner = meta:get_string("owner");
 			luaent.hurt = meta:get_float("hurt");
+			if solid==1 then 
+				luaent.physical = true
+			end
 			
 			obj:set_hp( meta:get_float("hp") );
 			
@@ -455,11 +499,12 @@ minetest.register_node("basic_machines:ball_spawner", {
 
 			meta:set_int("x0",x0);meta:set_int("y0",y0);meta:set_int("z0",z0);
 			
-			local speed,energy,bounce,gravity,puncheable;
+			local speed,energy,bounce,gravity,puncheable,solid;
 			energy = meta:get_float("energy"); -- if positive activates, negative deactivates, 0 does nothing
 			bounce = meta:get_int("bounce"); -- if nonzero bounces when hit obstacle, 0 gets absorbed
 			gravity = meta:get_float("gravity");  -- gravity
 			puncheable = meta:get_int("puncheable"); -- if 1 can be punched by players in protection, if 2 can be punched by anyone
+			solid = meta:get_int("solid");
 			
 			
 			if fields.speed then 
@@ -487,6 +532,10 @@ minetest.register_node("basic_machines:ball_spawner", {
 				meta:set_int("puncheable", tonumber(fields.puncheable) or 0) 
 			end
 			
+			if fields.solid then 
+				meta:set_int("solid", tonumber(fields.solid) or 0) 
+			end
+			
 			if fields.lifetime then
 				meta:set_int("lifetime", tonumber(fields.lifetime) or 0) 
 			end
@@ -496,7 +545,7 @@ minetest.register_node("basic_machines:ball_spawner", {
 			end
 			
 			if fields.hp then
-				meta:set_float("hp", math.abs(tonumber(fields.hp)) or 0) 
+				meta:set_float("hp", math.abs(tonumber(fields.hp) or 0)) 
 			end
 			
 			if fields.texture then
@@ -504,7 +553,7 @@ minetest.register_node("basic_machines:ball_spawner", {
 			end
 			
 			if fields.scale then
-				local scale = math.abs(tonumber(fields.scale)) or 100;
+				local scale = math.abs(tonumber(fields.scale) or 100);
 				if scale>1000 and not privs.privs then scale = 1000 end
 				meta:set_int("scale", scale) 
 			end
@@ -609,10 +658,10 @@ minetest.register_tool("basic_machines:ball_spell", {
 
 
 
-minetest.register_craft({
-	output = "basic_machines:ball_spawner",
-	recipe = {
-		{"basic_machines:power_cell"},
-		{"basic_machines:keypad"}
-	}
-})
+-- minetest.register_craft({
+	-- output = "basic_machines:ball_spawner",
+	-- recipe = {
+		-- {"basic_machines:power_cell"},
+		-- {"basic_machines:keypad"}
+	-- }
+-- })

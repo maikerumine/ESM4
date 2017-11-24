@@ -12,7 +12,7 @@ mg_villages.INVERSE_HOUSE_DENSITY = 4;
 mg_villages.artificial_snow_probability = 10;
 
 -- if set to true, soil around villaes will get special soil-snow instead of plant + snow cover
-mg_villages.use_soil_snow = false;
+mg_villages.use_soil_snow = true;
 
 -- only place roads if there are at least that many buildings in the village
 mg_villages.MINIMAL_BUILDUNGS_FOR_ROAD_PLACEMENT = 4;
@@ -27,7 +27,7 @@ mg_villages.VILLAGE_DETECT_RANGE = 400;
 mg_villages.REQUIRE_PRIV_FOR_TELEPORT = true;
 
 -- if set to true, players cannot modify spawned villages without buying the house from the village first
-mg_villages.ENABLE_PROTECTION = false;
+mg_villages.ENABLE_PROTECTION = true;
 
 -- the first village - the one the player spawns in - will be of this type
 mg_villages.FIRST_VILLAGE_TYPE = 'ruins';

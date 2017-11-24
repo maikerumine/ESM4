@@ -41,7 +41,7 @@ function place_beans(itemstack, placer, pointed_thing, plantname)
 
 	minetest.sound_play("default_place_node", {pos = pt.under, gain = 1.0})
 
-	if not minetest.setting_getbool("creative_mode") then
+	if not farming.is_creative(placer:get_player_name()) then
 
 		itemstack:take_item()
 
@@ -121,7 +121,7 @@ minetest.register_node("farming:beanpole", {
 
 		minetest.set_node(pointed_thing.above, {name = "farming:beanpole"})
 
-		if not minetest.setting_getbool("creative_mode") then
+		if not farming.is_creative(placer:get_player_name()) then
 			itemstack:take_item()
 		end
 
