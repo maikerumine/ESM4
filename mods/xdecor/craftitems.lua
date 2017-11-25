@@ -21,7 +21,7 @@ minetest.register_craftitem("xdecor:bowl_soup", {
 		return itemstack
 	end
 })
-]]
+
 minetest.register_tool("xdecor:hammer", {
 	description = "Hammer",
 	inventory_image = "xdecor_hammer.png",
@@ -29,7 +29,7 @@ minetest.register_tool("xdecor:hammer", {
 	stack_max = 1,
 	on_use = function() do return end end
 })
---[[
+
 minetest.register_craftitem("xdecor:honey", {
 	description = "Honey",
 	inventory_image = "xdecor_honey.png",

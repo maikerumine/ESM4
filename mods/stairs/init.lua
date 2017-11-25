@@ -1085,14 +1085,14 @@ stairs.register_all("marble", "es:marble",
 stairs.register_all("granite_bricks", "es:granite_bricks",
 	grp,
 	--{"technic_granite_bricks.png"},
-	{"mcl_core_diorite_smooth.png"},
+	{"mcl_core_granite_smooth.png"},
 	"Granite Bricks Block",
 	stairs.stone)
 	
 stairs.register_all("marble_bricks", "es:marble_bricks",
 	grp,
 	--{"technic_marble_bricks.png"},
-	{"mcl_core_granite_smooth.png"},
+	{"mcl_core_diorite_smooth.png"},
 	"Marble Bricks Block",
 	stairs.stone)
 	

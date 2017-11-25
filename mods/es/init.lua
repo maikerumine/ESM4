@@ -1,17 +1,17 @@
 --Extreme Survival created by maikerumine
--- Minetest 0.4.13 mod: "Extreme Survival"
+-- Minetest 0.5.0 mod: "Extreme Survival"
 -- namespace: es
---version 1.8
+--version 3.1
 --https://github.com/maikerumine
 
 --License:
 --~~~~~~~~
 --Code:
---(c) Copyright 2015 maikerumine; modified zlib-License
+--(c) Copyright 2017 maikerumine; modified zlib-License
 --see "LICENSE.txt" for details.
 
 --Media(if not stated differently):
---(c) Copyright (2014-2015) maikerumine; CC-BY-SA 3.0
+--(c) Copyright (2014-2017) maikerumine; CC-BY-SA 3.0
 
 es = {}
 --NOTE:  THIS--v  v--MUST BE FIRST IN THE INIT FOR EVERYTHING TO WORK
@@ -21,7 +21,7 @@ enable_stairsplus = true
 local modpath = minetest.get_modpath("es")
 es.modpath = modpath
 
-dofile(modpath.."/alias.lua")
+--dofile(modpath.."/alias.lua")
 dofile(modpath.."/crafting.lua")
 dofile(modpath.."/antigrief.lua")
 dofile(modpath.."/itemdrop.lua")

@@ -150,9 +150,9 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "xdecor:enchantment_table",
 	recipe = {
-		{"default:meselamp","default:marble_bricks","default:meselamp"},
-		{"default:emeraldblock","mobs_mc:ghast_head","default:emeraldblock"},
-		{"default:obsidianbrick","default:diamondblock","default:obsidianbrick"},
+		{"","default:book",""},
+		{"es:rubyblock","default:obsidian","es:rubyblock"},
+		{"default:obsidian","default:obsidian","default:obsidian"},
 	}
 })
 --[[

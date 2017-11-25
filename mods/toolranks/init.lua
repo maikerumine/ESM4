@@ -269,7 +269,7 @@ if minetest.get_modpath("esm") then
 end
 
 
-if minetest.get_modpath("moreores") then
+if minetest.get_modpath("moreoresm") then
 
   minetest.override_item("moreores:pick_mithril", {
     original_description = "Mithril Pickaxe",
