@@ -3,6 +3,7 @@ farming?
 flowers?
 stairs?
 moreblocks?
+moreores?
 cblocks?
 toolranks?
 

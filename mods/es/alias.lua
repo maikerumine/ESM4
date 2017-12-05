@@ -16,7 +16,7 @@
 --Alias                      "old"--->"new"
 ------------------------------------------
 
-
+--[[
 --===========================================
 --===========================================
 --This is to fix the old interaction with my modified 3d_armor mod.
@@ -52,14 +52,14 @@ minetest.register_alias("bags:small", "unified_inventory:small_esmmese")
 minetest.register_alias("bags:medium", "unified_inventory:medium_esmmese")
 minetest.register_alias("bags:large", "unified_inventory:large_esmmese")
 
-
+]]
 --===========================================
 --===========================================
 --beds
 minetest.register_alias("beds:bed_bottom_white", "beds:bed_bottom")
 minetest.register_alias("beds:bed_top_white", "beds:bed_top")
 
-
+--[[
 --===========================================
 --===========================================
 --carts
@@ -74,7 +74,7 @@ minetest.register_alias("default:desert_stone_with_iron", "es:desert_stone_with_
 minetest.register_alias("default:desert_stone_with_gold", "es:desert_stone_with_gold")
 minetest.register_alias("default:desert_stone_with_coal", "es:desert_stone_with_coal")
 
-
+]]
 --===========================================
 --===========================================
 --doors
@@ -94,7 +94,7 @@ minetest.register_alias("doors:door_steel_b_1", "doors:door_steel_a")
 minetest.register_alias("doors:door_steel_b_2", "doors:door_steel_b")
 minetest.register_alias("doors:door_steel_t_2", "doors:hidden")
 
-
+--[[
 --===========================================
 --===========================================
 --es crushing furnace
@@ -304,12 +304,12 @@ for i in ipairs(es.treelist) do
 end
 
 
---[[
-minetest.register_alias("moretrees:"..treename.."_planks", "default:junglewood")
-minetest.register_alias("moretrees:"..treename.."_trunk", "default:acacia_tree")
-minetest.register_alias("moretrees:"..treename.."_sapling", "default:sapling")
-minetest.register_alias("moretrees:"..treename.."_leaves", "default:leaves")
-]]
+
+--minetest.register_alias("moretrees:"..treename.."_planks", "default:junglewood")
+--minetest.register_alias("moretrees:"..treename.."_trunk", "default:acacia_tree")
+--minetest.register_alias("moretrees:"..treename.."_sapling", "default:sapling")
+--minetest.register_alias("moretrees:"..treename.."_leaves", "default:leaves")
+
 
 --aspen
 minetest.register_alias("aspen:sapling", "default:aspen_sapling")
@@ -772,7 +772,7 @@ minetest.register_alias("mg_villages:desert_sand_soil", "default:desert_sand")
 minetest.register_alias("mg_villages:plotmarker", "stairs:slab_stonebrick")
 minetest.register_alias("mg_villages:lava_flowing_tamed", "default:lava_flowing")
 minetest.register_alias("mg_villages:lava_source_tamed", "default:lava_source")
-
+]]
 
 
 

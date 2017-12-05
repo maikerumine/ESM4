@@ -349,17 +349,17 @@ if minetest.get_modpath("toolranks") then
 --aikerum	
   minetest.override_item("es:pick_aikerum", {
     original_description = "Extreme Survival Aikerum Pickaxe",
-    description = toolranks.create_description("Extreme Survival Aikerum Shovel Pickaxe", 0, 1),
+    description = toolranks.create_description("Extreme Survival Aikerum Pickaxe", 0, 1),
     after_use = toolranks.new_afteruse})
 
   minetest.override_item("es:axe_aikerum", {
     original_description = "Extreme Survival Aikerum Axe",
-    description = toolranks.create_description("Extreme Survival Aikerum Shovel Axe", 0, 1),
+    description = toolranks.create_description("Extreme Survival Aikerum Axe", 0, 1),
     after_use = toolranks.new_afteruse})
 
   minetest.override_item("es:shovel_aikerum", {
     original_description = "Extreme Survival Aikerum Shovel",
-    description = toolranks.create_description("Extreme Survival Aikerum Shovel Shovel", 0, 1),
+    description = toolranks.create_description("Extreme Survival Aikerum Shovel", 0, 1),
     after_use = toolranks.new_afteruse})
 --purpellium	
   minetest.override_item("es:pick_purpellium", {

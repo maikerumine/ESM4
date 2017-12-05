@@ -43,8 +43,8 @@ minetest.register_globalstep(function(dtime)
          and ((D == nil) or (t.wday == D))) then
       minetest.chat_send_all("Scheduled shutdown.  2000 Eastern Time Zone DST  0000 ZULU "
             .."Shutting down in FIVE minutes.  Enjoy the break")
-	          minetest.chat_send_all("STORE YOUR ITEMS WITHIN 4 MINUTES. "
-            .."Shutting down in FIVE minutes.")
+	          minetest.chat_send_all("Find safety. "
+            .."Never forget ESM.")
       --minetest.after(2, minetest.request_shutdown)
    end
       if ((t.hour == Y or t.hour == Z) and (t.min ==N) and (t.sec <= 2)

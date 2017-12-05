@@ -13,6 +13,72 @@
 --Media(if not stated differently):
 --(c) Copyright (2014-2015) maikerumine; CC-BY-SA 3.0
 
+--Treated Logs
+minetest.register_node("es:tree", {
+	description = "Treated Apple Tree  --=Use for buildings, will not grow moss or mushroom.",
+	tiles = {"default_tree_top.png", "default_tree_top.png", "default_tree.png"},
+	paramtype2 = "facedir",
+	is_ground_content = false,
+	groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2},
+	sounds = default.node_sound_wood_defaults(),
+
+	on_place = minetest.rotate_node
+})
+
+minetest.register_node("es:jungletree", {
+	description = "Treated Jungle Tree  --=Use for buildings, will not grow moss or mushroom.",
+	tiles = {"default_jungletree_top.png", "default_jungletree_top.png",
+		"default_jungletree.png"},
+	paramtype2 = "facedir",
+	is_ground_content = false,
+	groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2},
+	sounds = default.node_sound_wood_defaults(),
+
+	on_place = minetest.rotate_node
+})
+
+minetest.register_node("es:pine_tree", {
+	description = "Treated Pine Tree  --=Use for buildings, will not grow moss or mushroom.",
+	tiles = {"default_pine_tree_top.png", "default_pine_tree_top.png",
+		"default_pine_tree.png"},
+	paramtype2 = "facedir",
+	is_ground_content = false,
+	groups = {tree = 1, choppy = 3, oddly_breakable_by_hand = 1, flammable = 3},
+	sounds = default.node_sound_wood_defaults(),
+
+	on_place = minetest.rotate_node
+})
+
+minetest.register_node("es:acacia_tree", {
+	description = "Treated Acacia Tree  --=Use for buildings, will not grow moss or mushroom.",
+	tiles = {"default_acacia_tree_top.png", "default_acacia_tree_top.png",
+		"default_acacia_tree.png"},
+	paramtype2 = "facedir",
+	is_ground_content = false,
+	groups = {tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2},
+	sounds = default.node_sound_wood_defaults(),
+
+	on_place = minetest.rotate_node
+})
+
+minetest.register_node("es:aspen_tree", {
+	description = "Treated Aspen Tree  --=Use for buildings, will not grow moss or mushroom.",
+	tiles = {"default_aspen_tree_top.png", "default_aspen_tree_top.png",
+		"default_aspen_tree.png"},
+	paramtype2 = "facedir",
+	is_ground_content = false,
+	groups = {tree = 1, choppy = 3, oddly_breakable_by_hand = 1, flammable = 3},
+	sounds = default.node_sound_wood_defaults(),
+
+	on_place = minetest.rotate_node
+})
+
+
+
+
+
+
+
 
 minetest.register_node("es:lag_block", {
 	description = "Show this around town to sho you love the original Just Test.  REMEMBER THE TEST.  Lag, This is a dedication block to your ideas, your server, and you.  My skuchayem i lyubyat vas.  WE MISS AND LOVE YOU!",
@@ -76,7 +142,7 @@ minetest.register_node( "es:granite", {
 	--tiles = { "technic_granite.png" },
 	tiles = { "mcl_core_granite.png" },
 	is_ground_content = true,
-	groups = {cracky=3},
+	groups = {cracky=1, granite=1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -85,7 +151,7 @@ minetest.register_node( "es:granite_bricks", {
 	--tiles = { "technic_granite_bricks.png",},
 	tiles = { "mcl_core_granite_smooth.png",},
 	is_ground_content = true,
-	groups = {cracky=3},
+	groups = {cracky=1, granite=1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -94,7 +160,7 @@ minetest.register_node( "es:marble", {
 	--tiles = { "technic_marble.png" },
 	tiles = { "mcl_core_diorite.png" },
 	is_ground_content = true,
-	groups = {cracky=3},
+	groups = {cracky=1, marble=1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -103,7 +169,7 @@ minetest.register_node( "es:marble_bricks", {
 	--tiles = { "technic_marble_bricks.png" },
 	tiles = { "mcl_core_diorite_smooth.png" },
 	is_ground_content = true,
-	groups = {cracky=3},
+	groups = {cracky=1, marble=1},
 	sounds = default.node_sound_stone_defaults(),
 })
 --[[
@@ -327,7 +393,7 @@ minetest.register_node("es:sand_with_diamond", {
 
 --BONEBLOCK
 minetest.register_node("es:boneblock", {
-	description = "Bone Blox",
+	description = "Bone Blok  --=Use for treating default logs for building.",
 	tiles = {
 	"bones_top.png",
 	"bones_bottom.png",

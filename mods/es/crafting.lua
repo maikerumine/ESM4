@@ -22,6 +22,108 @@
 -- See README.txt for licensing and other information.
 --Lag Block
 --maikerumine
+es = {}
+--Bronze
+--[[
+minetest.register_craft({
+	output = "default:bronze_ingot 9",
+	recipe = {
+		{"default:copper_ingot", "default:copper_ingot", "default:copper_ingot"},
+		{"default:copper_ingot", "default:tin_ingot", "default:copper_ingot"},
+		{"default:copper_ingot", "default:copper_ingot", "default:copper_ingot"},
+	}
+})
+]]
+minetest.clear_craft({
+	type = "shapeless",
+	output = "default:bronze_ingot"
+})
+	minetest.register_craft({
+		--type = "shapeless",
+		output = 'default:bronze_ingot 8',
+		recipe = {
+		{'default:copper_ingot', 'default:coal_lump', 'default:copper_ingot'},
+		{'default:copper_ingot', 'moreores:tin_ingot', 'default:copper_ingot'},
+		{'default:copper_ingot', 'default:copper_ingot', 'default:copper_ingot'},
+		}
+	})
+
+	minetest.register_craft({
+		--type = "shapeless",
+		output = 'default:bronze_ingot 8',
+		recipe = {
+		{'default:copper_ingot', 'default:coal_lump', 'default:copper_ingot'},
+		{'default:copper_ingot', 'default:tin_ingot', 'default:copper_ingot'},
+		{'default:copper_ingot', 'default:copper_ingot', 'default:copper_ingot'},
+		}
+	})	
+
+--Treated logs
+minetest.register_craft({
+	type = "shapeless",
+	replacements = {{"es:boneblock", "es:boneblock"}},
+	output = "es:tree",
+	recipe = {"default:tree", "es:boneblock"},
+})
+minetest.register_craft({
+	type = "shapeless",
+	replacements = {{"es:boneblock", "es:boneblock"}},
+	output = "es:jungletree",
+	recipe = {"default:jungletree", "es:boneblock"},
+})
+minetest.register_craft({
+	type = "shapeless",
+	replacements = {{"es:boneblock", "es:boneblock"}},
+	output = "es:pine_tree",
+	recipe = {"default:pine_tree", "es:boneblock"},
+})
+minetest.register_craft({
+	type = "shapeless",
+	replacements = {{"es:boneblock", "es:boneblock"}},
+	output = "es:acacia_tree",
+	recipe = {"default:acacia_tree", "es:boneblock"},
+})
+minetest.register_craft({
+	type = "shapeless",
+	replacements = {{"es:boneblock", "es:boneblock"}},
+	output = "es:aspen_tree",
+	recipe = {"default:aspen_tree", "es:boneblock"},
+})
+--revert
+minetest.register_craft({
+	type = "shapeless",
+	replacements = {{"es:boneblock", "es:boneblock"}},
+	output = "default:tree",
+	recipe = {"es:tree", "es:boneblock"},
+})
+minetest.register_craft({
+	type = "shapeless",
+	replacements = {{"es:boneblock", "es:boneblock"}},
+	output = "default:jungletree",
+	recipe = {"es:jungletree", "es:boneblock"},
+})
+minetest.register_craft({
+	type = "shapeless",
+	replacements = {{"es:boneblock", "es:boneblock"}},
+	output = "default:pine_tree",
+	recipe = {"es:pine_tree", "es:boneblock"},
+})
+minetest.register_craft({
+	type = "shapeless",
+	replacements = {{"es:boneblock", "es:boneblock"}},
+	output = "default:acacia_tree",
+	recipe = {"es:acacia_tree", "es:boneblock"},
+})
+minetest.register_craft({
+	type = "shapeless",
+	replacements = {{"es:boneblock", "es:boneblock"}},
+	output = "default:aspen_tree",
+	recipe = {"es:aspen_tree", "es:boneblock"},
+})
+
+
+
+	
 minetest.register_craft({
 	output = 'es:lag_block',
 	recipe = {

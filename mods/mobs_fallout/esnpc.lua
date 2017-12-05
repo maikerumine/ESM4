@@ -7,8 +7,10 @@
 
 --REFERENCE
 --function (mod_name_here):spawn_specific(name, nodes, neighbors, min_light, max_light, interval, chance, active_object_count, min_height, max_height)
-
-mobs.npc_drops = { "cityscape:canned_food", "shooter:rocket_gun_loaded", "mobs_fallout:meat 4", "shooter:rifle", "default:shovel_steel", "farming:bread", "default:wood","shooter:ammo","default:duct_tape 3", "default:health_kit" }--Added 20151121
+--fix
+--mobs.npc_drops = { "cityscape:canned_food", "shooter:rocket_gun_loaded", "mobs_fallout:meat 4", "shooter:rifle", "default:shovel_steel", "farming:bread", "default:wood","shooter:ammo","default:duct_tape 3", "default:health_kit" }--Added 20151121
+mobs.npc_drops = { "default:pick_steel", "mobs:meat", "default:sword_steel", "default:shovel_steel", "farming:bread", "default:wood" }--Added 20151121
+mobs.npc2_drops = { "default:pick_mese", "mobs:meat", "default:sword_diamond", "default:pick_diamond", "farming:bread", "default:wood" }--Added 20151121
 
 mobs:register_spawn("mobs_fallout:Bajan", {"default:dirt_with_grass", "cityscape:concrete_broken", "default:stonebrick","default:cobble"}, 20, 10, 11000, 1, 31000)
 mobs:register_mob("mobs_fallout:Bajan", {

@@ -4,8 +4,8 @@ local timer = 0;
 --local positionx = 0.97;
 --local positiony = 0.02;
 
-local positionx = 0.30;   --horz
-local positiony = 0.90;  --vert
+local positionx = 0.97;   --horz
+local positiony = 0.02;  --vert
 
 local last_time = os.time()
 

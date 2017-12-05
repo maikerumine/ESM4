@@ -34,6 +34,7 @@ function prevent_place_above(name)
 		minetest.registered_craftitems[name].on_place=function(itemstack, placer, pointed_thing)
 			local pos = pointed_thing.above
 			if pos.y>0 then
+			minetest.chat_send_player(placer:get_player_name(), "Don't place water or lava above 0.")
 				minetest.log("action","ANTI GRIEF " .. placer:get_player_name() .. " tried to place " .. name .. " at " .. minetest.pos_to_string(pos));
 				return itemstack
 			else
@@ -57,6 +58,7 @@ function prevent_place_above(name)
 			--after_place_node = func(pos, placer, itemstack, pointed_thing)
 			local pos = pointed_thing.above
 			if pos.y>0 then
+			minetest.chat_send_player(placer:get_player_name(), "Don't place water or lava above 0.")
 				minetest.log("action","ANTI GRIEF " .. placer:get_player_name() .. " tried to place " .. name .. " at " .. minetest.pos_to_string(pos));
 				minetest.set_node(pos, {name = "air"});
 				return itemstack
@@ -99,6 +101,7 @@ function no_tnt_above(name)
 		minetest.registered_craftitems[name].on_place=function(itemstack, placer, pointed_thing)
 			local pos = pointed_thing.above
 			if pos.y>-150 then
+			minetest.chat_send_player(placer:get_player_name(), "Don't place TNT above -150.")
 				minetest.log("action","ANTI GRIEF " .. placer:get_player_name() .. " tried to place " .. name .. " at " .. minetest.pos_to_string(pos));
 				return itemstack
 			else
@@ -122,6 +125,7 @@ function no_tnt_above(name)
 			--after_place_node = func(pos, placer, itemstack, pointed_thing)
 			local pos = pointed_thing.above
 			if pos.y>-150 then
+			minetest.chat_send_player(placer:get_player_name(), "Don't place TNT above -150.")
 				minetest.log("action","ANTI GRIEF " .. placer:get_player_name() .. " tried to place " .. name .. " at " .. minetest.pos_to_string(pos));
 				minetest.set_node(pos, {name = "air"});
 				return itemstack
