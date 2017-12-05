@@ -148,7 +148,6 @@ minetest.register_node(doora, {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	sounds = default.node_sound_metal_defaults(),
 	groups = {cracky = 3},
 	node_box = {
 		type = "fixed",
@@ -182,7 +181,6 @@ minetest.register_node(doorb, {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky = 1},
-	sounds = default.node_sound_metal_defaults(),
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -208,7 +206,6 @@ minetest.register_node(doorb, {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	drop = doora,
-	sounds = default.node_sound_metal_defaults(),
 	groups = {cracky = 1},
 	node_box = {
 		type = "fixed",
@@ -239,7 +236,6 @@ minetest.register_node(doord, {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky = 1},
-	sounds = default.node_sound_metal_defaults(),
 	node_box = {
 		type = "fixed",
 		fixed = {

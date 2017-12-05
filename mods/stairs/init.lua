@@ -293,7 +293,7 @@ function stairs.register_slab1(subname, recipeitem, groups, images, description,
 		},
 		on_place = minetest.rotate_node
 	})
-
+--[[
 	-- slab recipe
 	minetest.register_craft({
 		output = 'stairs:slab1_' .. subname .. ' 3',
@@ -301,6 +301,7 @@ function stairs.register_slab1(subname, recipeitem, groups, images, description,
 			{"stairs:slab_" .. subname},
 		},
 	})
+	]]
 end
 
 
@@ -425,7 +426,7 @@ function stairs.register_slope(subname, recipeitem, groups, images, description,
 		},
 		on_place = minetest.rotate_node
 	})
-
+--[[
 	-- slope recipe
 	minetest.register_craft({
 		output = 'stairs:slope_' .. subname .. ' 6',
@@ -441,6 +442,7 @@ function stairs.register_slope(subname, recipeitem, groups, images, description,
 		output = recipeitem,
 		recipe = {"stairs:slope_" .. subname, "stairs:slope_" .. subname}
 	})
+	]]
 end
 --==============================
 

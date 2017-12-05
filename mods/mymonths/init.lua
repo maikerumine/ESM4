@@ -83,10 +83,25 @@ if mymonths.leaves == true then
 end
 
 if mymonths.leaves == false then
+--  'pale_green', 'orange', 'red', 'blooms', 'acacia_blooms',
+--  'orange_aspen', 'red_aspen', 'aspen_blooms', 'yellow_aspen'}
 
 	minetest.register_alias("mymonths:leaves_pale_green", "default:leaves")
 	minetest.register_alias("mymonths:leaves_orange", "default:leaves")
 	minetest.register_alias("mymonths:leaves_red", "default:leaves")
+	minetest.register_alias("mymonths:leaves_blooms", "default:leaves")
+	minetest.register_alias("mymonths:leaves_acacia_blooms", "default:leaves")
+	
+	minetest.register_alias("mymonths:leaves_orange_aspen", "default:leaves")
+	minetest.register_alias("mymonths:leaves_red_aspen", "default:leaves")
+	minetest.register_alias("mymonths:leaves_aspen_blooms", "default:leaves")
+	minetest.register_alias("mymonths:leaves_yellow_aspen", "default:leaves")
+	
+	minetest.register_alias("mymonths:fall_leaves_1", "default:leaves")
+	minetest.register_alias("mymonths:fall_leaves_2", "default:leaves")
+	minetest.register_alias("mymonths:fall_leaves_3", "default:leaves")
+	minetest.register_alias("mymonths:fall_leaves_4", "default:leaves")
+	
 	minetest.register_alias("mymonths:sticks_default", "default:leaves")
 	minetest.register_alias("mymonths:sticks_aspen", "default:aspen_leaves")
 end

@@ -1,5 +1,110 @@
 --scifi_nodes by D00Med 
 
+--the builder node
+
+local builder_formspec = 
+	"size[8,9]" ..
+	default.gui_bg ..
+	default.gui_bg_img ..
+	default.gui_slots ..
+	"list[current_name;input;1,1;1,1;]" ..
+	"list[current_name;output;3,0;4,3;]" ..
+	"list[current_player;main;0,4.85;8,1;]" ..
+	"list[current_player;main;0,6.08;8,3;8]" ..
+	"listring[current_name;input]" ..
+	"listring[current_name;output]" ..
+	"listring[current_player;main]" ..
+	default.get_hotbar_bg(0,4.85)
+
+local input_items = {
+	{"default:steel_ingot 1", "scifi_nodes:black", "scifi_nodes:blue", "scifi_nodes:rough", "scifi_nodes:rust", "scifi_nodes:white", "scifi_nodes:grey", "scifi_nodes:pplwll", "scifi_nodes:greenmetal", "scifi_nodes:wall", "scifi_nodes:blue_square", "scifi_nodes:mesh", "scifi_nodes:greytile"}
+}
+
+minetest.register_node("scifi_nodes:builder", {
+	description = "Sci-fi Node Builder",
+	tiles = {
+		"scifi_nodes_builder.png",
+		"scifi_nodes_builder.png",
+		"scifi_nodes_builder_side.png",
+		"scifi_nodes_builder_side.png",
+		"scifi_nodes_builder_side.png",
+		"scifi_nodes_builder_front.png"
+	},
+	on_construct = function(pos)
+		--local meta = minetest.get_meta(pos)
+		--meta:set_string("infotext", "Node Builder (currently does nothing)")
+		
+		local meta = minetest.get_meta(pos)
+		meta:set_string("formspec", builder_formspec)
+		meta:set_string("infotext", "Node Builder")
+		local inv = meta:get_inventory()
+		inv:set_size("output", 4 * 3)
+		inv:set_size("input", 1 * 1)
+	end,
+    on_metadata_inventory_put = function(pos, listname, index, stack, player)
+		local meta = minetest.get_meta(pos)
+		local inv = meta:get_inventory()
+		local player_inv = player:get_inventory()
+		if listname == "output" then
+			player_inv:add_item("main", stack)
+			inv:set_stack("output", index, "")
+		end
+		if listname == "input" then
+			for _, row in ipairs(input_items) do
+				local item = row[1]
+				if inv:contains_item("input", item) then
+					inv:set_stack("output", 1, row[2])
+					inv:set_stack("output", 2, row[3])
+					inv:set_stack("output", 3, row[4])
+					inv:set_stack("output", 4, row[5])
+					inv:set_stack("output", 5, row[6])
+					inv:set_stack("output", 6, row[7])
+					inv:set_stack("output", 7, row[8])
+					inv:set_stack("output", 8, row[9])
+					inv:set_stack("output", 9, row[10])
+					inv:set_stack("output", 10, row[11])
+					inv:set_stack("output", 11, row[12])
+					inv:set_stack("output", 12, row[13])
+				end
+			end			
+		end
+	end,
+    on_metadata_inventory_take = function(pos, listname, index, stack, player)
+		local meta = minetest.get_meta(pos)
+		local inv = meta:get_inventory()
+			local stack = inv:get_stack("input", 1)
+			local stack_name = stack:get_name()
+			inv:remove_item("input", stack_name.." 1")
+			
+			inv:set_stack("output", 1, "")
+			inv:set_stack("output", 2, "")
+			inv:set_stack("output", 3, "")
+			inv:set_stack("output", 4, "")
+			inv:set_stack("output", 5, "")
+			inv:set_stack("output", 6, "")
+			inv:set_stack("output", 7, "")
+			inv:set_stack("output", 8, "")
+			inv:set_stack("output", 9, "")
+			inv:set_stack("output", 10, "")
+			inv:set_stack("output", 11, "")
+			inv:set_stack("output", 12, "")
+	end,
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = {cracky=1, oddly_breakable_by_hand=1}
+})
+
+--nodes
+
+minetest.register_node("scifi_nodes:grassblk", {
+	description = "Dirt With Alien Grass",
+	tiles = {"default_grass.png^[colorize:cyan:80", "default_dirt.png",
+		{name = "default_dirt.png^(default_grass_side.png^[colorize:cyan:80)",
+			tileable_vertical = false}},
+	light_source = 2,
+	groups = {crumbly=1, oddly_breakable_by_hand=1, soil=1}
+})
+
 minetest.register_node("scifi_nodes:light", {
 	description = "blue lightbox",
 	sunlight_propagates = false,
@@ -13,7 +118,6 @@ minetest.register_node("scifi_nodes:light", {
 	},
 	light_source = 10,
 	paramtype = "light",
-	sounds = default.node_sound_glass_defaults(),
 	groups = {cracky=1}
 })
 
@@ -25,7 +129,6 @@ minetest.register_node("scifi_nodes:rfloor", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	light_source = 10,
-	sounds = default.node_sound_metal_defaults(),
 	groups = {cracky=1}
 })
 
@@ -37,7 +140,6 @@ minetest.register_node("scifi_nodes:bfloor", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	light_source = 10,
-	sounds = default.node_sound_metal_defaults(),
 	groups = {cracky=1}
 })
 
@@ -54,7 +156,6 @@ minetest.register_node("scifi_nodes:stripes2", {
 		"scifi_nodes_stripes2.png"
 	},
 	paramtype = "light",
-	sounds = default.node_sound_metal_defaults(),
 	groups = {cracky=1}
 })
 
@@ -70,7 +171,6 @@ minetest.register_node("scifi_nodes:gblock", {
 		"scifi_nodes_gblock.png"
 	},
 	paramtype = "light",
-	sounds = default.node_sound_metal_defaults(),
 	groups = {cracky=1}
 })
 
@@ -87,7 +187,6 @@ minetest.register_node("scifi_nodes:gblock2", {
 	},
 	paramtype = "light",
 	paramtype2 = "facedir",
-	sounds = default.node_sound_metal_defaults(),
 	groups = {cracky=1}
 })
 
@@ -104,7 +203,6 @@ minetest.register_node("scifi_nodes:gblock3", {
 	},
 	paramtype = "light",
 	paramtype2 = "facedir",
-	sounds = default.node_sound_metal_defaults(),
 	groups = {cracky=1}
 })
 
@@ -123,7 +221,6 @@ minetest.register_node("scifi_nodes:green_light", {
 	},
 	light_source = 10,
 	paramtype = "light",
-	sounds = default.node_sound_glass_defaults(),
 	groups = {cracky=1}
 })
 
@@ -140,7 +237,6 @@ minetest.register_node("scifi_nodes:red_light", {
 	},
 	light_source = 10,
 	paramtype = "light",
-	sounds = default.node_sound_glass_defaults(),
 	groups = {cracky=1}
 })
 
@@ -182,7 +278,6 @@ minetest.register_node("scifi_nodes:blink", {
 	}},
 	paramtype = "light",
 	groups = {cracky=1},
-	sounds = default.node_sound_glass_defaults(),
 	light_source = 5,
 })
 
@@ -206,7 +301,6 @@ minetest.register_node("scifi_nodes:black_screen", {
 	}},
 	paramtype = "light",
 	groups = {cracky=1},
-	sounds = default.node_sound_metal_defaults(),
 	light_source = 1,
 })
 
@@ -219,7 +313,6 @@ minetest.register_node("scifi_nodes:screen", {
 	}},
 	paramtype = "light",
 	groups = {cracky=1},
-	sounds = default.node_sound_metal_defaults(),
 	light_source = 5,
 })
 
@@ -232,7 +325,6 @@ minetest.register_node("scifi_nodes:screen2", {
 	}},
 	paramtype = "light",
 	groups = {cracky=1},
-	sounds = default.node_sound_metal_defaults(),
 	light_source = 5,
 })
 
@@ -251,7 +343,6 @@ minetest.register_node("scifi_nodes:white_pad", {
 	},
 	paramtype = "light",
 	paramtype2 = "facedir",
-	sounds = default.node_sound_metal_defaults(),
 	groups = {cracky=1}
 })
 
@@ -268,7 +359,6 @@ minetest.register_node("scifi_nodes:white_base", {
 	},
 	paramtype = "light",
 	paramtype2 = "facedir",
-	sounds = default.node_sound_metal_defaults(),
 	groups = {cracky=1}
 })
 
@@ -286,7 +376,6 @@ minetest.register_node("scifi_nodes:grnpipe", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=1},
-	sounds = default.node_sound_metal_defaults(),
 	on_place = minetest.rotate_node
 })
 
@@ -305,10 +394,99 @@ minetest.register_node("scifi_nodes:grnpipe2", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=1},
-	sounds = default.node_sound_metal_defaults(),
 	on_place = minetest.rotate_node
 })
 
+minetest.register_node("scifi_nodes:octrng", {
+	description = "Orange Octagon Glass",
+	sunlight_propagates = false,
+	drawtype = "glasslike",
+	tiles = {
+		"scifi_nodes_octrng.png",
+	},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	use_texture_alpha = true,
+	light_source = 10,
+	groups = {cracky=2},
+	sounds = default.node_sound_glass_defaults(),
+})
+
+minetest.register_node("scifi_nodes:octgrn", {
+	description = "Green Octagon Glass",
+	sunlight_propagates = false,
+	drawtype = "glasslike",
+	tiles = {
+		"scifi_nodes_octgrn.png",
+	},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	use_texture_alpha = true,
+	light_source = 10,
+	groups = {cracky=2},
+	sounds = default.node_sound_glass_defaults(),
+})
+
+minetest.register_node("scifi_nodes:octbl", {
+	description = "Blue Octagon Glass",
+	sunlight_propagates = false,
+	drawtype = "glasslike",
+	tiles = {
+		"scifi_nodes_octbl.png",
+	},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	use_texture_alpha = true,
+	light_source = 10,
+	groups = {cracky=2},
+	sounds = default.node_sound_glass_defaults(),
+})
+
+minetest.register_node("scifi_nodes:octppl", {
+	description = "Purple Octagon Glass",
+	sunlight_propagates = false,
+	drawtype = "glasslike",
+	tiles = {
+		"scifi_nodes_octppl.png",
+	},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	use_texture_alpha = true,
+	light_source = 10,
+	groups = {cracky=2},
+	sounds = default.node_sound_glass_defaults(),
+})
+
+minetest.register_node("scifi_nodes:tower", {
+	description = "Wind tower",
+	sunlight_propagates = false,
+	drawtype = "plantlike",
+	tiles = {{
+		name = "scifi_nodes_tower_anim.png",
+		animation = {type = "vertical_frames", aspect_w = 32, aspect_h = 32, length = 1.00},
+	}},
+	visual_scale = 2,
+	inventory_image = "scifi_nodes_tower.png",
+	paramtype = "light",
+	groups = {cracky=2},
+})
+
+minetest.register_node("scifi_nodes:junk", {
+	description = "Junk",
+	sunlight_propagates = true,
+	paramtype = "light",
+	liquid_viscosity = 8,
+	liquidtype = "source",
+	liquid_alternative_flowing = "scifi_nodes:junk",
+	liquid_alternative_source = "scifi_nodes:junk",
+	liquid_renewable = false,
+	liquid_range = 0,
+	walkable = false,
+	tiles = {
+		"scifi_nodes_junk.png"
+	},
+	groups = {snappy=1, oddly_breakable_by_hand=1, liquid=3, dig_immediate=1}
+})
 
 --edited wool code (Copyright (C) 2012 celeron55, Perttu Ahola <celeron55@gmail.com>)
 
@@ -359,16 +537,16 @@ node.types = {
 	{"dent",      "dented metal block",       "dent"},
 	{"greenmetal",      "green metal wall",       "grnmetl"},
 	{"greenmetal2",      "green metal wall2",       "grnmetl2"},
-	{"greenlights",      "green wall lights",       "grnlt"},
-	{"greenlights2",      "green wall lights2",       "grnlt2"},
-	{"greenbar",      "green light bar",       "grnlghtbr"},
+	{"greenlights",      "green wall lights",       "grnlt", 10},
+	{"greenlights2",      "green wall lights2",       "grnlt2", 10},
+	{"greenbar",      "green light bar",       "grnlghtbr", 10},
 	{"green2",      "green wall panel",       "grn2"},
 	{"greentubes",      "green pipes",       "grntubes"},
 	{"grey",      "grey wall",       "gry"},
 	{"greybolts",      "grey wall bolts",       "gryblts"},
 	{"greybars",      "grey bars",       "grybrs"},
 	{"greydots",      "grey wall dots",       "grydts"},
-	{"greygreenbar",      "gray power pipe",       "grygrnbr"},
+	{"greygreenbar",      "gray power pipe",       "grygrnbr", 10},
 	{"octofloor",      "Doom floor",       "octofloor"},
 	{"octofloor2",      "Brown Doom floor",       "octofloor2"},
 	{"doomwall1",      "Doom wall 1",       "doomwall1"},
@@ -386,8 +564,20 @@ node.types = {
 	{"monitorwall",      "Wall monitors",       "monitorwall"},
 	{"screen3",      "Wall monitor",       "screen3"},
 	{"doomlight",      "Doom light",       "doomlight", 12},
-	{"bluwllight",      "Blue wall light",       "capsule3", 14},
+	{"bluwllight",      "Blue wall light", "capsule3", 20},
+	{"bluegrid",      "Blue Grid", "bluegrid", 5},
 	{"fan",      "Fan",       "fan"},
+	{"ppllght",      "Purple wall light", "", 50},
+	{"pplwll",      "Purple wall", "", 0},
+	{"pplwll2",      "Purple wall2", "", 0},
+	{"pplwll3",      "Purple wall3", "", 0},
+	{"pplwll4",      "Purple wall4", "", 0},
+	{"pplblk",      "Purple tile", "", 0},
+	{"purple",      "Purple node", "", 0},
+	{"rock",      "Moonstone", "", 0},
+	{"rock2",      "Moonstone2", "", 0},
+	{"blackvnt",      "Black vent", "", 0},
+	{"blackplate",      "Black plate", "", 0},
 }
 
 for _, row in ipairs(node.types) do
@@ -400,23 +590,28 @@ for _, row in ipairs(node.types) do
 		tiles = {"scifi_nodes_"..name..".png"},
 		groups = {cracky=1},
 		paramtype = "light",
-		sounds = default.node_sound_metal_defaults(),
+		paramtype2 = "facedir",
 		light_source = light,
 	})
 end
 
 node.plants = {
-	{"flower1", "Glow Flower", 1,0, 14},
+	{"flower1", "Glow Flower", 1,0, 50},
 	{"flower2", "Pink Flower", 1.5,0, 10},
 	{"flower3", "Triffid", 2,5, 0},
 	{"flower4", "Weeping flower", 1.5,0, 0},
 	{"plant1", "Bulb Plant", 1,0, 0},
-	{"plant2", "Trap Plant", 1.5,0, 14},
+	{"plant2", "Trap Plant", 1.5,0, 30},
 	{"plant3", "Blue Jelly Plant", 1.2,0, 10},
 	{"plant4", "Green Jelly Plant", 1.2,0, 10},
 	{"plant5", "Fern Plant", 1.7,0, 0},
 	{"plant6", "Curly Plant", 1,0, 10},
 	{"plant7", "Egg weed", 1,0, 0},
+	{"plant8", "Slug weed", 1,0, 10},
+	{"plant9", "Prickly Plant", 1,0, 0},
+	{"plant10", "Umbrella weed", 1,0, 10},
+	{"eyetree", "Eye Tree", 2.5,0, 0},
+	{"grass", "Alien Grass", 1,0, 0},
 }
 
 for _, row in ipairs(node.plants) do
@@ -513,7 +708,7 @@ minetest.register_node("scifi_nodes:crate", {
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", chest_formspec)
-		meta:set_string("infotext", "Chest")
+		meta:set_string("infotext", "Crate")
 		local inv = meta:get_inventory()
 		inv:set_size("main", 8 * 4)
 	end,
@@ -543,7 +738,7 @@ minetest.register_node("scifi_nodes:box", {
 		"scifi_nodes_box.png"
 	},
 	paramtype2 = "facedir",
-	groups = {cracky = 1, oddly_breakable_by_hand = 2, fuel = 8},
+	groups = {cracky = 1},
 	legacy_facedir_simple = true,
 	is_ground_content = false,
 	sounds = default.node_sound_metal_defaults(),
@@ -552,7 +747,7 @@ minetest.register_node("scifi_nodes:box", {
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", chest_formspec)
-		meta:set_string("infotext", "Chest")
+		meta:set_string("infotext", "Box")
 		local inv = meta:get_inventory()
 		inv:set_size("main", 8 * 4)
 	end,
@@ -585,7 +780,6 @@ minetest.register_node("scifi_nodes:blumetlight", {
 	},
 	light_source = 10,
 	paramtype = "light",
-	sounds = default.node_sound_metal_defaults(),
 	groups = {cracky=1}
 })
 
@@ -596,9 +790,8 @@ minetest.register_node("scifi_nodes:lightstp", {
 	tiles = {
 		"scifi_nodes_lightstripe.png"
 	},
-	light_source = default.LIGHT_MAX,
+	light_source = 14,
 	paramtype = "light",
-	sounds = default.node_sound_metal_defaults(),
 	groups = {cracky=1}
 })
 
@@ -610,7 +803,6 @@ minetest.register_node("scifi_nodes:blklt2", {
 	},
 	light_source = 10,
 	paramtype = "light",
-	sounds = default.node_sound_metal_defaults(),
 	groups = {cracky=1}
 })
 
@@ -622,7 +814,6 @@ minetest.register_node("scifi_nodes:blumetstr", {
 	},
 	light_source = 10,
 	paramtype = "light",
-	sounds = default.node_sound_metal_defaults(),
 	groups = {cracky=1}
 })
 
@@ -635,7 +826,6 @@ minetest.register_node("scifi_nodes:glass", {
 	},
 	use_texture_alpha = true,
 	paramtype = "light",
-	sounds = default.node_sound_glass_defaults(),
 	groups = {cracky=1}
 })
 
@@ -647,7 +837,6 @@ minetest.register_node("scifi_nodes:whtlightbnd", {
 	},
 	light_source = 10,
 	paramtype = "light",
-	sounds = default.node_sound_metal_defaults(),
 	groups = {cracky=1}
 })
 
@@ -657,6 +846,9 @@ if xpane == xpane then
 dofile(minetest.get_modpath("scifi_nodes").."/panes.lua")
 end
 dofile(minetest.get_modpath("scifi_nodes").."/doors.lua")
+dofile(minetest.get_modpath("scifi_nodes").."/flowers.lua")
 dofile(minetest.get_modpath("scifi_nodes").."/nodeboxes.lua")
 dofile(minetest.get_modpath("scifi_nodes").."/models.lua")
 dofile(minetest.get_modpath("scifi_nodes").."/flowers.lua")
+dofile(minetest.get_modpath("scifi_nodes").."/stairs.lua")
+dofile(minetest.get_modpath("scifi_nodes").."/crafts.lua")

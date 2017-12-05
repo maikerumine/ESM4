@@ -19,7 +19,7 @@ HUNGER_STARVE_LVL = 3 -- level of staturation that causes starving
 
 HUNGER_MAX = 30 -- maximum level of saturation
 
-SPRINT_SPEED = 0.8 -- how much faster player can run if satiated
+SPRINT_SPEED = 1.8 -- how much faster player can run if satiated
 SPRINT_JUMP = 0.1 -- how much higher player can jump if satiated
 SPRINT_DRAIN = 0.35 -- how fast to drain satation while sprinting (0-1)
 

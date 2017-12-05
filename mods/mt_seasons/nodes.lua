@@ -111,7 +111,7 @@ end
 	Big thanks to PainterlyPack.net for allowing me to use these textures
 ]]
 
---[[
+
 -- pumpkin
 minetest.register_node("mt_seasons:pumpkin", {
 	description = "Pumpkin",
@@ -199,7 +199,7 @@ minetest.register_node("mt_seasons:jackolantern_on", {
 		minetest.swap_node(pos, node)
 	end,
 })
-]]
+
 
 --[[
 --moved to autumn
