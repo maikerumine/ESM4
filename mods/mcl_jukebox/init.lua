@@ -78,7 +78,7 @@ minetest.register_craft({
 	output = 'mcl_jukebox:jukebox',
 	recipe = {
 		{'group:wood', 'group:wood', 'group:wood'},
-		{'group:wood', 'default:diamond', 'group:wood'},
+		{'group:wood', 'default:emerald', 'group:wood'},
 		{'group:wood', 'group:wood', 'group:wood'},
 	}
 })
@@ -91,7 +91,7 @@ minetest.register_node("mcl_jukebox:jukebox", {
 	_doc_items_usagehelp = "Place a music disc into an empty jukebox to insert the music disc and play music. If the jukebox already has a music disc, you will retrieve this music disc first. The music can only be heard by you, not by other players.",
 	tiles = {"mcl_jukebox_top.png", "mcl_jukebox_side.png", "mcl_jukebox_side.png"},
 	sounds = default.node_sound_wood_defaults(),
-	groups = {handy=1,axey=1, deco_block=1, material_wood=1},
+	groups = {handy=1,axey=1, deco_block=1, material_wood=1, choppy = 2, cracky = 2},
 	is_ground_content = false,
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
@@ -160,8 +160,8 @@ minetest.register_node("mcl_jukebox:jukebox", {
 		end
 		meta:from_table(meta2:to_table())
 	end,
-	_mcl_blast_resistance = 30,
-	_mcl_hardness = 2,
+	--_mcl_blast_resistance = 30,
+	--_mcl_hardness = 2,
 })
 
 minetest.register_craft({

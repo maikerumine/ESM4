@@ -1,10 +1,13 @@
 -- This file supplies Kitchen cabinets and kitchen sink
 
-local S = homedecor.gettext
+local S = homedecor_i18n.gettext
 
-local counter_materials = { "", "granite", "marble", "steel" }
 local cabinet_sides = "(default_wood.png^[transformR90)^homedecor_kitchen_cabinet_bevel.png"
 local cabinet_bottom = "(default_wood.png^[colorize:#000000:100)^(homedecor_kitchen_cabinet_bevel.png^[colorize:#46321580)"
+
+local function N_(x) return x end
+
+local counter_materials = { "", N_("granite"), N_("marble"), N_("steel") }
 
 for _, mat in ipairs(counter_materials) do
 
@@ -12,7 +15,7 @@ for _, mat in ipairs(counter_materials) do
 	local material = ""
 
 	if mat ~= "" then
-		desc = S("Kitchen Cabinet ("..mat.." top)")
+		desc = S("Kitchen Cabinet (@1 top)", S(mat))
 		material = "_"..mat
 	end
 
@@ -29,6 +32,7 @@ for _, mat in ipairs(counter_materials) do
 		infotext=S("Kitchen Cabinet"),
 		inventory = {
 			size=24,
+			lockable=true,
 		},
 	})
 end
@@ -51,6 +55,7 @@ homedecor.register("kitchen_cabinet_half", {
 	infotext=S("Kitchen Cabinet"),
 	inventory = {
 		size=12,
+		lockable=true,
 	},
 })
 
@@ -68,9 +73,38 @@ homedecor.register("kitchen_cabinet_with_sink", {
 	infotext=S("Under-sink cabinet"),
 	inventory = {
 		size=16,
+		lockable=true,
 	},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{ -8/16, -8/16, -8/16,  8/16, 6/16,  8/16 },
+			{ -8/16,  6/16, -8/16, -6/16, 8/16,  8/16 },
+			{  6/16,  6/16, -8/16,  8/16, 8/16,  8/16 },
+			{ -8/16,  6/16, -8/16,  8/16, 8/16, -6/16 },
+			{ -8/16,  6/16,  6/16,  8/16, 8/16,  8/16 },
+		}
+	},
+	on_destruct = function(pos)
+		homedecor.stop_particle_spawner({x=pos.x, y=pos.y+1, z=pos.z})
+	end
 })
 
+local cp_cbox = {
+	type = "fixed",
+	fixed = { -0.375, -0.5, -0.5, 0.375, -0.3125, 0.3125 }
+}
+
+homedecor.register("copper_pans", {
+	description = S("Copper pans"),
+	mesh = "homedecor_copper_pans.obj",
+	tiles = { "homedecor_polished_copper.png" },
+	inventory_image = "homedecor_copper_pans_inv.png",
+	groups = { snappy=3 },
+	selection_box = cp_cbox,
+	walkable = false,
+	on_place = minetest.rotate_node
+})
 
 local kf_cbox = {
 	type = "fixed",
@@ -79,11 +113,45 @@ local kf_cbox = {
 
 homedecor.register("kitchen_faucet", {
 	mesh = "homedecor_kitchen_faucet.obj",
-	tiles = { "default_steel_block.png" },
+	tiles = { "homedecor_generic_metal_bright.png" },
 	inventory_image = "homedecor_kitchen_faucet_inv.png",
-	description = "Kitchen Faucet",
+	description = S("Kitchen Faucet"),
 	groups = {snappy=3},
 	selection_box = kf_cbox,
-	walkable = false
+	walkable = false,
+	on_rotate = screwdriver.disallow,
+	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+		local below = minetest.get_node_or_nil({x=pos.x, y=pos.y-1, z=pos.z})
+		if below and
+		  below.name == "homedecor:sink" or
+		  below.name == "homedecor:kitchen_cabinet_with_sink" or
+		  below.name == "homedecor:kitchen_cabinet_with_sink_locked" then
+			local particledef = {
+				outlet      = { x = 0, y = -0.19, z = 0.13 },
+				velocity_x  = { min = -0.05, max = 0.05 },
+				velocity_y  = -0.3,
+				velocity_z  = { min = -0.1,  max = 0 },
+				spread      = 0
+			}
+			homedecor.start_particle_spawner(pos, node, particledef, "homedecor_faucet")
+		end
+		return itemstack
+	end,
+	on_destruct = homedecor.stop_particle_spawner
 })
 
+homedecor.register("paper_towel", {
+	mesh = "homedecor_paper_towel.obj",
+	tiles = {
+		"homedecor_generic_quilted_paper.png",
+		"default_wood.png"
+	},
+	inventory_image = "homedecor_paper_towel_inv.png",
+	description = S("Paper towels"),
+	groups = { snappy=3 },
+	walkable = false,
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.4375, 0.125, 0.0625, 0.4375, 0.4375, 0.5 }
+	},
+})

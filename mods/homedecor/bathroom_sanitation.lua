@@ -1,4 +1,5 @@
-local S = homedecor.gettext
+
+local S = homedecor_i18n.gettext
 
 local toilet_sbox = {
 	type = "fixed",
@@ -7,26 +8,26 @@ local toilet_sbox = {
 
 local toilet_cbox = {
 	type = "fixed",
-	fixed = { 
+	fixed = {
 		{-6/16, -8/16, -8/16, 6/16, 1/16, 8/16 },
 		{-6/16, -8/16, 4/16, 6/16, 9/16, 8/16 }
 	}
 }
 
 homedecor.register("toilet", {
-	description = "Toilet",
+	description = S("Toilet"),
 	mesh = "homedecor_toilet_closed.obj",
 	tiles = {
-		"technic_marble.png^[colorize:#ffffff:175",
-		"technic_marble.png^[colorize:#ffffff:175",
-		"technic_marble.png^[colorize:#ffffff:175",
-		"default_steel_block.png^[brighten"
+		"homedecor_marble.png",
+		"homedecor_marble.png",
+		"homedecor_marble.png",
+		{ name = "homedecor_generic_metal.png", color = homedecor.color_med_grey }
 	},
 	selection_box = toilet_sbox,
 	node_box = toilet_cbox,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
-	on_punch = function (pos, node, puncher)
+	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		node.name = "homedecor:toilet_open"
 		minetest.set_node(pos, node)
 	end
@@ -35,18 +36,18 @@ homedecor.register("toilet", {
 homedecor.register("toilet_open", {
 	mesh = "homedecor_toilet_open.obj",
 	tiles = {
-		"technic_marble.png^[colorize:#ffffff:175",
-		"technic_marble.png^[colorize:#ffffff:175",
-		"technic_marble.png^[colorize:#ffffff:175",
+		"homedecor_marble.png",
+		"homedecor_marble.png",
+		"homedecor_marble.png",
 		"default_water.png",
-		"default_steel_block.png^[brighten"
+		{ name = "homedecor_generic_metal.png", color = homedecor.color_med_grey }
 	},
 	selection_box = toilet_sbox,
 	collision_box = toilet_cbox,
 	drop = "homedecor:toilet",
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
-	on_punch = function (pos, node, puncher)
+	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		node.name = "homedecor:toilet"
 		minetest.set_node(pos, node)
 		minetest.sound_play("homedecor_toilet_flush", {
@@ -65,10 +66,10 @@ local tp_cbox = {
 }
 
 homedecor.register("toilet_paper", {
-	description = "Toilet paper",
+	description = S("Toilet paper"),
 	mesh = "homedecor_toilet_paper.obj",
 	tiles = {
-		"wool_white.png",
+		"homedecor_generic_quilted_paper.png",
 		"default_wood.png"
 	},
 	inventory_image = "homedecor_toilet_paper_inv.png",
@@ -86,30 +87,61 @@ local sink_cbox = {
 }
 
 homedecor.register("sink", {
-	description = "Bathroom Sink",
+	description = S("Bathroom Sink"),
 	mesh = "homedecor_bathroom_sink.obj",
 	tiles = {
-		"technic_marble.png^[colorize:#ffffff:175",
-		"technic_marble.png^[colorize:#ffffff:175",
+		"homedecor_marble.png",
+		"homedecor_marble.png",
 		"default_water.png"
 	},
 	inventory_image="homedecor_bathroom_sink_inv.png",
 	selection_box = sink_cbox,
-	collision_box = sink_cbox,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{ -5/16,  5/16, 1/16, -4/16, 8/16, 8/16 },
+			{  5/16,  5/16, 1/16,  4/16, 8/16, 8/16 },
+			{ -5/16,  5/16, 1/16,  5/16, 8/16, 2/16 },
+			{ -5/16,  5/16, 6/16,  5/16, 8/16, 8/16 },
+			{ -4/16, -8/16, 1/16,  4/16, 5/16, 6/16 }
+		}
+	},
+	on_destruct = function(pos)
+		homedecor.stop_particle_spawner({x=pos.x, y=pos.y+1, z=pos.z})
+	end
 })
 
 --Taps
 
+local function taps_on_rightclick(pos, node, clicker, itemstack, pointed_thing)
+	local below = minetest.get_node_or_nil({x=pos.x, y=pos.y-1, z=pos.z})
+	if below and
+	  below.name == "homedecor:shower_tray" or
+	  below.name == "homedecor:sink" or
+	  below.name == "homedecor:kitchen_cabinet_with_sink" or
+	  below.name == "homedecor:kitchen_cabinet_with_sink_locked" then
+		local particledef = {
+			outlet      = { x = 0, y = -0.44, z = 0.28 },
+			velocity_x  = { min = -0.1, max = 0.1 },
+			velocity_y  = -0.3,
+			velocity_z  = { min = -0.1, max = 0 },
+			spread      = 0
+		}
+		homedecor.start_particle_spawner(pos, node, particledef, "homedecor_faucet")
+	end
+	return itemstack
+end
+
 homedecor.register("taps", {
-	description = "Bathroom taps/faucet",
+	description = S("Bathroom taps/faucet"),
 	mesh = "homedecor_bathroom_faucet.obj",
 	tiles = {
-		"default_steel_block.png^[brighten",
-		"default_copper_block.png^[colorize:#ffffff:175",
-		"default_steel_block.png^[colorize:#ffffff:200",
-		"technic_marble.png^[colorize:#ffffff:175",
+		{ name = "homedecor_generic_metal.png", color = homedecor.color_med_grey },
+		"homedecor_generic_metal_bright.png",
+		"homedecor_generic_metal.png",
+		"homedecor_generic_metal_bright.png"
 	},
 	inventory_image = "3dforniture_taps_inv.png",
 	wield_image = "3dforniture_taps_inv.png",
@@ -120,16 +152,19 @@ homedecor.register("taps", {
 	walkable = false,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
+	on_rightclick = taps_on_rightclick,
+	on_destruct = homedecor.stop_particle_spawner,
+	on_rotate = screwdriver.disallow
 })
 
 homedecor.register("taps_brass", {
-	--description = S("Bathroom taps/faucet (brass)"),
+	description = S("Bathroom taps/faucet (brass)"),
 	mesh = "homedecor_bathroom_faucet.obj",
 	tiles = {
-		"default_copper_block.png^[colorize:#ffffff:175",
-		"default_copper_block.png^[colorize:#ffffff:175",
-		"default_steel_block.png^[colorize:#ffffff:200",
-		"technic_marble.png^[colorize:#ffffff:175",
+		"homedecor_generic_metal_brass.png",
+		"homedecor_generic_metal_brass.png",
+		"homedecor_generic_metal.png",
+		"homedecor_generic_metal_brass.png"
 	},
 	inventory_image = "3dforniture_taps_brass_inv.png",
 	wield_image = "3dforniture_taps_brass_inv.png",
@@ -140,15 +175,18 @@ homedecor.register("taps_brass", {
 	walkable = false,
 	groups = {cracky=3},
 	sounds = default.node_sound_stone_defaults(),
+	on_rightclick = taps_on_rightclick,
+	on_destruct = homedecor.stop_particle_spawner,
+	on_rotate = screwdriver.disallow
 })
 
 --Shower Tray
 
 homedecor.register("shower_tray", {
-	description = "Shower Tray",
+	description = S("Shower Tray"),
 	tiles = {
-		"technic_marble.png",
-		"technic_marble.png"
+		"forniture_marble_base_ducha_top.png",
+		"homedecor_marble.png"
 	},
 	node_box = {
 		type = "fixed",
@@ -160,41 +198,17 @@ homedecor.register("shower_tray", {
 			{  0.45, -0.45, -0.45, 0.5, -0.4, 0.45 }
 		},
 	},
-	selection_box = {
-		type = "fixed",
-		fixed = { -0.5, -0.5, -0.5, 0.5, -0.4, 0.5 },
-	},
+	selection_box = homedecor.nodebox.slab_y(0.1),
 	groups = {cracky=2},
 	sounds = default.node_sound_stone_defaults(),
 	on_destruct = function(pos)
-		headpos = {x=pos.x, y=pos.y+2, z=pos.z}
-		local above_spawner_meta = minetest.get_meta(headpos)
-
-		local id = above_spawner_meta:get_int("active")
-		local s_handle = above_spawner_meta:get_int("sound")
-
-		if id ~= 0 then
-			minetest.delete_particlespawner(id)
-		end
-
-		if s_handle then
-			minetest.after(0, function(s_handle)
-				minetest.sound_stop(s_handle)
-			end, s_handle)
-		end
-
-		above_spawner_meta:set_int("active", nil)
-		above_spawner_meta:set_int("sound", nil)
+		homedecor.stop_particle_spawner({x=pos.x, y=pos.y+2, z=pos.z}) -- the showerhead
+		homedecor.stop_particle_spawner({x=pos.x, y=pos.y+1, z=pos.z}) -- the taps, if any
 	end
 })
 
 --Shower Head
 
-local fdir_to_flowpos = {
-	minx = { 0.15, 0.05, -0.15, -0.05 }, maxx = { -0.15, -0.3, 0.15, 0.3 },
-	minz = { 0.05, 0.15, -0.05, -0.15 }, maxz = { -0.3, -0.15, 0.3, 0.15 },
-	velx = { 0, -0.2, 0, 0.2 }, velz = { -0.2, 0, 0.2, 0 }
-}
 
 local sh_cbox = {
 	type = "fixed",
@@ -205,82 +219,96 @@ homedecor.register("shower_head", {
 	drawtype = "mesh",
 	mesh = "homedecor_shower_head.obj",
 	tiles = {
-		"default_steel_block.png^[brighten",
+		"homedecor_generic_metal.png",
 		"homedecor_shower_head.png"
 	},
 	inventory_image = "homedecor_shower_head_inv.png",
-	description = "Shower Head",
+	description = S("Shower Head"),
 	groups = {snappy=3},
 	selection_box = sh_cbox,
 	walkable = false,
-	on_rightclick = function (pos, node, clicker)
-		local below = minetest.get_node({x=pos.x, y=pos.y-2.0, z=pos.z})
-		local is_tray = string.find(below.name, "homedecor:shower_tray")
-		local fdir = node.param2
-		local minx = fdir_to_flowpos.minx[fdir + 1]
-		local maxx = fdir_to_flowpos.maxx[fdir + 1]
-		local minz = fdir_to_flowpos.minz[fdir + 1]
-		local maxz = fdir_to_flowpos.maxz[fdir + 1]
-		local velx = fdir_to_flowpos.velx[fdir + 1]
-		local velz = fdir_to_flowpos.velz[fdir + 1]
-
-		local this_spawner_meta = minetest.get_meta(pos)
-		local id = this_spawner_meta:get_int("active")
-		local s_handle = this_spawner_meta:get_int("sound")
-
-		if id ~= 0 then
-			if s_handle then
-				minetest.after(0, function(s_handle)
-					minetest.sound_stop(s_handle)
-				end, s_handle)
-			end
-			minetest.delete_particlespawner(id)
-			this_spawner_meta:set_int("active", nil)
-			this_spawner_meta:set_int("sound", nil)
-			return
+	on_rotate = screwdriver.disallow,
+	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+		local below = minetest.get_node_or_nil({x=pos.x, y=pos.y-2.0, z=pos.z})
+		if below and below.name == "homedecor:shower_tray" then
+			local particledef = {
+				outlet      = { x = 0, y = -0.42, z = 0.1 },
+				velocity_x  = { min = -0.15, max = 0.15 },
+				velocity_y  = -2,
+				velocity_z  = { min = -0.3,  max = 0.1 },
+				spread      = 0.12
+			}
+			homedecor.start_particle_spawner(pos, node, particledef, "homedecor_shower")
 		end
-
-		if fdir and fdir < 4 and is_tray and (not id or id == 0) then
-			id = minetest.add_particlespawner({
-				amount = 60, time = 0, collisiondetection = true,
-				minpos = {x=pos.x - minx, y=pos.y-0.45, z=pos.z - minz},
-				maxpos = {x=pos.x - maxx, y=pos.y-0.45, z=pos.z - maxz},
-				minvel = {x=velx, y=-2, z=velz}, maxvel = {x=velx, y=-2, z=velz},
-				minacc = {x=0, y=0, z=0}, maxacc = {x=0, y=-0.05, z=0},
-				minexptime = 2, maxexptime = 4, minsize = 0.5, maxsize = 1,
-				texture = "homedecor_water_particle.png",
-			})
-			s_handle = minetest.sound_play("homedecor_shower", {
-				pos = pos,
-				max_hear_distance = 5,
-				loop = true 
-			})
-			this_spawner_meta:set_int("active", id)
-			this_spawner_meta:set_int("sound", s_handle)
-			return
-		end
+		return itemstack
 	end,
 	on_destruct = function(pos)
-		local this_spawner_meta = minetest.get_meta(pos)
-		local id = this_spawner_meta:get_int("active")
-		local s_handle = this_spawner_meta:get_int("sound")
-
-		if id ~= 0 then
-			minetest.delete_particlespawner(id)
-		end
-
-		if s_handle then
-			minetest.after(0, function(s_handle)
-				minetest.sound_stop(s_handle)
-			end, s_handle)
-		end
-
-		this_spawner_meta:set_int("active", nil)
-		this_spawner_meta:set_int("sound", nil)
+		homedecor.stop_particle_spawner(pos)
 	end
 })
 
+homedecor.register("bathtub_clawfoot_brass_taps", {
+	drawtype = "mesh",
+	mesh = "homedecor_bathtub_clawfoot.obj",
+	tiles = {
+		{ name = "homedecor_generic_metal.png", color = homedecor.color_med_grey },
+		"homedecor_generic_metal_bright.png",
+		"homedecor_generic_metal_bright.png",
+		"homedecor_generic_metal_brass.png",
+		"homedecor_marble.png",
+		"homedecor_bathtub_clawfoot_bottom_inside.png",
+	},
+	description = S("Bathtub, clawfoot, with brass taps"),
+	groups = {cracky=3},
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.5, -0.5, -0.5, 1.5, 0.3125, 0.5 },
+	},
+	sounds = default.node_sound_stone_defaults(),
+})
 
+homedecor.register("bathtub_clawfoot_chrome_taps", {
+	drawtype = "mesh",
+	mesh = "homedecor_bathtub_clawfoot.obj",
+	tiles = {
+		{ name = "homedecor_generic_metal.png", color = homedecor.color_med_grey },
+		"homedecor_generic_metal_bright.png",
+		"homedecor_generic_metal_bright.png",
+		"homedecor_generic_metal_bright.png",
+		"homedecor_marble.png",
+		"homedecor_bathtub_clawfoot_bottom_inside.png",
+	},
+	description = S("Bathtub, clawfoot, with chrome taps"),
+	groups = {cracky=3},
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.5, -0.5, -0.5, 1.5, 0.3125, 0.5 },
+	},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+local bs_cbox = {
+	type = "fixed",
+	fixed = { -8/16, -8/16, 1/16, 8/16, 8/16, 8/16 }
+}
+
+homedecor.register("bathroom_set", {
+	drawtype = "mesh",
+	mesh = "homedecor_bathroom_set.obj",
+	tiles = {
+		"homedecor_bathroom_set_mirror.png",
+		"homedecor_bathroom_set_tray.png",
+		"homedecor_bathroom_set_toothbrush.png",
+		"homedecor_bathroom_set_cup.png",
+		"homedecor_bathroom_set_toothpaste.png",
+	},
+	inventory_image = "homedecor_bathroom_set_inv.png",
+	description = S("Bathroom sundries set"),
+	groups = {snappy=3},
+	selection_box = bs_cbox,
+	walkable = false,
+	sounds = default.node_sound_glass_defaults(),
+})
 
 minetest.register_alias("3dforniture:toilet", "homedecor:toilet")
 minetest.register_alias("3dforniture:toilet_open", "homedecor:toilet_open")
@@ -296,5 +324,3 @@ minetest.register_alias("taps", "homedecor:taps")
 minetest.register_alias("shower_tray", "homedecor:shower_tray")
 minetest.register_alias("shower_head", "homedecor:shower_head")
 minetest.register_alias("table_lamp", "homedecor:table_lamp_off")
-
-

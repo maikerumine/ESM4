@@ -1,6 +1,8 @@
 -- This file supplies refrigerators
 
-local S = homedecor.gettext
+local S = homedecor_i18n.gettext
+
+local function N_(x) return x end
 
 -- steel-textured fridge
 homedecor.register("refrigerator_steel", {
@@ -12,12 +14,13 @@ homedecor.register("refrigerator_steel", {
 	sounds = default.node_sound_stone_defaults(),
 	selection_box = homedecor.nodebox.slab_y(2),
 	collision_box = homedecor.nodebox.slab_y(2),
-	expand = { top="air" },
+	expand = { top="placeholder" },
 	infotext=S("Refrigerator"),
 	inventory = {
 		size=50,
 		lockable=true,
 	},
+	on_rotate = screwdriver.rotate_simple
 })
 
 -- white, enameled fridge
@@ -30,12 +33,13 @@ homedecor.register("refrigerator_white", {
 	selection_box = homedecor.nodebox.slab_y(2),
 	collision_box = homedecor.nodebox.slab_y(2),
 	sounds = default.node_sound_stone_defaults(),
-	expand = { top="air" },
+	expand = { top="placeholder" },
 	infotext=S("Refrigerator"),
 	inventory = {
 		size=50,
-		lockable=true
+		lockable=true,
 	},
+	on_rotate = screwdriver.rotate_simple
 })
 
 minetest.register_alias("homedecor:refrigerator_white_bottom", "homedecor:refrigerator_white")
@@ -46,12 +50,13 @@ minetest.register_alias("homedecor:refrigerator_steel_top", "air")
 
 minetest.register_alias("homedecor:refrigerator_white_bottom_locked", "homedecor:refrigerator_white_locked")
 minetest.register_alias("homedecor:refrigerator_white_top_locked", "air")
+minetest.register_alias("homedecor:refrigerator_locked", "homedecor:refrigerator_white_locked")
 
 minetest.register_alias("homedecor:refrigerator_steel_bottom_locked", "homedecor:refrigerator_steel_locked")
 minetest.register_alias("homedecor:refrigerator_steel_top_locked", "air")
 
 -- kitchen "furnaces"
-homedecor.register_furnace("homedecor:oven", {
+homedecor.register_furnace("oven", {
 	description = S("Oven"),
 	tile_format = "homedecor_oven_%s%s.png",
 	output_slots = 4,
@@ -59,7 +64,7 @@ homedecor.register_furnace("homedecor:oven", {
 	cook_speed = 1.25,
 })
 
-homedecor.register_furnace("homedecor:oven_steel", {
+homedecor.register_furnace("oven_steel", {
 	description = S("Oven (stainless steel)"),
 	tile_format = "homedecor_oven_steel_%s%s.png",
 	output_slots = 4,
@@ -67,7 +72,7 @@ homedecor.register_furnace("homedecor:oven_steel", {
 	cook_speed = 1.25,
 })
 
-homedecor.register_furnace("homedecor:microwave_oven", {
+homedecor.register_furnace("microwave_oven", {
 	description = S("Microwave Oven"),
 	tiles = {
 		"homedecor_microwave_top.png", "homedecor_microwave_top.png^[transformR180",
@@ -83,11 +88,9 @@ homedecor.register_furnace("homedecor:microwave_oven", {
 	output_width = 2,
 	cook_speed = 1.5,
 	extra_nodedef_fields = {
-		drawtype = "nodebox",
-		paramtype = "light",
 		node_box = {
 			type = "fixed",
-			fixed = { { -0.5, -0.5, -0.125, 0.5, 0.125, 0.5 } },
+			fixed = { -0.5, -0.5, -0.125, 0.5, 0.125, 0.5 },
 		},
 	},
 })
@@ -111,12 +114,13 @@ homedecor.register("coffee_maker", {
 		"homedecor_coffeemaker_cup.png",
 		"homedecor_coffeemaker_case.png",
 	},
-	description = "Coffee Maker",
+	description = S("Coffee Maker"),
 	inventory_image = "homedecor_coffeemaker_inv.png",
 	walkable = false,
 	groups = {snappy=3},
 	selection_box = cm_cbox,
-	node_box = cm_cbox
+	node_box = cm_cbox,
+	on_rotate = screwdriver.disallow
 })
 
 local fdir_to_steampos = {
@@ -126,6 +130,7 @@ local fdir_to_steampos = {
 
 minetest.register_abm({
 	nodenames = "homedecor:coffee_maker",
+	label = "sfx",
 	interval = 2,
 	chance = 1,
 	action = function(pos, node)
@@ -155,14 +160,63 @@ minetest.register_abm({
 	end
 })
 
+homedecor.register("toaster", {
+	description = S("Toaster"),
+	tiles = { "homedecor_toaster_sides.png" },
+	inventory_image = "homedecor_toaster_inv.png",
+	walkable = false,
+	groups = { snappy=3 },
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.0625, -0.5, -0.125, 0.125, -0.3125, 0.125}, -- NodeBox1
+		},
+	},
+	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+		local fdir = node.param2
+		minetest.set_node(pos, { name = "homedecor:toaster_loaf", param2 = fdir })
+		minetest.sound_play("toaster", {
+			pos = pos,
+			gain = 1.0,
+			max_hear_distance = 5
+		})
+		return itemstack
+	end
+})
 
+homedecor.register("toaster_loaf", {
+	tiles = {
+		"homedecor_toaster_toploaf.png",
+		"homedecor_toaster_sides.png",
+		"homedecor_toaster_sides.png",
+		"homedecor_toaster_sides.png",
+		"homedecor_toaster_sides.png",
+		"homedecor_toaster_sides.png"
+	},
+	walkable = false,
+	groups = { snappy=3, not_in_creative_inventory=1 },
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.0625, -0.5, -0.125, 0.125, -0.3125, 0.125}, -- NodeBox1
+			{-0.03125, -0.3125, -0.0935, 0, -0.25, 0.0935}, -- NodeBox2
+			{0.0625, -0.3125, -0.0935, 0.0935, -0.25, 0.0935}, -- NodeBox3
+		},
+	},
+	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+		local fdir = node.param2
+		minetest.set_node(pos, { name = "homedecor:toaster", param2 = fdir })
+		return itemstack
+	end,
+	drop = "homedecor:toaster"
+})
 
 
 homedecor.register("dishwasher", {
-	description = "Dishwasher",
+	description = S("Dishwasher"),
 	drawtype = "nodebox",
 	tiles = {
-		"default_steel_block.png",
+		"homedecor_dishwasher_top.png",
 		"homedecor_dishwasher_bottom.png",
 		"homedecor_dishwasher_sides.png",
 		"homedecor_dishwasher_sides.png^[transformFX",
@@ -183,11 +237,11 @@ homedecor.register("dishwasher", {
 	groups = { snappy = 3 },
 })
 
-local materials = {"granite", "marble", "steel", "wood"}
+local materials = { N_("granite"), N_("marble"), N_("steel"), N_("wood") }
 
 for _, m in ipairs(materials) do
 homedecor.register("dishwasher_"..m, {
-	description = "Dishwasher ("..m..")",
+	description = S("Dishwasher (@1)", S(m)),
 	tiles = {
 		"homedecor_kitchen_cabinet_top_"..m..".png",
 		"homedecor_dishwasher_bottom.png",

@@ -108,6 +108,7 @@ end
 
 if mymonths.flowers_die == true then
 	dofile(minetest.get_modpath("mymonths") .. "/flowers.lua")
+	dofile(minetest.get_modpath("mymonths") .. "/pre-flowers.lua")
 end
 
 if minetest.get_modpath("thirsty") then

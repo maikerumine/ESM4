@@ -1,5 +1,4 @@
 -- Home Decor mod by VanessaE
---Simplified by maikerumine
 --
 -- Mostly my own code, with bits and pieces lifted from Minetest's default
 -- lua files and from ironzorg's flowers mod.  Many thanks to GloopMaster
@@ -8,52 +7,14 @@
 -- The code for ovens, nightstands, refrigerators are basically modified
 -- copies of the code for chests and furnaces.
 
+local modpath = minetest.get_modpath("homedecor")
+
+local S = homedecor_i18n.gettext
+
 homedecor = {}
-
-homedecor.debug = 0
-
--- detail level for roofing slopes and also cobwebs
-
-homedecor.detail_level = 16
-
-homedecor.modpath = minetest.get_modpath("homedecor")
-
--- Boilerplate to support localized strings if intllib mod is installed.
-local S = rawget(_G, "intllib") and intllib.Getter() or function(s) return s end
-homedecor.gettext = S
-
--- debug
-
-local dbg = function(s)
-	if homedecor.debug == 1 then
-		print('[HomeDecor] ' .. s)
-	end
-end
-
--- infinite stacks
-
-if minetest.get_modpath("unified_inventory") or not minetest.setting_getbool("creative_mode") then
-	homedecor.expect_infinite_stacks = false
-else
-	homedecor.expect_infinite_stacks = true
-end
-
---table copy
-
-function homedecor.table_copy(t)
-	local nt = { };
-	for k, v in pairs(t) do
-		if type(v) == "table" then
-			nt[k] = homedecor.table_copy(v)
-		else
-			nt[k] = v
-		end
-	end
-	return nt
-end
+homedecor.modpath = modpath
 
 -- Determine if the item being pointed at is the underside of a node (e.g a ceiling)
-
 function homedecor.find_ceiling(itemstack, placer, pointed_thing)
 	-- most of this is copied from the rotate-and-place function in builtin
 	local unode = core.get_node_or_nil(pointed_thing.under)
@@ -66,9 +27,6 @@ function homedecor.find_ceiling(itemstack, placer, pointed_thing)
 				itemstack, pointed_thing)
 		return
 	end
-	local pitch = placer:get_look_pitch()
-	local fdir = core.dir_to_facedir(placer:get_look_dir())
-	local wield_name = itemstack:get_name()
 
 	local above = pointed_thing.above
 	local under = pointed_thing.under
@@ -84,7 +42,6 @@ function homedecor.find_ceiling(itemstack, placer, pointed_thing)
 	if undef and undef.buildable_to then
 		pos = pointed_thing.under
 		node = unode
-		iswall = false
 	end
 
 	if core.is_protected(pos, placer:get_player_name()) then
@@ -100,42 +57,66 @@ function homedecor.find_ceiling(itemstack, placer, pointed_thing)
 	return isceiling, pos
 end
 
-homedecor.plain_wood = "default_wood.png^"..
-					   "(homedecor_generic_wood_boards_overlay.png^[colorize:#a7682020:100)"
+screwdriver = screwdriver or {}
 
-homedecor.mahogany_wood = "(default_acacia_wood.png^[colorize:#401010:125)^"..
-					      "(homedecor_generic_wood_boards_overlay.png^[colorize:#66493880:200)"
+homedecor.plain_wood    = { name = "homedecor_generic_wood_plain.png",  color = 0xffa76820 }
+homedecor.mahogany_wood = { name = "homedecor_generic_wood_plain.png",  color = 0xff7d2506 }
+homedecor.white_wood    = "homedecor_generic_wood_plain.png"
+homedecor.dark_wood     = { name = "homedecor_generic_wood_plain.png",  color = 0xff39240f }
+homedecor.lux_wood      = { name = "homedecor_generic_wood_luxury.png", color = 0xff643f23 }
 
-homedecor.white_wood = "(default_pine_wood.png^[colorize:#e0f0ff:200)^"..
-					   "(homedecor_generic_wood_boards_overlay.png^[colorize:#ffffff:200)"
+homedecor.color_black     = 0xff303030
+homedecor.color_dark_grey = 0xff606060
+homedecor.color_med_grey  = 0xffa0a0a0
 
-homedecor.dark_wood = "(default_junglewood.png^[colorize:#140900:200)^"..
-					  "(homedecor_generic_wood_boards_overlay.png^[colorize:#21110180:180)"
-
-
-dofile(homedecor.modpath.."/crafts.lua")
-
--- nodebox arithmetics and helpers
--- (please keep non-generic nodeboxes with their node definition)
-dofile(homedecor.modpath.."/handlers/nodeboxes.lua")
--- expand and unexpand decor
-dofile(homedecor.modpath.."/handlers/expansion.lua")
--- register nodes that cook stuff
-dofile(homedecor.modpath.."/handlers/furnaces.lua")
--- glue it all together into a registration function
-dofile(homedecor.modpath.."/handlers/registration.lua")
+-- load different handler subsystems
+dofile(modpath.."/handlers/init.lua")
 
 -- load various other components
-dofile(homedecor.modpath.."/misc-nodes.lua")					-- the catch-all for all misc nodes
-dofile(homedecor.modpath.."/electronics.lua")
-dofile(homedecor.modpath.."/kitchen_appliances.lua")
-dofile(homedecor.modpath.."/kitchen_furniture.lua")
-dofile(homedecor.modpath.."/bathroom_furniture.lua")
-dofile(homedecor.modpath.."/bathroom_sanitation.lua")
-dofile(homedecor.modpath.."/furniture.lua")
-dofile(homedecor.modpath.."/books.lua")
-dofile(homedecor.modpath.."/window_treatments.lua")
+dofile(modpath.."/misc-nodes.lua")					-- the catch-all for all misc nodes
+dofile(modpath.."/tables.lua")
+dofile(modpath.."/electronics.lua")
+dofile(modpath.."/shutters.lua")
 
+dofile(modpath.."/roofing.lua")
 
+dofile(modpath.."/foyer.lua")
 
-print("[HomeDecor] "..S("Loaded!"))
+dofile(modpath.."/doors_and_gates.lua")
+
+dofile(modpath.."/fences.lua")
+
+dofile(modpath.."/lighting.lua")
+
+dofile(modpath.."/kitchen_appliances.lua")
+dofile(modpath.."/kitchen_furniture.lua")
+dofile(modpath.."/gastronomy.lua")
+
+dofile(modpath.."/bathroom_furniture.lua")
+dofile(modpath.."/bathroom_sanitation.lua")
+
+dofile(modpath.."/bedroom.lua")
+
+dofile(modpath.."/laundry.lua")
+
+dofile(modpath.."/office.lua")
+
+dofile(modpath.."/clocks.lua")
+dofile(modpath.."/electrics.lua")
+
+dofile(modpath.."/window_treatments.lua")
+
+dofile(modpath.."/furniture.lua")
+dofile(modpath.."/furniture_medieval.lua")
+dofile(modpath.."/furniture_recipes.lua")
+dofile(modpath.."/climate-control.lua")
+
+dofile(modpath.."/cobweb.lua")
+dofile(modpath.."/books.lua")
+dofile(modpath.."/exterior.lua")
+dofile(modpath.."/trash_cans.lua")
+dofile(modpath.."/wardrobe.lua")
+
+dofile(modpath.."/crafts.lua")
+
+print("[HomeDecor] " .. S("Loaded!"))
