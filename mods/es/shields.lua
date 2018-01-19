@@ -12,9 +12,13 @@
 
 --Media(if not stated differently):
 --(c) Copyright (2014-2017) maikerumine; CC-BY-SA 3.0
+if minetest.global_exists("armor") and armor.elements then
+	table.insert(armor.elements, "shield")
+	local mult = armor.config.level_multiplier or 1
+	armor.config.level_multiplier = mult * 0.9
+end
 
-
-local use_shields = minetest.get_modpath("shields")
+--local use_shields = minetest.get_modpath("shields")
 
 local craft_ingreds = {
 	infinium = "es:infinium_ingot",

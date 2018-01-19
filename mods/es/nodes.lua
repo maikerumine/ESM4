@@ -172,65 +172,6 @@ minetest.register_node( "es:marble_bricks", {
 	groups = {cracky=1, marble=1},
 	sounds = default.node_sound_stone_defaults(),
 })
---[[
---ES OLD_Node Definition
-minetest.register_node("es:stone_with_emerald", {
-	description = "Emerald Ore",
-	tiles = {"default_stone.png^emerald_ore.png"},
-	is_ground_content = true,
-	groups = {cracky=1},
-	drop = "es:emerald_crystal",
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("es:stone_with_ruby", {
-	description = "Ruby Ore",
-	tiles = {"default_stone.png^ruby_ore.png"},
-	is_ground_content = true,
-	groups = {cracky=1},
-	drop = "es:ruby_crystal",
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("es:stone_with_aikerum", {
-	description = "Aikerum Ore",
-	tiles = {"default_stone.png^aikerum_ore.png"},
-	is_ground_content = true,
-	groups = {cracky=1,level = 2},
-	drop = "es:aikerum_crystal",
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("es:stone_with_infinium", {
-	description = "Infinium Ore - Slightly Radioactive",
-	tiles = {"default_stone.png^infinium_ore.png"},
-	is_ground_content = true,
-	--groups = {cracky=1,level = 2, radioactive = (state == "source" and 2 or 2)},
-	groups = {cracky=1,level = 2, radioactive = 2},
-	drop = "es:infinium_goo",
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("es:stone_with_purpellium", {
-	description = "Purlellium Ore - Oddly interesting",
-	tiles = {"default_stone.png^purpellium_ore.png"},
-	is_ground_content = true,
-	--groups = {cracky=2,level = 2,fall_damage_add_percent = -1000, radioactive = (state == "source" and 2 or 2)},
-	groups = {cracky=2,level = 2,fall_damage_add_percent = -1000, radioactive = 2},
-	drop = "es:purpellium_lump",
-	sounds = default.node_sound_stone_defaults(),
-})
-
-minetest.register_node("es:depleted_uranium", {
-	description = "Depleted Uranium Ore RADIOACTIVE",
-	tiles = {"default_stone.png^uranium_ore.png"},
-	--groups = {cracky = 3, radioactive = (state == "source" and 3 or 2)},
-	groups = {cracky = 3, radioactive = 3},
-	drop = 'es:depleted_uranium_lump',
-	sounds = default.node_sound_stone_defaults(),
-	light_source = 12,
-})
-]]
 
 --ES NEW_Node Definition
 minetest.register_node("es:stone_with_emeralds", {
@@ -563,8 +504,15 @@ end
 --node def
 minetest.register_node("es:vault", {
 	description = "Use this to store MANY items.",
-	tiles = { "vault.png", "vault.png", "vault.png",
-		"vault.png", "vault.png",  "(vault.png^nyancat_front.png^[colorize:#00FF00:110)"},
+	tiles = { 
+	"vault.png",
+	"vault.png",
+	"vault.png",
+	"vault.png",
+	"vault.png",
+	--"(vault.png^nyancat_front.png^[colorize:#00FF00:110)"
+	"(default_nc_front.png^[colorize:#00FF00:110)"
+	},
 	inventory_image = "vault.png",
 	light_source = 14,
 	paramtype2 = "facedir",

@@ -12,17 +12,17 @@
 --Media(if not stated differently):
 --(c) Copyright (2014-2015) maikerumine; CC-BY-SA 3.0
 
---Default override crafting
 
---groups = {not_in_craft_guide=1},
-
--- Minetest 0.4 mod: bone_collector
--- Bones can be crafted to clay, sand or coal to motivate players clear the playground.
---
 -- See README.txt for licensing and other information.
---Lag Block
 --maikerumine
+
+
 es = {}
+
+--CRAFT OVERRIDES
+--Default override crafting
+--groups = {not_in_craft_guide=1},
+--======================================
 --Bronze
 --[[
 minetest.register_craft({
@@ -34,31 +34,38 @@ minetest.register_craft({
 	}
 })
 ]]
+
 minetest.clear_craft({
 	type = "shapeless",
 	output = "default:bronze_ingot"
 })
+
+if basic_machines then
+	if moreores then
 	minetest.register_craft({
 		--type = "shapeless",
 		output = 'default:bronze_ingot 8',
 		recipe = {
-		{'default:copper_ingot', 'default:coal_lump', 'default:copper_ingot'},
+		{'default:copper_ingot', 'basic_machines:charcoal', 'default:copper_ingot'},
 		{'default:copper_ingot', 'moreores:tin_ingot', 'default:copper_ingot'},
 		{'default:copper_ingot', 'default:copper_ingot', 'default:copper_ingot'},
 		}
 	})
+	end
 
 	minetest.register_craft({
 		--type = "shapeless",
 		output = 'default:bronze_ingot 8',
 		recipe = {
-		{'default:copper_ingot', 'default:coal_lump', 'default:copper_ingot'},
+		{'default:copper_ingot', 'basic_machines:charcoal', 'default:copper_ingot'},
 		{'default:copper_ingot', 'default:tin_ingot', 'default:copper_ingot'},
 		{'default:copper_ingot', 'default:copper_ingot', 'default:copper_ingot'},
 		}
 	})	
-
---Treated logs
+end
+	
+--DECORATIVE LOGS (NO MOSS OR FUNGI GROWTH)
+--======================================
 minetest.register_craft({
 	type = "shapeless",
 	replacements = {{"es:boneblock", "es:boneblock"}},
@@ -123,7 +130,8 @@ minetest.register_craft({
 
 
 
-	
+--Lag Block
+--======================================
 minetest.register_craft({
 	output = 'es:lag_block',
 	recipe = {
@@ -143,8 +151,10 @@ minetest.register_craft({
 })
 
 
-
-
+--BONE COLLECTOR
+-- Minetest 0.4 mod: bone_collector
+-- Bones can be crafted to clay, sand or coal to motivate players clear the playground.
+--======================================
 minetest.register_craft({
 	output = 'default:clay_lump',
 	recipe = {
@@ -188,6 +198,7 @@ minetest.register_craft({
 --END BONE COLLECTOR
 
 --compressed cobble
+--======================================
 minetest.register_craft({
 	output = 'es:compressedcobble',
 	recipe = {
@@ -205,6 +216,7 @@ minetest.register_craft({
 
 
 --marble and granite bricks
+--======================================
 minetest.register_craft({
 	output = 'es:marble_bricks',
 	recipe = {
@@ -223,6 +235,7 @@ minetest.register_craft({
 
 
 --MESE
+--======================================
 minetest.register_craftitem("es:mesecook_crystal", {
 	description = "Cookable Raw MESE",
 	inventory_image = "default_mineral_mese.png",
@@ -252,6 +265,8 @@ minetest.register_craft({
 })
 
 
+--URANIUM
+--======================================
 minetest.register_craftitem("es:depleted_uranium_ingot", {
 	description = "Depleted uranium",
 	inventory_image = "technic_uranium_ingot.png",
@@ -281,6 +296,8 @@ minetest.register_craft({
 	},
 })
 
+--VAULT CHEST
+--======================================
 minetest.register_craft({
 	output = "es:vault",
 	recipe = {
@@ -290,6 +307,8 @@ minetest.register_craft({
 	},
 })
 
+--BONEBLOCK
+--======================================
 minetest.register_craft({
 	output = 'es:boneblock',
 	recipe = {
@@ -299,6 +318,8 @@ minetest.register_craft({
 	},
 })
 
+--WHATBLOCK
+--======================================
 minetest.register_craft({
 	output = "es:what",
 	recipe = {
@@ -378,7 +399,8 @@ minetest.register_craft({
 })
 
 
---ES SPECIAL BLOCKS
+--ES SPECIAL ORES AND BLOCKS
+--======================================
 --emerald
 minetest.register_craft({
 	output = 'es:emeraldblock',
@@ -519,7 +541,59 @@ minetest.register_craftitem("es:purpellium_lump", {
 })
 
 
+--GRINDING
+--======================================
+--IF COTTAGES USE FOR GRINDING
+--place in init in cottages
+--cottages.handmill_product[ 'es:purpellium_lump' ] = 'es:purpellium_dust 1';
+--cottages.handmill_product[ 'es:aikerum_crystal' ] = 'es:aikerum_dust 1';
+--cottages.handmill_product[ 'es:ruby_crystal' ] = 'es:ruby_dust 1';
+--cottages.handmill_product[ 'es:emerald_crystal' ] = 'es:emerald_dust 1';
 
+--ES GRINDER:
+minetest.register_craftitem("es:purpellium_dust", {
+	description = "Purpellium Dust",
+	inventory_image = "dye_violet.png",
+})
+minetest.register_craftitem("es:aikerum_dust", {
+	description = "Aikerum Dust",
+	inventory_image = "dye_blue.png",
+})
+minetest.register_craftitem("es:ruby_dust", {
+	description = "Ruby Dust",
+	inventory_image = "dye_red.png",
+})
+minetest.register_craftitem("es:emerald_dust", {
+	description = "Emerald Dust",
+	inventory_image = "dye_green.png",
+})
+
+--[[
+--ES RUBBER
+minetest.register_craftitem("es:rubber_dust", {
+	description = "Rubber Dust",
+	inventory_image = "dye_black.png",
+})
+
+minetest.register_craftitem("es:rubber", {
+	description = "Rubber",
+	inventory_image = "black.png^gui_hotbar_selected.png",
+})
+
+minetest.register_craft({
+	--type = "shapeless",
+	output = 'es:rubber_dust 12',
+	recipe = {
+	{"default:jungletree", "default:jungletree","default:jungletree"},
+	{"default:jungletree", "default:steel_ingot","default:jungletree"},
+	{"default:jungletree", "default:jungletree","default:jungletree"},
+	},
+})
+]]
+
+
+--POTIONS AND VESSEL CRAFTING
+--======================================
 --crafting containers
 minetest.register_craft({
 	type = "shapeless",
@@ -551,58 +625,6 @@ minetest.register_craft({
 	output = "es:toxic_container",
 	recipe = {"vessels:glass_bottle", "es:bucket_toxic"},
 })
-
-
---IF COTTAGES USE FOR GRINDING
---place in init in cottages
---cottages.handmill_product[ 'es:purpellium_lump' ] = 'es:purpellium_dust 1';
---cottages.handmill_product[ 'es:aikerum_crystal' ] = 'es:aikerum_dust 1';
---cottages.handmill_product[ 'es:ruby_crystal' ] = 'es:ruby_dust 1';
---cottages.handmill_product[ 'es:emerald_crystal' ] = 'es:emerald_dust 1';
-
---ES GRINDER:
-minetest.register_craftitem("es:purpellium_dust", {
-	description = "Purpellium Dust",
-	inventory_image = "dye_violet.png",
-})
-minetest.register_craftitem("es:aikerum_dust", {
-	description = "Aikerum Dust",
-	inventory_image = "dye_blue.png",
-})
-minetest.register_craftitem("es:ruby_dust", {
-	description = "Ruby Dust",
-	inventory_image = "dye_red.png",
-})
-minetest.register_craftitem("es:emerald_dust", {
-	description = "Emerald Dust",
-	inventory_image = "dye_green.png",
-})
-
---[[[
---ES RUBBER
-minetest.register_craftitem("es:rubber_dust", {
-	description = "Rubber Dust",
-	inventory_image = "dye_black.png",
-})
-
-minetest.register_craftitem("es:rubber", {
-	description = "Rubber",
-	inventory_image = "black.png^gui_hotbar_selected.png",
-})
-
-
-minetest.register_craft({
-	--type = "shapeless",
-	output = 'es:rubber_dust 12',
-	recipe = {
-	{"default:jungletree", "default:jungletree","default:jungletree"},
-	{"default:jungletree", "default:steel_ingot","default:jungletree"},
-	{"default:jungletree", "default:jungletree","default:jungletree"},
-	},
-})
-]]
-
-
 
 
 --purpellium potion give endurance
@@ -817,25 +839,25 @@ minetest.register_craft({
 	output = '3d_armor:helmet_infinium',
 	type = "shapeless",
 	recipe =
-		{'es:ruby_container', 'es:helmet_infinium' },
+		{'es:ruby_container', '3d_armor:helmet_infinium' },
 })
 minetest.register_craft({
 	output = '3d_armor:chestplate_infinium',
 	type = "shapeless",
 	recipe =
-		{'es:ruby_container', 'es:chestplate_infinium'},
+		{'es:ruby_container', '3d_armor:chestplate_infinium'},
 })
 minetest.register_craft({
 	output = '3d_armor:leggings_infinium',
 	type = "shapeless",
 	recipe =
-		{'es:ruby_container', 'es:leggings_infinium'},
+		{'es:ruby_container', '3d_armor:leggings_infinium'},
 })
 minetest.register_craft({
 	output = '3d_armor:boots_infinium',
 	type = "shapeless",
 	recipe =
-		{'es:ruby_container', 'es:boots_infinium' },
+		{'es:ruby_container', '3d_armor:boots_infinium' },
 })
 
 --aikerum armour fix
@@ -843,25 +865,25 @@ minetest.register_craft({
 	output = '3d_armor:helmet_aikerum',
 	type = "shapeless",
 	recipe =
-		{'es:ruby_container', 'es:helmet_aikerum' },
+		{'es:ruby_container', '3d_armor:helmet_aikerum' },
 })
 minetest.register_craft({
 	output = '3d_armor:chestplate_aikerum',
 	type = "shapeless",
 	recipe =
-		{'es:ruby_container', 'es:chestplate_aikerum'},
+		{'es:ruby_container', '3d_armor:chestplate_aikerum'},
 })
 minetest.register_craft({
 	output = '3d_armor:leggings_aikerum',
 	type = "shapeless",
 	recipe =
-		{'es:ruby_container', 'es:leggings_aikerum'},
+		{'es:ruby_container', '3d_armor:leggings_aikerum'},
 })
 minetest.register_craft({
 	output = '3d_armor:boots_aikerum',
 	type = "shapeless",
 	recipe =
-		{'es:ruby_container', 'es:boots_aikerum' },
+		{'es:ruby_container', '3d_armor:boots_aikerum' },
 })
 
 --emerald armour fix
@@ -869,45 +891,30 @@ minetest.register_craft({
 	output = '3d_armor:helmet_emerald',
 	type = "shapeless",
 	recipe =
-		{'es:ruby_container', 'es:helmet_emerald' },
+		{'es:ruby_container', '3d_armor:helmet_emerald' },
 })
 minetest.register_craft({
 	output = '3d_armor:chestplate_emerald',
 	type = "shapeless",
 	recipe =
-		{'es:ruby_container', 'es:chestplate_emerald'},
+		{'es:ruby_container', '3d_armor:chestplate_emerald'},
 })
 minetest.register_craft({
 	output = '3d_armor:leggings_emerald',
 	type = "shapeless",
 	recipe =
-		{'es:ruby_container', 'es:leggings_emerald'},
+		{'es:ruby_container', '3d_armor:leggings_emerald'},
 })
 minetest.register_craft({
 	output = '3d_armor:boots_emerald',
 	type = "shapeless",
 	recipe =
-		{'es:ruby_container', 'es:boots_emerald' },
-})
-
-
---WEAPONS AND TOOLS
-minetest.register_craft({
-	output = 'es:handle',
-	recipe = {
-		{'default:bronze_ingot', 'default:mese_crystal', 'default:bronze_ingot'},
-		{'farming:string', 'default:steel_ingot', 'farming:string'},
-		{'farming:string', 'default:diamond', 'farming:string'},
-	}
-})
-minetest.register_craftitem("es:handle", {
-	description = "Extreme Survival Uni-handle",
-	inventory_image = "es_handle.png",
-	--inventory_image = "default_steel_ingot.png^default_diamond.png^default_mese_crystal.png^farming_cotton.png",
+		{'es:ruby_container', '3d_armor:boots_emerald' },
 })
 
 
 --INGOTS
+--======================================
 minetest.register_craft({
 	output = 'es:cookable_emerald_ingot',
 	type = "shapeless",
@@ -968,270 +975,281 @@ minetest.register_craftitem("es:cookable_purpellium_ingot", {
 	inventory_image = "default_bronze_ingot.png^[colorize:#FF00FF:200",
 })
 
---SWORDS
-minetest.register_craft({
-	output = 'es:sword_emerald',
-	recipe = {
-		{'es:emerald_ingot'},
-		{'es:emerald_ingot'},
-		{'es:handle'},
-	}
-})
-minetest.register_craft({
-	output = 'es:sword_ruby',
-	recipe = {
-		{'es:ruby_ingot'},
-		{'es:ruby_ingot'},
-		{'es:handle'},
-	}
-})
-minetest.register_craft({
-	output = 'es:sword_aikerum',
-	recipe = {
-		{'es:aikerum_ingot'},
-		{'es:aikerum_ingot'},
-		{'es:handle'},
-	}
-})
-minetest.register_craft({
-	output = 'es:sword_purpellium',
-	recipe = {
-		{'es:purpellium_ingot'},
-		{'es:purpellium_ingot'},
-		{'es:handle'},
-	}
+
+--WEAPONS AND TOOLS
+--======================================
+minetest.register_craftitem("es:handle", {
+	description = "Extreme Survival Uni-handle",
+	inventory_image = "es_handle.png",
+	--inventory_image = "default_steel_ingot.png^default_diamond.png^default_mese_crystal.png^farming_cotton.png",
 })
 
---PICKS
-minetest.register_craft({
-	output = 'es:pick_emerald',
-	recipe = {
-		{'es:emerald_ingot', 'es:emerald_ingot', 'es:emerald_ingot'},
-		{'', 'default:steel_ingot', ''},
-		{'', 'es:handle', ''},
-	}
-})
-minetest.register_craft({
-	output = 'es:pick_ruby',
-	recipe = {
-		{'es:ruby_ingot', 'es:ruby_ingot', 'es:ruby_ingot'},
-		{'', 'default:steel_ingot', ''},
-		{'', 'es:handle', ''},
-	}
-})
-minetest.register_craft({
-	output = 'es:pick_aikerum',
-	recipe = {
-		{'es:aikerum_ingot', 'es:aikerum_ingot', 'es:aikerum_ingot'},
-		{'', 'default:steel_ingot', ''},
-		{'', 'es:handle', ''},
-	}
-})
+local es_hard_tool_craft = tonumber(minetest.settings:get("es_hard_tool_craft"))
+if es_hard_tool_craft == 1 then
+	minetest.register_craft({
+		output = 'es:handle',
+		recipe = {
+			{'default:bronze_ingot', 'default:mese_crystal', 'default:bronze_ingot'},
+			{'farming:string', 'default:steel_ingot', 'farming:string'},
+			{'farming:string', 'default:diamond', 'farming:string'},
+		}
+	})
 
-minetest.register_craft({
-	output = 'es:pick_purpellium',
-	recipe = {
-		{'es:purpellium_ingot', 'es:purpellium_ingot', 'es:purpellium_ingot'},
-		{'', 'default:steel_ingot', ''},
-		{'', 'es:handle', ''},
-	}
-})
+	--SWORDS
+	minetest.register_craft({
+		output = 'es:sword_emerald',
+		recipe = {
+			{'es:emerald_ingot'},
+			{'es:emerald_ingot'},
+			{'es:handle'},
+		}
+	})
+	minetest.register_craft({
+		output = 'es:sword_ruby',
+		recipe = {
+			{'es:ruby_ingot'},
+			{'es:ruby_ingot'},
+			{'es:handle'},
+		}
+	})
+	minetest.register_craft({
+		output = 'es:sword_aikerum',
+		recipe = {
+			{'es:aikerum_ingot'},
+			{'es:aikerum_ingot'},
+			{'es:handle'},
+		}
+	})
+	minetest.register_craft({
+		output = 'es:sword_purpellium',
+		recipe = {
+			{'es:purpellium_ingot'},
+			{'es:purpellium_ingot'},
+			{'es:handle'},
+		}
+	})
 
---AXES
-minetest.register_craft({
-	output = 'es:axe_emerald',
-	recipe = {
-		{'es:emerald_ingot', 'es:emerald_ingot', ''},
-		{'es:emerald_ingot', 'default:steel_ingot', ''},
-		{'', 'es:handle', ''},
-	}
-})
-minetest.register_craft({
-	output = 'es:axe_ruby',
-	recipe = {
-		{'es:ruby_ingot', 'es:ruby_ingot', ''},
-		{'es:ruby_ingot', 'default:steel_ingot', ''},
-		{'', 'es:handle', ''},
-	}
-})
-minetest.register_craft({
-	output = 'es:axe_aikerum',
-	recipe = {
-		{'es:aikerum_ingot', 'es:aikerum_ingot', ''},
-		{'es:aikerum_ingot', 'default:steel_ingot', ''},
-		{'', 'es:handle', ''},
-	}
-})
+	--PICKS
+	minetest.register_craft({
+		output = 'es:pick_emerald',
+		recipe = {
+			{'es:emerald_ingot', 'es:emerald_ingot', 'es:emerald_ingot'},
+			{'', 'default:steel_ingot', ''},
+			{'', 'es:handle', ''},
+		}
+	})
+	minetest.register_craft({
+		output = 'es:pick_ruby',
+		recipe = {
+			{'es:ruby_ingot', 'es:ruby_ingot', 'es:ruby_ingot'},
+			{'', 'default:steel_ingot', ''},
+			{'', 'es:handle', ''},
+		}
+	})
+	minetest.register_craft({
+		output = 'es:pick_aikerum',
+		recipe = {
+			{'es:aikerum_ingot', 'es:aikerum_ingot', 'es:aikerum_ingot'},
+			{'', 'default:steel_ingot', ''},
+			{'', 'es:handle', ''},
+		}
+	})
 
---SHOVELS
-minetest.register_craft({
-	output = 'es:shovel_emerald',
-	recipe = {
-		{'', 'es:emerald_ingot', ''},
-		{'', 'default:steel_ingot', ''},
-		{'', 'es:handle', ''},
-	}
-})
-minetest.register_craft({
-	output = 'es:shovel_ruby',
-	recipe = {
-		{'', 'es:ruby_ingot', ''},
-		{'', 'default:steel_ingot', ''},
-		{'', 'es:handle', ''},
-	}
-})
+	minetest.register_craft({
+		output = 'es:pick_purpellium',
+		recipe = {
+			{'es:purpellium_ingot', 'es:purpellium_ingot', 'es:purpellium_ingot'},
+			{'', 'default:steel_ingot', ''},
+			{'', 'es:handle', ''},
+		}
+	})
 
-minetest.register_craft({
-	output = 'es:shovel_aikerum',
-	recipe = {
-		{'', 'es:aikerum_ingot', ''},
-		{'', 'default:steel_ingot', ''},
-		{'', 'es:handle', ''},
-	}
-})
+	--AXES
+	minetest.register_craft({
+		output = 'es:axe_emerald',
+		recipe = {
+			{'es:emerald_ingot', 'es:emerald_ingot', ''},
+			{'es:emerald_ingot', 'default:steel_ingot', ''},
+			{'', 'es:handle', ''},
+		}
+	})
+	minetest.register_craft({
+		output = 'es:axe_ruby',
+		recipe = {
+			{'es:ruby_ingot', 'es:ruby_ingot', ''},
+			{'es:ruby_ingot', 'default:steel_ingot', ''},
+			{'', 'es:handle', ''},
+		}
+	})
+	minetest.register_craft({
+		output = 'es:axe_aikerum',
+		recipe = {
+			{'es:aikerum_ingot', 'es:aikerum_ingot', ''},
+			{'es:aikerum_ingot', 'default:steel_ingot', ''},
+			{'', 'es:handle', ''},
+		}
+	})
 
---[[
---OLD EASY CRAFTS
---Weapon &Tool Crafting:
---SWORDS
-minetest.register_craft({
-	output = 'es:sword_emerald',
-	recipe = {
-		{'es:emerald_crystal'},
-		{'es:emerald_crystal'},
-		{'default:steel_ingot'},
-	}
-})
+	--SHOVELS
+	minetest.register_craft({
+		output = 'es:shovel_emerald',
+		recipe = {
+			{'', 'es:emerald_ingot', ''},
+			{'', 'default:steel_ingot', ''},
+			{'', 'es:handle', ''},
+		}
+	})
+	minetest.register_craft({
+		output = 'es:shovel_ruby',
+		recipe = {
+			{'', 'es:ruby_ingot', ''},
+			{'', 'default:steel_ingot', ''},
+			{'', 'es:handle', ''},
+		}
+	})
 
-minetest.register_craft({
-	output = 'es:sword_ruby',
-	recipe = {
-		{'es:ruby_crystal'},
-		{'es:ruby_crystal'},
-		{'default:steel_ingot'},
-	}
-})
+	minetest.register_craft({
+		output = 'es:shovel_aikerum',
+		recipe = {
+			{'', 'es:aikerum_ingot', ''},
+			{'', 'default:steel_ingot', ''},
+			{'', 'es:handle', ''},
+		}
+	})
+end
 
-minetest.register_craft({
-	output = 'es:sword_aikerum',
-	recipe = {
-		{'es:aikerum_crystal'},
-		{'es:aikerum_crystal'},
-		{'default:steel_ingot'},
-	}
-})
+if es_hard_tool_craft ~= 1 then
+	--OLD EASY CRAFTS
+	--Weapon &Tool Crafting:
+	--SWORDS
+	minetest.register_craft({
+		output = 'es:sword_emerald',
+		recipe = {
+			{'es:emerald_crystal'},
+			{'es:emerald_crystal'},
+			{'default:steel_ingot'},
+		}
+	})
 
-minetest.register_craft({
-	output = 'es:sword_purpellium',
-	recipe = {
-		{'es:purpellium_ingot'},
-		{'es:purpellium_ingot'},
-		{'default:steel_ingot'},
-	}
-})
+	minetest.register_craft({
+		output = 'es:sword_ruby',
+		recipe = {
+			{'es:ruby_crystal'},
+			{'es:ruby_crystal'},
+			{'default:steel_ingot'},
+		}
+	})
 
---PICKS
-minetest.register_craft({
-	output = 'es:pick_emerald',
-	recipe = {
-		{'es:emerald_crystal', 'es:emerald_crystal', 'es:emerald_crystal'},
-		{'', 'default:steel_ingot', ''},
-		{'', 'default:steel_ingot', ''},
-	}
-})
+	minetest.register_craft({
+		output = 'es:sword_aikerum',
+		recipe = {
+			{'es:aikerum_crystal'},
+			{'es:aikerum_crystal'},
+			{'default:steel_ingot'},
+		}
+	})
 
-minetest.register_craft({
-	output = 'es:pick_ruby',
-	recipe = {
-		{'es:ruby_crystal', 'es:ruby_crystal', 'es:ruby_crystal'},
-		{'', 'default:steel_ingot', ''},
-		{'', 'default:steel_ingot', ''},
-	}
-})
+	minetest.register_craft({
+		output = 'es:sword_purpellium',
+		recipe = {
+			{'es:purpellium_ingot'},
+			{'es:purpellium_ingot'},
+			{'default:steel_ingot'},
+		}
+	})
 
-minetest.register_craft({
-	output = 'es:pick_aikerum',
-	recipe = {
-		{'es:aikerum_crystal', 'es:aikerum_crystal', 'es:aikerum_crystal'},
-		{'', 'default:steel_ingot', ''},
-		{'', 'default:steel_ingot', ''},
-	}
-})
+	--PICKS
+	minetest.register_craft({
+		output = 'es:pick_emerald',
+		recipe = {
+			{'es:emerald_crystal', 'es:emerald_crystal', 'es:emerald_crystal'},
+			{'', 'default:steel_ingot', ''},
+			{'', 'default:steel_ingot', ''},
+		}
+	})
 
-minetest.register_craft({
-	output = 'es:pick_aikerum',
-	recipe = {
-		{'es:aikerum_crystal', 'es:aikerum_crystal', 'es:aikerum_crystal'},
-		{'', 'default:steel_ingot', ''},
-		{'', 'default:steel_ingot', ''},
-	}
-})
+	minetest.register_craft({
+		output = 'es:pick_ruby',
+		recipe = {
+			{'es:ruby_crystal', 'es:ruby_crystal', 'es:ruby_crystal'},
+			{'', 'default:steel_ingot', ''},
+			{'', 'default:steel_ingot', ''},
+		}
+	})
 
-minetest.register_craft({
-	output = 'es:pick_purpellium',
-	recipe = {
-		{'es:purpellium_ingot', 'es:purpellium_ingot', 'es:purpellium_ingot'},
-		{'', 'default:steel_ingot', ''},
-		{'', 'default:steel_ingot', ''},
-	}
-})
+	minetest.register_craft({
+		output = 'es:pick_aikerum',
+		recipe = {
+			{'es:aikerum_crystal', 'es:aikerum_crystal', 'es:aikerum_crystal'},
+			{'', 'default:steel_ingot', ''},
+			{'', 'default:steel_ingot', ''},
+		}
+	})
 
---AXES
-minetest.register_craft({
-	output = 'es:axe_emerald',
-	recipe = {
-		{'es:emerald_crystal', 'es:emerald_crystal', ''},
-		{'es:emerald_crystal', 'default:steel_ingot', ''},
-		{'', 'default:steel_ingot', ''},
-	}
-})
+	minetest.register_craft({
+		output = 'es:pick_purpellium',
+		recipe = {
+			{'es:purpellium_ingot', 'es:purpellium_ingot', 'es:purpellium_ingot'},
+			{'', 'default:steel_ingot', ''},
+			{'', 'default:steel_ingot', ''},
+		}
+	})
 
-minetest.register_craft({
-	output = 'es:axe_ruby',
-	recipe = {
-		{'es:ruby_crystal', 'es:ruby_crystal', ''},
-		{'es:ruby_crystal', 'default:steel_ingot', ''},
-		{'', 'default:steel_ingot', ''},
-	}
-})
+	--AXES
+	minetest.register_craft({
+		output = 'es:axe_emerald',
+		recipe = {
+			{'es:emerald_crystal', 'es:emerald_crystal', ''},
+			{'es:emerald_crystal', 'default:steel_ingot', ''},
+			{'', 'default:steel_ingot', ''},
+		}
+	})
 
-minetest.register_craft({
-	output = 'es:axe_aikerum',
-	recipe = {
-		{'es:aikerum_crystal', 'es:aikerum_crystal', ''},
-		{'es:aikerum_crystal', 'default:steel_ingot', ''},
-		{'', 'default:steel_ingot', ''},
-	}
-})
+	minetest.register_craft({
+		output = 'es:axe_ruby',
+		recipe = {
+			{'es:ruby_crystal', 'es:ruby_crystal', ''},
+			{'es:ruby_crystal', 'default:steel_ingot', ''},
+			{'', 'default:steel_ingot', ''},
+		}
+	})
 
---SHOVELS
-minetest.register_craft({
-	output = 'es:shovel_emerald',
-	recipe = {
-		{'', 'es:emerald_crystal', ''},
-		{'', 'default:steel_ingot', ''},
-		{'', 'default:steel_ingot', ''},
-	}
-})
-minetest.register_craft({
-	output = 'es:shovel_ruby',
-	recipe = {
-		{'', 'es:ruby_crystal', ''},
-		{'', 'default:steel_ingot', ''},
-		{'', 'default:steel_ingot', ''},
-	}
-})
+	minetest.register_craft({
+		output = 'es:axe_aikerum',
+		recipe = {
+			{'es:aikerum_crystal', 'es:aikerum_crystal', ''},
+			{'es:aikerum_crystal', 'default:steel_ingot', ''},
+			{'', 'default:steel_ingot', ''},
+		}
+	})
 
-minetest.register_craft({
-	output = 'es:shovel_aikerum',
-	recipe = {
-		{'', 'es:aikerum_crystal', ''},
-		{'', 'default:steel_ingot', ''},
-		{'', 'default:steel_ingot', ''},
-	}
-})
+	--SHOVELS
+	minetest.register_craft({
+		output = 'es:shovel_emerald',
+		recipe = {
+			{'', 'es:emerald_crystal', ''},
+			{'', 'default:steel_ingot', ''},
+			{'', 'default:steel_ingot', ''},
+		}
+	})
+	minetest.register_craft({
+		output = 'es:shovel_ruby',
+		recipe = {
+			{'', 'es:ruby_crystal', ''},
+			{'', 'default:steel_ingot', ''},
+			{'', 'default:steel_ingot', ''},
+		}
+	})
 
-]]
+	minetest.register_craft({
+		output = 'es:shovel_aikerum',
+		recipe = {
+			{'', 'es:aikerum_crystal', ''},
+			{'', 'default:steel_ingot', ''},
+			{'', 'default:steel_ingot', ''},
+		}
+	})
+end
 
 --COOKING RECIPIES
 minetest.register_craft({
