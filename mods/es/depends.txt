@@ -1,7 +1,4 @@
 default
-3d_armor?
-shields?
-basic_machines?
 farming?
 flowers?
 stairs?

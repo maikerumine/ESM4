@@ -16,7 +16,7 @@
 --Alias                      "old"--->"new"
 ------------------------------------------
 
---[[
+
 --===========================================
 --===========================================
 --This is to fix the old interaction with my modified 3d_armor mod.
@@ -52,14 +52,14 @@ minetest.register_alias("bags:small", "unified_inventory:small_esmmese")
 minetest.register_alias("bags:medium", "unified_inventory:medium_esmmese")
 minetest.register_alias("bags:large", "unified_inventory:large_esmmese")
 
-]]
+
 --===========================================
 --===========================================
 --beds
 minetest.register_alias("beds:bed_bottom_white", "beds:bed_bottom")
 minetest.register_alias("beds:bed_top_white", "beds:bed_top")
 
---[[
+
 --===========================================
 --===========================================
 --carts
@@ -74,7 +74,6 @@ minetest.register_alias("default:desert_stone_with_iron", "es:desert_stone_with_
 minetest.register_alias("default:desert_stone_with_gold", "es:desert_stone_with_gold")
 minetest.register_alias("default:desert_stone_with_coal", "es:desert_stone_with_coal")
 
-]]
 --===========================================
 --===========================================
 --doors
@@ -94,14 +93,14 @@ minetest.register_alias("doors:door_steel_b_1", "doors:door_steel_a")
 minetest.register_alias("doors:door_steel_b_2", "doors:door_steel_b")
 minetest.register_alias("doors:door_steel_t_2", "doors:hidden")
 
---[[
+
 --===========================================
 --===========================================
 --es crushing furnace
-minetest.register_alias("es:furnace", "es:infiniumblock")
-minetest.register_alias("es:furnace_active", "es:infiniumblock")
-minetest.register_alias("es:cfurnace", "es:infiniumblock")
-minetest.register_alias("es:cfurnace_active", "es:infiniumblock")
+minetest.register_alias("es:furnace", "es:what")
+minetest.register_alias("es:furnace_active", "es:what")
+minetest.register_alias("es:cfurnace", "es:what")
+minetest.register_alias("es:cfurnace_active", "es:what")
 
 --===========================================
 --===========================================
@@ -190,6 +189,7 @@ minetest.register_alias("meru:stone", "default:sandstone")
 
 --===========================================
 --===========================================
+
 --moreores
 minetest.register_alias("moreores:mineral_mithril", "default:stone_with_tin")
 minetest.register_alias("moreores:mineral_silver", "default:stone_with_tin")
@@ -397,116 +397,8 @@ minetest.register_alias("moretrees:spruce_cone", "farming:melon_8")
 minetest.register_alias("moretrees:fir_cone", "farming:cocoa_2")
 minetest.register_alias("moretrees:pine_cone", "farming:cocoa_2")
 minetest.register_alias("moretrees:acorn", "farming:cocoa_2")
-]]
-
---===========================================
---===========================================
-minetest.register_alias("nsspf:amanita_muscaria", "air")
-minetest.register_alias("nsspf:amanita_muscaria_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:amanita_muscaria_mycelium", "air")
-minetest.register_alias("nsspf:amanita_phalloides", "air")
-minetest.register_alias("nsspf:amanita_phalloides_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:amanita_phalloides_mycelium", "air")
-minetest.register_alias("nsspf:armillaria_mellea", "air")
-minetest.register_alias("nsspf:boletus_edulis", "air")
-minetest.register_alias("nsspf:boletus_edulis_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:boletus_edulis_mycelium", "air")
-minetest.register_alias("nsspf:boletus_pinophilus", "air")
-minetest.register_alias("nsspf:boletus_pinophilus_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:boletus_pinophilus_mycelium", "air")
-minetest.register_alias("nsspf:boletus_satanas", "air")
-minetest.register_alias("nsspf:boletus_satanas_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:boletus_satanas_mycelium", "air")
-minetest.register_alias("nsspf:cantharellus_cibarius", "air")
-minetest.register_alias("nsspf:cantharellus_cibarius_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:cantharellus_cibarius_mycelium", "air")
-minetest.register_alias("nsspf:clitocybe_glacialis", "air")
-minetest.register_alias("nsspf:clitocybe_glacialis_fungusdirt", "air")
-minetest.register_alias("nsspf:clitocybe_glacialis_mycelium", "air")
-minetest.register_alias("nsspf:clitocybula_azurea", "air")
-minetest.register_alias("nsspf:cooked_amanita_muscaria", "default:dirt")
-minetest.register_alias("nsspf:cooked_amanita_phalloides", "default:dirt")
-minetest.register_alias("nsspf:cooked_armillaria_mellea", "default:dirt")
-minetest.register_alias("nsspf:cooked_boletus_edulis", "default:dirt")
-minetest.register_alias("nsspf:cooked_boletus_pinophilus", "default:dirt")
-minetest.register_alias("nsspf:cooked_boletus_satanas", "default:dirt")
-minetest.register_alias("nsspf:cooked_cantharellus_cibarius", "default:dirt")
-minetest.register_alias("nsspf:cooked_clitocybe_glacialis", "default:dirt")
-minetest.register_alias("nsspf:cooked_clitocybula_azurea", "default:dirt")
-minetest.register_alias("nsspf:cooked_coprinus_atramentarius", "default:dirt")
-minetest.register_alias("nsspf:cooked_fistulina_hepatica", "default:dirt")
-minetest.register_alias("nsspf:cooked_ganoderma_lucidum", "default:dirt")
-minetest.register_alias("nsspf:cooked_gyromitra_esculenta", "default:dirt")
-minetest.register_alias("nsspf:cooked_hygrophorus_goetzii", "default:dirt")
-minetest.register_alias("nsspf:cooked_lentinus_strigosus", "default:dirt")
-minetest.register_alias("nsspf:cooked_lycoperdon_pyriforme", "default:dirt")
-minetest.register_alias("nsspf:cooked_macrolepiota_procera", "default:dirt")
-minetest.register_alias("nsspf:cooked_marasmius_haematocephalus", "default:dirt")
-minetest.register_alias("nsspf:cooked_morchella_conica", "default:dirt")
-minetest.register_alias("nsspf:cooked_mycena_chlorophos", "default:dirt")
-minetest.register_alias("nsspf:cooked_panellus_pusillus", "default:dirt")
-minetest.register_alias("nsspf:cooked_plectania_nannfeldtii", "default:dirt")
-minetest.register_alias("nsspf:cooked_psilocybe_cubensis", "default:dirt")
-minetest.register_alias("nsspf:cooked_russula_xerampelina", "default:dirt")
-minetest.register_alias("nsspf:cooked_suillus_grevillei", "default:dirt")
-minetest.register_alias("nsspf:coprinus_atramentarius", "air")
-minetest.register_alias("nsspf:coprinus_atramentarius_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:coprinus_atramentarius_mycelium", "air")
-minetest.register_alias("nsspf:fistulina_hepatica", "air")
-minetest.register_alias("nsspf:fomes_fomentarius", "air")
-minetest.register_alias("nsspf:ganoderma_lucidum", "air")
-minetest.register_alias("nsspf:gyromitra_esculenta", "air")
-minetest.register_alias("nsspf:gyromitra_esculenta_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:gyromitra_esculenta_mycelium", "air")
-minetest.register_alias("nsspf:hygrophorus_goetzii", "air")
-minetest.register_alias("nsspf:hygrophorus_goetzii_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:hygrophorus_goetzii_mycelium", "air")
-minetest.register_alias("nsspf:lentinus_strigosus", "air")
-minetest.register_alias("nsspf:lycoperdon_pyriforme", "air")
-minetest.register_alias("nsspf:lycoperdon_pyriforme_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:lycoperdon_pyriforme_mycelium", "air")
-minetest.register_alias("nsspf:macrolepiota_procera", "air")
-minetest.register_alias("nsspf:macrolepiota_procera_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:macrolepiota_procera_mycelium", "air")
-minetest.register_alias("nsspf:marasmius_haematocephalus", "air")
-minetest.register_alias("nsspf:morchella_conica", "air")
-minetest.register_alias("nsspf:morchella_conica_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:morchella_conica_mycelium", "air")
-minetest.register_alias("nsspf:mycena_chlorophos", "air")
-minetest.register_alias("nsspf:mycena_chlorophos_light", "air")
-minetest.register_alias("nsspf:panellus_pusillus", "air")
-minetest.register_alias("nsspf:panellus_pusillus_light", "air")
-minetest.register_alias("nsspf:plectania_nannfeldtii", "air")
-minetest.register_alias("nsspf:plectania_nannfeldtii_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:plectania_nannfeldtii_mycelium", "air")
-minetest.register_alias("nsspf:psilocybe_cubensis", "air")
-minetest.register_alias("nsspf:psilocybe_cubensis_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:psilocybe_cubensis_mycelium", "air")
-minetest.register_alias("nsspf:russula_xerampelina", "air")
-minetest.register_alias("nsspf:russula_xerampelina_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:russula_xerampelina_mycelium", "air")
-minetest.register_alias("nsspf:suillus_grevillei", "air")
-minetest.register_alias("nsspf:suillus_grevillei_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:suillus_grevillei_mycelium", "air")
-minetest.register_alias("nsspf:terfezia_arenaria_fruit", "default:dirt")
-minetest.register_alias("nsspf:terfezia_arenaria_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:terfezia_arenaria_tuber_mycelium", "air")
-minetest.register_alias("nsspf:tuber_borchii_fruit", "default:dirt")
-minetest.register_alias("nsspf:tuber_borchii_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:tuber_borchii_tuber_mycelium", "air")
-minetest.register_alias("nsspf:tuber_magnatum_pico_fruit", "default:dirt")
-minetest.register_alias("nsspf:tuber_magnatum_pico_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:tuber_magnatum_pico_tuber_mycelium", "air")
-minetest.register_alias("nsspf:tuber_melanosporum_fruit", "default:dirt")
-minetest.register_alias("nsspf:tuber_melanosporum_fungusdirt", "default:dirt")
-minetest.register_alias("nsspf:tuber_melanosporum_tuber_mycelium", "air")
 
 
-
-
-
-
---[[
 --===========================================
 --===========================================
 --pathv6alt
@@ -880,7 +772,7 @@ minetest.register_alias("mg_villages:desert_sand_soil", "default:desert_sand")
 minetest.register_alias("mg_villages:plotmarker", "stairs:slab_stonebrick")
 minetest.register_alias("mg_villages:lava_flowing_tamed", "default:lava_flowing")
 minetest.register_alias("mg_villages:lava_source_tamed", "default:lava_source")
-]]
+
 
 
 

@@ -36,4 +36,54 @@ minetest.register_chatcommand("mapfix", {
 		return true, "Done."
 	end,
 })
+--[[
+--RND CODE
+--NO GRIEF WITH liquids
+local function disable_placing_above_ground(name)
+
+   local table = minetest.registered_nodes[name]; if not table then return end
+   local table2 = {}
+   for i,v in pairs(table) do table2[i] = v end
+   table2.after_place_node = function(pos, placer, itemstack, pointed_thing)
+      if pos.y>=0 then minetest.set_node(pos,{name = "air"}) end
+   end
+   minetest.register_node(":"..name, table2)
+end
+
+minetest.after(0,function()
+   disable_placing_above_ground("default:water_source");
+   disable_placing_above_ground("default:river_water_source");
+   disable_placing_above_ground("default:lava_source");
+   disable_placing_above_ground("es:toxic_water_source");
+   disable_placing_above_ground("es:mud");
+   -- add here all other sources: toxic water, mud ,....
+end)
+]]
+
+
+--Killme
+minetest.register_chatcommand("killme", {
+	description = "Kill yourself to respawn",
+	func = function(name)
+		local player = minetest.get_player_by_name(name)
+		if player then
+			if minetest.settings:get_bool("enable_damage") then
+				player:set_hp(0)
+				return true
+			else
+				for _, callback in pairs(core.registered_on_respawnplayers) do
+					if callback(player) then
+						return true
+					end
+				end
+
+				-- There doesn't seem to be a way to get a default spawn pos from the lua API
+				return false, "No static_spawnpoint defined"
+			end
+		else
+			-- Show error message if used when not logged in, eg: from IRC mod
+			return false, "You need to be online to be killed!"
+		end
+	end
+})
 

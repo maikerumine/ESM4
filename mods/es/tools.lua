@@ -205,6 +205,116 @@ minetest.register_tool("es:shovel_aikerum", {
 })
 
 
+
+
+
+--[[
+--ARMOR_MOD_NAME = minetest.get_current_modname()
+--dofile(minetest.get_modpath(ARMOR_MOD_NAME).."/armor.lua")
+local use_3d_armor = minetest.get_modpath("3d_armor")
+
+--if use_3d_armor then
+--ARMOR
+minetest.register_tool("es:helmet_emerald", {
+	description = "Emerald Helmet",
+	inventory_image = "3d_armor_inv_helmet_emerald.png",
+	groups = {armor_head = 15, armor_heal = 12, armor_use = 100},
+	wear = 0,
+})
+
+minetest.register_tool("es:helmet_infinium", {
+	description = "Infinium Helmet",
+	inventory_image = "3d_armor_inv_helmet_infinium.png",
+	groups = {armor_head = 20, armor_heal = 15, armor_use = 150},
+	wear = 0,
+})
+
+minetest.register_tool("es:chestplate_emerald", {
+	description = "Emerald Chestplate",
+	inventory_image = "3d_armor_inv_chestplate_emerald.png",
+	groups = {armor_torso = 20, armor_heal = 12, armor_use = 100},
+	wear = 0,
+})
+
+minetest.register_tool("es:chestplate_infinium", {
+	description = "Infinium Chestplate",
+	inventory_image = "3d_armor_inv_chestplate_infinium.png",
+	groups = {armor_torso = 50, armor_heal = 15, armor_use = 150},
+	wear = 0,
+})
+
+minetest.register_tool("es:leggings_emerald", {
+	description = "Emerald Leggings",
+	inventory_image = "3d_armor_inv_leggings_emerald.png",
+	groups = {armor_legs = 20, armor_heal = 12, armor_use = 100},
+	wear = 0,
+})
+
+minetest.register_tool("es:leggings_infinium", {
+	description = "Infinium Leggings",
+	inventory_image = "3d_armor_inv_leggings_infinium.png",
+	groups = {armor_legs = 50, armor_heal = 15, armor_use = 150},
+	wear = 0,
+})
+
+minetest.register_tool("es:boots_emerald", {
+	description = "Emerald Boots",
+	inventory_image = "3d_armor_inv_boots_emerald.png",
+	groups = {armor_feet = 15, armor_heal = 12, armor_use = 100},
+	wear = 0,
+})
+
+minetest.register_tool("es:boots_infinium", {
+	description = "Infinium Boots",
+	inventory_image = "3d_armor_inv_boots_infinium.png",
+	groups = {armor_feet = 30, armor_heal = 15, armor_use = 150},
+	wear = 0,
+})
+
+-- Register crafting recipes:
+
+local craft_ingreds = {
+
+	infinium = "es:infinium_ingot",
+	emerald = "es:emerald_crystal",
+}
+
+--end
+for k, v in pairs(craft_ingreds) do
+	minetest.register_craft({
+		output = "es:helmet_"..k,
+		recipe = {
+			{v, v, v},
+			{v, "", v},
+			{"", "", ""},
+		},
+	})
+	minetest.register_craft({
+		output = "es:chestplate_"..k,
+		recipe = {
+			{v, "", v},
+			{v, v, v},
+			{v, v, v},
+		},
+	})
+	minetest.register_craft({
+		output = "es:leggings_"..k,
+		recipe = {
+			{v, v, v},
+			{v, "", v},
+			{v, "", v},
+		},
+	})
+	minetest.register_craft({
+		output = "es:boots_"..k,
+		recipe = {
+			{v, "", v},
+			{v, "", v},
+		},
+	})
+--end
+end]]
+
 if minetest.get_modpath("toolranks") then
 --emerald
   minetest.override_item("es:pick_emerald", {
@@ -268,3 +378,51 @@ if minetest.get_modpath("toolranks") then
     after_use = toolranks.new_afteruse})
 	]]
 end
+
+
+-- mods/jt_mods/tools.lua
+--Just Test Mods created by maikerumine
+--inspired by Andrey "lag01" the creator of the original Just Test server.
+-- Minetest 0.4.14 mod: "jt_mods"
+-- namespace: jt_mods
+--https://github.com/maikerumine
+
+--License:
+--~~~~~~~~
+--Code:
+--(c) Copyright 2016 maikerumine; modified zlib-License
+--see "LICENSE.txt" for details.
+
+--Media(if not stated differently):
+--(c) Copyright (2014-2016) maikerumine; CC-BY-SA 3.0
+
+minetest.register_tool("es:pick_obsidian", {
+	description = "Obsidian Pickaxe",
+	inventory_image = "jt_mods_tool_obsidianpick.png",
+	tool_capabilities = {
+		full_punch_interval = 0.1,
+		max_drop_level=3,
+		groupcaps={
+			cracky = {times={[1]=0.3, [2]=0.2, [3]=0.05}, uses=3, maxlevel=3},
+		},
+		damage_groups = {fleshy=6},
+	},
+})
+
+minetest.register_tool("es:pick_admin", {
+	description = "ADMIN Obsidian Pickaxe",
+	inventory_image = "jt_mods_tool_obsidianpick.png",
+	tool_capabilities = {
+		full_punch_interval = 0.1,
+		max_drop_level=3,
+		groupcaps={
+			cracky = {times={[1]=0.3, [2]=0.2, [3]=0.05}, uses=3000, maxlevel=3},
+			crumbly = {times={[1]=0.3, [2]=0.2, [3]=0.05}, uses=3000, maxlevel=3},
+			snappy = {times={[1]=0.3, [2]=0.2, [3]=0.05}, uses=3000, maxlevel=3},
+			choppy = {times={[1]=0.3, [2]=0.2, [3]=0.05}, uses=3000, maxlevel=3},
+		},
+		damage_groups = {fleshy=60},
+	},
+})
+
+

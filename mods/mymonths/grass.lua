@@ -80,21 +80,27 @@ minetest.register_lbm({
 		local month = tonumber(mymonths.month_counter)
 		local day = tonumber(mymonths.day_counter)
 
-		if month == 11
-		or month == 12
-		or month == 1
-		or month == 2 then
+		if month == 13
+		--or month == 12
+		--or month == 1
+		or month == 14 then
 			if n == 'default:dirt_with_grass' then
-				minetest.set_node(pos, {name = 'mymonths:fall_grass'})
+				--minetest.set_node(pos, {name = 'mymonths:fall_grass'})
+				minetest.set_node(pos, {name = 'default:dirt_with_grass'})
 			end
 
-		elseif month == 4
+		elseif month == 1
+		or month == 2
+		or month == 3
+		or month == 4
 		or month == 5
 		or month == 6
 		or month == 7
 		or month == 8
 		or month == 9
-		or month == 10 then
+		or month == 10
+		or month == 11
+		or month == 12 then
 			if n == 'mymonths:fall_grass' then
 				minetest.set_node(pos, {name = 'default:dirt_with_grass'})
 			end

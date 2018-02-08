@@ -18,13 +18,11 @@ minetest.register_globalstep(function(time)
 			if time > 0.8 or time < 0.2 then
 			sound_playing = time + 0.2
 			minetest.sound_play("mm_dark")
-			--minetest.sound_play("mcl_jukebox_track_3")
 			return true
 			end	
 
 				sound_playing = time + 0.2
 				minetest.sound_play("mm_light")
-				--minetest.sound_play("mcl_jukebox_track_1")
 				return true
 		end
 end)

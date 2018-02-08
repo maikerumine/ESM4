@@ -242,15 +242,15 @@ minetest.register_craft({
 	output = "unified_inventory:medium_esmmese",
 	recipe = {
 	{"default:copper_ingot", "default:copper_ingot", },
-        {"bags:small_esmmese", "bags:small_esmmese"},
-        {"bags:small_esmmese", "bags:small_esmmese"},
+        {"unified_inventory:small_esmmese", "unified_inventory:small_esmmese"},
+        {"unified_inventory:small_esmmese", "unified_inventory:small_esmmese"},
     },
 })
 minetest.register_craft({
 	output = "unified_inventory:large_esmmese",
 	recipe = {
 	{"default:steel_ingot", "default:steel_ingot", },
-        {"bags:medium_esmmese", "bags:medium_esmmese"},
-        {"bags:medium_esmmese", "bags:medium_esmmese"},
+        {"unified_inventory:medium_esmmese", "unified_inventory:medium_esmmese"},
+        {"unified_inventory:medium_esmmese", "unified_inventory:medium_esmmese"},
     },
 })

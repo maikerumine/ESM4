@@ -270,8 +270,6 @@ SHOOTER_ENTITIES = {
 	"scifi_mobs:xwing",
 	"scifi_mobs:xwing_player",
 	"scifi_mobs:core",
-
-	
 }
 
 local singleplayer = minetest.is_singleplayer()
