@@ -1,6 +1,0 @@
-
--- SETTINGS
-
-ENABLE_GULLS			= true
-ENABLE_LARGE_BIRDS		= true
-ENABLE_SMALL_BIRDS		= true

@@ -1,2 +1,0 @@
-License for the code: LGPL
-License for all the models, textures and sound: CC BY-SA 4.0

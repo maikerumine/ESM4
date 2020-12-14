@@ -1,5 +1,0 @@
-default
-protector?
-areas?
-boneworld?
-moreores?

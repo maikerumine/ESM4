@@ -1,6 +1,0 @@
-default
-mobs
-shooter?
-bones?
-intllib?
-es?
