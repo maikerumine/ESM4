@@ -1,0 +1,4 @@
+personal_log_inventory_button (Access via a button in SFInv/Unified Inventory) bool true
+personal_log_craftable_item (Access via a craftable item) bool false
+personal_log_chat_command (Allow the /log chat command to open the log) bool false
+personal_log_chat_command_priviledge (The personal_log privilege is required to access the log via chat command) bool false
