@@ -11,7 +11,8 @@ mobs:register_mob("mobs:Garry", {
 	attack_type = "dogfight",
 	attack_monsters = false,
 	attack_chance = 100,	--'attack_specific' has a table of entity names that monsters can attack {"player", "mobs_animal:chicken"}
-	pathfinding = 2,
+	--pathfinding = 2,
+	pathfinding = 1,
 	reach = 2,
 	hp_min = 4,
 	hp_max = 8,
@@ -719,4 +720,4 @@ mobs:spawn_specific("mobs:Griefer_Gary_Ghost",{ "group:crumbly"}, {"air"},
 	0, 6, 35, 13000, 1, -500, -1200)	
 
 --mobs:alias_mob("mobs:griefer_ghost", "mobs:Griefer_Gary_Ghost") -- compatibility
-mobs:register_spawn("mobs:Garry", "es:griefer_soul_block", 4, -1, 2, 2, 20, -20)
+mobs:register_spawn("mobs:Garry", "es:griefer_soul_block", 4, -1, 2, 2, -20, 20)

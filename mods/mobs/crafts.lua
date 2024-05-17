@@ -52,7 +52,7 @@ minetest.register_craft({
 })
 ]]
 
-
+--[[
 -- name tag
 minetest.register_craftitem("mobs:nametag", {
 	description = "Name Tag",
@@ -66,7 +66,8 @@ if minetest.get_modpath("dye") and minetest.get_modpath("farming") then
 		recipe = {{"default:paper", "dye:black", "farming:string"}}
 	})
 end
-
+]]
+minetest.register_alias("mobs:nametag", "mobs:meat_raw")	
 -- leather
 minetest.register_craftitem("mobs:leather", {
 	description = "Leather",
@@ -96,7 +97,7 @@ minetest.register_craft({
 	recipe = "mobs:meat_raw",
 	cooktime = 5
 })
-
+--[[
 -- lasso
 minetest.register_tool("mobs:lasso", {
 	description = "Lasso (right-click animal to put in inventory)",
@@ -134,7 +135,10 @@ if minetest.get_modpath("farming") then
 		}
 	})
 end
-
+]]
+minetest.register_alias("mobs:lasso", "mobs:meat_raw")	
+minetest.register_alias("mobs:net", "mobs:meat_raw")	
+minetest.register_alias("mobs:magic_lasso", "mobs:meat_raw")	
 -- shears (right click to shear animal)
 minetest.register_tool("mobs:shears", {
 	description = "Steel Shears (right-click to shear)",
@@ -150,7 +154,7 @@ minetest.register_craft({
 	}
 })
 
--- protection rune
+--[[-- protection rune
 minetest.register_craftitem("mobs:protector", {
 	description = "Mob Protection Rune",
 	inventory_image = "mobs_protector.png",
@@ -181,7 +185,11 @@ minetest.register_craft({
 		{"mobs:protector", "default:mese_crystal", "mobs:protector"}
 	}
 })
+]]
+minetest.register_alias("mobs:protector", "mobs:meat_raw")	
+minetest.register_alias("mobs:protector2", "mobs:meat_raw")	
 
+--[[
 -- saddle
 minetest.register_craftitem("mobs:saddle", {
 	description = "Saddle",
@@ -198,6 +206,9 @@ minetest.register_craft({
 	}
 })
 
+]]
+minetest.register_alias("mobs:saddle", "mobs:meat_raw")	
+
 
 -- make sure we can register fences
 if minetest.get_modpath("default") and default.register_fence then
@@ -206,7 +217,8 @@ if minetest.get_modpath("default") and default.register_fence then
 default.register_fence("mobs:fence_wood", {
 	description = "Mob Fence",
 	texture = "default_wood.png",
-	material = "default:fence_wood",
+	--material = "default:fence_wood",
+	material = "group:fence",
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
 	sounds = default.node_sound_wood_defaults(),
 	collision_box = {
@@ -245,7 +257,7 @@ minetest.register_craft({
 	output = "mobs:fence_top 12",
 	recipe = {
 		{"group:wood", "group:wood", "group:wood"},
-		{"", "default:fence_wood", ""}
+		{"", "group:fence", ""}
 	}
 })
 

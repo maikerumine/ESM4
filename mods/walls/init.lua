@@ -1,83 +1,104 @@
+-- walls/init.lua
+
 walls = {}
 
-walls.register = function(wall_name, wall_desc, wall_texture, wall_mat, wall_sounds)
+local fence_collision_extra = minetest.settings:get_bool("enable_fence_tall") and 3/8 or 0
+
+-- Load support for MT game translation.
+local S = minetest.get_translator("walls")
+
+walls.register = function(wall_name, wall_desc, wall_texture_table, wall_mat, wall_sounds, light_source)
+	--make wall_texture_table paramenter backwards compatible for mods passing single texture
+	if type(wall_texture_table) ~= "table" then
+		wall_texture_table = { wall_texture_table }
+	end
 	-- inventory node, and pole-type wall start item
 	minetest.register_node(wall_name, {
 		description = wall_desc,
 		drawtype = "nodebox",
 		node_box = {
 			type = "connected",
-			fixed = {{-1/4, -1/2, -1/4, 1/4, 1/2, 1/4}},
+			fixed = {-1/4, -1/2, -1/4, 1/4, 1/2, 1/4},
 			-- connect_bottom =
-			connect_front = {{-3/16, -1/2, -1/2,  3/16, 3/8, -1/4}},
-			connect_left = {{-1/2, -1/2, -3/16, -1/4, 3/8,  3/16}},
-			connect_back = {{-3/16, -1/2,  1/4,  3/16, 3/8,  1/2}},
-			connect_right = {{ 1/4, -1/2, -3/16,  1/2, 3/8,  3/16}},
+			connect_front = {-3/16, -1/2, -1/2,  3/16, 3/8, -1/4},
+			connect_left = {-1/2, -1/2, -3/16, -1/4, 3/8,  3/16},
+			connect_back = {-3/16, -1/2,  1/4,  3/16, 3/8,  1/2},
+			connect_right = { 1/4, -1/2, -3/16,  1/2, 3/8,  3/16},
 		},
-		connects_to = { "group:wall", "group:stone" },
+		collision_box = {
+			type = "connected",
+			fixed = {-1/4, -1/2, -1/4, 1/4, 1/2 + fence_collision_extra, 1/4},
+			-- connect_top =
+			-- connect_bottom =
+			connect_front = {-1/4,-1/2,-1/2,1/4,1/2 + fence_collision_extra,-1/4},
+			connect_left = {-1/2,-1/2,-1/4,-1/4,1/2 + fence_collision_extra,1/4},
+			connect_back = {-1/4,-1/2,1/4,1/4,1/2 + fence_collision_extra,1/2},
+			connect_right = {1/4,-1/2,-1/4,1/2,1/2 + fence_collision_extra,1/4},
+		},
+		connects_to = { "group:wall", "group:stone", "group:fence" },
 		paramtype = "light",
 		is_ground_content = false,
-		tiles = { wall_texture, },
+		tiles = wall_texture_table,
 		walkable = true,
-		--groups = { cracky = 3, wall = 1, stone = 2, oddly_breakable_by_hand = 1, not_in_craft_guide=1},
-		groups = { cracky = 3, wall = 1, stone = 2},
+		groups = { cracky = 3, wall = 1, stone = 2 , not_in_creative_inventory = 1},
 		sounds = wall_sounds,
+		light_source = light_source,	--mm added for lighted wall 20220818
+		use_texture_alpha = true,		--mm added 
 	})
 
 	-- crafting recipe
 	minetest.register_craft({
 		output = wall_name .. " 6",
 		recipe = {
-			{ '', '', '' },
+			{ "", "", "" },
 			{ wall_mat, wall_mat, wall_mat},
 			{ wall_mat, wall_mat, wall_mat},
 		}
 	})
---	type = "shapeless",
---	output = "es:muddy_block",
---	recipe = {"es:dry_dirt","default:water_flowing"},	
-	minetest.register_craft({
-		type = "shapeless",
-		output = wall_mat .. " 1",
-		recipe = {wall_name},
-	})
-
-end
---[[
---Example
-minetest.register_node("walls:cobble", {
-	description = "Cobblestone Wall -EXAMPLE FOR MOST DEFAULT BLOCKS",
-	tiles = {"default_cobble.png"},
-		drawtype = "nodebox",
-		node_box = {
-			type = "connected",
-			fixed = {{-1/4, -1/2, -1/4, 1/4, 1/2, 1/4}},
-			-- connect_bottom =
-			connect_front = {{-3/16, -1/2, -1/2,  3/16, 3/8, -1/4}},
-			connect_left = {{-1/2, -1/2, -3/16, -1/4, 3/8,  3/16}},
-			connect_back = {{-3/16, -1/2,  1/4,  3/16, 3/8,  1/2}},
-			connect_right = {{ 1/4, -1/2, -3/16,  1/2, 3/8,  3/16}},
-		},
-		connects_to = { "group:wall", "group:stone" },
-		paramtype = "light",
-		is_ground_content = false,
-		walkable = true,
-	groups = {cracky = 3, wall = 1, stone = 2, oddly_breakable_by_hand = 1},
-	sounds = default.node_sound_stone_defaults(),
-})
 
 	minetest.register_craft({
 		output = "walls:cobble 6",
 		recipe = {
-			{ '', '', '' },
-			{ 'default:cobble', 'default:cobble', 'default:cobble'},
-			{ 'default:cobble', 'default:cobble', 'default:cobble'},
+			{ "", "", "" },
+			{ "default:cobble", "default:cobble", "default:cobble"},
+			{ "default:cobble", "default:cobble", "default:cobble"},
 		}
 	})
-	]]
+	
+end
 
-walls.register("walls:cobble", "Cobblestone Wall", "default_cobble.png",
-		"default:cobble", default.node_sound_stone_defaults())
+
+		
+minetest.register_node("walls:cobble", {
+	description = "Cobblestone Wall --==All walls craft like this==--",
+		drawtype = "nodebox",
+		node_box = {
+			type = "connected",
+			fixed = {-1/4, -1/2, -1/4, 1/4, 1/2, 1/4},
+			-- connect_bottom =
+			connect_front = {-3/16, -1/2, -1/2,  3/16, 3/8, -1/4},
+			connect_left = {-1/2, -1/2, -3/16, -1/4, 3/8,  3/16},
+			connect_back = {-3/16, -1/2,  1/4,  3/16, 3/8,  1/2},
+			connect_right = { 1/4, -1/2, -3/16,  1/2, 3/8,  3/16},
+		},
+		collision_box = {
+			type = "connected",
+			fixed = {-1/4, -1/2, -1/4, 1/4, 1/2 + fence_collision_extra, 1/4},
+			-- connect_top =
+			-- connect_bottom =
+			connect_front = {-1/4,-1/2,-1/2,1/4,1/2 + fence_collision_extra,-1/4},
+			connect_left = {-1/2,-1/2,-1/4,-1/4,1/2 + fence_collision_extra,1/4},
+			connect_back = {-1/4,-1/2,1/4,1/4,1/2 + fence_collision_extra,1/2},
+			connect_right = {1/4,-1/2,-1/4,1/2,1/2 + fence_collision_extra,1/4},
+		},
+	tiles = {"default_cobble.png"},
+	is_ground_content = false,
+	groups = {cracky = 3, wall = 1, stone = 2, not_in_creative_inventory = 0},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+--walls.register("walls:cobble", "Cobblestone Wall", "default_cobble.png",
+--		"default:cobble", default.node_sound_stone_defaults())
 
 walls.register("walls:mossycobble", "Mossy Cobblestone Wall", "default_mossycobble.png",
 		"default:mossycobble", default.node_sound_stone_defaults())
@@ -129,35 +150,12 @@ walls.register("walls:steelblock", "Steel Block Wall", "default_steel_block.png"
 
 walls.register("walls:waterflowing", "Water Flowing Wall", "default_water.png",
 		"default:water_flowing", default.node_sound_water_defaults())
---[[
-	minetest.register_node("walls:waterflowing", {
-		description = "Water Flowing Wall",
-		drawtype = "nodebox",
-		node_box = {
-			type = "connected",
-			fixed = {{-1/4, -1/2, -1/4, 1/4, 1/2, 1/4}},
-			-- connect_bottom =
-			connect_front = {{-3/16, -1/2, -1/2,  3/16, 3/8, -1/4}},
-			connect_left = {{-1/2, -1/2, -3/16, -1/4, 3/8,  3/16}},
-			connect_back = {{-3/16, -1/2,  1/4,  3/16, 3/8,  1/2}},
-			connect_right = {{ 1/4, -1/2, -3/16,  1/2, 3/8,  3/16}},
-		},
-		connects_to = { "group:wall", "group:stone" },
-		paramtype = "light",
-		is_ground_content = false,
-		tiles = "default_water.png",
-		walkable = false,
-		--groups = { cracky = 3, wall = 1, stone = 2, oddly_breakable_by_hand = 1, not_in_craft_guide=1},
-		groups = { oddly_breakable_by_hand = 1, wall = 1, stone = 2, water = 3, liquid = 3, cools_lava = 1},
-		sounds = default.node_sound_water_defaults(),
-	})
 
-]]
 walls.register("walls:nyancat_rainbow", "Nyan Cat Rainbow Wall", "nyancat_rainbow.png",
-		"nyancat:nyancat_rainbow", default.node_sound_wood_defaults())
+		"nyancat:nyancat_rainbow", default.node_sound_wood_defaults(), default.LIGHT_MAX)
 
 walls.register("walls:torch", "Torch Wall", "fire_basic_flame.png",
-		"default:torch", default.node_sound_leaves_defaults())
+		"default:torch", default.node_sound_leaves_defaults(), default.LIGHT_MAX)
 
 
 --CBLOCKS
@@ -260,22 +258,22 @@ walls.register("walls:marble_bricks", "Marble Bricks Block Wall", "technic_marbl
 
 --es blocks		
 walls.register("walls:emeraldblock", "Emerald Block Wall", "es_emerald_block.png",
-		"es:emeraldblock", default.node_sound_glass_defaults())
+		"es:emeraldblock", default.node_sound_glass_defaults(), 7)
 
 walls.register("walls:rubyblock", "Ruby Block Wall", "es_ruby_block.png",
-		"es:rubydblock", default.node_sound_glass_defaults())
+		"es:rubydblock", default.node_sound_glass_defaults(), 7)
 		
 walls.register("walls:aikerumblock", "Aikerum Block Wall", "es_aikerum_block.png",
-		"es:aikerumblock", default.node_sound_glass_defaults())
+		"es:aikerumblock", default.node_sound_glass_defaults(), 7)
 		
 walls.register("walls:infiniumblock", "Infinium Block Wall", "es_infinium_block.png",
 		"es:infiniumblock", default.node_sound_stone_defaults())
 		
 walls.register("walls:purpelliumblock", "Purpellium Block Wall", "es_purpellium_block.png",
-		"es:purpelliumblock", default.node_sound_glass_defaults())
+		"es:purpelliumblock", default.node_sound_glass_defaults(), 7)
 
 walls.register("walls:beedo_block", "Beedo Block Wall", "es_beedo_block.png",
-		"es:beedo_block", default.node_sound_glass_defaults())
+		"es:beedo_block", default.node_sound_glass_defaults(), 7)
 
 walls.register("walls:unobtainiumblock", "Unobtainium Block Wall", "es_unobtainium_block.png",
 		"es:unobtainiumblock", default.node_sound_stone_defaults())
@@ -301,7 +299,7 @@ walls.register("walls:dirt", "Dirt Wall", "default_dirt.png",
 
 --default glass
 walls.register("walls:meselamp", "Meselamp Wall", "default_meselamp.png",
-		"default:meselamp", default.node_sound_glass_defaults())
+		"default:meselamp", default.node_sound_glass_defaults(), default.LIGHT_MAX)
 
 walls.register("walls:glass", "Glass Wall", "default_glass.png",
 		"default:glass", default.node_sound_glass_defaults())
@@ -351,3 +349,6 @@ walls.register("walls:pillar", "Quartz Pillar Wall", "quartz_pillar_side.png",
 walls.register("walls:chiseled", "Quartz Chisled Wall", "quartz_chiseled.png",
 		"quartz:chiseled", default.node_sound_stone_defaults())	
 ]]
+
+
+minetest.log("action", "ES: [WALLS MM STYLE] loaded.")

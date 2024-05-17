@@ -806,7 +806,8 @@
 		clust_size     	= 2,
 		y_min    		= -2500,
 		y_max   	  	= -2400,
-		flags         	= "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 	
 	minetest.register_ore({
@@ -818,7 +819,8 @@
 		clust_size     	= 2,
 		y_min    		= -15000,
 		y_max   	  	= -12400,
-		flags         	= "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 
 	minetest.register_ore({
@@ -830,7 +832,21 @@
 		clust_size     	= 2,
 		y_min     		= -15000,
 		y_max     		= -12400,
-		flags          	= "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
+	})
+	
+	minetest.register_ore({
+		ore_type       	= "sheet",
+		ore            	= "default:dirt",
+		wherein        	= "default:stone",
+		clust_scarcity 	= 1 * 1 * 1,
+		clust_num_ores 	= 90,
+		clust_size     	= 2,
+		y_min     		= -17400,
+		y_max     		= -15400,
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 
 
@@ -1432,7 +1448,8 @@
 		clust_size     = 9,
 		y_min          = -1455,
 		y_max          = -1144,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 
 	minetest.register_ore({
@@ -1444,7 +1461,8 @@
 		clust_size     = 9,
 		y_min          = -16000,
 		y_max          = -13000,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})		
 
 	-- Gravel
@@ -1457,7 +1475,8 @@
 		clust_size     = 9,
 		y_min          = -1600,
 		y_max          = -130,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 
 	-- Dirt	
@@ -1470,7 +1489,8 @@
 		clust_size     = 9,
 		y_min          = -5000,
 		y_max          = -4000,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 	
 	--=======================================================
@@ -1660,7 +1680,8 @@
 		clust_size     = 5,
 		y_min     = -12000,
 		y_max     = -10300,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -1685,7 +1706,8 @@
 		clust_size     = 5,
 		y_min     = -12000,
 		y_max     = -10300,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 
 	--===============================
@@ -1700,7 +1722,8 @@
 		clust_size     = 9,
 			y_min          = -14551,
 			y_max          = -14440,
-			flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -1712,7 +1735,8 @@
 		clust_size     = 9,
 			y_min          = -14551,
 			y_max          = -14440,
-			flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -1724,7 +1748,8 @@
 		clust_size     = 9,
 			y_min          = -14551,
 			y_max          = -14440,
-			flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -1736,7 +1761,8 @@
 		clust_size     = 9,
 			y_min          = -14551,
 			y_max          = -14440,
-			flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -1748,7 +1774,8 @@
 		clust_size     = 9,
 			y_min          = -14551,
 			y_max          = -14440,
-			flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -1760,7 +1787,8 @@
 		clust_size     = 9,
 			y_min          = -14551,
 			y_max          = -14440,
-			flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -1772,7 +1800,8 @@
 		clust_size     = 9,
 			y_min          = -14551,
 			y_max          = -14440,
-			flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -1784,7 +1813,8 @@
 		clust_size     = 9,
 			y_min          = -14551,
 			y_max          = -14440,
-			flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 
 	--[[
@@ -1997,7 +2027,8 @@
 		clust_size     = 9,
 		y_min          = -17650,
 		y_max          = -15000,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 
 	minetest.register_ore({
@@ -2009,7 +2040,8 @@
 		clust_size     = 9,
 		y_min          = -17650,
 		y_max          = -15000,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -2021,7 +2053,8 @@
 		clust_size     = 9,
 		y_min          = -17650,
 		y_max          = -15000,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -2033,7 +2066,8 @@
 		clust_size     = 9,
 		y_min          = -17650,
 		y_max          = -15000,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -2045,7 +2079,8 @@
 		clust_size     = 9,
 		y_min          = -17650,
 		y_max          = -15000,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -2057,7 +2092,8 @@
 		clust_size     = 9,
 		y_min          = -17650,
 		y_max          = -15000,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -2069,7 +2105,8 @@
 		clust_size     = 9,
 		y_min          = -17650,
 		y_max          = -15000,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -2081,7 +2118,8 @@
 		clust_size     = 9,
 		y_min          = -17650,
 		y_max          = -15000,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -2093,7 +2131,8 @@
 		clust_size     = 9,
 		y_min          = -17650,
 		y_max          = -15000,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -2105,7 +2144,8 @@
 		clust_size     = 9,
 		y_min          = -17650,
 		y_max          = -15000,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -2117,7 +2157,8 @@
 		clust_size     = 9,
 		y_min          = -17650,
 		y_max          = -15000,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -2129,7 +2170,8 @@
 		clust_size     = 9,
 		y_min          = -17650,
 		y_max          = -15000,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -2141,7 +2183,8 @@
 		clust_size     = 9,
 		y_min          = -17650,
 		y_max          = -15000,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -2153,7 +2196,8 @@
 		clust_size     = 9,
 		y_min          = -17650,
 		y_max          = -15000,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	minetest.register_ore({
@@ -2165,7 +2209,8 @@
 		clust_size     = 9,
 		y_min          = -17650,
 		y_max          = -15500,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 	--thicc lava
@@ -2178,7 +2223,8 @@
 		clust_size     = 2,
 		y_min          = -16500,
 		y_max          = -14550,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 	
 	--thicc toxic
@@ -2191,7 +2237,8 @@
 		clust_size     = 2,
 		y_min          = -16000,
 		y_max          = -14550,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})	
 	
 	--thicc cobble
@@ -2204,7 +2251,8 @@
 		clust_size     = 2,
 		y_min          = -16000,
 		y_max          = -14550,
-		flags          = "absheight",
+		noise_threshold = 0.4,
+		noise_params 	= {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
 	})
 		
 
@@ -2341,12 +2389,12 @@
 --================================================================
 --================================================================
 
-local layer = -17654 -- determined as appropriate by experiment
-local node = {name = "es:stoneblock"}
+local layer_bedrock = -17654 -- determined as appropriate by experiment
+local node_bedrock = {name = "es:stoneblock"}
 
 
 minetest.register_on_generated(function(minp, maxp)
-	if maxp.y >= layer and minp.y <= layer then
+	if maxp.y >= layer_bedrock and minp.y <= layer_bedrock then
 		local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
 		local data = vm:get_data()
 		local area = VoxelArea:new({MinEdge=emin, MaxEdge=emax})
@@ -2354,7 +2402,7 @@ minetest.register_on_generated(function(minp, maxp)
 
 		for x = minp.x, maxp.x do
 			for z = minp.z, maxp.z do
-				local p_pos = area:index(x, layer, z)
+				local p_pos = area:index(x, layer_bedrock, z)
 				data[p_pos] = c_bedrock
 			end
 		end
@@ -2367,3 +2415,62 @@ minetest.register_on_generated(function(minp, maxp)
 end)
 
 
+
+local layer_air = -17655 -- determined as appropriate by experiment
+
+
+local node_air = {name = "es:air"}
+
+
+minetest.register_on_generated(function(minp, maxp)
+	if maxp.y >= layer_air and minp.y <= layer_air then
+		local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
+		local data = vm:get_data()
+		local area = VoxelArea:new({MinEdge=emin, MaxEdge=emax})
+		local c_air = minetest.get_content_id("es:air")
+
+		for x = minp.x, maxp.x do
+			for z = minp.z, maxp.z do
+				local p_pos = area:index(x, layer_air, z)
+
+				data[p_pos] = c_air
+			end
+		end
+
+		vm:set_data(data)
+		vm:calc_lighting()
+		vm:update_liquids()
+		vm:write_to_map()
+	end
+end)
+
+
+--WEIRD OREGEN--
+--==========================
+--sheet, puff, scatter, blob, stratum, vein
+--		clust_scarcity = 6 * 6 * 6,
+--		clust_num_ores = 9,
+--		clust_size     = 6,
+
+--[[
+	minetest.register_ore({
+		--ore_type       = "sheet",
+		ore_type       = "blob",
+		ore            = "default:ice",
+		wherein        = {"default:water_source"},
+		--clust_scarcity = 1,
+		clust_scarcity = 18 * 8 * 18,
+		--clust_num_ores = 12,
+		clust_num_ores = 12,
+		--clust_size     = 4,
+		clust_size     = 18,
+		y_max = -19000,
+		y_min = -19020,	
+		noise_threshold = 0.4,
+		noise_params = {offset=0, scale=15, spread={x=130, y=130, z=130}, seed=24, octaves=3, persist=0.70}
+	})
+	]]
+	
+
+
+minetest.log("action", "ES: [orgen-base] loaded.")

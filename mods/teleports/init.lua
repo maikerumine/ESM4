@@ -222,6 +222,10 @@ minetest.register_node("teleports:teleport", {
 	description = S("Teleport -=Name by having sign next to teleport, max length 16 characters.=- "),
 	drawtype = "glasslike",
 	tiles = {"teleports_teleport_top.png"},
+	
+	use_texture_alpha = "clip", -- only needed for stairs API
+	
+	
 	is_ground_content = false,
 	paramtype = "light",
 	--light_source = minetest.LIGHT_MAX-10,

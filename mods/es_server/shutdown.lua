@@ -43,7 +43,8 @@ minetest.register_globalstep(function(dtime)
          and ((D == nil) or (t.wday == D))) then
 		 --minetest.sound_play("SummertimeSadness")
 		 --minetest.sound_play("mcl_jukebox_track_8")
-		 minetest.sound_play("psycastria")
+		 --minetest.sound_play("psycastria")
+		 minetest.sound_play("mm_dark")
       minetest.chat_send_all("Scheduled shutdown.  0000 ZULU "
             .."Shutting down in FIVE minutes.  Enjoy the break")
 	          minetest.chat_send_all("Find safety. "
@@ -82,10 +83,10 @@ minetest.register_globalstep(function(dtime)
 	          minetest.chat_send_all("L   SHUTTING SERVER DOWN NOW! "
             .."  Please come back in a few while map is backed-----up. ")			
 	          minetest.chat_send_all("2020 ESM Back to the basics revival tour! "
-            .."  Please come back in a few while map is backed-----up. ")
+            .."  Please come back in 30 minutes while map is backed-----up. ")
 		minetest.sound_play("hohoho")	
 		minetest.chat_send_all("!   SHUTTING SERVER DOWN NOW! "
-            .."  Please come back in a few moments while the server undergoes it's daily maintenance.  Have a cup of tea and enjoy perhaps Just Test, @test@ JT2, Must Test,  or browse the forum for fun reading in the meantime.  Helmet: In The Mean time!")
+            .."  Please come back in 30 minutes while the server undergoes it's daily maintenance.  Have a cup of tea and enjoy perhaps Just Test, @test@ JT2, Must Test,  or browse the forum for fun reading in the meantime.  Helmet: In The Mean time!")
       minetest.after(5, minetest.request_shutdown)
    end
 end)

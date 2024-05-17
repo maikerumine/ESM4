@@ -229,3 +229,5 @@ minetest.register_node("es:emerald_container", {
 	groups = {vessel=1,dig_immediate=3,attached_node=1},
 	sounds = default.node_sound_glass_defaults(),
 })
+
+minetest.log("action", "ES: [containers] loaded.")

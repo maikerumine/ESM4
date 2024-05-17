@@ -100,19 +100,20 @@ minetest.register_craft({
 minetest.register_craft({
 	type = "cooking",
 	--cooktime = 12000,
-	cooktime = 11080,
+	--cooktime = 11080,
+	cooktime = 5540,
 	output = "es:unobtainium_ingot",
 	recipe = "es:unobtainium_lump",
 })
 
-
+--[[
 minetest.register_craft({
 	type = "cooking",
 	cooktime = 90,
 	output = "default:mese_crystal",
 	recipe = "es:mesecook_crystal",
 })
-
+]]
 
 --Dust cooking
 minetest.register_craft({
@@ -170,13 +171,14 @@ minetest.register_craft({
 	output = "default:sand",
 	recipe = "default:gravel",
 })	
+--[[
 minetest.register_craft({
 	type = "cooking",
 	cooktime = 5,
 	output = "default:dirt",
 	recipe = "default:sand",
 })	
-
+]]
 
 minetest.register_craft({
 	type = "cooking",

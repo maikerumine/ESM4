@@ -125,6 +125,24 @@ minetest.register_entity("fishing:bait_worm_entity", {
 -----------------------------------------------------------------------------------------------
 -- GETTING WORMS
 -----------------------------------------------------------------------------------------------
+--[[
+minetest.register_node(":default:dirt", {
+	description = "Dirt!  -Dig for worms to fish-",
+	tiles = {"default_dirt.png"},
+	groups = {crumbly = 3, soil = 1},
+		drop = {
+		max_items = 2,
+		items = {
+			{items = {"fishing:bait_worm"}, rarity = 4},
+			{items = {"default:dirt"}}
+		}
+	},
+	sounds = default.node_sound_dirt_defaults(),
+})
+]]
+
+
+--[[
 -- get worms from digging in dirt:
 if fishing_setting.settings["new_worm_source"] == false then
 	minetest.register_node(":default:dirt", {
@@ -257,4 +275,16 @@ else
 			return hoe_on_use(itemstack, user, pointed_thing, 500)
 		end,
 	})
+
+		minetest.register_tool(":farming:hoe_mese_green", {
+		--description = fishing_setting.func.S("Diamond Hoe"),
+		description = fishing_setting.func.S("Green Mese Hoe  -=Long lasting hoe"),
+		inventory_image = "es_tool_green_mese_hoe.png",
+		on_use = function(itemstack, user, pointed_thing)
+			return hoe_on_use(itemstack, user, pointed_thing, 700)
+		end,
+	})
+
+
 end
+]]

@@ -17,7 +17,7 @@ cblocks = {}
 minetest.register_node("cblocks:stone_brown_with_coal", {
 	description = "Coal Ore",
 	tiles = {"default_stone.png^cblocks_brown.png^default_mineral_coal.png"},
-	groups = {cracky = 3},
+	groups = {cracky = 3, not_in_creative_inventory = 1},
 	drop = "default:coal_lump",
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -26,7 +26,7 @@ minetest.register_node("cblocks:stone_brown_with_coal", {
 minetest.register_node("cblocks:stone_brown_with_iron", {
 	description = "Iron Ore",
 	tiles = {"default_stone.png^cblocks_brown.png^default_mineral_iron.png"},
-	groups = {cracky = 2},
+	groups = {cracky = 2, not_in_creative_inventory = 1},
 	drop = "default:iron_lump",
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -35,7 +35,7 @@ minetest.register_node("cblocks:stone_brown_with_iron", {
 minetest.register_node("cblocks:stone_brown_with_copper", {
 	description = "Copper Ore",
 	tiles = {"default_stone.png^cblocks_brown.png^default_mineral_copper.png"},
-	groups = {cracky = 2},
+	groups = {cracky = 2, not_in_creative_inventory = 1},
 	drop = "default:copper_lump",
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -44,7 +44,7 @@ minetest.register_node("cblocks:stone_brown_with_copper", {
 minetest.register_node("cblocks:stone_brown_with_tin", {
 	description = "Tin Ore",
 	tiles = {"default_stone.png^cblocks_brown.png^default_mineral_tin.png"},
-	groups = {cracky = 2},
+	groups = {cracky = 2, not_in_creative_inventory = 1},
 	drop = "default:tin_lump",
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -53,7 +53,7 @@ minetest.register_node("cblocks:stone_brown_with_tin", {
 minetest.register_node("cblocks:stone_brown_with_mese", {
 	description = "Mese Ore",
 	tiles = {"default_stone.png^cblocks_brown.png^default_mineral_mese.png"},
-	groups = {cracky = 1},
+	groups = {cracky = 1, not_in_creative_inventory = 1},
 	drop = "default:mese_crystal",
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -62,7 +62,7 @@ minetest.register_node("cblocks:stone_brown_with_mese", {
 minetest.register_node("cblocks:stone_brown_with_gold", {
 	description = "Gold Ore",
 	tiles = {"default_stone.png^cblocks_brown.png^default_mineral_gold.png"},
-	groups = {cracky = 2},
+	groups = {cracky = 2, not_in_creative_inventory = 1},
 	drop = "default:gold_lump",
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -71,7 +71,7 @@ minetest.register_node("cblocks:stone_brown_with_gold", {
 minetest.register_node("cblocks:stone_brown_with_diamond", {
 	description = "Diamond Ore",
 	tiles = {"default_stone.png^cblocks_brown.png^default_mineral_diamond.png"},
-	groups = {cracky = 1},
+	groups = {cracky = 1, not_in_creative_inventory = 1},
 	drop = "default:diamond",
 	sounds = default.node_sound_stone_defaults(),
 })

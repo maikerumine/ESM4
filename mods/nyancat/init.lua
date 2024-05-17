@@ -87,3 +87,5 @@ minetest.register_alias("nyancat", "nyancat:nyancat")
 minetest.register_alias("nyancat_rainbow", "nyancat:nyancat_rainbow")
 default.make_nyancat = nyancat.place
 default.generate_nyancats = nyancat.generate
+
+minetest.log("action", "ES: [NYANCAT] loaded.")

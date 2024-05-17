@@ -28,7 +28,11 @@ minetest.register_node("mobs:laser_box", {
 			{7.5/17, -2.5/17, -2.5/17, 8.5/17, -3.5/17, -3.5/17},
 		}
 	},
-	tiles = {"futuremobs_laser.png", "futuremobs_laser.png", "futuremobs_laser.png", "futuremobs_laser.png", "futuremobs_laser.png", "futuremobs_laser.png"},
+	tiles = {"cblocks_red.png", "cblocks_red.png", "cblocks_red.png", "cblocks_red.png", "cblocks_red.png", "cblocks_red.png"},
+	
+	use_texture_alpha = true, -- only needed for stairs API
+	
+	
 	--groups = {not_in_creative_inventory=1},
 })
 
@@ -38,13 +42,17 @@ local THROWING_LASER_ENTITY={
 	visual = "wielditem",
 	visual_size = {x=0.1, y=0.1},
 	textures = {"mobs:laser_box"},
+	
+	use_texture_alpha = true, -- only needed for stairs API
+	
+	
 	lastpos={},
 	collisionbox = {0,0,0,0,0,0},
 }
 
 THROWING_LASER_ENTITY.on_step = function(self, dtime)
 	self.timer=self.timer+dtime
-	local pos = self.object:getpos()
+	local pos = self.object:get_pos()
 	local node = minetest.env:get_node(pos)
 
 	if self.timer>0.2 then
@@ -69,7 +77,8 @@ THROWING_LASER_ENTITY.on_step = function(self, dtime)
 			end
 		end
 	end
-
+--nodeblocker code
+--[[      ]]
 	if self.lastpos.x~=nil then
 		if node.name ~= "air" then
 			minetest.env:add_item(self.lastpos, 'mobs:laser')
@@ -77,14 +86,16 @@ THROWING_LASER_ENTITY.on_step = function(self, dtime)
 		end
 	end
 	self.lastpos={x=pos.x, y=pos.y, z=pos.z}
+--[[	]]
 end
 
 minetest.register_entity("mobs:laser_entity", THROWING_LASER_ENTITY)
 
 minetest.register_craft({
-	output = 'mobs:laser 8',
+	output = 'mobs:laser 99',
 	recipe = {
-		{'default:steel_ingot', 'es:mese_green_crystal', 'default:steel_ingot'},
+		--{'default:steel_ingot', 'es:mese_green_crystal', 'default:steel_ingot'},
+		{'default:steel_ingot', 'es:ruby_crystal', 'default:steel_ingot'},
 	}
 })
 
@@ -97,16 +108,17 @@ lasers = {
 local throwing_shoot_laser = function(itemstack, player)
 	for _,laser in ipairs(lasers) do
 		if player:get_inventory():get_stack("main", player:get_wield_index()+1):get_name() == laser[1] then
-			if not minetest.setting_getbool("creative_mode") then
+--			if not minetest.setting_getbool("creative_mode") then
 				player:get_inventory():remove_item("main", laser[1])
-			end
-			local playerpos = player:getpos()
-			local obj = minetest.env:add_entity({x=playerpos.x,y=playerpos.y+1.5,z=playerpos.z}, laser[2])
+--			end
+			local playerpos = player:get_pos()
+			--local obj = minetest.env:add_entity({x=playerpos.x,y=playerpos.y+1.5,z=playerpos.z}, laser[2])  --core.env:[...] is deprecated and should be replaced with core.[...]
+			local obj = minetest.add_entity({x=playerpos.x,y=playerpos.y+1.5,z=playerpos.z}, laser[2])
 			local dir = player:get_look_dir()
 			--obj:setvelocity({x=dir.x*19, y=dir.y*19, z=dir.z*19})
-			obj:setvelocity({x=dir.x*29, y=dir.y*29, z=dir.z*29})
-			obj:setacceleration({x=dir.x*-3, y=-10, z=dir.z*-3})
-			obj:setyaw(player:get_look_yaw()+math.pi)
+			obj:set_velocity({x=dir.x*29, y=dir.y*29, z=dir.z*29})
+			obj:set_acceleration({x=dir.x*-3, y=-10, z=dir.z*-3})
+			obj:set_yaw(player:get_look_horizontal()+math.pi)
 			minetest.sound_play("laser_sound", {pos=playerpos})
 			if obj:get_luaentity().player == "" then
 				obj:get_luaentity().player = player
@@ -124,10 +136,10 @@ minetest.register_tool("mobs:blue_laser_gun", {
     stack_max = 1,
 	on_use = function(itemstack, user, pointed_thing)
 		if throwing_shoot_laser(item, user, pointed_thing) then
-			if not minetest.setting_getbool("creative_mode") then
+			--if not minetest.setting_getbool("creative_mode") then
 				--itemstack:add_wear(65535/100)
 				itemstack:add_wear(65535/1000)
-			end
+			--end
 		end
 		return itemstack
 	end,
@@ -148,10 +160,10 @@ minetest.register_tool("mobs:red_laser_gun", {
     stack_max = 1,
 	on_use = function(itemstack, user, pointed_thing)
 		if throwing_shoot_laser(item, user, pointed_thing) then
-			if not minetest.setting_getbool("creative_mode") then
+			--if not minetest.setting_getbool("creative_mode") then
 				--itemstack:add_wear(65535/100)
 				itemstack:add_wear(65535/1000)
-			end
+			--end
 		end
 		return itemstack
 	end,
@@ -166,8 +178,17 @@ minetest.register_craft({
 	}
 })
 
+
+minetest.register_craft({
+	output = 'mobs:red_laser_gun',
+	recipe = {
+		{'default:wood', 'default:steelblock', ''},
+		{'default:steel_ingot', 'es:aikerum_crystal', 'default:glass'},
+		{'default:steel_ingot', 'default:steel_ingot', ''},
+	}
+})
 --dofile(minetest.get_modpath("mobs").."/arrow.lua")
 
-if minetest.setting_get("log_mods") then
+--if minetest.setting_get("log_mods") then
 	minetest.log("action", "throwing loaded")
-end
+--end

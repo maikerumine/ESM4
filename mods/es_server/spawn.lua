@@ -35,8 +35,8 @@ minetest.register_chatcommand("spawn", {
 
 
 
-	local pos = player:getpos()
-	local vel = player:getvelocity()	--20200902 rnd? fix
+	local pos = player:get_pos()
+	local vel = player:get_velocity()	--20200902 rnd? fix
 
 	if pos.x>-20 and pos.x<20 and pos.y>-20 and pos.y<200 and pos.z>-20 and pos.z<20
 	then
@@ -55,8 +55,8 @@ minetest.register_chatcommand("spawn", {
 	else
 	 --set  velocity = 0  then teleport
 		--player:setvelocity(spawn_prison.vel)	--20200902 rnd? fix
-		player:setvelocity(0)	--20200902 rnd? fix
-		player:setpos(spawn_prison.pos)
+		player:set_velocity(0)	--20200902 rnd? fix
+		player:set_pos(spawn_prison.pos)
 		minetest.sound_play("thunder")
 		minetest.chat_send_player(name, "Teleported to spawn!")
 			 

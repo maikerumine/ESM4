@@ -5,6 +5,7 @@
 
 spawn_sanitizer = {}
 spawn_sanitizer.cleaned=false
+spawn_sanitizer.cleaned_deep=false
 spawn_sanitizer.timer=0
 
 minetest.registered_nodes["bones:bones"].groups = {dig_immediate=3}
@@ -325,3 +326,67 @@ minetest.registered_craftitems["bucket:bucket_lava"].on_place=function(itemstack
     end
 	return old_bucket_lava_on_place(itemstack, placer, pointed_thing)
 end
+
+--=======================
+--MM added deep spawn
+--  -19000
+
+minetest.after(13, function(dtime)
+
+	if spawn_sanitizer.cleaned_deep==true then
+		return
+	end
+
+	local positions5 = minetest.find_nodes_in_area(
+		{x=-25, y=-19000, z=-25},
+		{x=25, y=-19009, z=25},
+		{"air", "default:water_flowing", "default:water_source", "default:river_water_flowing", "default:river_water_source", "es:dry_dirt", "default:stone", "es:muddy_block", "es:air"})
+	for _, pos in ipairs(positions5) do
+		minetest.set_node(pos, {name="default:cobble"})
+	end
+	
+	
+	local positions5 = minetest.find_nodes_in_area(
+		{x=-24, y=-18999, z=-24},
+		{x=24, y=-19009, z=24},
+		{"air", "default:water_flowing", "default:water_source", "default:river_water_flowing", "default:river_water_source", "es:dry_dirt", "default:stone", "es:muddy_block", "es:air"})
+	for _, pos in ipairs(positions5) do
+		minetest.set_node(pos, {name="default:cobble"})
+	end
+
+	local positions6 = minetest.find_nodes_in_area(
+		{x=-21, y=-18998, z=-21},
+		{x=21, y=-18930, z=21},
+		{"default:cobble", "default:mossycobble", "default:stone", "default:water_source", "default:lava_source", "default:water_flowing", "default:river_water_flowing", "default:river_water_source", "es:muddy_block"})
+	for _, pos in ipairs(positions6) do
+		minetest.set_node(pos, {name="es:air"})
+	end
+
+	
+
+	
+
+	
+	local positions8 = minetest.find_nodes_in_area(
+		{x=-5, y=-19005, z=-5},
+		{x=5, y=-19000, z=5},
+		{"default:cobble"})
+	for _, pos in ipairs(positions8) do
+		minetest.set_node(pos, {name="air"})
+	end
+
+    minetest.set_node({x=-2, y=-18999, z=-1}, {name="es:fake_water_source"})
+    minetest.set_node({x=-2, y=-18999, z=1}, {name="es:lava_source"})
+
+    minetest.set_node({x=0, y=-18999, z=-3}, {name="default:lava_source"})
+    minetest.set_node({x=0, y=-18999, z=3}, {name="default:lava_source"})
+
+
+	if not spawn_sanitizer.cleaned_deep then
+		spawn_sanitizer.cleaned_deep=true
+		minetest.log("action", "Spawn Deeeeeeeeep sanitized!")
+		minetest.sound_play("mm_dark")
+	end
+
+    --spawn_sanitizer.clean_spawnpoint();
+end)

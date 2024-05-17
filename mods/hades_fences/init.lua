@@ -66,10 +66,10 @@ end
 
 local fences = {
 	{ "rusty", S("Rusty Fence"), "default_rusty.png", {cracky=3, fence_metal=1}, {"group:fence_metal", "columnia:rusty_block"}, hades_sounds.node_sound_metal_defaults() },
-	{ "wood", S("Common Wood Fence"), "default_wood.png" },
+--	{ "wood", S("Common Wood Fence"), "default_wood.png" },
 --	{ "pale_wood", S("Pale Wood Fence"), "hades_trees_pale_wood.png" },
-	{ "birch_wood", S("Birch Wood Fence"), "default_birchwood.png" },
-	{ "jungle_wood", S("Jungle Wood Fence"), "default_junglewood.png" },
+--	{ "birch_wood", S("Birch Wood Fence"), "default_birchwood.png" },
+--	{ "jungle_wood", S("Jungle Wood Fence"), "default_junglewood.png" },
 	{ "wood_black", S("Black Wood Fence"), "hades_trees_colwood_black.png" },
 	{ "wood_blue", S("Blue Wood Fence"), "hades_trees_colwood_blue.png" },
 	{ "wood_cyan", S("Cyan Wood Fence"), "hades_trees_colwood_cyan.png" },

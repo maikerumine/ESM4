@@ -99,11 +99,11 @@ mobs:register_arrow("mobs:speaker", {
 
 
 --20220628 supress
---[[
+
 mobs:spawn({
 	name = "mobs:sirenhead",
-	nodes = {"default:dirt_with_coniferous_litter", "default:dirt_with_rainforest_litter"},
+	nodes = {"es:dry_dirt", "default:dry_dirt"},
 	chance = 27,
 })
-]]
+
 --mobs:register_egg("mobs_flat:sirenhead", "sirenhead", "default_desert_sand.png", 1)

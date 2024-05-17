@@ -44,6 +44,17 @@ if minetest.get_modpath("ropes") ~= nil then
 	})
 end
 
+if minetest.get_modpath("hades_core") ~= nil then
+	minetest.register_craft({
+		output = "fishing:pole_wood",
+		recipe = {
+			{"",            "",            "group:stick" },
+			{"",            "group:stick", "hades_core:sugarcane"  },
+			{"group:stick", "",            "hades_core:sugarcane"  },
+		}
+	})
+end
+
 
 
 -- Aikerum Fishing Pole
@@ -64,9 +75,9 @@ end
 --bait corn
 
 minetest.register_craft({
-	output = "fishing:bait_corn 9",
+	output = "fishing:bait_corn 2",
 	recipe = {
-		{"", "flowers:flower_tulip", ""},
+		{"", "hades_core:sugarcane", ""},
 	}
 })
 

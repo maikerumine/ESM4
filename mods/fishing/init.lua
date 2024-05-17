@@ -18,7 +18,7 @@ local path = minetest.get_modpath("fishing").."/"
 
 fishing_setting = {}
 fishing_setting.func = {}
-fishing_setting.is_creative_mode = minetest.setting_getbool("creative_mode")
+--fishing_setting.is_creative_mode = minetest.setting_getbool("creative_mode")
 fishing_setting.file_settings = minetest.get_worldpath() .. "/fishing_config.txt"
 fishing_setting.file_trophies = minetest.get_worldpath() .. "/fishing_trophies.txt"
 fishing_setting.file_contest = minetest.get_worldpath() .. "/fishing_contest.txt"
@@ -58,11 +58,11 @@ fishing_setting.settings["escape_chance"] = ESCAPE_CHANCE
 -- load config file if exist in worldpath
 fishing_setting.func.load()
 
---dofile(path .."worms.lua")
+dofile(path .."worms.lua")
 dofile(path .."crafting.lua")
 dofile(path .."baits.lua")
 dofile(path .."prizes.lua")
---dofile(path .."baitball.lua")
+dofile(path .."baitball.lua")
 dofile(path .."bobber.lua")
 dofile(path .."bobber_shark.lua")
 dofile(path .."fishes.lua")

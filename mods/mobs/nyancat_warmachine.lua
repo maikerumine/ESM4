@@ -1,6 +1,6 @@
 
 --Maikerumine added drcube for his world needs
---[[
+
 mobs:register_mob("mobs:Nyancat_War_Machine", {
 	nametag = "Nyancat War Machine",
 	type = "npc",
@@ -35,8 +35,9 @@ mobs:register_mob("mobs:Nyancat_War_Machine", {
 	floats = 1,
 	--fly = true,
 	--fly_in = "air",
-	replace_what = "default:water_source",
-	replace_with = "bones:bones",
+	--replace_what = "default:water_source",
+	--replace_what = "air",
+	--replace_with = "bones:bones",
 	replace_rate = 1,
 	replace_offset = 1,
 	damage = 8,
@@ -158,7 +159,7 @@ mobs:register_arrow("mobs:rainbow_heavy", {
 		--mobs:explosion(pos, 1, 1, 0)
 	end
 })
-]]
+
 minetest.register_node("mobs:nyancat_war_machine_loader", {
 	description = "Nyancat War Machine Loader  -=WILL \nDESTROY  \nEVERYTHING  \nUse with caution=- \nRight click mob to deactivate.",
 	--tiles = {"default_water.png^player.png^gui_furnace_arrow_fg.png^treeprop.png^heart.png"},
@@ -188,6 +189,6 @@ minetest.register_node("mobs:nyancat_war_machine_loader", {
 	})
 	
 	
-if minetest.setting_get("log_mods") then
+--if minetest.setting_get("log_mods") then
 	minetest.log("action", "Nyan War Machine mob loaded")
-end
+--end

@@ -71,7 +71,7 @@ minetest.register_tool(":default:pick_wood", {
 					es.colors.grey .. 	"Cracky: 3		1.60  max level: 1\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Great for keeping warm. \nNot long lasting.",
-	inventory_image = "default_tool_woodpick.png",
+	inventory_image = "esdefault_tool_woodpick.png",
 	tool_capabilities = {
 		full_punch_interval = 1.2,
 		max_drop_level=0,
@@ -97,7 +97,7 @@ minetest.register_tool(":default:pick_stone", {
 					es.colors.grey .. 	"Cracky: 2		2.00  max level: 1\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Great for digging at a slow \nand relaxed pace. \nNot able to dig better ore.",
-	inventory_image = "default_tool_stonepick.png",
+	inventory_image = "esdefault_tool_stonepick.png",
 	tool_capabilities = {
 		full_punch_interval = 1.3,
 		max_drop_level=0,
@@ -124,7 +124,7 @@ minetest.register_tool(":default:pick_bronze", {
 					es.colors.grey .. 	"Cracky: 1		4.50  max level: 2\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Good basic tool.  You are better off saving \ntin and copper for other uses.",
-	inventory_image = "default_tool_bronzepick.png",
+	inventory_image = "esdefault_tool_bronzepick.png",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -151,7 +151,7 @@ minetest.register_tool(":default:pick_steel", {
 					es.colors.grey .. 	"Cracky: 1		4.00  max level: 2\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Best basic tool.  Get the job done for cheap.",
-	inventory_image = "default_tool_steelpick.png",
+	inventory_image = "esdefault_tool_steelpick.png",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -178,7 +178,7 @@ minetest.register_tool(":default:pick_mese", {
 					es.colors.grey .. 	"Cracky: 1		2.40  max level: 3\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Save mese for lamps and protectors.",
-	inventory_image = "default_tool_mesepick.png",
+	inventory_image = "esdefault_tool_mesepick.png",
 	tool_capabilities = {
 		full_punch_interval = 0.9,
 		max_drop_level=3,
@@ -205,7 +205,7 @@ minetest.register_tool(":default:pick_diamond", {
 					es.colors.grey .. 	"Cracky: 1		2.00  max level: 3\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Easy way to make a better pick with potion!",
-	inventory_image = "default_tool_diamondpick.png",
+	inventory_image = "esdefault_tool_diamondpick.png",
 	tool_capabilities = {
 		full_punch_interval = 0.9,
 		max_drop_level=3,
@@ -237,7 +237,7 @@ minetest.register_tool(":default:shovel_wood", {
 					es.colors.white ..	"Description:   \n" ..
 										"Stay warm and burn in a furnace.",
 	inventory_image = "default_tool_woodshovel.png",
-	wield_image = "default_tool_woodshovel.png^[transformR90",
+	wield_image = "esdefault_tool_woodshovel.png^[transformR90",
 	tool_capabilities = {
 		full_punch_interval = 1.2,
 		max_drop_level=0,
@@ -264,8 +264,8 @@ minetest.register_tool(":default:shovel_stone", {
 					es.colors.grey .. 	"Crumbly: 1		1.80  max level: 1\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Stone is ok.",
-	inventory_image = "default_tool_stoneshovel.png",
-	wield_image = "default_tool_stoneshovel.png^[transformR90",
+	inventory_image = "esdefault_tool_stoneshovel.png",
+	wield_image = "esdefault_tool_stoneshovel.png^[transformR90",
 	tool_capabilities = {
 		full_punch_interval = 1.4,
 		max_drop_level=0,
@@ -292,8 +292,8 @@ minetest.register_tool(":default:shovel_bronze", {
 					es.colors.grey .. 	"Crumbly: 1		1.65  max level: 2\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Who actually makes a bronze shovel?",
-	inventory_image = "default_tool_bronzeshovel.png",
-	wield_image = "default_tool_bronzeshovel.png^[transformR90",
+	inventory_image = "esdefault_tool_bronzeshovel.png",
+	wield_image = "esdefault_tool_bronzeshovel.png^[transformR90",
 	tool_capabilities = {
 		full_punch_interval = 1.1,
 		max_drop_level=1,
@@ -320,8 +320,8 @@ minetest.register_tool(":default:shovel_steel", {
 					es.colors.grey .. 	"Crumbly: 1		1.50  max level: 2\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Get real with steel! \nOutlasts bronze...",
-	inventory_image = "default_tool_steelshovel.png",
-	wield_image = "default_tool_steelshovel.png^[transformR90",
+	inventory_image = "esdefault_tool_steelshovel.png",
+	wield_image = "esdefault_tool_steelshovel.png^[transformR90",
 	tool_capabilities = {
 		full_punch_interval = 1.1,
 		max_drop_level=1,
@@ -348,8 +348,8 @@ minetest.register_tool(":default:shovel_mese", {
 					es.colors.grey .. 	"Crumbly: 1		1.20  max level: 3\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Can use in special craft.",
-	inventory_image = "default_tool_meseshovel.png",
-	wield_image = "default_tool_meseshovel.png^[transformR90",
+	inventory_image = "esdefault_tool_meseshovel.png",
+	wield_image = "esdefault_tool_meseshovel.png^[transformR90",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=3,
@@ -376,8 +376,8 @@ minetest.register_tool(":default:shovel_diamond", {
 					es.colors.grey .. 	"Crumbly: 1		1.10  max level: 3\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Upgrade with a splash of luck!",
-	inventory_image = "default_tool_diamondshovel.png",
-	wield_image = "default_tool_diamondshovel.png^[transformR90",
+	inventory_image = "esdefault_tool_diamondshovel.png",
+	wield_image = "esdefault_tool_diamondshovel.png^[transformR90",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -407,7 +407,7 @@ minetest.register_tool(":default:axe_wood", {
 					es.colors.grey .. 	"Choppy: 2		3.00  max level: 1\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Save your wood for a door.",
-	inventory_image = "default_tool_woodaxe.png",
+	inventory_image = "esdefault_tool_woodaxe.png",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=0,
@@ -434,7 +434,7 @@ minetest.register_tool(":default:axe_stone", {
 					es.colors.grey .. 	"Choppy: 1		3.00  max level: 1\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"The BEST cheap axe on the market!.",
-	inventory_image = "default_tool_stoneaxe.png",
+	inventory_image = "esdefault_tool_stoneaxe.png",
 	tool_capabilities = {
 		full_punch_interval = 1.2,
 		max_drop_level=0,
@@ -461,7 +461,7 @@ minetest.register_tool(":default:axe_bronze", {
 					es.colors.grey .. 	"Choppy: 1		2.75  max level: 2\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"It looks cool.",
-	inventory_image = "default_tool_bronzeaxe.png",
+	inventory_image = "esdefault_tool_bronzeaxe.png",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -488,7 +488,7 @@ minetest.register_tool(":default:axe_steel", {
 					es.colors.grey .. 	"Choppy: 1		2.50  max level: 2\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Steel is real.",
-	inventory_image = "default_tool_steelaxe.png",
+	inventory_image = "esdefault_tool_steelaxe.png",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -515,7 +515,7 @@ minetest.register_tool(":default:axe_mese", {
 					es.colors.grey .. 	"Choppy: 1		2.20  max level: 3\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Mese for protector not for axe.",
-	inventory_image = "default_tool_meseaxe.png",
+	inventory_image = "esdefault_tool_meseaxe.png",
 	tool_capabilities = {
 		full_punch_interval = 0.9,
 		max_drop_level=1,
@@ -542,7 +542,7 @@ minetest.register_tool(":default:axe_diamond", {
 					es.colors.grey .. 	"Choppy: 1		2.10  max level: 3\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Just a drop will do.",
-	inventory_image = "default_tool_diamondaxe.png",
+	inventory_image = "esdefault_tool_diamondaxe.png",
 	tool_capabilities = {
 		full_punch_interval = 0.9,
 		max_drop_level=1,
@@ -572,7 +572,7 @@ minetest.register_tool(":default:sword_wood", {
 					es.colors.grey .. 	"Snappy: 2		1.60  max level: 1\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Burn Baby Burn!!!.",
-	inventory_image = "default_tool_woodsword.png",
+	inventory_image = "esdefault_tool_woodsword.png",
 	tool_capabilities = {
 		full_punch_interval = 1,
 		max_drop_level=0,
@@ -598,7 +598,7 @@ minetest.register_tool(":default:sword_stone", {
 					es.colors.grey .. 	"Snappy: 2		1.40  max level: 1\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Not useful.",
-	inventory_image = "default_tool_stonesword.png",
+	inventory_image = "esdefault_tool_stonesword.png",
 	tool_capabilities = {
 		full_punch_interval = 1.2,
 		max_drop_level=0,
@@ -625,7 +625,7 @@ minetest.register_tool(":default:sword_bronze", {
 					es.colors.grey .. 	"Snappy: 1		2.75  max level: 2\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Good enough.",
-	inventory_image = "default_tool_bronzesword.png",
+	inventory_image = "esdefault_tool_bronzesword.png",
 	tool_capabilities = {
 		full_punch_interval = 0.8,
 		max_drop_level=1,
@@ -652,7 +652,7 @@ minetest.register_tool(":default:sword_steel", {
 					es.colors.grey .. 	"Snappy: 1		2.5  max level: 2\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Better than Bronze, and cheaper too.",
-	inventory_image = "default_tool_steelsword.png",
+	inventory_image = "esdefault_tool_steelsword.png",
 	tool_capabilities = {
 		full_punch_interval = 0.8,
 		max_drop_level=1,
@@ -679,7 +679,7 @@ minetest.register_tool(":default:sword_mese", {
 					es.colors.grey .. 	"Snappy: 1		2.0  max level: 3\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Mese lamps are pretty.",
-	inventory_image = "default_tool_mesesword.png",
+	inventory_image = "esdefault_tool_mesesword.png",
 	tool_capabilities = {
 		full_punch_interval = 0.7,
 		max_drop_level=1,
@@ -706,7 +706,7 @@ minetest.register_tool(":default:sword_diamond", {
 					es.colors.grey .. 	"Snappy: 1		1.90  max level: 3\n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"One craft away from an Aikerum sword today.",
-	inventory_image = "default_tool_diamondsword.png",
+	inventory_image = "esdefault_tool_diamondsword.png",
 	tool_capabilities = {
 		full_punch_interval = 0.7,
 		max_drop_level=1,
@@ -947,7 +947,7 @@ minetest.register_tool("es:pick_purpellium", {
 	sound = {breaks = "default_tool_breaks"},
 	groups = {pickaxe = 1}
 })
-
+--[[
 minetest.register_tool("es:pick_unobtainium", {
 	--description = "Extreme Survival Unobtainium Pickswordshovelaxe [Use:700 HP:13 FPI:0.1]",
 				description = 
@@ -994,6 +994,31 @@ minetest.register_tool("es:pick_unobtainium", {
 	sound = {breaks = "default_tool_breaks"},
 	groups = {pickaxe = 1, shovel = 1, axe = 1, sword = 1}
 })
+]]
+
+minetest.register_tool("es:pick_unobtainium", {
+	--description = "Extreme Survival Unobtainium Pickswordshovelaxe [Use:700 HP:13 FPI:0.1]",
+				description = 
+					es.colors.green .. 	"UN-Unobtainium Pickaxe \n" ..
+
+					es.colors.white ..	"Description:   \n" ..
+										"NOPE!!  Under re-development..",
+	inventory_image = "es_tool_unobtainiumpick.png",
+	tool_capabilities = {
+		full_punch_interval = 10,
+		max_drop_level=1,
+		groupcaps={
+
+		},
+		damage_groups = {fleshy=1},
+	},
+	sound = {breaks = "default_tool_breaks"},
+	groups = {pickaxe = 1, shovel = 1, axe = 1, sword = 1}
+})
+
+
+
+
 
 minetest.register_tool("es:pick_mese_green", {
 	--description = "Mese Pickaxe [Use:20 HP:5 FPI:0.9]",

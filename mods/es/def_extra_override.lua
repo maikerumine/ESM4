@@ -55,7 +55,17 @@ es = {}
     })
 ]]
 
-
+--butter!
+    minetest.override_item("default:gold_ingot", {
+	    description = "Stick of butter!",
+    })
+--[[
+minetest.register_craftitem("default:gold_ingot", {
+	description = S("Gold Ingot"),
+	inventory_image = "default_gold_ingot.png"
+})
+]]	
+	
 --Cityblock
     minetest.clear_craft({
 		output = "city_block:cityblock",
@@ -79,7 +89,7 @@ es = {}
 --=================================================	
 --default
     minetest.clear_craft({
-		output = "default:ladder_wood 5",
+		output = "default:ladder_wood",
 		recipe = {
 		{"group:stick", "", "group:stick"},
 		{"group:stick", "group:stick", "group:stick"},
@@ -97,7 +107,7 @@ es = {}
 	})
 
     minetest.clear_craft({
-		output = "default:ladder_steel 15",
+		output = "default:ladder_steel",
 		recipe = {
 		{"default:steel_ingot", "", "default:steel_ingot"},
 		{"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"},
@@ -343,3 +353,32 @@ es = {}
 		recipe = {"farming:wheat", "farming:wheat", "farming:wheat", "farming:wheat"}
 	})
 ]]
+
+
+--[[
+minetest.register_craft({
+	output = "default:chest",
+	recipe = {
+		{"group:wood", "group:wood", "group:wood"},
+		{"group:wood", "", "group:wood"},
+		{"group:wood", "group:wood", "group:wood"},
+	}
+})
+
+minetest.register_craft({
+	output = "default:chest_locked",
+	recipe = {
+		{"group:wood", "group:wood", "group:wood"},
+		{"group:wood", "default:steel_ingot", "group:wood"},
+		{"group:wood", "group:wood", "group:wood"},
+	}
+})
+
+minetest.register_craft( {
+	type = "shapeless",
+	output = "default:chest_locked",
+	recipe = {"default:chest", "default:steel_ingot"},
+})
+
+]]
+

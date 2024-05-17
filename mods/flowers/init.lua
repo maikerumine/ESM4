@@ -248,7 +248,7 @@ end
 
 minetest.register_abm({
 	label = "Mushroom spread",
-	nodenames = {"flowers:mushroom_brown", "flowers:mushroom_red"},
+	nodenames = {"group:mushroom"},
 	interval = 11,
 	chance = 150,
 	action = function(...)
@@ -279,6 +279,7 @@ local waterlily_def = {
 	tiles = {"flowers_waterlily.png", "flowers_waterlily_bottom.png"},
 	inventory_image = "flowers_waterlily.png",
 	wield_image = "flowers_waterlily.png",
+	use_texture_alpha = "clip",
 	liquids_pointable = true,
 	walkable = false,
 	buildable_to = true,

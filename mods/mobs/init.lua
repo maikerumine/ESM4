@@ -82,8 +82,8 @@ dofile(minetest.get_modpath("mobs").."/sirenhead.lua")
 				end
 			end
 ]]
---[[
-if minetest.setting_get("log_mods") then
+
+--if minetest.setting_get("log_mods") then
 	minetest.log("action", "Andrey / Maikerumine mobs loaded")
-end
-]]
+	minetest.log("action", "ES: [all dem mobs!] loaded.")
+--end

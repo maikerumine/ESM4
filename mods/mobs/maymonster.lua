@@ -5,7 +5,7 @@
 
 mobs:register_mob("mobs:may_monster", {
 	type = "monster",
-	nametag = "Dr. M",	
+	nametag = "Yimmy",	
 	hp_min = 140,	
 	hp_max = 155,
 	collisionbox = {-0.3, -2.0, -0.3, 0.3, 0.8, 0.3},
@@ -94,10 +94,10 @@ mobs:register_mob("mobs:may_monster", {
 	end,	
 })
 
---[[
+
 mobs:spawn({
 	name = "mobs:may_monster",
-	nodes = {"default:ice", "es:strange_grass", "cblocks:stone_violet"},
+	nodes = {"default:ice", "es:strange_grass", "cblocks:stone_violet",  "default:cave_ice"},
 	neighbors = {"air"},
 	min_light = 0,
 	max_light = 5,
@@ -110,7 +110,7 @@ mobs:spawn({
 	on_spawn = nil,
 	on_map_load = nil,
 })
-]]
+
 
 mobs:register_mob("mobs:may_mini_monster", {
 	type = "monster",

@@ -30,8 +30,8 @@ mobs:register_mob("mobs:Nyancat", {
 	--run_velocity = 30,
 	run_velocity = 0.0,
 	floats = 1,
-	fly = true,
-	fly_in = "air",
+--	fly = true,
+--	fly_in = "air",
 	damage = 8,
 	drops = {
 		{name = "nyancat:nyancat_rainbow",
@@ -51,14 +51,14 @@ mobs:register_mob("mobs:Nyancat", {
 	light_damage = 0,
 	on_rightclick = nil,
 	--attack_type = "dogfight",
-	attack_type = "dogshoot",
-	--attack_type = "shoot",
+	--attack_type = "dogshoot",
+	attack_type = "shoot",
 	dogshoot_switch = 1,
-	dogshoot_count_max = 3, -- shoot for 10 seconds
-	dogshoot_count2_max = 5.5, -- dogfight for 3 seconds
+	dogshoot_count_max = 11, -- shoot for 10 seconds
+	dogshoot_count2_max = 3, -- dogfight for 3 seconds
 	--shoot_interval = 0.1,
 	--shoot_interval = 0.35,
-	shoot_interval = 0.35,
+	shoot_interval = 0.25,
 	arrow = "mobs:rainbow",
 	shoot_offset = 1,
 	lifetimer=10,
@@ -106,7 +106,8 @@ mobs:spawn({
 	neighbors = {"air"},
 	min_light = 0,
 	max_light = 15,
-	interval = 1000,
+	--interval = 1000,
+	interval = 10,
 	chance = 1,
 	active_object_count = 1,
 	min_height = -20,
@@ -156,6 +157,6 @@ mobs:register_arrow("mobs:rainbow", {
 
 
 
-if minetest.setting_get("log_mods") then
+--if minetest.setting_get("log_mods") then
 	minetest.log("action", "Nyan mob loaded")
-end
+--end

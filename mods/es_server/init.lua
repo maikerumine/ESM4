@@ -31,6 +31,7 @@ dofile(modpath.."/beerarchy_welcome.lua")
 --	dofile(minetest.get_modpath("es_server").."/spawn_space.lua")  --esr-049-530
 	dofile(minetest.get_modpath("es_server").."/spawn_space_10k.lua")  --esm1
 	dofile(minetest.get_modpath("es_server").."/spawn_6k.lua")  --esm1
+	dofile(minetest.get_modpath("es_server").."/spawn_19k.lua")  --esm1
 --end
 --if es_anticheat == 1 then	--add anti cheating.  noclip and fly caught by rnd code
 --	dofile(minetest.get_modpath("es_server").."/anticheat.lua")
@@ -55,4 +56,6 @@ dofile(modpath.."/beerarchy_welcome.lua")
 --end
 --if es_invisible_tool == 1 then	--add invisibility command type /i
 --	dofile(minetest.get_modpath("es_server").."/invis.lua")
+
+minetest.log("action", "ES: [ES SERVER] loaded.")
 

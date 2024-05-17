@@ -147,7 +147,7 @@ homedecor.register("ceiling_lamp_off", {
 -- if you add new sheets, you should change pagenumber value accordingly
 
 --pagenumber = 49
-pagenumber = 97
+pagenumber = 100
 
 -- register es news nodes
 
@@ -172,7 +172,7 @@ for i = 1, pagenumber do
 		selection_box = {
 			type = "wallmounted",
 		},
-		groups = {snappy=1, oddly_breakable_by_hand=2, flammable=3},
+		groups = {snappy=1, oddly_breakable_by_hand=2, flammable=3, not_in_creative_inventory = 1},
 		sounds = default.node_sound_leaves_defaults(),
 		drop = "es_server:es_news_"..i,
 		--[[]]
@@ -180,19 +180,62 @@ for i = 1, pagenumber do
 			node.name = "es_server:es_news_"..x
 			minetest.set_node(pos, node)
 			--if math.random(1, 3) == 1 then
-				minetest.sound_play("item_drop_pickup.1", {pos = pos})
+				minetest.sound_play("item_drop_pickup", {pos = pos})
 			--end
 		end,
 		on_punch = function(pos, node, puncher)
 			node.name = "es_server:es_news_"..y
 			minetest.set_node(pos, node)
 			--if math.random(1, 3) == 1 then
-				minetest.sound_play("item_drop_pickup.2", {pos = pos})
+				minetest.sound_play("item_drop_pickup", {pos = pos})
 			--end
 		end,--[[]]
 	})
 
+--[[
+
+	minetest.register_node("es_server:es_news_1", {
+		description = "ES News_1",
+		drawtype = "signlike",
+	    tiles = {"es_news_1_page.png"},
+	    inventory_image = "es_news_1_page.png",
+	    wield_image = "es_news_1_page.png",
+	    paramtype = "light",
+	    paramtype2 = "wallmounted",
+	    walkable = false,
+	    --climbable = true,
+		sunlight_propagates = true,
+		selection_box = {
+			type = "wallmounted",
+		},
+		groups = {snappy=1, oddly_breakable_by_hand=2, flammable=3, not_in_creative_inventory = 0},
+		sounds = default.node_sound_leaves_defaults(),
+		drop = "es_server:es_news_"..i,
+				
+		on_rightclick = function(pos, node, clicker)
+			node.name = "es_server:es_news_"..x
+			minetest.set_node(pos, node)
+			--if math.random(1, 3) == 1 then
+				minetest.sound_play("item_drop_pickup", {pos = pos})
+			--end
+		end,
+		on_punch = function(pos, node, puncher)
+			node.name = "es_server:es_news_"..y
+			minetest.set_node(pos, node)
+			--if math.random(1, 3) == 1 then
+				minetest.sound_play("item_drop_pickup", {pos = pos})
+			--end
+		end,
+	})
+	]]
 end
+
+
+
+
+
+
+
 
 -- register es news craft
 

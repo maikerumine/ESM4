@@ -158,7 +158,7 @@ mobs:register_mob("mobs:beedo_mini_monster", {
 	fear_height = 3,
 		
 })
---[[
+
 mobs:spawn({
 	name = "mobs:beedo_monster",
 	--nodes = {"default:clay", "cblocks:stone_orange", "cblocks:stone_yellow", "es:beedo_block"},
@@ -175,7 +175,7 @@ mobs:spawn({
 	on_spawn = nil,
 	on_map_load = nil,
 })
-]]
+
 
 --[[
 if minetest.setting_get("log_mods") then

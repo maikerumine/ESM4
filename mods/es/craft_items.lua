@@ -22,11 +22,12 @@ es = {}
 
 --MESE
 --======================================
+--[[
 minetest.register_craftitem("es:mesecook_crystal", {
 	description = "Cookable Raw MESE",
 	inventory_image = "default_mineral_mese.png",
 })
-
+]]
 
 --URANIUM
 --======================================
@@ -86,7 +87,8 @@ minetest.register_craftitem("es:purpellium_lump", {
 
 
 minetest.register_craftitem("es:unobtainium_ingot", {
-	description = "Unobtainium Ingot -=Cook lump for 11080 seconds quarter of a day, to have this ingot then you may.",
+	--description = "Unobtainium Ingot -=Cook lump for 11080 seconds quarter of a day, to have this ingot then you may.",
+	description = "Unobtainium Ingot -=Cook lump for 5540 seconds  of a day, to have this ingot then you may.",
 	inventory_image = "es_unobtainium_ingot.png",
 })
 minetest.register_craftitem("es:unobtainium_lump", {

@@ -3,7 +3,11 @@ hopper = {}
 
 -- internationalization boilerplate
 local MP = minetest.get_modpath(minetest.get_current_modname())
-local S, NS = dofile(MP.."/intllib.lua")
+local S = minetest.get_translator("hopper")
+
+hopper.translator_escaped = function(...)
+	return minetest.formspec_escape(S(...))
+end
 
 if minetest.get_modpath("default") then
 	hopper.formspec_bg = default.gui_bg .. default.gui_bg_img .. default.gui_slots
@@ -58,4 +62,10 @@ if minetest.get_modpath("lucky_block") then
 	})
 end
 
-print (S("[MOD] Hopper loaded"))
+-- Utility function for inventory movement logs
+function hopper.log_inventory(...)
+	minetest.log(hopper.config.inv_log_level, ...)
+end
+
+
+minetest.log("action", "[hopper] Hopper mod loaded")

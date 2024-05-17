@@ -333,7 +333,7 @@ minetest.register_abm({
 --
 -- Dirt transformation
 --
-
+--[[
 minetest.register_abm({
 	label = "Grow grass on dirt",
 	nodenames = {"default:dirt"},
@@ -352,7 +352,7 @@ minetest.register_abm({
 				end
 	end,
 })
-
+]]
 --
 -- Sugarcane growing
 --
@@ -458,7 +458,7 @@ minetest.register_abm({
 		end
 	end,
 })
-
+--[[
 minetest.register_abm({
 	label = "Grow papyrus",
 	nodenames = {"default:papyrus"},
@@ -487,3 +487,4 @@ minetest.register_abm({
 	end,
 })
 
+]]

@@ -28,3 +28,19 @@ minetest.register_tool("mobs:sword_lightsteel_red", {
 		damage_groups = {fleshy=2.50},
 	},
 })
+
+
+
+minetest.register_craft({
+	output = 'mobs:sword_lightsteel_red',
+	type = "shapeless",
+	recipe =
+		{'es:ruby_dust', 'default:sword_bronze' },
+})
+
+minetest.register_craft({
+	output = 'mobs:sword_lightsteel_blue',
+	type = "shapeless",
+	recipe =
+		{'es:aikerum_dust', 'default:sword_bronze' },
+})

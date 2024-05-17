@@ -47,7 +47,7 @@ mobs:register_mob("mobs_mc:silverfish", {
 	damage = 1,
 	reach = 1,
 })
-
+--[[
 mobs:register_egg("mobs_mc:silverfish", S("Silverfish"), "mobs_mc_spawn_icon_silverfish.png", 0)
 
 -- Monster egg blocks (Minetest Game)
@@ -130,3 +130,4 @@ if minetest.get_modpath("default") and mobs_mc.create_monster_egg_nodes then
 	})
 
 end
+]]

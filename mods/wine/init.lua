@@ -260,7 +260,7 @@ minetest.register_craft({
 		}
 	})
 -- Raw champagne
---[[
+
 if minetest.get_modpath("farming")
 and farming.mod and (farming.mod == "undo" or farming.mod == "redo") then
 
@@ -278,7 +278,7 @@ and farming.mod and (farming.mod == "undo" or farming.mod == "redo") then
 		}
 	})
 end
-]]
+
 
 -- override to add food group to wine and brandy glass
 minetest.override_item("wine:glass_wine", {
@@ -437,7 +437,7 @@ end
 		}
 	})
 -- Mint Julep recipe
---[[
+
 if minetest.get_modpath("farming")
 and farming.mod and (farming.mod == "redo" or farming.mod == "undo") then
 
@@ -450,7 +450,7 @@ and farming.mod and (farming.mod == "redo" or farming.mod == "undo") then
 		}
 	})
 end
-]]
+
 
 -- Wine barrel formspec
 winebarrel_formspec = "size[8,9]"

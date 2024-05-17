@@ -26,7 +26,7 @@ local function has_locked_chest_privilege(meta, player)
 end
 
 local chests = {
-	{ "", S("Chest"), S("Locked Chest") },
+--	{ "", S("Chest"), S("Locked Chest") },
 	{ "white", S("White Chest"), S("White Locked Chest") },
 	{ "grey", S("Grey Chest"), S("Grey Locked Chest") },
 	{ "dark_grey", S("Dark Grey Chest"), S("Dark Grey Locked Chest") },
@@ -176,18 +176,22 @@ if sub ~= "" then
 	minetest.register_craft({
 		type = "shapeless",
 		output = itemstring_unlocked,
-		recipe = { "group:unlocked_chest", "dye:"..sub },
+		recipe = { "default:chest", "dye:"..sub },
 	})
+
 	minetest.register_craft({
 		type = "shapeless",
 		output = itemstring_locked,
-		recipe = { itemstring_unlocked, "hades_core:steel_ingot" },
+		recipe = { itemstring_unlocked, "default:steel_ingot" },
 	})
+
 	minetest.register_craft({
 		type = "shapeless",
 		output = itemstring_locked,
-		recipe = { "group:locked_chest", "dye:"..sub },
+		--recipe = { "group:locked_chest", "dye:"..sub },
+		recipe = { "default:chest_locked", "dye:"..sub },
 	})
+--[[
 	minetest.register_craft({
 		output = itemstring_unlocked,
 		recipe = {
@@ -204,19 +208,25 @@ if sub ~= "" then
 			{'hades_trees:colwood_'..sub, 'hades_trees:colwood_'..sub, 'hades_trees:colwood_'..sub},
 		}
 	})
+	]]
 end
 
 end
-
+--[[
 minetest.register_craft({
 	output = 'hades_chests:chest',
 	recipe = {
 		{'group:wood', 'group:wood', 'group:wood'},
-		{'group:wood', '', 'group:wood'},
+		{'group:wood', 'hades_core:nails', 'group:wood'},
 		{'group:wood', 'group:wood', 'group:wood'},
 	}
 })
+]]
 
+minetest.register_alias("hades_chests:chest", "default:chest")
+minetest.register_alias("hades_chests:chest_locked", "default:chest_locked")
+
+--[[
 minetest.register_craft({
 	type = "shapeless",
 	output = 'hades_chests:chest_locked',
@@ -230,7 +240,7 @@ minetest.register_craft({
 		{'group:wood', 'group:wood', 'group:wood'},
 	}
 })
-
+]]
 minetest.register_craft({
 	type = "fuel",
 	recipe = "group:chest",

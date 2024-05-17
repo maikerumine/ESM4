@@ -25,6 +25,10 @@ minetest.register_node("fishing:bobber_box", {
 		"fishing_bobber.png",
 		"fishing_bobber.png^[transformFX"
 	},
+	
+	use_texture_alpha = "clip", -- only needed for stairs API
+	
+	
 	groups = {not_in_creative_inventory=1},
 })
 

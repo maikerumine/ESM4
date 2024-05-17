@@ -10,6 +10,7 @@
 
     local space = 5000 --value for space, change the value to however you like.
     local cave = -40 --value for cave, change the value to however you like.
+    local cave_deep = -18500 --value for cave, change the value to however you like.
 
     --The skybox for space, feel free to change it to however you like.
     local spaceskybox = {
@@ -86,7 +87,7 @@ minetest.register_globalstep(function(dtime)
 		time = 0
 
 		local name = player:get_player_name()
-		local pos = player:getpos()
+		local pos = player:get_pos()
 	
 	    --If the player has reached Space
 		if minetest.get_player_by_name(name) and pos.y >= space then
@@ -136,6 +137,19 @@ minetest.register_globalstep(function(dtime)
 --					clouds = false
 --				})
 				end
+				
+				--====================
+				if minetest.get_player_by_name(name) and pos.y <=cave_deep then
+				player:set_stars({visible=true})
+				player:set_moon({visible=true})
+				player:set_sun({visible=true, sunrise_visible=true, scale=0.5})
+				earth_sky(player)
+				clouds = true
+				player:set_physics_override({gravity = 1.5,})
+
+				end
+				--====================
+				
 			end
 		end
 	end

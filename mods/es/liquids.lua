@@ -47,6 +47,10 @@ minetest.register_node("es:fake_water_source", {
 			},
 		},
 	},
+	
+	--use_texture_alpha = "clip", -- only needed for stairs API
+	
+	
 	alpha = 160,
 	paramtype = "light",
 	walkable = false,
@@ -98,6 +102,10 @@ minetest.register_node("es:fake_water_flowing", {
 		},
 	},
 	alpha = 160,
+	
+	--use_texture_alpha = "clip", -- only needed for stairs API
+	
+	
 	paramtype = "light",
 	walkable = false,
 	--pointable = true,
@@ -152,6 +160,10 @@ minetest.register_node("es:toxic_water_source", {
 		},
 	},
 	alpha = 240,
+	
+	--use_texture_alpha = "clip", -- only needed for stairs API
+	
+	
 	paramtype = "light",
 	light_source = 12,
 	walkable = false,
@@ -204,6 +216,10 @@ minetest.register_node("es:toxic_water_flowing", {
 		},
 	},
 	alpha = 240,
+	
+	--use_texture_alpha = "clip", -- only needed for stairs API
+	
+	
 	paramtype = "light",
 	light_source = 12,
 	paramtype2 = "flowingliquid",
@@ -219,7 +235,7 @@ minetest.register_node("es:toxic_water_flowing", {
 	liquid_alternative_flowing = "es:toxic_water_flowing",
 	liquid_alternative_source = "es:toxic_water_source",
 	liquid_viscosity = 2,
-	damage_per_second = 2*2,
+	--damage_per_second = 2*2,
 	post_effect_color = {a = 255, r = 10, g = 160, b = 10},
 	groups = {water = 3, liquid = 3, puts_out_fire = 1,
 		--not_in_creative_inventory = 1, radioactive = (state == "source" and 2 or 2),},
@@ -277,6 +293,10 @@ minetest.register_node("es:mud_flowing", {
 	},
 
 	alpha = 250,
+	
+	--use_texture_alpha = "clip", -- only needed for stairs API
+	
+	
 	paramtype = "light",
 	paramtype2 = "flowingliquid",
 	walkable = false,
@@ -422,6 +442,10 @@ minetest.register_node("es:rainbow_water_source", {
 		},
 	},
 	alpha = 240,
+	
+	--use_texture_alpha = "clip", -- only needed for stairs API
+	
+	
 	paramtype = "light",
 	light_source = 12,
 	walkable = false,
@@ -469,6 +493,10 @@ minetest.register_node("es:rainbow_water_flowing", {
 		},
 	},
 	alpha = 240,
+	
+	--use_texture_alpha = "clip", -- only needed for stairs API
+	
+	
 	paramtype = "light",
 	light_source = 12,
 	paramtype2 = "flowingliquid",
@@ -506,3 +534,15 @@ bucket.register_liquid(
 	"Rainbow Bucket",
 	{tool = 1}
 )
+
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "es:rainbow_water_source",
+	replacements = {{"es:bucket_rainbow", "bucket:bucket_empty"}},
+	recipe = {"es:bucket_rainbow"},
+})
+
+
+minetest.log("action", "ES: [liquids] loaded.")
+

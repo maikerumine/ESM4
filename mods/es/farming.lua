@@ -4,6 +4,7 @@
 --version 1.8
 --https://github.com/maikerumine
 
+--[[
 local function register_plant(name, min, max, spawnby, num)
 	minetest.register_decoration({
 		deco_type = "simple",
@@ -72,3 +73,30 @@ if minetest.get_mapgen_params().mgname == "v6" then
 else
 	farming.register_mgv7_decorations()
 end
+
+]]
+
+local mud_correspondences = {
+	["es:dry_dirt"] = "default:dirt",
+	["stairs:slab_dry_dirt"] = "stairs:slab_dirt",
+	["stairs:stair_dry_dirt"] = "stairs:stair_dirt",
+	["stairs:stair_inner_dry_dirt"] = "stairs:stair_inner_dirt",
+	["stairs:stair_outer_dry_dirt"] = "stairs:stair_outer_dirt",
+	["walls:dry_dirt"] = "walls:dirt",
+}
+minetest.register_abm({
+	label = "Dirt growth",
+	nodenames = {"es:dry_dirt", "stairs:slab_dry_dirt", "stairs:stair_dry_dirt",
+		"stairs:stair_inner_dry_dirt", "stairs:stair_outer_dry_dirt",
+		"walls:dry_dirt"},
+	neighbors = {"group:water"},
+	interval = 16,
+	chance = 200,
+	catch_up = false,
+	action = function(pos, node)
+		node.name = mud_correspondences[node.name]
+		if node.name then
+			minetest.set_node(pos, node)
+		end
+	end
+})

@@ -1200,7 +1200,7 @@ cblocks = {}
 --endgen default
 
 
-
+minetest.log("action", "ES: [orgen-cblocks] loaded.")
 
 
 	

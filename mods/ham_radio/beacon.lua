@@ -8,6 +8,10 @@ minetest.register_node("ham_radio:beacon", {
     "ham_radio_transmitter_side.png",
     "ham_radio_beacon_front.png"
   },
+  
+  use_texture_alpha = "clip", -- only needed for stairs API
+  
+  
   groups = {cracky=2,oddly_breakable_by_hand=2},
   sounds = default.node_sound_metal_defaults(),
   paramtype2 = "facedir",

@@ -31,7 +31,7 @@ dofile(path .. "/0_gameconfig_mm.lua")
 --dofile(path .. "/1_items_default.lua")
 
 -- Bow, arrow and throwables
-dofile(path .. "/2_throwing.lua")
+--dofile(path .. "/2_throwing.lua")
 
 -- Shared functions
 dofile(path .. "/3_shared.lua")
@@ -99,3 +99,5 @@ COLISIONBOX in minetest press f5 to see where you are looking at then put these 
 --]]
 --
 --
+
+minetest.log("action", "ES: [MC MOBS 4 MINETEST] loaded.")

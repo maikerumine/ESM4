@@ -1,1 +1,0 @@
-Creates place, which new players can demolish, place is restored at each restart.

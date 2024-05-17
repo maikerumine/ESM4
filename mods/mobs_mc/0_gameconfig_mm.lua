@@ -280,7 +280,7 @@ mobs_mc.spawn = {
 	-- These probably don't need overrides
 	mushroom_island = { mobs_mc.items.mycelium, "mcl_core:mycelium" },
 	nether_fortress = { mobs_mc.items.nether_brick_block, "mcl_nether:nether_brick", },
-	nether = { mobs_mc.items.netherrack, "mcl_nether:netherrack", "nether:netherrack", },
+	nether = { mobs_mc.items.netherrack, "mcl_nether:netherrack", "nether:netherrack", "es:air" },
 	nether_portal = { mobs_mc.items.nether_portal, "mcl_portals:portal" },
 	water = { mobs_mc.items.water_source, "mcl_core:water_source", "default:water_source" },
 }
@@ -295,8 +295,10 @@ mobs_mc.spawn_height = {
 	overworld_max = 31000,
 
 	-- Nether boundaries (inclusive)
-	nether_min = -4369,
-	nether_max = -3000,
+	--nether_min = -4369,
+	nether_min = -18800,
+	--nether_max = -3000,
+	nether_max = -19000,
 
 	-- End boundaries (inclusive)
 	end_min = -6200,

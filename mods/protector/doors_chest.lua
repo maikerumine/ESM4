@@ -4,7 +4,7 @@
 -- within this mod for local use.
 
 local S = protector.intllib
---[[
+--[[	]]
 -- Registers a door
 function register_door(name, def)
 	def.groups.not_in_creative_inventory = 1
@@ -312,16 +312,17 @@ register_door(name, {
 minetest.register_craft({
 	output = name,
 	recipe = {
-		{"group:wood", "group:wood"},
-		{"group:wood", "default:copper_ingot"},
-		{"group:wood", "group:wood"}
+		{"group:wood", "group:wood", 'hades_core:nails'},
+		{"group:wood", "default:copper_ingot", 'hades_core:nails'},
+		{"group:wood", "group:wood", 'hades_core:nails'}
+
 	}
 })
 
 minetest.register_craft({
 	output = name,
 	recipe = {
-		{"doors:door_wood", "default:copper_ingot"}
+		{"doors:door_wood", "default:copper_ingot", 'hades_core:nails'}
 	}
 })
 
@@ -345,16 +346,16 @@ register_door(name, {
 minetest.register_craft({
 	output = name,
 	recipe = {
-		{"default:steel_ingot", "default:steel_ingot"},
-		{"default:steel_ingot", "default:copper_ingot"},
-		{"default:steel_ingot", "default:steel_ingot"}
+		{"default:steel_ingot", "default:steel_ingot", 'hades_core:nails'},
+		{"default:steel_ingot", "default:copper_ingot", 'hades_core:nails'},
+		{"default:steel_ingot", "default:steel_ingot", 'hades_core:nails'}
 	}
 })
 
 minetest.register_craft({
 	output = name,
 	recipe = {
-		{"doors:door_steel", "default:copper_ingot"}
+		{"doors:door_steel", "default:copper_ingot", 'hades_core:nails'}
 	}
 })
 
@@ -438,14 +439,14 @@ minetest.register_craft({
 	recipe = {
 		{'group:wood', 'default:copper_ingot', 'group:wood'},
 		{'group:wood', 'group:wood', 'group:wood'},
-		{'', '', ''},
+		{'hades_core:nails', '', ''},
 	}
 })
 
 minetest.register_craft({
 	output = "protector:trapdoor",
 	recipe = {
-		{"doors:trapdoor", "default:copper_ingot"}
+		{"doors:trapdoor", "default:copper_ingot", 'hades_core:nails'}
 	}
 })
 
@@ -467,18 +468,19 @@ register_trapdoor("protector:trapdoor_steel", {
 minetest.register_craft({
 	output = 'protector:trapdoor_steel',
 	recipe = {
-		{'default:copper_ingot', 'default:steel_ingot'},
-		{'default:steel_ingot', 'default:steel_ingot'},
+		{'default:copper_ingot', 'default:steel_ingot', ''},
+		{'default:steel_ingot', 'default:steel_ingot',  '',},
+		{'hades_core:nails', '', ''},
 	}
 })
 
 minetest.register_craft({
 	output = "protector:trapdoor_steel",
 	recipe = {
-		{"doors:trapdoor_steel", "default:copper_ingot"}
+		{"doors:trapdoor_steel", "default:copper_ingot", 'hades_core:nails'}
 	}
 })
-]]
+--]]
 -- Protected Chest
 
 minetest.register_node("protector:chest", {
@@ -670,12 +672,12 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 end)
 
 -- Protected Chest recipes
---[[
+--[[	]]
 minetest.register_craft({
 	output = 'protector:chest',
 	recipe = {
 		{'group:wood', 'group:wood', 'group:wood'},
-		{'group:wood', 'default:copper_ingot', 'group:wood'},
+		{'group:wood', 'default:copper_ingot', 'hades_core:nails'},
 		{'group:wood', 'group:wood', 'group:wood'},
 	}
 })
@@ -683,7 +685,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = 'protector:chest',
 	recipe = {
-		{'default:chest', 'default:copper_ingot', ''},
+		{'default:chest', 'default:copper_ingot', 'hades_core:nails'},
 	}
 })
-]]
+--]]

@@ -21,6 +21,10 @@ minetest.register_node("es:fake_craft_guide_sign_wall", {
 	description = "Fake Craft Sign",
 	drawtype = "signlike",
 	tiles = {"craft_guide_sign.png"},
+	
+	use_texture_alpha = "clip", -- only needed for stairs API
+	
+	
 	inventory_image = "craft_guide_sign.png",
 	paramtype = 'light',
 	paramtype2 = "wallmounted",
@@ -49,6 +53,10 @@ minetest.register_node("es:fake_craft_guide_lcd_pc", {
 		"laptop_opti_pc_back.png^laptop_opti_kb_back.png^laptop_opti_ms_back.png^laptop_opti_lcb_back.png^laptop_opti_lcp_back.png^laptop_opti_lcd_back.png",
 		"laptop_opti_pc_on_front.png^laptop_opti_kb_front.png^laptop_opti_ms_front.png^laptop_opti_lcb_front.png^laptop_opti_lcp_front.png^laptop_opti_lcd_on_front.png",
 	},
+	
+	use_texture_alpha = "clip", -- only needed for stairs API
+	
+	
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",

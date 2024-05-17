@@ -34,3 +34,5 @@ end)
 minetest.register_on_leaveplayer(function(player)
 	mcl_burning.set(player, "int", "hud_id")
 end)
+
+minetest.log("action", "ES: [MCL BURNING] loaded.")

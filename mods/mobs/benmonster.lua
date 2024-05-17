@@ -95,10 +95,10 @@ mobs:register_mob("mobs:ben_monster", {
 		})		
 	end,	
 })
---[[
+
 mobs:spawn({
 	name = "mobs:ben_monster",
-	nodes = {"default:cobblestone","default:cobble"},
+	nodes = {"default:permafrost_with_moss","default:permafrost_with_stones"},
 	neighbors = {"air"},
 	min_light = 0,
 	max_light = 5,
@@ -111,7 +111,7 @@ mobs:spawn({
 	on_spawn = nil,
 	on_map_load = nil,
 })
-]]
+
 
 --[[
 if minetest.setting_get("log_mods") then

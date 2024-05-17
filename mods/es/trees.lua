@@ -67,8 +67,8 @@ minetest.register_node("es:strange_leaves", {
 	},
 	sounds = default.node_sound_leaves_defaults(),
 
-	--after_place_node = default.after_place_leaves,
-	after_place_node = after_place_leaves,	--def
+	after_place_node = default.after_place_leaves,
+	--after_place_node = after_place_leaves,	--def
 })
 
 minetest.register_node("es:aiden_tree_leaves", {
@@ -106,8 +106,8 @@ minetest.register_node("es:aiden_tree_leaves", {
 	},
 	sounds = default.node_sound_leaves_defaults(),
 
-	--after_place_node = default.after_place_leaves,
-	after_place_node = after_place_leaves,	--def
+	after_place_node = default.after_place_leaves,
+	--after_place_node = after_place_leaves,	--def
 })
 
 minetest.register_node("es:strange_shrub", {
@@ -189,7 +189,7 @@ minetest.register_node("es:strange_tree_wood", {
 	place_param2 = 0,
 	tiles = {"es_strange_wood.png"},
 	is_ground_content = false,
-	groups = {choppy = 2, flammable = 2},
+	groups = {choppy = 2, flammable = 2, wood = 1},
 	sounds = default.node_sound_wood_defaults(),
 })
 

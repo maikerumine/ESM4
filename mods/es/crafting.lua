@@ -293,7 +293,6 @@ minetest.register_craft({
 --======================================
 minetest.register_craft({
 	output = "es:stealth_locked_chest",
-	replacements = {{"bucket:bucket_toxic", "bucket:bucket_empty"}},
 	recipe = {
 	{"default:cobble","default:cobble","default:cobble"},
 	{"default:cobble","default:steelblock","default:cobble"},
@@ -305,7 +304,6 @@ minetest.register_craft({
 --======================================
 minetest.register_craft({
 	output = 'es:boneblock',
-	replacements = {{"default:steelblock", "default:steelblock"}},
 	recipe = {
 	{"bones:bones", "bones:bones", "bones:bones"},
 	{"bones:bones", "default:steelblock", "bones:bones"},

@@ -1,5 +1,0 @@
-default
-bones
-stairs
-bucket
-tnt

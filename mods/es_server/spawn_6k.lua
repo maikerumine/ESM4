@@ -24,7 +24,7 @@ minetest.register_chatcommand("mine", {
 	local t=minetest.get_gametime();
 	local t0 = spawn_limit[name] or (t-spawn_limit_max);
 	if t - t0<spawn_limit_max then
-	minetest.chat_send_player(name, "Please wait " .. spawn_limit_max-(t-t0) .. "s before using /spawn again");
+	minetest.chat_send_player(name, "Please wait " .. spawn_limit_max-(t-t0) .. "s before using /mine again");
 	return
 	else
 	spawn_limit[name] = minetest.get_gametime(); -- remember the time when player tried used spawn
@@ -32,8 +32,8 @@ minetest.register_chatcommand("mine", {
 
 
 
-	local pos = player:getpos()
-	local vel = player:getvelocity()	--20200902 rnd? fix
+	local pos = player:get_pos()
+	local vel = player:get_velocity()	--20200902 rnd? fix
 
 	if pos.x>-20 and pos.x<20 and pos.y>-20 and pos.y<200 and pos.z>-20 and pos.z<20
 	then
@@ -52,10 +52,10 @@ minetest.register_chatcommand("mine", {
 	else
 	 --set  velocity = 0  then teleport
 		--player:setvelocity(spawn_mine_6k.vel)	--20200902 rnd? fix
-		player:setvelocity(0)	--20200902 rnd? fix
-		player:setpos(spawn_mine_6k.pos)
+		player:set_velocity(0)	--20200902 rnd? fix
+		player:set_pos(spawn_mine_6k.pos)
 		minetest.sound_play("thunder")
-		minetest.chat_send_player(name, "Teleported to spawn!")
+		minetest.chat_send_player(name, "Teleported to the -6k mine!")
 			 
 	end
 	end

@@ -45,7 +45,8 @@ minetest.clear_registered_ores()
 --dofile(modpath.."/biome_grass_old_v7.lua")
 --dofile(modpath.."/biome_magic_stone.lua")
 --dofile(modpath.."/biome_null_stone.lua")
-dofile(modpath.."/biome_stone_enhanced.lua")
+--dofile(modpath.."/biome_stone_enhanced.lua")
+dofile(modpath.."/biome_stone_enhanced_depth.lua")
 --dofile(modpath.."/biome_wasteland.lua")
 
 
@@ -85,7 +86,7 @@ dofile(modpath.."/tools.lua")
 
 	--farming redo
 --if farming and redo then
---	dofile(modpath.."/farming.lua")
+	dofile(modpath.."/farming.lua")
 --end
 
 	--flowers on es nodes

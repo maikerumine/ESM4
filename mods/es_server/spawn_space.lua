@@ -33,8 +33,8 @@ minetest.register_chatcommand("space", {
 				--player:setvelocity({x=0, y=0, z=0})	--20200902 rnd? fix
 --===========================
 
-	local pos = player:getpos()
-	local vel = player:getvelocity()	--20200902 rnd? fix
+	local pos = player:get_pos()
+	local vel = player:get_velocity()	--20200902 rnd? fix
 
 		if pos.x>-3 and pos.x<3 and pos.y>14999 and pos.y<15000 and pos.z>-3 and pos.z<3
 		then
@@ -45,11 +45,11 @@ minetest.register_chatcommand("space", {
 		then
 			minetest.chat_send_player(name, "YOU MUST DIE TO ESCAPE!")
 		else
-			player:setvelocity(0)	--20200902
+			player:set_velocity(0)	--20200902
 			minetest.chat_send_player(name, "Setting velocity!")
-			player:setvelocity(0)	--20200909
+			player:set_velocity(0)	--20200909
 			minetest.chat_send_player(name, "Setting velocity!")
-			player:setpos(spawn_space.pos)
+			player:set_pos(spawn_space.pos)
 			minetest.chat_send_player(name, "Setting position!")
 			minetest.sound_play("teleport")
 			minetest.chat_send_player(name, "Teleported to space!")		 

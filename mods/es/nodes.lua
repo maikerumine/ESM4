@@ -63,10 +63,11 @@ end
 minetest.register_node("es:oremagicinator", {
 	description = "Ore Generator Block -= Dig for random ore or cobble.",
 	tiles = {"default_stone.png"},
-	groups = {cracky = 3, stone = 1},
+	groups = {cracky = 2, stone = 1},
 	drop = {
 		max_items = 1,
 		items = {
+		--[[
 		--cblocks--
 		--======================================================
 		--black
@@ -610,7 +611,7 @@ minetest.register_node("es:oremagicinator", {
 				rarity = 260,
 			},
 
-		
+		]]
 		--======================================================
 			{
 				-- player will get ore with 1/20 chance
@@ -836,6 +837,10 @@ minetest.register_node("es:what", {
 	drawtype = "glasslike_framed_optional",
 	--tiles = {"default_obsidian_glass.png^bubble.png", "default_obsidian_glass_detail.png^bubble.png"},
     	tiles = {"es_what_block.png"},
+		
+	use_texture_alpha = "clip", -- only needed for stairs API
+	
+	
 	inventory_image = minetest.inventorycube("es_what_block.png"),
 	paramtype = "light",
 	paramtype2 = "glasslikeliquidlevel",
@@ -948,6 +953,40 @@ minetest.register_node("es:desert_stone_with_meatz", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
+--==================================
+--==================================
+--==================================
+-- Flame nodes
+--[[
+
+	tiles = {{
+		name = "fire_basic_flame_animated.png",
+		animation = {
+			type = "vertical_frames",
+			aspect_w = 16,
+			aspect_h = 16,
+			length = 1
+		}}
+
+]]
+
+
+
+
+
+
+
+
+
+
+--==================================
+--==================================
+
+
+
+
+
+
 minetest.register_node("es:stone_with_emeralds", {
 	description = "Emerald Ore",
 	tiles = {"default_stone.png^es_emerald_ore.png"},
@@ -1009,6 +1048,7 @@ minetest.register_node("es:depleted_uraniums", {
 	description = "Depleted Uranium Ore RADIOACTIVE",
 	tiles = {"default_stone.png^es_uranium_ore.png"},
 	--groups = {cracky = 3, radioactive = (state == "source" and 3 or 2)},
+	--groups = {cracky = 3, radioactive = 1},
 	groups = {cracky = 3, radioactive = 1},
 	drop = 'es:depleted_uranium_lump',
 	sounds = default.node_sound_stone_defaults(),

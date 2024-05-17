@@ -56,3 +56,9 @@ minetest.register_craft({
 	output = "fishing:baitball_shark 20",
 	recipe = {"fishing:shark_raw", "fishing:pike_raw"}
 })
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "fishing:baitball_shark 20",
+	recipe = {"mobs:rat", "mobs:rat"}
+})

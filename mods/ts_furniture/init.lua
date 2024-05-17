@@ -43,7 +43,7 @@ end
 
 local furnitures = {
 	["chair"] = {
-		description = "Chair",
+		description = "Chair  --==Can use colored woods too==--",
 		sitting = true,
 		nodebox = {
 			{ -1/4, -0.5, 5/16, -5/16, 0.5, 3/16 }, -- foot 1
@@ -57,6 +57,7 @@ local furnitures = {
 			{ 3/16, 0, 3/16, 1/8, 3/8, 1/4 }, -- conector 1-2
 			{ -1/16, 0, 3/16, 1/16, 1/2, 1/4 } -- conector 1-2
 		},
+		groups = {choppy = 2, oddly_breakable_by_hand = 3, flammable = 2, not_in_creative_inventory = 1},
 		craft = function(recipe)
 			return {
 				{ "", "group:stick" },
@@ -67,7 +68,7 @@ local furnitures = {
 		burntime = 17,
 	},
 	["table"] = {
-		description = "Table",
+		description = "Table  --==Can use colored woods too==--",
 		nodebox = {
 			{ -0.4, -0.5, -0.4, -0.3, 0.4, -0.3 }, -- foot 1
 			{ 0.3, -0.5, -0.4, 0.4, 0.4, -0.3 }, -- foot 2
@@ -75,6 +76,7 @@ local furnitures = {
 			{ 0.3, -0.5, 0.3, 0.4, 0.4, 0.4 }, -- foot 4
 			{ -0.5, 0.4, -0.5, 0.5, 0.5, 0.5 }, -- table top
 		},
+		groups = {choppy = 2, oddly_breakable_by_hand = 3, flammable = 2, not_in_creative_inventory = 1},
 		craft = function(recipe)
 			return {
 				{ recipe, recipe, recipe },
@@ -85,7 +87,7 @@ local furnitures = {
 		burntime = 25,
 	},
 	["small_table"] = {
-		description = "Small Table",
+		description = "Small Table  --==Can use colored woods too==--",
 		nodebox = {
 			{ -0.4, -0.5, -0.4, -0.3, 0.1, -0.3 }, -- foot 1
 			{ 0.3, -0.5, -0.4, 0.4, 0.1, -0.3 }, -- foot 2
@@ -93,6 +95,7 @@ local furnitures = {
 			{ 0.3, -0.5, 0.3, 0.4, 0.1, 0.4 }, -- foot 4
 			{ -0.5, 0.1, -0.5, 0.5, 0.2, 0.5 }, -- table top
 		},
+		groups = {choppy = 2, oddly_breakable_by_hand = 3, flammable = 2, not_in_creative_inventory = 1},
 		craft = function(recipe)
 			return {
 				{ recipe, recipe, recipe },
@@ -102,12 +105,13 @@ local furnitures = {
 		burntime = 23,
 	},
 	["tiny_table"] = {
-		description = "Tiny Table",
+		description = "Tiny Table  --==Can use colored woods too==--",
 		nodebox = {
 			{ -0.5, -0.1, -0.5, 0.5, 0, 0.5 }, -- table top
 			{ -0.4, -0.5, -0.5, -0.3, -0.1, 0.5 }, -- foot 1
 			{ 0.3, -0.5, -0.5, 0.4, -0.1, 0.5 }, -- foot 2
 		},
+		groups = {choppy = 2, oddly_breakable_by_hand = 3, flammable = 2, not_in_creative_inventory = 1},
 		craft = function(recipe)
 			local bench_name = "ts_furniture:" .. recipe:gsub(":", "_") .. "_bench"
 			return {
@@ -117,13 +121,14 @@ local furnitures = {
 		burntime = 20,
 	},
 	["bench"] = {
-		description = "Bench",
+		description = "Bench  --==Can use colored woods too==--",
 		sitting = true,
 		nodebox = {
 			{ -0.5, -0.1, 0, 0.5, 0, 0.5 }, -- seating
 			{ -0.4, -0.5, 0, -0.3, -0.1, 0.5 }, -- foot 1
 			{ 0.3, -0.5, 0, 0.4, -0.1, 0.5 }, -- foot 2
 		},
+		groups = {choppy = 2, oddly_breakable_by_hand = 3, flammable = 2, not_in_creative_inventory = 1},
 		craft = function(recipe)
 			return {
 				{ recipe, recipe },
@@ -133,7 +138,7 @@ local furnitures = {
 		burntime = 16,
 	},
 	["ladder"] = {
-		description = "Ladder",
+		description = "Ladder  --==Can use colored woods too==--",
 		--inventory_image = "default_ladder_wood.png",
 		--walkable = false,
 		climbable = true,
@@ -145,7 +150,7 @@ local furnitures = {
 			{ -1/2, 1/4, 7/16, 1/2, 5/16, 3/8},
 			{-1/2, -3/16, 7/16, 1/2, -1/4, 3/8},
 		},
-		groups = {choppy = 2, oddly_breakable_by_hand = 3, flammable = 2},
+		groups = {choppy = 2, oddly_breakable_by_hand = 3, flammable = 2, not_in_creative_inventory = 1},
 		craft = function(recipe)
 			return {
 				{ "group:stick", "", "group:stick"},
@@ -156,7 +161,7 @@ local furnitures = {
 		burntime = 10,
 	},
 	["cabinet"] = {
-		description = "Cabinet",
+		description = "Cabinet  --==Can use colored woods too==--",
 		nodebox = {
 			{1/2, 1/2, 1/2, -1/2, 7/16, -1/2},
 			{1/2, 7/16, 1/2, -1/2, -1/2, -3/8},
@@ -167,7 +172,7 @@ local furnitures = {
 
 		},
 		storage = 32,
-		groups = {choppy = 2, flammable = 2},
+		groups = {choppy = 2, flammable = 2, not_in_creative_inventory = 1},
 		toggle = true,
 		toggle_nodebox = {
 		--	Horizontal Panels
@@ -399,3 +404,5 @@ if minetest.get_modpath("ethereal") then
 	ts_furniture.register_furniture("ethereal:willow_wood", "Willow", "willow_wood.png")
 	ts_furniture.register_furniture("ethereal:yellow_wood", "Healing Tree", "yellow_wood.png")
 end
+
+minetest.log("action", "ES: [TS FURNITURE] loaded.")

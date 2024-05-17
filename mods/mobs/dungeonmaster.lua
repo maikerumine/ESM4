@@ -60,7 +60,7 @@ mobs:spawn({
 	neighbors = {"default:mese", "default:stone_with_mese", "default:lava_source", "default:mossycobble"},
 	chance = 70,
 	active_object_count = 2,
-	min_height = -28500,
+	min_height = -18500,
 	max_height = -1500,
 })
 --[[

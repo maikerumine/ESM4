@@ -2,6 +2,10 @@ minetest.register_tool("ham_radio:handheld_receiver", {
   description = "Handheld Radio Receiver",
   wield_image = "ham_radio_receiver_handheld.png",
   inventory_image = "ham_radio_receiver_handheld.png",
+  
+  use_texture_alpha = "clip", -- only needed for stairs API
+  
+  
   groups = { disable_repair = 1 },
   -- left click - change frequency
   on_use = function(itemstack, user, pointed_thing)

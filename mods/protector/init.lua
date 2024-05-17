@@ -392,7 +392,7 @@ minetest.register_node("protector:protect", {
 
 		protector.can_dig(protector.radius, pointed_thing.under, user:get_player_name(), false, 2)
 	end,
---[[
+--[[	]]
 	on_rightclick = function(pos, node, clicker, itemstack)
 
 		local meta = minetest.get_meta(pos)
@@ -405,7 +405,7 @@ minetest.register_node("protector:protect", {
 				protector_formspec(meta))
 		end
 	end,
-]]
+--]]
 	on_punch = function(pos, node, puncher)
 
 		if minetest.is_protected(pos, puncher:get_player_name()) then
@@ -437,6 +437,10 @@ minetest.register_craft({
 minetest.register_node("protector:protect2", {
 	description = S("Protection Logo  -=VERY Tiny, use with caution!=-") .. " (" .. S("USE for area check") .. ")",
 	tiles = {"protector_logo.png"},
+	
+	use_texture_alpha = "clip", -- only needed for stairs API
+	
+	
 	wield_image = "protector_logo_large.png",
 	inventory_image = "protector_logo_large.png",
 	sounds = default.node_sound_stone_defaults(),
@@ -475,7 +479,7 @@ minetest.register_node("protector:protect2", {
 
 		protector.can_dig(protector.radius, pointed_thing.under, user:get_player_name(), false, 2)
 	end,
---[[
+--[[	]]
 	on_rightclick = function(pos, node, clicker, itemstack)
 
 		local meta = minetest.get_meta(pos)
@@ -486,7 +490,7 @@ minetest.register_node("protector:protect2", {
 			"protector:node_" .. minetest.pos_to_string(pos), protector_formspec(meta))
 		end
 	end,
-]]
+--]]
 	on_punch = function(pos, node, puncher)
 
 		if minetest.is_protected(pos, puncher:get_player_name()) then
@@ -579,6 +583,10 @@ minetest.register_entity("protector:display", {
 	-- wielditem seems to be scaled to 1.5 times original node size
 	visual_size = {x = 1.0 / 1.5, y = 1.0 / 1.5},
 	textures = {"protector:display_node"},
+	
+	use_texture_alpha = "clip", -- only needed for stairs API
+	
+	
 	timer = 0,
 
 	on_step = function(self, dtime)
@@ -645,4 +653,6 @@ if minetest.get_modpath("mesecons_mvps") then
 end
 
 
-print (S("[MOD] Protector Redo loaded"))
+--print (S("[MOD] Protector Redo loaded"))
+
+minetest.log("action", "ES: [MM PROTECT] loaded.")

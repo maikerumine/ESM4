@@ -49,22 +49,24 @@ local colours = {
 
 for i = 1, #colours, 1 do
 	--example
-	--[[
+--[[	
 	minetest.register_node("cblocks:stonebrick_red", {
 		description = "Red Stone Brick -EXAMPLE FOR ALL CBLOCKS: Glass, Wood, Stonebrick, and Clay",
 		tiles = {"default_stone_brick.png^[colorize:#ff000070"},
 		is_ground_content = false,
-		groups = {cracky = 2, stone = 1},
+		groups = {cracky = 2, stone = 1, not_in_creative_inventory = 1},
 		sounds = default.node_sound_stone_defaults(),
 	})
-	]]
+]]	
 
 	-- wood
 	minetest.register_node("cblocks:wood_" .. colours[i][1], {
 		description = colours[i][2] .. " Wooden Planks",
 		tiles = {"cblocks_wood.png^" .. colours[i][3]},
+		paramtype2 = "facedir",
+		place_param2 = 0,
 		is_ground_content = false,
-		groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, wood = 1,not_in_craft_guide=0},
+		groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, wood = 1,not_in_craft_guide=0, not_in_creative_inventory = 1},
 		sounds = default.node_sound_wood_defaults(),
 	})
 
@@ -78,10 +80,12 @@ for i = 1, #colours, 1 do
 
 	--Cobble
 	minetest.register_node("cblocks:cobble_" .. colours[i][1], {
-		description = colours[i][2] .. " Cobble  NOTE:  Cobble, Stone, Stonebrick, Clay, Glass, and Wood can be colorized.",
+		description = colours[i][2] .. " Cobble  NOTE:  Cobble, Stone, Stonebrick, Clay, Glass, and Wood can be colorized and used for stair / slab / slopes.",
 		tiles = {"default_cobble.png^" .. colours[i][3]},
+		paramtype2 = "facedir",
+		place_param2 = 0,
 		is_ground_content = false,
-		groups = {cracky = 3, stone = 1},
+		groups = {cracky = 3, stone = 1, not_in_creative_inventory = 0},
 		sounds = default.node_sound_stone_defaults(),
 	})
 
@@ -97,8 +101,10 @@ for i = 1, #colours, 1 do
 	minetest.register_node("cblocks:stonebrick_" .. colours[i][1], {
 		description = colours[i][2] .. " Stone Brick",
 		tiles = {"default_stone_brick.png^" .. colours[i][3]},
+		paramtype2 = "facedir",
+		place_param2 = 0,
 		is_ground_content = false,
-		groups = {cracky = 2, stone = 1,not_in_craft_guide=0},
+		groups = {cracky = 2, stone = 1,not_in_craft_guide=0, not_in_creative_inventory = 1},
 		sounds = default.node_sound_stone_defaults(),
 	})
 
@@ -122,7 +128,7 @@ for i = 1, #colours, 1 do
 		tiles = {"default_stone.png^" .. colours[i][3]},
 		is_ground_content = true,
 		drop = "cblocks:cobble_" .. colours[i][1],
-		groups = {cracky = 2, stone = 1,not_in_craft_guide=0},
+		groups = {cracky = 2, stone = 1,not_in_craft_guide=0, not_in_creative_inventory = 1},
 		sounds = default.node_sound_stone_defaults(),
 	})
 
@@ -137,15 +143,21 @@ for i = 1, #colours, 1 do
 	minetest.register_node( "cblocks:glass_" .. colours[i][1], {
 		description = colours[i][2] .. " Glass",
 		tiles = {"default_glass.png^default_glass_detail.png^" .. colours[i][3]},
+		paramtype2 = "facedir",
+		place_param2 = 0,
+		
+		--use_texture_alpha = "clip", -- only needed for stairs API
+		
+		
 		drawtype = "glasslike",
 		paramtype = "light",
-		alpha = 160,
+		--alpha = 160,
 		drawtype = "glasslike_framed_optional",
 		paramtype2 = "glasslikeliquidlevel",
 		sunlight_propagates = true,
 		use_texture_alpha = true,
 		is_ground_content = false,
-		groups = {cracky = 3, oddly_breakable_by_hand = 3,not_in_craft_guide=0},
+		groups = {cracky = 3, oddly_breakable_by_hand = 3,not_in_craft_guide=0, not_in_creative_inventory = 1},
 		sounds = default.node_sound_glass_defaults(),
 	})
 
@@ -161,7 +173,7 @@ for i = 1, #colours, 1 do
 		description = colours[i][2] .. " Clay",
 		tiles = {"default_clay.png^" .. colours[i][3]},
 		is_ground_content = true,
-		groups = {crumbly = 3,not_in_craft_guide=0},
+		groups = {crumbly = 3,not_in_craft_guide=0, not_in_creative_inventory = 1},
 		sounds = default.node_sound_stone_defaults(),
 	})
 
@@ -176,16 +188,19 @@ for i = 1, #colours, 1 do
 	minetest.register_node( "cblocks:meselamp_" .. colours[i][1], {
 		description = colours[i][2] .. " Mese Lamp",
 		tiles = {"cblocks_meselamp.png^" .. colours[i][3]},
+		
+		--use_texture_alpha = "clip", -- only needed for stairs API
+		
 		drawtype = "glasslike",
 		paramtype = "light",
-		alpha = 160,
+		--alpha = 160,
 		drawtype = "glasslike_framed_optional",
 		paramtype2 = "glasslikeliquidlevel",
 		sunlight_propagates = true,
 		use_texture_alpha = true,
 		is_ground_content = false,
 		light_source = 14,
-		groups = {cracky = 3, oddly_breakable_by_hand = 3,not_in_craft_guide=0},
+		groups = {cracky = 3, oddly_breakable_by_hand = 3,not_in_craft_guide=0, not_in_creative_inventory = 1},
 		sounds = default.node_sound_glass_defaults(),
 	})
 
@@ -200,8 +215,10 @@ for i = 1, #colours, 1 do
 	minetest.register_node("cblocks:brick_" .. colours[i][1], {
 		description = colours[i][2] .. " Brick Block",
 		tiles = {"cblocks_brick.png^" .. colours[i][3]},
+		paramtype2 = "facedir",
+		place_param2 = 0,
 		is_ground_content = false,
-		groups = {cracky = 3,not_in_craft_guide=0},
+		groups = {cracky = 3,not_in_craft_guide=0, not_in_creative_inventory = 1},
 		sounds = default.node_sound_stone_defaults(),
 	})
 
@@ -536,3 +553,6 @@ if minetest.get_modpath("ts_furniture") then
 	ts_furniture.register_furniture("cblocks:wood_white", "White", "cblocks_wood.png^cblocks_white.png")
 	ts_furniture.register_furniture("cblocks:wood_yellow", "Yellow", "cblocks_wood.png^cblocks_yellow.png")
 end
+
+
+minetest.log("action", "ES: [C BLOCKS MM STYLE] loaded.")

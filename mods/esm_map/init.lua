@@ -39,12 +39,12 @@ for i = 1, mapnumber do
 			on_rightclick = function(pos, node, clicker)
 				node.name = "esm_map:map_8"--..x
 				minetest.set_node(pos, node)
-					minetest.sound_play("item_drop_pickup.1", {pos = pos})
+					minetest.sound_play("item_drop_pickup", {pos = pos})
 			end,
 			on_punch = function(pos, node, puncher)
 				node.name = "esm_map:map_1"--..y
 				minetest.set_node(pos, node)
-					minetest.sound_play("item_drop_pickup.2", {pos = pos})
+					minetest.sound_play("item_drop_pickup", {pos = pos})
 			end,
 	})
 
@@ -62,18 +62,18 @@ for i = 1, mapnumber do
 			selection_box = {
 				type = "wallmounted",
 			},
-			groups = {snappy=2, oddly_breakable_by_hand=2, flammable=3},
+			groups = {snappy=2, oddly_breakable_by_hand=2, flammable=3, not_in_creative_inventory = 1},
 			sounds = default.node_sound_leaves_defaults(),
 		drop = "esm_map:map_history",
 			on_rightclick = function(pos, node, clicker)
 				node.name = "esm_map:map_history"--..x
 				minetest.set_node(pos, node)
-					minetest.sound_play("hitem_drop_pickup.1", {pos = pos})
+					minetest.sound_play("hitem_drop_pickup", {pos = pos})
 			end,
 			on_punch = function(pos, node, puncher)
 				node.name = "esm_map:map_2"--..y
 				minetest.set_node(pos, node)
-					minetest.sound_play("hitem_drop_pickup.2", {pos = pos})
+					minetest.sound_play("hitem_drop_pickup", {pos = pos})
 			end,
 	})
 
@@ -90,18 +90,18 @@ for i = 1, mapnumber do
 			selection_box = {
 				type = "wallmounted",
 			},
-			groups = {snappy=2, oddly_breakable_by_hand=2, flammable=3},
+			groups = {snappy=2, oddly_breakable_by_hand=2, flammable=3, not_in_creative_inventory = 1},
 			sounds = default.node_sound_leaves_defaults(),
 		drop = "esm_map:map_history",
 			on_rightclick = function(pos, node, clicker)
 				node.name = "esm_map:map_1"--..x
 				minetest.set_node(pos, node)
-					minetest.sound_play("hitem_drop_pickup.1", {pos = pos})
+					minetest.sound_play("hitem_drop_pickup", {pos = pos})
 			end,
 			on_punch = function(pos, node, puncher)
 				node.name = "esm_map:map_3"--..y
 				minetest.set_node(pos, node)
-					minetest.sound_play("hitem_drop_pickup.2", {pos = pos})
+					minetest.sound_play("hitem_drop_pickup", {pos = pos})
 			end,
 	})
 
@@ -118,18 +118,18 @@ for i = 1, mapnumber do
 			selection_box = {
 				type = "wallmounted",
 			},
-			groups = {snappy=2, oddly_breakable_by_hand=2, flammable=3},
+			groups = {snappy=2, oddly_breakable_by_hand=2, flammable=3, not_in_creative_inventory = 1},
 			sounds = default.node_sound_leaves_defaults(),
 		drop = "esm_map:map_history",
 			on_rightclick = function(pos, node, clicker)
 				node.name = "esm_map:map_2"--..x
 				minetest.set_node(pos, node)
-					minetest.sound_play("hitem_drop_pickup.1", {pos = pos})
+					minetest.sound_play("hitem_drop_pickup", {pos = pos})
 			end,
 			on_punch = function(pos, node, puncher)
 				node.name = "esm_map:map_4"--..y
 				minetest.set_node(pos, node)
-					minetest.sound_play("hitem_drop_pickup.2", {pos = pos})
+					minetest.sound_play("hitem_drop_pickup", {pos = pos})
 			end,
 	})
 
@@ -146,18 +146,18 @@ for i = 1, mapnumber do
 			selection_box = {
 				type = "wallmounted",
 			},
-			groups = {snappy=2, oddly_breakable_by_hand=2, flammable=3},
+			groups = {snappy=2, oddly_breakable_by_hand=2, flammable=3, not_in_creative_inventory = 1},
 			sounds = default.node_sound_leaves_defaults(),
 		drop = "esm_map:map_history",
 			on_rightclick = function(pos, node, clicker)
 				node.name = "esm_map:map_3"--..x
 				minetest.set_node(pos, node)
-					minetest.sound_play("hitem_drop_pickup.1", {pos = pos})
+					minetest.sound_play("hitem_drop_pickup", {pos = pos})
 			end,
 			on_punch = function(pos, node, puncher)
 				node.name = "esm_map:map_5"--..y
 				minetest.set_node(pos, node)
-					minetest.sound_play("hitem_drop_pickup.2", {pos = pos})
+					minetest.sound_play("hitem_drop_pickup", {pos = pos})
 			end,
 	})
 
@@ -174,18 +174,18 @@ for i = 1, mapnumber do
 			selection_box = {
 				type = "wallmounted",
 			},
-			groups = {snappy=2, oddly_breakable_by_hand=2, flammable=3},
+			groups = {snappy=2, oddly_breakable_by_hand=2, flammable=3, not_in_creative_inventory = 1},
 			sounds = default.node_sound_leaves_defaults(),
 		drop = "esm_map:map_history",
 			on_rightclick = function(pos, node, clicker)
 				node.name = "esm_map:map_4"--..x
 				minetest.set_node(pos, node)
-					minetest.sound_play("hitem_drop_pickup.1", {pos = pos})
+					minetest.sound_play("hitem_drop_pickup", {pos = pos})
 			end,
 			on_punch = function(pos, node, puncher)
 				node.name = "esm_map:map_6"--..y
 				minetest.set_node(pos, node)
-					minetest.sound_play("hitem_drop_pickup.2", {pos = pos})
+					minetest.sound_play("hitem_drop_pickup", {pos = pos})
 			end,
 	})
 
@@ -202,18 +202,18 @@ for i = 1, mapnumber do
 			selection_box = {
 				type = "wallmounted",
 			},
-			groups = {snappy=2, oddly_breakable_by_hand=2, flammable=3},
+			groups = {snappy=2, oddly_breakable_by_hand=2, flammable=3, not_in_creative_inventory = 1},
 			sounds = default.node_sound_leaves_defaults(),
 		drop = "esm_map:map_history",
 			on_rightclick = function(pos, node, clicker)
 				node.name = "esm_map:map_5"--..x
 				minetest.set_node(pos, node)
-					minetest.sound_play("hitem_drop_pickup.1", {pos = pos})
+					minetest.sound_play("hitem_drop_pickup", {pos = pos})
 			end,
 			on_punch = function(pos, node, puncher)
 				node.name = "esm_map:map_7"--..y
 				minetest.set_node(pos, node)
-					minetest.sound_play("hitem_drop_pickup.2", {pos = pos})
+					minetest.sound_play("hitem_drop_pickup", {pos = pos})
 			end,
 	})
 
@@ -230,18 +230,18 @@ for i = 1, mapnumber do
 			selection_box = {
 				type = "wallmounted",
 			},
-			groups = {snappy=2, oddly_breakable_by_hand=2, flammable=3},
+			groups = {snappy=2, oddly_breakable_by_hand=2, flammable=3, not_in_creative_inventory = 1},
 			sounds = default.node_sound_leaves_defaults(),
 		drop = "esm_map:map_history",
 			on_rightclick = function(pos, node, clicker)
 				node.name = "esm_map:map_6"--..x
 				minetest.set_node(pos, node)
-					minetest.sound_play("hitem_drop_pickup.1", {pos = pos})
+					minetest.sound_play("hitem_drop_pickup", {pos = pos})
 			end,
 			on_punch = function(pos, node, puncher)
 				node.name = "esm_map:map_8"--..y
 				minetest.set_node(pos, node)
-					minetest.sound_play("hitem_drop_pickup.2", {pos = pos})
+					minetest.sound_play("hitem_drop_pickup", {pos = pos})
 			end,
 	})
 
@@ -258,18 +258,18 @@ for i = 1, mapnumber do
 			selection_box = {
 				type = "wallmounted",
 			},
-			groups = {snappy=2, oddly_breakable_by_hand=2, flammable=3},
+			groups = {snappy=2, oddly_breakable_by_hand=2, flammable=3, not_in_creative_inventory = 1},
 			sounds = default.node_sound_leaves_defaults(),
 		drop = "esm_map:map_history",
 			on_rightclick = function(pos, node, clicker)
 				node.name = "esm_map:map_7"--..x
 				minetest.set_node(pos, node)
-					minetest.sound_play("hitem_drop_pickup.1", {pos = pos})
+					minetest.sound_play("hitem_drop_pickup", {pos = pos})
 			end,
 			on_punch = function(pos, node, puncher)
 				node.name = "esm_map:map_9"--..y
 				minetest.set_node(pos, node)
-					minetest.sound_play("hitem_drop_pickup.2", {pos = pos})
+					minetest.sound_play("hitem_drop_pickup", {pos = pos})
 			end,
 	})
 
@@ -286,18 +286,18 @@ for i = 1, mapnumber do
 			selection_box = {
 				type = "wallmounted",
 			},
-			groups = {snappy=2, oddly_breakable_by_hand=2, flammable=3},
+			groups = {snappy=2, oddly_breakable_by_hand=2, flammable=3, not_in_creative_inventory = 1},
 			sounds = default.node_sound_leaves_defaults(),
 		drop = "esm_map:map_history",
 			on_rightclick = function(pos, node, clicker)
 				node.name = "esm_map:map_8"--..x
 				minetest.set_node(pos, node)
-					minetest.sound_play("hitem_drop_pickup.1", {pos = pos})
+					minetest.sound_play("hitem_drop_pickup", {pos = pos})
 			end,
 			on_punch = function(pos, node, puncher)
 				node.name = "esm_map:map_history"--..y
 				minetest.set_node(pos, node)
-					minetest.sound_play("hitem_drop_pickup.2", {pos = pos})
+					minetest.sound_play("hitem_drop_pickup", {pos = pos})
 			end,
 	})
 
@@ -340,4 +340,4 @@ minetest.register_craft({
 	}
 })
 
-
+minetest.log("action", "ES: [ES MAP] loaded.")

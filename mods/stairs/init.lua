@@ -94,7 +94,10 @@ function stairs.register_stair(subname, recipeitem, groups, images, description,
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
-		use_texture_alpha = src_def and src_def.use_texture_alpha,	--mm added for alpha texture stair / slab
+		
+		use_texture_alpha = "clip", -- only needed for stairs API
+		
+		--use_texture_alpha = src_def and src_def.use_texture_alpha,	--mm added for alpha texture stair / slab
 		light_source = light_source,	--mm added for lighted stair / slab
 		groups = new_groups,
 		sounds = sounds,
@@ -193,7 +196,11 @@ function stairs.register_slab(subname, recipeitem, groups, images, description,
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
-		use_texture_alpha = src_def and src_def.use_texture_alpha,	--mm added for alpha texture stair / slab
+		
+		use_texture_alpha = "clip", -- only needed for stairs API
+		
+		
+		--use_texture_alpha = src_def and src_def.use_texture_alpha,	--mm added for alpha texture stair / slab
 		light_source = light_source,	--mm added for lighted stair / slab
 		groups = new_groups,
 		sounds = sounds,
@@ -343,7 +350,11 @@ function stairs.register_stair_inner(subname, recipeitem, groups, images,
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
-		use_texture_alpha = src_def and src_def.use_texture_alpha,	--mm added for alpha texture stair / slab
+		
+		use_texture_alpha = "clip", -- only needed for stairs API
+		
+		
+		--use_texture_alpha = src_def and src_def.use_texture_alpha,	--mm added for alpha texture stair / slab
 		light_source = light_source,	--mm added for lighted stair / slab
 		groups = new_groups,
 		sounds = sounds,
@@ -434,7 +445,11 @@ function stairs.register_stair_outer(subname, recipeitem, groups, images,
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
-		use_texture_alpha = src_def and src_def.use_texture_alpha,	--mm added for alpha texture stair / slab
+		
+		use_texture_alpha = "clip", -- only needed for stairs API
+		
+		
+		--use_texture_alpha = src_def and src_def.use_texture_alpha,	--mm added for alpha texture stair / slab
 		light_source = light_source,	--mm added for lighted stair / slab
 		groups = new_groups,
 		sounds = sounds,
@@ -505,6 +520,7 @@ function stairs.register_slab1(subname, recipeitem, groups, images,
 	local new_groups = table.copy(groups)
 	new_groups.slab = 1
 	warn_if_exists("stairs:slab1_" .. subname)
+
 	minetest.register_node(":stairs:slab1_" .. subname, {
 		description = description,
 		drawtype = "nodebox",
@@ -512,7 +528,11 @@ function stairs.register_slab1(subname, recipeitem, groups, images,
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
-		use_texture_alpha = src_def and src_def.use_texture_alpha,	--mm added for alpha texture stair / slab
+		
+		use_texture_alpha = "clip", -- only needed for stairs API
+		
+		
+		--use_texture_alpha = src_def and src_def.use_texture_alpha,	--mm added for alpha texture stair / slab
 		light_source = light_source,	--mm added for lighted stair / slab
 		groups = new_groups,
 		sounds = sounds,
@@ -571,6 +591,7 @@ function stairs.register_slope(subname, recipeitem, groups, images,
 	local new_groups = table.copy(groups)
 	new_groups.stair = 1
 	warn_if_exists("stairs:slope_" .. subname)
+
 	minetest.register_node(":stairs:slope_" .. subname, {
 		description = description,
 		--drawtype = "nodebox",
@@ -580,7 +601,11 @@ function stairs.register_slope(subname, recipeitem, groups, images,
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = false,
-		use_texture_alpha = src_def and src_def.use_texture_alpha,	--mm added for alpha texture stair / slab
+		
+		use_texture_alpha = "clip", -- only needed for stairs API
+		
+		
+		--use_texture_alpha = src_def and src_def.use_texture_alpha,	--mm added for alpha texture stair / slab
 		light_source = light_source,	--mm added for lighted stair / slab
 		groups = groups,
 		sounds = sounds,
@@ -731,8 +756,10 @@ my_register_stair_and_slab(
 	"default:cobble",
 	{cracky = 3},
 	{"default_cobble.png"},
-	"Cobblestone Stair",
-	"Cobblestone Slab",
+	"Cobblestone Stair  --==All stairs craft like this==--",
+	"Cobblestone Slab  --==All slabs craft like this==--",
+--	"Cobblestone Panel  --==All slabs craft like this==--",
+--	"Cobblestone Slope  --==All slabs craft like this==--",
 	default.node_sound_stone_defaults(),
 	true
 )
@@ -1064,7 +1091,7 @@ my_register_stair_and_slab(
 my_register_stair_and_slab(
 	"tree",
 	"default:tree",
-	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, not_in_creative_inventory = 1},
 	{"default_tree_top.png"},
 	"Apple Tree Stair",
 	"Apple Tree Slab",
@@ -1075,7 +1102,7 @@ my_register_stair_and_slab(
 my_register_stair_and_slab(
 	"jungletree",
 	"default:jungletree",
-	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, not_in_creative_inventory = 1},
 	{"default_jungletree_top.png"},
 	"Jungle Tree Stair",
 	"Jungle Tree Slab",
@@ -1084,7 +1111,7 @@ my_register_stair_and_slab(
 )
 
 my_register_stair_and_slab("pine_tree", "default:pine_tree",
-	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, not_in_creative_inventory = 1},
 	{"default_pine_tree_top.png"},
 	"Pine Tree Stair",
 	"Pine Tree Slab",
@@ -1093,7 +1120,7 @@ my_register_stair_and_slab("pine_tree", "default:pine_tree",
 )
 
 my_register_stair_and_slab("acacia_tree", "default:acacia_tree",
-	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, not_in_creative_inventory = 1},
 	{"default_acacia_tree_top.png"},
 	"Acacia Tree Stair",
 	"Acacia Tree Slab",
@@ -1102,7 +1129,7 @@ my_register_stair_and_slab("acacia_tree", "default:acacia_tree",
 )
 
 my_register_stair_and_slab("aspen_tree", "default:aspen_tree",
-	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
+	{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, not_in_creative_inventory = 1},
 	{"default_aspen_tree_top.png"},
 	"Aspen Tree Stair",
 	"Aspen Tree Slab",
@@ -1114,7 +1141,7 @@ my_register_stair_and_slab("aspen_tree", "default:aspen_tree",
 my_register_stair_and_slab(
 	"gravel",
 	"default:gravel",
-	{crumbly = 3, falling_node = 1},
+	{crumbly = 3, falling_node = 1, not_in_creative_inventory = 1},
 	{"default_gravel.png"},
 	"Gravel Stair",
 	"Gravel Slab",
@@ -1125,7 +1152,7 @@ my_register_stair_and_slab(
 my_register_stair_and_slab(
 	"clay",
 	"default:clay",
-	{crumbly = 3},
+	{crumbly = 3, not_in_creative_inventory = 1},
 	{"default_clay.png"},
 	"Clay Stair",
 	"Clay Slab",
@@ -1136,7 +1163,7 @@ my_register_stair_and_slab(
 my_register_stair_and_slab(
 	"dirt",
 	"default:dirt",
-	{crumbly = 3, soil = 1},
+	{crumbly = 3, soil = 1, not_in_creative_inventory = 1},
 	{"default_dirt.png"},
 	"Dirt Stair",
 	"Dirt Slab",
@@ -1147,7 +1174,7 @@ my_register_stair_and_slab(
 my_register_stair_and_slab(
 	"dry_dirt",
 	"default:dry_dirt",
-	{crumbly = 3, soil = 0},
+	{crumbly = 3, soil = 0, not_in_creative_inventory = 1},
 	{"default_dry_dirt.png"},
 	"Dry Dirt Stair",
 	"Dry Dirt Slab",
@@ -1158,7 +1185,7 @@ my_register_stair_and_slab(
 my_register_stair_and_slab(
 	"dirt_with_grass",
 	"default:dirt_with_grass",
-	 {crumbly = 3, soil = 1, spreading_dirt_type = 0},
+	 {crumbly = 3, soil = 1, spreading_dirt_type = 0, not_in_creative_inventory = 1},
 --	{"default_grass.png", "default_dirt.png", "default_dirt.png^default_grass_side.png"},
 	{"default_grass.png", "default_dirt.png", "default_grass.png"},
 	"Dirt With Grass Stair",
@@ -1170,7 +1197,7 @@ my_register_stair_and_slab(
 my_register_stair_and_slab(
 	"dirt_with_snow",
 	"default:dirt_with_snow",
-	 {crumbly = 3, soil = 1, spreading_dirt_type = 0},
+	 {crumbly = 3, soil = 1, spreading_dirt_type = 0, not_in_creative_inventory = 1},
 --	{"default_snow.png", "default_dirt.png", "default_dirt.png^default_snow_side.png"},
 	{"default_snow.png", "default_dirt.png", "default_snow.png"},
 	"Dirt With Grass With Snow Stair",
@@ -1182,7 +1209,7 @@ my_register_stair_and_slab(
 my_register_stair_and_slab(
 	"dirt_with_dry_grass",
 	"default:dirt_with_dry_grass",
-	{crumbly = 3, soil = 1, spreading_dirt_type = 0},
+	{crumbly = 3, soil = 1, spreading_dirt_type = 0, not_in_creative_inventory = 1},
 --	{"default_dry_grass.png", "default_dirt.png", "default_dirt.png^default_dry_grass_side.png"},
 	{"default_dry_grass.png", "default_dirt.png", "default_dry_grass.png"},
 	"Dirt With Dry Grass Stair",
@@ -1194,7 +1221,7 @@ my_register_stair_and_slab(
 my_register_stair_and_slab(
 	"dirt_with_rainforest_litter",
 	"default:dirt_with_rainforest_litter",
-	{crumbly = 3, soil = 1, spreading_dirt_type = 0},
+	{crumbly = 3, soil = 1, spreading_dirt_type = 0, not_in_creative_inventory = 1},
 --	{"default_rainforest_litter.png", "default_dirt.png", "default_dirt.png^default_rainforest_litter_side.png"},
 	{"default_rainforest_litter.png", "default_dirt.png", "default_rainforest_litter.png"},
 	"Dirt W/ Rainforest Litter Stair",
@@ -1206,7 +1233,7 @@ my_register_stair_and_slab(
 my_register_stair_and_slab(
 	"dirt_with_coniferous_litter",
 	"default:dirt_with_coniferous_litter",
-	{crumbly = 3, soil = 1, spreading_dirt_type = 0},
+	{crumbly = 3, soil = 1, spreading_dirt_type = 0, not_in_creative_inventory = 1},
 --	{"default_coniferous_litter.png", "default_dirt.png", "default_dirt.png^default_coniferous_litter_side.png"},
 	{"default_coniferous_litter.png", "default_dirt.png", "default_coniferous_litter.png"},
 	"Dirt W/ Coniferous Litter Stair",
@@ -1260,7 +1287,8 @@ if minetest.get_modpath("cblocks") then
 	my_register_stair_and_slab(
 		colours[i][1] .. "_stonebrick",
 		"cblocks:stonebrick_" .. colours[i][1],
-		{cracky = 2. , not_in_craft_guide=1},
+		--{cracky = 2. , not_in_craft_guide=1},
+		{cracky = 2, not_in_creative_inventory = 1},
 		--{"default_stone_brick.png^[colorize:" .. colours[i][3]},
 		{"default_stone_brick.png^" .. colours[i][3]},
 		colours[i][2] .. " Stonebrick Stair",
@@ -1272,7 +1300,7 @@ if minetest.get_modpath("cblocks") then
 	my_register_stair_and_slab(
 		colours[i][1] .. "_brick",
 		"cblocks:brick_" .. colours[i][1],
-		{cracky = 3},
+		{cracky = 3, not_in_creative_inventory = 1},
 		--{"default_brick.png^[colorize:" .. colours[i][3]},
 		{"cblocks_brick.png^" .. colours[i][3]},
 		colours[i][2] .. " Brick Stair",
@@ -1284,7 +1312,7 @@ if minetest.get_modpath("cblocks") then
 	my_register_stair_and_slab(
 		colours[i][1] .. "_stone",
 		"cblocks:stone_" .. colours[i][1],
-		{cracky = 2},
+		{cracky = 2, not_in_creative_inventory = 1},
 		--{"default_stone.png^[colorize:" .. colours[i][3]},
 		{"default_stone.png^" .. colours[i][3]},
 		colours[i][2] .. " Stone Stair",
@@ -1296,7 +1324,7 @@ if minetest.get_modpath("cblocks") then
 	my_register_stair_and_slab(
 		colours[i][1] .. "_clay",
 		"cblocks:clay_" .. colours[i][1],
-		{crumbly = 2, oddly_breakable_by_hand = 2},
+		{crumbly = 2, oddly_breakable_by_hand = 2, not_in_creative_inventory = 1},
 		--{"default_clay.png^[colorize:" .. colours[i][3]},
 		{"default_clay.png^" .. colours[i][3]},
 		colours[i][2] .. " Clay Stair",
@@ -1308,7 +1336,7 @@ if minetest.get_modpath("cblocks") then
 	my_register_stair_and_slab(
 		colours[i][1] .. "_wood",
 		"cblocks:wood_" .. colours[i][1],
-		{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
+		{choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, not_in_creative_inventory = 1},
 		--{"default_wood.png^[colorize:" .. colours[i][3]},
 		{"cblocks_wood.png^" .. colours[i][3]},
 		colours[i][2] .. " Wood Stair",
@@ -1320,7 +1348,7 @@ if minetest.get_modpath("cblocks") then
 	my_register_stair_and_slab(
 		colours[i][1] .. "_cobble",
 		"cblocks:cobble_" .. colours[i][1],
-		{cracky = 2},
+		{cracky = 2, not_in_creative_inventory = 1},
 		--{"default_wood.png^[colorize:" .. colours[i][3]},
 		{"default_cobble.png^" .. colours[i][3]},
 		colours[i][2] .. " Cobble Stair",
@@ -1332,7 +1360,7 @@ if minetest.get_modpath("cblocks") then
 	my_register_stair_and_slab(
 		colours[i][1] .. "_glass",
 		"cblocks:glass_" .. colours[i][1],
-		{cracky = 3, oddly_breakable_by_hand = 3},
+		{cracky = 3, oddly_breakable_by_hand = 3, not_in_creative_inventory = 1},
 		--{"cblocks.png^[colorize:" .. colours[i][3]},
 		{"default_glass.png^default_glass_detail.png^[colorize:" .. coloursg[i][3]},
 		--{"default_glass.png^default_glass_detail.png^" .. colours[i][3]},
@@ -1350,7 +1378,7 @@ if minetest.get_modpath("cblocks") then
 	my_register_stair_and_slab(
 		colours[i][1] .. "_meselamp",
 		"cblocks:meselamp_" .. colours[i][1],
-		{cracky = 3, oddly_breakable_by_hand = 3},
+		{cracky = 3, oddly_breakable_by_hand = 3, not_in_creative_inventory = 1},
 		--{"default_meselamp.png^[colorize:" .. colours[i][3]},
 		{"cblocks_meselamp.png^" .. colours[i][3]},
 		colours[i][2] .. " Mese Lamp Stair",
@@ -1371,7 +1399,7 @@ if minetest.get_modpath("wool") then
 	my_register_stair_and_slab(
 		"wool_" .. colours[i][1],
 		"wool:" .. colours[i][1],
-		{snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3},
+		{snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3, not_in_creative_inventory = 1},
 		{"wool_" .. colours[i][1] .. ".png"},
 		colours[i][2] .. " Wool Stair",
 		colours[i][2] .. " Wool Slab",
@@ -1379,6 +1407,442 @@ if minetest.get_modpath("wool") then
 		true
 	)
 	end -- END for
+end
+
+--= HADES mod
+if minetest.get_modpath("hades_core") then
+--[[
+hades_core:stone_block_baked	-
+hades_core:stone_baked		-
+hades_core:essexite_block		-
+hades_core:essexite		-
+hades_core:marble_block		-
+hades_core:marble		--
+hades_core:tuff_block		-
+hades_core:tuff		-
+hades_core:tuff_baked_block		-
+hades_core:tuff_baked		-
+hades_core:chondrite_block		-
+hades_core:chondrite		-
+hades_core:ash_block		-
+hades_core:ash		-
+hades_core:gravel_block		-
+hades_core:gravel_volcanic_block		-
+hades_core:gravel_volcanic		-
+		hades_core:cactus_block
+		hades_core:cactus_brick
+hades_core:chondrite_brick		-
+hades_core:essexite_brick		-
+hades_core:marble_brick		-
+hades_core:tuff_brick		-
+hades_core:tuff_baked_brick		-
+hades_core:floor_chondrite_stone		-
+hades_core:floor_chondrite_stone2		--
+hades_core:floor_bstone_stone		-
+hades_core:floor_btuff_tuff		-
+hades_core:floor_bstone_sandstone		-
+hades_core:floor_bstone_sandstone2		-
+hades_core:floor_marble_essexite		-
+hades_core:floor_marble_essexite2		-
+hades_core:floor_essexite_gold		-
+hades_core:floor_essexite_gold2		-
+
+]]
+	my_register_stair_and_slab(
+		"burned_stone_block",
+		"hades_core:stone_block_baked",
+		{cracky=3, burned_node=1, not_in_creative_inventory = 0},
+		{"default_stone_block_baked.png"},
+		"Burned Stone Block Stair",
+		"Burned Stone Block Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+	
+	my_register_stair_and_slab(
+		"stone_baked",
+		"hades_core:stone_baked",
+		{cracky=3, stone=1, porous=1, burned_node=1, not_in_creative_inventory = 0},
+		{"default_stone_baked.png"},
+		"Stone Baked Stair",
+		"Stone Baked Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+	
+	my_register_stair_and_slab(
+		"essexite_block",
+		"hades_core:essexite_block",
+		{cracky=2, not_in_creative_inventory = 0},
+		{"default_essexite_block.png"},
+		"Essexite Block Stair",
+		"Essexite Block Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+	
+	my_register_stair_and_slab(
+		"essexite",
+		"hades_core:essexite",
+		{cracky=1, stone=1, porous=1, not_in_creative_inventory = 0},
+		{"default_essexite.png"},
+		"Essexite Stair",
+		"Essexite Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"marble_block",
+		"hades_core:marble_block",
+		{cracky=3, not_in_creative_inventory = 0},
+		{"default_marble_block.png"},
+		"Marble Block Stair",
+		"Marble Block Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"marble",
+		"hades_core:marble",
+		{cracky=3, stone=1, porous=1, not_in_creative_inventory = 0},
+		{"default_marble.png"},
+		"Marble Stair",
+		"Marble Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)	
+	
+	my_register_stair_and_slab(
+		"tuff_block",
+		"hades_core:tuff_block",
+		{cracky=3, not_in_creative_inventory = 0},
+		{"default_tuff_block.png"},
+		"Tuff Block Stair",
+		"Tuff Block Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"tuff",
+		"hades_core:tuff",
+		{cracky=3, porous=1, not_in_creative_inventory = 0},
+		{"default_tuff.png"},
+		"Tuff Stair",
+		"Tuff Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"tuff_baked_block",
+		"hades_core:tuff_baked_block",
+		{cracky=3, burned_node=1, not_in_creative_inventory = 0},
+		{"default_tuff_baked_block.png"},
+		"Burned Tuff Block Stair",
+		"Burned Tuff Block Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"tuff_baked",
+		"hades_core:tuff_baked",
+		{cracky=3, porous=1, burned_node=1, not_in_creative_inventory = 0},
+		{"default_tuff_baked.png"},
+		"Burned Tuff Stair",
+		"Burned Tuff Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"chondrite_block",
+		"hades_core:chondrite_block",
+		{cracky=2, not_in_creative_inventory = 0},
+		{"default_chondrite_block.png"},
+		"Chondrite Block Stair",
+		"Chondrite Block Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"chondrite",
+		"hades_core:chondrite",
+		{cracky=2, stone=1, porous=1, not_in_creative_inventory = 0},
+		{"default_chondrite.png"},
+		"Chondrite Stair",
+		"Chondrite Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"ash_block",
+		"hades_core:ash_block",
+		{crumbly=3, not_in_creative_inventory = 0},
+		{"default_ash_block.png"},
+		"Volcanic Ash Block Stair",
+		"Volcanic Ash Block Slab",
+		default.node_sound_sand_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"ash",
+		"hades_core:ash",
+		{crumbly=3, falling_node=1, ash=1, porous=1, not_in_creative_inventory = 0},
+		{"default_ash.png"},
+		"Volcanic Ash Stair",
+		"Volcanic Ash Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)	
+
+	my_register_stair_and_slab(
+		"gravel_block",
+		"hades_core:gravel_block",
+		{crumbly=2, not_in_creative_inventory = 0},
+		{"default_gravel_block.png"},
+		"Gravel Block Stair",
+		"Gravel Block Slab",
+		default.node_sound_sand_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"gravel_volcanic_block",
+		"hades_core:gravel_volcanic_block",
+		{crumbly=2, not_in_creative_inventory = 0},
+		{"default_gravel_volcanic_block.png"},
+		"Volcanic Gravel Block Stair",
+		"Volcanic Gravel Block Slab",
+		default.node_sound_sand_defaults(),
+		true
+	)	
+
+	my_register_stair_and_slab(
+		"gravel_volcanic",
+		"hades_core:gravel_volcanic",
+		{crumbly=1, porous=1, not_in_creative_inventory = 0},
+		{"default_gravel_volcanic.png"},
+		"Volcanic Gravel Stair",
+		"Volcanic Gravel Slab",
+		default.node_sound_sand_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"chondrite_brick",
+		"hades_core:chondrite_brick",
+		{cracky=2, stone=1, not_in_creative_inventory = 0},
+		{"default_chondrite_brick.png"},
+		"Chondrite Brick Stair",
+		"Chondrite Brick Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"essexite_brick",
+		"hades_core:essexite_brick",
+		{cracky=1, stone=1, not_in_creative_inventory = 0},
+		{"default_essexite_brick.png"},
+		"Essexite Brick Stair",
+		"Essexite Brick Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"marble_brick",
+		"hades_core:marble_brick",
+		{cracky=3, stone=1, not_in_creative_inventory = 0},
+		{"default_marble_brick.png"},
+		"Marble Brick Stair",
+		"Marble Brick Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"tuff_brick",
+		"hades_core:tuff_brick",
+		{cracky=3, not_in_creative_inventory = 0},
+		{"default_tuff_brick.png"},
+		"Tuff Brick Stair",
+		"Tuff Brick Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+	
+	my_register_stair_and_slab(
+		"tuff_baked_brick",
+		"hades_core:tuff_baked_brick",
+		{cracky=3, burned_node=1, not_in_creative_inventory = 0},
+		{"default_tuff_baked_brick.png"},
+		"Burned Tuff Brick Stair",
+		"Burned Tuff Brick Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"floor_chondrite_stone",
+		"hades_core:floor_chondrite_stone",
+		{cracky=3, stone=1, not_in_creative_inventory = 0},
+		{"default_floor_chondrite_stone.png"},
+		"Chondrite/Stone Block Stair",
+		"Chondrite/Stone Block Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)	
+	
+	my_register_stair_and_slab(
+		"floor_chondrite_stone2",
+		"hades_core:floor_chondrite_stone2",
+		{cracky=3, stone=1, not_in_creative_inventory = 0},
+		{
+		"default_floor_chondrite_stone2.png",
+		"default_floor_chondrite_stone2.png",
+		"default_floor_chondrite_stone2.png",
+		"default_floor_chondrite_stone2.png",
+		"default_floor_chondrite_stone2.png^[transformFX",
+		},
+		"Chondrite/Stone Tile Stair",
+		"Chondrite/Stone Tile Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"floor_bstone_stone",
+		"hades_core:floor_bstone_stone",
+		{cracky=3, stone=1, not_in_creative_inventory = 0},
+		{
+		"default_floor_bstone_stone.png",
+		"default_floor_bstone_stone.png",
+		"default_floor_bstone_stone.png",
+		"default_floor_bstone_stone.png",
+		"default_floor_bstone_stone.png^[transformFX",
+		},
+		"Burned Stone/Stone Tile Stair",
+		"Burned Stone/Stone Tile Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"floor_btuff_tuff",
+		"hades_core:floor_btuff_tuff",
+		{cracky=3, not_in_creative_inventory = 0},
+		{
+		"default_floor_btuff_tuff.png",
+		"default_floor_btuff_tuff.png",
+		"default_floor_btuff_tuff.png",
+		"default_floor_btuff_tuff.png",
+		"default_floor_btuff_tuff.png^[transformFX",
+	},
+		"Burned Tuff/Tuff Tile Stair",
+		"Burned Tuff/Tuff Tile Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"floor_bstone_sandstone",
+		"hades_core:floor_bstone_sandstone",
+		{cracky=3, not_in_creative_inventory = 0},
+		{
+		"default_floor_bstone_sandstone.png",
+		"default_floor_bstone_sandstone.png",
+		"default_floor_bstone_sandstone.png",
+		"default_floor_bstone_sandstone.png",
+		"default_floor_bstone_sandstone.png^[transformR90",
+		},
+		"Burned Stone/Sandstone Block Stair",
+		"Burned Stone/Sandstone Block Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)	
+
+	my_register_stair_and_slab(
+		"floor_bstone_sandstone2",
+		"hades_core:floor_bstone_sandstone2",
+		{cracky=3, not_in_creative_inventory = 0},
+		{
+		"default_floor_bstone_sandstone2.png",
+		"default_floor_bstone_sandstone2.png",
+		"default_floor_bstone_sandstone2.png",
+		"default_floor_bstone_sandstone2.png",
+		"default_floor_bstone_sandstone2.png^[transformR90",
+		},
+		"Burned Stone/Sandstone Tile Stair",
+		"Burned Stone/Sandstone Tile Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"floor_marble_essexite",
+		"hades_core:floor_marble_essexite",
+		{cracky=2, stone=1, not_in_creative_inventory = 0},
+		{
+		"default_floor_marble_essexite.png",
+		"default_floor_marble_essexite.png",
+		"default_floor_marble_essexite.png",
+		"default_floor_marble_essexite.png",
+		"default_floor_marble_essexite.png^[transformR90",
+		},
+		"Marble/Essexite Tile Stair",
+		"Marble/Essexite Tile Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"floor_marble_essexite2",
+		"hades_core:floor_marble_essexite2",
+		{cracky=2, stone=1, not_in_creative_inventory = 0},
+		{
+		"default_floor_marble_essexite2.png",
+		"default_floor_marble_essexite2.png",
+		"default_floor_marble_essexite2.png",
+		"default_floor_marble_essexite2.png",
+		"default_floor_marble_essexite2.png^[transformR90",
+		},
+		"Marble/Essexite Block Stair",
+		"Marble/Essexite Block Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+
+	my_register_stair_and_slab(
+		"floor_essexite_gold",
+		"hades_core:floor_essexite_gold",
+		{cracky=2, not_in_creative_inventory = 0},
+		{"default_floor_essexite_gold.png"},
+		"Golden Essexite Block Stair",
+		"Golden Essexite Block Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+	
+	my_register_stair_and_slab(
+		"floor_essexite_gold2",
+		"hades_core:floor_essexite_gold2",
+		{cracky=2, not_in_creative_inventory = 0},
+		{"default_floor_essexite_gold2.png"},
+		"Golden Essexite Tile Stair",
+		"Golden Essexite Tile Slab",
+		default.node_sound_stone_defaults(),
+		true
+	)
+	
+	
 end
 
 
@@ -1389,7 +1853,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"dry_dirt",
 		"es:dry_dirt",
-		{crumbly = 2, soil = 0, spreading_dirt_type = 0},
+		{crumbly = 2, soil = 0, spreading_dirt_type = 0, not_in_creative_inventory = 1},
 		{"es_dry_dirt.png"},
 		"Some dry dirt Stair",
 		"Some dry dirt Slab",
@@ -1400,7 +1864,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"strange_grass",
 		"es:strange_grass",
-		{crumbly = 3, soil = 1, spreading_dirt_type = 1, es_grass = 1},
+		{crumbly = 3, soil = 1, spreading_dirt_type = 1, es_grass = 1, not_in_creative_inventory = 1},
 		{"es_strange_grass.png", "default_clay.png", "default_clay.png^es_strange_grass_side.png"},
 		"Strange Grass Stair",
 		"Strange Grass Slab",
@@ -1411,7 +1875,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"aiden_grass",
 		"es:aiden_grass",
-		{crumbly = 3, soil = 1, spreading_dirt_type = 1, es_grass = 1},
+		{crumbly = 3, soil = 1, spreading_dirt_type = 1, es_grass = 1, not_in_creative_inventory = 1},
 		{"es_aiden_grass.png", "default_clay.png", "default_clay.png^es_aiden_grass_side.png"},
 		"Aiden Grass Stair",
 		"Aiden Grass Slab",
@@ -1423,7 +1887,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"granite",
 		"es:granite",
-		{cracky = 3},
+		{cracky = 3, not_in_creative_inventory = 1},
 		{"technic_granite.png"},
 		--{"mcl_core_granite.png"},
 		"Granite Block Stair",	
@@ -1435,7 +1899,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"marble",
 		"es:marble",
-		{cracky = 3},
+		{cracky = 3, not_in_creative_inventory = 1},
 		{"technic_marble.png"},
 		--{"mcl_core_diorite.png"},
 		"Marble Block Stair",
@@ -1447,7 +1911,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"granite_bricks",
 		"es:granite_bricks",
-		{cracky = 3},
+		{cracky = 3, not_in_creative_inventory = 1},
 		{"technic_granite_bricks.png"},
 		--{"mcl_core_granite_smooth.png"},
 		"Granite Bricks Block Stair",
@@ -1459,7 +1923,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"marble_bricks",
 		"es:marble_bricks",
-		{cracky = 3},
+		{cracky = 3, not_in_creative_inventory = 1},
 		{"technic_marble_bricks.png"},
 		--{"mcl_core_diorite_smooth.png"},
 		"Marble Bricks Block Stair",
@@ -1472,7 +1936,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"strange_tree",
 		"es:strange_tree",
-		{cracky = 1,oddly_breakable_by_hand=1},
+		{cracky = 1,oddly_breakable_by_hand=1, not_in_creative_inventory = 1},
 		{"es_strange_tree.png"},
 		"Strange Tree Stair",
 		"Strange Tree Slab",
@@ -1483,7 +1947,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"strange_tree_wood",
 		"es:strange_tree_wood",
-		{cracky = 1,oddly_breakable_by_hand=1},
+		{cracky = 1,oddly_breakable_by_hand=1, not_in_creative_inventory = 1},
 		{"es_strange_wood.png"},
 		"Strange Tree Stair",
 		"Strange Tree Slab",
@@ -1494,7 +1958,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"aiden_tree",
 		"es:aiden_tree",
-		{cracky = 1,oddly_breakable_by_hand=1},
+		{cracky = 1,oddly_breakable_by_hand=1, not_in_creative_inventory = 1},
 		{"es_aiden_tree.png"},
 		"Aiden Tree Stair",
 		"Aiden Tree Slab",
@@ -1505,7 +1969,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"aiden_tree_wood",
 		"es:aiden_tree_wood",
-		{cracky = 1,oddly_breakable_by_hand=1},
+		{cracky = 1,oddly_breakable_by_hand=1, not_in_creative_inventory = 1},
 		{"es_aiden_wood.png"},
 		"Aiden Tree Wood Stair",
 		"Aiden Tree Wood Slab",
@@ -1518,7 +1982,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"strange_clay_blue",
 		"es:strange_clay_blue",
-		{crumbly = 3,oddly_breakable_by_hand=1},
+		{crumbly = 3,oddly_breakable_by_hand=1, not_in_creative_inventory = 1},
 		{"es_strange_clay_blue.png"},
 		"Strange Clay Blue Stair",
 		"Strange Clay Blue Slab",
@@ -1529,7 +1993,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"strange_clay_red",
 		"es:strange_clay_red",
-		{crumbly = 3,oddly_breakable_by_hand=1},
+		{crumbly = 3,oddly_breakable_by_hand=1, not_in_creative_inventory = 1},
 		{"es_strange_clay_red.png"},
 		"Strange Clay Red Stair",
 		"Strange Clay Red Slab",
@@ -1540,7 +2004,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"strange_clay_maroon",
 		"es:strange_clay_maroon",
-		{crumbly = 3,oddly_breakable_by_hand=1},
+		{crumbly = 3,oddly_breakable_by_hand=1, not_in_creative_inventory = 1},
 		{"es_strange_clay_maroon.png"},
 		"Strange Clay Maroon Stair",
 		"Strange Clay Maroon Slab",
@@ -1551,7 +2015,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"strange_clay_brown",
 		"es:strange_clay_brown",
-		{crumbly = 3,oddly_breakable_by_hand=1},
+		{crumbly = 3,oddly_breakable_by_hand=1, not_in_creative_inventory = 1},
 		{"es_strange_clay_brown.png"},
 		"Strange Clay Brown Stair",
 		"Strange Clay Brown Slab",
@@ -1562,7 +2026,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"strange_clay_orange",
 		"es:strange_clay_orange",
-		{crumbly = 3,oddly_breakable_by_hand=1},
+		{crumbly = 3,oddly_breakable_by_hand=1, not_in_creative_inventory = 1},
 		{"es_strange_clay_orange.png"},
 		"Strange Clay Orange Stair",
 		"Strange Clay Orange Slab",
@@ -1573,7 +2037,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"strange_clay_black",
 		"es:strange_clay_black",
-		{crumbly = 3,oddly_breakable_by_hand=1},
+		{crumbly = 3,oddly_breakable_by_hand=1, not_in_creative_inventory = 1},
 		{"es_strange_clay_black.png"},
 		"Strange Clay Black Stair",
 		"Strange Clay Black Slab",
@@ -1584,7 +2048,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"strange_clay_grey",
 		"es:strange_clay_grey",
-		{crumbly = 3,oddly_breakable_by_hand=1},
+		{crumbly = 3,oddly_breakable_by_hand=1, not_in_creative_inventory = 1},
 		{"es_strange_clay_grey.png"},
 		"Strange Clay Grey Stair",
 		"Strange Clay Grey Slab",
@@ -1597,7 +2061,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"emerald",
 		"es:emeraldblock",
-		{cracky = 3},
+		{cracky = 3, not_in_creative_inventory = 1},
 		{"es_emerald_block.png"},
 		"Emerald Block Stair",
 		"Emerald Block Slab",
@@ -1609,7 +2073,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"ruby",
 		"es:rubyblock",
-		{cracky = 3},
+		{cracky = 3, not_in_creative_inventory = 1},
 		{"es_ruby_block.png"},
 		"Ruby Block Stair",
 		"Ruby Block Slab",
@@ -1621,7 +2085,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"aikerum",
 		"es:aikerumblock",
-		{cracky = 3},
+		{cracky = 3, not_in_creative_inventory = 1},
 		{"es_aikerum_block.png"},
 		"Aikerum Block Stair",
 		"Aikerum Block Slab",
@@ -1633,7 +2097,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"infinium",
 		"es:infiniumblock",
-		{cracky = 3},
+		{cracky = 3, not_in_creative_inventory = 1},
 		{"es_infinium_block.png"},
 		"Infinium Block Stair",
 		"Infinium Block Slab",
@@ -1644,7 +2108,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"purpellium",
 		"es:purpelliumblock",
-		{cracky = 3},
+		{cracky = 3, not_in_creative_inventory = 1},
 		{"es_purpellium_block.png"},
 		"Purpellium Block Stair",
 		"Purpellium Block Slab",
@@ -1653,10 +2117,10 @@ if minetest.get_modpath("es") then
 		7
 	)
 	
-		my_register_stair_and_slab(
+	my_register_stair_and_slab(
 		"unobtanium",
 		"es:unobtaniumblock",
-		{cracky = 3},
+		{cracky = 3, not_in_creative_inventory = 1},
 		{"es_unobtainium_block.png"},
 		"Unobtanium Block Stair",
 		"Unobtanium Block Slab",
@@ -1667,7 +2131,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"beedo",
 		"es:beedo_block",
-		{cracky = 3},
+		{cracky = 3, not_in_creative_inventory = 1},
 		{"es_beedo_block.png"},
 		"Beedo Block Stair",
 		"Beedo Block Slab",
@@ -1679,7 +2143,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"boneblock",
 		"es:boneblock",
-		{crumbly = 2,oddly_breakable_by_hand=1},
+		{crumbly = 2,oddly_breakable_by_hand=1, not_in_creative_inventory = 1},
 		{"es_bones_front.png"},
 		"Bone Block Stair",
 		"Bone Block Slab",
@@ -1690,7 +2154,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"depleted_uranium",
 		"es:depleted_uraniumblock",
-		{cracky = 3},
+		{cracky = 3, not_in_creative_inventory = 1},
 		{"es_depleted_uranium_block.png"},
 		"Depleted Uranium Block Stair",
 		"Depleted Uranium Block Slab",
@@ -1702,7 +2166,7 @@ if minetest.get_modpath("es") then
 	my_register_stair_and_slab(
 		"greenmese",
 		"es:mese_green",
-		{crumbly = 2,oddly_breakable_by_hand=1},
+		{crumbly = 2,oddly_breakable_by_hand=1, not_in_creative_inventory = 1},
 		{"es_mese_green_block.png"},
 		"Green MESE Stair",
 		"Green MESE Slab",
@@ -1710,10 +2174,10 @@ if minetest.get_modpath("es") then
 		true
 	)	
 	
-		my_register_stair_and_slab(
+	my_register_stair_and_slab(
 		"messymese",
 		"es:messymese",
-		{crumbly = 2,oddly_breakable_by_hand=1},
+		{crumbly = 2,oddly_breakable_by_hand=1, not_in_creative_inventory = 1},
 		{"es_messy_mese.png"},
 		"Messymese Stair",
 		"Messymese Slab",
@@ -2021,3 +2485,6 @@ S("Inner Snow Block Stair")
 S("Outer Snow Block Stair")
 S("Snow Block Slab")
 --]]
+
+
+minetest.log("action", "ES: [STAIRS  MM STYLE] loaded.")

@@ -45,12 +45,12 @@ elseif mcl_books_modpath then
 	book_written = "mcl_books:written_book"
 	author_meta_field = "author"
 end
-
+--[[
 local mcl_formspec_itemslot
 if mcl_formspec then
 	mcl_formspec_itemslot = mcl_formspec.get_itemslot_bg
 end
-
+]]
 --------------------------------------------------------
 -- Data store
 

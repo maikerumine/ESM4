@@ -1,5 +1,5 @@
 local mailbox = {}
-screwdriver = screwdriver or {}
+--screwdriver = screwdriver or {}
 
 local function get_img(img)
 	if not img then return end
@@ -168,7 +168,7 @@ xdecor.register("mailbox", {
 		 "xdecor_mailbox_side.png", "xdecor_mailbox_side.png",
 		 "xdecor_mailbox.png", "xdecor_mailbox.png"},
 	groups = {cracky = 3, oddly_breakable_by_hand = 1},
-	on_rotate = screwdriver.rotate_simple,
+--	on_rotate = screwdriver.rotate_simple,
 	can_dig = mailbox.dig,
 	on_rightclick = mailbox.rightclick,
 	allow_metadata_inventory_take = mailbox.allow_take,

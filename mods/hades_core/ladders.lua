@@ -93,7 +93,7 @@ end
 
 
 
-
+--[[
 hades_core.register_ladder("hades_core:ladder", {
 	description = S("Wooden Ladder"),
 	texture = "default_ladder.png",
@@ -107,5 +107,5 @@ hades_core.register_ladder("hades_core:ladder_bronze", {
 	groups = {cracky=3},
 	sounds = hades_sounds.node_sound_metal_defaults(),
 })
-
+]]
 

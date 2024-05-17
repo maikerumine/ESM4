@@ -362,8 +362,8 @@ end
 minetest.register_on_dieplayer(function(player, hitter)
 
 		local player_name = player:get_player_name()
-		local node = minetest.registered_nodes[minetest.get_node(player:getpos()).name]
-		local pos = player:getpos()
+		local node = minetest.registered_nodes[minetest.get_node(player:get_pos()).name]
+		local pos = player:get_pos()
 		local death = {x=0, y=3, z=0}
 		minetest.sound_play("player_death", {pos = pos, gain = 1})
 		pos.x = math.floor(pos.x + 0.5)
@@ -475,7 +475,7 @@ minetest.register_on_dieplayer(function(player, hitter)
 minetest.register_on_punchplayer(function(player, hitter)
 
 	
---	local pos = player:getpos()
+--	local pos = player:get_pos()
 --	local death = {x=0, y=23, z=-1.5}
   if not (player or hitter) then
   return false   end

@@ -143,3 +143,4 @@ minetest.register_craft({
 	}
 })
 
+minetest.log("action", "ES: [ADMIN TNT] loaded.")

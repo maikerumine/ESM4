@@ -38,7 +38,7 @@ es.colors = {
 					es.colors.gold .. 	"Use:		800   \n" ..
 					es.colors.gold .. 	"Fire:		0   \n" ..
 					es.colors.gold .. 	"Water:		-0.1   \n" ..
-					es.colors.gold .. 	"Radiation:		4   \n" ..
+					es.colors.gold .. 	"Radiation:		16   \n" ..
 					es.colors.grey .. 	"Physics Gravity:		0 \n" ..
 					es.colors.grey .. 	"Physics Speed:		-0.7 \n" ..
 					es.colors.grey .. 	"Physics Jump:		0 \n" ..
@@ -46,8 +46,9 @@ es.colors = {
 										"Great for blocking radiation, but super slow. ",
 		
 		inventory_image = "3d_armor_inv_helmet_mese_green.png",
-		groups = {armor_head=1, armor_heal=8, armor_use=800, armor_fire=0, armor_water=-0.1, physics_speed=-0.1, armor_radiation = 4},
-		armor_groups = {fleshy=10},
+		groups = {armor_head=1, armor_heal=8, armor_use=800, armor_fire=0, armor_water=-0.1, physics_speed=-0.1, armor_radiation = 16},
+		--armor_groups = {fleshy=10},
+		armor_groups = {fleshy=10, radiation=50},  --test adding new method 20220812
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:chestplate_mese_green", {
@@ -59,15 +60,15 @@ es.colors = {
 					es.colors.gold .. 	"Use:		800   \n" ..
 					es.colors.gold .. 	"Fire:		0   \n" ..
 					es.colors.gold .. 	"Water:		-0.1   \n" ..
-					es.colors.gold .. 	"Radiation:		6   \n" ..
+					es.colors.gold .. 	"Radiation:		24   \n" ..
 					es.colors.grey .. 	"Physics Gravity:		0 \n" ..
 					es.colors.grey .. 	"Physics Speed:		-0.7 \n" ..
 					es.colors.grey .. 	"Physics Jump:		0 \n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Great for blocking radiation, but super slow. ",
 		inventory_image = "3d_armor_inv_chestplate_mese_green.png",
-		groups = {armor_torso=1, armor_heal=8, armor_use=800, armor_fire=0, armor_water=-0.1, physics_speed=-0.1, armor_radiation = 6},
-		armor_groups = {fleshy=12},
+		groups = {armor_torso=1, armor_heal=8, armor_use=800, armor_fire=0, armor_water=-0.1, physics_speed=-0.1, armor_radiation = 24},
+		armor_groups = {fleshy=12, radiation=50},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:leggings_mese_green", {
@@ -79,15 +80,15 @@ es.colors = {
 					es.colors.gold .. 	"Use:		800   \n" ..
 					es.colors.gold .. 	"Fire:		0   \n" ..
 					es.colors.gold .. 	"Water:		-0.1   \n" ..
-					es.colors.gold .. 	"Radiation:		4   \n" ..
+					es.colors.gold .. 	"Radiation:		16   \n" ..
 					es.colors.grey .. 	"Physics Gravity:		0 \n" ..
 					es.colors.grey .. 	"Physics Speed:		-0.7 \n" ..
 					es.colors.grey .. 	"Physics Jump:		0 \n" ..
 					es.colors.white ..	"Description:   \n" ..
 										"Great for blocking radiation, but super slow. ",
 		inventory_image = "3d_armor_inv_leggings_mese_green.png",
-		groups = {armor_legs=1, armor_heal=8, armor_use=800, armor_fire=0, armor_water=-0.1, physics_speed=-0.1, armor_radiation = 4},
-		armor_groups = {fleshy=12},
+		groups = {armor_legs=1, armor_heal=8, armor_use=800, armor_fire=0, armor_water=-0.1, physics_speed=-0.1, armor_radiation = 16},
+		armor_groups = {fleshy=12, radiation=50},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:boots_mese_green", {
@@ -99,7 +100,7 @@ es.colors = {
 					es.colors.gold .. 	"Use:		800   \n" ..
 					es.colors.gold .. 	"Fire:		0   \n" ..
 					es.colors.gold .. 	"Water:		-0.1   \n" ..
-					es.colors.gold .. 	"Radiation:		4   \n" ..
+					es.colors.gold .. 	"Radiation:		16   \n" ..
 					es.colors.grey .. 	"Physics Gravity:		0 \n" ..
 					es.colors.grey .. 	"Physics Speed:		-0.7 \n" ..
 					es.colors.grey .. 	"Physics Jump:		0.01 \n" ..
@@ -107,8 +108,8 @@ es.colors = {
 										"Great for blocking radiation, but super slow. ",
 		inventory_image = "3d_armor_inv_boots_mese_green.png",
 		groups = {armor_feet=1, armor_heal=8, armor_use=800, physics_speed=-0.1,
-				physics_jump=0.01, armor_fire=0, armor_water=-0.1, armor_radiation = 4},
-		armor_groups = {fleshy=10},
+				physics_jump=0.01, armor_fire=0, armor_water=-0.1, armor_radiation = 16},
+		armor_groups = {fleshy=10, radiation=50},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	
@@ -131,7 +132,7 @@ es.colors = {
 		
 		inventory_image = "3d_armor_inv_helmet_emerald.png",
 		groups = {armor_head=1, armor_heal=8, armor_use=100, armor_fire=0, armor_water=-0.1, armor_radiation = 3},
-		armor_groups = {fleshy=10},
+		armor_groups = {fleshy=10, radiation=3},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:chestplate_emerald", {
@@ -151,7 +152,7 @@ es.colors = {
 										"Great for blocking radiation. ",
 		inventory_image = "3d_armor_inv_chestplate_emerald.png",
 		groups = {armor_torso=1, armor_heal=8, armor_use=100, armor_fire=0, armor_water=-0.1, armor_radiation = 3},
-		armor_groups = {fleshy=12},
+		armor_groups = {fleshy=12, radiation=3},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:leggings_emerald", {
@@ -171,7 +172,7 @@ es.colors = {
 										"Great for blocking radiation. ",
 		inventory_image = "3d_armor_inv_leggings_emerald.png",
 		groups = {armor_legs=1, armor_heal=8, armor_use=100, armor_fire=0, armor_water=-0.1, armor_radiation = 3},
-		armor_groups = {fleshy=12},
+		armor_groups = {fleshy=12, radiation=3},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:boots_emerald", {
@@ -191,8 +192,8 @@ es.colors = {
 										"Great for blocking radiation. ",
 		inventory_image = "3d_armor_inv_boots_emerald.png",
 		groups = {armor_feet=1, armor_heal=8, armor_use=100, physics_speed=0.7,
-				physics_jump=0.5, armor_fire=0, armor_water=-0.1, armor_radiation = 3},
-		armor_groups = {fleshy=10},
+				physics_jump=0.5, armor_fire=0, armor_water=-0.1, radiation = 3},
+		armor_groups = {fleshy=10, radiation=3},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 
@@ -214,7 +215,7 @@ es.colors = {
 										"Great for swimming in lava. ",
 		inventory_image = "3d_armor_inv_helmet_ruby.png",
 		groups = {armor_head=1, armor_heal=12, armor_use=110, armor_fire=1.5, armor_water=-1, armor_radiation = 0.5},
-		armor_groups = {fleshy=7},
+		armor_groups = {fleshy=7, radiation=0.5},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:chestplate_ruby", {
@@ -234,7 +235,7 @@ es.colors = {
 										"Great for swimming in lava. ",
 		inventory_image = "3d_armor_inv_chestplate_ruby.png",
 		groups = {armor_torso=1, armor_heal=12, armor_use=110, armor_fire=1.5, armor_water=-1, armor_radiation = 0.5},
-		armor_groups = {fleshy=11},
+		armor_groups = {fleshy=11, radiation=0.5},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:leggings_ruby", {
@@ -254,7 +255,7 @@ es.colors = {
 										"Great for swimming in lava. ",
 		inventory_image = "3d_armor_inv_leggings_ruby.png",
 		groups = {armor_legs=1, armor_heal=12, armor_use=110, armor_fire=1.5, armor_water=-1, armor_radiation = 0.5},
-		armor_groups = {fleshy=11},
+		armor_groups = {fleshy=11, radiation=0.5},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:boots_ruby", {
@@ -274,8 +275,8 @@ es.colors = {
 										"Great for swimming in lava.  The fastest boots in town! ",
 		inventory_image = "3d_armor_inv_boots_ruby.png",
 		groups = {armor_feet=1, armor_heal=12, armor_use=110, physics_speed=2.9,
-				physics_jump=0.5, armor_fire=1.5, armor_water=-1, armor_radiation = 0.5},
-		armor_groups = {fleshy=7},
+				physics_jump=0.5, armor_fire=1.5, armor_water=-1, radiation = 0.5},
+		armor_groups = {fleshy=7, radiation=0.5},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 
@@ -297,7 +298,7 @@ es.colors = {
 										"Great for breathing underwater. ",
 		inventory_image = "3d_armor_inv_helmet_aikerum.png",
 		groups = {armor_head=1, armor_heal=10, armor_use=130, armor_water=1, armor_radiation = 0.2},
-		armor_groups = {fleshy=17},
+		armor_groups = {fleshy=17, radiation=0.2},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:chestplate_aikerum", {
@@ -317,7 +318,7 @@ es.colors = {
 										"Great for breathing underwater. ",
 		inventory_image = "3d_armor_inv_chestplate_aikerum.png",
 		groups = {armor_torso=1, armor_heal=10, armor_use=130, armor_water=1, armor_radiation = 0.2},
-		armor_groups = {fleshy=26},
+		armor_groups = {fleshy=26, radiation=0.2},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:leggings_aikerum", {
@@ -337,7 +338,7 @@ es.colors = {
 										"Great for breathing underwater. ",
 		inventory_image = "3d_armor_inv_leggings_aikerum.png",
 		groups = {armor_legs=1, armor_heal=10, armor_use=130, armor_water=1, armor_radiation = 0.2},
-		armor_groups = {fleshy=26},
+		armor_groups = {fleshy=26, radiation=0.2},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:boots_aikerum", {
@@ -357,8 +358,8 @@ es.colors = {
 										"Great for breathing underwater. ",
 		inventory_image = "3d_armor_inv_boots_aikerum.png",
 		groups = {armor_feet=1, armor_heal=10, armor_use=130, physics_speed=1.1,
-				physics_jump=0.7, armor_water=1, armor_radiation = 0.2},
-		armor_groups = {fleshy=17},
+				physics_jump=0.7, armor_water=1, radiation = 0.2},
+		armor_groups = {fleshy=17, radiation=0.2},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 
@@ -380,7 +381,7 @@ es.colors = {
 										"Great for most things. ",
 		inventory_image = "3d_armor_inv_helmet_infinium.png",
 		groups = {armor_head=1, armor_heal=15, armor_use=80, armor_fire=1, armor_water=-0.2, armor_radiation = 1},
-		armor_groups = {fleshy=18},
+		armor_groups = {fleshy=18, radiation=1},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:chestplate_infinium", {
@@ -400,7 +401,7 @@ es.colors = {
 										"Great for most things. ",
 		inventory_image = "3d_armor_inv_chestplate_infinium.png",
 		groups = {armor_torso=1, armor_heal=15, armor_use=80, armor_fire=1, armor_water=-0.2, armor_radiation = 1},
-		armor_groups = {fleshy=27},
+		armor_groups = {fleshy=27, radiation=1},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:leggings_infinium", {
@@ -420,7 +421,7 @@ es.colors = {
 										"Great for most things. ",
 		inventory_image = "3d_armor_inv_leggings_infinium.png",
 		groups = {armor_legs=1, armor_heal=15, armor_use=80, armor_fire=1, armor_water=-0.2, armor_radiation = 1},
-		armor_groups = {fleshy=27},
+		armor_groups = {fleshy=27, radiation=1},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:boots_infinium", {
@@ -441,7 +442,7 @@ es.colors = {
 		inventory_image = "3d_armor_inv_boots_infinium.png",
 		groups = {armor_feet=1, armor_heal=15, armor_use=80, physics_speed=0.8,
 				physics_jump=0.4, armor_fire=1, armor_water=-0.2, armor_radiation = 1},
-		armor_groups = {fleshy=18},
+		armor_groups = {fleshy=18, radiation=1},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 
@@ -463,7 +464,7 @@ es.colors = {
 										"Great for healing. ",
 		inventory_image = "3d_armor_inv_helmet_purpellium.png",
 		groups = {armor_head=1, armor_heal=22, armor_use=120, armor_fire=1, armor_water=-1, armor_radiation = 1},
-		armor_groups = {fleshy=15},
+		armor_groups = {fleshy=15, radiation=1},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:chestplate_purpellium", {
@@ -483,7 +484,7 @@ es.colors = {
 										"Great for healing. ",
 		inventory_image = "3d_armor_inv_chestplate_purpellium.png",
 		groups = {armor_torso=1, armor_heal=22, armor_use=120, armor_fire=1, armor_water=-1, armor_radiation = 1},
-		armor_groups = {fleshy=20},
+		armor_groups = {fleshy=20, radiation=1},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:leggings_purpellium", {
@@ -503,7 +504,7 @@ es.colors = {
 										"Great for healing. ",
 		inventory_image = "3d_armor_inv_leggings_purpellium.png",
 		groups = {armor_legs=1, armor_heal=22, armor_use=120, armor_fire=1, armor_water=-1, armor_radiation = 1},
-		armor_groups = {fleshy=20},
+		armor_groups = {fleshy=20, radiation=1},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:boots_purpellium", {
@@ -523,8 +524,8 @@ es.colors = {
 										"Great for healing.  Bouncy Boots can simulate spacewalks.",
 		inventory_image = "3d_armor_inv_boots_purpellium.png",
 		groups = {armor_feet=1, armor_heal=22, armor_use=120, physics_jump=0.3, physics_speed=0.5,
-				physics_jump=1.2, armor_fire=1, armor_water=-1, armor_radiation = 1},
-		armor_groups = {fleshy=15},
+				physics_jump=1.2, armor_fire=1, armor_water=-1, armor_radiation = 1, feather_fall = 200},
+		armor_groups = {fleshy=15, radiation=1},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 
@@ -532,7 +533,7 @@ es.colors = {
 	armor:register_armor(":3d_armor:helmet_unobtainium", {
 		--description = "Unobtainium Helmet -= HP25; He40; Us70; Fi1; Wa1; Ra1.2; Ju0; Sp0 =-",
 				description = 
-					es.colors.green .. 	"Unontainium Helmet \n" ..
+					es.colors.green .. 	"Unobtainium Helmet \n" ..
 					es.colors.gold .. 	"Level:		25   \n" ..
 					es.colors.gold .. 	"Heal:		40   \n" ..
 					es.colors.gold .. 	"Use:		200   \n" ..
@@ -546,13 +547,13 @@ es.colors = {
 										"Great for combat, swimming, \nhealing, and blocking radiation. \nNot long lasting.",
 		inventory_image = "3d_armor_inv_helmet_unobtainium.png",
 		groups = {armor_head=1, armor_heal=40, armor_use=200, armor_fire=1, armor_water=1, armor_radiation = 1.2},
-		armor_groups = {fleshy=25},
+		armor_groups = {fleshy=25, radiation=1.2},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:chestplate_unobtainium", {
 		--description = "Unobtainium Chestplate -= HP25; He40; Us70; Fi1; Wa1; Ra1.2; Ju0; Sp0 =-",
 				description = 
-					es.colors.green .. 	"Unontainium Chestplate \n" ..
+					es.colors.green .. 	"Unobtainium Chestplate \n" ..
 					es.colors.gold .. 	"Level:		25   \n" ..
 					es.colors.gold .. 	"Heal:		40   \n" ..
 					es.colors.gold .. 	"Use:		200   \n" ..
@@ -566,13 +567,13 @@ es.colors = {
 										"Great for combat, swimming, \nhealing, and blocking radiation. \nNot long lasting.",
 		inventory_image = "3d_armor_inv_chestplate_unobtainium.png",
 		groups = {armor_torso=1, armor_heal=40, armor_use=200, armor_fire=1, armor_water=1, armor_radiation = 1.2},
-		armor_groups = {fleshy=25},
+		armor_groups = {fleshy=25, radiation=1.2},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:leggings_unobtainium", {
 		--description = "Unobtainium Leggings -= HP25; He40; Us70; Fi1; Wa1; Ra1.2; Ju0; Sp0 =-",
 				description = 
-					es.colors.green .. 	"Unontainium Leggings \n" ..
+					es.colors.green .. 	"Unobtainium Leggings \n" ..
 					es.colors.gold .. 	"Level:		25   \n" ..
 					es.colors.gold .. 	"Heal:		40   \n" ..
 					es.colors.gold .. 	"Use:		200   \n" ..
@@ -586,13 +587,13 @@ es.colors = {
 										"Great for combat, swimming, \nhealing, and blocking radiation. \nNot long lasting.",
 		inventory_image = "3d_armor_inv_leggings_unobtainium.png",
 		groups = {armor_legs=1, armor_heal=40, armor_use=200, armor_fire=1, armor_water=1, armor_radiation = 1.2},
-		armor_groups = {fleshy=25},
+		armor_groups = {fleshy=25, radiation=1.2},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})
 	armor:register_armor(":3d_armor:boots_unobtainium", {
 		--description = "Unobtainium Boots -= HP25; He40; Us70; Fi1; Wa1; Ra1.2; Ju1.1; Sp1.1 =-",
 				description = 
-					es.colors.green .. 	"Unontainium Boots \n" ..
+					es.colors.green .. 	"Unobtainium Boots \n" ..
 					es.colors.gold .. 	"Level:		25   \n" ..
 					es.colors.gold .. 	"Heal:		40   \n" ..
 					es.colors.gold .. 	"Use:		200   \n" ..
@@ -607,7 +608,7 @@ es.colors = {
 		inventory_image = "3d_armor_inv_boots_unobtainium.png",
 		groups = {armor_feet=1, armor_heal=40, armor_use=200, physics_speed=1.1,
 				physics_jump=1.1, armor_fire=1, armor_water=1, armor_radiation = 1.2},
-		armor_groups = {fleshy=25},
+		armor_groups = {fleshy=25, radiation=1.2},
 		damage_groups = {cracky=2, snappy=1, level=3},
 	})	
 	
@@ -1004,8 +1005,8 @@ for k, v in pairs(craft_ingreds) do
 	})
 end
 
-if minetest.setting_getbool("log_mods") then
+--if minetest.setting_getbool("log_mods") then
 	minetest.log("action", "ES: [3d_armor] loaded.")
-end
+--end
 
 

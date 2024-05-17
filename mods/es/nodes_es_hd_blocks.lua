@@ -15,6 +15,32 @@
 
 es = {}
 
+--AIRBLOCK
+--==================
+minetest.register_node("es:air", {
+	description = "AIR  -=! CANNOT MINE !=-",
+	drawtype = "airlike",
+	tiles = {"default_glass.png", "default_glass_detail.png"},
+	inventory_image = minetest.inventorycube("default_glass.png"),
+	wield_image = "default_glass.png",
+	use_texture_alpha = "clip", -- only needed for stairs API
+	
+	light_source = 13,
+	paramtype = "light",
+	buildable_to = true,
+	pointable = false,
+	walkable = false,
+	sunlight_propagates = true,
+	is_ground_content = false,
+	on_blast = function() end,
+	on_destruct = function () end,
+	can_dig = function() return false end,
+	diggable = false,
+	drop = "es:nopenode",
+	groups = {immortal=1,cracky=0,not_in_creative_inventory = 1},
+	sounds = default.node_sound_glass_defaults(),
+})
+
 
 
 --INPERVIOUS NODES  CANNOT BREAK- Great for prison walls.
@@ -23,6 +49,10 @@ minetest.register_node("es:hgglass", {
 	description = "High Density Glass  -=! CANNOT MINE !=-",
 	drawtype = "glasslike_framed_optional",
 	tiles = {"default_glass.png", "default_glass_detail.png"},
+	
+	use_texture_alpha = "clip", -- only needed for stairs API
+	
+	
 	inventory_image = minetest.inventorycube("default_glass.png"),
 	paramtype = "light",
 	buildable_to = false,
@@ -42,6 +72,10 @@ minetest.register_node("es:hgglass2", {
 	description = "High Density Glass II  -=! CANNOT MINE !=-",
 	drawtype = "glasslike",
 	tiles = { "default_obsidian_glass.png"},
+	
+	use_texture_alpha = "clip", -- only needed for stairs API
+	
+	
 	inventory_image = minetest.inventorycube("default_obsidian_glass.png"),
 	paramtype = "light",
 	buildable_to = false,

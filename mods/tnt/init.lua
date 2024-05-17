@@ -243,9 +243,9 @@ local function add_effects(pos, radius, drops)
 			local def = minetest.registered_nodes[name]
 			if def then
 				node = { name = name }
-			end
-			if def and def.tiles and def.tiles[1] then
-				texture = def.tiles[1]
+				if def.tiles and type(def.tiles[1]) == "string" then
+					texture = def.tiles[1]
+				end
 			end
 		end
 	end
@@ -279,7 +279,7 @@ function tnt.burn(pos, nodename)
 		def.on_ignite(pos)
 	elseif minetest.get_item_group(name, "tnt") > 0 then
 		minetest.swap_node(pos, {name = name .. "_burning"})
-		minetest.sound_play("tnt_ignite", {pos = pos}, true)
+		minetest.sound_play("tnt_ignite", {pos = pos, gain = 1.0}, true)
 		minetest.get_node_timer(pos):start(1)
 	end
 end
@@ -555,7 +555,7 @@ minetest.register_node("tnt:gunpowder_burning", {
 	on_blast = function() end,
 	on_construct = function(pos)
 		minetest.sound_play("tnt_gunpowder_burning", {pos = pos,
-			gain = 2}, true)
+			gain = 1.0}, true)
 		minetest.get_node_timer(pos):start(1)
 	end,
 })
@@ -565,13 +565,13 @@ minetest.register_craft({
 	type = "shapeless",
 	recipe = {"default:coal_lump", "default:gravel"}
 })
-
+--[[
 minetest.register_craftitem("tnt:tnt_stick", {
 	description = S("TNT Stick"),
 	inventory_image = "tnt_tnt_stick.png",
 	groups = {flammable = 5},
 })
-
+]]
 if enable_tnt then
 	minetest.register_craft({
 		output = "tnt:tnt_stick 2",

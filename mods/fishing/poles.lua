@@ -21,6 +21,10 @@ for _,pole in pairs(fishing_setting.poles) do
 		groups = {},
 		inventory_image = "fishing_pole_".. pole.name ..".png",
 		wield_image = "fishing_pole_".. pole.name ..".png",
+		
+		use_texture_alpha = "clip", -- only needed for stairs API
+		
+		
 		stack_max = 1,
 		liquids_pointable = true,
 
@@ -143,6 +147,10 @@ for _,pole in pairs(fishing_setting.poles) do
 			"fishing_pole_".. pole.name .."_simple.png",
 			"fishing_pole_".. pole.name .."_simple.png^[transformFX",
 		},
+		
+		use_texture_alpha = "clip", -- only needed for stairs API
+		
+		
 		groups = { snappy=3, flammable=2, not_in_creative_inventory=1 },
 		node_box = {
 			type = "fixed",

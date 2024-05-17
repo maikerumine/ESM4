@@ -132,7 +132,7 @@ local throwing_shoot_arrow = function(itemstack, player)
 			local dir = player:get_look_dir()
 			obj:set_velocity({x=dir.x*22, y=dir.y*22, z=dir.z*22})
 			obj:set_acceleration({x=dir.x*-3, y=-10, z=dir.z*-3})
-			obj:set_yaw(player:get_look_yaw()+math.pi)
+			obj:set_yaw(player:get_look_horizontal()+math.pi)	--Deprecated call to get_look_yaw, use get_look_horizontal instead
 			minetest.sound_play("throwing_sound", {pos=playerpos}, true)
 			if obj:get_luaentity().player == "" then
 				obj:get_luaentity().player = player

@@ -104,7 +104,7 @@ minetest.register_node(":default:large_cactus_seedling", {
 })
 
 --SCREWDRIVER OVERRIDES
-
+--[[
 minetest.clear_craft({
 		output = "screwdriver:screwdriver",
 		recipe = {
@@ -112,7 +112,9 @@ minetest.clear_craft({
 			{"group:stick"}
 		}
 	})
-minetest.register_alias("screwdriver:screwdriver", "slab_rotate:glove")	
+	]]
+--minetest.register_alias("screwdriver:screwdriver", "slap_rotate:glove")	
+minetest.register_alias("slap_rotate:glove", "screwdriver:screwdriver")	
 	
 --TNT OVERRIDES
 

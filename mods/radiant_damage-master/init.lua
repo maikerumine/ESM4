@@ -501,14 +501,18 @@ if radiant_damage.config.enable_radioactive_damage then
 	radiant_damage.register_radiant_damage("radioactive", {
 		interval = 1,
 		--emitted_by = {["group:lava"] = radiant_damage.config.lava_damage, ["fire:basic_flame"] = radiant_damage.config.fire_damage, ["fire:permanent_flame"] = radiant_damage.config.fire_damage},
-		--emitted_by = {["group:radioactive"] = radiant_damage.config.radioactive_damage},
+		emitted_by = {["group:radioactive"] = radiant_damage.config.radioactive_damage},
+		
+		
 		emitted_by = {
-		["es:toxic_water_flowing"] = radiant_damage.config.radioactive_damage,
-		["es:toxic_water_source"] = radiant_damage.config.radioactive_damage * 3,--},	--was9
-		["es:depleted_uraniums"] = radiant_damage.config.radioactive_damage * 3,
+		["es:toxic_water_flowing"] = radiant_damage.config.radioactive_damage * 4,
+		["es:toxic_water_source"] = radiant_damage.config.radioactive_damage * 6,--},	--was9
+		--["es:depleted_uraniums"] = radiant_damage.config.radioactive_damage * 3,
+		["es:depleted_uraniums"] = radiant_damage.config.radioactive_damage * 8,
 		["es:stone_with_purpelliums"] = radiant_damage.config.radioactive_damage * 2,
-		["es:toxic_container"] = radiant_damage.config.radioactive_damage * 3,
+		["es:toxic_container"] = radiant_damage.config.radioactive_damage * 4,
 		["es:stone_with_infiniums"] = radiant_damage.config.radioactive_damage * 2},
+		
 		inverse_square_falloff = true,
 		default_attenuation = 0.9, -- radioation moves through anything.
 		on_damage = on_radioactive_damage,
